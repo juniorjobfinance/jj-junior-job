@@ -1366,34 +1366,53 @@ const MAISONS_PRESTIGE = new Set([
 
 // Postes rares et convoités : ceux qu'on ne trouve pas à tous les coins de rue.
 const POSTE_RARE_RE =
-  /\bm&a\b|fusions?[\s-]acquisitions?|private equity|corporate finance|front office|\btrader\b|trading|transaction services|leveraged finance|\becm\b|\bdcm\b|capital markets|structuration|deal|investment banking|equity research|venture/i;
+  /\bm&a\b|fusions?[\s-]acquisitions?|private equity|corporate finance|front office|\btrader\b|trading|transaction services|leveraged finance|\becm\b|\bdcm\b|capital markets|structuration|deal|investment banking|equity research|venture|market risk|credit risk|\balm\b|asset & liability|real estate investment/i;
+
+// Grands groupes reconnaissables — surtout utile pour le VIE, dont les
+// employeurs ne sont pas dans la liste des maisons de référence mais restent de
+// belles signatures pour un étudiant (un VIE chez TotalEnergies ou Sanofi, ça
+// se remarque).
+const GRANDE_STRUCTURE_RE =
+  /totalenergies|\bengie\b|\bedf\b|\borange\b|bouygues|louis dreyfus|caceis|capgemini|airbus|thales|renault|michelin|danone|schneider|saint-gobain|veolia|\bsncf\b|sanofi|\bbnp\b|credit agricole|societe generale|\bipsen\b|technip|criteo|merck|janssen|arkopharma/i;
 
 function scorePepite(o) {
   let score = 0;
   if (MAISONS_PRESTIGE.has(o.maison)) score += 3;
   if (POSTE_RARE_RE.test(o.title)) score += 2;
-  // Un poste convoité ouvert en stage/alternance/VIE est une vraie aubaine junior.
-  if (o.volet !== 'cdi-cdd') score += 1;
-  // Le lien direct chez l'employeur prestigieux vaut mieux qu'un agrégateur.
+  // Le VIE est par nature une opportunité convoitée (à l'étranger, bien
+  // rémunéré) : on le valorise, et on reconnaît les grandes structures dont
+  // le nom n'est pas dans la liste des maisons de référence.
+  if (o.volet === 'vie') {
+    score += 2;
+    if (GRANDE_STRUCTURE_RE.test(o.emp)) score += 2;
+  }
+  // Un poste convoité ouvert en stage/alternance est une aubaine junior.
+  if (o.volet === 'stage' || o.volet === 'alternance') score += 1;
+  // Le lien direct chez l'employeur vaut mieux qu'un agrégateur.
   if (!/adzuna|francetravail|choisirleservicepublic|businessfrance/.test(o.source)) score += 1;
   return score;
 }
 
-// Retourne l'ensemble des _key retenus comme pépites (au plus ~12, variés).
+// Sélectionne les pépites SÉPARÉMENT pour chaque onglet, pour qu'aucun onglet
+// ne soit privé de mises en avant (avant, les stages raflaient toutes les
+// places et le VIE restait vide). Au plus ~8 par onglet, 2 par maison.
 function choisirPepites(offers) {
-  const notes = offers
-    .map((o) => ({ o, s: scorePepite(o) }))
-    .filter((x) => x.s >= 4) // seuil : prestige + un autre signal au minimum
-    .sort((a, b) => b.s - a.s);
-
   const retenus = new Set();
-  const parMaison = {};
-  for (const { o } of notes) {
-    // Au plus 2 offres par maison : de la variété, pas 8 offres Lazard.
-    parMaison[o.maison] = (parMaison[o.maison] || 0) + 1;
-    if (parMaison[o.maison] > 2) continue;
-    retenus.add(o._key);
-    if (retenus.size >= 12) break;
+  for (const volet of ['stage', 'alternance', 'vie', 'cdi-cdd']) {
+    const notes = offers
+      .filter((o) => o.volet === volet)
+      .map((o) => ({ o, s: scorePepite(o) }))
+      .filter((x) => x.s >= 4)
+      .sort((a, b) => b.s - a.s);
+    const parMaison = {};
+    let n = 0;
+    for (const { o } of notes) {
+      const cle = o.maison + '|' + o.emp;
+      parMaison[cle] = (parMaison[cle] || 0) + 1;
+      if (parMaison[cle] > 2) continue;
+      retenus.add(o._key);
+      if (++n >= 8) break;
+    }
   }
   return retenus;
 }
