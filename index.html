@@ -343,6 +343,12 @@
     letter-spacing: 0.03em;
   }
 
+  /* L'attribut hidden vaut "display: none", mais il vient de la feuille de style
+     du navigateur : n'importe quel "display" déclaré ici l'emporte sur lui. Sans
+     cette règle, masquer un élément en JavaScript par .hidden = true ne produit
+     rien de visible — le filtre restait affiché alors qu'il se croyait caché. */
+  [hidden] { display: none !important; }
+
   .new-only {
     display: flex;
     align-items: center;
