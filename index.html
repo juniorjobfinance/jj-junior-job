@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%230a1424'/><text x='32' y='44' font-family='monospace' font-size='34' font-weight='700' fill='%23a8763f' text-anchor='middle'>JJ</text></svg>">
-<title>JJ Finance — le vivier junior de la finance française</title>
-<link rel="alternate" type="application/rss+xml" title="JJ Finance — dernières offres" href="offres.xml">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%230a1424'/><text x='32' y='45' font-family='Georgia,serif' font-size='33' font-weight='700' fill='%23c79a5c' text-anchor='middle' letter-spacing='-1'>JJ</text></svg>">
+<title>Junior Job Finance — toutes les opportunités en finance pour démarrer votre carrière</title>
+<link rel="alternate" type="application/rss+xml" title="Junior Job Finance — dernières offres" href="offres.xml">
 <meta name="description" content="Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise, offres vérifiées chaque jour, sans compte et sans pub.">
 <link rel="canonical" href="https://juniorjobfinance.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="JJ Finance">
-<meta property="og:title" content="JJ Finance — le vivier junior de la finance française">
+<meta property="og:site_name" content="Junior Job Finance">
+<meta property="og:title" content="Junior Job Finance — toutes les opportunités en finance pour démarrer votre carrière">
 <meta property="og:description" content="Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise, offres vérifiées chaque jour, sans compte et sans pub.">
 <meta property="og:url" content="https://juniorjobfinance.com/">
 <meta property="og:locale" content="fr_FR">
@@ -56,11 +56,12 @@
   }
 
   /* ---------- Header ----------
-     La marque : un cachet "JJ" laiton sur fond nuit — le même dessin que la
-     favicon, pour qu'onglet et page racontent la même chose — et le nom
-     "JJ Finance" en romain à empattements. Tout est local : la police est une
-     pile système (Georgia), aucune fonte téléchargée, la promesse "aucune
-     ressource extérieure" de la politique de confidentialité reste vraie. */
+     La marque : un cachet "JJ" laiton sérif sur médaillon nuit à double filet
+     or (SVG en ligne) — le même dessin que la favicon, pour qu'onglet et page
+     racontent la même chose — et le nom "Junior Job Finance" en romain à
+     empattements. Tout est local : le monogramme est un SVG inline et la police
+     une pile système (Georgia), aucune fonte ni image téléchargée, la promesse
+     "aucune ressource extérieure" de la confidentialité reste vraie. */
   header.site {
     background: linear-gradient(180deg, var(--navy-900) 0%, var(--navy-950) 100%);
     color: var(--paper);
@@ -78,20 +79,13 @@
     flex: none;
     width: 54px;
     height: 54px;
-    border-radius: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-950) 85%);
-    border: 1.5px solid var(--brass);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.35);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: 0.03em;
-    color: var(--brass);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
     user-select: none;
   }
+  header.site .logo svg { width: 100%; height: 100%; display: block; }
   header.site .brand-text {
     display: flex;
     flex-direction: column;
@@ -103,6 +97,10 @@
     font-size: 1.65rem;
     line-height: 1.1;
     letter-spacing: 0.015em;
+    color: var(--paper);
+  }
+  header.site .wordmark b {
+    font-weight: 700;
     color: var(--paper);
   }
   header.site .wordmark em {
@@ -138,7 +136,7 @@
   header.site .contact-lien:hover { background: rgba(168, 118, 63, 0.14); }
   @media (max-width: 640px) { header.site .contact-lien { display: none; } }
   @media (max-width: 640px) {
-    header.site .logo { width: 46px; height: 46px; font-size: 1.35rem; border-radius: 11px; }
+    header.site .logo { width: 46px; height: 46px; }
     header.site .wordmark { font-size: 1.4rem; }
     header.site .brand .tagline { font-size: 0.78rem; }
   }
@@ -586,15 +584,29 @@
 
 <header class="site">
   <div class="brand">
-    <span class="logo" aria-hidden="true">JJ</span>
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="jjOr" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e6cd97"/><stop offset="0.55" stop-color="#c79a5c"/><stop offset="1" stop-color="#a8763f"/>
+          </linearGradient>
+          <linearGradient id="jjNv" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1a3252"/><stop offset="1" stop-color="#0a1424"/>
+          </linearGradient>
+        </defs>
+        <rect x="2.5" y="2.5" width="59" height="59" rx="15" fill="url(#jjNv)" stroke="url(#jjOr)" stroke-width="1.6"/>
+        <rect x="7" y="7" width="50" height="50" rx="11" fill="none" stroke="#a8763f" stroke-width="0.7" opacity="0.45"/>
+        <text x="32" y="43.5" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="url(#jjOr)" text-anchor="middle" letter-spacing="-1">JJ</text>
+      </svg>
+    </span>
     <div class="brand-text">
-      <span class="wordmark">JJ&nbsp;<em>Finance</em></span>
-      <span class="tagline">Le vivier junior de la finance française</span>
+      <span class="wordmark"><b>Junior&nbsp;Job</b>&nbsp;<em>Finance</em></span>
+      <span class="tagline">Toutes les opportunités en finance pour démarrer votre carrière</span>
     </div>
     <a class="contact-lien" href="mailto:contact@juniorjobfinance.com">Contact</a>
   </div>
   <div class="promesse">
-    Trié par métier <span>·</span> 0-3 ans d'expérience <span>·</span> vérifié chaque jour <span>·</span> sans compte, sans pub
+    Stages <span>·</span> Alternances <span>·</span> VIE <span>·</span> Premiers CDI <span>·</span> actualisé chaque jour <span>·</span> sans compte, sans publicité
   </div>
 </header>
 
