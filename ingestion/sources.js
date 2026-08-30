@@ -39,7 +39,7 @@ async function getJSON(url, options = {}) {
 // une boîte comme Qonto ou Younited publie aussi des postes marketing/sales/tech,
 // on ne garde que ce qui relève clairement de la finance (titre ou département).
 const FINANCE_KEYWORDS_RE =
-  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]le de gestion|controlling|audit|risqu|\brisk\b|conformit|complian|actuari|underwrit|assuranc|insuranc|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b/i;
+  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]le de gestion|controlling|audit|risqu|\brisk\b|conformit|complian|actuari|underwrit|assuranc|insuranc|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
 
 // Contre-filtre : certains intitulés matchent un mot-clé finance par accident
 // ("IT Support **Analyst**", "**Legal** Assistant", "Product **Analyst**").
@@ -49,7 +49,7 @@ const FINANCE_KEYWORDS_RE =
 // "Ingénieur financier risques" et "Technicien comptable" sont de vrais postes
 // finance. On ne vise que les intitulés techniques explicites.
 const NON_FINANCE_RE =
-  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|\blegal\b|juridique|juriste|avocat|marketing|communication|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
+  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|data scien|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
 
 // Entreprises dont le MÉTIER est la finance (banque, gestion d'actifs, private
 // equity, audit, conseil financier/stratégie, assurance). Chez elles, des
@@ -66,7 +66,7 @@ function looksLikeFinance(...fields) {
   // Un signal finance FORT (comptabilité, contrôle de gestion, M&A, actuariat...)
   // l'emporte sur le contre-filtre : "Contrôleur de gestion IT" reste de la finance.
   const strongFinance =
-    /comptab|accounti|accountant|contr[ôo]le de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b/i;
+    /comptab|accounti|accountant|contr[ôo]le de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets/i;
   if (strongFinance.test(text)) return true;
   return !NON_FINANCE_RE.test(text);
 }
@@ -1729,36 +1729,14 @@ function fetchManual() {
 // Business France) — c'est ce qui distingue le référencement de la
 // republication, et ce qui rend l'usage défendable sans accord préalable.
 //
-// L'API n'a pas de facette "finance" fiable : on cible par mots-clés, comme
-// pour Adzuna, et le pipeline fait le classement fin ensuite.
+// Stratégie : le vivier VIE mondial est petit (~660 offres tous secteurs) et
+// l'API renvoie un champ `count` avec le total. Plutôt que d'interroger par
+// mots-clés — où chaque terme est PLAFONNÉ à 50 résultats (on perdait ainsi
+// jusqu'à ~90 offres sur un mot large comme "analyst") — on récupère TOUT le
+// vivier page par page, puis on filtre finance en local avec le même filtre
+// que les autres sources. Résultat : couverture finance exhaustive, aucun trou.
 const VIE_API_URL = 'https://civiweb-api-prd.azurewebsites.net/api/Offers/search';
 const VIE_API_KEY = process.env.VIE_API_KEY || '';
-// Mots-clés finance au sens large : le VIE est destiné aux jeunes Français,
-// on prend toutes les destinations et toutes les sous-familles en lien avec la
-// finance, la comptabilité et l'économie. L'API dédoublonne par id, donc
-// élargir ne crée pas de doublons — ça ne fait qu'améliorer la couverture.
-const VIE_MOTS_CLES = [
-  // Cœur finance
-  'finance', 'financial', 'financier', 'corporate finance', 'financement',
-  // Comptabilité
-  'comptable', 'comptabilité', 'accounting', 'accountant', 'consolidation',
-  'auditeur', 'audit', 'commissariat aux comptes',
-  // Contrôle & trésorerie
-  'contrôle de gestion', 'controlling', 'controller', 'management control',
-  'trésorerie', 'treasury', 'cash management', 'fp&a', 'business analyst',
-  // Marchés & M&A
-  'trader', 'trading', 'front office', 'sales', 'structuration', 'm&a',
-  'corporate development', 'capital markets', 'investment banking',
-  // Gestion d'actifs
-  'asset management', 'investment', 'portfolio', 'private equity', 'fund',
-  'wealth', 'gestion de patrimoine',
-  // Risques & conformité
-  'risque', 'risk', 'conformité', 'compliance', 'actuaire', 'actuarial',
-  'kyc', 'aml', 'crédit', 'credit',
-  // Économie & data
-  'économiste', 'economist', 'economics', 'data analyst', 'quant',
-  'reporting', 'analyste', 'analyst', 'pricing', 'tax', 'fiscalité',
-];
 
 async function fetchViePage(query, skip, limit) {
   const res = await fetch(VIE_API_URL, {
@@ -1789,40 +1767,40 @@ async function fetchVie() {
   if (!VIE_API_KEY) return DEMO_DATA ? [] : [];
 
   const parId = new Map();
-  let echecs = 0;
+  let total = Infinity;
+  let echec = false;
 
-  for (const q of VIE_MOTS_CLES) {
+  // Pagination complète : on suit le `count` renvoyé par l'API. Garde-fou à
+  // 2000 (soit ~40 pages) au cas où le total exploserait un jour — le pipeline
+  // ne doit jamais boucler sans fin.
+  for (let skip = 0; skip < total && skip < 2000; skip += 50) {
+    let j;
     try {
-      // L'API plafonne à ~50 par page ; une seule page par mot-clé suffit
-      // largement à couvrir le vivier finance (moins de 500 offres au total).
-      const j = await fetchViePage(q, 0, 50);
-      for (const o of j.result || []) {
-        if (o.id && !parId.has(o.id)) parId.set(o.id, o);
-      }
+      j = await fetchViePage('', skip, 50);
     } catch {
-      echecs++;
+      // Un échec réseau en cours de route : on garde ce qu'on a déjà et on sort.
+      echec = true;
+      break;
     }
-    // Une cinquantaine de mots-clés d'affilée fait tomber l'API sous limite de
-    // débit : un petit délai entre chaque requête suffit à tout faire passer.
-    await new Promise((r) => setTimeout(r, 250));
+    total = j.count || 0;
+    const lot = j.result || [];
+    if (!lot.length) break;
+    for (const o of lot) {
+      if (o.id && !parId.has(o.id)) parId.set(o.id, o);
+    }
+    // Petit délai entre les pages pour rester sous la limite de débit de l'API.
+    await new Promise((r) => setTimeout(r, 120));
   }
 
-  if (echecs) {
-    console.warn(`[sources] VIE (Business France) : ${echecs} requête(s) en échec, le reste est conservé.`);
+  if (echec) {
+    console.warn('[sources] VIE (Business France) : pagination interrompue (réseau), le reste est conservé.');
   }
 
-  // Une recherche par mots-clés large ramène du bruit ("DÉVOPS", "Biomolecule
-  // Engineer") : on repasse chaque offre au même filtre finance que les autres
-  // sources, sur l'intitulé et la spécialisation, pour ne garder que le vivier
-  // finance / comptabilité / économie.
+  // On filtre finance avec le même filtre que les autres sources, sur
+  // l'intitulé de mission. Le vivier VIE couvre tous les secteurs ; ce filtre
+  // ne retient que la finance / comptabilité / marchés / assurance / économie.
   return [...parId.values()]
-    .filter((o) =>
-      isFinanceOfferFor(
-        o.organizationName,
-        o.missionTitle,
-        (o.specializations || []).map((s) => s.label || s.name).join(' ')
-      )
-    )
+    .filter((o) => isFinanceOfferFor(o.organizationName, o.missionTitle))
     .map((o) => ({ __src: 'vie', emp: o.organizationName, raw: o }));
 }
 
