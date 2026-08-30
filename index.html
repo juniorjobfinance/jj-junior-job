@@ -295,8 +295,10 @@
     padding: 0.9rem 1.1rem 1rem;
     margin-bottom: 1.25rem;
     box-shadow: 0 3px 14px rgba(10, 20, 36, 0.18);
-    overflow: hidden;
   }
+  /* Fenêtre de découpe : c'est ELLE qui masque, pile à sa largeur, sans la
+     marge intérieure — sinon la pépite suivante déborde sur le côté droit. */
+  .pepites-fenetre { overflow: hidden; }
   .pepites-tete {
     display: flex;
     align-items: baseline;
@@ -639,7 +641,9 @@
           <button type="button" class="pepite-suiv" aria-label="Pépite suivante">›</button>
         </div>
       </div>
-      <div class="pepites-piste" id="pepites-piste"></div>
+      <div class="pepites-fenetre">
+        <div class="pepites-piste" id="pepites-piste"></div>
+      </div>
       <div class="pepites-points" id="pepites-points" aria-hidden="true"></div>
     </div>
 
@@ -1034,11 +1038,10 @@
   var pepitesCourantes = [];
 
   function construirePepites(base) {
-    // On montre les pépites de l'onglet courant ; s'il n'y en a pas dans cet
-    // onglet, on retombe sur les pépites toutes catégories confondues pour ne
-    // jamais afficher un bandeau vide sur un onglet peu fourni.
-    var duVolet = base.filter(function (o) { return o.pepite; });
-    pepitesCourantes = duVolet.length ? duVolet : OFFRES.filter(function (o) { return o.pepite; });
+    // On ne montre QUE les pépites de l'onglet courant : afficher un stage dans
+    // le bandeau de l'onglet VIE n'aurait aucun sens. S'il n'y a pas de pépite
+    // dans cet onglet, le bandeau se masque, tout simplement.
+    pepitesCourantes = base.filter(function (o) { return o.pepite; });
 
     var piste = document.getElementById('pepites-piste');
     var points = document.getElementById('pepites-points');
