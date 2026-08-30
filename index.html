@@ -323,14 +323,23 @@
   }
   button#reset-filters:hover { background: var(--navy-800); color: white; }
 
-  /* ---------- Pépites JJ (bandeau carrousel) ---------- */
+  /* ---------- Pépites JJ (bandeau carrousel) ----------
+     Bande pleine largeur placée juste sous les onglets : la zone centre le
+     bandeau sur la même largeur que le contenu (1200px) ; quand il n'y a pas
+     de pépite, le bandeau est en display:none et la zone ne prend aucune
+     hauteur (pas de padding vertical). */
+  .pepites-zone { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
   .pepites {
     background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%);
     border: 1px solid var(--brass);
     border-radius: 10px;
     padding: 0.9rem 1.1rem 1rem;
-    margin-bottom: 1.25rem;
+    margin-top: 1.5rem;
     box-shadow: 0 3px 14px rgba(10, 20, 36, 0.18);
+  }
+  @media (max-width: 820px) {
+    .pepites-zone { padding: 0 1rem; }
+    .pepites { margin-top: 1rem; }
   }
   /* Fenêtre de découpe : c'est ELLE qui masque, pile à sa largeur, sans la
      marge intérieure — sinon la pépite suivante déborde sur le côté droit. */
@@ -643,6 +652,26 @@
   <span class="total" id="total-count"></span>
 </nav>
 
+<!-- Bandeau « Pépites JJ » en pleine largeur, juste sous les onglets (et non
+     dans la colonne des offres, où il tombait sous les filtres sur mobile).
+     Rempli par le script s'il y a des offres mises en avant ; masqué sinon. -->
+<div class="pepites-zone">
+  <div id="pepites" class="pepites" hidden>
+    <div class="pepites-tete">
+      <span class="pepites-titre">💎 Les Pépites JJ</span>
+      <span class="pepites-sous">Des offres qui sortent du lot, repérées pour vous</span>
+      <div class="pepites-nav" aria-hidden="true">
+        <button type="button" class="pepite-prec" aria-label="Pépite précédente">‹</button>
+        <button type="button" class="pepite-suiv" aria-label="Pépite suivante">›</button>
+      </div>
+    </div>
+    <div class="pepites-fenetre">
+      <div class="pepites-piste" id="pepites-piste"></div>
+    </div>
+    <div class="pepites-points" id="pepites-points" aria-hidden="true"></div>
+  </div>
+</div>
+
 <main id="panel-offres">
   <aside class="filters" id="filters-panel">
     <h2>Recherche</h2>
@@ -680,23 +709,6 @@
   </aside>
 
   <section aria-live="polite">
-    <!-- Bandeau « Pépites JJ » : rempli par le script s'il y a des offres
-         mises en avant. Masqué sinon. -->
-    <div id="pepites" class="pepites" hidden>
-      <div class="pepites-tete">
-        <span class="pepites-titre">💎 Les Pépites JJ</span>
-        <span class="pepites-sous">Des offres qui sortent du lot, repérées pour vous</span>
-        <div class="pepites-nav" aria-hidden="true">
-          <button type="button" class="pepite-prec" aria-label="Pépite précédente">‹</button>
-          <button type="button" class="pepite-suiv" aria-label="Pépite suivante">›</button>
-        </div>
-      </div>
-      <div class="pepites-fenetre">
-        <div class="pepites-piste" id="pepites-piste"></div>
-      </div>
-      <div class="pepites-points" id="pepites-points" aria-hidden="true"></div>
-    </div>
-
     <div class="results-head">
       <h1 style="font-size:1.1rem; margin:0;">Offres</h1>
       <div class="results-tools">
