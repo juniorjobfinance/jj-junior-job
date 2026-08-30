@@ -208,7 +208,20 @@
     padding: 1.1rem;
     position: sticky;
     top: 1rem;
+    /* Le volet est plus haut que l'écran (10 familles + menus) : collé en haut,
+       son bas devenait inatteignable. On le laisse défiler à l'intérieur quand
+       il dépasse la hauteur de la fenêtre, pour qu'on atteigne tous les filtres. */
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
+  /* Barre de défilement discrète, aux couleurs du site. */
+  aside.filters::-webkit-scrollbar { width: 8px; }
+  aside.filters::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 4px;
+  }
+  aside.filters { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
   /* En une seule colonne (écran étroit), un panneau "sticky" se fige au-dessus
      des offres et les recouvre. Il ne doit coller que dans la mise en page à
      deux colonnes, où il occupe sa propre gouttière. Cette règle doit venir
