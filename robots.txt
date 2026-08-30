@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://juniorjobfinance.vercel.app/sitemap.xml
+Sitemap: https://juniorjobfinance.com/sitemap.xml

@@ -25,7 +25,7 @@ const SITEMAP_PATH = path.join(__dirname, '..', 'sitemap.xml');
 // Adresse publique du site : sert au flux RSS et au sitemap. À changer ici et
 // nulle part ailleurs le jour où un vrai nom de domaine remplace le sous-domaine
 // Vercel.
-const SITE_URL = 'https://juniorjobfinance.vercel.app';
+const SITE_URL = 'https://juniorjobfinance.com';
 
 // Un canonique absent pendant ce nombre de passages consécutifs est retiré
 // (PROJET.md §8.6 : "2-3 passages consécutifs").
