@@ -136,9 +136,11 @@
   header.site .contact-lien:hover { background: rgba(168, 118, 63, 0.14); }
   @media (max-width: 640px) { header.site .contact-lien { display: none; } }
   @media (max-width: 640px) {
+    header.site { padding: 1.1rem 1.1rem 1rem; }
     header.site .logo { width: 46px; height: 46px; }
     header.site .wordmark { font-size: 1.4rem; }
     header.site .brand .tagline { font-size: 0.78rem; }
+    header.site .promesse { font-size: 0.66rem; }
   }
 
   /* ---------- Tabs ---------- */
@@ -182,6 +184,23 @@
     font-size: 0.78rem;
     color: var(--ink-soft);
     padding-right: 0.2rem;
+    white-space: nowrap;
+  }
+  /* Sur mobile, les 4 onglets + le total ne tiennent pas sur 375px et « CDI · CDD »
+     se faisait couper. On rend la barre défilable horizontalement (sans barre
+     visible), on empêche les onglets de rétrécir, et on masque le total (déjà
+     rappelé au-dessus de la liste « 252 offres »). */
+  @media (max-width: 640px) {
+    nav.tabs {
+      padding: 0 1rem;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    nav.tabs::-webkit-scrollbar { display: none; }
+    nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; padding: 0.9rem 0.75rem; }
+    nav.tabs .total { display: none; }
   }
 
   /* ---------- Layout ---------- */
@@ -197,6 +216,12 @@
   @media (max-width: 820px) {
     main { grid-template-columns: 1fr; }
   }
+  /* Les pistes d'une grille CSS ont un minimum "auto" : elles refusent de
+     descendre sous la largeur de leur contenu le plus large, ce qui, sur mobile,
+     poussait la colonne à ~680px et faisait déborder toute la page en largeur.
+     min-width:0 sur les enfants de la grille les autorise à rétrécir jusqu'à la
+     fenêtre ; le contenu interne se replie alors normalement. */
+  main > * { min-width: 0; }
 
   /* ---------- Sidebar / filtres ---------- */
   aside.filters {
