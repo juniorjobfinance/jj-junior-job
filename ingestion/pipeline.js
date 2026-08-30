@@ -96,24 +96,45 @@ const SOURCES_DATE_FIABLE_RE =
 //
 // Ce découpage-ci suit les métiers tels que les nomment les écoles et les
 // recruteurs, et la case fourre-tout porte désormais son vrai nom.
+// Familles AFFICHÉES sur le site. Le principe posé au départ : JJ doit rester
+// lisible pour un étudiant qui découvre le secteur. Seize cases classaient
+// juste mais se lisaient mal — dix suffisent, aucune quasi-vide, des noms
+// qu'un étudiant comprend. La précision, elle, reste dans les règles : elles
+// distinguent seize métiers, puis CONSOLIDATION_FAMILLES les replie sur dix.
+// Corriger un classement se fait donc dans les règles ; changer le découpage
+// visible se fait ici et dans la table de repli, sans toucher aux règles.
 const FAMILLES = [
-  'Banque de détail & clientèle',
-  'Assurance — distribution & sinistres',
-  'Actuariat',
+  'Banque de détail & Relation client',
+  'Assurance',
   'Comptabilité & Consolidation',
-  'Contrôle de gestion & FP&A',
-  'Trésorerie & Financement',
-  'Audit & Contrôle interne',
-  'Conseil',
-  'M&A & Transaction Services',
-  'Marchés & Front Office',
-  'Gestion d\'actifs & Wealth',
-  'Middle & Back Office',
-  'Risques & Conformité',
-  'Data & Quant',
-  'Organisation & Projets',
+  'Contrôle de gestion & Trésorerie',
+  'Audit & Conseil',
+  'M&A & Marchés financiers',
+  "Gestion d'actifs & Investissement",
+  'Risques, Conformité & Actuariat',
+  'Data, Tech & Opérations',
   'Autres métiers de la finance',
 ];
+
+// Famille fine (celle des règles) -> famille affichée.
+const CONSOLIDATION_FAMILLES = {
+  'Banque de détail & clientèle': 'Banque de détail & Relation client',
+  'Assurance — distribution & sinistres': 'Assurance',
+  'Comptabilité & Consolidation': 'Comptabilité & Consolidation',
+  'Contrôle de gestion & FP&A': 'Contrôle de gestion & Trésorerie',
+  'Trésorerie & Financement': 'Contrôle de gestion & Trésorerie',
+  'Audit & Contrôle interne': 'Audit & Conseil',
+  'Conseil': 'Audit & Conseil',
+  'M&A & Transaction Services': 'M&A & Marchés financiers',
+  'Marchés & Front Office': 'M&A & Marchés financiers',
+  "Gestion d'actifs & Wealth": "Gestion d'actifs & Investissement",
+  'Risques & Conformité': 'Risques, Conformité & Actuariat',
+  'Actuariat': 'Risques, Conformité & Actuariat',
+  'Data & Quant': 'Data, Tech & Opérations',
+  'Middle & Back Office': 'Data, Tech & Opérations',
+  'Organisation & Projets': 'Data, Tech & Opérations',
+  'Autres métiers de la finance': 'Autres métiers de la finance',
+};
 
 // L'ordre compte : la première règle qui correspond gagne. Les métiers les plus
 // spécifiques passent donc avant les plus larges — sans quoi "Analyste M&A"
@@ -181,7 +202,7 @@ function normaliserPourClassement(text) {
 function inferFamille(title, romeLibelle) {
   const text = normaliserPourClassement(`${title} ${romeLibelle || ''}`);
   for (const [re, famille] of FAMILLE_RULES) {
-    if (re.test(text)) return famille;
+    if (re.test(text)) return CONSOLIDATION_FAMILLES[famille] || famille;
   }
   // Aucune règle n'a mordu. Le dire franchement vaut mieux que de gonfler une
   // famille légitime avec ce qu'on n'a pas su classer.
