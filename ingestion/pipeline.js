@@ -103,23 +103,27 @@ const SOURCES_DATE_FIABLE_RE =
 // distinguent seize métiers, puis CONSOLIDATION_FAMILLES les replie sur dix.
 // Corriger un classement se fait donc dans les règles ; changer le découpage
 // visible se fait ici et dans la table de repli, sans toucher aux règles.
+// Familles = des MÉTIERS purs, jamais des secteurs. « Assurance » et « Banque
+// de détail » ne sont pas des métiers : ce sont des types de structure, et ils
+// vivent déjà dans le filtre correspondant. Un gestionnaire de sinistres et un
+// conseiller bancaire font le même métier de fond — la relation client — chez
+// deux employeurs différents.
 const FAMILLES = [
-  'Banque de détail & Relation client',
-  'Assurance',
   'Comptabilité & Consolidation',
   'Contrôle de gestion & Trésorerie',
   'Audit & Conseil',
   'M&A & Marchés financiers',
   "Gestion d'actifs & Investissement",
   'Risques, Conformité & Actuariat',
+  'Commercial & Relation client',
   'Data, Tech & Opérations',
   'Autres métiers de la finance',
 ];
 
 // Famille fine (celle des règles) -> famille affichée.
 const CONSOLIDATION_FAMILLES = {
-  'Banque de détail & clientèle': 'Banque de détail & Relation client',
-  'Assurance — distribution & sinistres': 'Assurance',
+  'Banque de détail & clientèle': 'Commercial & Relation client',
+  'Assurance — distribution & sinistres': 'Commercial & Relation client',
   'Comptabilité & Consolidation': 'Comptabilité & Consolidation',
   'Contrôle de gestion & FP&A': 'Contrôle de gestion & Trésorerie',
   'Trésorerie & Financement': 'Contrôle de gestion & Trésorerie',
@@ -308,24 +312,24 @@ const SECTEUR_PAR_MAISON = {
   'Kepler Cheuvreux': "Banque d'affaires & marchés",
 
   // Infrastructure de marché et données financières.
-  'LSEG': 'Infrastructure & données de marché',
+  'LSEG': 'Secteur public & institutions',
 
   // Gestion d'actifs.
-  'Amundi': "Gestion d'actifs", 'AXA IM': "Gestion d'actifs",
-  'BNP Paribas AM': "Gestion d'actifs", 'Natixis IM': "Gestion d'actifs",
-  'Carmignac': "Gestion d'actifs", 'Comgest': "Gestion d'actifs",
-  'Sycomore': "Gestion d'actifs", 'Groupama AM': "Gestion d'actifs",
-  'CPR AM': "Gestion d'actifs", 'Lazard Frères Gestion': "Gestion d'actifs",
-  "La Financière de l'Échiquier": "Gestion d'actifs",
+  'Amundi': "Gestion d'actifs & Private equity", 'AXA IM': "Gestion d'actifs & Private equity",
+  'BNP Paribas AM': "Gestion d'actifs & Private equity", 'Natixis IM': "Gestion d'actifs & Private equity",
+  'Carmignac': "Gestion d'actifs & Private equity", 'Comgest': "Gestion d'actifs & Private equity",
+  'Sycomore': "Gestion d'actifs & Private equity", 'Groupama AM': "Gestion d'actifs & Private equity",
+  'CPR AM': "Gestion d'actifs & Private equity", 'Lazard Frères Gestion': "Gestion d'actifs & Private equity",
+  "La Financière de l'Échiquier": "Gestion d'actifs & Private equity",
 
   // Private equity, infrastructure, capital-risque.
-  'Ardian': 'Private equity & capital-risque', 'Eurazeo': 'Private equity & capital-risque',
-  'PAI Partners': 'Private equity & capital-risque', 'Tikehau': 'Private equity & capital-risque',
-  'Antin Infrastructure': 'Private equity & capital-risque', 'Astorg': 'Private equity & capital-risque',
-  'Sagard': 'Private equity & capital-risque', 'Andera Partners': 'Private equity & capital-risque',
-  'LBO France': 'Private equity & capital-risque', 'IK Partners': 'Private equity & capital-risque',
-  'Siparex': 'Private equity & capital-risque', 'Partech': 'Private equity & capital-risque',
-  'Alven': 'Private equity & capital-risque', 'Bpifrance': 'Private equity & capital-risque',
+  'Ardian': "Gestion d'actifs & Private equity", 'Eurazeo': "Gestion d'actifs & Private equity",
+  'PAI Partners': "Gestion d'actifs & Private equity", 'Tikehau': "Gestion d'actifs & Private equity",
+  'Antin Infrastructure': "Gestion d'actifs & Private equity", 'Astorg': "Gestion d'actifs & Private equity",
+  'Sagard': "Gestion d'actifs & Private equity", 'Andera Partners': "Gestion d'actifs & Private equity",
+  'LBO France': "Gestion d'actifs & Private equity", 'IK Partners': "Gestion d'actifs & Private equity",
+  'Siparex': "Gestion d'actifs & Private equity", 'Partech': "Gestion d'actifs & Private equity",
+  'Alven': "Gestion d'actifs & Private equity", 'Bpifrance': "Gestion d'actifs & Private equity",
 
   // Assurance, mutuelles et courtage.
   'AXA': 'Assurance & mutuelles', 'Allianz France': 'Assurance & mutuelles',
@@ -334,8 +338,8 @@ const SECTEUR_PAR_MAISON = {
   'AG2R La Mondiale': 'Assurance & mutuelles', 'Groupama': 'Assurance & mutuelles',
   'Matmut': 'Assurance & mutuelles', 'MAIF': 'Assurance & mutuelles',
   'Macif': 'Assurance & mutuelles', 'Malakoff Humanis': 'Assurance & mutuelles',
-  'Marsh McLennan': 'Courtage & conseil en assurance',
-  'Verlingue': 'Courtage & conseil en assurance', 'Coface': 'Courtage & conseil en assurance',
+  'Marsh McLennan': 'Assurance & mutuelles',
+  'Verlingue': 'Assurance & mutuelles', 'Coface': 'Assurance & mutuelles',
 
   // Audit, conseil, transaction services.
   'Deloitte': 'Audit & conseil', 'EY': 'Audit & conseil', 'KPMG': 'Audit & conseil',
@@ -346,9 +350,9 @@ const SECTEUR_PAR_MAISON = {
   'Sia Partners': 'Audit & conseil', 'Talan': 'Audit & conseil', 'Capgemini': 'Audit & conseil',
 
   // Institutions publiques.
-  'Banque de France': 'Institution publique', 'AMF': 'Institution publique',
-  'ACPR': 'Institution publique', 'Caisse des Dépôts': 'Institution publique',
-  'Agence France Trésor': 'Institution publique',
+  'Banque de France': 'Secteur public & institutions', 'AMF': 'Secteur public & institutions',
+  'ACPR': 'Secteur public & institutions', 'Caisse des Dépôts': 'Secteur public & institutions',
+  'Agence France Trésor': 'Secteur public & institutions',
 
   // Fintech.
   'Qonto': 'Fintech', 'Swile': 'Fintech', 'Pennylane': 'Fintech',
@@ -364,13 +368,13 @@ const SECTEUR_PAR_MAISON = {
 // nomment différemment la même chose fabriquent des doublons dans le filtre.
 const SECTEUR_PAR_MOT = [
   [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de détail'],
-  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Gestion d'actifs"],
-  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, 'Private equity & capital-risque'],
+  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Gestion d'actifs & Private equity"],
+  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, "Gestion d'actifs & Private equity"],
   [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, 'Assurance & mutuelles'],
-  [/courtage|courtier|\bbroker\b/i, 'Courtage & conseil en assurance'],
+  [/courtage|courtier|\bbroker\b/i, 'Assurance & mutuelles'],
   [/audit|conseil|consulting|advisory|cabinet|expertise comptable|commissariat/i, 'Audit & conseil'],
   [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech'],
-  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Institution publique'],
+  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Secteur public & institutions'],
 ];
 
 // Étiquette des employeurs qu'aucun mot ne permet de rattacher. Elle correspond
@@ -378,12 +382,38 @@ const SECTEUR_PAR_MOT = [
 // ensemble.
 const SECTEUR_AUTRES = 'PME & start-up';
 
-function inferSector(emp, maison) {
+// Une même maison recrute dans plusieurs mondes : BNP Paribas a un réseau
+// d'agences, une banque d'affaires (CIB), un gérant d'actifs (AM) et un
+// assureur (Cardif). Classer toutes ses offres "Banque de détail" parce que la
+// maison s'appelle BNP serait faux une fois sur trois. Quand l'employeur ou
+// l'intitulé désigne l'entité qui recrute, c'est elle qui décide du type.
+const ENTITE_BFI_RE =
+  /\bcib\b|corporate\s*(?:&|and|et)\s*investment|banque de financement|banque d'affaires|global (?:markets|banking)|investment bank|salle des march[ée]s|\bglobal capital markets\b|\bm&a\b|fusions?[\s-]acquisitions?|\btrading\b|\btrader\b|structuration|produits d[ée]riv[ée]s/i;
+const ENTITE_GESTION_RE =
+  /asset management|\bam\b\s*$|gestion d'actifs|investment managers?|wealth management|banque priv[ée]e|gestion priv[ée]e|private equity|gestion de portefeuille|\bg[ée]rant\b/i;
+const ENTITE_ASSURANCE_RE = /\bcardif\b|\bassurances?\b|\binsurance\b|\bpr[ée]voyance\b/i;
+
+// Maisons multi-entités : les groupes bancaires dont le type par défaut est le
+// réseau de détail. C'est pour elles seules que la détection d'entité joue —
+// chez Amundi ou Deloitte, il n'y a rien à arbitrer.
+const MAISONS_MULTI_ENTITES = new Set([
+  'BNP Paribas', 'Société Générale', 'Crédit Agricole', 'BPCE', 'Crédit Mutuel',
+  'La Banque Postale', 'Natixis', 'HSBC France',
+]);
+
+function inferSector(emp, maison, title) {
+  if (maison && MAISONS_MULTI_ENTITES.has(maison)) {
+    const texte = (emp || '') + ' ' + (title || '');
+    if (ENTITE_GESTION_RE.test(texte)) return "Gestion d'actifs & Private equity";
+    if (ENTITE_BFI_RE.test(texte)) return "Banque d'affaires & marchés";
+    if (ENTITE_ASSURANCE_RE.test(emp || '')) return 'Assurance & mutuelles';
+  }
+
   if (maison && SECTEUR_PAR_MAISON[maison]) return SECTEUR_PAR_MAISON[maison];
   // Une maison de référence absente de la table est un grand groupe industriel
   // ou de services : sa direction financière recrute des juniors, mais ce n'est
   // pas une maison de finance. Le dire évite de la ranger sous "Banque".
-  if (maison) return 'Direction financière de groupe';
+  if (maison) return 'Entreprise (direction financière)';
   const key = (emp || '').toLowerCase().trim();
   for (const [re, secteur] of SECTEUR_PAR_MOT) {
     if (re.test(key)) return secteur;
@@ -1039,7 +1069,7 @@ function normalize(item) {
   const famille = inferFamille(title, romeLibelle);
   emp = normaliserEmployeur(emp);
   const maisonRef = trouverMaison(emp);
-  const sector = inferSector(emp, maisonRef);
+  const sector = inferSector(emp, maisonRef, title);
 
   return {
     emp,

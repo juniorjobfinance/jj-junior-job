@@ -115,7 +115,9 @@ Groupama                 | groupama|\bgan\b
 # === Banques de réseau françaises ===========================================
 BNP Paribas              | bnp ?paribas|^bnpp
 Société Générale         | societe generale|^sg\b|boursobank|boursorama
-Crédit Agricole          | credit agricole|^lcl\b|indosuez
+# Les caisses régionales s'appellent "Caisse Régionale de Crédit Agricole..." :
+# le nom de la maison n'est pas en tête, d'où l'alternative non ancrée.
+Crédit Agricole          | credit agricole|^lcl\b|indosuez|.*caisse regionale de credit agricole|.*groupe credit agricole
 BPCE                     | bpce|caisse d.?epargne|banque populaire|^bred\b|banque palatine|credit cooperatif|banque bcp|casden
 Crédit Mutuel            | credit mutuel|^cic\b|banque transatlantique|arkea
 La Banque Postale        | banque postale

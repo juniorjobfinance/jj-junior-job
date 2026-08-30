@@ -219,14 +219,27 @@
     background: var(--paper);
   }
   fieldset { border: none; padding: 0; margin: 0; }
+  /* Chaque famille tient sur deux lignes : le nom + son compteur, puis la
+     description en petit gris — « ce qu'il y a dedans », alignée sous le nom
+     (après la case à cocher). Assez discrète pour ne pas alourdir le volet,
+     assez lisible pour qu'un étudiant qui découvre le secteur s'y retrouve. */
   .famille-option {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.3rem 0;
+    column-gap: 0.5rem;
+    padding: 0.35rem 0 0.4rem;
     font-size: 0.88rem;
     cursor: pointer;
+  }
+  .famille-option + .famille-option { border-top: 1px solid rgba(220, 214, 201, 0.45); }
+  .famille-option .famille-nom { display: flex; align-items: center; gap: 0.4rem; }
+  .famille-option .famille-desc {
+    grid-column: 1 / -1;
+    padding-left: 1.15rem;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    color: #8b93a3;
   }
   .famille-option input { margin: 0; }
   .famille-option .count {
@@ -563,30 +576,44 @@
   // fois — la page affichait neuf familles à zéro pendant que les données en
   // comptaient seize. L'ordre est l'ordre d'affichage du volet de gauche.
   var FAMILLES = [
-    'Banque de détail & Relation client',
-    'Assurance',
     'Comptabilité & Consolidation',
     'Contrôle de gestion & Trésorerie',
     'Audit & Conseil',
     'M&A & Marchés financiers',
     "Gestion d'actifs & Investissement",
     'Risques, Conformité & Actuariat',
+    'Commercial & Relation client',
     'Data, Tech & Opérations',
     'Autres métiers de la finance'
   ];
 
+  // « Ce qu'il y a dedans » : la ligne grise sous chaque famille. Un étudiant
+  // qui découvre le secteur ne sait pas ce que cache « M&A & Marchés » — ces
+  // mots-clés le lui disent sans qu'il ait à deviner. Format volontairement
+  // court : des mots-clés, jamais des phrases.
+  var FAMILLE_DESCRIPTIONS = {
+    'Comptabilité & Consolidation': 'comptable, aide-comptable, consolidation, reporting',
+    'Contrôle de gestion & Trésorerie': 'contrôle de gestion, FP&A, trésorerie, financement',
+    'Audit & Conseil': 'audit financier, commissariat aux comptes, contrôle interne, transaction services',
+    'M&A & Marchés financiers': 'fusions-acquisitions, corporate finance, front office, sales, trading',
+    "Gestion d'actifs & Investissement": 'asset management, gérant, private equity, analyse buy-side',
+    'Risques, Conformité & Actuariat': 'risk management, compliance, contrôle des risques, actuariat',
+    'Commercial & Relation client': 'conseiller, chargé d\'affaires, souscription, distribution, gestion de sinistres',
+    'Data, Tech & Opérations': 'data science, quant, modélisation, middle & back office, MOA',
+    'Autres métiers de la finance': 'ce qui ne rentre dans aucune autre case'
+  };
+
+  // Neuf types, jamais de quasi-vide, PME en dernier. Comme pour les familles,
+  // cette liste doit suivre les tables d'ingestion/pipeline.js.
   var STRUCTURES = [
     'Banque de détail',
     "Banque d'affaires & marchés",
-    "Gestion d'actifs",
-    'Private equity & capital-risque',
+    "Gestion d'actifs & Private equity",
     'Assurance & mutuelles',
-    'Courtage & conseil en assurance',
     'Audit & conseil',
+    'Entreprise (direction financière)',
     'Fintech',
-    'Infrastructure & données de marché',
-    'Institution publique',
-    'Direction financière de groupe',
+    'Secteur public & institutions',
     'PME & start-up'
   ];
 
@@ -691,9 +718,11 @@
   function buildFamilleFieldset() {
     els.familleFieldset.innerHTML = FAMILLES.map(function (f, i) {
       var id = 'famille-' + i;
+      var desc = FAMILLE_DESCRIPTIONS[f] || '';
       return '<label class="famille-option" for="' + id + '">' +
-        '<span><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
+        '<span class="famille-nom"><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
         '<span class="count" data-famille="' + f + '"></span>' +
+        (desc ? '<span class="famille-desc">' + desc + '</span>' : '') +
         '</label>';
     }).join('');
     Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
