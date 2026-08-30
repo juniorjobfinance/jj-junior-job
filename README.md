@@ -84,6 +84,16 @@ le déploiement Vercel. Les identifiants sont des secrets de dépôt — voir
 Une variante locale existe pour Windows dans [`automatisation/`](automatisation/), utile
 uniquement si l'Action n'est pas branchée.
 
+## Choix de configuration
+
+**`cleanUrls` est laissé à `false`** dans `vercel.json`. L'activer ferait servir
+`/mentions-legales` sans extension, alors que le serveur de développement local sert les
+fichiers par leur nom exact. Local et production divergeraient — et c'est exactement là que
+se cachent les liens cassés qu'on ne découvre qu'après la mise en ligne.
+
+JSON n'accepte pas de commentaires, et Vercel refuse tout champ hors de son schéma : la
+raison d'un réglage se note ici, jamais dans `vercel.json`.
+
 ## Phase 2
 
 Le site est aujourd'hui restreint aux grandes maisons. Pour l'ouvrir aux PME et ETI :
