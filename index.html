@@ -516,21 +516,42 @@
 (function () {
   'use strict';
 
+  // Ces deux listes doivent suivre celles d'ingestion/pipeline.js (FAMILLES et
+  // les tables de secteurs) : dupliquées en dur ici, elles ont déjà divergé une
+  // fois — la page affichait neuf familles à zéro pendant que les données en
+  // comptaient seize. L'ordre est l'ordre d'affichage du volet de gauche.
   var FAMILLES = [
-    'Commercial & Relation client',
-    'Analyse & Research',
+    'Banque de détail & clientèle',
+    'Assurance — distribution & sinistres',
+    'Actuariat',
+    'Comptabilité & Consolidation',
+    'Contrôle de gestion & FP&A',
+    'Trésorerie & Financement',
+    'Audit & Contrôle interne',
+    'Conseil',
+    'M&A & Transaction Services',
+    'Marchés & Front Office',
+    "Gestion d'actifs & Wealth",
+    'Middle & Back Office',
     'Risques & Conformité',
-    'M&A & Transactions',
-    'Audit & Conseil',
-    "Finance d'entreprise",
-    'Gestion & Investissement',
-    'Assurance & Actuariat',
-    'Data & Quant'
+    'Data & Quant',
+    'Organisation & Projets',
+    'Autres métiers de la finance'
   ];
 
   var STRUCTURES = [
-    'Banque', "Gestion d'actifs", 'Private Equity/VC', 'Assurance',
-    'Audit & conseil', 'Entreprise', 'Fintech', 'Finance publique'
+    'Banque de détail',
+    "Banque d'affaires & marchés",
+    "Gestion d'actifs",
+    'Private equity & capital-risque',
+    'Assurance & mutuelles',
+    'Courtage & conseil en assurance',
+    'Audit & conseil',
+    'Fintech',
+    'Infrastructure & données de marché',
+    'Institution publique',
+    'Direction financière de groupe',
+    'PME & start-up'
   ];
 
   var PAGE_SIZE = 50;
