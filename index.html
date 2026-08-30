@@ -123,6 +123,20 @@
     color: var(--brass);
   }
   header.site .promesse span { color: #8a93a8; }
+  /* Lien de contact discret, poussé tout à droite de l'en-tête. */
+  header.site .contact-lien {
+    margin-left: auto;
+    align-self: center;
+    color: var(--brass);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 1px solid rgba(168, 118, 63, 0.5);
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    white-space: nowrap;
+  }
+  header.site .contact-lien:hover { background: rgba(168, 118, 63, 0.14); }
+  @media (max-width: 640px) { header.site .contact-lien { display: none; } }
   @media (max-width: 640px) {
     header.site .logo { width: 46px; height: 46px; font-size: 1.35rem; border-radius: 11px; }
     header.site .wordmark { font-size: 1.4rem; }
@@ -484,6 +498,7 @@
       <span class="wordmark">JJ&nbsp;<em>Finance</em></span>
       <span class="tagline">Le vivier junior de la finance française</span>
     </div>
+    <a class="contact-lien" href="mailto:contact@juniorjobfinance.com">Contact</a>
   </div>
   <div class="promesse">
     Trié par métier <span>·</span> 0-3 ans d'expérience <span>·</span> vérifié chaque jour <span>·</span> sans compte, sans pub
@@ -564,6 +579,7 @@
     <a href="mentions-legales.html">Mentions légales</a>
     <a href="confidentialite.html">Politique de confidentialité</a>
     <a href="offres.xml">Flux RSS</a>
+    <a href="mailto:contact@juniorjobfinance.com">Contact</a>
   </nav>
 </footer>
 
