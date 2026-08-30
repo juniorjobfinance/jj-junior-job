@@ -259,7 +259,7 @@ const FAUX_EMPLOYEUR_MOTIFS = [
   'audencia', 'inseec', 'excelia',
   // Intérim et grands réseaux de recrutement
   'adecco', 'randstad', 'manpower', 'expectra', "hays\\b", 'michael page', 'robert half',
-  'walters people', 'fed finance', 'fed group', 'winsearch', "lynx\\s?rh", "aquila\\s?rh",
+  'walters people', 'robert walters', 'fed finance', 'fed group', 'winsearch', "lynx\\s?rh", "aquila\\s?rh",
   "ras int[ée]rim", "synergie\\b", 'proman', "crit\\b", "actual\\b", 'temporis', 'kelly services',
   'page personnel', 'approach people', 'talentpeople', 'silkhom', 'urban linker', 'externatic',
   'nextep', 'abil resources', "lincoln\\b", 'vidal associates', 'cabinet de recrutement',

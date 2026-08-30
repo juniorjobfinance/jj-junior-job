@@ -853,7 +853,14 @@
       return fa - fb || b[1] - a[1];
     });
     remplirSelect(els.lieuSelect, zones, 'Toute la France', state.lieu);
-    remplirSelect(els.empSelect, comptages(base, maisonDe), 'Toutes les maisons', state.emp);
+    // « PME et start-ups » rassemble des centaines d'employeurs vus une seule
+    // fois : le groupe pèse lourd, mais il se choisit en dernier.
+    var maisons = comptages(base, maisonDe).sort(function (x, y) {
+      var fx = x[0] === 'PME et start-ups' ? 1 : 0;
+      var fy = y[0] === 'PME et start-ups' ? 1 : 0;
+      return fx - fy || y[1] - x[1];
+    });
+    remplirSelect(els.empSelect, maisons, 'Toutes les maisons', state.emp);
     state.lieu = els.lieuSelect.value;
     state.emp = els.empSelect.value;
 

@@ -58,15 +58,20 @@ const MAX_AGE_JOURS_ATS_DIRECT = 120;
 // lisent l'ATS de la maison elle-même.
 const SOURCES_AGREGATEUR_RE = /^(francetravail|adzuna|opendatasoft|labonnealternance)/;
 
-// PHASE 1 : le site ne montre que les grandes maisons (ingestion/maisons.txt) —
-// celles que visent réellement les étudiants en finance. Une offre chez un
-// employeur inconnu du fichier est écartée.
+// Les employeurs absents de la liste de référence ne sont plus écartés : ils
+// sont REGROUPÉS. Chaque offre garde le nom exact de son employeur sur la carte
+// — c'est là que le candidat postule — mais dans le filtre "Entreprise" les
+// deux cents PME, cabinets et associations tiennent une seule ligne au lieu de
+// deux cents.
 //
-// PHASE 2 : passer cette constante à false ouvre le site aux PME et ETI. Rien
-// d'autre à changer : le champ "maison" reste renseigné pour les grandes
-// maisons et vide pour les autres, et le filtre "Entreprise" de la page
-// continue de fonctionner.
-const PHASE_GRANDES_MAISONS = true;
+// C'est ce qui permet d'avoir le volume ET la lisibilité : un étudiant qui
+// cherche Rothschild ou Amundi les repère toujours d'un coup d'œil, sans faire
+// défiler des dizaines de noms qu'il ne connaît pas.
+const MAISON_AUTRES = 'PME et start-ups';
+
+// Mettre à true pour revenir à un site strictement limité aux maisons de
+// référence : les offres du groupe MAISON_AUTRES sont alors écartées.
+const MAISONS_DE_REFERENCE_SEULEMENT = false;
 
 // Toutes les sources ne datent pas leurs offres. Celles listées ici renvoient
 // une VRAIE date de publication ; les autres (TalentSoft, SuccessFactors et le
@@ -82,32 +87,74 @@ const SOURCES_DATE_FIABLE_RE =
 // Référentiels de classification
 // ---------------------------------------------------------------------------
 
+// Familles métier. Le découpage précédent (9 familles) souffrait de deux maux :
+// "Commercial & Relation client" mélangeait les conseillers d'agence bancaire et
+// les gestionnaires de sinistres — deux métiers qui n'ont rien en commun — et
+// "Risques & Conformité" servait de fourre-tout, récupérant tout ce que les
+// règles ne reconnaissaient pas. Un étudiant qui cochait "Risques" tombait sur
+// des actuaires et des account managers.
+//
+// Ce découpage-ci suit les métiers tels que les nomment les écoles et les
+// recruteurs, et la case fourre-tout porte désormais son vrai nom.
 const FAMILLES = [
-  'Commercial & Relation client',
-  'Analyse & Research',
+  'Banque de détail & clientèle',
+  'Assurance — distribution & sinistres',
+  'Actuariat',
+  'Comptabilité & Consolidation',
+  'Contrôle de gestion & FP&A',
+  'Trésorerie & Financement',
+  'Audit & Contrôle interne',
+  'Conseil',
+  'M&A & Transaction Services',
+  'Marchés & Front Office',
+  'Gestion d\'actifs & Wealth',
+  'Middle & Back Office',
   'Risques & Conformité',
-  'M&A & Transactions',
-  'Audit & Conseil',
-  "Finance d'entreprise",
-  'Gestion & Investissement',
-  'Assurance & Actuariat',
   'Data & Quant',
+  'Organisation & Projets',
+  'Autres métiers de la finance',
 ];
 
-// Mots-clés (titre + libellé ROME) -> famille métier. Ordre = priorité de match.
+// L'ordre compte : la première règle qui correspond gagne. Les métiers les plus
+// spécifiques passent donc avant les plus larges — sans quoi "Analyste M&A"
+// tomberait dans "Marchés" à cause du mot "analyste".
+//
+// Les motifs s'appuient sur des RADICAUX ("charg", "conseill", "gestionnaire")
+// plutôt que sur des mots entiers : les intitulés arrivent au masculin, au
+// féminin et au pluriel, et "Chargée d'affaires" ne correspondait pas à un
+// motif écrit "chargé".
 const FAMILLE_RULES = [
-  [/\bm&a\b|fusions?[\s-]?acquisitions?|transaction services|ecm|dcm|due diligence|conseil financier/i, 'M&A & Transactions'],
-  // "Consultant" chez un cabinet relève d'Audit & Conseil (PROJET.md §15 range
-  // explicitement le conseil, stratégie comprise, dans le périmètre). Sans cette
-  // règle, tous les consultants tombaient dans le fourre-tout Risques.
-  [/audit|commissariat aux comptes|expertise comptable|consultant|consulting|conseil\b|advisory/i, 'Audit & Conseil'],
-  [/actuari|souscription|underwrit/i, 'Assurance & Actuariat'],
-  [/data scien|\bdata analyst\b|quant|machine learning|mod[ée]lisation/i, 'Data & Quant'],
-  [/contr[ôo]le(?:ur)? de gestion|controlling|\bcontroller\b|tr[ée]sorerie|\btr[ée]sorier|comptabilit[ée]|comptable|accounting|accountant|daf\b|administrat.+financi|business partner|\bfp&a\b|consolid|\bbudg[ée]t|cost (?:engineer|controller)|facturation|recouvrement|credit management|paie et adv|contr[ôo]le financier|contr[ôo]le budg[ée]taire|gestion financi[èe]re/i, "Finance d'entreprise"],
-  [/risque|\brisk\b|conformit[ée]|compliance|contr[ôo]le interne|internal control|\bkyc\b|\blcb.?ft\b|blanchiment|d[ée]ontolog|contr[ôo]le permanent|s[ée]curit[ée] financi[èe]re|sanctions|fraude/i, 'Risques & Conformité'],
-  [/private equity|venture capital|\bvc\b|asset management|gestion d'actifs|gestion de portefeuille|march[ée]s|infrastructure fund|\bg[ée]rant\b|gestion privée|banque priv[ée]e|wealth|middle office|back office|front office|custody|d[ée]positaire|fund admin|opcvm|\bsalle des march[ée]s\b/i, 'Gestion & Investissement'],
-  [/analyste cr[ée]dit|equity research|analyste financier|[ée]conomiste|research|analyse financi[èe]re|analyste risque de cr[ée]dit|[ée]tudes [ée]conomiques/i, 'Analyse & Research'],
-  [/commercial|charg[ée] d'affaires|charg[ée] de client[èe]le|conseiller|coverage|relation client/i, 'Commercial & Relation client'],
+  // --- Spécialités identifiables sans ambiguïté ---------------------------
+  [/actuair|tarification (?:vie|sant|iard)|provisionnement|\bsolvab(?:ilit[ée])? ?ii\b/i, 'Actuariat'],
+  [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|corporate finance|leveraged finance|\becm\b|\bdcm\b|private equity|capital[\s-]?investissement|venture capital|\blbo\b|deal advisory|[ée]valuation d'entreprise|fund finance|buyout|co[\s-]?investment/i, 'M&A & Transaction Services'],
+  [/data scien|data analyst|analyste data|\bquant\b|quantitatif|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)/i, 'Data & Quant'],
+
+  // --- Assurance : sinistres, contrats, distribution -----------------------
+  [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurance (?:collective|emprunteur|construction|sant[ée])|\binsurance\b/i, 'Assurance — distribution & sinistres'],
+
+  // --- Marchés, gestion, opérations ---------------------------------------
+  [/front office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits d[ée]riv[ée]|march[ée]s financiers/i, 'Marchés & Front Office'],
+  [/asset management|gestion d'actifs|gestion de portefeuille|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\besg\b|extra[\s-]?financi/i, "Gestion d'actifs & Wealth"],
+  [/middle office|back office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
+
+  // --- Finance d'entreprise ------------------------------------------------
+  [/comptab|accounting|accountant|consolid|cl[ôo]ture comptable|r[ée]vision comptable|facturation|\bdaf\b|gestionnaire de paie|\bpaie\b|administration des ventes|\badv\b/i, 'Comptabilité & Consolidation'],
+  [/contr[ôo]le de gestion|contr[ôo]leur de gestion|controlling|\bcontroller\b|\bfp&a\b|business partner|budg[ée]t|reporting financier|performance financi[èe]re|cost control|pilotage financier|contr[ôo]leur? financi|contr[ôo]leur op[ée]rations/i, 'Contrôle de gestion & FP&A'],
+  [/tr[ée]sorerie|tr[ée]sorier|treasury|cash management|financement structur|financement immobilier|charg.{0,15}financement|credit management|recouvrement|analyste cr[ée]dit|risque de cr[ée]dit|\bcr[ée]dit\b/i, 'Trésorerie & Financement'],
+
+  // --- Audit, conseil, risques ---------------------------------------------
+  [/audit|commissariat aux comptes|contr[ôo]le interne|internal control|contr[ôo]le permanent|inspection g[ée]n[ée]rale/i, 'Audit & Contrôle interne'],
+  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux/i, 'Risques & Conformité'],
+  [/consult|conseil\b|advisory|transformation financi/i, 'Conseil'],
+
+  // --- Analyse et recherche -------------------------------------------------
+  [/analyse financi[èe]re|analyste financier|equity research|\bresearch\b|[ée]conomist|[ée]tudes [ée]conomiques|strat[ée]giste/i, 'Marchés & Front Office'],
+
+  // --- Organisation, MOA, projets ------------------------------------------
+  [/business analyst|moa|amoa|ma[îi]trise d'ouvrage|chef(?:fe)? de projet|product owner|organisation et projets|pmo/i, 'Organisation & Projets'],
+
+  // --- Réseau bancaire et commercial : le plus large, donc en dernier -------
+  [/conseill|charg.{0,4} (?:de client|d'affaires|de stmt)|client[èe]le|agence bancaire|banque de d[ée]tail|commercial|d[ée]veloppement|coverage|relation client|account manager|charg.{0,4} d'affaires|business development|\bagence\b/i, 'Banque de détail & clientèle'],
 ];
 
 // Les intitulés français sont truffés d'écriture inclusive :
@@ -136,7 +183,9 @@ function inferFamille(title, romeLibelle) {
   for (const [re, famille] of FAMILLE_RULES) {
     if (re.test(text)) return famille;
   }
-  return 'Risques & Conformité'; // fallback : back-office/opérations rangées ici (§4.2)
+  // Aucune règle n'a mordu. Le dire franchement vaut mieux que de gonfler une
+  // famille légitime avec ce qu'on n'a pas su classer.
+  return 'Autres métiers de la finance';
 }
 
 // Une même maison arrive sous plusieurs orthographes selon la source :
@@ -213,88 +262,112 @@ function normaliserEmployeur(emp) {
 }
 
 // Type de structure par employeur (heuristique — liste de départ PROJET.md §15).
-const SECTOR_BY_EMPLOYER = {
-  // Banque
-  'société générale': 'Banque', 'bnp paribas': 'Banque', 'crédit agricole': 'Banque',
-  natixis: 'Banque', hsbc: 'Banque', 'goldman sachs': 'Banque', jpmorgan: 'Banque',
-  'morgan stanley': 'Banque', citi: 'Banque', barclays: 'Banque', 'deutsche bank': 'Banque',
-  ubs: 'Banque', 'la banque postale': 'Banque', bpce: 'Banque', boursobank: 'Banque',
-  'caisse d\'epargne': 'Banque', 'caisse d\'épargne': 'Banque', 'banque populaire': 'Banque',
-  bred: 'Banque', 'banque palatine': 'Banque', 'crédit coopératif': 'Banque', lcl: 'Banque',
-  indosuez: "Gestion d'actifs",
-  // Gestion d'actifs
-  amundi: "Gestion d'actifs", 'axa im': "Gestion d'actifs", carmignac: "Gestion d'actifs",
-  comgest: "Gestion d'actifs", tikehau: "Gestion d'actifs",
-  // Private Equity / VC
-  ardian: 'Private Equity/VC', eurazeo: 'Private Equity/VC', 'pai partners': 'Private Equity/VC',
-  astorg: 'Private Equity/VC', bpifrance: 'Private Equity/VC',
-  // Assurance
-  axa: 'Assurance', allianz: 'Assurance', 'cnp assurances': 'Assurance', covéa: 'Assurance',
-  scor: 'Assurance', generali: 'Assurance',
-  // Audit & conseil
-  deloitte: 'Audit & conseil', ey: 'Audit & conseil', kpmg: 'Audit & conseil', pwc: 'Audit & conseil',
-  mazars: 'Audit & conseil', 'oliver wyman': 'Audit & conseil', mckinsey: 'Audit & conseil',
-  bcg: 'Audit & conseil', bain: 'Audit & conseil',
-  // Fintech
-  qonto: 'Fintech', pennylane: 'Fintech', spendesk: 'Fintech', alan: 'Fintech', ledger: 'Fintech',
-  payfit: 'Fintech', younited: 'Fintech',
-  // Finance publique
-  'banque de france': 'Finance publique', amf: 'Finance publique', acpr: 'Finance publique',
-  'caisse des dépôts': 'Finance publique',
-};
-
-// Le type de structure déduit du seul nom d'employeur laissait un tiers des
-// offres dans le fourre-tout "Entreprise" — Matmut classé comme un industriel,
-// Sia Partners comme un commerçant. Maintenant qu'on rattache chaque offre à une
-// maison de référence, on s'en sert : c'est une information sûre, là où deviner
-// à partir d'une raison sociale ne l'est jamais.
+// Type de structure. Le découpage précédent rangeait 446 offres sous un seul
+// mot, "Banque" — or un étudiant qui vise le M&A chez Lazard et celui qui vise
+// une agence de la Caisse d'Épargne ne cherchent pas la même chose. La banque
+// de détail et la banque d'affaires sont deux mondes, et c'est la distinction
+// la plus utile qu'on puisse offrir sur ce site.
 const SECTEUR_PAR_MAISON = {
-  'Matmut': 'Assurance', 'MAIF': 'Assurance', 'Macif': 'Assurance',
-  'Malakoff Humanis': 'Assurance', 'Groupama': 'Assurance', 'Covéa': 'Assurance',
-  'AG2R La Mondiale': 'Assurance', 'Generali France': 'Assurance',
-  'Allianz France': 'Assurance', 'CNP Assurances': 'Assurance', 'Scor': 'Assurance',
-  'AXA': 'Assurance',
-  'Sia Partners': 'Audit & conseil', 'Grant Thornton': 'Audit & conseil',
-  'Forvis Mazars': 'Audit & conseil', 'Eight Advisory': 'Audit & conseil',
-  'Accuracy': 'Audit & conseil', 'Oliver Wyman': 'Audit & conseil',
-  'McKinsey': 'Audit & conseil', 'BCG': 'Audit & conseil', 'Bain': 'Audit & conseil',
-  'Deloitte': 'Audit & conseil', 'EY': 'Audit & conseil', 'KPMG': 'Audit & conseil',
-  'PwC': 'Audit & conseil', 'Capgemini': 'Audit & conseil',
-  'Lazard': 'Banque', 'Rothschild & Co': 'Banque', 'Edmond de Rothschild': 'Banque',
-  'Messier & Associés': 'Banque', 'Centerview Partners': 'Banque',
-  'Perella Weinberg': 'Banque', 'Oddo BHF': 'Banque', 'BPCE': 'Banque',
-  'Crédit Mutuel': 'Banque', 'La Banque Postale': 'Banque',
-  'BNP Paribas CIB': 'Banque', 'Société Générale CIB': 'Banque',
-  'Ardian': 'Private Equity/VC', 'Eurazeo': 'Private Equity/VC',
-  'PAI Partners': 'Private Equity/VC', 'Tikehau': 'Private Equity/VC',
-  'Antin Infrastructure': 'Private Equity/VC', 'Astorg': 'Private Equity/VC',
-  'Sagard': 'Private Equity/VC', 'Andera Partners': 'Private Equity/VC',
-  'LBO France': 'Private Equity/VC', 'IK Partners': 'Private Equity/VC',
-  'Siparex': 'Private Equity/VC', 'Partech': 'Private Equity/VC',
-  'Alven': 'Private Equity/VC', 'Bpifrance': 'Private Equity/VC',
+  // Banque de détail : réseaux d'agences, clientèle particuliers et pro.
+  'BPCE': 'Banque de détail', 'Crédit Agricole': 'Banque de détail',
+  'BNP Paribas': 'Banque de détail', 'Société Générale': 'Banque de détail',
+  'Crédit Mutuel': 'Banque de détail', 'La Banque Postale': 'Banque de détail',
+
+  // Banque d'affaires et de marchés : CIB, boutiques M&A, courtiers.
+  'BNP Paribas CIB': "Banque d'affaires & marchés", 'Société Générale CIB': "Banque d'affaires & marchés",
+  'Crédit Agricole CIB': "Banque d'affaires & marchés", 'Natixis': "Banque d'affaires & marchés",
+  'Goldman Sachs': "Banque d'affaires & marchés", 'JPMorgan': "Banque d'affaires & marchés",
+  'Morgan Stanley': "Banque d'affaires & marchés", 'Bank of America': "Banque d'affaires & marchés",
+  'Citi': "Banque d'affaires & marchés", 'Barclays': "Banque d'affaires & marchés",
+  'Deutsche Bank': "Banque d'affaires & marchés", 'UBS': "Banque d'affaires & marchés",
+  'HSBC France': "Banque d'affaires & marchés", 'Lazard': "Banque d'affaires & marchés",
+  'Rothschild & Co': "Banque d'affaires & marchés", 'Edmond de Rothschild': "Banque d'affaires & marchés",
+  'Oddo BHF': "Banque d'affaires & marchés", 'Messier & Associés': "Banque d'affaires & marchés",
+  'Centerview Partners': "Banque d'affaires & marchés", 'Perella Weinberg': "Banque d'affaires & marchés",
+  'Kepler Cheuvreux': "Banque d'affaires & marchés",
+
+  // Infrastructure de marché et données financières.
+  'LSEG': 'Infrastructure & données de marché',
+
+  // Gestion d'actifs.
   'Amundi': "Gestion d'actifs", 'AXA IM': "Gestion d'actifs",
   'BNP Paribas AM': "Gestion d'actifs", 'Natixis IM': "Gestion d'actifs",
   'Carmignac': "Gestion d'actifs", 'Comgest': "Gestion d'actifs",
   'Sycomore': "Gestion d'actifs", 'Groupama AM': "Gestion d'actifs",
   'CPR AM': "Gestion d'actifs", 'Lazard Frères Gestion': "Gestion d'actifs",
   "La Financière de l'Échiquier": "Gestion d'actifs",
-  'Banque de France': 'Finance publique', 'AMF': 'Finance publique',
-  'ACPR': 'Finance publique', 'Caisse des Dépôts': 'Finance publique',
-  'Agence France Trésor': 'Finance publique',
-  'Talan': 'Audit & conseil', 'Roland Berger': 'Audit & conseil', 'BDO': 'Audit & conseil',
-  'Marsh McLennan': 'Assurance', 'Verlingue': 'Assurance', 'Coface': 'Assurance',
-  'Kepler Cheuvreux': 'Banque', 'LSEG': 'Banque',
+
+  // Private equity, infrastructure, capital-risque.
+  'Ardian': 'Private equity & capital-risque', 'Eurazeo': 'Private equity & capital-risque',
+  'PAI Partners': 'Private equity & capital-risque', 'Tikehau': 'Private equity & capital-risque',
+  'Antin Infrastructure': 'Private equity & capital-risque', 'Astorg': 'Private equity & capital-risque',
+  'Sagard': 'Private equity & capital-risque', 'Andera Partners': 'Private equity & capital-risque',
+  'LBO France': 'Private equity & capital-risque', 'IK Partners': 'Private equity & capital-risque',
+  'Siparex': 'Private equity & capital-risque', 'Partech': 'Private equity & capital-risque',
+  'Alven': 'Private equity & capital-risque', 'Bpifrance': 'Private equity & capital-risque',
+
+  // Assurance, mutuelles et courtage.
+  'AXA': 'Assurance & mutuelles', 'Allianz France': 'Assurance & mutuelles',
+  'CNP Assurances': 'Assurance & mutuelles', 'Scor': 'Assurance & mutuelles',
+  'Covéa': 'Assurance & mutuelles', 'Generali France': 'Assurance & mutuelles',
+  'AG2R La Mondiale': 'Assurance & mutuelles', 'Groupama': 'Assurance & mutuelles',
+  'Matmut': 'Assurance & mutuelles', 'MAIF': 'Assurance & mutuelles',
+  'Macif': 'Assurance & mutuelles', 'Malakoff Humanis': 'Assurance & mutuelles',
+  'Marsh McLennan': 'Courtage & conseil en assurance',
+  'Verlingue': 'Courtage & conseil en assurance', 'Coface': 'Courtage & conseil en assurance',
+
+  // Audit, conseil, transaction services.
+  'Deloitte': 'Audit & conseil', 'EY': 'Audit & conseil', 'KPMG': 'Audit & conseil',
+  'PwC': 'Audit & conseil', 'Forvis Mazars': 'Audit & conseil', 'Grant Thornton': 'Audit & conseil',
+  'BDO': 'Audit & conseil', 'Eight Advisory': 'Audit & conseil', 'Accuracy': 'Audit & conseil',
+  'McKinsey': 'Audit & conseil', 'BCG': 'Audit & conseil', 'Bain': 'Audit & conseil',
+  'Oliver Wyman': 'Audit & conseil', 'Roland Berger': 'Audit & conseil',
+  'Sia Partners': 'Audit & conseil', 'Talan': 'Audit & conseil', 'Capgemini': 'Audit & conseil',
+
+  // Institutions publiques.
+  'Banque de France': 'Institution publique', 'AMF': 'Institution publique',
+  'ACPR': 'Institution publique', 'Caisse des Dépôts': 'Institution publique',
+  'Agence France Trésor': 'Institution publique',
+
+  // Fintech.
   'Qonto': 'Fintech', 'Swile': 'Fintech', 'Pennylane': 'Fintech',
   'Spendesk': 'Fintech', 'Alan': 'Fintech', 'Ledger': 'Fintech', 'Younited': 'Fintech',
 };
 
+// Employeurs hors liste de référence : on ne connaît pas leur maison, seulement
+// leur raison sociale. Quelques mots suffisent à reconnaître un métier
+// ("Banque de ...", "... Assurances", "Cabinet ... audit"), et tout le reste
+// reçoit une étiquette honnête plutôt qu'un "Entreprise" qui ne dit rien.
+//
+// Le vocabulaire est le MÊME que celui de SECTEUR_PAR_MAISON : deux tables qui
+// nomment différemment la même chose fabriquent des doublons dans le filtre.
+const SECTEUR_PAR_MOT = [
+  [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de détail'],
+  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Gestion d'actifs"],
+  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, 'Private equity & capital-risque'],
+  [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, 'Assurance & mutuelles'],
+  [/courtage|courtier|\bbroker\b/i, 'Courtage & conseil en assurance'],
+  [/audit|conseil|consulting|advisory|cabinet|expertise comptable|commissariat/i, 'Audit & conseil'],
+  [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech'],
+  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Institution publique'],
+];
+
+// Étiquette des employeurs qu'aucun mot ne permet de rattacher. Elle correspond
+// au groupe "PME et start-ups" du filtre entreprise : les deux se lisent
+// ensemble.
+const SECTEUR_AUTRES = 'PME & start-up';
+
 function inferSector(emp, maison) {
   if (maison && SECTEUR_PAR_MAISON[maison]) return SECTEUR_PAR_MAISON[maison];
+  // Une maison de référence absente de la table est un grand groupe industriel
+  // ou de services : sa direction financière recrute des juniors, mais ce n'est
+  // pas une maison de finance. Le dire évite de la ranger sous "Banque".
+  if (maison) return 'Direction financière de groupe';
   const key = (emp || '').toLowerCase().trim();
-  for (const [needle, sector] of Object.entries(SECTOR_BY_EMPLOYER)) {
-    if (key.includes(needle)) return sector;
+  for (const [re, secteur] of SECTEUR_PAR_MOT) {
+    if (re.test(key)) return secteur;
   }
-  return 'Entreprise'; // corporate/DAF par défaut (§3 : la finance existe partout)
+  return SECTEUR_AUTRES;
 }
 
 // ---------------------------------------------------------------------------
@@ -665,6 +738,21 @@ function adoucirMajuscules(titre) {
     .join(' ');
 }
 
+// Toutes les entrées d'un site carrières ne sont pas des offres d'emploi. On y
+// trouve des événements ("Thales AfterWork Finance - 16 Avril"), des pages de
+// marque ("Marsh aime les avocats"), et des métiers qui n'ont de financier que
+// l'employeur : juristes, avocats, recruteurs. Les laisser passer, c'est faire
+// perdre son temps au candidat sur une liste qui promet des offres.
+const PAS_UNE_OFFRE_RE =
+  /afterwork|after[\s-]work|webinar|webinaire|job ?dating|portes ouvertes|forum (?:de |des )?(?:recrutement|m[ée]tiers|[ée]coles)|\bsalon\b|meet ?up|conf[ée]rence|d[ée]couvrez|rejoignez[\s-]nous|candidature spontan[ée]e|talent ?pool|cooptation/i;
+
+const METIER_HORS_PERIMETRE_RE =
+  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement/i;
+
+function estUneOffreFinance(titre) {
+  return !PAS_UNE_OFFRE_RE.test(titre) && !METIER_HORS_PERIMETRE_RE.test(titre);
+}
+
 function cleanTitle(title) {
   let t = decodeEntities(title || '').replace(/\s+/g, ' ').trim();
 
@@ -917,6 +1005,7 @@ function normalize(item) {
 
   title = adoucirMajuscules(cleanTitle(title));
   if (!title || !url) return null;
+  if (!estUneOffreFinance(title)) return null;
 
   // Garde-fou central : JJ promet un lien vers l'annonce de la MAISON (§2 du
   // brief). Un lien vers un job board intermédiaire (JobTeaser, Welcome to the
@@ -928,8 +1017,8 @@ function normalize(item) {
   const volet = classifyVolet({ src: __src, typeContratRaw, title });
   const famille = inferFamille(title, romeLibelle);
   emp = normaliserEmployeur(emp);
-  const maison = trouverMaison(emp) || '';
-  const sector = inferSector(emp, maison);
+  const maisonRef = trouverMaison(emp);
+  const sector = inferSector(emp, maisonRef);
 
   return {
     emp,
@@ -941,10 +1030,12 @@ function normalize(item) {
     // Zone d'affichage (calculée ici pour que la page n'ait pas à reconnaître
     // 300 orthographes de villes en JavaScript).
     zone: inferZone(decodeEntities(ville || '').trim()),
-    // Grande maison de rattachement. "Caisse d'Épargne Île-de-France" garde son
-    // nom sur la carte — le candidat postule bien là — mais se range sous
-    // "Groupe BPCE" dans le filtre entreprise. Vide = maison hors liste.
-    maison,
+    // Maison de rattachement pour le filtre "Entreprise". "Caisse d'Épargne
+    // Île-de-France" garde son nom sur la carte — le candidat postule bien là —
+    // mais se range sous "BPCE". Les employeurs hors liste se regroupent sous
+    // MAISON_AUTRES plutôt que d'occuper une ligne chacun.
+    maison: maisonRef || MAISON_AUTRES,
+    maisonReference: Boolean(maisonRef),
     place: pays || 'France',
     sal: sal || undefined,
     url,
@@ -1262,16 +1353,16 @@ async function run() {
   const grandesVilles = normalized.filter((o) => estGrandeVille(o.loc));
   console.log(`[pipeline] ${grandesVilles.length} offres en grandes villes (${normalized.length - grandesVilles.length} écartées : petites communes).`);
 
-  // Phase 1 : périmètre restreint aux maisons de référence.
-  const dansLePerimetre = PHASE_GRANDES_MAISONS
-    ? grandesVilles.filter((o) => o.maison)
+  const dansLePerimetre = MAISONS_DE_REFERENCE_SEULEMENT
+    ? grandesVilles.filter((o) => o.maisonReference)
     : grandesVilles;
-  if (PHASE_GRANDES_MAISONS) {
-    console.log(
-      `[pipeline] ${dansLePerimetre.length} offres dans les ${MAISONS.length} grandes maisons ` +
-        `(${grandesVilles.length - dansLePerimetre.length} écartées : employeur hors liste de référence).`
-    );
-  }
+  const horsListe = grandesVilles.filter((o) => !o.maisonReference).length;
+  console.log(
+    MAISONS_DE_REFERENCE_SEULEMENT
+      ? `[pipeline] ${dansLePerimetre.length} offres dans les ${MAISONS.length} maisons de référence ` +
+          `(${horsListe} écartées : employeur hors liste).`
+      : `[pipeline] ${dansLePerimetre.length} offres retenues, dont ${horsListe} regroupées sous « ${MAISON_AUTRES} ».`
+  );
 
   // Le filtre d'âge ne s'applique qu'aux sources qui fournissent une VRAIE date
   // de publication : TalentSoft, SuccessFactors et le framework e-i n'en donnent
@@ -1343,13 +1434,20 @@ async function run() {
   }
   console.log('  (' + fusionnees + ' offres vues dans plusieurs sources, fusionnées)');
 
-  if (PHASE_GRANDES_MAISONS) {
+  {
     const parMaison = {};
     for (const o of final) parMaison[o.maison] = (parMaison[o.maison] || 0) + 1;
-    const classees = Object.entries(parMaison).sort((a, b) => b[1] - a[1]);
+    // Le groupe des PME se compte à part : mêlé au classement, il écraserait
+    // tout et on ne verrait plus quelles maisons de référence recrutent.
+    const classees = Object.entries(parMaison)
+      .filter(([nom]) => nom !== MAISON_AUTRES)
+      .sort((a, b) => b[1] - a[1]);
     const absentes = MAISONS.filter((m) => !parMaison[m.nom]).map((m) => m.nom);
     console.log(`\n--- Maisons présentes (${classees.length} sur ${MAISONS.length}) ---`);
     for (const [nom, n] of classees) console.log('  ' + nom.padEnd(26) + String(n).padStart(5));
+    if (parMaison[MAISON_AUTRES]) {
+      console.log(`\n--- « ${MAISON_AUTRES} » : ${parMaison[MAISON_AUTRES]} offres ---`);
+    }
     console.log(`\n--- Maisons sans aucune offre aujourd'hui (${absentes.length}) ---`);
     console.log('  ' + absentes.join(', '));
   }
