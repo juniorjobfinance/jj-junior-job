@@ -554,6 +554,35 @@ const ZONE_INCONNUE = 'Lieu non précisé';
 const DEPTS_IDF = ['hauts-de-seine', 'seine-saint-denis', 'val-de-marne',
   "val-d'oise", 'yvelines', 'essonne', 'seine-et-marne'];
 
+// Nettoie le libellé de lieu pour l'affichage. Les sources renvoient de tout :
+// l'adresse postale complète ("21 AVENUE DU BEL AIR 75012 PARIS"), le code
+// postal collé ("75015 Paris 15e Arrondissement"), un suffixe de plateforme
+// ("Courbevoie(pld)"). On veut juste la ville, lisible.
+function nettoyerLieu(loc) {
+  let v = (loc || '').trim();
+  if (!v) return v;
+  v = v
+    .replace(/\([a-z]{2,4}\)\s*$/i, '')        // "Courbevoie(pld)" -> "Courbevoie"
+    .replace(/\bcedex\b\s*\d*/gi, '')          // "Paris Cedex 08" -> "Paris"
+    .replace(/\s+\d+\s*e(?:r|me)?\s+arrondissement/i, ''); // "Paris 15e Arrondissement" -> "Paris"
+  // Adresse complète en capitales : on ne garde que la ville, après le code postal.
+  const m = v.match(/\b\d{5}\b\s+(.+)$/);
+  if (m) v = m[1];
+  // Reste un code postal isolé en tête ? on le retire.
+  v = v.replace(/^\s*\d{5}\s*/, '').replace(/\s{2,}/g, ' ').trim();
+  // "21 AVENUE DU BEL AIR PARIS" tout en capitales -> "Paris"
+  if (v === v.toUpperCase() && v.length > 3) {
+    const mots = v.split(/\s+/);
+    const ville = mots.slice(-2).join(' ').match(/^(?:PARIS|LYON|MARSEILLE|LILLE|LA D[ÉE]FENSE)/i)
+      ? mots.slice(-2).join(' ')
+      : mots[mots.length - 1];
+    v = ville
+      .toLowerCase()
+      .replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase());
+  }
+  return v || loc;
+}
+
 function inferZone(loc) {
   const v = (loc || '').toLowerCase().trim();
   if (!v) return ZONE_INCONNUE;
@@ -1110,7 +1139,7 @@ function normalize(item) {
     sector,
     famille,
     volet,
-    loc: decodeEntities(ville || '').trim() || 'Non précisé',
+    loc: nettoyerLieu(decodeEntities(ville || '').trim()) || 'Non précisé',
     // Zone d'affichage (calculée ici pour que la page n'ait pas à reconnaître
     // 300 orthographes de villes en JavaScript).
     zone: inferZone(decodeEntities(ville || '').trim()),
