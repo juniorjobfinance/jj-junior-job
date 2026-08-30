@@ -1342,7 +1342,66 @@ async function applyFreshnessAndDeadRemoval(offers) {
 // ---------------------------------------------------------------------------
 // Écriture de offres.js (window.__OFFRES__)
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// « Pépites JJ » — les offres qui sortent du lot
+//
+// Ce ne sont PAS les plus récentes, mais les plus convoitées : une grande
+// maison prestigieuse ET/OU un poste rare (M&A, front office, private equity),
+// de préférence accessible à un junior (stage, alternance, VIE). L'idée est
+// qu'un étudiant tombe d'emblée sur « la » belle opportunité qu'il n'aurait
+// pas cherchée.
+// ---------------------------------------------------------------------------
+
+// Maisons dont le seul nom fait rêver un étudiant en finance.
+const MAISONS_PRESTIGE = new Set([
+  'Goldman Sachs', 'JPMorgan', 'Morgan Stanley', 'Bank of America', 'Citi',
+  'Barclays', 'Deutsche Bank', 'UBS', 'BNP Paribas CIB', 'Société Générale CIB',
+  'Rothschild & Co', 'Lazard', 'Messier & Associés', 'Centerview Partners',
+  'Perella Weinberg', 'Edmond de Rothschild', 'Ardian', 'Eurazeo', 'PAI Partners',
+  'Tikehau', 'Antin Infrastructure', 'Astorg', 'Sagard', 'Bpifrance',
+  'McKinsey', 'BCG', 'Bain', 'Oliver Wyman', 'Amundi', 'Carmignac',
+  'LVMH', "L'Oréal", 'Kering', 'Hermès', 'Chanel', 'TotalEnergies',
+  'Goldman Sachs', 'Natixis',
+]);
+
+// Postes rares et convoités : ceux qu'on ne trouve pas à tous les coins de rue.
+const POSTE_RARE_RE =
+  /\bm&a\b|fusions?[\s-]acquisitions?|private equity|corporate finance|front office|\btrader\b|trading|transaction services|leveraged finance|\becm\b|\bdcm\b|capital markets|structuration|deal|investment banking|equity research|venture/i;
+
+function scorePepite(o) {
+  let score = 0;
+  if (MAISONS_PRESTIGE.has(o.maison)) score += 3;
+  if (POSTE_RARE_RE.test(o.title)) score += 2;
+  // Un poste convoité ouvert en stage/alternance/VIE est une vraie aubaine junior.
+  if (o.volet !== 'cdi-cdd') score += 1;
+  // Le lien direct chez l'employeur prestigieux vaut mieux qu'un agrégateur.
+  if (!/adzuna|francetravail|choisirleservicepublic|businessfrance/.test(o.source)) score += 1;
+  return score;
+}
+
+// Retourne l'ensemble des _key retenus comme pépites (au plus ~12, variés).
+function choisirPepites(offers) {
+  const notes = offers
+    .map((o) => ({ o, s: scorePepite(o) }))
+    .filter((x) => x.s >= 4) // seuil : prestige + un autre signal au minimum
+    .sort((a, b) => b.s - a.s);
+
+  const retenus = new Set();
+  const parMaison = {};
+  for (const { o } of notes) {
+    // Au plus 2 offres par maison : de la variété, pas 8 offres Lazard.
+    parMaison[o.maison] = (parMaison[o.maison] || 0) + 1;
+    if (parMaison[o.maison] > 2) continue;
+    retenus.add(o._key);
+    if (retenus.size >= 12) break;
+  }
+  return retenus;
+}
+
 function writeOutput(offers) {
+  const pepites = choisirPepites(offers);
+  console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
+
   const publicOffers = offers.map((o) => {
     const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, ...rest } = o;
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
@@ -1356,6 +1415,8 @@ function writeOutput(offers) {
       // false = la source ne date pas ses offres : _postedAt vaut la date de
       // collecte, la page ne doit donc pas l'afficher comme date de publication.
       datePubFiable: SOURCES_DATE_FIABLE_RE.test(o.source),
+      // true = « Pépite JJ », mise en avant dans le bandeau du haut.
+      pepite: pepites.has(o._key),
     };
   });
 

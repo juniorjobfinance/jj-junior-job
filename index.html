@@ -287,6 +287,84 @@
   }
   button#reset-filters:hover { background: var(--navy-800); color: white; }
 
+  /* ---------- Pépites JJ (bandeau carrousel) ---------- */
+  .pepites {
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%);
+    border: 1px solid var(--brass);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem 1rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 3px 14px rgba(10, 20, 36, 0.18);
+    overflow: hidden;
+  }
+  .pepites-tete {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.7rem;
+  }
+  .pepites-titre {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.05rem;
+    color: var(--brass);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .pepites-sous { font-size: 0.78rem; color: #aeb6c6; }
+  .pepites-nav { margin-left: auto; display: flex; gap: 0.35rem; }
+  .pepites-nav button {
+    appearance: none;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(168, 118, 63, 0.55);
+    background: transparent;
+    color: var(--brass);
+    font-size: 1.1rem; line-height: 1;
+    cursor: pointer;
+  }
+  .pepites-nav button:hover { background: rgba(168, 118, 63, 0.18); }
+  /* La piste glisse horizontalement ; chaque pépite occupe toute la largeur. */
+  .pepites-piste { display: flex; transition: transform 0.45s ease; }
+  @media (prefers-reduced-motion: reduce) { .pepites-piste { transition: none; } }
+  .pepite {
+    flex: 0 0 100%;
+    min-width: 0;
+    text-decoration: none;
+    color: var(--paper);
+    display: block;
+  }
+  .pepite .pepite-mention {
+    font-size: 0.74rem;
+    color: var(--brass);
+    margin-bottom: 0.25rem;
+  }
+  .pepite .pepite-titre {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 0.15rem;
+  }
+  .pepite .pepite-emp { font-weight: 600; color: #dfe4ee; font-size: 0.92rem; }
+  .pepite .pepite-meta {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: #aeb6c6;
+    display: flex; gap: 0.5rem 0.9rem; flex-wrap: wrap;
+  }
+  .pepite .pepite-cta { color: var(--brass); }
+  .pepites-points { display: flex; justify-content: center; gap: 0.35rem; margin-top: 0.7rem; }
+  .pepites-points button {
+    appearance: none;
+    width: 7px; height: 7px; padding: 0;
+    border-radius: 50%; border: none;
+    background: rgba(174, 182, 198, 0.4);
+    cursor: pointer;
+  }
+  .pepites-points button[aria-current="true"] { background: var(--brass); }
+  @media (max-width: 640px) { .pepites-sous { display: none; } }
+
   /* ---------- Résultats ---------- */
   .results-head {
     display: flex;
@@ -550,6 +628,21 @@
   </aside>
 
   <section aria-live="polite">
+    <!-- Bandeau « Pépites JJ » : rempli par le script s'il y a des offres
+         mises en avant. Masqué sinon. -->
+    <div id="pepites" class="pepites" hidden>
+      <div class="pepites-tete">
+        <span class="pepites-titre">💎 Les Pépites JJ</span>
+        <span class="pepites-sous">Des offres qui sortent du lot, repérées pour vous</span>
+        <div class="pepites-nav" aria-hidden="true">
+          <button type="button" class="pepite-prec" aria-label="Pépite précédente">‹</button>
+          <button type="button" class="pepite-suiv" aria-label="Pépite suivante">›</button>
+        </div>
+      </div>
+      <div class="pepites-piste" id="pepites-piste"></div>
+      <div class="pepites-points" id="pepites-points" aria-hidden="true"></div>
+    </div>
+
     <div class="results-head">
       <h1 style="font-size:1.1rem; margin:0;">Offres</h1>
       <div class="results-tools">
@@ -935,8 +1028,80 @@
 
   var etatNouveauteUtile = true;
 
+  // ---- Pépites JJ : carrousel du haut -------------------------------------
+  var pepiteIndex = 0;
+  var pepiteTimer = null;
+  var pepitesCourantes = [];
+
+  function construirePepites(base) {
+    // On montre les pépites de l'onglet courant ; s'il n'y en a pas dans cet
+    // onglet, on retombe sur les pépites toutes catégories confondues pour ne
+    // jamais afficher un bandeau vide sur un onglet peu fourni.
+    var duVolet = base.filter(function (o) { return o.pepite; });
+    pepitesCourantes = duVolet.length ? duVolet : OFFRES.filter(function (o) { return o.pepite; });
+
+    var piste = document.getElementById('pepites-piste');
+    var points = document.getElementById('pepites-points');
+    var bandeau = document.getElementById('pepites');
+
+    if (!pepitesCourantes.length) { bandeau.hidden = true; if (pepiteTimer) clearInterval(pepiteTimer); return; }
+    bandeau.hidden = false;
+
+    piste.innerHTML = pepitesCourantes.map(function (o) {
+      var lieu = o.loc && !/non précisé/i.test(o.loc) ? o.loc : (o.place && o.place !== 'France' ? o.place : '');
+      var bits = [esc(o.maison || o.emp)];
+      if (lieu) bits.push(esc(lieu));
+      bits.push(esc(o.famille));
+      return (
+        '<a class="pepite" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
+          '<div class="pepite-mention">✨ JJ estime que cette offre mérite votre attention</div>' +
+          '<div class="pepite-titre">' + esc(o.title) + '</div>' +
+          '<div class="pepite-emp">' + esc(o.emp) + '</div>' +
+          '<div class="pepite-meta">' + bits.map(function (b) { return '<span>' + b + '</span>'; }).join('') +
+            '<span class="pepite-cta">Voir l\'annonce →</span>' +
+          '</div>' +
+        '</a>'
+      );
+    }).join('');
+
+    points.innerHTML = pepitesCourantes.map(function (_, i) {
+      return '<button type="button" data-i="' + i + '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>';
+    }).join('');
+
+    pepiteIndex = 0;
+    montrerPepite(0);
+    relancerPepiteAuto();
+  }
+
+  function montrerPepite(i) {
+    if (!pepitesCourantes.length) return;
+    pepiteIndex = (i + pepitesCourantes.length) % pepitesCourantes.length;
+    document.getElementById('pepites-piste').style.transform = 'translateX(-' + (pepiteIndex * 100) + '%)';
+    Array.prototype.forEach.call(document.querySelectorAll('#pepites-points button'), function (b, k) {
+      if (k === pepiteIndex) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    });
+  }
+
+  function relancerPepiteAuto() {
+    if (pepiteTimer) clearInterval(pepiteTimer);
+    if (pepitesCourantes.length < 2) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    pepiteTimer = setInterval(function () { montrerPepite(pepiteIndex + 1); }, 5000);
+  }
+
+  document.querySelector('.pepite-suiv').addEventListener('click', function () { montrerPepite(pepiteIndex + 1); relancerPepiteAuto(); });
+  document.querySelector('.pepite-prec').addEventListener('click', function () { montrerPepite(pepiteIndex - 1); relancerPepiteAuto(); });
+  document.getElementById('pepites-points').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    montrerPepite(+b.dataset.i); relancerPepiteAuto();
+  });
+  // On met en pause le défilement quand le curseur survole le bandeau.
+  document.getElementById('pepites').addEventListener('mouseenter', function () { if (pepiteTimer) clearInterval(pepiteTimer); });
+  document.getElementById('pepites').addEventListener('mouseleave', relancerPepiteAuto);
+
   function render() {
     var base = voletOffers(state.volet);
+    construirePepites(base);
     updateFamilleCounts(base);
     etatNouveauteUtile = nouveauteSignifiante(base);
     // Le filtre "nouvelles offres" disparaît avec le badge : proposer de filtrer
