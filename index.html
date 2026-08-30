@@ -594,6 +594,17 @@
     return (Date.now() - new Date(offer.firstSeenAt).getTime()) < 86400000;
   }
 
+  // Vrai quand « nouveau » ne distingue plus rien : au tout premier passage de
+  // l'ingestion, ou après une perte de la mémoire des passages, la quasi-totalité
+  // des offres est vue pour la première fois. Un badge que 100 % des cartes
+  // portent n'informe personne — on le masque, et le filtre avec, plutôt que
+  // d'afficher une promesse creuse. Tout revient seul dès le passage suivant.
+  var SEUIL_NOUVEAUTE_UTILE = 0.6;
+  function nouveauteSignifiante(base) {
+    if (!base.length) return false;
+    return base.filter(isNew).length / base.length < SEUIL_NOUVEAUTE_UTILE;
+  }
+
   var els = {
     tabs: Array.prototype.slice.call(document.querySelectorAll('nav.tabs button[role="tab"]')),
     filtersPanel: document.getElementById('filters-panel'),
@@ -699,7 +710,7 @@
 
   function freshnessBadge(offer) {
     var badges = viaBadge(offer);
-    if (isNew(offer)) badges += '<span class="badge new">NOUVEAU</span> ';
+    if (etatNouveauteUtile && isNew(offer)) badges += '<span class="badge new">NOUVEAU</span> ';
 
     // Date de PUBLICATION par l'employeur, en clair. Les concurrents affichent
     // des offres de 2 mois mêlées à des offres de 12 h sans le dire (et Indeed
@@ -810,9 +821,19 @@
     );
   }
 
+  var etatNouveauteUtile = true;
+
   function render() {
     var base = voletOffers(state.volet);
     updateFamilleCounts(base);
+    etatNouveauteUtile = nouveauteSignifiante(base);
+    // Le filtre "nouvelles offres" disparaît avec le badge : proposer de filtrer
+    // sur un critère que tout le monde remplit ne mène qu'à une déception.
+    els.newOnly.closest('label').hidden = !etatNouveauteUtile;
+    if (!etatNouveauteUtile && state.newOnly) {
+      state.newOnly = false;
+      els.newOnly.checked = false;
+    }
     els.newCount.textContent = base.filter(isNew).length;
     els.directCount.textContent = base.filter(estDirect).length;
     // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que

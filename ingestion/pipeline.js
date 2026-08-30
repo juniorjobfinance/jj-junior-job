@@ -245,7 +245,50 @@ const SECTOR_BY_EMPLOYER = {
   'caisse des dépôts': 'Finance publique',
 };
 
-function inferSector(emp) {
+// Le type de structure déduit du seul nom d'employeur laissait un tiers des
+// offres dans le fourre-tout "Entreprise" — Matmut classé comme un industriel,
+// Sia Partners comme un commerçant. Maintenant qu'on rattache chaque offre à une
+// maison de référence, on s'en sert : c'est une information sûre, là où deviner
+// à partir d'une raison sociale ne l'est jamais.
+const SECTEUR_PAR_MAISON = {
+  'Matmut': 'Assurance', 'MAIF': 'Assurance', 'Macif': 'Assurance',
+  'Malakoff Humanis': 'Assurance', 'Groupama': 'Assurance', 'Covéa': 'Assurance',
+  'AG2R La Mondiale': 'Assurance', 'Generali France': 'Assurance',
+  'Allianz France': 'Assurance', 'CNP Assurances': 'Assurance', 'Scor': 'Assurance',
+  'AXA': 'Assurance',
+  'Sia Partners': 'Audit & conseil', 'Grant Thornton': 'Audit & conseil',
+  'Forvis Mazars': 'Audit & conseil', 'Eight Advisory': 'Audit & conseil',
+  'Accuracy': 'Audit & conseil', 'Oliver Wyman': 'Audit & conseil',
+  'McKinsey': 'Audit & conseil', 'BCG': 'Audit & conseil', 'Bain': 'Audit & conseil',
+  'Deloitte': 'Audit & conseil', 'EY': 'Audit & conseil', 'KPMG': 'Audit & conseil',
+  'PwC': 'Audit & conseil', 'Capgemini': 'Audit & conseil',
+  'Lazard': 'Banque', 'Rothschild & Co': 'Banque', 'Edmond de Rothschild': 'Banque',
+  'Messier & Associés': 'Banque', 'Centerview Partners': 'Banque',
+  'Perella Weinberg': 'Banque', 'Oddo BHF': 'Banque', 'BPCE': 'Banque',
+  'Crédit Mutuel': 'Banque', 'La Banque Postale': 'Banque',
+  'BNP Paribas CIB': 'Banque', 'Société Générale CIB': 'Banque',
+  'Ardian': 'Private Equity/VC', 'Eurazeo': 'Private Equity/VC',
+  'PAI Partners': 'Private Equity/VC', 'Tikehau': 'Private Equity/VC',
+  'Antin Infrastructure': 'Private Equity/VC', 'Astorg': 'Private Equity/VC',
+  'Sagard': 'Private Equity/VC', 'Andera Partners': 'Private Equity/VC',
+  'LBO France': 'Private Equity/VC', 'IK Partners': 'Private Equity/VC',
+  'Siparex': 'Private Equity/VC', 'Partech': 'Private Equity/VC',
+  'Alven': 'Private Equity/VC', 'Bpifrance': 'Private Equity/VC',
+  'Amundi': "Gestion d'actifs", 'AXA IM': "Gestion d'actifs",
+  'BNP Paribas AM': "Gestion d'actifs", 'Natixis IM': "Gestion d'actifs",
+  'Carmignac': "Gestion d'actifs", 'Comgest': "Gestion d'actifs",
+  'Sycomore': "Gestion d'actifs", 'Groupama AM': "Gestion d'actifs",
+  'CPR AM': "Gestion d'actifs", 'Lazard Frères Gestion': "Gestion d'actifs",
+  "La Financière de l'Échiquier": "Gestion d'actifs",
+  'Banque de France': 'Finance publique', 'AMF': 'Finance publique',
+  'ACPR': 'Finance publique', 'Caisse des Dépôts': 'Finance publique',
+  'Agence France Trésor': 'Finance publique',
+  'Qonto': 'Fintech', 'Swile': 'Fintech', 'Pennylane': 'Fintech',
+  'Spendesk': 'Fintech', 'Alan': 'Fintech', 'Ledger': 'Fintech', 'Younited': 'Fintech',
+};
+
+function inferSector(emp, maison) {
+  if (maison && SECTEUR_PAR_MAISON[maison]) return SECTEUR_PAR_MAISON[maison];
   const key = (emp || '').toLowerCase().trim();
   for (const [needle, sector] of Object.entries(SECTOR_BY_EMPLOYER)) {
     if (key.includes(needle)) return sector;
@@ -524,6 +567,39 @@ function decodeEntities(text) {
 // et des codes internes ("#TDFE2026"). Le type de contrat est déjà porté par
 // l'onglet, et la mention H/F par la loi — pas besoin de les répéter dans le
 // titre. Objectif : un intitulé qui se lit comme un nom de poste.
+// Une annonce sur vingt arrive tout en capitales ("CHARGE D'AFFAIRES GRANDES
+// ENTREPRISES NICE"). Sur une liste, ça hurle et ça se lit mal. On repasse en
+// casse normale, en laissant tranquilles les sigles courts (CDI, M&A, ESG, RH)
+// et les mots qui contiennent un chiffre (H/F, BAC+5).
+// Mots-outils français : en capitales d'origine ils doivent redescendre en
+// minuscules, pas rester tels quels ("Chef DE Produits").
+const PETITS_MOTS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'et', 'en', 'au', 'aux',
+  'sur', 'sous', 'pour', 'par', 'dans', 'chez', 'un', 'une', 'a']);
+
+// Sigles à laisser intacts même longs : les recasser les rendrait illisibles.
+const SIGLES = new Set(['CDI', 'CDD', 'RH', 'ESG', 'KYC', 'LCB', 'FT', 'ALM', 'IARD',
+  'SI', 'IT', 'BI', 'PME', 'ETI', 'ADV', 'DAF', 'FPA', 'MOA', 'MOE', 'VIE', 'CVC']);
+
+function adoucirMajuscules(titre) {
+  if (!titre || titre !== titre.toUpperCase()) return titre;
+  if (titre.replace(/[^A-ZÀ-Ö]/g, '').length < 8) return titre;
+  return titre
+    .split(' ')
+    .map((mot, i) => {
+      const nu = mot.replace(/[^A-Za-zÀ-ÿ]/g, '');
+      if (SIGLES.has(nu)) return mot;
+      if (nu.length <= 3 && !PETITS_MOTS.has(nu.toLowerCase())) return mot; // sigle court
+      if (/d/.test(mot)) return mot;
+      const bas = mot.toLowerCase();
+      // Les mots-outils restent en minuscules, sauf en tête de titre.
+      if (i > 0 && PETITS_MOTS.has(nu.toLowerCase())) return bas;
+      // Majuscule initiale seulement : ni après une apostrophe (d'affaires),
+      // ni après un tiret dans un mot composé déjà couvert plus bas.
+      return bas.replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());
+    })
+    .join(' ');
+}
+
 function cleanTitle(title) {
   let t = decodeEntities(title || '').replace(/\s+/g, ' ').trim();
 
@@ -774,7 +850,7 @@ function normalize(item) {
     return null; // source inconnue -> ignorée
   }
 
-  title = cleanTitle(title);
+  title = adoucirMajuscules(cleanTitle(title));
   if (!title || !url) return null;
 
   // Garde-fou central : JJ promet un lien vers l'annonce de la MAISON (§2 du
@@ -787,7 +863,8 @@ function normalize(item) {
   const volet = classifyVolet({ src: __src, typeContratRaw, title });
   const famille = inferFamille(title, romeLibelle);
   emp = normaliserEmployeur(emp);
-  const sector = inferSector(emp);
+  const maison = trouverMaison(emp) || '';
+  const sector = inferSector(emp, maison);
 
   return {
     emp,
@@ -802,7 +879,7 @@ function normalize(item) {
     // Grande maison de rattachement. "Caisse d'Épargne Île-de-France" garde son
     // nom sur la carte — le candidat postule bien là — mais se range sous
     // "Groupe BPCE" dans le filtre entreprise. Vide = maison hors liste.
-    maison: trouverMaison(emp) || '',
+    maison,
     place: pays || 'France',
     sal: sal || undefined,
     url,
@@ -833,8 +910,39 @@ function slugTitleFuzzy(title) {
     .trim();
 }
 
+// Les sources écrivent le même lieu de trois façons — "38 - Grenoble",
+// "Grenoble", "MONTPELLIER", "69 - Lyon 3e Arrondissement". Sans aplatissement,
+// la clé canonique les distingue et la même offre s'affiche deux fois.
+function slugLieu(loc) {
+  return slug(
+    (loc || '')
+      .replace(/^\s*\d{2,3}\s*[-–]\s*/, '')          // "38 - Grenoble" -> "Grenoble"
+      .replace(/\s+\d+\s*e(r|me)?\s+arrondissement/i, '') // "Lyon 3e Arrondissement" -> "Lyon"
+      .replace(/\s*\(\w+\)\s*$/, '')                // "Courbevoie(pld)" -> "Courbevoie"
+  );
+}
+
 function canonicalKey(offer) {
-  return `${slug(offer.emp)}|${slugTitleFuzzy(offer.title)}|${slug(offer.loc)}`;
+  return `${slug(offer.emp)}|${slugTitleFuzzy(offer.title)}|${slugLieu(offer.loc)}`;
+}
+
+// Clé sans le lieu : sert au rattrapage des offres dont une source donne la ville
+// et l'autre pas. Un même poste chez une même maison publié deux fois, une fois
+// localisé et une fois "Non précisé", est la même offre.
+function cleSansLieu(offer) {
+  return `${slug(offer.emp)}|${slugTitleFuzzy(offer.title)}`;
+}
+
+// Retire les offres sans lieu quand la même offre existe ailleurs avec un lieu.
+// On garde toujours la version la plus informative pour le candidat.
+function retirerSansLieuRedondantes(offers) {
+  const localisees = new Set();
+  for (const o of offers) {
+    if (!/^non précisé$|^france$/i.test((o.loc || '').trim())) localisees.add(cleSansLieu(o));
+  }
+  return offers.filter(
+    (o) => !(/^non précisé$|^france$/i.test((o.loc || '').trim()) && localisees.has(cleSansLieu(o)))
+  );
 }
 
 const SOURCE_PRIORITY = (src) => {
@@ -1132,9 +1240,13 @@ async function run() {
     `[pipeline] ${junior.length} offres après filtre junior 0-3 ans (${fraiches.length - junior.length} écartées : senior/confirmé).`
   );
 
-  const deduped = dedupe(junior);
+  const dedupBrut = dedupe(junior);
+  const deduped = retirerSansLieuRedondantes(dedupBrut);
   const dupCount = junior.length - deduped.length;
-  console.log(`[pipeline] ${deduped.length} offres après déduplication (${dupCount} doublons fusionnés).`);
+  console.log(
+    `[pipeline] ${deduped.length} offres après déduplication (${dupCount} doublons fusionnés, ` +
+      `dont ${dedupBrut.length - deduped.length} variantes sans lieu).`
+  );
 
   const final = await applyFreshnessAndDeadRemoval(deduped);
   console.log(`[pipeline] ${final.length} offres finales après vérification de fraîcheur${CHECK_LINKS ? ' + liens' : ''}.`);
