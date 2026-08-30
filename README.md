@@ -77,7 +77,8 @@ l'interdisent ne sont pas lus, même quand un point d'accès existe.
 ## Mise à jour quotidienne
 
 Une GitHub Action ([`.github/workflows/mise-a-jour-quotidienne.yml`](.github/workflows/mise-a-jour-quotidienne.yml))
-lance le pipeline chaque matin à 06h30 (heure de Paris), commite `offres.js` et redéclenche
+lance le pipeline **deux fois par jour, à minuit et à midi** (heure de Paris), commite
+`offres.js` et redéclenche
 le déploiement Vercel. Les identifiants sont des secrets de dépôt — voir
 [`.env.example`](.env.example) pour la liste.
 

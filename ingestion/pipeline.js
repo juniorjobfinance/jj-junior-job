@@ -29,7 +29,13 @@ const SITE_URL = 'https://juniorjobfinance.vercel.app';
 
 // Un canonique absent pendant ce nombre de passages consécutifs est retiré
 // (PROJET.md §8.6 : "2-3 passages consécutifs").
-const MAX_MISSED_RUNS = 3;
+//
+// Ce compteur se mesure en PASSAGES, pas en jours. Avec deux passages
+// quotidiens (minuit et midi), la valeur 3 retirerait une offre après seulement
+// 36 heures d'absence — une source qui tombe une journée suffirait à vider des
+// maisons entières. On compte donc 6 passages, soit les mêmes trois jours de
+// tolérance qu'avec un passage par jour.
+const MAX_MISSED_RUNS = 6;
 
 // Âge maximum d'une offre. Deux seuils, parce que "vieille" ne veut pas dire
 // la même chose selon d'où vient l'annonce.
