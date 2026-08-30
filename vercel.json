@@ -29,24 +29,11 @@
       ]
     },
     {
-      "source": "/offres.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
       "source": "/offres.xml",
       "headers": [
         {
           "key": "Content-Type",
           "value": "application/rss+xml; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
         }
       ]
     }

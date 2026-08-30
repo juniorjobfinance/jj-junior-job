@@ -95,6 +95,12 @@ se cachent les liens cassés qu'on ne découvre qu'après la mise en ligne.
 JSON n'accepte pas de commentaires, et Vercel refuse tout champ hors de son schéma : la
 raison d'un réglage se note ici, jamais dans `vercel.json`.
 
+**Aucun `Cache-Control` n'est imposé sur `offres.js` et `offres.xml`.** Un
+`s-maxage` sur ces deux fichiers les fige au bord du réseau *par-dessus les
+déploiements* : le site a servi les offres de la veille pendant une heure après une mise à
+jour. Le cache par défaut de Vercel, lui, est purgé à chaque déploiement — c'est
+exactement ce qu'il faut pour des fichiers régénérés deux fois par jour.
+
 ## Phase 2
 
 Le site est aujourd'hui restreint aux grandes maisons. Pour l'ouvrir aux PME et ETI :
