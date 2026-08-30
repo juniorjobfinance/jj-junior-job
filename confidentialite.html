@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%230a1424'/><text x='32' y='44' font-family='monospace' font-size='34' font-weight='700' fill='%23a8763f' text-anchor='middle'>JJ</text></svg>">
-<title>Politique de confidentialité — JJ, Junior Job</title>
+<title>Politique de confidentialité — JJ Finance</title>
 <link rel="canonical" href="https://juniorjobfinance.vercel.app/confidentialite.html">
-<meta name="description" content="Politique de confidentialité et RGPD du site JJ — Junior Job : aucune donnée collectée, aucun cookie, aucun compte.">
+<meta name="description" content="Politique de confidentialité et RGPD du site JJ Finance : aucune donnée collectée, aucun cookie, aucun compte.">
 <style>
   :root {
     --navy-950: #0a1424;
@@ -56,6 +56,29 @@
     letter-spacing: 0.05em;
     color: var(--brass);
   }
+  header.site .brand { align-items: center; gap: 0.8rem; }
+  header.site .logo {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-950) 85%);
+    border: 1.5px solid var(--brass);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--brass);
+    user-select: none;
+  }
+  header.site .wordmark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.25rem;
+    color: var(--paper);
+  }
+  header.site .wordmark em { font-style: italic; color: var(--brass); }
   header.site a { color: var(--paper); text-decoration: none; }
   header.site .tagline { font-size: 0.85rem; color: #c7cede; }
 
@@ -128,9 +151,9 @@
 
 <header class="site">
   <div class="brand">
-    <span class="mark">JJ</span>
-    <a href="./"><strong>Junior Job</strong></a>
-    <span class="tagline">— le vivier junior finance français</span>
+    <span class="logo" aria-hidden="true">JJ</span>
+    <a href="./"><span class="wordmark">JJ&nbsp;<em>Finance</em></span></a>
+    <span class="tagline">— le vivier junior de la finance française</span>
   </div>
 </header>
 
@@ -355,7 +378,7 @@
 </main>
 
 <footer class="site">
-  JJ — Junior Job. Stages, alternances et CDI/CDD 0-3 ans en finance, en France.
+  JJ Finance. Stages, alternances et CDI/CDD 0-3 ans en finance, en France.
   <nav>
     <a href="./">Les offres</a>
     <a href="mentions-legales.html">Mentions légales</a>

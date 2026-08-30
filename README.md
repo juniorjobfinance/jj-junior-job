@@ -1,4 +1,4 @@
-# JJ — Junior Job
+# JJ Finance
 
 Le vivier junior finance français : stages, alternances et CDI/CDD **0-3 ans d'expérience**
 dans les métiers de la finance, en France.

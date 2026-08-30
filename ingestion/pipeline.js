@@ -146,7 +146,7 @@ const CONSOLIDATION_FAMILLES = {
 // motif écrit "chargé".
 const FAMILLE_RULES = [
   // --- Spécialités identifiables sans ambiguïté ---------------------------
-  [/actuair|tarification (?:vie|sant|iard)|provisionnement|\bsolvab(?:ilit[ée])? ?ii\b/i, 'Actuariat'],
+  [/actuari|actuair|tarification (?:vie|sant|iard)|provisionnement|\bsolvab(?:ilit[ée])? ?ii\b/i, 'Actuariat'],
   [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|corporate finance|leveraged finance|\becm\b|\bdcm\b|private equity|capital[\s-]?investissement|venture capital|\blbo\b|deal advisory|[ée]valuation d'entreprise|fund finance|buyout|co[\s-]?investment/i, 'M&A & Transaction Services'],
   [/data scien|data analyst|analyste data|\bquant\b|quantitatif|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)/i, 'Data & Quant'],
 
@@ -154,9 +154,9 @@ const FAMILLE_RULES = [
   [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurance (?:collective|emprunteur|construction|sant[ée])|\binsurance\b/i, 'Assurance — distribution & sinistres'],
 
   // --- Marchés, gestion, opérations ---------------------------------------
-  [/front office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits d[ée]riv[ée]|march[ée]s financiers/i, 'Marchés & Front Office'],
-  [/asset management|gestion d'actifs|gestion de portefeuille|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\besg\b|extra[\s-]?financi/i, "Gestion d'actifs & Wealth"],
-  [/middle office|back office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
+  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits d[ée]riv[ée]|march[ée]s financiers|structuring|\bpricing\b/i, 'Marchés & Front Office'],
+  [/asset management|gestion d'actifs|gestion de portefeuille|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi/i, "Gestion d'actifs & Wealth"],
+  [/middle[\s-]?office|back[\s-]?office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
 
   // --- Finance d'entreprise ------------------------------------------------
   [/comptab|accounting|accountant|consolid|cl[ôo]ture comptable|r[ée]vision comptable|facturation|\bdaf\b|gestionnaire de paie|\bpaie\b|administration des ventes|\badv\b/i, 'Comptabilité & Consolidation'],
@@ -165,14 +165,14 @@ const FAMILLE_RULES = [
 
   // --- Audit, conseil, risques ---------------------------------------------
   [/audit|commissariat aux comptes|contr[ôo]le interne|internal control|contr[ôo]le permanent|inspection g[ée]n[ée]rale/i, 'Audit & Contrôle interne'],
-  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux/i, 'Risques & Conformité'],
+  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux|reporting r[ée]glementaire|regulatory reporting|d[ée]claratif/i, 'Risques & Conformité'],
   [/consult|conseil\b|advisory|transformation financi/i, 'Conseil'],
 
   // --- Analyse et recherche -------------------------------------------------
   [/analyse financi[èe]re|analyste financier|equity research|\bresearch\b|[ée]conomist|[ée]tudes [ée]conomiques|strat[ée]giste/i, 'Marchés & Front Office'],
 
   // --- Organisation, MOA, projets ------------------------------------------
-  [/business analyst|moa|amoa|ma[îi]trise d'ouvrage|chef(?:fe)? de projet|product owner|organisation et projets|pmo/i, 'Organisation & Projets'],
+  [/business analyst|\bmoa\b|\bamoa\b|ma[îi]trise d'ouvrage|chef(?:fe)? de projet|product owner|organisation et projets|\bpmo\b/i, 'Organisation & Projets'],
 
   // --- Réseau bancaire et commercial : le plus large, donc en dernier -------
   [/conseill|charg.{0,4} (?:de client|d'affaires|de stmt)|client[èe]le|agence bancaire|banque de d[ée]tail|commercial|d[ée]veloppement|coverage|relation client|account manager|charg.{0,4} d'affaires|business development|\bagence\b/i, 'Banque de détail & clientèle'],
@@ -768,7 +768,7 @@ const PAS_UNE_OFFRE_RE =
   /afterwork|after[\s-]work|webinar|webinaire|job ?dating|portes ouvertes|forum (?:de |des )?(?:recrutement|m[ée]tiers|[ée]coles)|\bsalon\b|meet ?up|conf[ée]rence|d[ée]couvrez|rejoignez[\s-]nous|candidature spontan[ée]e|talent ?pool|cooptation/i;
 
 const METIER_HORS_PERIMETRE_RE =
-  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement/i;
+  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)/i;
 
 function estUneOffreFinance(titre) {
   return !PAS_UNE_OFFRE_RE.test(titre) && !METIER_HORS_PERIMETRE_RE.test(titre);
@@ -1346,7 +1346,7 @@ function writeRss(offers) {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0">',
     '  <channel>',
-    '    <title>JJ — Junior Job : dernières offres finance junior</title>',
+    '    <title>JJ Finance : dernières offres finance junior</title>',
     `    <link>${SITE_URL}/</link>`,
     "    <description>Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise.</description>",
     '    <language>fr-FR</language>',

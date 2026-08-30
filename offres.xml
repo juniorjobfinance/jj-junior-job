@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>JJ — Junior Job : dernières offres finance junior</title>
+    <title>JJ Finance : dernières offres finance junior</title>
     <link>https://juniorjobfinance.vercel.app/</link>
     <description>Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise.</description>
     <language>fr-FR</language>
-    <lastBuildDate>Sun, 30 Aug 2026 17:05:58 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 17:17:21 GMT</lastBuildDate>
     <item>
       <title>Conseiller en prêt immobilier et assurance — BFI Partners</title>
       <link>https://www.adzuna.fr/details/5830356303?utm_medium=api&amp;utm_source=c77c5e66</link>
@@ -234,7 +234,7 @@
       <title>Chargé(e) de Back-office et assurances des Particuliers — Qualis</title>
       <link>https://candidat.francetravail.fr/offres/recherche/detail/6277914</link>
       <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/6277914</guid>
-      <description>Banque de détail &amp; Relation client · PME &amp; start-up · 75 - Paris 19e Arrondissement · cdi-cdd</description>
+      <description>Data, Tech &amp; Opérations · PME &amp; start-up · 75 - Paris 19e Arrondissement · cdi-cdd</description>
       <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
     </item>
     <item>
@@ -609,13 +609,6 @@
       <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
     </item>
     <item>
-      <title>Business Developer Entreprises — Dynaren</title>
-      <link>https://candidat.francetravail.fr/offres/recherche/detail/5783260</link>
-      <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/5783260</guid>
-      <description>Assurance · PME &amp; start-up · 69 - Lyon 3e Arrondissement · cdi-cdd</description>
-      <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
-    </item>
-    <item>
       <title>Gestionnaire Prévoyance Décès et Obsèques - VDA — Groupe Henner</title>
       <link>https://candidat.francetravail.fr/offres/recherche/detail/5737907</link>
       <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/5737907</guid>
@@ -682,7 +675,7 @@
       <title>Gestionnaire Back-Office Produits SCPI / FIP / FCPI - CDD — Finzzle Groupe</title>
       <link>https://candidat.francetravail.fr/offres/recherche/detail/6048418</link>
       <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/6048418</guid>
-      <description>Autres métiers de la finance · PME &amp; start-up · 31 - Toulouse · cdi-cdd</description>
+      <description>Data, Tech &amp; Opérations · PME &amp; start-up · 31 - Toulouse · cdi-cdd</description>
       <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
     </item>
     <item>
@@ -704,6 +697,13 @@
       <link>https://candidat.francetravail.fr/offres/recherche/detail/212PVBG</link>
       <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/212PVBG</guid>
       <description>Gestion d'actifs &amp; Investissement · PME &amp; start-up · 34 - MONTPELLIER · cdi-cdd</description>
+      <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Conseillère, conseiller Spécialisé.e en Patrimoine — LA POSTE</title>
+      <link>https://candidat.francetravail.fr/offres/recherche/detail/212FTBV</link>
+      <guid isPermaLink="true">https://candidat.francetravail.fr/offres/recherche/detail/212FTBV</guid>
+      <description>Gestion d'actifs &amp; Investissement · PME &amp; start-up · 75 - Paris 7e Arrondissement · cdi-cdd</description>
       <pubDate>Sun, 30 Aug 2026 16:41:00 GMT</pubDate>
     </item>
   </channel>
