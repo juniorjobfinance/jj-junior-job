@@ -1,0 +1,217 @@
+# Vague 3 — grosses maisons qui recrutent BEAUCOUP de stages/alternances :
+# Big 4 et conseil, banques, gestion d'actifs, énergie, grands groupes.
+# Variantes de noms incluses car le slug d'un ATS suit rarement le nom exact.
+
+# --- Big 4 / conseil (toutes variantes) ---
+Deloitte
+Deloitte France
+DeloitteFrance
+EY France
+EYFrance
+Ernst and Young
+KPMG France
+KPMGFrance
+PwC France
+PricewaterhouseCoopers
+PwCFrance
+Mazars France
+Grant Thornton
+BDO France
+RSM France
+Baker Tilly
+Crowe
+Moore Global
+Nexia
+PKF
+Forvis
+Eight Advisory France
+Accuracy Advisory
+Alvarez and Marsal France
+AlixPartners France
+Kearney France
+McKinsey France
+Bain and Company France
+Boston Consulting Group France
+Oliver Wyman France
+Roland Berger France
+Arthur D Little
+Simon Kucher
+LEK Consulting
+Strategy and PwC
+Wavestone France
+Sia Partners France
+Capgemini Invent
+Accenture France
+Deloitte Digital
+
+# --- Banques / financements ---
+BNP Paribas Group
+Societe Generale Group
+Credit Agricole Group
+CACIB
+Caceis
+Amundi Group
+Natixis Investment Managers
+BPCE Group
+Credit Mutuel Alliance Federale
+La Banque Postale Group
+Arkea
+Oddo BHF France
+Kepler Cheuvreux France
+Exane BNP Paribas
+Portzamparc BNP
+Aurel BGC
+Louis Capital Markets
+TP ICAP France
+Tradition France
+GFI Securities
+Euronext
+Euroclear France
+Clearstream France
+Swift France
+Worldline Financial Services
+Ingenico Group
+Nexi France
+Edenred France
+Sodexo Benefits
+Up Group
+Bimpli
+Cegid
+Sage France
+Silae
+ADP France
+
+# --- Gestion d'actifs / investisseurs institutionnels ---
+Amundi Asset Management
+BNP Paribas Asset Management France
+AXA Investment Managers Paris
+Natixis Investment Managers France
+Ostrum
+Mirova France
+DNCA
+Carmignac Gestion
+Comgest France
+La Financiere de l Echiquier France
+Edmond de Rothschild France
+Groupama AM
+Tikehau Capital
+Sycomore AM
+Lazard Freres Gestion France
+CPR AM
+LBPAM
+BlackRock France
+Vanguard France
+Fidelity France
+Schroders France
+Invesco France
+Amundi ETF
+Robeco France
+Allianz Global Investors France
+PIMCO France
+JP Morgan Asset Management France
+Goldman Sachs Asset Management France
+Morgan Stanley Investment Management France
+State Street France
+BNY Mellon France
+Northern Trust France
+Caceis Investor Services
+Societe Generale Securities Services
+CIC Market Solutions
+
+# --- Énergie / utilities / trading ---
+TotalEnergies Group
+EDF Group
+Engie Group
+Veolia Group
+Suez Group
+RTE
+Enedis
+GRDF
+GRTgaz
+Terega
+Storengy
+Elengy
+Dalkia
+EDF Renouvelables
+Engie Solutions
+Engie Green
+TotalEnergies Renouvelables
+Air Liquide Group
+Arkema Group
+Solvay
+Borealis France
+Naturgy France
+Iberdrola France
+Enel France
+Shell France
+BP France
+ExxonMobil France
+Esso France
+Bolloré Energy
+Rubis Energie
+Picoty
+Avia France
+Total Marketing France
+
+# --- Grands groupes gros recruteurs stage/alternance ---
+Orange Group
+Bouygues Group
+Vinci Group
+Eiffage Group
+Saint Gobain Group
+Schneider Electric France
+Legrand France
+Alstom France
+Safran Group
+Dassault Aviation France
+Naval Group France
+Thales Group
+Airbus Group
+Renault Group
+Stellantis France
+Valeo Group
+Forvia Faurecia
+Michelin Group
+Plastic Omnium
+Sanofi Group
+Servier
+Ipsen
+Pierre Fabre
+LOreal Group
+LVMH Group
+Kering Group
+Hermes Group
+Chanel France
+Richemont France
+Danone Group
+Nestle France
+Unilever France
+Mondelez France
+Pernod Ricard Group
+Carrefour Group
+Auchan Retail
+Casino Group
+Leroy Merlin France
+Decathlon France
+Accor Group
+Sodexo Group
+Elior Group
+Compass Group France
+Air France
+SNCF Group
+RATP Group
+ADP Aeroports de Paris
+Getlink Group
+CMA CGM Group
+Geodis Group
+DHL France
+FedEx France
+Capgemini Group
+Atos Group
+Sopra Steria Group
+Publicis Groupe
+Havas France
+JCDecaux France
+Teleperformance France
+Ubisoft France
+Dassault Systemes France

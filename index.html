@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JJ — Junior Job — le vivier junior finance français</title>
+<link rel="alternate" type="application/rss+xml" title="JJ — dernières offres" href="offres.xml">
+<style>
+  :root {
+    --navy-950: #0a1424;
+    --navy-900: #0f1f33;
+    --navy-800: #17304d;
+    --navy-700: #22456b;
+    --paper: #f6f4ef;
+    --paper-raised: #ffffff;
+    --ink: #101826;
+    --ink-soft: #4a5568;
+    --line: #dcd6c9;
+    --brass: #a8763f;
+    --brass-dark: #8a5f30;
+    --brass-soft: #f1e4d0;
+    --ok: #2f6b4f;
+    --focus: #1b6fd6;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    line-height: 1.4;
+  }
+
+  a { color: var(--navy-800); }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ---------- Header ---------- */
+  header.site {
+    background: var(--navy-950);
+    color: var(--paper);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 3px solid var(--brass);
+  }
+  header.site .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header.site .brand .mark {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--brass);
+  }
+  header.site .brand .tagline {
+    font-size: 0.85rem;
+    color: #c7cede;
+  }
+  header.site .promesse {
+    max-width: 1200px;
+    margin: 0.5rem auto 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--brass);
+  }
+  header.site .promesse span { color: #8a93a8; }
+
+  /* ---------- Tabs ---------- */
+  nav.tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+  nav.tabs button[role="tab"] {
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 0.9rem 1rem;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  nav.tabs button[role="tab"]:hover { color: var(--ink); }
+  nav.tabs button[role="tab"][aria-selected="true"] {
+    color: var(--navy-950);
+    border-bottom-color: var(--brass);
+  }
+  nav.tabs .tab-count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-left: 0.35rem;
+  }
+  nav.tabs .total {
+    margin-left: auto;
+    align-self: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    padding-right: 0.2rem;
+  }
+
+  /* ---------- Layout ---------- */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Sidebar / filtres ---------- */
+  aside.filters {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.1rem;
+    position: sticky;
+    top: 1rem;
+  }
+  /* En une seule colonne (écran étroit), un panneau "sticky" se fige au-dessus
+     des offres et les recouvre. Il ne doit coller que dans la mise en page à
+     deux colonnes, où il occupe sa propre gouttière. Cette règle doit venir
+     APRÈS la déclaration sticky ci-dessus pour l'emporter. */
+  @media (max-width: 820px) {
+    aside.filters { position: static; }
+  }
+  aside.filters h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 1rem 0 0.5rem;
+  }
+  aside.filters h2:first-child { margin-top: 0; }
+  aside.filters input[type="search"] {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font: inherit;
+    background: var(--paper);
+  }
+  fieldset { border: none; padding: 0; margin: 0; }
+  .famille-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .famille-option input { margin: 0; }
+  .famille-option .count {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    min-width: 1.6em;
+    text-align: right;
+  }
+  select#structure-filter,
+  select#lieu-filter,
+  select#emp-filter {
+    width: 100%;
+    padding: 0.45rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font: inherit;
+    background: var(--paper);
+  }
+  button#reset-filters {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    background: none;
+    border: 1px solid var(--navy-800);
+    color: var(--navy-800);
+    border-radius: 6px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button#reset-filters:hover { background: var(--navy-800); color: white; }
+
+  /* ---------- Résultats ---------- */
+  .results-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.85rem;
+  }
+  .results-count {
+    font-family: var(--font-mono);
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .results-tools {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .sort-label {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .sort-label select {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.2rem 0.3rem;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--paper-raised);
+    color: var(--ink);
+  }
+  .cards {
+    display: grid;
+    gap: 0.85rem;
+  }
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .card:hover { border-color: var(--brass); }
+  .card h3 {
+    margin: 0 0 0.15rem;
+    font-size: 1.05rem;
+    color: var(--navy-950);
+  }
+  .card .emp {
+    font-weight: 600;
+    color: var(--navy-700);
+    margin-bottom: 0.45rem;
+  }
+  .card .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+  .card .meta .mono { font-family: var(--font-mono); }
+  .card .meta .tag-famille {
+    background: var(--brass-soft);
+    color: var(--brass-dark);
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+  }
+  .card .meta .tag-struct {
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .card .meta .tag-loc::before {
+    content: "◍ ";
+    color: var(--brass);
+  }
+  .card .badges { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
+  .card .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--brass-soft);
+    color: var(--brass-dark);
+  }
+  .badge.fresh::before { content: "●"; color: var(--ok); }
+  .badge.posted {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+  .badge.posted.unknown {
+    border-style: dashed;
+    font-style: italic;
+  }
+  .badge.via {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px dashed var(--line);
+    font-style: italic;
+  }
+  .badge.new {
+    background: var(--navy-950);
+    color: var(--paper);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .new-only {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .new-only:hover { border-color: var(--brass); }
+  .new-only input { margin: 0 0.35rem 0 0; }
+  .new-only .count {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .link-out {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy-800);
+    white-space: nowrap;
+  }
+  .also-on {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+
+  button#load-more {
+    display: block;
+    margin: 1.25rem auto 0;
+    padding: 0.55rem 1.4rem;
+    background: var(--navy-950);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button#load-more:hover { background: var(--navy-800); }
+  button#load-more[hidden] { display: none; }
+
+  .empty-state {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--ink-soft);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+  }
+
+  footer.site {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+  }
+  /* Les mentions légales sont obligatoires et doivent rester atteignables depuis
+     n'importe quelle page : on les détache du paragraphe pour qu'elles se voient. */
+  footer.site .liens-legaux {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <span class="mark">JJ</span>
+    <span class="tagline">Junior Job — le vivier junior finance français</span>
+  </div>
+  <div class="promesse">
+    Trié par métier <span>·</span> 0-3 ans d'expérience <span>·</span> vérifié chaque jour <span>·</span> sans compte, sans pub
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Type de contrat">
+  <button role="tab" data-volet="stage" aria-selected="true" aria-controls="panel-offres" id="tab-stage">Stage</button>
+  <button role="tab" data-volet="alternance" aria-selected="false" aria-controls="panel-offres" id="tab-alternance">Alternance</button>
+  <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
+  <span class="total" id="total-count"></span>
+</nav>
+
+<main id="panel-offres">
+  <aside class="filters" id="filters-panel">
+    <h2>Recherche</h2>
+    <input type="search" id="q" placeholder="Poste, entreprise…" aria-label="Rechercher un poste ou une entreprise">
+
+    <label class="new-only" for="new-only">
+      <span><input type="checkbox" id="new-only"> Nouvelles offres (24 h)</span>
+      <span class="count" id="new-count"></span>
+    </label>
+
+    <label class="new-only" for="direct-only">
+      <span><input type="checkbox" id="direct-only"> Lien direct entreprise</span>
+      <span class="count" id="direct-count"></span>
+    </label>
+
+    <h2>Famille métier</h2>
+    <fieldset id="familles-fieldset"></fieldset>
+
+    <h2>Type de structure</h2>
+    <select id="structure-filter" aria-label="Filtrer par type de structure">
+      <option value="">Toutes structures</option>
+    </select>
+
+    <h2>Lieu</h2>
+    <select id="lieu-filter" aria-label="Filtrer par lieu">
+      <option value="">Toute la France</option>
+    </select>
+
+    <h2>Entreprise</h2>
+    <select id="emp-filter" aria-label="Filtrer par entreprise">
+      <option value="">Toutes les maisons</option>
+    </select>
+
+    <button id="reset-filters" type="button">Réinitialiser les filtres</button>
+  </aside>
+
+  <section aria-live="polite">
+    <div class="results-head">
+      <h1 style="font-size:1.1rem; margin:0;">Offres</h1>
+      <div class="results-tools">
+        <label class="sort-label" for="sort">Trier&nbsp;:
+          <select id="sort" aria-label="Trier les offres">
+            <option value="recent">Plus récentes</option>
+            <option value="entreprise">Entreprise (A-Z)</option>
+            <option value="poste">Poste (A-Z)</option>
+          </select>
+        </label>
+        <span class="results-count" id="results-count"></span>
+      </div>
+    </div>
+    <div class="cards" id="cards"></div>
+    <button id="load-more" type="button" hidden>Charger plus d'offres</button>
+  </section>
+</main>
+
+<footer class="site">
+  Les offres sont ingérées automatiquement depuis des sources publiques (France Travail,
+  La Bonne Alternance) et les ATS directs des entreprises. Chaque offre renvoie vers
+  l'annonce officielle. JJ ne collecte aucune candidature.
+  <br>
+  Pour être prévenu des nouvelles offres sans créer de compte ni donner votre adresse :
+  <a href="offres.xml">flux RSS des 100 dernières offres</a>.
+  <nav class="liens-legaux">
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="confidentialite.html">Politique de confidentialité</a>
+    <a href="offres.xml">Flux RSS</a>
+  </nav>
+</footer>
+
+<script src="offres.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var FAMILLES = [
+    'Commercial & Relation client',
+    'Analyse & Research',
+    'Risques & Conformité',
+    'M&A & Transactions',
+    'Audit & Conseil',
+    "Finance d'entreprise",
+    'Gestion & Investissement',
+    'Assurance & Actuariat',
+    'Data & Quant'
+  ];
+
+  var STRUCTURES = [
+    'Banque', "Gestion d'actifs", 'Private Equity/VC', 'Assurance',
+    'Audit & conseil', 'Entreprise', 'Fintech', 'Finance publique'
+  ];
+
+  var PAGE_SIZE = 50;
+
+  var OFFRES = Array.isArray(window.__OFFRES__) ? window.__OFFRES__ : [];
+
+  var state = {
+    volet: 'stage',
+    familles: new Set(),
+    structure: '',
+    q: '',
+    newOnly: false,
+    directOnly: false,
+    lieu: '',
+    emp: '',
+    sort: 'recent',
+    page: 1
+  };
+
+  // --- URL partageable -----------------------------------------------------
+  // Les concurrents perdent l'état de recherche dès qu'on partage un lien
+  // (paramètres ignorés, identifiants de session, mot-clé effacé au changement
+  // de ville). Ici l'état vit dans l'URL : un lien envoyé à un camarade rouvre
+  // exactement la même vue, et la page est indexable.
+  function stateToUrl() {
+    var p = new URLSearchParams();
+    if (state.volet !== 'stage') p.set('contrat', state.volet);
+    if (state.familles.size) p.set('familles', [].concat(Array.from(state.familles)).join('|'));
+    if (state.structure) p.set('structure', state.structure);
+    if (state.lieu) p.set('lieu', state.lieu);
+    if (state.emp) p.set('entreprise', state.emp);
+    if (state.q) p.set('q', state.q);
+    if (state.newOnly) p.set('nouveau', '1');
+    if (state.directOnly) p.set('direct', '1');
+    if (state.sort !== 'recent') p.set('tri', state.sort);
+    var qs = p.toString();
+    history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+  }
+
+  function urlToState() {
+    var p = new URLSearchParams(location.search);
+    var volet = p.get('contrat');
+    if (volet === 'stage' || volet === 'alternance' || volet === 'cdi-cdd') state.volet = volet;
+    var fam = p.get('familles');
+    if (fam) fam.split('|').forEach(function (f) { if (FAMILLES.indexOf(f) !== -1) state.familles.add(f); });
+    var s = p.get('structure');
+    if (s && STRUCTURES.indexOf(s) !== -1) state.structure = s;
+    state.lieu = p.get('lieu') || '';
+    state.emp = p.get('entreprise') || '';
+    state.q = p.get('q') || '';
+    state.newOnly = p.get('nouveau') === '1';
+    state.directOnly = p.get('direct') === '1';
+    var tri = p.get('tri');
+    if (tri === 'entreprise' || tri === 'poste') state.sort = tri;
+  }
+
+  // "Nouvelle" = repérée par JJ lors du dernier passage quotidien, c.-à-d.
+  // vue pour la première fois il y a moins de 24 h.
+  // "Lien direct" = l'URL mène chez l'entreprise (ou son ATS), pas sur un
+  // agrégateur intermédiaire.
+  function estDirect(offer) {
+    return !/adzuna\.fr|candidat\.francetravail\.fr|choisirleservicepublic\.gouv\.fr/.test(offer.url);
+  }
+
+  function isNew(offer) {
+    if (!offer.firstSeenAt) return false;
+    return (Date.now() - new Date(offer.firstSeenAt).getTime()) < 86400000;
+  }
+
+  var els = {
+    tabs: Array.prototype.slice.call(document.querySelectorAll('nav.tabs button[role="tab"]')),
+    filtersPanel: document.getElementById('filters-panel'),
+    familleFieldset: document.getElementById('familles-fieldset'),
+    structureSelect: document.getElementById('structure-filter'),
+    lieuSelect: document.getElementById('lieu-filter'),
+    empSelect: document.getElementById('emp-filter'),
+    q: document.getElementById('q'),
+    newOnly: document.getElementById('new-only'),
+    directOnly: document.getElementById('direct-only'),
+    directCount: document.getElementById('direct-count'),
+    sort: document.getElementById('sort'),
+    newCount: document.getElementById('new-count'),
+    resetBtn: document.getElementById('reset-filters'),
+    cards: document.getElementById('cards'),
+    resultsCount: document.getElementById('results-count'),
+    loadMore: document.getElementById('load-more'),
+    main: document.getElementById('panel-offres')
+  };
+
+  function buildFamilleFieldset() {
+    els.familleFieldset.innerHTML = FAMILLES.map(function (f, i) {
+      var id = 'famille-' + i;
+      return '<label class="famille-option" for="' + id + '">' +
+        '<span><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
+        '<span class="count" data-famille="' + f + '"></span>' +
+        '</label>';
+    }).join('');
+    Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
+      cb.addEventListener('change', function () {
+        if (cb.checked) state.familles.add(cb.value); else state.familles.delete(cb.value);
+        state.page = 1;
+        render();
+      });
+    });
+  }
+
+  function buildStructureSelect() {
+    STRUCTURES.forEach(function (s) {
+      var opt = document.createElement('option');
+      opt.value = s;
+      opt.textContent = s;
+      els.structureSelect.appendChild(opt);
+    });
+  }
+
+  // La zone d'affichage est calculée à l'ingestion (ingestion/pipeline.js) :
+  // c'est là que vivent déjà les listes de villes et de communes du Grand Paris,
+  // et les dupliquer ici garantissait qu'elles divergent.
+  // Le filtre entreprise regroupe par MAISON : les 12 caisses d'épargne
+  // régionales tiennent une seule ligne "Groupe BPCE" au lieu de douze, et le
+  // candidat qui cherche "BPCE" les trouve toutes. La carte, elle, garde le nom
+  // de l'entité qui recrute : c'est là qu'il postule.
+  function maisonDe(offer) {
+    return offer.maison || offer.emp;
+  }
+
+  function zoneDe(offer) {
+    return offer.zone || 'Lieu non précisé';
+  }
+
+  // Remplit un <select> avec les valeurs présentes dans les offres du volet,
+  // classées par nombre d'offres décroissant, en conservant la valeur choisie.
+  function remplirSelect(sel, valeurs, libelleTout, choix) {
+    sel.innerHTML = '<option value="">' + libelleTout + '</option>' +
+      valeurs.map(function (v) {
+        return '<option value="' + esc(v[0]) + '">' + esc(v[0]) + ' (' + v[1] + ')</option>';
+      }).join('');
+    sel.value = choix;
+    if (sel.value !== choix) sel.value = ''; // la valeur a disparu de ce volet
+  }
+
+  function comptages(base, cle) {
+    var c = {};
+    base.forEach(function (o) { var k = cle(o); if (k) c[k] = (c[k] || 0) + 1; });
+    return Object.keys(c)
+      .map(function (k) { return [k, c[k]]; })
+      .sort(function (a, b) { return b[1] - a[1] || a[0].localeCompare(b[0], 'fr'); });
+  }
+
+  function daysAgo(iso) {
+    if (!iso) return null;
+    var then = new Date(iso);
+    var now = new Date();
+    var startThen = new Date(then.getFullYear(), then.getMonth(), then.getDate());
+    var startNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((startNow - startThen) / 86400000);
+  }
+
+  // Transparence sur la destination du lien : quand l'offre vient d'un
+  // agrégateur (France Travail, Adzuna), le candidat n'arrive pas directement
+  // chez l'entreprise. On le lui DIT — aucun concurrent analysé ne le fait,
+  // et c'est ce qui rend la promesse "lien direct" crédible sur le reste.
+  function viaBadge(offer) {
+    if (/candidat\.francetravail\.fr/.test(offer.url)) return '<span class="badge via">via France Travail</span> ';
+    if (/adzuna\.fr/.test(offer.url)) return '<span class="badge via">via Adzuna</span> ';
+    // L'AMF, la Caisse des Dépôts et la Direction générale du Trésor n'ont pas
+    // de site carrières : le portail de l'État est leur unique canal de
+    // publication. On le dit plutôt que de laisser croire à un lien direct.
+    if (/choisirleservicepublic\.gouv\.fr/.test(offer.url)) return '<span class="badge via">via Service Public</span> ';
+    return '';
+  }
+
+  function freshnessBadge(offer) {
+    var badges = viaBadge(offer);
+    if (isNew(offer)) badges += '<span class="badge new">NOUVEAU</span> ';
+
+    // Date de PUBLICATION par l'employeur, en clair. Les concurrents affichent
+    // des offres de 2 mois mêlées à des offres de 12 h sans le dire (et Indeed
+    // tague "nouveau" une annonce de janvier). L'afficher, c'est laisser le
+    // candidat juger lui-même de la fraîcheur.
+    // Quelques ATS (TalentSoft, SuccessFactors, framework e-i) ne publient
+    // aucune date, ni en liste ni sur la fiche. Leur postedAt vaut la date de
+    // collecte : l'afficher comme date de publication serait faux. On le dit.
+    if (offer.datePubFiable === false) {
+      badges += '<span class="badge posted unknown">Date de publication non communiquée</span> ';
+    } else {
+      var p = daysAgo(offer.postedAt);
+      if (p !== null && p >= 0) {
+        var txt = p === 0 ? "Publiée aujourd'hui" : p === 1 ? 'Publiée hier' : 'Publiée il y a ' + p + ' j';
+        badges += '<span class="badge posted">' + txt + '</span> ';
+      }
+    }
+
+    // "Vérifiée aujourd'hui" figurait sur la quasi-totalité des cartes : une
+    // pastille que tout le monde porte n'informe personne, et l'en-tête l'annonce
+    // déjà ("vérifié chaque jour"). On ne l'affiche donc que quand elle dit
+    // vraiment quelque chose : une offre que le dernier passage n'a pas revue.
+    var d = daysAgo(offer.verifiedAt);
+    if (d === null || d <= 0) return badges;
+    return badges + '<span class="badge fresh">Vérifiée il y a ' + d + ' j</span>';
+  }
+
+  function sortOffers(list) {
+    var arr = list.slice();
+    if (state.sort === 'entreprise') {
+      arr.sort(function (a, b) { return (a.emp || '').localeCompare(b.emp || '', 'fr'); });
+    } else if (state.sort === 'poste') {
+      arr.sort(function (a, b) { return (a.title || '').localeCompare(b.title || '', 'fr'); });
+    } else {
+      // Plus récentes d'abord, sur la date de PUBLICATION par l'employeur —
+      // pas sur la date d'arrivée dans JJ. Les offres dont la source ne donne
+      // aucune date (datePubFiable === false) portent la date de collecte : à
+      // jour égal elles passent DERRIÈRE celles réellement publiées ce jour-là,
+      // sinon 150 offres sans date trusteraient le haut de la liste.
+      arr.sort(function (a, b) {
+        var da = new Date(b.postedAt || 0) - new Date(a.postedAt || 0);
+        if (da !== 0) return da;
+        var fa = a.datePubFiable === false ? 1 : 0;
+        var fb = b.datePubFiable === false ? 1 : 0;
+        return fa - fb;
+      });
+    }
+    return arr;
+  }
+
+  function voletOffers(volet) {
+    return OFFRES.filter(function (o) { return o.volet === volet; });
+  }
+
+  function matchesFilters(o) {
+    if (state.newOnly && !isNew(o)) return false;
+    if (state.directOnly && !estDirect(o)) return false;
+    if (state.familles.size && !state.familles.has(o.famille)) return false;
+    if (state.structure && o.sector !== state.structure) return false;
+    if (state.lieu && zoneDe(o) !== state.lieu) return false;
+    if (state.emp && maisonDe(o) !== state.emp) return false;
+    if (state.q) {
+      // Recherche insensible aux accents : "Société Générale" doit trouver
+      // "Societe Generale" (les sources écrivent les deux) et inversement.
+      var sansAccents = function (s) {
+        return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      };
+      var q = sansAccents(state.q);
+      var hay = sansAccents(o.title + ' ' + o.emp);
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  }
+
+  function updateFamilleCounts(base) {
+    var counts = {};
+    base.forEach(function (o) { counts[o.famille] = (counts[o.famille] || 0) + 1; });
+    Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('.count'), function (span) {
+      span.textContent = counts[span.dataset.famille] || 0;
+    });
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function cardHTML(o) {
+    var metaBits = [
+      '<span class="tag-famille">' + esc(o.famille) + '</span>',
+      '<span class="tag-struct">' + esc(o.sector) + '</span>',
+      '<span class="tag-loc">' + esc(o.loc) + (o.place && o.place !== 'France' ? ', ' + esc(o.place) : '') + '</span>'
+    ];
+    if (o.sal) metaBits.push('<span class="mono">' + esc(o.sal) + '</span>');
+    if (o.dl) metaBits.push('<span class="mono">avant le ' + esc(o.dl) + '</span>');
+
+    return (
+      '<a class="card" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
+        '<h3>' + esc(o.title) + '</h3>' +
+        '<div class="emp">' + esc(o.emp) + '</div>' +
+        '<div class="meta">' + metaBits.join('') + '</div>' +
+        '<div class="foot">' +
+          '<div class="badges">' + freshnessBadge(o) + '</div>' +
+          '<span class="link-out">Voir l\'annonce →</span>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  function render() {
+    var base = voletOffers(state.volet);
+    updateFamilleCounts(base);
+    els.newCount.textContent = base.filter(isNew).length;
+    els.directCount.textContent = base.filter(estDirect).length;
+    // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que
+    // le menu n'existe), pas du DOM.
+    // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
+    // ce sont des non-réponses, pas des destinations qu'on choisit.
+    var FOURRE_TOUT = ['Autres villes', 'Lieu non précisé'];
+    var zones = comptages(base, zoneDe).sort(function (a, b) {
+      var fa = FOURRE_TOUT.indexOf(a[0]) === -1 ? 0 : 1;
+      var fb = FOURRE_TOUT.indexOf(b[0]) === -1 ? 0 : 1;
+      return fa - fb || b[1] - a[1];
+    });
+    remplirSelect(els.lieuSelect, zones, 'Toute la France', state.lieu);
+    remplirSelect(els.empSelect, comptages(base, maisonDe), 'Toutes les maisons', state.emp);
+    state.lieu = els.lieuSelect.value;
+    state.emp = els.empSelect.value;
+
+    var filtered = sortOffers(base.filter(matchesFilters));
+    var visible = filtered.slice(0, state.page * PAGE_SIZE);
+    stateToUrl();
+
+    els.resultsCount.textContent = filtered.length + ' offre' + (filtered.length > 1 ? 's' : '');
+
+    if (!filtered.length) {
+      els.cards.innerHTML = '<div class="empty-state">Aucune offre ne correspond à ces filtres pour le moment.</div>';
+    } else {
+      els.cards.innerHTML = visible.map(cardHTML).join('');
+    }
+
+    els.loadMore.hidden = visible.length >= filtered.length;
+    if (!els.loadMore.hidden) {
+      els.loadMore.textContent =
+        'Charger plus d\'offres (' + visible.length + ' sur ' + filtered.length + ')';
+    }
+  }
+
+  els.tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      els.tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+      tab.setAttribute('aria-selected', 'true');
+      state.volet = tab.dataset.volet;
+      state.page = 1;
+      render();
+    });
+  });
+
+  els.q.addEventListener('input', function () {
+    state.q = els.q.value.trim();
+    state.page = 1;
+    render();
+  });
+
+  els.sort.addEventListener('change', function () {
+    state.sort = els.sort.value;
+    state.page = 1;
+    render();
+  });
+
+  els.directOnly.addEventListener('change', function () {
+    state.directOnly = els.directOnly.checked;
+    state.page = 1;
+    render();
+  });
+
+  els.newOnly.addEventListener('change', function () {
+    state.newOnly = els.newOnly.checked;
+    state.page = 1;
+    render();
+  });
+
+  els.lieuSelect.addEventListener('change', function () {
+    state.lieu = els.lieuSelect.value;
+    state.page = 1;
+    render();
+  });
+
+  els.empSelect.addEventListener('change', function () {
+    state.emp = els.empSelect.value;
+    state.page = 1;
+    render();
+  });
+
+  els.structureSelect.addEventListener('change', function () {
+    state.structure = els.structureSelect.value;
+    state.page = 1;
+    render();
+  });
+
+  els.resetBtn.addEventListener('click', function () {
+    state.familles.clear();
+    state.structure = '';
+    state.lieu = '';
+    state.emp = '';
+    state.q = '';
+    state.newOnly = false;
+    state.directOnly = false;
+    state.page = 1;
+    els.q.value = '';
+    els.newOnly.checked = false;
+    els.directOnly.checked = false;
+    els.structureSelect.value = '';
+    els.lieuSelect.value = '';
+    els.empSelect.value = '';
+    Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) { cb.checked = false; });
+    render();
+  });
+
+  els.loadMore.addEventListener('click', function () {
+    state.page += 1;
+    render();
+  });
+
+  // Compteur par onglet + total : sans ça, un visiteur qui arrive sur "Stage"
+  // croit que le site ne contient que les offres de cet onglet.
+  function buildTabCounts() {
+    els.tabs.forEach(function (tab) {
+      var n = voletOffers(tab.dataset.volet).length;
+      if (!tab.querySelector('.tab-count')) {
+        var span = document.createElement('span');
+        span.className = 'tab-count';
+        tab.appendChild(span);
+      }
+      tab.querySelector('.tab-count').textContent = n;
+    });
+    var total = document.getElementById('total-count');
+    if (total) total.textContent = OFFRES.length + ' offres au total';
+  }
+
+  buildFamilleFieldset();
+  buildStructureSelect();
+  buildTabCounts();
+
+  // Restaure l'état depuis l'URL (lien partagé, favori, retour arrière) et
+  // reflète-le dans les contrôles avant le premier rendu.
+  urlToState();
+  els.tabs.forEach(function (t) {
+    t.setAttribute('aria-selected', String(t.dataset.volet === state.volet));
+  });
+  els.q.value = state.q;
+  els.newOnly.checked = state.newOnly;
+  els.directOnly.checked = state.directOnly;
+  els.sort.value = state.sort;
+  els.structureSelect.value = state.structure;
+  Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
+    cb.checked = state.familles.has(cb.value);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

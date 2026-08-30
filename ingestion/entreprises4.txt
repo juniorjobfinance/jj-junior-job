@@ -1,0 +1,178 @@
+# Vague 4 — filiales et entités des grands groupes finance, plus les maisons
+# encore absentes. Les filiales ont souvent leur PROPRE portail carrières, même
+# quand la maison mère est fermée (ex : Boursorama accessible alors que
+# Société Générale ne l'est pas).
+
+# --- Filiales BNP Paribas ---
+BNP Paribas Cardif
+Cardif
+Arval
+BNP Paribas Personal Finance
+Cetelem
+BNP Paribas Real Estate
+BNP Paribas Leasing Solutions
+BNP Paribas Factor
+Hello bank
+BNP Paribas Fortis
+Consorsbank
+
+# --- Filiales Société Générale ---
+Boursorama
+Sogecap
+Franfinance
+SG Securities Services
+ALD Automotive
+Ayvens
+Societe Generale Equipment Finance
+Sogeprom
+Credit du Nord
+
+# --- Filiales Crédit Agricole ---
+LCL
+Amundi
+Caceis
+CACIB
+Credit Agricole Consumer Finance
+Sofinco
+Credit Agricole Leasing
+Credit Agricole Assurances
+Predica
+Pacifica
+CA Indosuez
+Credit Agricole Immobilier
+Credit Agricole Technologies
+
+# --- Filiales BPCE / autres banques ---
+Natixis
+Oney
+Palatine
+Fidor
+Credit Foncier
+Socfim
+Pramex
+
+# --- Assureurs et mutuelles encore absents ---
+Scor
+Covea
+MAIF
+MACIF
+Matmut
+Abeille Assurances
+Aema
+AG2R La Mondiale
+Malakoff Humanis
+Klesia
+Apicil
+Pro BTP
+Harmonie Mutuelle
+Mutuelle Generale
+MGEN
+Swiss Life
+April
+Verlingue
+Diot Siaci
+Gras Savoye
+Verspieren
+Coface
+Allianz
+Generali
+Groupama
+AXA
+
+# --- Gestion d'actifs et PE encore absents ---
+Carmignac
+Comgest
+Tikehau
+Eurazeo
+Antin
+Bpifrance
+Ardian
+Astorg
+Sagard
+Andera
+Wendel
+Meridiam
+Infravia
+Idinvest
+Seven2
+Capzanine
+Five Arrows
+
+# --- Big 4 et conseil : autres entités ---
+Deloitte
+PwC
+KPMG
+Mazars
+Grant Thornton
+BDO
+RSM
+Baker Tilly
+Fiducial
+In Extenso
+Exco
+Cerfrance
+Wavestone
+Sia Partners
+Accuracy
+Eight Advisory
+Alvarez and Marsal
+AlixPartners
+Kearney
+Oliver Wyman
+McKinsey
+Bain
+BCG
+Roland Berger
+
+# --- Grands groupes : postes finance ---
+TotalEnergies
+LOreal
+LVMH
+Kering
+Hermes
+Danone
+Pernod Ricard
+Carrefour
+Auchan
+Casino
+Sanofi
+Servier
+Ipsen
+Airbus
+Safran
+Thales
+Dassault
+Naval Group
+Alstom
+Renault
+Stellantis
+Valeo
+Forvia
+Michelin
+Schneider Electric
+Legrand
+Saint Gobain
+Vinci
+Bouygues
+Eiffage
+EDF
+Engie
+Veolia
+Suez
+Orange
+SNCF
+RATP
+Air France
+Accor
+Sodexo
+Elior
+Capgemini
+Atos
+Sopra Steria
+Publicis
+JCDecaux
+Teleperformance
+Worldline
+Edenred
+Ubisoft
+Dassault Systemes

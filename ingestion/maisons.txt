@@ -1,0 +1,150 @@
+# ---------------------------------------------------------------------------
+# LES 100 GRANDES MAISONS — liste de référence de JJ (phase 1)
+#
+# Liste arrêtée par Victor. Elle décide de ce qui apparaît sur le site : une
+# offre chez un employeur absent d'ici est écartée par le pipeline.
+#
+# Format :   Nom affiché | motif de reconnaissance (expression régulière)
+#
+# Le motif est comparé au nom d'employeur renvoyé par les sources, qui écrivent
+# la même maison de dix façons ("BNP PARIBAS", "Bnp Paribas Mission Handicap").
+# Il est testé sans accent ni casse, et ancré au DÉBUT du nom — sauf si le motif
+# commence par ".*". Le premier motif qui correspond gagne : l'ordre compte, on
+# place donc "Crédit Agricole CIB" avant "Crédit Agricole".
+#
+# Une maison peut couvrir plusieurs entités : BPCE attrape les Caisses d'Épargne
+# et les Banques Populaires régionales. La carte affiche l'entité qui recrute ;
+# c'est le filtre "Entreprise" du site qui regroupe sous le nom de la maison.
+#
+# AJOUTER une maison : une ligne de plus, relancer le pipeline.
+# PHASE 2 (ouvrir aux PME et ETI) : PHASE_GRANDES_MAISONS = false dans
+# ingestion/pipeline.js. Rien d'autre à changer.
+# ---------------------------------------------------------------------------
+
+# === Banques d'affaires et de marchés =======================================
+Goldman Sachs            | goldman
+JPMorgan                 | j\.?p\.? ?morgan|jpmorgan|chase
+Morgan Stanley           | morgan stanley
+BNP Paribas CIB          | bnp ?paribas cib|bnpp cib
+Société Générale CIB     | societe generale cib|sg ?cib
+Bank of America          | bank of america|bofa|merrill
+Citi                     | citi(group|bank)?\b
+Barclays                 | barclays
+Deutsche Bank            | deutsche bank
+UBS                      | \bubs\b
+HSBC France              | hsbc
+Natixis                  | natixis(?! ?(im|investment))
+Crédit Agricole CIB      | credit agricole cib|ca-?cib
+Oddo BHF                 | oddo
+
+# === Boutiques M&A ==========================================================
+Rothschild & Co          | rothschild(?! ?& ?co gestion)
+Lazard                   | ^lazard(?! ?freres gestion)
+Messier & Associés       | messier
+Centerview Partners      | centerview
+Perella Weinberg         | perella
+Edmond de Rothschild     | edmond de rothschild
+
+# === Private equity, infrastructure, capital-risque =========================
+Ardian                   | ardian
+Eurazeo                  | eurazeo
+PAI Partners             | pai partners
+Tikehau                  | tikehau
+Bpifrance                | bpifrance|bpi france
+Antin Infrastructure     | antin
+Astorg                   | astorg
+Sagard                   | sagard
+Andera Partners          | andera
+LBO France               | lbo france
+IK Partners              | ik partners
+Siparex                  | siparex
+Partech                  | partech
+Alven                    | ^alven\b
+
+# === Gestion d'actifs =======================================================
+Amundi                   | amundi
+AXA IM                   | axa ?(im|investment)
+BNP Paribas AM           | bnp ?paribas (am|asset)
+Natixis IM               | natixis ?(im|investment)|ostrum
+Carmignac                | carmignac
+Comgest                  | comgest
+La Financière de l'Échiquier | financiere de l.?echiquier|lfde
+Sycomore                 | sycomore
+Groupama AM              | groupama ?(am|asset)
+Lazard Frères Gestion    | lazard freres gestion
+CPR AM                   | ^cpr ?(am|asset)
+
+# === Audit, transaction services et conseil =================================
+Deloitte                 | deloitte
+EY                       | ^ey\b|ernst ?& ?young
+KPMG                     | kpmg
+PwC                      | ^pwc|pricewaterhouse
+Forvis Mazars            | forvis|mazars
+Grant Thornton           | grant thornton
+Eight Advisory           | eight advisory|8 advisory
+Accuracy                 | ^accuracy
+McKinsey                 | mckinsey
+BCG                      | ^bcg\b|boston consulting
+Bain                     | ^bain\b
+Oliver Wyman             | oliver wyman
+Sia Partners             | ^sia\b
+
+# === Assurance ==============================================================
+Matmut                   | matmut
+MAIF                     | ^maif\b|mutuelle assurance instituteur
+Macif                    | ^macif\b|^aema\b|abeille assurance
+Malakoff Humanis         | malakoff
+AXA                      | ^axa\b
+Allianz France           | allianz
+CNP Assurances           | ^cnp\b
+Scor                     | ^scor\b
+Covéa                    | covea|maaf|\bmma\b|\bgmf\b
+Generali France          | generali
+AG2R La Mondiale         | ag2r|la mondiale
+Groupama                 | groupama|\bgan\b
+
+# === Banques de réseau françaises ===========================================
+BNP Paribas              | bnp ?paribas|^bnpp
+Société Générale         | societe generale|^sg\b|boursobank|boursorama
+Crédit Agricole          | credit agricole|^lcl\b|indosuez
+BPCE                     | bpce|caisse d.?epargne|banque populaire|^bred\b|banque palatine|credit cooperatif|banque bcp|casden
+Crédit Mutuel            | credit mutuel|^cic\b|banque transatlantique|arkea
+La Banque Postale        | banque postale
+
+# === Fintech ================================================================
+Qonto                    | qonto
+Swile                    | swile
+Pennylane                | pennylane
+Spendesk                 | spendesk
+Alan                     | ^alan\b
+Ledger                   | ^ledger\b
+Younited                 | younited
+
+# === Grands groupes — finance d'entreprise, contrôle de gestion =============
+TotalEnergies            | total ?energies|^total\b
+LVMH                     | ^lvmh
+L'Oréal                  | l.?oreal
+Airbus                   | airbus
+Sanofi                   | sanofi
+Kering                   | ^kering\b
+Schneider Electric       | schneider
+Vinci                    | ^vinci\b
+Danone                   | ^danone\b
+Air Liquide              | air liquide
+Safran                   | ^safran\b
+Michelin                 | michelin
+Renault                  | ^renault\b
+Orange                   | ^orange\b
+Thales                   | thales
+Capgemini                | capgemini
+Hermès                   | ^hermes\b
+Pernod Ricard            | pernod
+
+# === Institutions publiques =================================================
+Banque de France         | banque de france
+AMF                      | autorite des marches financiers|^amf\b
+ACPR                     | ^acpr\b|prudentiel
+Caisse des Dépôts        | caisse des depots|^cdc\b|banque des territoires
+# L'AFT n'est pas un employeur distinct sur le portail de l'État : ses postes y
+# sont publiés par sa tutelle, la Direction générale du Trésor ("DGT - AFT - ...").
+Agence France Trésor     | agence france tresor|^aft\b|direction generale du tresor|^dgt\b

@@ -1,0 +1,25 @@
+# Vague 5 (session de nuit) — infrastructures de marché, données financières,
+# courtage, gestion, paiement, PE/VC non encore sondés.
+Euroclear
+Euronext Paris
+Mastercard France
+Moodys France
+Morningstar France
+MSCI France
+FactSet
+SimCorp
+Murex
+Finastra
+Sopra Banking
+Diot Siaci
+WTW France
+Milleis Banque
+Indosuez
+Delubac
+Sienna Investment Managers
+Eiffel Investment Group
+Ofi Invest AM
+Ecofi Investissements
+Federal Finance Gestion
+Credit Mutuel Arkea
+Surav

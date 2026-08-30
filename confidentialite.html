@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité — JJ, Junior Job</title>
+<meta name="description" content="Politique de confidentialité et RGPD du site JJ — Junior Job : aucune donnée collectée, aucun cookie, aucun compte.">
+<style>
+  :root {
+    --navy-950: #0a1424;
+    --navy-800: #17304d;
+    --navy-700: #22456b;
+    --paper: #f6f4ef;
+    --paper-raised: #ffffff;
+    --ink: #101826;
+    --ink-soft: #4a5568;
+    --line: #dcd6c9;
+    --brass: #a8763f;
+    --brass-dark: #8a5f30;
+    --brass-soft: #f1e4d0;
+    --ok: #2f6b4f;
+    --focus: #1b6fd6;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    line-height: 1.55;
+  }
+  a { color: var(--navy-800); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  header.site {
+    background: var(--navy-950);
+    color: var(--paper);
+    padding: 1.25rem 1.5rem;
+    border-bottom: 3px solid var(--brass);
+  }
+  header.site .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  header.site .brand .mark {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--brass);
+  }
+  header.site a { color: var(--paper); text-decoration: none; }
+  header.site .tagline { font-size: 0.85rem; color: #c7cede; }
+
+  main { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  h1 { font-size: 1.6rem; margin: 0 0 0.35rem; color: var(--navy-950); }
+  .maj { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.05rem;
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--navy-950);
+  }
+  h3 { font-size: 0.95rem; margin: 1.3rem 0 0.4rem; color: var(--navy-700); }
+  p, li, td, th { font-size: 0.95rem; }
+  ul { padding-left: 1.2rem; }
+  dl { margin: 0.6rem 0; }
+  dt { font-weight: 600; color: var(--navy-700); margin-top: 0.7rem; }
+  dd { margin: 0.1rem 0 0 0; }
+
+  .a-completer {
+    background: var(--brass-soft);
+    border: 1px dashed var(--brass);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--brass-dark);
+    font-weight: 600;
+  }
+  .encart {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brass);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+    margin: 1.2rem 0;
+  }
+  .encart p:first-child { margin-top: 0; }
+  .encart p:last-child { margin-bottom: 0; }
+  .encart h3 { margin-top: 0; }
+  .resume {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ok);
+    border-radius: 6px;
+    padding: 1rem 1.15rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .resume ul { margin: 0.5rem 0 0; }
+  .resume p { margin: 0; font-weight: 600; }
+
+  .tableau-conteneur { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 0.8rem 0; min-width: 32rem; }
+  th, td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+
+  footer.site {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  footer.site nav { margin-top: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <span class="mark">JJ</span>
+    <a href="./"><strong>Junior Job</strong></a>
+    <span class="tagline">— le vivier junior finance français</span>
+  </div>
+</header>
+
+<main>
+  <h1>Politique de confidentialité</h1>
+  <p class="maj">Dernière mise à jour : <span class="a-completer">JJ/MM/AAAA</span></p>
+
+  <div class="resume">
+    <p>L'essentiel, en cinq lignes</p>
+    <ul>
+      <li>JJ ne vous demande <strong>aucun compte</strong> et <strong>aucune adresse e-mail</strong>.</li>
+      <li>JJ ne dépose <strong>aucun cookie</strong> et n'utilise <strong>aucun outil de mesure d'audience</strong>.</li>
+      <li>Aucune ressource extérieure n'est chargée : ni police, ni image, ni script tiers.</li>
+      <li>Les seules données vous concernant sont les <strong>journaux techniques</strong> de notre hébergeur.</li>
+      <li>Dès que vous cliquez sur une offre, vous quittez JJ : c'est la politique du site d'arrivée qui s'applique.</li>
+    </ul>
+  </div>
+
+  <p>
+    La présente politique explique quelles données personnelles sont traitées lorsque vous
+    consultez JJ, pourquoi, et quels droits vous pouvez exercer. Elle est établie
+    conformément au règlement (UE) 2016/679 (RGPD) et à la loi n° 78-17 du 6 janvier 1978
+    dite « Informatique et Libertés ».
+  </p>
+
+  <h2>1. Responsable du traitement</h2>
+  <dl>
+    <dt>Responsable</dt>
+    <dd><span class="a-completer">VOTRE PRÉNOM ET NOM</span></dd>
+    <dt>Contact pour toute question ou demande d'exercice de droits</dt>
+    <dd><span class="a-completer">VOTRE ADRESSE E-MAIL DE CONTACT</span></dd>
+  </dl>
+  <p>
+    Compte tenu de la nature et du volume des traitements, JJ n'est pas tenu de désigner un
+    délégué à la protection des données (DPO).
+  </p>
+
+  <h2>2. Ce que JJ ne fait pas</h2>
+  <p>
+    Parce que c'est plus court à lire que la liste inverse, voici ce qui est
+    <strong>absent</strong> de ce site :
+  </p>
+  <ul>
+    <li>aucun compte, aucune inscription, aucun mot de passe ;</li>
+    <li>aucun formulaire de candidature, aucun dépôt de CV ;</li>
+    <li>aucun cookie, aucun traceur, aucun pixel publicitaire ;</li>
+    <li>aucun outil de mesure d'audience (ni Google Analytics, ni équivalent) ;</li>
+    <li>aucune police, image ou script chargés depuis un serveur tiers ;</li>
+    <li>aucune revente, location ou cession de données à qui que ce soit ;</li>
+    <li>aucune newsletter — le suivi des nouvelles offres se fait par
+      <a href="offres.xml">flux RSS</a>, qui ne demande pas votre adresse.</li>
+  </ul>
+
+  <h2>3. Données effectivement traitées</h2>
+
+  <h3>3.1 Journaux techniques de l'hébergeur</h3>
+  <p>
+    Comme tout site web, JJ est délivré par des serveurs qui enregistrent automatiquement
+    les requêtes reçues. Ce traitement est opéré par notre hébergeur, Vercel Inc.
+  </p>
+  <div class="tableau-conteneur">
+    <table>
+      <thead>
+        <tr><th>Données</th><th>Finalité</th><th>Base légale</th><th>Conservation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adresse IP, date et heure, page demandée, code de réponse, type de navigateur, site référent</td>
+          <td>Délivrer les pages, assurer la sécurité et la disponibilité du service, diagnostiquer les pannes</td>
+          <td>Intérêt légitime (art. 6.1.f RGPD) : faire fonctionner et protéger le site</td>
+          <td>Durée appliquée par l'hébergeur — voir <a href="https://vercel.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">sa politique de confidentialité</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    L'éditeur de JJ ne consulte pas ces journaux à des fins de profilage et n'en tire aucune
+    statistique commerciale.
+  </p>
+
+  <h3>3.2 Messages que vous nous envoyez</h3>
+  <div class="tableau-conteneur">
+    <table>
+      <thead>
+        <tr><th>Données</th><th>Finalité</th><th>Base légale</th><th>Conservation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adresse e-mail et contenu de votre message</td>
+          <td>Répondre à votre demande (signalement d'offre, exercice de vos droits, question)</td>
+          <td>Intérêt légitime : traiter les demandes reçues ; obligation légale lorsqu'il s'agit d'une demande RGPD</td>
+          <td><span class="a-completer">DURÉE — 12 mois recommandé</span> après le dernier échange</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.3 Données figurant dans les offres publiées</h3>
+  <p>
+    Les offres agrégées par JJ concernent des personnes morales et décrivent des postes.
+    Elles ne sont, en principe, pas des données personnelles. Il arrive toutefois qu'une
+    annonce mentionne une personne physique — un contact de recrutement, un nom dans un
+    intitulé. JJ ne recherche pas ces informations et ne les exploite pas ; elles sont
+    reprises telles que publiées par l'employeur.
+  </p>
+  <p>
+    Toute personne physique identifiée dans une offre reprise sur JJ peut en demander la
+    suppression à l'adresse de contact ci-dessus. Le retrait est effectué dans les meilleurs
+    délais, sans qu'aucune justification ne soit exigée.
+  </p>
+
+  <h2>4. Cookies et traceurs</h2>
+  <p>
+    <strong>JJ ne dépose aucun cookie</strong> et n'utilise aucune technologie équivalente
+    (stockage local, empreinte de navigateur, pixel invisible). Aucune bannière de
+    consentement n'est donc nécessaire : il n'y a rien à consentir.
+  </p>
+  <p>
+    Les filtres que vous appliquez — contrat, métier, lieu, entreprise — sont inscrits dans
+    l'adresse de la page, afin que vous puissiez la mettre en favori ou la partager. Ils ne
+    sont enregistrés nulle part, ni sur votre appareil, ni sur nos serveurs.
+  </p>
+
+  <h2>5. Destinataires des données</h2>
+  <p>Les données décrites ci-dessus ne sont transmises à personne, à deux exceptions près :</p>
+  <ul>
+    <li>
+      <strong>Vercel Inc.</strong>, notre hébergeur, qui agit en qualité de sous-traitant au
+      sens de l'article 28 du RGPD ;
+    </li>
+    <li>
+      <strong>votre fournisseur de messagerie et le nôtre</strong>, si vous nous écrivez.
+    </li>
+  </ul>
+  <p>
+    Aucune donnée n'est vendue, louée, échangée, ni communiquée à des annonceurs, à des
+    recruteurs ou à des courtiers en données.
+  </p>
+
+  <h2>6. Transferts hors de l'Union européenne</h2>
+  <p>
+    Vercel Inc. est une société établie aux États-Unis. L'hébergement de ce site peut donc
+    entraîner un transfert de données — pour l'essentiel votre adresse IP — hors de l'Union
+    européenne. Ces transferts sont encadrés par les garanties prévues au chapitre V du
+    RGPD, notamment les clauses contractuelles types de la Commission européenne et, le cas
+    échéant, le cadre de protection des données UE–États-Unis (<em>Data Privacy
+    Framework</em>). Les engagements de l'hébergeur sont détaillés dans son
+    <a href="https://vercel.com/legal/dpa" rel="noopener noreferrer" target="_blank">accord de traitement des données</a>.
+  </p>
+
+  <div class="encart">
+    <h3>Si vous préférez éviter tout transfert hors UE</h3>
+    <p>
+      Vercel permet de choisir une région d'exécution européenne (par exemple Paris,
+      <code>cdg1</code>, ou Francfort, <code>fra1</code>). Configurer le projet ainsi réduit
+      les transferts, sans les supprimer totalement — la société reste américaine. Si vous
+      faites ce choix, mentionnez-le ici.
+    </p>
+  </div>
+
+  <h2>7. Liens vers des sites tiers</h2>
+  <p>
+    La raison d'être de JJ est de vous envoyer vers l'annonce publiée par l'entreprise.
+    Lorsque vous cliquez sur une offre, <strong>vous quittez JJ</strong> et arrivez sur le
+    site de l'employeur, de son logiciel de recrutement, ou — lorsque c'est le seul canal de
+    publication existant, ce que la carte de l'offre indique alors explicitement — sur
+    France Travail, Adzuna ou le portail Choisir le service public.
+  </p>
+  <p>
+    Ces sites ont leurs propres politiques de confidentialité et déposent leurs propres
+    cookies. JJ n'a aucun contrôle sur eux et ne leur transmet aucune information à votre
+    sujet : votre navigateur s'y connecte directement, comme si vous aviez saisi l'adresse
+    vous-même.
+  </p>
+
+  <h2>8. Vos droits</h2>
+  <p>
+    Vous disposez, sur les données vous concernant, des droits suivants : <strong>accès,
+    rectification, effacement, limitation du traitement, opposition</strong> et
+    <strong>portabilité</strong>. Vous pouvez également définir des directives relatives au
+    sort de vos données après votre décès.
+  </p>
+  <p>
+    Pour les exercer, écrivez à <span class="a-completer">VOTRE ADRESSE E-MAIL DE CONTACT</span>.
+    Une réponse vous sera apportée dans un délai d'un mois, prolongeable de deux mois en cas
+    de demande complexe. Une preuve d'identité pourra être demandée en cas de doute
+    raisonnable sur l'identité du demandeur.
+  </p>
+  <p>
+    En pratique, JJ ne détenant ni compte ni profil, la plupart de ces droits portent sur
+    les journaux de l'hébergeur ou sur un message que vous nous auriez adressé.
+  </p>
+  <p>
+    Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous
+    pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et
+    des libertés :
+  </p>
+  <p>
+    CNIL — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 —
+    <a href="https://www.cnil.fr/fr/plaintes" rel="noopener noreferrer" target="_blank">www.cnil.fr/fr/plaintes</a>
+  </p>
+
+  <h2>9. Sécurité</h2>
+  <p>
+    Le site est servi exclusivement en HTTPS. Il ne comporte ni base de données, ni espace
+    d'administration, ni formulaire : les offres sont publiées sous forme de fichiers
+    statiques régénérés une fois par jour. Cette architecture réduit la surface d'exposition
+    et fait qu'aucune donnée d'utilisateur n'est stockée par JJ.
+  </p>
+
+  <h2>10. Modifications</h2>
+  <p>
+    Cette politique peut être modifiée pour refléter une évolution du site ou de la
+    réglementation. La date de dernière mise à jour figure en haut de cette page.
+  </p>
+
+  <h2>11. Mentions légales</h2>
+  <p>
+    Les informations relatives à l'éditeur et à l'hébergeur figurent dans les
+    <a href="mentions-legales.html">mentions légales</a>.
+  </p>
+</main>
+
+<footer class="site">
+  JJ — Junior Job. Stages, alternances et CDI/CDD 0-3 ans en finance, en France.
+  <nav>
+    <a href="./">Les offres</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="confidentialite.html">Politique de confidentialité</a>
+    <a href="offres.xml">Flux RSS</a>
+  </nav>
+</footer>
+
+</body>
+</html>

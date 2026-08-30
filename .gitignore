@@ -1,0 +1,32 @@
+# Secrets — ne JAMAIS publier
+.env
+.env.*
+!.env.example
+
+# Généré par le pipeline
+ingestion/state.json
+
+# Divers
+node_modules/
+*.log
+
+# Journaux des passages quotidiens
+journaux/
+ingestion/cache-avature.json
+
+# Fichiers de travail du sourcing : jamais publiés, ils seraient servis
+# publiquement par l'hébergeur statique.
+detection*.txt
+sonde-*.txt
+portails.txt
+*.log
+swagger*.json
+
+# Pages de mise au point récupérées pendant l'analyse des ATS
+am2.html
+amjob.html
+ey2.html
+eyjob.html
+
+# Configuration locale de l'éditeur
+.claude/

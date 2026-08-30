@@ -1,0 +1,73 @@
+# Les maisons qui sortent le plus de stages / alternances / CDI juniors en France.
+# Format : Nom affiché | slugs à essayer (le 1er sert de tenant) | noms de site Workday à essayer
+#
+# --- Big 4 / conseil ---------------------------------------------------------
+PwC France | pwc, pwcfr | Global_Experienced_Careers, PwC_Professional_Careers, Campus
+Accenture France | accenture | AccentureCareers
+Wavestone | wavestone | Wavestone_Careers
+Alvarez & Marsal | alvarezandmarsal, alvarezmarsal | AM_Careers
+Kearney | kearney | Kearney_Careers
+Bain & Company | bain, bainandcompany | Bain_Careers
+Eight Advisory | eightadvisory, 8advisory |
+BDO France | bdo, bdofrance |
+# --- Banques / financement ---------------------------------------------------
+La Banque Postale | labanquepostale, lbp |
+Boursobank | boursorama, boursobank |
+Oddo BHF | oddobhf, oddo |
+Edmond de Rothschild | edmondderothschild, edr | EdR_Careers
+Kepler Cheuvreux | keplercheuvreux |
+Bpifrance | bpifrance |
+Société Générale | societegenerale, sg | SG_Careers
+BNP Paribas | bnpparibas, bnpp | BNPP_Careers
+Crédit Agricole | creditagricole, ca |
+# --- Assurance ---------------------------------------------------------------
+Generali France | generali | Generali_Careers
+Allianz France | allianz | Allianz_Careers
+Covéa | covea |
+MAIF | maif |
+MACIF | macif |
+Malakoff Humanis | malakoffhumanis, malakoff |
+AG2R La Mondiale | ag2rlamondiale, ag2r |
+Verlingue | verlingue |
+# --- Gestion / private equity ------------------------------------------------
+Carmignac | carmignac |
+Comgest | comgest |
+La Financière de l'Échiquier | lfde, echiquier |
+Eurazeo | eurazeo | Eurazeo_Careers
+Antin Infrastructure Partners | antin, antininfrastructure |
+Astorg | astorg |
+Sienna Investment Managers | sienna, siennaim |
+Ofi Invest | ofiinvest, ofi |
+# --- Grands groupes (finance d'entreprise, gros volumes de stages) ------------
+TotalEnergies | totalenergies, total | TotalEnergies_Careers
+EDF | edf, edfgroup | EDF_Careers
+Engie | engie | ENGIE_Careers
+Orange | orange, orangesa | Orange_Careers
+Vinci | vinci |
+Bouygues | bouygues |
+Safran | safran | Safran_Careers
+Schneider Electric | schneiderelectric, schneider | Global_Career_Site
+Dassault Systèmes | dassaultsystemes, 3ds | DassaultSystemes_Careers
+Danone | danone | Danone_Careers
+Carrefour | carrefour |
+Renault Group | renault, groupe-renault | Renault_Careers
+Stellantis | stellantis | Stellantis_Careers
+Veolia | veolia | Veolia_Careers
+Alstom | alstom | Alstom_Careers
+Legrand | legrand |
+Publicis Groupe | publicisgroupe, publicis |
+Sopra Steria | soprasteria, sopra | SopraSteria_Careers
+Capgemini | capgemini | Capgemini_Careers
+Bureau Veritas | bureauveritas, bv |
+Kering | kering | Kering_Careers
+Hermès | hermes, hermesparis |
+Pernod Ricard | pernodricard | PernodRicard_Careers
+Michelin | michelin |
+Vivendi | vivendi |
+Bolloré | bollore |
+Eiffage | eiffage |
+Saint-Gobain | saintgobain |
+Air France KLM | airfranceklm, airfrance |
+SNCF | sncf |
+RATP | ratp |
+La Poste | laposte, groupelaposte |

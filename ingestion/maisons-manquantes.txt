@@ -1,0 +1,56 @@
+# Maisons de la liste de référence qui ne sortent aucune offre : file d'attente
+# des connecteurs à trouver. Format du sondeur : Nom | slugs | sites Workday.
+Morgan Stanley | morganstanley, ms | MorganStanley_Careers
+Citi | citi, citigroup | Citi_Careers
+Barclays | barclays | Barclays_Careers
+Nomura | nomura | Nomura_Careers
+Jefferies | jefferies | Jefferies_Careers
+Santander | santander | Santander_Careers
+Evercore | evercore | Evercore_Careers
+Centerview Partners | centerview |
+PJT Partners | pjt, pjtpartners |
+Perella Weinberg | perella, pwpartners |
+Houlihan Lokey | houlihanlokey, hl | HL_Careers
+DC Advisory | dcadvisory, daiwa |
+Bryan Garnier | bryangarnier |
+Apax Partners | apax, apaxpartners |
+Wendel | wendel, wendelgroup |
+Bridgepoint | bridgepoint |
+Siparex | siparex |
+BlackRock | blackrock | BlackRock_Professional
+Schroders | schroders | Schroders_Careers
+Euronext | euronext |
+Euroclear | euroclear |
+Moodys | moodys | Moodys_Careers
+MSCI | msci | MSCI_Careers
+Morningstar | morningstar |
+Caisse des Depots | caissedesdepots, cdc, banquedesterritoires |
+Banque de France | banquedefrance, bdf |
+AMF | amf, amffrance |
+LVMH | lvmh | LVMH_Careers
+Safran | safran, safrangroup | Safran_Careers
+Schneider Electric | schneiderelectric, se | Global_Career_Site
+Kering | kering | Kering_Careers
+Michelin | michelin, michelinhr |
+Saint-Gobain | saintgobain |
+Pernod Ricard | pernodricard | PernodRicard_Careers
+Accor | accor | Accor_Careers
+Wavestone | wavestone |
+Accuracy | accuracy |
+McKinsey | mckinsey | McKinsey_Careers
+BCG | bcg, bostonconsultinggroup | BCG_Careers
+Generali France | generali, generalifrance |
+AG2R La Mondiale | ag2rlamondiale, ag2r, lamondiale |
+La Banque Postale | labanquepostale, lbp |
+Eurazeo | eurazeo |
+Antin Infrastructure | antin, antinip |
+Astorg | astorg |
+Carmignac | carmignac |
+Oddo BHF | oddobhf, oddo |
+Tikehau Capital | tikehau, tikehaucapital |
+Bpifrance | bpifrance |
+Spendesk | spendesk |
+Swile | swile |
+PayFit | payfit |
+Ledger | ledger |
+Younited | younited |

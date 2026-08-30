@@ -1,0 +1,53 @@
+# Mise à jour quotidienne des offres JJ (variante hébergée).
+#
+# Utile le jour où le site est publié : le PC n'a plus besoin d'être allumé.
+# Les identifiants vont dans Settings > Secrets and variables > Actions.
+name: Mise à jour quotidienne
+
+on:
+  schedule:
+    - cron: '30 4 * * *' # 06h30 heure de Paris (été) / 05h30 (hiver)
+  workflow_dispatch: {}   # bouton "Run workflow" pour un passage manuel
+
+permissions:
+  contents: write
+
+jobs:
+  ingestion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # state.json porte la mémoire des passages (firstSeenAt, missedRuns) :
+      # sans lui, aucune offre ne serait jamais "nouvelle" ni jamais retirée.
+      - name: Restaurer la mémoire des passages et le cache des fiches
+        uses: actions/cache@v4
+        with:
+          path: |
+            ingestion/state.json
+            ingestion/cache-avature.json
+          key: jj-state-${{ github.run_id }}
+          restore-keys: jj-state-
+
+      - name: Ingestion
+        env:
+          FRANCE_TRAVAIL_CLIENT_ID: ${{ secrets.FRANCE_TRAVAIL_CLIENT_ID }}
+          FRANCE_TRAVAIL_CLIENT_SECRET: ${{ secrets.FRANCE_TRAVAIL_CLIENT_SECRET }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          LBA_API_TOKEN: ${{ secrets.LBA_API_TOKEN }}
+        run: node ingestion/pipeline.js
+
+      - name: Publier offres.js
+        run: |
+          git config user.name  "JJ bot"
+          git config user.email "bot@users.noreply.github.com"
+          # state.json et le cache sont gardés par actions/cache, pas par git
+          # (ils sont dans .gitignore).
+          git add offres.js offres.xml
+          git diff --staged --quiet || git commit -m "Offres du $(date +%F)"
+          git push

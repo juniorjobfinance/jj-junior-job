@@ -1,0 +1,407 @@
+# Vague 2 — maisons dont le MÉTIER est la finance (banque, assurance, gestion,
+# private equity, investissements alternatifs, conseil/risk, immobilier
+# financier, énergie/trading). Ce sont celles qui profitent le plus du filtre
+# "employeur natif finance" : chez elles, un poste "Analyste" ou "Consultant"
+# est par nature un poste finance.
+#
+# Usage : node ingestion/detect-ats.js --file ingestion/entreprises2.txt
+
+# --- Gestion d'actifs / gestion privée (élargi) ---
+Rothschild Martin Maurel
+Neuflize OBC
+Indosuez Wealth Management
+BNP Paribas Wealth Management
+Societe Generale Private Banking
+Milleis
+Oddo BHF
+Financiere Arbevel
+Ecofi
+Federal Finance
+Credit Mutuel Asset Management
+Ofi Invest
+Swiss Life Gestion Privee
+Cholet Dupont
+Portzamparc
+Turgot Asset Management
+Haas Gestion
+Talence Gestion
+Amplegest
+Pictet
+Lombard Odier
+Julius Baer
+Union Bancaire Privee
+Degroof Petercam France
+Quilvest
+Financiere de l Arc
+Athymis Gestion
+Dorval Asset Management
+Tailor Asset Management
+Sanso Investment Solutions
+Trusteam Finance
+Metropole Gestion
+Sextant
+Amiral Gestion
+Indépendance AM
+Gay Lussac Gestion
+Pluvalca
+Financiere Tiepolo
+Prevaal Finance
+Nova Asset Management
+
+# --- Private Equity / Venture / Dette privée / Infra ---
+Antin Infrastructure
+Infravia Capital Partners
+Ardian Infrastructure
+Mirova Infrastructure
+RGreen Invest
+Tikehau Investment Management
+Eurazeo Private Debt
+Idinvest Partners
+Bpifrance Investissement
+Five Arrows
+Capzanine
+Tikehau Ace Capital
+Seven2
+Astorg Partners
+PAI
+Cinven France
+CVC France
+EQT France
+KKR France
+Blackstone France
+Carlyle France
+Advent International France
+Permira France
+Hg Capital France
+TowerBrook France
+Oaktree France
+Apollo France
+Brookfield France
+Antin
+Latour Capital
+Charterhouse France
+Sagard NewGen
+Montagu France
+Bridgepoint Development Capital
+IdiCo
+21 Invest
+Initiative et Finance
+Abenex
+Azulis Capital
+B and Capital
+Capital Export
+Careit
+Cerea Capital
+Crédit Mutuel Equity
+Edmond de Rothschild Private Equity
+Eren Industries
+Esfin Gestion
+Extendam
+Florac
+Fondations Capital
+Geneo Capital
+Hivest Capital
+Innovafonds
+Isatis Capital
+Kartesia
+MBO Plus
+Mérieux Equity Partners
+Motion Equity
+Nextstage
+Ouest Croissance
+Parquest Capital
+Pechel
+Perceva
+Raise
+Sofinnova Partners
+Sparring Capital
+Trocadero Capital
+UI Investissement
+Unexo
+Winch Capital
+Ekkio
+Andera Acto
+Anaxago Capital
+Kerala Ventures
+Otium Capital
+Jolt Capital
+Bpifrance Large Venture
+Eurazeo Growth Fund
+Korelya Capital
+Cathay Innovation
+Iris Capital
+Idinvest Digital
+Truffle Capital
+Innovacom
+Omnes
+Seventure Partners
+Supernova Invest
+Elaia Partners
+Alter Equity
+Citizen Capital
+Investir and Plus
+Ring Capital Impact
+Makesense Ventures
+Aster Capital
+Demeter Partners
+Emertec
+Starquest
+Techstars Paris
+Station F
+Kima
+Frst Capital
+Galion Ventures
+Axeleo Capital
+Newfund Capital
+Ventech France
+Alven Capital
+Serena Capital
+Partech Ventures
+Daphni Purple
+Breega Capital
+Educapital Fund
+Brighteye Ventures
+Global Founders Capital France
+
+# --- Assurance / courtage / réassurance ---
+AXA France
+AXA Partners
+AXA XL France
+Allianz Trade
+Euler Hermes
+Coface
+Atradius France
+Groupama Assurances Mutuelles
+Generali Investments France
+Sogecap
+Cardif
+BNP Paribas Cardif
+Predica
+Spirica
+Suravenir
+Ageas France
+Aema Groupe
+Aesio Mutuelle
+Macsf
+Mutuelle Generale
+Mgen
+Unofi
+Neoliane
+Assurly
+Luko Insurance
+Alan Assurance
+Acheel Assurance
+Lovys Insurance
+Wakam Insurance
+Seyna Insurtech
+Descartes Underwriting France
+Stello Assurance
+Orus Assurance
+Simplea
+Yomoni Assurance
+Placement Direct
+Linxea
+Altaprofits
+Meilleurplacement
+Assurancevie com
+Gan Assurances
+Thelem Assurances
+Prepar Vie
+Monceau Assurances
+La Mondiale
+Verspieren
+Siaci Saint Honore
+Marsh France
+Aon France
+Willis Towers Watson France
+Gallagher France
+Bessé
+Filhet Allard
+Assurances Pilliot
+Roederer
+Adelaide
+Satec
+Ciprés Assurances
+April Partenaires
+Solly Azar
+Zephir Assurances
+
+# --- Banques (élargi) ---
+Banque Delubac
+Banque Hottinguer
+Banque Martin Maurel
+Banque Michel Inchauspe
+Banque Chalus
+Banque Populaire Val de France
+Banque Populaire Bourgogne
+Banque Populaire Mediterranee
+Caisse d Epargne Aquitaine
+Caisse d Epargne Cote d Azur
+Caisse d Epargne Provence
+Banque de Savoie
+Credit Agricole Ile de France
+Credit Agricole Centre Est
+Credit Agricole Alpes Provence
+Credit Agricole Nord de France
+Credit Agricole Toulouse
+Credit du Maroc
+Credit Foncier
+Cre Setr
+Banque Kolb
+Banque Laydernier
+Banque Nuger
+Banque Pouyanne
+Banque Rhone Alpes
+Banque Tarneaud
+Societe Marseillaise de Credit
+Banque Courtois
+Banque Dupuy de Parseval
+Caisse Regionale
+BforBank
+Ma French Bank
+Orange Bank
+Green Got
+Helios
+OnlyOne
+Bunq France
+N26 France
+Revolut France
+Wise France
+Qonto Business
+
+# --- Conseil / audit / risk / transaction services (élargi) ---
+Mazars
+Grant Thornton France
+Baker Tilly France
+Crowe France
+Moore France
+Nexia France
+PKF France
+UHY France
+Sofidec
+Exponens
+Aca Nexia
+Advolis Orfis
+Deloitte Finance
+EY Parthenon
+Strategy and
+Monitor Deloitte
+PwC Strategy
+KPMG Advisory
+Sia Conseil
+Colombus Consulting
+Ares and Co
+Aurexia Consulting
+Chappuis Halder and Co
+Eurogroup
+Exton
+Galitt
+Harwell Management
+Headlink Partners
+Initio
+Kea Partners
+Konvergence
+Margo Consulting
+Meltis
+Micropole
+Nexialog Consulting
+Optimind Winter
+Periclès Group
+Quanteam
+Redbridge
+Reply France
+Solucom
+Talan
+Tallis Consulting
+Vertone Conseil
+Weave
+Ylios
+Alpha FMC France
+Capco France
+Sopra Banking Software
+Murex
+Finastra France
+ION Group France
+Calypso Technology
+Kyriba France
+Linedata
+Sungard France
+SS and C France
+Simcorp France
+Vermeg
+Axway
+Sopra HR
+
+# --- Immobilier financier / SCPI / asset management immo ---
+Amundi Immobilier
+AEW Ciloger
+BNP Paribas REIM
+La Francaise REM
+Perial Asset Management
+Sofidy Gestion
+Primonial REIM
+Corum Asset Management
+Iroko Zen
+Novaxia
+Atland Voisin
+Advenis REIM
+Fiducial Gerance
+Paref Gestion
+Norma Capital
+Inter Gestion
+Voisin
+Kyaneos
+Remake Asset Management
+Alderan
+Mata Capital
+Swiss Life REIM
+Deka France
+Union Investment France
+Patrizia France
+Hines France
+Tishman Speyer France
+Ivanhoe Cambridge France
+Allianz Real Estate France
+Generali Real Estate France
+Gecina Asset
+Icade Promotion
+Altarea Cogedim
+Emerige Residentiel
+Ogic
+Pitch Immo
+Marignan
+Bouygues Immobilier Grand Paris
+Vinci Immobilier Promotion
+Eiffage Immobilier
+
+# --- Énergie / trading matières premières (finance de marché) ---
+TotalEnergies Trading
+Engie Global Markets
+EDF Trading
+Trafigura France
+Vitol France
+Gunvor France
+Mercuria France
+Glencore France
+Louis Dreyfus Company
+Sucden
+Soufflet Negoce
+InVivo Trading
+Axpo France
+Alpiq France
+Statkraft France
+Uniper France
+RWE France
+Vattenfall France
+Eneco France
+Total Direct Energie
+Voltalia
+Neoen
+Boralex France
+Akuo Energy
+Reden Solar
+Qair
+Valeco
+Sonnedix France
+Photosol
+TSE Energy

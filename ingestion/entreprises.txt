@@ -1,0 +1,523 @@
+# Liste des maisons cibles JJ (PROJET.md §15, élargie).
+# Une entreprise par ligne. Lignes vides et # ignorées.
+# Usage : node ingestion/detect-ats.js --file ingestion/entreprises.txt
+
+# --- BFI / banques d'investissement ---
+BNP Paribas
+Societe Generale
+Natixis
+Credit Agricole CIB
+Goldman Sachs
+JPMorgan
+Morgan Stanley
+Bank of America
+Citi
+Barclays
+Deutsche Bank
+HSBC
+UBS
+Nomura
+Jefferies
+Oddo BHF
+Kepler Cheuvreux
+Exane
+
+# --- M&A / conseil financier (boutiques) ---
+Rothschild
+Lazard
+Messier Associes
+Centerview
+Perella Weinberg
+DC Advisory
+Alantra
+Bryan Garnier
+Natixis Partners
+Cambon Partners
+Clipperton
+Transaction R
+Sycomore Corporate Finance
+Degroof Petercam
+Canaccord Genuity
+Houlihan Lokey
+Evercore
+PJT Partners
+Moelis
+Raymond James
+Edmond de Rothschild Corporate Finance
+Financiere de Courcelles
+Sodica
+Aelios
+Largillière Finance
+Invest Corporate Finance
+Edwin Partners
+Callisto
+Atout Capital
+Nfinance
+
+# --- Gestion d'actifs ---
+Amundi
+AXA Investment Managers
+BNP Paribas Asset Management
+Ostrum Asset Management
+Mirova
+DNCA Finance
+Carmignac
+Comgest
+La Financiere de l Echiquier
+Edmond de Rothschild
+Groupama Asset Management
+Tikehau
+Sycomore Asset Management
+Lazard Freres Gestion
+La Banque Postale Asset Management
+CPR Asset Management
+Rothschild Martin Maurel
+Lyxor
+Candriam
+Eleva Capital
+Moneta Asset Management
+Varenne Capital
+Montpensier Finance
+Oddo BHF Asset Management
+Meeschaert
+Palatine Asset Management
+Tocqueville Finance
+Erasmus Gestion
+Mandarine Gestion
+Clartan
+
+# --- Private Equity / VC / Infrastructure ---
+Ardian
+Eurazeo
+PAI Partners
+Antin Infrastructure Partners
+Meridiam
+Astorg
+Sagard
+Andera Partners
+LBO France
+Wendel
+Bpifrance
+Cathay Capital
+IK Partners
+Siparex
+Partech
+Alven
+Elaia
+Isai
+Serena
+Idinvest
+Apax Partners
+Activa Capital
+Ekkio Capital
+Motion Equity Partners
+Naxicap
+Ciclad
+Turenne Capital
+Weinberg Capital Partners
+Qualium Investissement
+Chequers Capital
+Argos Wityu
+Equistone
+Montefiore Investment
+Keensight Capital
+Eurazeo Growth
+Bridgepoint
+Cerea Partners
+Unigrains
+Omnes Capital
+Demeter
+Ring Capital
+Revaia
+Frst
+Kima Ventures
+Daphni
+Breega
+Newfund
+XAnge
+Ventech
+360 Capital
+Educapital
+Founders Future
+Singular
+Blast Club
+Speedinvest
+Eurazeo Venture
+
+# --- Assurance / réassurance / mutuelles ---
+AXA
+Allianz France
+CNP Assurances
+Covea
+Groupama
+Generali France
+Scor
+AG2R La Mondiale
+Malakoff Humanis
+MACIF
+MAIF
+Abeille Assurances
+Matmut
+GMF
+MAAF
+MMA
+Swiss Life France
+Aviva France
+April
+Verlingue
+Gras Savoye
+Diot Siaci
+Wakam
+Alptis
+Klesia
+Apicil
+Pro BTP
+Harmonie Mutuelle
+Mercer France
+
+# --- Audit / conseil / transaction services ---
+Deloitte
+EY
+KPMG
+PwC
+Forvis Mazars
+Grant Thornton
+BDO
+RSM
+Eight Advisory
+Accuracy
+Advolis
+Oliver Wyman
+McKinsey
+BCG
+Bain
+Roland Berger
+Kearney
+Alvarez and Marsal
+Alix Partners
+Sia Partners
+Wavestone
+Julhiet Sterwen
+Square Management
+Eurogroup Consulting
+Exton Consulting
+Vertone
+Chappuis Halder
+Aurexia
+Nexialog
+Optimind
+Actuaris
+Galea
+Addactis
+Fidal
+Baker Tilly
+Exco
+In Extenso
+Fiducial
+Cerfrance
+Compagnie Fiduciaire
+Orcom
+Audit Conseil Expertise
+Crowe
+
+# --- Banque de détail / groupes bancaires ---
+Credit Mutuel
+CIC
+La Banque Postale
+BoursoBank
+Fortuneo
+Hello bank
+Banque Populaire
+Caisse d Epargne
+BRED
+Banque Palatine
+Credit Cooperatif
+Banque Courtois
+Banque Rhone Alpes
+Credit du Nord
+LCL
+Milleis Banque
+Banque Neuflize OBC
+Banque Transatlantique
+Delubac
+Banque Wormser Freres
+Bred Banque Populaire
+Arkea
+Credit Mutuel Arkea
+Casden
+Banque de Savoie
+Nickel
+Monabanq
+
+# --- Fintech / paiement / assurtech ---
+Qonto
+Swile
+Pennylane
+Spendesk
+Alan
+Ledger
+Younited
+October
+Sumeria
+Shine
+Payfit
+Libeo
+Defacto
+Memo Bank
+Kyriba
+Silvr
+Karmen
+Lydia
+Ageras
+Agicap
+Upflow
+Mooncard
+Regate
+Fygr
+Dougs
+Indy
+Georges
+Tiime
+Yousign
+Lucca
+Sellsy
+Axonaut
+Pigment
+Sesamm
+Kili Technology
+Descartes Underwriting
+Akur8
+Zelros
+Shift Technology
+Luko
+Leocare
+Acheel
+Seyna
+Wakam
+Lovys
+Orus
+Stello
+Trustpair
+Sis ID
+Fintecture
+Swan
+Treezor
+Bridge
+Budget Insight
+Powens
+Lemonway
+MangoPay
+HiPay
+Slimpay
+Younited Credit
+Franfinance
+Floa
+Oney
+Cofidis
+Sofinco
+Cetelem
+Younited Business
+Alma
+Klarna France
+Pledg
+Joe
+Silvr
+Karmen
+Unlimitd
+Hero
+Libeo
+Qare
+Finary
+Ramify
+Cashbee
+Goodvest
+Yomoni
+Nalo
+Mon Petit Placement
+Anaxago
+Wiseed
+Homunity
+Fundimmo
+ClubFunding
+Lendopolis
+October
+Tudigo
+Sowefund
+Baltis
+La Premiere Brique
+Raizers
+Bricks
+Iroko
+Corum
+Primaliance
+Louve Invest
+Meilleurtaux
+Empruntis
+Pretto
+Papernest
+Helloprêt
+Ymanci
+Cafpi
+Vousfinancer
+Artemis Courtage
+
+# --- Immobilier financier / SCPI / foncières ---
+Unibail Rodamco Westfield
+Klepierre
+Gecina
+Covivio
+Icade
+Altarea
+Nexity
+Bouygues Immobilier
+Kaufman and Broad
+Vinci Immobilier
+Emerige
+Sogeprom
+Cogedim
+Perial
+Sofidy
+Amundi Immobilier
+Primonial
+La Francaise
+Swiss Life Asset Managers France
+BNP Paribas Real Estate
+CBRE France
+JLL France
+Cushman and Wakefield France
+Savills France
+Knight Frank France
+Colliers France
+Arthur Loyd
+Foncia
+Nexity Property Management
+Ceetrus
+
+# --- Corporate / DAF (grands groupes) ---
+TotalEnergies
+LVMH
+L Oreal
+Airbus
+Sanofi
+Kering
+Schneider Electric
+Vinci
+Danone
+Air Liquide
+Safran
+Michelin
+Renault
+Stellantis
+Orange
+Thales
+Capgemini
+Publicis
+Carrefour
+Saint Gobain
+EDF
+Engie
+Bouygues
+Veolia
+Pernod Ricard
+Hermes
+Dassault Systemes
+Legrand
+Sodexo
+Alstom
+Accor
+Arkema
+Bureau Veritas
+Sopra Steria
+Atos
+Worldline
+Ingenico
+Edenred
+Teleperformance
+Eiffage
+SPIE
+Rexel
+Elis
+Verallia
+Imerys
+Nexans
+Faurecia
+Forvia
+Valeo
+Plastic Omnium
+Ubisoft
+Believe
+Criteo
+OVHcloud
+Dassault Aviation
+Naval Group
+MBDA
+Framatome
+Orano
+Suez
+Derichebourg
+Seche Environnement
+Air France KLM
+SNCF
+RATP
+Aeroports de Paris
+Getlink
+CMA CGM
+Geodis
+Bollore
+Rubis
+Vallourec
+Eramet
+Solvay France
+Clariane
+Korian
+Elior
+Fnac Darty
+Casino
+Auchan
+Leclerc
+Intermarche
+Systeme U
+Decathlon
+Leroy Merlin
+Adeo
+Kingfisher France
+Boulanger
+Cdiscount
+Veepee
+ManoMano
+Back Market
+Doctolib
+BlaBlaCar
+Deezer
+Dailymotion
+Meero
+Contentsquare
+Dataiku
+Mirakl
+Algolia
+Sendinblue
+Brevo
+Talend
+Younited
+
+# --- Finance publique / régulateurs / institutions ---
+Banque de France
+AMF
+ACPR
+Caisse des Depots
+Agence France Tresor
+DG Tresor
+CDC Habitat
+Bpifrance
+Caisse des Depots et Consignations
+Agence Francaise de Developpement
+Proparco
+Banque Europeenne d Investissement
+Societe du Grand Paris
+Action Logement
+UNEDIC
+ACOSS
+URSSAF
+Agirc Arrco
+CNAV
+Caisse des Francais de l Etranger
