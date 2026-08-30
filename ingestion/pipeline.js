@@ -281,6 +281,9 @@ const SECTEUR_PAR_MAISON = {
   'Banque de France': 'Finance publique', 'AMF': 'Finance publique',
   'ACPR': 'Finance publique', 'Caisse des Dépôts': 'Finance publique',
   'Agence France Trésor': 'Finance publique',
+  'Talan': 'Audit & conseil', 'Roland Berger': 'Audit & conseil', 'BDO': 'Audit & conseil',
+  'Marsh McLennan': 'Assurance', 'Verlingue': 'Assurance', 'Coface': 'Assurance',
+  'Kepler Cheuvreux': 'Banque', 'LSEG': 'Banque',
   'Qonto': 'Fintech', 'Swile': 'Fintech', 'Pennylane': 'Fintech',
   'Spendesk': 'Fintech', 'Alan': 'Fintech', 'Ledger': 'Fintech', 'Younited': 'Fintech',
 };

@@ -1,7 +1,8 @@
 # ---------------------------------------------------------------------------
-# LES 100 GRANDES MAISONS — liste de référence de JJ (phase 1)
+# LES GRANDES MAISONS — liste de référence de JJ (phase 1)
 #
-# Liste arrêtée par Victor. Elle décide de ce qui apparaît sur le site : une
+# Liste arrêtée par Victor : les 100 maisons de départ, plus celles ajoutées
+# depuis. Elle décide de ce qui apparaît sur le site : une
 # offre chez un employeur absent d'ici est écartée par le pipeline.
 #
 # Format :   Nom affiché | motif de reconnaissance (expression régulière)
@@ -36,6 +37,8 @@ HSBC France              | hsbc
 Natixis                  | natixis(?! ?(im|investment))
 Crédit Agricole CIB      | credit agricole cib|ca-?cib
 Oddo BHF                 | oddo
+Kepler Cheuvreux         | kepler
+LSEG                     | ^lseg\b|london stock exchange|refinitiv
 
 # === Boutiques M&A ==========================================================
 Rothschild & Co          | rothschild(?! ?& ?co gestion)
@@ -88,9 +91,15 @@ BCG                      | ^bcg\b|boston consulting
 Bain                     | ^bain\b
 Oliver Wyman             | oliver wyman
 Sia Partners             | ^sia\b
+Talan                    | ^talan\b
+Roland Berger            | roland berger
+BDO                      | ^bdo\b
 
 # === Assurance ==============================================================
 Matmut                   | matmut
+Marsh McLennan           | marsh|mercer|guy carpenter
+Verlingue                | verlingue
+Coface                   | coface
 MAIF                     | ^maif\b|mutuelle assurance instituteur
 Macif                    | ^macif\b|^aema\b|abeille assurance
 Malakoff Humanis         | malakoff
@@ -139,6 +148,10 @@ Thales                   | thales
 Capgemini                | capgemini
 Hermès                   | ^hermes\b
 Pernod Ricard            | pernod
+Accor                    | ^accor\b
+Air France KLM           | air france|^klm\b
+Chanel                   | ^chanel\b
+Altarea                  | altarea
 
 # === Institutions publiques =================================================
 Banque de France         | banque de france
