@@ -846,7 +846,7 @@
     // le menu n'existe), pas du DOM.
     // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
     // ce sont des non-réponses, pas des destinations qu'on choisit.
-    var FOURRE_TOUT = ['Autres villes', 'Lieu non précisé'];
+    var FOURRE_TOUT = ['Autres villes', 'Département seul', 'Lieu non précisé'];
     var zones = comptages(base, zoneDe).sort(function (a, b) {
       var fa = FOURRE_TOUT.indexOf(a[0]) === -1 ? 0 : 1;
       var fb = FOURRE_TOUT.indexOf(b[0]) === -1 ? 0 : 1;

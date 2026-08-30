@@ -6,12 +6,10 @@ name: Mise à jour quotidienne
 
 on:
   schedule:
-    # Minuit et midi, heure de Paris. GitHub ne comprend que l'UTC et ignore
-    # l'heure d'été : ces horaires tombent juste d'avril à octobre, et une
-    # heure plus tard le reste de l'année (01h et 13h). Sans conséquence pour
-    # un job board — personne ne guette la bascule à la minute près.
-    - cron: '0 22 * * *' # minuit à Paris (heure d'été)
-    - cron: '0 10 * * *' # midi à Paris (heure d'été)
+    # Une fois par jour, le matin. GitHub ne comprend que l'UTC et ignore
+    # l'heure d'été : 04h30 UTC vaut 06h30 à Paris d'avril à octobre, et 05h30
+    # le reste de l'année.
+    - cron: '30 4 * * *'
   workflow_dispatch: {}   # bouton "Run workflow" pour un passage manuel
 
 permissions:
@@ -77,14 +75,48 @@ jobs:
         env:
           HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: |
+          resume() { echo "$1" >> "$GITHUB_STEP_SUMMARY"; echo "$1"; }
+
           if [ -z "$HOOK" ]; then
-            echo "::warning::Secret VERCEL_DEPLOY_HOOK_URL absent — le site ne sera pas redéployé."
-            exit 0
+            resume "### ❌ Secret VERCEL_DEPLOY_HOOK_URL absent"
+            resume "Le dépôt ne contient aucun secret sous ce nom **exact**."
+            resume "À créer dans Settings > Secrets and variables > Actions."
+            exit 1
           fi
-          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$HOOK")
-          echo "Deploy Hook appelé, réponse HTTP $code"
-          # La réponse est vide et sans intérêt ; seul le code compte.
+
+          # Une URL de Deploy Hook ressemble toujours à
+          # https://api.vercel.com/v1/integrations/deploy/prj_XXXX/YYYY
+          # Vérifier sa forme AVANT l'appel évite de confondre « URL mal collée »
+          # et « Vercel refuse » — deux problèmes aux corrections opposées.
+          case "$HOOK" in
+            https://api.vercel.com/v1/integrations/deploy/*) : ;;
+            *)
+              resume "### ❌ L'URL du secret n'a pas la forme d'un Deploy Hook Vercel"
+              resume "Attendu : \`https://api.vercel.com/v1/integrations/deploy/prj_.../...\`"
+              resume "Longueur reçue : ${#HOOK} caractères."
+              resume "Cause la plus fréquente : ce n'est pas l'URL du hook mais celle du projet."
+              exit 1
+              ;;
+          esac
+
+          reponse=$(curl -s -w "\n%{http_code}" -X POST "$HOOK")
+          code=$(printf '%s' "$reponse" | tail -n1)
+          corps=$(printf '%s' "$reponse" | sed '$d')
+
           case "$code" in
-            2*) echo "Redéploiement demandé." ;;
-            *)  echo "::error::Le Deploy Hook a répondu $code."; exit 1 ;;
+            2*)
+              resume "### ✅ Redéploiement Vercel demandé (HTTP $code)"
+              ;;
+            403|404)
+              resume "### ❌ Vercel refuse le hook (HTTP $code)"
+              resume "Le hook a été supprimé, ou l'URL est tronquée."
+              resume "Réponse : \`$corps\`"
+              resume "→ Recréez-le dans Vercel > Settings > Git > Deploy Hooks, et recollez l'URL entière."
+              exit 1
+              ;;
+            *)
+              resume "### ❌ Le Deploy Hook a répondu HTTP $code"
+              resume "Réponse : \`$corps\`"
+              exit 1
+              ;;
           esac

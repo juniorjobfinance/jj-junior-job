@@ -30,12 +30,10 @@ const SITE_URL = 'https://juniorjobfinance.vercel.app';
 // Un canonique absent pendant ce nombre de passages consécutifs est retiré
 // (PROJET.md §8.6 : "2-3 passages consécutifs").
 //
-// Ce compteur se mesure en PASSAGES, pas en jours. Avec deux passages
-// quotidiens (minuit et midi), la valeur 3 retirerait une offre après seulement
-// 36 heures d'absence — une source qui tombe une journée suffirait à vider des
-// maisons entières. On compte donc 6 passages, soit les mêmes trois jours de
-// tolérance qu'avec un passage par jour.
-const MAX_MISSED_RUNS = 6;
+// Ce compteur se mesure en PASSAGES, pas en jours : il doit suivre la fréquence
+// du cron. Avec un passage quotidien, 3 passages valent trois jours de
+// tolérance — de quoi encaisser une source indisponible sans vider le site.
+const MAX_MISSED_RUNS = 3;
 
 // Âge maximum d'une offre. Deux seuils, parce que "vieille" ne veut pas dire
 // la même chose selon d'où vient l'annonce.
@@ -327,6 +325,13 @@ const GRAND_PARIS = [
   'fontenay', 'creteil', 'créteil', 'noisy', 'bobigny', 'villejuif', 'gentilly',
   'arcueil', 'cachan', 'antony', 'massy', 'palaiseau', 'saclay', 'velizy', 'vélizy',
   'guyancourt', 'versailles', 'cergy', 'nanteuil', 'roissy', 'orly', 'rungis',
+  'saint-cloud', 'garches', 'sevres', 'sèvres', 'meudon', 'chatillon', 'châtillon',
+  'bagneux', 'clamart', 'saint-mande', 'saint-mandé', 'le kremlin', 'maisons-alfort',
+  'alfortville', 'saint-maur', 'nogent', 'romainville', 'les lilas', 'pre-saint-gervais',
+  'aulnay', 'drancy', 'bondy', 'rosny', 'champigny', 'chatenay', 'châtenay',
+  'bourg-la-reine', 'sceaux', 'fresnes', 'chevilly', 'thiais', 'choisy',
+  'saint-germain-en-laye', 'poissy', 'sartrouville', 'houilles', 'bezons', 'argenteuil',
+  'la defense', 'la défense', 'saint-quentin-en-yvelines', 'evry', 'évry', 'noisiel',
 ];
 
 // Métropoles régionales (>100 000 hab. ou pôle économique majeur).
@@ -354,6 +359,34 @@ const REGIONS_ET_INCONNU = [
   'hauts-de-france', 'grand est', 'bretagne', 'normandie', 'pays de la loire',
   "provence-alpes-côte d'azur", 'paca', 'bourgogne', 'franche-comté',
   'centre-val de loire', 'corse', 'non précisé', 'remote', 'télétravail',
+];
+
+// Beaucoup de sources donnent le DÉPARTEMENT au lieu de la commune
+// ("Hauts-de-Seine", "NORD", "RHONE"). Ce n'est pas une petite ville : c'est un
+// libellé de même niveau qu'une région, et le rejeter écartait à lui seul des
+// centaines d'offres de grandes maisons — dont 53 rien que pour les
+// Hauts-de-Seine, qui est le premier bassin d'emploi financier de France.
+const DEPARTEMENTS = [
+  'ain', 'aisne', 'allier', 'alpes-maritimes', 'ardeche', 'ardèche', 'ardennes',
+  'ariege', 'ariège', 'aube', 'aude', 'aveyron', 'bouches-du-rhone',
+  'bouches-du-rhône', 'calvados', 'cantal', 'charente', 'charente-maritime',
+  'cher', 'correze', 'corrèze', "cote-d'or", "côte-d'or", "cotes-d'armor",
+  "côtes-d'armor", 'creuse', 'dordogne', 'doubs', 'drome', 'drôme', 'eure',
+  'eure-et-loir', 'finistere', 'finistère', 'gard', 'haute-garonne', 'gers',
+  'gironde', 'herault', 'hérault', 'ille-et-vilaine', 'indre', 'indre-et-loire',
+  'isere', 'isère', 'jura', 'landes', 'loir-et-cher', 'loire', 'haute-loire',
+  'loire-atlantique', 'loiret', 'lot', 'lot-et-garonne', 'lozere', 'lozère',
+  'maine-et-loire', 'manche', 'marne', 'haute-marne', 'mayenne',
+  'meurthe-et-moselle', 'meuse', 'morbihan', 'moselle', 'nievre', 'nièvre',
+  'nord', 'oise', 'orne', 'pas-de-calais', 'puy-de-dome', 'puy-de-dôme',
+  'pyrenees-atlantiques', 'pyrénées-atlantiques', 'hautes-pyrenees',
+  'hautes-pyrénées', 'pyrenees-orientales', 'pyrénées-orientales', 'bas-rhin',
+  'haut-rhin', 'rhone', 'rhône', 'haute-saone', 'haute-saône', 'saone-et-loire',
+  'saône-et-loire', 'sarthe', 'savoie', 'haute-savoie', 'paris', 'seine-maritime',
+  'seine-et-marne', 'yvelines', 'deux-sevres', 'deux-sèvres', 'somme', 'tarn',
+  'tarn-et-garonne', 'var', 'vaucluse', 'vendee', 'vendée', 'vienne',
+  'haute-vienne', 'vosges', 'yonne', 'territoire de belfort', 'essonne',
+  'hauts-de-seine', 'seine-saint-denis', 'val-de-marne', "val-d'oise",
 ];
 
 // Regroupement des lieux en zones affichables. Les sources écrivent la même
@@ -389,25 +422,54 @@ const ZONES = [
 // pas exploitable. Les ranger à part vaut mieux que les noyer dans "autres".
 const ZONE_INCONNUE = 'Lieu non précisé';
 
+// Départements franciliens : une offre "Hauts-de-Seine" est parisienne, pas
+// "autre ville".
+const DEPTS_IDF = ['hauts-de-seine', 'seine-saint-denis', 'val-de-marne',
+  "val-d'oise", 'yvelines', 'essonne', 'seine-et-marne'];
+
 function inferZone(loc) {
   const v = (loc || '').toLowerCase().trim();
   if (!v) return ZONE_INCONNUE;
   if (/t[ée]l[ée]travail|remote/.test(v)) return 'Télétravail';
   if (PARIS_RE.test(v) || GRAND_PARIS.some((c) => v.includes(c))) return 'Paris / Île-de-France';
   if (/^(ile|île)[\s-]de[\s-]france/.test(v)) return 'Paris / Île-de-France';
+  if (DEPTS_IDF.some((d) => v === d || v.startsWith(d + ','))) return 'Paris / Île-de-France';
+  // Un arrondissement seul, sans ville : c'est Paris dans l'écrasante majorité
+  // des cas, et le libellé ne permet pas de trancher autrement.
+  if (/^\d{1,2}\s*(er|e|ème|eme)\s+arrondissement/i.test(v)) return 'Paris / Île-de-France';
   for (const [zone, villes] of ZONES) {
     if (villes.some((c) => v.includes(c))) return zone;
   }
   if (REGIONS_ET_INCONNU.some((r) => v === r || v.startsWith(r + ','))) return ZONE_INCONNUE;
+  // Un département sans commune ("NORD", "RHONE") n'est pas une ville : le
+  // ranger parmi les villes tromperait le candidat, qui ne saurait pas où le
+  // poste se trouve réellement.
+  if (DEPARTEMENTS.some((d) => v === d || v.startsWith(d + ','))) return 'Département seul';
   return 'Autres villes';
+}
+
+// Cherche un nom de ville comme un MOT, pas comme une sous-chaîne : sans ça,
+// "Lillebonne" (Seine-Maritime) passait pour Lille, et "Lorient" pour Orient.
+function contientVille(libelle, ville) {
+  const i = libelle.indexOf(ville);
+  if (i === -1) return false;
+  const avant = libelle[i - 1];
+  const apres = libelle[i + ville.length];
+  const estLettre = (c) => c !== undefined && /[a-zà-öø-ÿ]/.test(c);
+  return !estLettre(avant) && !estLettre(apres);
 }
 
 function estGrandeVille(loc) {
   const v = (loc || '').toLowerCase().trim();
   if (!v) return true; // pas d'info -> on ne jette pas
   if (REGIONS_ET_INCONNU.some((r) => v === r || v.startsWith(r + ','))) return true;
+  // Département seul : même statut qu'une région.
+  if (DEPARTEMENTS.some((d) => v === d || v.startsWith(d + ','))) return true;
+  // "1er Arrondissement", "13ème Arrondissement" sans le nom de la ville : ces
+  // libellés ne désignent que Paris, Lyon ou Marseille — jamais un village.
+  if (/^\d{1,2}\s*(er|e|ème|eme)\s+arrondissement/i.test(v)) return true;
   if (PARIS_RE.test(v)) return true;
-  return [...GRAND_PARIS, ...GRANDES_VILLES].some((ville) => v.includes(ville));
+  return [...GRAND_PARIS, ...GRANDES_VILLES].some((ville) => contientVille(v, ville));
 }
 
 // ---------------------------------------------------------------------------
