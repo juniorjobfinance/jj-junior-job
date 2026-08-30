@@ -81,7 +81,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|manuel)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -164,7 +164,7 @@ const FAMILLE_RULES = [
 
   // --- Finance d'entreprise ------------------------------------------------
   [/comptab|accounting|accountant|consolid|cl[ôo]ture comptable|r[ée]vision comptable|facturation|\bdaf\b|gestionnaire de paie|\bpaie\b|administration des ventes|\badv\b/i, 'Comptabilité & Consolidation'],
-  [/contr[ôo]le de gestion|contr[ôo]leur de gestion|controlling|\bcontroller\b|\bfp&a\b|business partner|budg[ée]t|reporting financier|performance financi[èe]re|cost control|pilotage financier|contr[ôo]leur? financi|contr[ôo]leur op[ée]rations/i, 'Contrôle de gestion & FP&A'],
+  [/contr[ôo]le de gestion|contr[ôo]leur de gestion|controlling|\bcontroller\b|\bfp&a\b|business partner|budg[ée]t|reporting financier|performance financi[èe]re|cost control|pilotage financier|contr[ôo]leur? financi|contr[ôo]leur op[ée]rations|p&l|business performance|performance op[ée]rationnelle|\balm\b|asset & liability/i, 'Contrôle de gestion & FP&A'],
   [/tr[ée]sorerie|tr[ée]sorier|treasury|cash management|financement structur|financement immobilier|charg.{0,15}financement|credit management|recouvrement|analyste cr[ée]dit|risque de cr[ée]dit|\bcr[ée]dit\b/i, 'Trésorerie & Financement'],
 
   // --- Audit, conseil, risques ---------------------------------------------
@@ -173,7 +173,7 @@ const FAMILLE_RULES = [
   [/consult|conseil\b|advisory|transformation financi/i, 'Conseil'],
 
   // --- Analyse et recherche -------------------------------------------------
-  [/analyse financi[èe]re|analyste financier|equity research|\bresearch\b|[ée]conomist|[ée]tudes [ée]conomiques|strat[ée]giste/i, 'Marchés & Front Office'],
+  [/analyse financi[èe]re|analyste financier|financial analyst|finance analyst|finance officer|[ée]quity research|\bresearch\b|[ée]conomist|[ée]tudes [ée]conomiques|strat[ée]giste/i, 'Marchés & Front Office'],
 
   // --- Organisation, MOA, projets ------------------------------------------
   [/business analyst|\bmoa\b|\bamoa\b|ma[îi]trise d'ouvrage|chef(?:fe)? de projet|product owner|organisation et projets|\bpmo\b/i, 'Organisation & Projets'],
@@ -342,12 +342,12 @@ const SECTEUR_PAR_MAISON = {
   'Verlingue': 'Assurance & mutuelles', 'Coface': 'Assurance & mutuelles',
 
   // Audit, conseil, transaction services.
-  'Deloitte': 'Audit & conseil', 'EY': 'Audit & conseil', 'KPMG': 'Audit & conseil',
-  'PwC': 'Audit & conseil', 'Forvis Mazars': 'Audit & conseil', 'Grant Thornton': 'Audit & conseil',
-  'BDO': 'Audit & conseil', 'Eight Advisory': 'Audit & conseil', 'Accuracy': 'Audit & conseil',
-  'McKinsey': 'Audit & conseil', 'BCG': 'Audit & conseil', 'Bain': 'Audit & conseil',
-  'Oliver Wyman': 'Audit & conseil', 'Roland Berger': 'Audit & conseil',
-  'Sia Partners': 'Audit & conseil', 'Talan': 'Audit & conseil', 'Capgemini': 'Audit & conseil',
+  'Deloitte': "Cabinet d'audit & conseil", 'EY': "Cabinet d'audit & conseil", 'KPMG': "Cabinet d'audit & conseil",
+  'PwC': "Cabinet d'audit & conseil", 'Forvis Mazars': "Cabinet d'audit & conseil", 'Grant Thornton': "Cabinet d'audit & conseil",
+  'BDO': "Cabinet d'audit & conseil", 'Eight Advisory': "Cabinet d'audit & conseil", 'Accuracy': "Cabinet d'audit & conseil",
+  'McKinsey': "Cabinet d'audit & conseil", 'BCG': "Cabinet d'audit & conseil", 'Bain': "Cabinet d'audit & conseil",
+  'Oliver Wyman': "Cabinet d'audit & conseil", 'Roland Berger': "Cabinet d'audit & conseil",
+  'Sia Partners': "Cabinet d'audit & conseil", 'Talan': "Cabinet d'audit & conseil", 'Capgemini': "Cabinet d'audit & conseil",
 
   // Institutions publiques.
   'Banque de France': 'Secteur public & institutions', 'AMF': 'Secteur public & institutions',
@@ -372,7 +372,7 @@ const SECTEUR_PAR_MOT = [
   [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, "Gestion d'actifs & Private equity"],
   [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, 'Assurance & mutuelles'],
   [/courtage|courtier|\bbroker\b/i, 'Assurance & mutuelles'],
-  [/audit|conseil|consulting|advisory|cabinet|expertise comptable|commissariat/i, 'Audit & conseil'],
+  [/audit|conseil|consulting|advisory|cabinet|expertise comptable|commissariat/i, "Cabinet d'audit & conseil"],
   [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech'],
   [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Secteur public & institutions'],
 ];
@@ -798,7 +798,7 @@ const PAS_UNE_OFFRE_RE =
   /afterwork|after[\s-]work|webinar|webinaire|job ?dating|portes ouvertes|forum (?:de |des )?(?:recrutement|m[ée]tiers|[ée]coles)|\bsalon\b|meet ?up|conf[ée]rence|d[ée]couvrez|rejoignez[\s-]nous|candidature spontan[ée]e|talent ?pool|cooptation/i;
 
 const METIER_HORS_PERIMETRE_RE =
-  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)/i;
+  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b/i;
 
 function estUneOffreFinance(titre) {
   return !PAS_UNE_OFFRE_RE.test(titre) && !METIER_HORS_PERIMETRE_RE.test(titre);
@@ -855,10 +855,43 @@ function normalize(item) {
         );
       url = direct || raw.origineOffre?.urlOrigine;
     }
-    typeContratRaw = raw.typeContrat;
+    // Un contrat d'apprentissage est un « CDD » pour l'API : son vrai visage
+    // est dans natureContrat ("Contrat apprentissage", "Contrat de
+    // professionnalisation"). Sans ce libellé, toutes les alternances France
+    // Travail se classaient en CDI/CDD.
+    typeContratRaw = [raw.natureContrat, raw.typeContrat].filter(Boolean).join(' ');
     romeLibelle = raw.romeLibelle;
     postedAt = raw.dateActualisation;
     sal = raw.salaire?.libelle;
+    descr = raw.description;
+  } else if (__src === 'vie') {
+    // Business France (Mon VIE-VIA). Mode référencement : on NE reprend PAS la
+    // description de la mission (raw.missionDescription) — seulement de quoi
+    // identifier l'offre. Le clic renvoie sur la fiche officielle pour candidater.
+    emp = raw.organizationName || 'Employeur non précisé';
+    title = raw.missionTitle;
+    // Le VIE est par nature à l'étranger : la ville sert d'info, pas de filtre.
+    // La carte affiche déjà le pays à part (place) — on ne le remet donc PAS
+    // dans la ville, sinon « Madrid, Espagne, Espagne ». On nettoie aussi le
+    // libellé Business France, souvent en capitales avec des tirets parasites
+    // (« MORRISTOWN -NJ- »).
+    ville = (raw.cityName || '')
+      .replace(/\s*-\s*[A-Z]{2,3}-?\s*$/, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+      // « MADRID » crié -> « Madrid » ; on laisse les vraies capitales composées.
+      .replace(/^[A-ZÀ-Ö][A-ZÀ-Ö\s'-]+$/, (v) =>
+        v.toLowerCase().replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase())
+      );
+    pays = raw.countryName
+      ? raw.countryName.charAt(0) + raw.countryName.slice(1).toLowerCase()
+      : 'International';
+    url = `https://mon-vie-via.businessfrance.fr/offres/${raw.id}`;
+    typeContratRaw = 'VIE';
+    // Le classement famille se fait sur le seul intitulé (pas de description).
+    romeLibelle = (raw.specializations || []).map((s) => s.label || s.name).filter(Boolean).join(' ');
+    postedAt = raw.startBroadcastDate || raw.creationDate || new Date().toISOString();
+    if (raw.indemnite) sal = `${Math.round(Number(raw.indemnite))} €/mois (indemnité VIE)`;
   } else if (__src === 'labonnealternance') {
     // Format API v1 (api.apprentissage.beta.gouv.fr) : l'offre est découpée en
     // blocs identifier / workplace / apply / contract / offer.
@@ -1401,11 +1434,17 @@ async function run() {
   const normalized = raw.map(normalize).filter(Boolean);
   console.log(`[pipeline] ${normalized.length} offres normalisées (${raw.length - normalized.length} rejetées : champs manquants).`);
 
-  const grandesVilles = normalized.filter((o) => estGrandeVille(o.loc));
-  console.log(`[pipeline] ${grandesVilles.length} offres en grandes villes (${normalized.length - grandesVilles.length} écartées : petites communes).`);
+  // Le filtre "grandes villes françaises" ne s'applique pas au VIE : par nature
+  // à l'étranger, et destiné aux jeunes Français, il est pertinent quelle que
+  // soit la destination. On le laisse donc passer sans condition de lieu.
+  const grandesVilles = normalized.filter((o) => o.volet === 'vie' || estGrandeVille(o.loc));
+  console.log(`[pipeline] ${grandesVilles.length} offres en grandes villes ou VIE (${normalized.length - grandesVilles.length} écartées : petites communes).`);
 
+  // Le VIE entre toujours, même si l'entreprise n'est pas une maison de
+  // référence : c'est un canal à part (Business France), pas un employeur qu'on
+  // aurait choisi de lister — le restreindre à la liste n'aurait aucun sens.
   const dansLePerimetre = MAISONS_DE_REFERENCE_SEULEMENT
-    ? grandesVilles.filter((o) => o.maisonReference)
+    ? grandesVilles.filter((o) => o.maisonReference || o.volet === 'vie')
     : grandesVilles;
   const horsListe = grandesVilles.filter((o) => !o.maisonReference).length;
   console.log(

@@ -43,6 +43,7 @@ jobs:
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           LBA_API_TOKEN: ${{ secrets.LBA_API_TOKEN }}
+          VIE_API_KEY: ${{ secrets.VIE_API_KEY }}
         run: node ingestion/pipeline.js
 
       - name: Publier offres.js

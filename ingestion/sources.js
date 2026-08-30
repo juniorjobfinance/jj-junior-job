@@ -179,24 +179,32 @@ async function fetchFranceTravail() {
     // filtré à la SOURCE plutôt qu'après coup.
     // On interroge code ROME par code ROME : l'API tronque les résultats quand
     // on cumule trop de critères, et cela permet de mieux couvrir chaque métier.
+    // Deux passes par code ROME : la générale (expérience 0-3 ans), puis une
+    // passe ALTERNANCE. Les contrats d'apprentissage (E2) et de
+    // professionnalisation (FS) ont leur propre « nature de contrat » : sans la
+    // demander explicitement, l'API n'en remonte presque aucun — le site
+    // affichait 0 alternance France Travail alors que le vivier est là.
+    const passes = [{ experience: '1,2' }, { natureContrat: 'E2,FS' }];
     for (const rome of ROME_FINANCE) {
-      const params = new URLSearchParams({
-        codeROME: rome,
-        experience: '1,2',
-        // Offres en France métropolitaine + DOM (pas d'offres étrangères).
-        paysContinent: '01',
-      });
+      for (const passe of passes) {
+        const params = new URLSearchParams({
+          codeROME: rome,
+          // Offres en France métropolitaine + DOM (pas d'offres étrangères).
+          paysContinent: '01',
+          ...passe,
+        });
 
-      const pageSize = 150;
-      for (let debut = 0; debut < 600; debut += pageSize) {
-        const { resultats, fini } = await franceTravailPage(
-          token,
-          params,
-          debut,
-          debut + pageSize - 1
-        );
-        toutes.push(...resultats);
-        if (fini || resultats.length < pageSize) break;
+        const pageSize = 150;
+        for (let debut = 0; debut < 600; debut += pageSize) {
+          const { resultats, fini } = await franceTravailPage(
+            token,
+            params,
+            debut,
+            debut + pageSize - 1
+          );
+          toutes.push(...resultats);
+          if (fini || resultats.length < pageSize) break;
+        }
       }
     }
   } catch (err) {
@@ -274,7 +282,13 @@ const FAUX_EMPLOYEUR_MOTIFS = [
   "relais.?assur", 'augustin noha', 'comptalents', 'dlsi', 'iziwork', 'my premium consulting',
   'linking executive', 'odas conseil', 'capijobnew', "r[ée]union comp[ée]tences",
   "rh d[ée]veloppement", 'new net 3d', 'recrut', 'staffing', 'headhunt', 'executive search',
-  'mercuri urval', 'florian mantione', 'alphea',
+  'mercuri urval', 'florian mantione', 'alphea', 'adsearch',
+  // Un employeur dont le nom se TERMINE par « RH » est un cabinet
+  // ("Cornouaille RH", "Nextgen RH") — jamais une maison de finance.
+  '\\brh\\s*$',
+  // Collectivités : une mairie qui recrute un chargé de prévention n'est pas
+  // une maison de finance, même si l'intitulé contient « risques ».
+  '^ville de ', '^mairie ', '^commune ', '^communaut[ée] de communes',
 ];
 const FAUX_EMPLOYEUR_RE = new RegExp(FAUX_EMPLOYEUR_MOTIFS.join('|'), 'i');
 
@@ -1706,14 +1720,121 @@ function fetchManual() {
   return MANUAL_OFFERS.map((o) => ({ __src: 'manuel', emp: o.emp, raw: o }));
 }
 
+// ---------------------------------------------------------------------------
+// VIE — Business France (portail Mon VIE-VIA / API Civiweb)
+//
+// Mode "référencement seul" (voie B) : on n'affiche que titre, entreprise, lieu
+// et durée, et le clic renvoie TOUJOURS vers la fiche officielle pour
+// candidater. On ne reproduit PAS la description de la mission (contenu de
+// Business France) — c'est ce qui distingue le référencement de la
+// republication, et ce qui rend l'usage défendable sans accord préalable.
+//
+// L'API n'a pas de facette "finance" fiable : on cible par mots-clés, comme
+// pour Adzuna, et le pipeline fait le classement fin ensuite.
+const VIE_API_URL = 'https://civiweb-api-prd.azurewebsites.net/api/Offers/search';
+const VIE_API_KEY = process.env.VIE_API_KEY || '';
+// Mots-clés finance au sens large : le VIE est destiné aux jeunes Français,
+// on prend toutes les destinations et toutes les sous-familles en lien avec la
+// finance, la comptabilité et l'économie. L'API dédoublonne par id, donc
+// élargir ne crée pas de doublons — ça ne fait qu'améliorer la couverture.
+const VIE_MOTS_CLES = [
+  // Cœur finance
+  'finance', 'financial', 'financier', 'corporate finance', 'financement',
+  // Comptabilité
+  'comptable', 'comptabilité', 'accounting', 'accountant', 'consolidation',
+  'auditeur', 'audit', 'commissariat aux comptes',
+  // Contrôle & trésorerie
+  'contrôle de gestion', 'controlling', 'controller', 'management control',
+  'trésorerie', 'treasury', 'cash management', 'fp&a', 'business analyst',
+  // Marchés & M&A
+  'trader', 'trading', 'front office', 'sales', 'structuration', 'm&a',
+  'corporate development', 'capital markets', 'investment banking',
+  // Gestion d'actifs
+  'asset management', 'investment', 'portfolio', 'private equity', 'fund',
+  'wealth', 'gestion de patrimoine',
+  // Risques & conformité
+  'risque', 'risk', 'conformité', 'compliance', 'actuaire', 'actuarial',
+  'kyc', 'aml', 'crédit', 'credit',
+  // Économie & data
+  'économiste', 'economist', 'economics', 'data analyst', 'quant',
+  'reporting', 'analyste', 'analyst', 'pricing', 'tax', 'fiscalité',
+];
+
+async function fetchViePage(query, skip, limit) {
+  const res = await fetch(VIE_API_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', accept: 'application/json', 'X-API-KEY': VIE_API_KEY },
+    body: JSON.stringify({
+      limit,
+      skip,
+      query,
+      activitySectorId: [],
+      missionsTypesIds: [],
+      missionsDurations: [],
+      gerographicZones: [],
+      countriesIds: [],
+      studiesLevelId: [],
+      companiesSizes: [],
+      specializationsIds: [],
+      entreprisesIds: [0],
+      missionStartDate: null,
+    }),
+    signal: AbortSignal.timeout(25000),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function fetchVie() {
+  if (!VIE_API_KEY) return DEMO_DATA ? [] : [];
+
+  const parId = new Map();
+  let echecs = 0;
+
+  for (const q of VIE_MOTS_CLES) {
+    try {
+      // L'API plafonne à ~50 par page ; une seule page par mot-clé suffit
+      // largement à couvrir le vivier finance (moins de 500 offres au total).
+      const j = await fetchViePage(q, 0, 50);
+      for (const o of j.result || []) {
+        if (o.id && !parId.has(o.id)) parId.set(o.id, o);
+      }
+    } catch {
+      echecs++;
+    }
+    // Une cinquantaine de mots-clés d'affilée fait tomber l'API sous limite de
+    // débit : un petit délai entre chaque requête suffit à tout faire passer.
+    await new Promise((r) => setTimeout(r, 250));
+  }
+
+  if (echecs) {
+    console.warn(`[sources] VIE (Business France) : ${echecs} requête(s) en échec, le reste est conservé.`);
+  }
+
+  // Une recherche par mots-clés large ramène du bruit ("DÉVOPS", "Biomolecule
+  // Engineer") : on repasse chaque offre au même filtre finance que les autres
+  // sources, sur l'intitulé et la spécialisation, pour ne garder que le vivier
+  // finance / comptabilité / économie.
+  return [...parId.values()]
+    .filter((o) =>
+      isFinanceOfferFor(
+        o.organizationName,
+        o.missionTitle,
+        (o.specializations || []).map((s) => s.label || s.name).join(' ')
+      )
+    )
+    .map((o) => ({ __src: 'vie', emp: o.organizationName, raw: o }));
+}
+
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
     fetchAdzuna(),
+    fetchVie(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

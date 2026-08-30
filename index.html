@@ -494,6 +494,7 @@
   <button role="tab" data-volet="stage" aria-selected="true" aria-controls="panel-offres" id="tab-stage">Stage</button>
   <button role="tab" data-volet="alternance" aria-selected="false" aria-controls="panel-offres" id="tab-alternance">Alternance</button>
   <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
+  <button role="tab" data-volet="vie" aria-selected="false" aria-controls="panel-offres" id="tab-vie">VIE</button>
   <span class="total" id="total-count"></span>
 </nav>
 
@@ -610,7 +611,7 @@
     "Banque d'affaires & marchés",
     "Gestion d'actifs & Private equity",
     'Assurance & mutuelles',
-    'Audit & conseil',
+    "Cabinet d'audit & conseil",
     'Entreprise (direction financière)',
     'Fintech',
     'Secteur public & institutions',
@@ -657,7 +658,7 @@
   function urlToState() {
     var p = new URLSearchParams(location.search);
     var volet = p.get('contrat');
-    if (volet === 'stage' || volet === 'alternance' || volet === 'cdi-cdd') state.volet = volet;
+    if (volet === 'stage' || volet === 'alternance' || volet === 'cdi-cdd' || volet === 'vie') state.volet = volet;
     var fam = p.get('familles');
     if (fam) fam.split('|').forEach(function (f) { if (FAMILLES.indexOf(f) !== -1) state.familles.add(f); });
     var s = p.get('structure');
@@ -676,7 +677,7 @@
   // "Lien direct" = l'URL mène chez l'entreprise (ou son ATS), pas sur un
   // agrégateur intermédiaire.
   function estDirect(offer) {
-    return !/adzuna\.fr|candidat\.francetravail\.fr|choisirleservicepublic\.gouv\.fr/.test(offer.url);
+    return !/adzuna\.fr|candidat\.francetravail\.fr|choisirleservicepublic\.gouv\.fr|businessfrance\.fr/.test(offer.url);
   }
 
   function isNew(offer) {
@@ -797,6 +798,9 @@
     // de site carrières : le portail de l'État est leur unique canal de
     // publication. On le dit plutôt que de laisser croire à un lien direct.
     if (/choisirleservicepublic\.gouv\.fr/.test(offer.url)) return '<span class="badge via">via Service Public</span> ';
+    // Le VIE passe par Business France : le clic mène à la fiche officielle,
+    // c'est là qu'on candidate. On le signale, comme les autres agrégateurs.
+    if (/businessfrance\.fr/.test(offer.url)) return '<span class="badge via">via Business France</span> ';
     return '';
   }
 
