@@ -1019,7 +1019,7 @@ function writeRss(offers) {
     '<rss version="2.0">',
     '  <channel>',
     '    <title>JJ — Junior Job : dernières offres finance junior</title>',
-    '    <link>https://example.org/jj/</link>',
+    '    <link>https://juniorjobfinance.com/</link>',
     "    <description>Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise.</description>",
     '    <language>fr-FR</language>',
     `    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
