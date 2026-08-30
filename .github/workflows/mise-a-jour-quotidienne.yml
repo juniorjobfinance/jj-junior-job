@@ -48,11 +48,43 @@ jobs:
         run: node ingestion/pipeline.js
 
       - name: Publier offres.js
+        id: publication
         run: |
           git config user.name  "JJ bot"
           git config user.email "bot@users.noreply.github.com"
           # state.json et le cache sont gardés par actions/cache, pas par git
           # (ils sont dans .gitignore).
           git add offres.js offres.xml sitemap.xml
-          git diff --staged --quiet || git commit -m "Offres du $(date +%F)"
-          git push
+          if git diff --staged --quiet; then
+            echo "Aucun changement à publier."
+            echo "modifie=non" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Offres du $(date +%F)"
+            git push
+            echo "modifie=oui" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Vercel ne redéploie PAS sur un commit poussé par le bot : son intégration
+      # GitHub n'accepte que les commits d'un membre de l'équipe, et ajouter un
+      # membre exige le plan Pro. Le Deploy Hook contourne ça gratuitement — c'est
+      # une URL secrète qui, appelée en POST, déclenche un déploiement de la
+      # branche de production, quel que soit l'auteur du dernier commit.
+      #
+      # Sans ce déclenchement, l'ingestion tourne dans le vide : les offres sont
+      # bien commitées, mais le site continue de servir celles de la veille.
+      - name: Déclencher le redéploiement Vercel
+        if: steps.publication.outputs.modifie == 'oui'
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::warning::Secret VERCEL_DEPLOY_HOOK_URL absent — le site ne sera pas redéployé."
+            exit 0
+          fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$HOOK")
+          echo "Deploy Hook appelé, réponse HTTP $code"
+          # La réponse est vide et sans intérêt ; seul le code compte.
+          case "$code" in
+            2*) echo "Redéploiement demandé." ;;
+            *)  echo "::error::Le Deploy Hook a répondu $code."; exit 1 ;;
+          esac
