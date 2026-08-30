@@ -20,6 +20,12 @@ const CHECK_LINKS = process.argv.includes('--check-links');
 const STATE_PATH = path.join(__dirname, 'state.json');
 const OUTPUT_PATH = path.join(__dirname, '..', 'offres.js');
 const RSS_PATH = path.join(__dirname, '..', 'offres.xml');
+const SITEMAP_PATH = path.join(__dirname, '..', 'sitemap.xml');
+
+// Adresse publique du site : sert au flux RSS et au sitemap. À changer ici et
+// nulle part ailleurs le jour où un vrai nom de domaine remplace le sous-domaine
+// Vercel.
+const SITE_URL = 'https://juniorjobfinance.vercel.app';
 
 // Un canonique absent pendant ce nombre de passages consécutifs est retiré
 // (PROJET.md §8.6 : "2-3 passages consécutifs").
@@ -974,6 +980,7 @@ function writeOutput(offers) {
   const body = `window.__OFFRES__ = ${JSON.stringify(publicOffers, null, 2)};\n`;
   fs.writeFileSync(OUTPUT_PATH, header + body);
   writeRss(publicOffers);
+  writeSitemap();
 }
 
 // ---------------------------------------------------------------------------
@@ -990,6 +997,36 @@ function xmlEscape(s) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+// Sitemap. Le site n'a que trois pages, mais celle d'accueil change tous les
+// matins : le générer avec le reste garantit que la date déclarée aux moteurs
+// est la vraie date du dernier passage, et non celle du jour où quelqu'un a
+// pensé à mettre le fichier à jour.
+function writeSitemap() {
+  const jour = new Date().toISOString().slice(0, 10);
+  const pages = [
+    { chemin: '/', freq: 'daily', priorite: '1.0', maj: jour },
+    { chemin: '/mentions-legales.html', freq: 'yearly', priorite: '0.2', maj: jour },
+    { chemin: '/confidentialite.html', freq: 'yearly', priorite: '0.2', maj: jour },
+  ];
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...pages.map((p) =>
+      [
+        '  <url>',
+        `    <loc>${SITE_URL}${p.chemin}</loc>`,
+        `    <lastmod>${p.maj}</lastmod>`,
+        `    <changefreq>${p.freq}</changefreq>`,
+        `    <priority>${p.priorite}</priority>`,
+        '  </url>',
+      ].join('\n')
+    ),
+    '</urlset>',
+    '',
+  ].join('\n');
+  fs.writeFileSync(SITEMAP_PATH, xml);
 }
 
 function writeRss(offers) {
@@ -1019,7 +1056,7 @@ function writeRss(offers) {
     '<rss version="2.0">',
     '  <channel>',
     '    <title>JJ — Junior Job : dernières offres finance junior</title>',
-    '    <link>https://juniorjobfinance.vercel.app/</link>',
+    `    <link>${SITE_URL}/</link>`,
     "    <description>Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise.</description>",
     '    <language>fr-FR</language>',
     `    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
@@ -1098,8 +1135,8 @@ async function run() {
 
   writeOutput(final);
   console.log(
-    `[pipeline] Écrit dans ${path.relative(process.cwd(), OUTPUT_PATH)} ` +
-      `et ${path.relative(process.cwd(), RSS_PATH)} (flux RSS des 100 dernières).`
+    `[pipeline] Écrit dans ${path.relative(process.cwd(), OUTPUT_PATH)}` +
+      `, ${path.relative(process.cwd(), RSS_PATH)} (flux RSS) et ${path.relative(process.cwd(), SITEMAP_PATH)}.`
   );
 
   // Résumé par onglet et par famille

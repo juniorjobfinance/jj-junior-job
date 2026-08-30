@@ -48,6 +48,6 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           # state.json et le cache sont gardés par actions/cache, pas par git
           # (ils sont dans .gitignore).
-          git add offres.js offres.xml
+          git add offres.js offres.xml sitemap.xml
           git diff --staged --quiet || git commit -m "Offres du $(date +%F)"
           git push

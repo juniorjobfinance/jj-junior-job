@@ -1,0 +1,6 @@
+# JJ — Junior Job
+# Le site est fait pour être trouvé : tout est indexable.
+User-agent: *
+Allow: /
+
+Sitemap: https://juniorjobfinance.vercel.app/sitemap.xml

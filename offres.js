@@ -1,5 +1,5 @@
 // Fichier généré par ingestion/pipeline.js — NE PAS ÉDITER À LA MAIN.
-// Généré le 2026-08-30T12:08:24.829Z
+// Généré le 2026-08-30T12:51:51.651Z
 window.__OFFRES__ = [
   {
     "emp": "GMF Assurances",
@@ -14,7 +14,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 27780.0 Euros à 30000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212VNQJ",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T14:56:35.143Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -32,7 +32,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 25000.0 Euros à 40000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6421199",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T14:34:04.952Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -50,7 +50,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 32290.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6396877",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T03:31:14.838Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -68,7 +68,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 27000.0 Euros à 35000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6318889",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:32:51.478Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -86,7 +86,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 27000.0 Euros à 33000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6278126",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:32:53.467Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -104,7 +104,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 50000.0 Euros à 60000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6271803",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T14:35:23.595Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -122,7 +122,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 25000.0 Euros à 30000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6233540",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T14:33:55.241Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -140,7 +140,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 25000.0 Euros à 60000.0 Euros",
     "url": "https://dogfinance.com/offre/gan-prevoyance/commercial-en-assurances-hf81555?utm_source=poleemploi&utm_medium=site&utm_campaign=poleemploi",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T03:01:20.218Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -157,7 +157,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5829149",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T00:32:43.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -174,7 +174,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5793229",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:32:47.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -192,7 +192,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 35000.0 Euros à 40000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5782672",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T14:35:21.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -209,7 +209,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5744006",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:11:10.759Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -226,7 +226,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5737801",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:32:54.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -244,7 +244,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 25000.0 Euros à 30000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5670046",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T14:35:18.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -262,7 +262,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 45000.0 Euros à 55000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5500066",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T03:22:23.639Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -279,7 +279,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://dogfinance.com/offre/groupama/commercial-en-assurances-hf10802?utm_source=poleemploi&utm_medium=site&utm_campaign=poleemploi",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T03:01:32.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -296,7 +296,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/0754329",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:19:17.709Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -314,7 +314,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 45000.0 Euros sur 12.0 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/213CFVC",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T17:23:54.144Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -332,7 +332,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 27000.0 Euros à 29000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212VQXR",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T15:15:54.567Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -350,7 +350,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 36500.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212NMQH",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T10:01:27.812Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -368,7 +368,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 30000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6178022",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T14:37:04.571Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -386,7 +386,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 32000.0 Euros à 34000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212WBRD",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T08:32:12.979Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -404,7 +404,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 35000.0 Euros à 37000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5940867",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:32:51.048Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -422,7 +422,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 31000.0 Euros à 38000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5793234",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:32:48.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -440,7 +440,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 35000.0 Euros à 41000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5829105",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T00:32:42.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -458,7 +458,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 45000.0 Euros à 50000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6149343",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:32:41.673Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -475,7 +475,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/4709044",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T03:18:46.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -492,7 +492,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://dogfinance.com/offre/gan-prevoyance/commercial-terrain-en-assurances-hf96236?utm_source=poleemploi&utm_medium=site&utm_campaign=poleemploi",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T03:01:32.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -509,7 +509,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5711162",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T12:54:33.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -526,7 +526,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/1472418",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:19:23.502Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -544,7 +544,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 26000.00 Euros à 28000.00 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212NDQX",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T11:20:12.976Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -562,7 +562,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 28000.0 Euros à 35000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212MMJM",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T16:08:42.630Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -580,7 +580,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 30500.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/211XSKF",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T15:58:18.919Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -597,7 +597,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6425940",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T03:19:37.139Z",
     "firstSeenAt": "2026-08-30T01:21:40.588Z",
     "datePubFiable": true
@@ -615,7 +615,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 27000.0 Euros à 32000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6318614",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:32:41.232Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -632,7 +632,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6244990",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:06:14.573Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -650,7 +650,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 28000.0 Euros à 38000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6236633",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:32:37.600Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -667,7 +667,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6155074",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:07:03.721Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -685,7 +685,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 29000.0 Euros à 34000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6002354",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T00:32:45.181Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -703,7 +703,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 29000.0 Euros à 34000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/6002339",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T00:32:44.395Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -720,7 +720,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5793167",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:32:48.000Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -737,7 +737,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5737760",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:32:53.000Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -755,7 +755,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 31000.0 Euros à 38000.0 Euros",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5711194",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T12:54:33.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -772,7 +772,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5711112",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T12:54:32.000Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -789,7 +789,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/4709139",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T03:19:27.151Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -806,7 +806,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/3470853",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:17:58.120Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -823,7 +823,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/3160661",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:18:16.541Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -840,7 +840,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/3160659",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:18:20.117Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -857,7 +857,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/3055973",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T05:18:16.541Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -874,7 +874,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5880717",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:32:45.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -891,7 +891,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5737788",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:32:53.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -908,7 +908,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/5711143",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T12:54:32.000Z",
     "firstSeenAt": "2026-08-30T09:18:54.716Z",
     "datePubFiable": true
@@ -926,7 +926,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 35000.0 Euros à 45000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212HMPV",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T22:47:52.032Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -943,7 +943,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://dogfinance.com/offre/banque-de-france/business-analyst-relation-marche-t2s---hf?utm_source=poleemploi&utm_medium=site&utm_campaign=poleemploi",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T03:01:38.000Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -960,7 +960,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://dogfinance.com/offre/banque-de-france/business-analyst-tests-fonctionnels-t2s---hf99431?utm_source=poleemploi&utm_medium=site&utm_campaign=poleemploi",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T03:01:37.000Z",
     "firstSeenAt": "2026-08-29T22:49:51.942Z",
     "datePubFiable": true
@@ -978,7 +978,7 @@ window.__OFFRES__ = [
     "sal": "Annuel de 40000.0 Euros à 45000.0 Euros sur 12 mois",
     "url": "https://candidat.francetravail.fr/offres/recherche/detail/212HMFL",
     "source": "francetravail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T22:47:53.300Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -996,7 +996,7 @@ window.__OFFRES__ = [
     "url": "https://rhalternance.com/jobs/finance-banque-et-assurance/guyancourt/alternance-contrôleur-de-gestion-f-h-416305853",
     "source": "labonnealternance",
     "_descr": "Descriptif du poste :",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T22:17:16.000Z",
     "firstSeenAt": "2026-08-30T09:14:32.687Z",
     "datePubFiable": true
@@ -1016,7 +1016,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "ashby:qonto"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-08T12:35:08.844Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1036,7 +1036,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "ashby:qonto"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-06T08:50:39.687Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1056,7 +1056,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "ashby:qonto"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-10T13:59:02.348Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1073,7 +1073,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.lever.co/younited/f495ea24-b326-460f-9c16-1e4befba10b7",
     "source": "lever:younited",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-27T12:56:22.680Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1090,7 +1090,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.lever.co/swile/5b9cc299-e18c-4d85-a833-9fa0422a0a51",
     "source": "lever:swile",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-21T08:52:27.332Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1107,7 +1107,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000146194039",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T13:55:12.939Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1124,7 +1124,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000146191819",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T13:46:51.881Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1141,7 +1141,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000146190029",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T13:38:39.469Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1158,7 +1158,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000146175099",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T12:26:19.157Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1175,7 +1175,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145797082",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T16:55:47.951Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1192,7 +1192,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145793361",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T16:55:20.933Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1209,7 +1209,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145796799",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T16:55:07.935Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1226,7 +1226,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145795179",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T16:47:40.698Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1243,7 +1243,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145780156",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T15:55:27.702Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1260,7 +1260,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145779874",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T15:43:15.666Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1277,7 +1277,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145704719",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T10:13:04.050Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1294,7 +1294,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145700423",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T09:50:01.712Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1311,7 +1311,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145687959",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T08:53:07.470Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1328,7 +1328,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145551174",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:34:14.089Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1345,7 +1345,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145549765",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:30:06.573Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1362,7 +1362,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145545380",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:23:19.133Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1379,7 +1379,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145548450",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:17:47.686Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1396,7 +1396,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145543644",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:04:44.887Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1413,7 +1413,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145544719",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T15:04:07.242Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1430,7 +1430,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145510764",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T13:13:46.611Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1447,7 +1447,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145509009",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T12:55:28.777Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1464,7 +1464,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145502750",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T12:32:11.754Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1481,7 +1481,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145489690",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T11:47:37.768Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1498,7 +1498,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145491454",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T11:46:46.863Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1515,7 +1515,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145468345",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T09:56:15.873Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1532,7 +1532,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145313950",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T15:36:37.560Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1549,7 +1549,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145298137",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T14:40:24.449Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1566,7 +1566,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000145266649",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T12:28:29.811Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -1583,7 +1583,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000144323507",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T13:44:51.469Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1603,7 +1603,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "smartrecruiters:sia"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T13:44:32.505Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1620,7 +1620,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000144322805",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T13:44:07.252Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -1637,7 +1637,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000140258708",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-28T14:25:07.971Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1654,7 +1654,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000138670070",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-20T15:08:06.814Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1671,7 +1671,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000137949322",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-15T17:11:57.629Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1688,7 +1688,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000137134790",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-10T13:27:57.648Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1705,7 +1705,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000137057042",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-10T07:12:30.433Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1722,7 +1722,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000135031610",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30T14:07:11.770Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1739,7 +1739,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000127486194",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-20T16:58:21.458Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1756,7 +1756,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/Sia/744000127485419",
     "source": "smartrecruiters:sia",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-20T16:47:59.301Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1773,7 +1773,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/SycomoreAssetManagement/744000128684809",
     "source": "smartrecruiters:sycomoreassetmanagement",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-27T09:57:22.402Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1790,7 +1790,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000146187244",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T13:38:52.420Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1807,7 +1807,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000145560830",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T16:15:19.019Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1824,7 +1824,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000145303290",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T14:54:32.664Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1841,7 +1841,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000145229714",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T09:20:53.946Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1858,7 +1858,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000143639529",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T07:28:57.976Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1875,7 +1875,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000141917621",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T13:24:44.415Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1892,7 +1892,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000140932029",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31T14:37:51.141Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1909,7 +1909,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000140930573",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31T14:34:15.958Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -1926,7 +1926,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000140647449",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-30T10:00:27.945Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1943,7 +1943,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000140175021",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-28T08:22:04.550Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1960,7 +1960,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000139093364",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-22T14:27:21.146Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1977,7 +1977,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000136505929",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-08T15:25:17.628Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -1994,7 +1994,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000134964879",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30T09:00:47.444Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2011,7 +2011,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000134960744",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30T08:51:04.490Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2028,7 +2028,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000134955375",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30T08:27:07.558Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2045,7 +2045,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000134778629",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29T12:32:29.526Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2062,7 +2062,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000133532729",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-23T08:13:56.598Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2079,7 +2079,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000132451012",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16T15:25:50.328Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2096,7 +2096,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000131944129",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-12T16:34:10.231Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2113,7 +2113,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000131654359",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-11T11:53:59.171Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2130,7 +2130,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000131495419",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-10T16:12:21.333Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2147,7 +2147,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000131184569",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-09T15:39:23.553Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2164,7 +2164,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000130399583",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-05T09:04:42.146Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2181,7 +2181,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000127596576",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-21T07:47:00.489Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2198,7 +2198,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000126083789",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-12T13:17:50.059Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2215,7 +2215,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.smartrecruiters.com/MAZARS/744000124893783",
     "source": "smartrecruiters:mazars",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-06T13:14:30.526Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -2232,8 +2232,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Gentilly/stage-6-mois---dveloppement-IA-et-data-analyse_R2867590",
     "source": "workday:sanofi",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-14T12:08:24.573Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-14T12:51:51.381Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
   },
@@ -2249,8 +2249,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Marseille-Area/Spcialiste-Comptabilit-Gnrale--F-H-_JR10429782",
     "source": "workday:ag",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-24T12:08:24.573Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-24T12:51:51.381Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
   },
@@ -2266,8 +2266,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Marseille-Area/Spcialiste-Recouvrement-Cash---Contrats--F-H-_JR10429829",
     "source": "workday:ag",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-24T12:08:24.573Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-24T12:51:51.381Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
   },
@@ -2283,8 +2283,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Toulouse-Area/Comptable-fournisseurs_JR10419419",
     "source": "workday:ag",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.573Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.381Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2300,8 +2300,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://airliquidehr.wd3.myworkdayjobs.com/en-US/AirLiquideExternalCareer/job/France-Bagneux/PROGRAMS---FINANCE-CONTROLLER-H-F_R10080435-1",
     "source": "workday:airliquidehr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.574Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.382Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2317,8 +2317,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://airliquidehr.wd3.myworkdayjobs.com/en-US/AirLiquideExternalCareer/job/France-Sassenage/Contrleur-de-gestion-H-F_R10096903-1",
     "source": "workday:airliquidehr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.574Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.382Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2334,8 +2334,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://airliquidehr.wd3.myworkdayjobs.com/en-US/AirLiquideExternalCareer/job/France-Bagneux/Contrleur-Oprations--ALLEX-Graduate-Program--H-F_R10088363",
     "source": "workday:airliquidehr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.574Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.382Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2351,8 +2351,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Toulouse/Contrleur-de-Gestion-Bids-et-Projets-Complexes--H-F-_R0331349",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-28T12:08:24.574Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-28T12:51:51.382Z",
     "firstSeenAt": "2026-08-29T20:59:56.856Z",
     "datePubFiable": true
   },
@@ -2371,8 +2371,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "workday:thales"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.574Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.383Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2388,8 +2388,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Zenith-Business-Data-Analyst-Finance_R0309466-2",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.383Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2405,8 +2405,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Comptable-Gnral-SAP-H-F_R0330268-1",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2422,8 +2422,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy/Manager-Comptabilit-Gnrale-F-H_R0308753-2",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2439,8 +2439,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy/Thales-AfterWork-Finance---16-Avril-2026_R0316495-1",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2456,8 +2456,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Comptabilit-Clients-H-F_R0316508-1",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2473,8 +2473,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Charg-de-Trsorerie-H-F_R0316497-1",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2490,8 +2490,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-contrats-H-F_R0316501",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2507,8 +2507,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Cadre-Comptable_R0313999-2",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2524,8 +2524,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Comptable-Clients-H-F_R0304407-1",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.575Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2541,8 +2541,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Contrleur-de-Gestion-Offres-et-Projets-F-H_R0281948",
     "source": "workday:thales",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2558,8 +2558,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Paris/Fund-Finance-Buyout-Stage---Janvier-2027-I-Paris--M-F-_JR1002094",
     "source": "workday:ardian",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-26T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-26T12:51:51.384Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
   },
@@ -2575,8 +2575,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Paris/Fund-Finance-Private-Credit-Stage---Janvier-2027-I-Paris--M-F-_JR1002152",
     "source": "workday:ardian",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2592,8 +2592,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Paris/CDD---Fund-Finance-Data-Analyst---Private-Credit_JR1002145",
     "source": "workday:ardian",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.384Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2609,8 +2609,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Paris/Fund-Finance-Co-Investment-Apprentice---Septembre-2026---Paris--M-F-_JR1001819",
     "source": "workday:ardian",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.385Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2626,8 +2626,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://rothschildandco.wd3.myworkdayjobs.com/en-US/Rothschildandco_Lateral/job/Paris/Alternance-Comptabilit-Fiscale---Septembre-2026_JR015805",
     "source": "workday:rothschildandco",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.385Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2643,8 +2643,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://rothschildandco.wd3.myworkdayjobs.com/en-US/Rothschildandco_Lateral/job/Paris/Stage-Controlling-Support-Functions---WAM-division---Juin-2026_JR015374",
     "source": "workday:rothschildandco",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.576Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.385Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2660,8 +2660,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Marseille/Consultant-comptable---Comptabilit-Fiscalit---Marseille---F-H_740401WD",
     "source": "workday:pwc",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.580Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.388Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2677,8 +2677,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Toulouse/Consultant-Architecte-Cloud-et-Intgration---CDI---H-F_669586WD",
     "source": "workday:pwc",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-07-31T12:08:24.580Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-07-31T12:51:51.388Z",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -2694,7 +2694,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-clients-grands-comptes-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2714,7 +2714,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -2734,7 +2734,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2751,7 +2751,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-de-particuliers-f-h-toulouse-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2768,7 +2768,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-f-h-chartres-tassigny-28",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2785,7 +2785,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-nation-cdd-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2802,7 +2802,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-paris-secteur-louvre",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -2819,7 +2819,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-paris-secteur-trocadero",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -2836,7 +2836,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-pme-f-h-seine-saint-denis",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2853,7 +2853,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-agriculture-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2870,7 +2870,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-multicanal-f-h-dijon-21",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2887,7 +2887,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-secteur-public-et-projets-du-territoire-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2904,7 +2904,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-banque-a-distance-f-h-rennes-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2921,7 +2921,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -2938,7 +2938,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-accueil-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2955,7 +2955,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-grandes-entreprises-h-f-nice",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2972,7 +2972,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-17",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -2989,7 +2989,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-ingenieur-etudes-amelioration-continue-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3006,7 +3006,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/banquier-prive-h-f-75",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3023,7 +3023,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-back-office-credit-consommation-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3040,7 +3040,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/chargee-de-conformite-et-de-controle-permanent-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3057,7 +3057,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-noisy-le-grand-centre-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3074,7 +3074,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-reporting-reglementaire-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3091,7 +3091,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/alternant-chef-de-produits",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3108,7 +3108,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/expert-conformite-bancassurance-et-controles-permanents-f-h-cdd",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3125,7 +3125,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3142,7 +3142,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-dingenierie-flux-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3159,7 +3159,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-agence-en-ligne-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3176,7 +3176,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-odeon-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3193,7 +3193,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/chargee-detudes-economiques-et-financieres",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3210,7 +3210,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-assistant-trader-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3227,7 +3227,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-prive-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3244,7 +3244,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-nantes-44",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3261,7 +3261,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-f-h-tours-37-orleans-45-bourges-18",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3281,7 +3281,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3298,7 +3298,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-gestionnaire-middle-contentieux-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3315,7 +3315,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-relations-clients-f-h-cdd",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3332,7 +3332,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-neuilly-sur-marne-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3349,7 +3349,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-saint-denis-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3366,7 +3366,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/originateur-sustainable-banking-financement-durable-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3383,7 +3383,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-digital-paris-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3400,7 +3400,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-cergy-cerclades-95-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-18T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3417,7 +3417,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-digital-tours-37",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3434,7 +3434,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-pte-dorleans-paris",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3451,7 +3451,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-professionnels-f-h-5",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3468,7 +3468,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-versailles-foch-78",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3485,7 +3485,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-ile-de-france",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3502,7 +3502,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3519,7 +3519,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/banquier-conseil-direction-du-developpement-et-de-la-transformation-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3536,7 +3536,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-reporting-risque-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3553,7 +3553,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-en-gestion-de-patrimoine-premium-cdd-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3570,7 +3570,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-de-limmobilier-h-f-cdd",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3587,7 +3587,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-clientele",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3604,7 +3604,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-banque-a-distance-f-h-lille-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3621,7 +3621,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-internationales-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3638,7 +3638,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdd-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3655,7 +3655,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particulier-f-h-e-agence",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3672,7 +3672,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-7",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3689,7 +3689,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-risques-h-f-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3706,7 +3706,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/controleur-permanent-de-conformite-f-h-cdd-7-mois",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3723,7 +3723,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-clientele-patrimoniale-nice-malaussena",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3740,7 +3740,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/assistant-pole-retournement-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3757,7 +3757,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-cdi-lille",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3774,7 +3774,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/comptable-specialiste-bancaire-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3794,7 +3794,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3811,7 +3811,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/pepiniere-gestionnaire-de-clientele-h-f-cdi-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3828,7 +3828,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-f-h-nice",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3845,7 +3845,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdd-conseiller-ere-commercial-e-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3862,7 +3862,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-banque-digitale-h-f-le-mans-72",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3879,7 +3879,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-affaires-publiques-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -3896,7 +3896,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/transaction-regulatory-reporting-analyst-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -3913,7 +3913,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-projets-et-etudes-comptables-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -3930,7 +3930,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/devenez-conseiller-de-clientele-particuliers-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3947,7 +3947,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-h-f-14",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3964,7 +3964,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-agence-assistance-entreprises-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3981,7 +3981,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-ere-de-clientele-particuliers-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -3998,7 +3998,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-ere-de-clientele-particuliers-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4015,7 +4015,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-des-particuliers-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4032,7 +4032,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4049,7 +4049,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-7",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4066,7 +4066,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-paris-secteur-commercial-la-chapelle",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4086,7 +4086,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4103,7 +4103,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-f-h-dijon-wilson-21",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4120,7 +4120,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-issy-les-moulineaux-92",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4137,7 +4137,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-locatif-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4154,7 +4154,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-h-f-vitry94",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4171,7 +4171,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4188,7 +4188,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-specialise-en-credit-f-h-nantes",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4205,7 +4205,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-appui-commercial-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4222,7 +4222,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-professions-liberales-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4239,7 +4239,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-data-scientist-generative-ai-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -4256,7 +4256,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-back-office-credit-a-la-consommation-cdd-6-mois-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4273,7 +4273,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-quantitatif-risques-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4290,7 +4290,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-grands-comptes-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4307,7 +4307,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-digital-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4324,7 +4324,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdi-btp-banque-paris-etoile",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4341,7 +4341,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-patrimonial-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4358,7 +4358,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-des-particuliers-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4375,7 +4375,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-5",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4392,7 +4392,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-lutte-contre-le-blanchiment-et-ft-f-h-direction-de-la-conformite-et-controles-permanents",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4409,7 +4409,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-clientele-entreprises-f-h-tours-37",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4426,7 +4426,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-junior-f-h-brest-29",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4443,7 +4443,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-marche-des-entreprises-economie-sociale-force-dappui-regionale-tours-37-ou-orleans-45",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:32:58.865Z",
     "datePubFiable": true
@@ -4460,7 +4460,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-h-f-17",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4477,7 +4477,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-arpajon-91",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4494,7 +4494,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-grandes-entreprises-h-f-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4511,7 +4511,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-besancon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4528,7 +4528,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-bobigny-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4545,7 +4545,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/chargee-daffaires-internationales-h-f-dijon-21",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4562,7 +4562,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-clientele-professionnels-f-h-tours-beranger-37",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4579,7 +4579,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-saint-ouen-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-18T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4599,7 +4599,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "opendatasoft:bpce.opendatasoft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4616,7 +4616,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-ouvert-aux-profils-en-reconversion-5",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4633,7 +4633,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-professionnelle-h-f-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4650,7 +4650,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-mission-pilotage-f-h-lezennes",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4667,7 +4667,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-de-particuliers-f-h-nice-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4684,7 +4684,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-gestion-service-client-cautions-f-h-cdi-btp-banque",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4701,7 +4701,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-poissy-78",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4718,7 +4718,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-noisy-le-roi-78",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4735,7 +4735,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-secteur-95",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4752,7 +4752,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-15",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4769,7 +4769,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/controleur-permanent-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4786,7 +4786,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4803,7 +4803,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particulier-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4820,7 +4820,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-centre-daffaires-entreprises-marseille-toulon-nice-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -4837,7 +4837,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-centre-daffaires-entreprises-marseille-toulon-nice-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -4854,7 +4854,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-centre-daffaires-entreprises-marseille-toulon-nice-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -4871,7 +4871,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4888,7 +4888,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-des-professionnels-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4905,7 +4905,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-vente-a-distance-specialise-en-credit-a-la-consommation-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4922,7 +4922,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-23",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4939,7 +4939,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdd-chargee-services-bancaires-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4956,7 +4956,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-maizieres-les-metz",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -4973,7 +4973,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-personnes-protegees-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -4990,7 +4990,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-multimedia-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5007,7 +5007,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-privee-f-h-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5024,7 +5024,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdi-btp-banque-grenoble",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5041,7 +5041,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-f-h-9",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5058,7 +5058,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/assistant-charge-daffaires-entreprises-f-h-btp-banque-grenoble-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5075,7 +5075,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdd-conseiller-en-gestion-de-patrimoine-premium-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5092,7 +5092,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-professionnels-f-h-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5109,7 +5109,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-pme-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5126,7 +5126,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-cdd-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5143,7 +5143,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-particuliers-h-f-cdi-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5160,7 +5160,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-clientele-professionnels-h-f-force-pro-tours-ou-orleans",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5177,7 +5177,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5194,7 +5194,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdd-chargee-de-risques-de-credits-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5211,7 +5211,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daccueil-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5228,7 +5228,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/controleur-normes-de-conformite-et-service-investissement-f-h-cdd-6-mois",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5245,7 +5245,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-succession-f-h-cdd-7-mois-lezennes",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5262,7 +5262,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-f-h-20",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5279,7 +5279,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-pilotage-et-reporting-des-risques-transverses-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -5296,7 +5296,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-flux-edi-assistance-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5316,7 +5316,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "adzuna"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -5333,7 +5333,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-transport-environment-industry-group-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -5350,7 +5350,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-assistant-banquier-conseil-f-h-lille",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -5367,7 +5367,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-conformite-services-dinvestissement-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5384,7 +5384,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-risk-esg-analyst-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -5401,7 +5401,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/ingenieur-financier-risques-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5418,7 +5418,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-paris-secteur-ternes",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5435,7 +5435,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-strasbourg-cdi",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5452,7 +5452,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-vincennes-94",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5469,7 +5469,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-h-f-villejuif-94",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5486,7 +5486,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/comptable-comptes-individuels-multinormes-assurances-f-h-paris-ou-rennes",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5503,7 +5503,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5520,7 +5520,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/banquier-prive-du-dirigeant-f-h-3",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5537,7 +5537,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-9",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5554,7 +5554,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdd-6-mois-technicien-comptable-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -5571,7 +5571,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-back-office-corporate-cdd-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5588,7 +5588,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-relations-clients-h-f-middle-office",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5605,7 +5605,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-relation-commerciale-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5622,7 +5622,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-patrimonial-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5639,7 +5639,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-relation-clientele-cdd-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5656,7 +5656,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/tresorier-alm-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5673,7 +5673,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-h-f-9",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5690,7 +5690,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-innovation-cdi-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5707,7 +5707,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-antony-92",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5724,7 +5724,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-eti-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5741,7 +5741,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-palaiseau-91",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5758,7 +5758,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-noisy-mont-dest-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5775,7 +5775,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-13",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5792,7 +5792,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-relation-client-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5809,7 +5809,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-ouvert-aux-profils-en-reconversion",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5826,7 +5826,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-professionnelle-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5843,7 +5843,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-ouvert-aux-profils-en-reconversion-8",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5860,7 +5860,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/alternance-1-an-charge-de-securite-financiere-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5877,7 +5877,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdi-btp-banque-metz",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5894,7 +5894,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-multimedia-f-h-cdi-tours",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -5911,7 +5911,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-f-h-mouffetard",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5928,7 +5928,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-daumesnil-paris-est",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5945,7 +5945,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-avron-paris-est",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5962,7 +5962,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-secteur-93",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5979,7 +5979,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-secteur-75",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -5996,7 +5996,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-ile-de-france",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6013,7 +6013,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-33",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6030,7 +6030,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/assistant-de-clientele-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6047,7 +6047,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-centre-daffaires-entreprises-marseille-toulon-nice-avignon",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -6064,7 +6064,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/compliance-officer-sanctions-f-h-cdd-de-6-mois",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -6081,7 +6081,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-securite-financiere-f-h-direction-de-la-conformite-et-controles-permanents-cepac",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6098,7 +6098,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-5",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6115,7 +6115,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6132,7 +6132,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-14eme-gal-leclerc-paris",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6149,7 +6149,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-innovantes-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6166,7 +6166,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/foire-de-chalons-en-champagne-conseiller-bancaire-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6183,7 +6183,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/gestionnaire-credits-documentaires-h-f",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6200,7 +6200,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/cdi-banquier-prive-h-f-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6217,7 +6217,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-risques-operationnels-f-h-cdi-nanterre",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6234,7 +6234,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/charge-daffaires-entreprises-f-h-cdi-amiens",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6251,7 +6251,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/analyste-risques-de-marche-f-h-2",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -6268,7 +6268,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-commercial-f-h-nice-ouest",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6285,7 +6285,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/apprentissage-assistant-e-grands-comptes-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -6302,7 +6302,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-46",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6319,7 +6319,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-asnieres-92",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6336,7 +6336,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/devenez-conseiller-de-clientele-particuliers-h-f-5",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6353,7 +6353,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-gestionnaire-back-office-monetique",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6370,7 +6370,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/stage-6-mois-valuation-risk-analyst-f-h",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -6387,7 +6387,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.bpce.fr/job/devenez-conseiller-de-clientele-particuliers-h-f-4",
     "source": "opendatasoft:bpce.opendatasoft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T21:06:20.265Z",
     "datePubFiable": true
@@ -6407,7 +6407,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "recruitee:ikpartners"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -6424,7 +6424,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://8advisory.recruitee.com/o/forward-deployment-engineer-alternance",
     "source": "recruitee:8advisory",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-20 15:00:37 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6441,7 +6441,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/alternant-expertise-conseil-nice-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-30 09:03:34 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6458,7 +6458,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/assistant-audit-octobre-2026-bourgogne-franche-comte-dijon-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-22 08:51:14 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6475,7 +6475,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/consultant-transaction-services-lyon-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-09 14:29:44 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6492,7 +6492,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/assistant-debutant-audit-toulon-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-08 10:57:13 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6509,7 +6509,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/assistant-debutant-audit-nice-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-08 10:55:15 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6526,7 +6526,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/gestionnaire-de-paie-rouen-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-06 14:48:40 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6543,7 +6543,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/avocat-corporate-ma-neuilly-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-25 15:14:35 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6560,7 +6560,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/stagiaire-audit-extra-financier-neuilly-sur-seine-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-06 07:41:50 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6577,7 +6577,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/assistant-debutant-audit-octobre-2026-marseille-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-04 08:54:21 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6594,7 +6594,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieresfrance.grant-thornton.fr/o/alternance-expertise-conseil-neuilly-sur-seine-hf",
     "source": "recruitee:grantthornton",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14 08:14:06 UTC",
     "firstSeenAt": "2026-08-29T21:23:56.710Z",
     "datePubFiable": true
@@ -6611,7 +6611,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.paipartners.com/o/paris-investment-group-internship-6-months-start-in-mar-2027",
     "source": "recruitee:paipartners",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-03 13:38:11 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6628,7 +6628,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.paipartners.com/o/paris-investment-group-internship-6-months-start-in-jan-2027",
     "source": "recruitee:paipartners",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-03 13:36:58 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6645,7 +6645,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.paipartners.com/o/paris-investment-group-internship-6-months-start-in-sep-2026",
     "source": "recruitee:paipartners",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-03 13:38:37 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6662,7 +6662,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://tikehaucapital.recruitee.com/o/alternant-esg-immobilier-durable",
     "source": "recruitee:tikehaucapital",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-27 15:59:37 UTC",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6679,7 +6679,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6461",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-23",
     "firstSeenAt": "2026-08-29T21:51:57.193Z",
     "datePubFiable": true
@@ -6696,7 +6696,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/4226",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-28",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6713,7 +6713,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6063",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-19",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6730,7 +6730,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6232",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6747,7 +6747,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6233",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6764,7 +6764,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6231",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6784,7 +6784,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "oraclecloud:icbpjb.fa.ocs.oraclecloud.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6801,7 +6801,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6313",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6818,7 +6818,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6314",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6835,7 +6835,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6315",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6852,7 +6852,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6317",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6869,7 +6869,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6316",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6886,7 +6886,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6318",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6903,7 +6903,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6319",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6920,7 +6920,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6321",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6937,7 +6937,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6322",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6954,7 +6954,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6320",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6971,7 +6971,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6323",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -6988,7 +6988,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6328",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7005,7 +7005,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6325",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7022,7 +7022,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6326",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7039,7 +7039,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6330",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7056,7 +7056,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6329",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7073,7 +7073,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6336",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7090,7 +7090,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6337",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7107,7 +7107,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6331",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7124,7 +7124,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6335",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7141,7 +7141,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6338",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7158,7 +7158,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6340",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7175,7 +7175,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6341",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7192,7 +7192,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6347",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-30",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7209,7 +7209,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6358",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-06",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7226,7 +7226,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6359",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-06",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7243,7 +7243,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6370",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-16",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7260,7 +7260,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6380",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-20",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7277,7 +7277,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6385",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-20",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7294,7 +7294,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6393",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-21",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7311,7 +7311,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6452",
     "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7328,7 +7328,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1001/job/210764421",
     "source": "oraclecloud:jpmc.fa.oraclecloud.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13",
     "firstSeenAt": "2026-08-29T21:51:57.193Z",
     "datePubFiable": true
@@ -7346,7 +7346,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/qonto/53d136f5-0939-4c3d-9704-342bb53fab0e",
     "source": "ashby:qonto",
     "_descr": "Our mission: Creating the freedom for SMEs to succeed in business and beyond, by delivering Europe's leading finance workspace.\n\n \n\nOur journey: Founded by Alexandre https://www.linkedin.com/in/aprot/ and Steve https://www.linkedin.com/in/steveanavi/ in July 2017, Qonto has rapidly gained trust, serving over 600,000 customers with a team of 1,600+ Qontoers across Europe.\n\n \n\nOur beliefs: We evaluate applicants based on skills and potential — no boxes to tick. Our team is 55% international, 44% women, and 20% parents.\n\nDiscover the steps we took to create a discrimination-free hiring process https://medium.com/qonto-way/a-recruiters-dilemma-confronting-bias-in-hiring-b78acce148eb.\n\n \n\n⭐ Mission\n\nJoin us as a Freelance Full-Stack Engineer to build one of Qonto's first internal applications: a modern, high-quality People platform that transforms the daily experience of 1,700+ Qontoers - from compensation cycles and performance reviews to everyday HR workflows.\n\nYou'll work hand-in-hand with Mélodie https://www.linkedin.com/in/melodie-moulin/, our Head of People Systems, on a high-ownership mission: co-define the product vision, design the architecture, and ship to production. This is not a staff-augmentation engagement - it's a mandate for someone who builds like an owner.\n\n \n\n👩‍💻🧑‍💻 As a Freelance Full-Stack Engineer, you will\n\n \n\n• Ship the People platform MVP by December 2026: migrate key Workday modules into a custom internal app (React  for the front, Go for the back) that handles comp cycles, performance reviews, and daily HR workflows for 1,700+ Qontoers - on time and with zero compromise on quality.\n\n• Co-define the product vision and roadmap with Mélodie: run user discovery with People teams, challenge specs, and help decide what gets built first - not just how to build it.\n\n• Design for security and compliance from day one: architect systems that handle sensitive People data (GDPR, access controls, data residency) with the rigor the context demands.\n\n• Ship faster with AI: leverage AI tools (Cursor, Claude Code, Copilot…) in your daily workflow and build AI-enabled features where they create real leverage for the People team.\n\n• Enable long-term adoption: document your work, run training sessions, and set up governance so the People team can own and evolve the tools long after the mission ends.\n\n \n\n🏅 What we're looking for\n\n• Strong full-stack engineering (backend primary): You've shipped production apps end-to-end, handling sensitive data. React and Go are familiar - but we're evaluating craft and delivery capacity, not your exact stack.\n\n• AI-native workflow: You use AI tools daily to ship faster - code generation, testing, architecture support. Not experimenting - actually delivering.\n\n• Architecture & security instincts: You design for GDPR, access control, and data residency from the start. Security is not an afterthought.\n\n• Product engineer mindset: You've shaped what to build, not just how. You run user discovery, challenge specs, and iterate on real feedback.\n\n• High autonomy + owner mindset: You've delivered complex, ambiguous projects with minimal guidance. You set your own priorities, communicate proactively, and unblock yourself.\n\n• Bonus: Experience with HRIS/People tools (Workday, ATS, Payroll systems) or internal tooling for large organizations.\n\n \n \n\n🔧 What you'll get\n\n \n\n• A greenfield mandate with direct access to decision-makers - no layers of approval, no waiting on committees\n\n• A stack built on React and Go, and the Workday REST middleware - adaptability valued over stack matching\n\n• Unlimited access to AI tools: Cursor, Claude Code, Copilot, Notion AI\n\n• A culture where autonomy is the default: you own the architecture, set the direction, and ship\n\n• A mission with direct impact on every Qontoer's daily life from day one\n\n \n\n🤝 Your manager & main point of contact\n\nYou'll work day-to-day with Sébastien https://linkedin.com/in/sebastientalasi/, Lead Corporate Automation, your functional lead for this mission, as well as Justine https://www.linkedin.com/in/justineraze/, our first engineer on the mission - and collaborate closely with Mélodie http://linkedin.com/in/m%C3%A9lodie-moulin-262a3840, Head of People Systems, on the People side of the scope.\n\nSébastien brings 15+ years of experience as a Staff Engineer / Tech Lead on SAP and corporate systems, with stints at Sopra Steria, nearly a decade at CANAL+ Group (where he led the S/4HANA conversion and cloud migration), and VINCI Energies. He joined Qonto in September 2025 to lead Corporate Automation. Expect a hands-on, lean-minded leader who values technical excellence, clear ownership, and pairing - someone who'll spar with you on solutions and roll up his sleeves to ship the right outcome.\n\n \n\n💬 Hiring Process\n\n \n\n• A first interview (1 hour): with Samy (your Recruiter)\n\n• A skills test (done asynchronously and then debriefed with Sébastien) to demonstrate how you think and give you a taste of what working at Qonto could be like\n\n \n\nWe aim to have the hiring process last 10 days max, from first interview to potential offer🤞\n\n \n\nIf you've read this far and thought \"that sounds like me but I don't check every box\" — apply anyway. We hire on potential and mindset, not checklists.\n\n \n\n----------------------------------\n\n🔒 Your security matters to us\n\n Recruitment scams are on the rise. Keep in mind, we will never work with third-party platforms or agencies that request payment from candidates.\n\nIf you receive a suspicious message claiming to be from Qonto, please report it right away (support@qonto.com)\n\n----------------------------------",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T09:51:57.074+00:00",
     "firstSeenAt": "2026-08-29T21:16:37.487Z",
     "datePubFiable": true
@@ -7364,7 +7364,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/pennylane/22ed6f0a-53de-4e98-87f7-200bd17a7a45",
     "source": "ashby:pennylane",
     "_descr": "Are you looking to have an impact on the daily life of millions of entrepreneurs in France (and tomorrow in Europe)?\n\nAre you looking for a work environment that values trust, proactivity, and autonomy?\n\nThen Pennylane is the right place for you !\n\n \n\nOur vision\n\nWe aim to become the most beloved financial Operating System of French SMEs and Accounting Firms (and soon, European ones).\n\nWe help entrepreneurs rid themselves of time-consuming tasks related to accounting and finance while providing them with access to key financial information to assist in making the best decisions for their business.\n\n \n\nAbout us\n\nPennylane is one of the fastest growing Fintechs in France (and soon to be in Europe!)\n\n \n\nIn 6 years of existence, we’ve managed to :\n\n💻 Make ourselves known as a groundbreaking accounting and financial software for small businesses and their accountants\n\n💰 Raise a total of €400 millions, including from Sequoia, the famous fund from the Silicon Valley who invested early in companies like Google, Facebook, Airbnb, Stripe, Paypal and much more...\n\n👨‍👩‍👧‍👦 Grow from 7 cofounders to 1200 happy Pennylaners : we’re now recognized as one of the greatest places to work in France (and also remotely), with a 4.6/5 rating on Glassdoor https://www.glassdoor.fr/Avis/Pennylane-France-Avis-E4171708.htm.\n\n🌍 Build an international environment with more than 25 nationalities, with a strong remote-friendly culture, where 30% of the employees are already working from all parts of Europe\n\n🤝 Earn the trust of thousands of customers and accounting firms and obtain outstanding ratings https://www.google.com/search?q=pennylane&ei=O9pOYvm0Co-blwSmhKmIAw&ved=0ahUKEwi5vsWL-4H3AhWPzYUKHSZCCjEQ4dUDCA4&uact=5&oq=pennylane&gs_lcp=Cgdnd3Mtd2l6EAMyDQgAEIAEELEDEIMBEAoyCwguEIAEEMcBEK8BMgcIABCABBAKMgcIABCABBAKMgUIABCABDIFCAAQgAQyBQgAEIAEMgcIABCABBAKMgcIABCABBAKMgcIABCABBAKOgcIABBHELADOgkIABCwAxAKEEM6CgguEMcBEK8BEAo6BggAEBYQHjoICAAQFhAKEB46DQguEIAEEMcBEK8BEApKBAhBGABKBAhGGABQ7QFY6wVgugdoAXABeACAAUiIAbMCkgEBNZgBAKABAcgBCcABAQ&sclient=gws-wiz\n\n🚀 Already more than 1,250,000 small and medium-sized enterprises (SMEs) and over 6000 accounting firms use Pennylane in France!\n\n \n\nOur electronic invoicing track represents a core strategic priority for Pennylane. This dedicated team is responsible for developing our comprehensive electronic invoicing offering for our accounting firm partners and their SME clients (Small and Medium-sized Enterprises), accelerating client acquisition, enhancing customer satisfaction, and establishing operational excellence within this segment.\n\n \n\nAs our cross-functional initiatives expand, we now require robust frameworks for end-to-end process management, data-driven performance analytics, and a relentless focus on operational efficiency and scalability. We are seeking an exceptional, impact-oriented Strategy & Operations professional who will be instrumental in building these critical capabilities and propelling our electronic invoicing track toward market leadership.\n\n \n\nWhy this role matters at Pennylane\n\n \n\nThe Strategy & Operations role will serve as the critical link between our strategic vision and day-to-day execution, working directly with the General Manager for the track. You will help translate ambitious goals into actionable, measurable roadmaps, establish best-in-class metrics, and develop the operational infrastructure needed to scale the business rapidly and sustainably.\n\n \n\nThis is a high-impact, high-visibility role with significant opportunity for leadership and professional growth. \n\n \n\nYour responsibilities\n\n \n\nStrategic planning and execution\n\n- Partner with the product leadership to define, prioritize, and implement operational roadmaps aligned with business objectives\n\n- Design and establish scalable operational frameworks that support our growth\n\n \n\nData-driven decision making\n\n- Lead comprehensive analyses to identify market opportunities, operational inefficiencies, and growth levers\n\n- Develop actionable insights and recommendations based on quantitative and qualitative research\n\n \n\nProject leadership\n\n- Spearhead strategic initiatives and pilot programs from ideation through implementation and measurement\n\n- Identify and manage complex, cross-functional projects with multiple stakeholders and competing priorities\n\n \n\nCross-functional orchestration\n\n- Serve as the operational nexus between the track and horizontal teams including care, sales, and the other product teams impacted by the electronic invoicing reform\n\n- Facilitate effective collaboration and alignment across organizational boundaries\n\n \n\nPerformance management\n\n- Own the OKR process for the track, ensuring clarity of objectives and accountability for results\n\n- Design and implement robust tracking mechanisms to monitor performance against key metrics\n\n- Proactively identify performance gaps and develop action plans to address them\n\n \n\nWho we’re looking for\n\n \n\nExperience\n\n- 5+ years of experience in Strategy & Operations or a related field, with a strong record of scaling business operations in dynamic environments\n\n- Proven track record of translating strategic initiatives into executable operational plans and projects, delivering measurable business impact\n\n- Proficiency in SQL (or willingness to learn) and modern data analysis tools to drive decision-making independently\n\n \n\nCore competencies\n\n- Strategic vision: ability to connect business objectives with operational requirements while maintaining focus on long-term goals\n\n- Analytical excellence: skilled at distilling complex data into actionable insights that drive business outcomes\n\n- Project management rigor: experience leading cross-functional initiatives from conception to implementation\n\n- Communication and influence: exceptional ability to articulate complex concepts clearly and persuade diverse stakeholders\n\n- Problem-solving orientation: demonstrated ability to identify root causes and develop innovative, practical solutions\n\n\n\n\n⚠️ THIS ROLE IS PARIS-BASED ONLY, AND UNFORTUNATELY WE'RE NOT ABLE TO OFFER A FULLY REMOTE SETUP.\n\n\nYOU'LL NEED TO BE FLUENT IN BOTH FRENCH AND ENGLISH FOR THIS ROLE.\n\n\n\nRecruitment Process\n\n- Screening interview with Orane - Senior Business Recruiter (30 mins)\n\n- An interview with Antoine - General Manager RFE  (1h)\n\n- A Business Case to prepare at home and to present (1h)\n\n- A final interview with Eric - VP Strategic Initiatives (45 mins)\n\n\n\n \n\nWhat do we do to make your work life easier\n\n \n\n🌴 Wherever you are based, you will get 25 vacations days paid by Pennylane\n\n💵 You’ll have a competitive compensation package\n\n📈 You'll get company shares to enjoy a piece of the success story you're building with us\n\n🏡 You’ll have a budget to turn your home into a more comfortable workspace, as well as a monthly allowance to work from a coworking space whenever you feel like it\n\n⛹️ Through our partner Gymlib, you’ll have access to 8000 fitness spaces in Europe and more than 300 activities related to wellness\n\n🇬🇧 You’ll have access to Busuu https://www.busuu.com/fr/p/start-learning?utm_medium=cpc&utm_source=google&utm_campaign=FR_FR_Web_Brand_E&utm_group=FR_FR_Web_Brand_E&utm_term=busuu&gclid=CjwKCAjw682TBhATEiwA9crl34OqnbJDliinEXFZNqOcb6391KXrgq4ZDDwEiwMdtTdtuVULvuF7HhoCgZEQAvD_BwE&gclsrc=aw.ds to perfect your English or your French\n\n💻 You’ll get the latest Apple equipment\n\n🏢 Depending on the teams and the requirements of the position - you'll be able to work remotely from your country of residence, as long as it is in Europe and within a maximum time difference of two hours from the CET time zone\n\n🎉 We are committed to regularly coming together for company events such as Tech Days (which bring remote Pennylaners together every 3 months) or our annual company seminar, fostering significant moments of cohesion for everyone.\n\n \n\nIf you are based in France, you will have a French contract following French regulation on top of the additional perks : 6 to 12 RTT, 5 weeks PTOs, lunch credits (Swile), Alan Blue healthcare cover and regular events in cities where Pennylaners are mostly presents (Lyon, Bordeaux, Nantes…)\n\n \n\nWho are we looking for ?\n\nTo thrive at Pennylane, you need :\n\n-To speak English (level is assessed and appreciated according to the department you’re applying to)\n\n-To be energized by an ever-shifting work environment\n\n-To be highly collaborative (within your team or other stakeholders)\n\n-Sufficiently experienced to prioritize business-led actions on your day to day activity\n\n \n\nWe know that some people are less likely to apply than others, if they don’t feel like they meet the full list of criteria.\n\nIf you’re hesitating, we encourage you to apply : who knows, it might be the start of a meaningful and long-lasting collaboration.\n\n \n\nImportant information for candidates\n\nRecruitment scam attempts are on the rise. We invite you to remain vigilant during your exchanges.\n\nApplications through official channels only : apply exclusively through our job postings published on our official platforms (career site, official partner pages).\n\nAlways verify the sender's email address: our communications are sent from professional email addresses with the domains @pennylane.com or @pennylane-partners.com\n\nWe will never ask you for payment or financial information\n\n(bank details, payment for an interview, equipment purchases, etc.) as part of the recruitment process. If such a request is made to you, it is fraudulent. We invite you to not respond and to report it to us immediately.\n\n \n\nWe also want to emphasize that we fully embrace diversity, equity and inclusion and that we’re doing our best to create a safe and inclusive environment.\n\nWe are committed to providing an equal employment opportunity regardless of gender, sexual orientation, origin, disabilities, or any other traits that make you who you are. If anything, diversity makes us a more fun place to work at.\n\n\n\n🇫🇷 Données personnelles \n\nPennylane traite vos données pour gérer votre candidature et évaluer votre adéquation au poste. Si votre candidature n’aboutit pas, vos données peuvent être conservées 2 ans à compter de notre dernier échange ou de la clôture du recrutement afin de constituer & gérer un vivier de candidats. Vous pouvez vous opposer à tout moment et demander la suppression de vos données en écrivant à : dpo@pennylane.com.  dpo@pennylane.com \nNotre data policy https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n🇬🇧 Personal Data \n\nPennylane processes your data to manage your application and assess your suitability for the position. If your application is unsuccessful, your data may be retained for 2 years from our last exchange or the closing of the recruitment process, in order to build and manage a candidate pool. You may object at any time and request the deletion of your data by writing to dpo@pennylane.com. Learn more https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n🇩🇪 Personenbezogene Daten \n\nPennylane verarbeitet Ihre Daten, um Ihre Bewerbung zu bearbeiten und Ihre Eignung für die Stelle zu beurteilen. Sollte Ihre Bewerbung nicht erfolgreich sein, können Ihre Daten bis zu 2 Jahre ab unserem letzten Austausch oder dem Abschluss des Rekrutierungsverfahrens gespeichert werden, um einen Kandidatenpool aufzubauen und zu verwalten. Sie können jederzeit Widerspruch einlegen und die Löschung Ihrer Daten beantragen, indem Sie an dpo@pennylane.com schreiben. Mehr erfahren https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n\n\n🇪🇸 Datos personales\n\nPennylane trata sus datos para gestionar su candidatura y evaluar su idoneidad para el puesto. En caso de que su candidatura no sea seleccionada, sus datos podrán conservarse hasta 2 años a partir de nuestro último contacto o de la finalización del proceso de selección, con el fin de constituir y gestionar una reserva de candidatos. Puede oponerse en cualquier momento y solicitar la eliminación de sus datos escribiendo a dpo@pennylane.com. Más información https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n\n",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-02T14:58:50.439+00:00",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7382,7 +7382,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/pennylane/a8a378f3-1f5c-4523-9b0d-7d21e6bdf8dd",
     "source": "ashby:pennylane",
     "_descr": "🚀 Envie d’une aventure où la comptabilité est une priorité business ? Rejoins Pennylane en tant que comptable interne et intègre une équipe dynamique composée de quatre personnes !\nSous la supervision de Sabrina, tu prendras en charge la comptabilité fournisseurs et tous les flux liés aux achats : immobilisations, notes de frais et dépenses opérationnelles. Ton objectif ? Faire rayonner l'excellence opérationnelle, garantir la fiabilité de nos clôtures et contribuer activement à notre croissance internationale.\n\n\n\n\nNOTRE VISION\n\nNotre ambition est de devenir le logiciel de pilotage financier préféré des PMEs européennes.\nNous aidons les entrepreneurs à se débarrasser des tâches chronophages liées à la comptabilité et à la finance, tout en leur donnant accès à des informations financières clés pour prendre de meilleures décisions.\nEn parallèle, nous aidons les cabinets d’expertise-comptable à passer moins de temps sur des tâches répétitives et plus de temps sur le conseil.\n\n\n\n\nÀ PROPOS DE PENNYLANE\n\nPennylane est une des FinTech à la plus forte croissance en France, et souhaite bientôt adresser le marché européen.\n\nEn 5 ans d'existence, nous sommes parvenus à :\n\n - 💻 Nous positionner sur le marché comme un éditeur de solution de comptabilité et de gestion financière innovant\n\n - 💰 Lever un total de 230 millions d'euros, auprès d'investisseurs de renom, dont Sequoia Capital, le fonds phare de la Silicon Valley, connu pour avoir soutenu Google, Facebook, Airbnb, Stripe, PayPal et bien d'autres à leur début\n\n - 👨‍👩‍👧‍👦 Passer de 7 cofondateurs à une équipe de 800 collaborateurs, avec une note moyenne de 4,6/5 sur Glassdoor et 94% des évaluateurs Glassdoor qui recommanderaient PL à leurs proches !\n\n - 🌍 Construire une équipe internationale composée de collaborateurs issus de 25 pays différents, avec une culture du télétravail très flexible\n\n - 🤝 Gagner la confiance de milliers d'utilisateurs et obtenir d'excellents retours https://www.google.com/search?q=pennylane&ei=O9pOYvm0Co-blwSmhKmIAw&ved=0ahUKEwi5vsWL-4H3AhWPzYUKHSZCCjEQ4dUDCA4&uact=5&oq=pennylane&gs_lcp=Cgdnd3Mtd2l6EAMyDQgAEIAEELEDEIMBEAoyCwguEIAEEMcBEK8BMgcIABCABBAKMgcIABCABBAKMgUIABCABDIFCAAQgAQyBQgAEIAEMgcIABCABBAKMgcIABCABBAKMgcIABCABBAKOgcIABBHELADOgkIABCwAxAKEEM6CgguEMcBEK8BEAo6BggAEBYQHjoICAAQFhAKEB46DQguEIAEEMcBEK8BEApKBAhBGABKBAhGGABQ7QFY6wVgugdoAXABeACAAUiIAbMCkgEBNZgBAKABAcgBCcABAQ&sclient=gws-wiz\n\n - 🚀 Déjà plus de 500,000 TPE/PME et plus de 5000 cabinets d’expertise-comptable utilisent Pennylane en France !\n\n\n\n\nCE QUE TU VAS ACCOMPLIR\n\n\nCYCLE FOURNISSEURS\n\n - Assurer la qualité des imputations comptables et analytiques dans Pennylane pour un reporting fiable et actionnable.\n\n - Préparer et cadencer les paiements fournisseurs en optimisant les flux.\n\n - Être le point de contact avec les prestataires en cas d’impayés et de litiges, avec une résolution rapide et documentée.\n\n - Piloter la qualité de la donnée fournisseurs en coordination avec l’équipe Procurement et via notre outil Pivot.\n\n - Analyser la balance âgée fournisseurs et proposer des actions correctives (process, cut-off, conditions) pour éviter les dérives.\n\n - Piloter les cut-offs (CCA/FNP) et conduire la revue mensuelle des charges pour tenir des clôtures J+4 stables.\n\n - Contribuer à la préparation de la TVA : cadrages, contrôles et éléments déclaratifs.\n\n\nDÉPENSES COLLABORATEURS\n\n - Traiter les notes de frais et les dépenses cartes collaborateurs en garantissant conformité et rapidité.\n\n - Assurer l’intégration des dépenses de voyage en comptabilité, via notre outil TravelPerk.\n\n\nIMMOBILISATIONS & PRODUCTION IMMOBILISÉE\n\n - Gérer le cycle des immobilisations de bout en bout dans Pennylane (saisie, amortissements, cadrages).\n\n - Piloter la production immobilisée (logiciel/R&D) et contribuer au dossier du C.I.R pour transformer nos efforts tech en valeur financière.\n\n\nPROJETS TRANSVERSES\n\n - Participer aux chantiers structurants : consolidation des comptes, comptabilité carbone (VSME), fiabilisation internationale.\n\n - Standardiser et automatiser quand c’est pertinent (check-lists, contrôles de première passe, réconciliations).\n\n - Devenir un(e) véritable acteur/actrice de Pennylane via des feedbacks réguliers et des tests avec les équipes Produit.\n\n\n\n\nPOURQUOI C’EST UN POSTE À FORT LEVIER\n\n - Impact direct sur la qualité des clôtures mensuelles, la fluidité du cycle fournisseurs et la valorisation du C.I.R.\n\n - Poste au carrefour des opérations et de la data financière, avec un vrai terrain de jeu pour améliorer, automatiser et documenter.\n\n - Tu arrives à un moment charnière : Pennylane accélère, les missions grandissent, les opportunités de carrière aussi.\n\n\n\n\nCE QUE TU APPORTES\n\n - 3 à 5 ans d'expérience en comptabilité d'entreprise : bonne maîtrise du cycle fournisseurs et première expérience en comptabilité d'immobilisations et internationale.\n\n - Rigueur, sens du détail utile, culture de la qualité et curiosité.\n\n - Maitrise des logiciels comptables (Pennylane est un plus) et des tableurs Excel/ Google Sheets.\n\n - Esprit de collaboration : tu aimes travailler en binôme, partager les bonnes pratiques, documenter et faire grandir l’équipe.\n\n\n\n\n🎁 CE QUE L’ON PEUT T’OFFRIR\n\n - 💵 BSPCE pour devenir actionnaire de Pennylane.\n\n - 🏥 Mutuelle Alan.\n\n - 🍜 Carte Swile.\n\n - 🏝 6 à 12 RTT en plus des 5 semaines de congés payés.\n\n - 🇬🇧 Cours d’anglais avec Busuu.\n\n - 🏢 Bureaux à deux pas de Saint-Lazare (Paris) et culture remote flexible.\n\n - 🧑‍💻 Budget mensuel pour full-remote/coworking.\n\n - 🏃‍♀️ Accès Gymlib (8000 salles, 300+ activités).\n\n - 💻 Mac, events réguliers (Pennylane Days trimestriels, séminaire annuel).\n\n\n\n\nPOUR T’ÉPANOUIR CHEZ PENNYLANE, TU DOIS\n\n - Parler anglais (niveau évalué selon le département). L’allemand est plus.\n\n - Aimer évoluer dans un environnement en changement.\n\n - Faire de la collaboration une priorité avec ton équipe et les parties prenantes.\n\n - Savoir prioriser les actions à fort impact business.\n\nNous savons que certaines personnes hésitent à postuler si elles ne cochent pas 100 % des critères. Si tu doutes, postule quand même : cela pourrait être le début d’une collaboration durable et significative !\n\n🇫🇷 Données personnelles \n\nPennylane traite vos données pour gérer votre candidature et évaluer votre adéquation au poste. Si votre candidature n’aboutit pas, vos données peuvent être conservées 2 ans à compter de notre dernier échange ou de la clôture du recrutement afin de constituer & gérer un vivier de candidats. Vous pouvez vous opposer à tout moment et demander la suppression de vos données en écrivant à : dpo@pennylane.com.  dpo@pennylane.com \nNotre data policy https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n🇬🇧 Personal Data \n\nPennylane processes your data to manage your application and assess your suitability for the position. If your application is unsuccessful, your data may be retained for 2 years from our last exchange or the closing of the recruitment process, in order to build and manage a candidate pool. You may object at any time and request the deletion of your data by writing to dpo@pennylane.com. Learn more https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n🇩🇪 Personenbezogene Daten \n\nPennylane verarbeitet Ihre Daten, um Ihre Bewerbung zu bearbeiten und Ihre Eignung für die Stelle zu beurteilen. Sollte Ihre Bewerbung nicht erfolgreich sein, können Ihre Daten bis zu 2 Jahre ab unserem letzten Austausch oder dem Abschluss des Rekrutierungsverfahrens gespeichert werden, um einen Kandidatenpool aufzubauen und zu verwalten. Sie können jederzeit Widerspruch einlegen und die Löschung Ihrer Daten beantragen, indem Sie an dpo@pennylane.com schreiben. Mehr erfahren https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n\n\n🇪🇸 Datos personales\n\nPennylane trata sus datos para gestionar su candidatura y evaluar su idoneidad para el puesto. En caso de que su candidatura no sea seleccionada, sus datos podrán conservarse hasta 2 años a partir de nuestro último contacto o de la finalización del proceso de selección, con el fin de constituir y gestionar una reserva de candidatos. Puede oponerse en cualquier momento y solicitar la eliminación de sus datos escribiendo a dpo@pennylane.com. Más información https://www.pennylane.com/fr/vos-donnees-personnelles-recrutement\n\n\n",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T05:20:55.156+00:00",
     "firstSeenAt": "2026-08-29T23:01:00.315Z",
     "datePubFiable": true
@@ -7400,7 +7400,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/alan/207a6ec4-1831-44a3-af4e-4ec42e7b7528",
     "source": "ashby:alan",
     "_descr": "HEALTH CAN’T WAIT. \n\nNot for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. You wait, until you can’t.\n\nAlan exists to end the wait.\n\nHealth is a universal right, and we believe this right can only become real when it’s coupled with prevention. We need to stop treating health as something we repair and start treating it as something we build, every day. It’s not solely a question of willpower. It’s the healthcare system itself that needs to work for everyone, in a sustainable way.\n\nSo we are building the new standard in prevention insurance. Alan is the first company that integrates insurance, prevention, and care into a single, acclaimed user experience.\n\nWe are on an incredible journey to build a global leading company, with a unique culture https://alan.com/en/careers. We already partner with 40K+ companies of all sizes, serving more than 1M+ members, and have reached €800M+ in ARR.\n\nPrevention as the new norm. That's what we're building with our team of 800+ people. If it speaks to you: we're hiring across France, Spain, Belgium, and Canada. And beyond.\n\n\n\n\n⭐️ THE ALAN INSURANCE GRADUATE PROGRAM ⭐️\n\nThe Alan Insurance Graduate Program is a unique opportunity to enter the team at the core of Alan Insurance business without getting silo-ed on a precise role. The Insurance team focuses on innovating on our health and disability insurance products, over 5 geographies including France, Belgium, Spain and Canada. Through the Program, you will develop a very precious blend of technical, business, entrepreneurial and product skills.\n\nAfter a 2-months onboarding, you may be involved in multiple missions in different streams of the Insurance team:\n\n - The Enterprise and Public Sector stream structures the best offers for our largest clients, whether a ministry or a corporate. They land on our most important deals (RFP - request for proposal) with our Sales team, contributing to business growth in a very visible way. \n\n - The insurance product stream dive into the lifecycle of a contract, from pricing and product implementation to the renewal phase. They team up with Engineer, Data and Marketing teams to ensure a delightful experience to our customers, whether when signing on our website, better equip Sales with the best offers or undergoing the renewal campaign (offer updates from one year to another). \n\n - The analytics and repricing stream focus on building metrics, tools, and dynamic models to monitor our portfolio, forecast our margin and price our portfolio. They push strategic decision making (like repricing) alongside the Data, Strategy and Finance teams.\n\n - The reinsurance and risk stream owns the Capital requirement model, the risk governance, the relationship with our Supervisor (ACPR) and the reinsurance coverage. \n\nEach program and mission will be co-built with you, to make the most of your growth plan and ensure you have impact and visibility from day 1 at Alan. \n\nAll along your Graduate Program, you will also benefit from a personalized support from the team through coaching. This will ensure that you are never alone on a topic and that you grow fast, while still being in the driver’s seat. \n\nAt Alan, we are at the forefront of the latest innovations in artificial intelligence. You will be expected to leverage every piece of technology at your disposal to contribute to scaling our tooling and processes.\n\n\n\n\n⭐️ IS IT YOU WE’RE LOOKING FOR? ⭐️\n\nYou would be a good fit if you:\n\n - Have a first experience in actuarial/insurance, finance, strategy, data, quantitative or product topics.\n\n - Have a scientific background (statistics, engineering, actuarial science) \n\n - Are excited about growing in a fast-paced environment on multidisciplinary topics involving technical, data, regulatory, product and business questions related to health and prévoyance insurance\n\n - Are comfortable with SQL or willing to learn\n\n - Are analytical and structured, with a fact-based decision-making style\n\n - Are enthusiastic about teamwork, curious, learning, and teaching\n\n - Are willing to deeply change the insurance industry and challenge the status quo\n\n - Have strong written communication skills\n\n - Are fluent in both French and English (Alan’s working language)\n\n\n\n\n🌍 HOW WE WORK\n\n - Location: You must be legally eligible to work from France.\n\n - Remote work: We offer remote work flexibility, but we value in-person collaboration\n   \n    \n\n\n🎯 IMPORTANT NOTE: WE HIRE PEOPLE, NOT ROLES.\n\nIf you're excited about this opportunity but don't check every box, we'd love to hear from you. Everyone, no matter how underrepresented, should feel free to apply, as it can only bring learnings or success.\n\nIf you identify yourself as a woman: Did you know that research shows women often apply only when meeting 100% of requirements?\n\nRemember, this is just a guide, not a checklist. We'll be thrilled to receive your application!\n\n \n\n🔖 Check out our About Alan https://alan.com/about and Career https://alan.com/careers pages, as well as our Medium https://medium.com/alan, blog https://blog.alan.com/ and Glassdoor page https://www.glassdoor.com/Overview/Working-at-Alan-EI_IE1696043.11,15.htm for more info.\n\n \n\n\nYOU WANT TO KNOW MORE ABOUT ALAN?\n\n🙌 Perks & Benefits https://alan.com/en/careers/a/salary-equity: Alaners are provided with a stimulating environment and perks ensuring they are happy, efficient and spend only high-quality time with co-workers.\n\n🤘A strong culture https://alan.com/en/about/a/leadership-principles: People joining Alan are often surprised and delighted by our innovative working method. We have a set of cultural values that guide our approach to work #LI-DNP ",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-19T17:08:51.279+00:00",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7418,7 +7418,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/alan/a88bfea4-31a2-4c02-aba3-0c1a1c0fbac1",
     "source": "ashby:alan",
     "_descr": "HEALTH CAN’T WAIT. \n\nNot for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. You wait, until you can’t.\n\nAlan exists to end the wait.\n\nHealth is a universal right, and we believe this right can only become real when it’s coupled with prevention. We need to stop treating health as something we repair and start treating it as something we build, every day. It’s not solely a question of willpower. It’s the healthcare system itself that needs to work for everyone, in a sustainable way.\n\nSo we are building the new standard in prevention insurance. Alan is the first company that integrates insurance, prevention, and care into a single, acclaimed user experience.\n\nWe are on an incredible journey to build a global leading company, with a unique culture https://alan.com/en/careers. We already partner with 40K+ companies of all sizes, serving more than 1M+ members, and have reached €800M+ in ARR.\n\nPrevention as the new norm. That's what we're building with our team of 800+ people. If it speaks to you: we're hiring across France, Spain, Belgium, and Canada. And beyond.\n\n\n⚡ THE CORPORATE TEAM AT ALAN\n\nYou will join Alan's Corporate team, the unit that covers legal, privacy, governance, risk, compliance and security as Alan scales.\n\nAlan wants to be in 10 countries within five years, and that only works with corporate processes built to scale with it. This is a newly created role, and your job is to make Alan's regulated development seamless and integrated with how we build product.\n\nYou will benefit from close mentorship and structured support, you won't be left on your own, and the deep legal, privacy, and security expertise stays in the team around you. At Alan, roles evolve, so you will have real opportunities to expand your scope across topics and countries as you grow.\n\n\n\n\n🤝 YOUR MISSIONS\n\nCorporate protects Alan and its members, but regulated work can still be slow, manual and disconnected from how we build. You are here to build the compliance product that fixes that: processes and tooling that hold as Alan grows, and that make regulated work lighter on both sides, for the teams you serve and for the experts you work with.\n\n - Make regulated work scale. Alan's regulatory load grows with every new member, market and product. You build the layer that absorbs it, so Corporate's load stops climbing in lockstep with the company: a clear path from each request to the right owner, and tooling that takes on the recurring work.\n\n - Rebuild processes end to end. You find the painful process, work out what people are really doing to get around it, and redesign it so it is faster for everyone. You stay on it after launch, watch how it is used, and keep improving it until it becomes the way people work.\n\n - Spot the next bottleneck before it bites. You design solutions that keep Alan compliant and fast at the same time, rather than trading one for the other.\n\n - Measure what you ship. You set clear goals and check them, so every change makes life easier on both sides: the Corporate team you work with and the people they serve.\n\nIn your first six months, you will have:\n\n - Shipped a first system that gives the teams you serve one simple, fast way to get what they need from Corporate.\n\n - Owned at least one process from problem to a live, automated solution that people actually use.\n\n - Become a trusted, pragmatic builder for the Corporate team and for the people they serve.\n\n\n\n\n🚀 PROFILE WE ARE LOOKING FOR\n\nWhat you bring\n\n - You have built things people kept using. You have turned manual, repetitive work into automated or self-serve solutions with no-code, low-code and AI tools, whether at work, in internships, or on your own projects.\n\n - You are drawn to regulated work. You want to understand why these processes exist and where they create friction, and you ramp up fast on a domain that is new to you. Hands-on experience in one of these areas is a plus that speeds your ramp-up, not a requirement.\n\n - French and English (professional level).\n\n\n\nQualities we look for to join our team\n\n - Builder mindset: You move fast and autonomously, prioritise ruthlessly, test as you go, favour delivery over polish, and collaborate to ship.\n\n - Explorer mindset: You are curious about a vague problem, dig deep to frame it well, stay solution-oriented, and escalate early.\n\n - Appetite for regulated complexity: The complexity of regulated work energises you as much as the tooling does, and you approach it with a try-and-retry, challenger mindset.\n\n - Sound judgment: You sense where a shortcut would break a legal, privacy, security or compliance requirement, and you know when to stop and ask.\n\n - Project ownership: You drive projects end to end, from user research and planning to delivery, and you own what happens after launch: adoption and continuous improvement.\n\n - Clear communication: You are proactive and clear with stakeholders, you show progress, and you explain why.\n\n\n\nFor this role we are looking to hire within the B1-C0 level range https://alan.com/en/careers/a/salary-equity.\n\n\n\n\n🌍 HOW WE WORK\n\n\n\nLocation: You must be legally eligible to work from France, Belgium or Spain.\n\nRemote work: We offer remote work flexibility, but we value in-person collaboration\n\n\n\n\n🎯 IMPORTANT NOTE: WE HIRE PEOPLE, NOT ROLES.\n\n\n\nIf you're excited about this opportunity but don't check every box, we'd love to hear from you. Everyone, no matter how underrepresented, should feel free to apply, as it can only bring learnings or success.\n\n\n\nIf you identify yourself as a woman: Did you know that research shows women often apply only when meeting 100% of requirements?\n\n\n\nRemember, this is just a guide, not a checklist. We'll be thrilled to receive your application!\n\n\n\n🔖 Check out our About Alan https://alan.com/about and Career https://alan.com/careers pages, as well as our Medium https://medium.com/alan, blog https://blog.alan.com/ and Glassdoor page https://www.glassdoor.com/Overview/Working-at-Alan-EI_IE1696043.11,15.htm for more info.\n\n\n\n\n👀 YOU WANT TO KNOW MORE ABOUT ALAN?\n\n🙌 Perks & Benefits https://alan.com/en/careers/a/salary-equity: Alaners are provided with a stimulating environment and perks ensuring they are happy, efficient and spend only high-quality time with co-workers.\n\n🤘 A strong culture https://alan.com/en/about/a/leadership-principles: People joining Alan are often surprised and delighted by our innovative working method. We have a set of cultural values that guide our approach to work",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T10:48:01.773+00:00",
     "firstSeenAt": "2026-08-29T21:16:37.487Z",
     "datePubFiable": true
@@ -7436,7 +7436,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/alan/9b05fbb0-506a-4dd5-89e1-52540db950a9",
     "source": "ashby:alan",
     "_descr": "HEALTH CAN’T WAIT. \n\nNot for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. You wait, until you can’t.\n\nAlan exists to end the wait.\n\nHealth is a universal right, and we believe this right can only become real when it’s coupled with prevention. We need to stop treating health as something we repair and start treating it as something we build, every day. It’s not solely a question of willpower. It’s the healthcare system itself that needs to work for everyone, in a sustainable way.\n\nSo we are building the new standard in prevention insurance. Alan is the first company that integrates insurance, prevention, and care into a single, acclaimed user experience.\n\nWe are on an incredible journey to build a global leading company, with a unique culture https://alan.com/en/careers. We already partner with 40K+ companies of all sizes, serving more than 1M+ members, and have reached €800M+ in ARR.\n\nPrevention as the new norm. That's what we're building with our team of 800+ people. If it speaks to you: we're hiring across France, Spain, Belgium, and Canada. And beyond.\n\n\n\n\n📈 FINANCE COMMUNITY AT ALAN\n\nFinance & Strategy exists to enable better decisions, faster, at every level of the company, in a regulated, diverse and ever changing business.\n\nWe succeed when ambitious goals become credible plans, when strategic bets are grounded in financial reality, and when the entire company (not just Finance!) speaks the language of performance.\n\nWe set the right ambition, we monitor whether we're getting there, and we raise our hand when something needs to change.\n\nWe are not record-keepers. We are builders, partners, and challengers. We are looking for people who want to build, support decision making processes and challenge the status quo.\n\n \n\nThe core responsibilities of the Finance & Strategy community are:\n\n - Strategy & Planning: steers Alan's financial performance through business planning, financial and operational monitoring, investor relations and financing\n\n - Financial Reporting: is the steward of Alan's financial truth, ensuring that we produce accurate, timely financial data. It owns the reporting to all key stakeholders (board, leadership team, tax authorities, and regulators like the ACPR) and ensures that financial data is the single, uncontested source of truth for the company's performance.\n\n - Finance Data and Operations: Build and own the core finance data and tooling infrastructure (models, pipelines, and concepts that connect business operations to financial reality). This is where Finance meets product thinking\n\n - Functional poles with end-to-end ownership of their domain: Treasury, Procurement, M&A\n\n\n\n\n⭐️ YOUR MISSION ⭐️\n\nWe are looking for a forward-thinking, experienced finance professional to own the financial controlling of Alan's French entities.\n\nYou will be part of our Financial Controlling team, within Financial Reporting - the feedback engine of our finance system. Your job is to own the numbers. You are not just reporting figures: you are the person who truly understands what they mean and drives action from them.\n\nYou will work in full autonomy, in close collaboration with our Financial Data, Finance Strategy, and operational teams, serving as the bridge between financial figures and the business.\n\n \n\n\n⭐️ WHAT YOU WILL DO ⭐️\n\nThe goal is to build the financial controlling function in France. That means defining what dashboards you need & writing the specs to drive automation. \n\nThis is a rare opportunity to shape how financial controlling works at a fast-scaling company by:\n\n - Owning the financial reporting of your entities, including monthly P&L and Balance Sheet reviews, variance analysis, commentary and audit readiness\n\n - Ensuring figures are accurate, well-documented and always ready for scrutiny : you will own the organization of the finance function in these subsidiaries and the financial integration of potential acquired companies\n\n - Challenging, improving and automating financial processes, from writing controlling specifications for our Financial Data team to identifying improvement points in the monthly reporting cycle and driving concrete improvements\n\n - Partnering with cross-functional teams to ensure financial data is well understood and leveraged for decision-making, and owning specific financial streams transversally across geographies\n\n - Contributing to scaling the team, including participating in hiring and onboarding future team members\n   \n   \n\n\n⭐️ QUALIFICATIONS ⭐️\n\n - Financial expertise: at least 5 years of experience of French accounting standards and how financial statements work; background in a top audit firm and/or a fast-paced scale-up. Familiarity with consolidation and process automation are a bonus.\n\n - Languages: Fluent in both English and French.\n\n - Analytical mindset: Strong analytical skills with the ability to maintain a holistic view while staying rigorous at the detail level. Basic SQL or AI tools knowledge is a bonus.\n\n - Soft skills: Rigorous, hands-on and highly organized. Critical thinker who comes with concrete proposals. Comfortable working with both finance and non-finance stakeholders. Strong ability to work autonomously, move forward independently and make clear decisions even in ambiguous situations.\n\n - Familiarity with insurance accounting or regulated financial entities is a strong plus.\n\n\n\nFor this role we are looking to hire within the C1-E level range https://alan.com/en/careers/a/salary-equity. \n\n\n\n\n🌍 HOW WE WORK\n\n - Location: You must be legally eligible to work from France.\n\n - Remote work: We offer remote work flexibility, but we value in-person collaboration\n   \n    \n\n\n🎯 IMPORTANT NOTE: WE HIRE PEOPLE, NOT ROLES.\n\nIf you're excited about this opportunity but don't check every box, we'd love to hear from you. Everyone, no matter how underrepresented, should feel free to apply, as it can only bring learnings or success.\n\nIf you identify yourself as a woman: Did you know that research shows women often apply only when meeting 100% of requirements?\n\nRemember, this is just a guide, not a checklist. We'll be thrilled to receive your application!\n\n \n\n🔖 Check out our About Alan https://alan.com/about and Career https://alan.com/careers pages, as well as our Medium https://medium.com/alan, blog https://blog.alan.com/ and Glassdoor page https://www.glassdoor.com/Overview/Working-at-Alan-EI_IE1696043.11,15.htm for more info.\n\n \n\n\nYOU WANT TO KNOW MORE ABOUT ALAN?\n\n - 🙌 Perks & Benefits https://alan.com/en/careers/a/salary-equity: Alaners are provided with a stimulating environment and perks ensuring they are happy, efficient and spend only high-quality time with co-workers.\n\n - 🤘A strong culture https://alan.com/en/about/a/leadership-principles: People joining Alan are often surprised and delighted by our innovative working method. We have a set of cultural values that guide our approach to work\n\n\n\n#LI-DNP",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-04T21:09:49.076+00:00",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7454,7 +7454,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/alan/8355372c-be90-413d-95b6-3b0968dcac5a",
     "source": "ashby:alan",
     "_descr": "HEALTH CAN’T WAIT. \n\nNot for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. You wait, until you can’t.\n\nAlan exists to end the wait.\n\nHealth is a universal right, and we believe this right can only become real when it’s coupled with prevention. We need to stop treating health as something we repair and start treating it as something we build, every day. It’s not solely a question of willpower. It’s the healthcare system itself that needs to work for everyone, in a sustainable way.\n\nSo we are building the new standard in prevention insurance. Alan is the first company that integrates insurance, prevention, and care into a single, acclaimed user experience.\n\nWe are on an incredible journey to build a global leading company, with a unique culture https://alan.com/en/careers. We already partner with 40K+ companies of all sizes, serving more than 1M+ members, and have reached €800M+ in ARR.\n\nPrevention as the new norm. That's what we're building with our team of 800+ people. If it speaks to you: we're hiring across France, Spain, Belgium, and Canada. And beyond.\n\n\n\n\n📈 FINANCE COMMUNITY AT ALAN\n\nFinance & Strategy exists to enable better decisions, faster, at every level of the company, in a regulated, diverse and ever changing business.\n\nWe succeed when ambitious goals become credible plans, when strategic bets are grounded in financial reality, and when the entire company (not just Finance!) speaks the language of performance.\n\nWe set the right ambition, we monitor whether we're getting there, and we raise our hand when something needs to change.\n\nWe are not record-keepers. We are builders, partners, and challengers. We are looking for people who want to build, support decision making processes and challenge the status quo.\n\n \n\nThe core responsibilities of the Finance & Strategy community are:\n\n - Strategy & Planning: steers Alan's financial performance through business planning, financial and operational monitoring, investor relations and financing\n\n - Financial Reporting: is the steward of Alan's financial truth, ensuring that we produce accurate, timely financial data. It owns the reporting to all key stakeholders (board, leadership team, tax authorities, and regulators like the ACPR) and ensures that financial data is the single, uncontested source of truth for the company's performance.\n\n - Finance Data and Operations: Build and own the core finance data and tooling infrastructure (models, pipelines, and concepts that connect business operations to financial reality). This is where Finance meets product thinking\n\n - Functional poles with end-to-end ownership of their domain: Treasury, Procurement, M&A\n\n\n\n\n⭐️ YOUR MISSION ⭐️\n\nWe are looking for a forward-thinking, experienced finance professional to own the financial controlling of Alan's international entities.\n\nYou will be part of our Financial Controlling team: the feedback engine of our finance system. Your job is to own the numbers. You are not just reporting figures - you are the person who truly understands what they mean and drives action from them.\n\nA key part of this role will be to define and structure the working model with local accountants in each international entity - monitoring and challenging their output, and ensuring full consistency between local accounting and our central production scope.\n\nYou will work in full autonomy, in close collaboration with our Financial Data, Finance Strategy, and operational teams, serving as the bridge between financial figures and the business.\n\n \n\n\n⭐️ WHAT YOU WILL DO ⭐️\n\nThe goal is to build the financial controlling function for international entities. That means defining what dashboards you need & writing the specs to drive automation. You will play a central role in setting up Alan's financial infrastructure in existing and new markets as we expand.\n\nThis is a rare opportunity to shape how financial controlling works at a fast-scaling company by:\n\n - Owning the financial reporting of your entities, including monthly P&L and Balance Sheet reviews, variance analysis, commentary and audit readiness. \n\n - Ensuring figures are accurate, well-documented and always ready for scrutiny : you will own the organization of the finance function in these subsidiaries and the financial integration of potential acquired companies.\n\n - Structuring and managing relationships with local accounting firms by defining the working model in each country (monitoring and challenging their output) and ensuring full consistency with Alan's central reporting scope.\n\n - Challenging, improving and automating financial processes, from writing controlling specifications for our Financial Data team to identifying improvement points in the monthly reporting cycle and driving concrete improvements\n\n - Partnering with cross-functional teams to ensure financial data is well understood and leveraged for decision-making, and owning specific financial streams transversally across geographies\n\n - Contributing to scaling the team, including participating in hiring and onboarding future team members.\n   \n   \n\n\n⭐️ QUALIFICATIONS ⭐️\n\n - Financial expertise: At least 5 years of experience in accounting and how financial statements work across multiple entities or geographies; proven experience coordinating external accounting firms and/or overseeing multi-country financial reporting; background in a top audit firm and/or a fast-paced scale-up. Familiarity with consolidation and financial services are a bonus.\n\n - Languages: Fluent in English; additional European language(s) are a strong plus.\n\n - Analytical mindset: Strong analytical skills with the ability to synthesize complex information and communicate it clearly to non-finance stakeholders. Basic SQL or AI tools knowledge is a bonus.\n\n - Soft skills: Rigorous, autonomous, proactive and solution-oriented. Strong communicator with both internal teams and external partners. Strong ability to work autonomously, move forward independently and make clear decisions even in ambiguous situations.\n\n - Familiarity with insurance accounting or regulated financial entities is a strong plus.\n\n\n\nFor this role we are looking to hire within the C1-E level range https://alan.com/en/careers/a/salary-equity. \n\n\n\n\n🌍 HOW WE WORK\n\nLocation: You must be legally eligible to work from France.\n\nRemote work: We offer remote work flexibility, but we value in-person collaboration\n\n \n\n\n🎯 IMPORTANT NOTE: WE HIRE PEOPLE, NOT ROLES.\n\nIf you're excited about this opportunity but don't check every box, we'd love to hear from you. Everyone, no matter how underrepresented, should feel free to apply, as it can only bring learnings or success.\n\nIf you identify yourself as a woman: Did you know that research shows women often apply only when meeting 100% of requirements?\n\nRemember, this is just a guide, not a checklist. We'll be thrilled to receive your application!\n\n \n\n🔖 Check out our About Alan https://alan.com/about and Career https://alan.com/careers pages, as well as our Medium https://medium.com/alan, blog https://blog.alan.com/ and Glassdoor page https://www.glassdoor.com/Overview/Working-at-Alan-EI_IE1696043.11,15.htm for more info.\n\n \n\n\nYOU WANT TO KNOW MORE ABOUT ALAN?\n\n🙌 Perks & Benefits https://alan.com/en/careers/a/salary-equity: Alaners are provided with a stimulating environment and perks ensuring they are happy, efficient and spend only high-quality time with co-workers.\n\n🤘A strong culture https://alan.com/en/about/a/leadership-principles: People joining Alan are often surprised and delighted by our innovative working method. We have a set of cultural values that guide our approach to work",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-22T13:59:02.089+00:00",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7472,7 +7472,7 @@ window.__OFFRES__ = [
     "url": "https://jobs.ashbyhq.com/alan/22b4ce75-032f-44ff-88e3-472649e0a045",
     "source": "ashby:alan",
     "_descr": "HEALTH CAN’T WAIT. \n\nNot for symptoms to get worse. Not for a six‑month appointment. Not for a system to catch up. But that’s exactly how healthcare works today. You wait, until you can’t.\n\nAlan exists to end the wait.\n\nHealth is a universal right, and we believe this right can only become real when it’s coupled with prevention. We need to stop treating health as something we repair and start treating it as something we build, every day. It’s not solely a question of willpower. It’s the healthcare system itself that needs to work for everyone, in a sustainable way.\n\nSo we are building the new standard in prevention insurance. Alan is the first company that integrates insurance, prevention, and care into a single, acclaimed user experience.\n\nWe are on an incredible journey to build a global leading company, with a unique culture https://alan.com/en/careers. We already partner with 40K+ companies of all sizes, serving more than 1M+ members, and have reached €800M+ in ARR.\n\nPrevention as the new norm. That's what we're building with our team of 800+ people. If it speaks to you: we're hiring across France, Spain, Belgium, and Canada. And beyond.\n\n\n\n\n📈 FINANCE COMMUNITY AT ALAN\n\nFinance & Strategy exists to enable better decisions, faster, at every level of the company, in a regulated, diverse and ever changing business.\n\nWe succeed when ambitious goals become credible plans, when strategic bets are grounded in financial reality, and when the entire company (not just Finance!) speaks the language of performance.\n\nWe set the right ambition, we monitor whether we're getting there, and we raise our hand when something needs to change.\n\nWe are not record-keepers. We are builders, partners, and challengers. We are looking for people who want to build, support decision making processes and challenge the status quo.\n\n \n\nThe core responsibilities of the Finance & Strategy community are:\n\n - Strategy & Planning: steers Alan's financial performance through business planning, financial and operational monitoring, investor relations and financing\n\n - Financial Reporting: is the steward of Alan's financial truth, ensuring that we produce accurate, timely financial data. It owns the reporting to all key stakeholders (board, leadership team, tax authorities, and regulators like the ACPR) and ensures that financial data is the single, uncontested source of truth for the company's performance.\n\n - Finance Data and Operations: Build and own the core finance data and tooling infrastructure (models, pipelines, and concepts that connect business operations to financial reality). This is where Finance meets product thinking\n\n - Functional poles with end-to-end ownership of their domain: Treasury, Procurement, M&A\n\n\n\n\n⭐️ YOUR MISSION ⭐️\n\nWe are looking for a rigorous and hands-on accountant to help shape and run Alan's closing production process.\n\nYou will be part of our Financial Reporting area, focusing on Financial production.  This area ensures that every number in our books is accurate, timely, and trustworthy, and serves as the source of truth for all financial decisions across the company.\n\nYour role will be twofold:\n\n - Run our key accounting processes: Lead monthly, quarterly, and year-end closings\n\n - Ensure a feedback loop to drive process improvements, surface anomalies, flag data gaps, and actively contribute to making the closing faster, more automated, and more reliable over time. You will be a key partner to our Financial Operations and Data teams.\n\n \n\n\n⭐️ WHAT YOU WILL DO ⭐️\n\n - Month-end close: own the end-to-end closing cycle across multiple legal entities; push pre-formatted journal entries into NetSuite, ensure completeness and accuracy, and deliver on schedule every month (target: J+5)\n\n - Accounting review: perform a thorough first-level review of balance sheet and P&L accounts at each close; identify unusual movements, resolve discrepancies, and ensure the overall reliability of the financial statements; build processes (routines, verification files, control procedures)\n\n - Account and bank reconciliation: maintain clean, up-to-date reconciliations across all balance sheet accounts and entities on a daily basis;\n\n - Contribute to finance transformation and system improvements: identify manual or repetitive tasks and collaborate with Financial Data to drive automation and reduce closing friction over time ; translate new business streams and P&L lines into accounting (acting as an interface between business teams and Finance)\n\n - Tax and statutory compliance: prepare and file VAT returns, URSSAF declarations, and other statutory filings accurately and on time; coordinate with external advisors where needed\n\n\n\n\n⭐️ QUALIFICATIONS ⭐️\n\nExperience and technical skills\n\n - 4 to 6 years of accounting experience minimum, in an accounting firm or in-house at a fast-paced startup/scale-up\n\n - Languages: full fluency in French and English\n\n - Deep command of French accounting standards: VAT rules, URSSAF declarations, bank reconciliation, general ledger management, and month-end close processes\n\n - Proven ability to own a closing cycle end-to-end, including identifying and resolving issues independently\n\n - Hands-on experience with an ERP (NetSuite is a strong plus)\n\n - Comfortable with spreadsheets (Google Sheets or Excel); familiarity with modern accounting tools (Pennylane, Payflows, etc.) is a plus\n\n \n\nMindset and soft skills\n\n - Reliable and detail-oriented: you deliver on time, every time, and keep a clean audit trail\n\n - Autonomous and self-directed: you don't wait to be told what to do next; you manage your priorities, make decisions independently, and know how to take a step back to distinguish what truly matters from day-to-day noise\n\n - Process-driven: you naturally question how things are done and come with concrete ideas to improve them\n\n - Curious about automation and tooling; comfortable working in a data-driven environment\n\n - Clear communicator: you know when to move independently and when to escalate\n\n\n\nFor this role we are looking to hire within the B0-C0 level range https://alan.com/en/careers/a/salary-equity. \n\n \n\n\n🌍 HOW WE WORK\n\n - Location: You must be legally eligible to work from France.\n\n - Remote work: We offer remote work flexibility, but we value in-person collaboration\n   \n    \n\n\n🎯 IMPORTANT NOTE: WE HIRE PEOPLE, NOT ROLES.\n\nIf you're excited about this opportunity but don't check every box, we'd love to hear from you. Everyone, no matter how underrepresented, should feel free to apply, as it can only bring learnings or success.\n\nIf you identify yourself as a woman: Did you know that research shows women often apply only when meeting 100% of requirements?\n\nRemember, this is just a guide, not a checklist. We'll be thrilled to receive your application!\n\n \n\n🔖 Check out our About Alan https://alan.com/about and Career https://alan.com/careers pages, as well as our Medium https://medium.com/alan, blog https://blog.alan.com/ and Glassdoor page https://www.glassdoor.com/Overview/Working-at-Alan-EI_IE1696043.11,15.htm for more info.\n\n \n\n\nYOU WANT TO KNOW MORE ABOUT ALAN?\n\n - 🙌 Perks & Benefits https://alan.com/en/careers/a/salary-equity: Alaners are provided with a stimulating environment and perks ensuring they are happy, efficient and spend only high-quality time with co-workers.\n\n - 🤘A strong culture https://alan.com/en/about/a/leadership-principles: People joining Alan are often surprised and delighted by our innovative working method. We have a set of cultural values that guide our approach to work\n\n#LI-DNP",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-10T11:06:36.834+00:00",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7492,7 +7492,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-12T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7512,7 +7512,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-05T14:28:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7532,7 +7532,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T10:00:00+0000",
     "firstSeenAt": "2026-08-29T21:16:37.487Z",
     "datePubFiable": true
@@ -7552,7 +7552,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-09T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7572,7 +7572,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-02T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7592,7 +7592,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-29T07:41:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7612,7 +7612,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-22T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7632,7 +7632,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-10T12:11:00+0000",
     "firstSeenAt": "2026-08-29T21:16:37.487Z",
     "datePubFiable": true
@@ -7652,7 +7652,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-24T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7672,7 +7672,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-19T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7692,7 +7692,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "phenom:careers.axa.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-28T10:00:00+0000",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -7709,8 +7709,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-vie-prague-compliance-officer-m-f_114613.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7726,8 +7726,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-investment-specialist-intern-private-markets-h-f_115134.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7743,8 +7743,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-de-conformite-h-f_114805.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7760,8 +7760,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-vie-risk-analyst-m-f_111975.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7777,8 +7777,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-assistant-architecte-developpeur-solution-de-pilotage-si-amundi-h-f_113915.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7794,8 +7794,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-otc-middle-office-analyst-m-f_115102.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7811,8 +7811,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-fund-distributor-operations-officer-trailer-fees-h-f_100414.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7828,8 +7828,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-inside-sales-data-as-a-service-h-f_112310.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7845,8 +7845,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-assistant-moa-trading-h-f_110051.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7862,8 +7862,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stagiaire-data-h-f_115015.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7879,8 +7879,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-e-de-projets-esg-immobilier-durable-h-f_113646.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7896,8 +7896,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-back-office-amundi-finance-h-f_115013.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7913,8 +7913,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stagiaire-analyste-risque-reglementaire-international-h-f_114973.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7930,8 +7930,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-de-com-interne-et-externe-h-f_112606.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7947,8 +7947,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-assistant-coordination-operationnelle-et-administrative-h-f_113902.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7964,8 +7964,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-d-appels-d-offres-h-f_114707.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7981,8 +7981,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-client-services-specialist-front-office-risk-m-f_114217.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -7998,8 +7998,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-controleur-financier-6-12-mois-h-f_114098.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8015,8 +8015,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-professional-services-implementation-specialist-h-f_113743.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8032,8 +8032,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-analyste-suivi-des-depenses-en-donnees-financieres-h-f_109476.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:32:58.865Z",
     "datePubFiable": false
   },
@@ -8049,8 +8049,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-assistant-de-gestion-de-fonds-structures-h-f_109095.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8066,8 +8066,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-middle-office-h-f_113523.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:32:58.865Z",
     "datePubFiable": false
   },
@@ -8083,8 +8083,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-conseiller-affaires-publiques-h-f_112490.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8100,8 +8100,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-asset-servicing-management-business-analyst-h-f_112169.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8117,8 +8117,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-charge-service-clients-institutionnels-et-souverains-pole-international-h-f_109473.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T21:32:58.865Z",
     "datePubFiable": false
   },
@@ -8134,8 +8134,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-intern-ea-team-assistant-_73744.aspx",
     "source": "talentsoft:jobs.amundi.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.677Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.488Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": false
   },
@@ -8151,8 +8151,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-comptable-technique-assurances-h-f_7348.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8168,8 +8168,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-stage-6-mois-assistant-gerant-actif-passif-h-f_7890.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": false
   },
@@ -8188,8 +8188,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "talentsoft:cnp-recrute.talent-soft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8205,8 +8205,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-charge-de-production-comptable-h-f_6718.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8222,8 +8222,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-clientele-f-h-nantes-h-f_7333.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8239,8 +8239,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-comptable-inventaire-de-l-actif-h-f_6422.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8256,8 +8256,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-clientele-pole-developpement-f-h-nantes_7167.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8273,8 +8273,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-comptable-operations-d-actifs-h-f_7132.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8290,8 +8290,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-charge-de-conformite-4-mois-h-f_7355.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8307,8 +8307,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-prestations-beneficiaires-emprunteur-h-f_7415.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8324,8 +8324,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-comptable-actifs-financiers-h-f_7385.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8341,8 +8341,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-commercial-assurances-individuelles-france-entiere-h-f_5088.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8358,8 +8358,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-charge-d-etudes-financieres-h-f_7580.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8375,8 +8375,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-commercial-itinerant-rouen-est-h-f_7734.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8392,8 +8392,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-commercial-itinerant-narbonne_7535.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8409,8 +8409,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-commercial-itinerant-pau-h-f_7702.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8426,8 +8426,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-commercial-itinerant-chartres-h-f_7064.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.489Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8443,8 +8443,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-analyste-risques-cdd-12-mois-h-f_7884.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8463,8 +8463,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "talentsoft:cnp-recrute.talent-soft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8480,8 +8480,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-conseiller-prestations-beneficiaires-7-mois-h-f_7795.aspx",
     "source": "talentsoft:cnp-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8497,8 +8497,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-herouville-st-clair-f-h_10832.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8514,8 +8514,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-conseiller-ere-en-assurance-maubeuge-f-h_10827.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8531,8 +8531,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-aix-en-provence-_10753.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.678Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8548,8 +8548,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-gardanne-_10737.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8565,8 +8565,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-st-pol-sur-mer-f-h_10725.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8582,8 +8582,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-grand-quevilly-f-h_10816.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8599,8 +8599,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-conseiller-ere-en-assurance-lillebonne-f-h_10819.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8616,8 +8616,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-le-perreux-sur-marne-f-h_10031.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8633,8 +8633,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-amboise_10796.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8650,8 +8650,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-fleury-les-aubrais_10795.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8670,8 +8670,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "talentsoft:matmut-recrute.talent-soft.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8687,8 +8687,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-charleville-mezieres_10603.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8704,8 +8704,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-de-professionnels_10697.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8721,8 +8721,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-vandoeuvre-les-nancy_10293.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8738,8 +8738,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-nancy_10806.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8755,8 +8755,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-colmar-_10805.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8772,8 +8772,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-toulon-_10110.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8789,8 +8789,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-renfort-f-h_10798.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8806,8 +8806,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-12-f-h_10287.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8823,8 +8823,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-job-dating-cafe-recrut-matmut-conseiller-ere-telephonique-en-assurance_10729.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8840,8 +8840,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-beziers-clemenceau-_9326.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8857,8 +8857,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-l-union-f-h_10788.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.490Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8874,8 +8874,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-annemasse-f-h_10785.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8891,8 +8891,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-laval-f-h_10782.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8908,8 +8908,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-st-etienne-charcot_9410.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8925,8 +8925,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-cachan-f-h_10282.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8942,8 +8942,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-fenouillet-f-h_10286.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8959,8 +8959,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-montluel-f-h_10773.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8976,8 +8976,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-lyon-saxe-f-h_10772.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -8993,8 +8993,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-cluses-f-h_10771.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9010,8 +9010,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-10-f-h_10769.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9027,8 +9027,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-la-seyne-sur-mer-_10653.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9044,8 +9044,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-marseille-1er-arrondissement_7745.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9061,8 +9061,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-charge-e-du-reporting-comptable-f-h_10764.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9078,8 +9078,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-troyes-_9696.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.679Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9095,8 +9095,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-antibes-_10405.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9112,8 +9112,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-labege-f-h_10741.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9129,8 +9129,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-chennevieres-f-h_10740.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9146,8 +9146,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-torcy_10529.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.491Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9163,8 +9163,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-argenteuil-f-h_10693.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9180,8 +9180,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-villemomble-f-h_10046.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9197,8 +9197,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-metz-_10677.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9214,8 +9214,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-saintes-f-h_10673.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9231,8 +9231,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-le-havre-hotel-de-ville-f-h_10646.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9248,8 +9248,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-noisy-le-sec-f-h_10086.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9265,8 +9265,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-montpellier-lodeve-f-h_10490.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9282,8 +9282,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-riom-f-h_10651.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9299,8 +9299,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-lyon-merieux_10629.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9316,8 +9316,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-villeurbanne-f-h_10627.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9333,8 +9333,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-15-convention_7636.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9350,8 +9350,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-cdd-boe-_10609.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9367,8 +9367,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-20-f-h_7904.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.492Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9384,8 +9384,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-colombes-f-h_9621.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9401,8 +9401,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-nanterre-_8167.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9418,8 +9418,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-gestionnaire-comptable-f-h_10583.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9435,8 +9435,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-business-analyst-engineer-f-h_10266.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9452,8 +9452,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-toulouse-minimes-_9195.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9469,8 +9469,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-st-ouen-f-h_10024.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9486,8 +9486,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-st-pierre-de-varengeville_10133.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9503,8 +9503,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-ferney-voltaire-f-h_10415.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9520,8 +9520,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-pantin-f-h_9717.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9537,8 +9537,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-onet-le-chateau-f-h_10381.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9554,8 +9554,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-lyon-_10288.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.680Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9571,8 +9571,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-15-theatre-f-h_9782.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9588,8 +9588,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-moulins-_9002.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9605,8 +9605,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-st-cyr-sur-loire_9735.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9622,8 +9622,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-carcassonne-citroen-f-h_10229.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9639,8 +9639,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-h-f-juvisy-f-h_9209.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9656,8 +9656,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-epinay-sur-seine-f-h_10053.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9673,8 +9673,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-decines-charpieu_9974.aspx",
     "source": "talentsoft:matmut-recrute.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.493Z",
     "firstSeenAt": "2026-08-29T21:47:27.953Z",
     "datePubFiable": false
   },
@@ -9690,8 +9690,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://aema.talent-soft.com/offre-de-emploi/emploi-charge-des-risques-stage-h-f_9155.aspx",
     "source": "talentsoft:aema.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-29T22:07:06.237Z",
     "datePubFiable": false
   },
@@ -9707,8 +9707,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://aema.talent-soft.com/offre-de-emploi/emploi-analyste-achats_9174.aspx",
     "source": "talentsoft:aema.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-29T22:07:06.237Z",
     "datePubFiable": false
   },
@@ -9724,8 +9724,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://aema.talent-soft.com/offre-de-emploi/emploi-chef-fe-de-projets-transverses-finance-strategie-risques-f-h_9192.aspx",
     "source": "talentsoft:aema.talent-soft.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.681Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-29T22:07:06.237Z",
     "datePubFiable": false
   },
@@ -9741,8 +9741,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-gestionnaire-sinistres-en-assurances-construction-smacl-f-h_10802.aspx",
     "source": "talentsoft:recrutement.maif.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9758,8 +9758,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-business-analyst-solutions-c-ur-assurances-de-personnes-f-h_10692.aspx",
     "source": "talentsoft:recrutement.maif.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9775,8 +9775,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-charge-d-etudes-comptables-f-h_10788.aspx",
     "source": "talentsoft:recrutement.maif.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9792,8 +9792,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-charge-d-etudes-assurances-ace-tarification-f-h_10778.aspx",
     "source": "talentsoft:recrutement.maif.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9809,8 +9809,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-analyste-moa-f-h_10538.aspx",
     "source": "talentsoft:recrutement.maif.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.494Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9826,8 +9826,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-conseiller-commercial-vente-a-distance-assurance-collective-f-h-_27644.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9843,8 +9843,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-charge-de-prevention-des-risques-surete-et-securite-f-h_27462.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9863,8 +9863,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "talentsoft:carrieres.malakoffhumanis.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9883,8 +9883,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "talentsoft:carrieres.malakoffhumanis.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9900,8 +9900,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-charge-d-etudes-actuarielles-produits-epargne-f-h_24949.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9917,8 +9917,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-alternance-technico-commercial-assurances-f-h_27167.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9934,8 +9934,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-gestionnaire-clients-assurance-de-personnes-f-h-prevoyance-incapacite-invalidite_27630.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9951,8 +9951,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-gestionnaire-clients-assurance-de-personnes-f-h_27731.aspx",
     "source": "talentsoft:carrieres.malakoffhumanis.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.682Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -9968,8 +9968,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Toulouse-Consultant%28e%29Auditeur%28rice%29-en-Gestion-des-Risques-des-SI-FH-31000/1419299833/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.683Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -9985,8 +9985,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Lyon-Consultant-Data-Gouvernance-Data-Management-%28FH%29-69393/1414165333/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.683Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.495Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10002,8 +10002,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Business-Analyst-Intelligent-AutomationRPA-FH-92037/1420801333/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.683Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.496Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10019,8 +10019,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Data-Product-Owner-HF-92037/1388072133/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.685Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.496Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10036,8 +10036,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Data-Gouvernance-Data-Management-%28FH%29-92037/1405632633/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.685Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.496Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10053,8 +10053,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Mobility-Assignment-Services-Team-Operations-Consultant-92037/1409718633/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.685Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.496Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10070,8 +10070,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Rennes-Consultant-Conseil-Comptable-et-Financier-EY-Nantes-Rennes-FH-35000/1393682833/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.685Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.497Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10087,8 +10087,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Nantes-Consultant%28e%29Auditeur%28rice%29-en-Gestion-des-Risques-des-SI-NantesRennes-HF-44000/1395629033/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.685Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.497Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10104,8 +10104,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Nancy-Consultant-Conseil-Comptable-et-Financier-Strasbourg-Nancy-HF-54000/1392843333/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.686Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.499Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10121,8 +10121,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Lille-Gestionnaire-Comptable-Centre-Op%C3%A9rationnel-d&amp;apos;Excellence-Lille-HF-59800/1398529933/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.686Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.500Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10138,8 +10138,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant%28e%29-Op%C3%A9rationnel-Finance-Services-Financiers-Paris-FH-92037/1393238033/",
     "source": "successfactors:careers.ey.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.687Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.502Z",
     "firstSeenAt": "2026-08-29T21:57:00.037Z",
     "datePubFiable": false
   },
@@ -10155,8 +10155,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://apply.careers.hsbc.com/job/PARIS-Analyste-Garanties-Internationales-%28fmd%29-75-75116/1358653157/",
     "source": "successfactors:apply.careers.hsbc.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.688Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.502Z",
     "firstSeenAt": "2026-08-29T23:40:12.924Z",
     "datePubFiable": false
   },
@@ -10175,7 +10175,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "successfactors:apply.careers.hsbc.com"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -10192,8 +10192,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://apply.careers.hsbc.com/job/PARIS-Stage-Financements-syndiqu%C3%A9s-Corporate-%28TM-Syndicated-Loan-Executions%29-%28fmd%29-75-75116/1369197557/",
     "source": "successfactors:apply.careers.hsbc.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.688Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.502Z",
     "firstSeenAt": "2026-08-29T23:40:12.924Z",
     "datePubFiable": false
   },
@@ -10209,8 +10209,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://apply.careers.hsbc.com/job/PARIS-Alternance-Contr%C3%B4leur-Interne-Direction-Financi%C3%A8re-%28fmd%29-75-75116/1366096057/",
     "source": "successfactors:apply.careers.hsbc.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.688Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.502Z",
     "firstSeenAt": "2026-08-29T23:40:12.924Z",
     "datePubFiable": false
   },
@@ -10226,8 +10226,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://apply.careers.hsbc.com/job/PARIS-Stage-DEBT-SECURITIES-OPERATIONS-DATA-ANALYST-%28fmd%29-75-75116/1367652857/",
     "source": "successfactors:apply.careers.hsbc.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.688Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.502Z",
     "firstSeenAt": "2026-08-29T23:40:12.924Z",
     "datePubFiable": false
   },
@@ -10244,7 +10244,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/stage-consolidation-reportings-reglementaires-26000EJM-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienBasé à Boulogne-Billancourt (92), vous rejoignez la Direction Financière et plus particulièrement le pôle Comptabilité-Reporting. En tant que stagiaire en Consolidation & Reportings Réglementaires, vous aidez à la bonne réalisation de la consolidation et de la production du reporting réglementaire FINREP.Vos missions principales consistent à :-          Aider à élaborer les comptes consolidés mensuels de BOURSORAMA avec notamment :·        Le suivi des opérations intra-groupe à Boursorama et avec le Groupe SG,·    L’aide à la réalisation des retraitements IFRS pour la publication des liasses dans l’outil de consolidation groupe,·        La relation avec les entités consolidées,·        L’aide à la production des annexes aux comptes consolidés (semestrielles et annuelles)-          Aider à élaborer le reporting réglementaire FINREP (trimestriel),-          Travailler, en lien avec l’équipe Projets et Contrôles Comptables, sur le projet de migration de l’outil de déclaration réglementaire groupe (périmètre FINREP).Et si c’était vous ?Titulaire d’un diplôme Bac+4 /5 en Comptabilité/Audit (Master CCA, DSCG ou équivalent), vous justifiez d’une première expérience en cabinet ou en Direction Financière, vous maîtrisez la comptabilité et avez des connaissances sur les normes IFRS ainsi qu’un excellent niveau sur Excel.Votre capacité d’analyse et de synthèse, votre rigueur, votre autonomie et votre sens critique vous permettent de traiter des sujets complexes avec fiabilité.Adaptable, doté d’un bon relationnel et de qualités rédactionnelles, vous êtes force de proposition ; la connaissance du secteur bancaire serait un atout.Plus qu’un poste, un tremplinPourquoi nous choisir ?BoursoBank, filiale du groupe Société Générale, est pionnière et leader sur ses deux activités : la banque en ligne et l’information économique et financière sur Internet avec son Portail Boursorama.com.BoursoBank, filiale du groupe Société Générale, est pionnière et leader sur ses deux activités : la banque en ligne et l’information économique et financière sur Internet avec son Portail Boursorama.com.Avec son positionnement unique de banque-média et un développement centré sur les nouvelles attentes des clients (autonomie, simplicité, accès à l’information, sécurité et frais réduits), BoursoBank compte aujourd’hui plus 8 millions de clients et conforte, d’année en année, sa position d’acteur bancaire majeur en France.Engagée à simplifier la banque, à donner du pouvoir d’achat à ses clients et à offrir à chacun la faculté d’agir sur son argent, BoursoBank a aussi l’ambition de participer de façon active et responsable à la transition écologique de ses clients en plus de celle qu’elle opère pour son propre fonctionnement. C’est grâce et avec l’ensemble de ses équipes, sensibilisées et actives à l’optimisation de l’impact environnemental et social quel que soit leur métier, que BoursoBank est certifiée B Corp depuis février 2023 et labélisée Numérique Responsa",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/06/17",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -10262,7 +10262,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/stage-controle-de-gestion-26000H6B-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienSous l'autorité d’un Contrôleur de Gestion de la région, les missions du stagiaire consisteront àmise en place d’un nouveau modèle de pilotage de la performance financière avec la suppression des DCRproduire et diffuser auprès des DRA, des analyses relatives à la rentabilité de leurs AgencesEt si c’était vous ?Avant tout, c’est votre personnalité que nous allons aimer !•       Doté d’un très bon relationnel, vous avez le sens de l’écoute et de la communication•       Dynamique et positif, vous aimez travailler en équipe et faites preuve d’adaptabilité en toute circonstance•       Rigoureux et organisé, vous savez gérer plusieurs tâches simultanément•       Vous avez une bonne maîtrise des outils bureautiques du Pack OfficeVous êtes étudiant de niveau Bac+4/5 en université ou école de commerce avec une spécialisation en Marketing/Communication.Vous recherchez un stage de 6 mois dans lequel vous pourrez mettre en pratique vos connaissances.Plus qu’un poste, un tremplinDès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.Pour poursuivre vos études ou à l’issue de votre parcours, diverses opportunités pourront s’offrir à vous au sein du Groupe.Comment nous rejoindre ? 1. Vous postulez et votre candidature est retenue, bravo !2. Vous passez un entretien avec un manager opérationnel3. Félicitations !  Vous signez rapidement votre convention et vous intégrez votre nouvelle équipePourquoi nous choisir ?Avec 1 400 agences et 25 000 collaborateurs dans toute la France, SG est la banque de détail du groupe Société Générale. Chez SG, vous pouvez développer vos compétences, et approfondir vos expertises, dans un environnement qui conjugue challenge et bienveillance, en vous offrant un accompagnement constant de vos manager et responsable RH et les avantages d’un grand groupe. Chez SG, notre succès repose sur l'esprit d'équipe, la diversité et la complémentarité de nos métiers. Engagés aux côtés de nos clients et conscients de notre rôle à jouer, nous les accompagnons dans leurs projets de développement. Rejoindre SG, c’est intégrer une équipe de talents, engagés pour leurs clients et tournés vers l'avenir. Chez SG, faites grandir vos ambitions.",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/07/24",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -10280,7 +10280,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-financements-aupres-de-la-clientele-professionnelle-26000G8A-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienLes Centres de Services assurent la mise en œuvre des traitements, prestations et engagements de services afférents aux opérations bancaires pour l’ensemble de notre clientèle (particuliers, professionnels, associations et entreprises) en étroite collaboration en étroite collaboration avec les agences.Vous intégrez une équipe accueillante, solidaire et votre manager vous guidera tout au long de votre parcours pour développer un haut niveau d’expertise reconnu chez SGConcrètement, en collaboration avec le Front Office et les clients, vous serez amené à :Qualifier et s'assurer de la complétude et de la conformité des dossiers de financements auprès de la clientèle professionnelle, Prendre en charge la mise en place des financements complexes, prendre les sûretés et gérer les événements de la vie du crédit,Rédaction des contrats et des avenants des dossiers de financements,Assurer la gestion courante de l'utilisation de toutes lignes de crédits et des échéances impayéesEt si c’était vous ?Avant tout, c’est votre personnalité que nous allons aimer !Doté d’un très bon relationnel et d’un véritable sens de l’écoute, votre priorité est d’accompagner les projets confiés avec éthique et responsabilité, et d’assurer la satisfaction clientDynamique et positif, vous aimez travailler en équipe et faites preuve d’adaptabilité en toutes circonstanceAutonome et rigoureux, vous savez prioriser vos actionsVous disposez d’une expérience vous ayant permis de développer des connaissances de l’offre bancaire destinée à la clientèle professionnelle. Vous avez une bonne vision des processus Front to Back, et disposez de bases comptables, juridiques et fiscales des entreprises.Plus qu’un poste, un tremplinDevenir Chargé de financement Entreprises chez SG, c’est vivre une expérience enrichissante et participer à notre ambition de devenir la banque de référence de la satisfaction clients.  Vous bénéficierez de formations personnalisées, et votre réussite vous donnera accès à une carrière dynamique avec la possibilité d’évoluer vers de nouveaux métiers (Gestionnaire de la relation client, Chargé d’études Entreprises en Agence Entreprise, Référent Métier en région …) Rejoindre SG permet de bénéficier de nombreux avantages : Package rémunération (fixe, variable, intéressement, participation), télétravail, congés et RTT additionnels, Compte Epargne Temps monétisable, restauration d’entreprise et/ou titres restaurant, politique parentale avantageuse, avantages bancaires, mutuelle et prévoyance, Comité Social et Economique d’Entreprise (CSEE)…Comment nous rejoindre ? 1. Vous postulez et votre candidature est retenue, bravo !2. Vous réalisez nos tests de sélection3. Vous passez un entretien avec un acteur RH et un manager opérationnel4. Félicitations !  Vous signez rapidement votre contrat et vous intégrez votre nouvelle équipePourquoi nous choisir ?Avec 1 400 agences et 25 000 collaborateurs dans toute la France, SG est la banque de détail du groupe Soci",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/07/07",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -10298,7 +10298,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/analyste-alm-pilotage-et-tresorerie-25000L0L-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienBasé dans nos bureaux de Boulogne-Billancourt (92), vous intégrez la Direction Financière et plus particulièrement le pôle ALM. Vous participez à l’identification, l’analyse, la mesure et la gestion des risques structurels (liquidité, taux, change), ainsi qu’aux projets d’évolution des systèmes financiers. Vous travaillez en étroite collaboration avec la Comptabilité, le Contrôle de Gestion, ainsi qu’avec les directions centrales Trésorerie, ALM et Risques du Groupe Société Générale.Vos principales missions :Gestion de la trésorerie Front Office : vous calculez la position de trésorerie, mettez en place la couverture quotidienne, intégrez les deals dans le système d’information et réalisez le reporting à la direction.Gestion des portefeuilles de dérivés (swaps) : vous suivez la valorisation des portefeuilles, calculez et confirmez les appels de marge, assurez la réconciliation des positions.Production et analyse des métriques de pilotage : vous produisez et analysez chaque mois les indicateurs de risques de liquidité, d’IRRBB (sensibilité de la VAN de bilan et de la MNI) et de change, ainsi que les ratios réglementaires (LCR, NSFR, AMT), en réalisé et en prévisionnel.Couverture des risques structurels : vous proposez et mettez en place des stratégies de couverture adaptées.Projets d’évolution des outils : vous contribuez à la conception, à l’amélioration et au déploiement des outils de gestion de trésorerie et d’ALM.Et si c’était vous ?Vous êtes diplômé d’une formation supérieure (Bac+5) en Finance et justifiez d’au moins 3 ans d’expérience en gestion actif/passif dans le secteur bancaire.Vous maîtrisez Excel, disposez de solides bases en mathématiques financières et possédez des notions de comptabilité bancaire. La maîtrise de R, Python ou VBA constitue un atout.Vous utilisez l’anglais de manière opérationnelle, à l’écrit comme à l’oral.Reconnu pour votre rigueur, votre curiosité et votre esprit d’analyse et de synthèse, vous appréciez particulièrement le travail en équipe et l’environnement collaboratif.Plus qu’un poste, un tremplinPourquoi nous choisir ?BoursoBank, filiale du groupe Société Générale, est pionnière et leader sur ses deux activités : la banque en ligne et l’information économique et financière sur Internet avec son Portail Boursorama.com.Avec son positionnement unique de banque-média et un développement centré sur les nouvelles attentes des clients (autonomie, simplicité, accès à l’information, sécurité et frais réduits), BoursoBank compte aujourd’hui plus 8 millions de clients et conforte, d’année en année, sa position d’acteur bancaire majeur en France.Engagée à simplifier la banque, à donner du pouvoir d’achat à ses clients et à offrir à chacun la faculté d’agir sur son argent, BoursoBank a aussi l’ambition de participer de façon active et responsable à la transition écologique de ses clients en plus de celle qu’elle opère pour son propre fonctionnement. C’est grâce et avec l’ensemble de ses équipes, ",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/07/29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -10316,7 +10316,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/analyste-risques-structurels-reportings-prudentiels-26000HJR-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous avez une vraie passion pour les chiffres utilisés au quotidien par la banque et la réglementation associée aux risques structurels que sont la liquidité, le taux d'intérêt et le change ?En tant que Contrôleur Financier sur ces risques, vous avez une vision globale des données et vérifiez que tout est conforme avant envoi aux instances internes (comité d’audit ou autres) ou externes (Régulateurs et Superviseurs). Bref, rien ne vous échappe!Ce stage vous donnera l'opportunité d'évoluer dans une grande banque couvrant tout type d'activités et d'acquérir une compétence sur les risques structurels.Concrètement, vous serez amené à : Effectuer les missions de contrôle annuelles définies sur votre périmètreProposer des axes d’amélioration pour renforcer le dispositif de contrôlePrésenter les résultats de vos travaux aux managers de l’entité concernéePrendre en charge des missions ponctuelles dans le cadre des arrêtés comptables ou prudentielsDurée du stage : 6 moisEt si c’était vous ? Vous êtes étudiant de niveau Bac +5 en École de Commerce, d'Ingénieur ou Université, avec une spécialisation en informatique/finance Agile d'esprit, vous êtes force de proposition pour améliorer continuellement l'organisation existante Vous êtes à l'aise avec Excel, VBA, Alteryx Vous avez l'esprit de synthèse et d'analyse et vous êtes capable d'émettre un avis indépendant et pertinent sur un dispositif de contrôle ou sur l'application d'une norme You're fluent in English ! Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ? Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…).Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail : parrainer des personnes en difficulté dans le",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/04",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10334,8 +10334,26 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/analyste-risques-sur-operations-de-marche-commodities-25000IGZ-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienRISQ/RMA est la division en charge de la supervision des risques des activités de marché au sein du Groupe Société Générale. Elle fait partie de la deuxième ligne de défense et a pour mission d’analyser, de challenger, de donner un avis indépendant et de suivre les activités de trading des lignes métiers, permettant ainsi une exécution efficace de la stratégie de la banque en cohérence avec sa tolérance au risque.L'analyste Senior Risques de Marché est responsable des limites de risques de marchés, il analyse les demandes de la LOD1 (changements de limites, nouvelles transactions) et contribue à l’élaboration des méthodologies et modèles. Dans le cadre de ses missions, il suit quotidiennement les marchés financiers et l’activité des desks de trading.Responsabilités principalesResponsable des risques de marché des desks matières premières en Europe, avec la supervision des desks matières premières à l’international (Royaume-Uni, États-Unis et Asie)Responsable des méthodologies de stress tests sur les risques de marché et de contrepartie : conception, processus d’approbation, coordination avec les différentes équipes modèleVeiller à ce que les risques de marché pris par les desks de trading soient correctement évalués, mesurés, validés et gérés conformément aux politiques de risque de la banque et à son appétit pour le risqueAnalyse (et soumission à la direction pour validation) des nouvelles demandes de limites ou de transactions (dans le cadre des processus SDV, NPC et FOPI). Suivi des dépassements de limites et des revues régulières des expositionsMaintien de l’infrastructure du cadre de limites et de sa qualité : suivi continu, documentation, outils de reporting et de notification, qualité des donnéesRéalisation de revues régulières du cadre de limites et des méthodologies associées pour anticiper et accompagner les évolutions du business, tout en garantissant la qualité et la cohérence du cadre de risque de marché en placePréparation de la documentation pour les des différents Comités de risque et Contribution aux analyses et aux données pour les reportings managériaux (Weekly Market, Market Risk Committee, CORISQ)Contribution aux Réponses aux demandes et recommandations des régulateurs et des auditeurs internes/externesParticipation à la définition des méthodes de valorisation des transactions de marchéEt si c’était vous ?Vous disposez des compétences suivantes : Diplômé d’une Grande Ecole ou d’un Master avec une spécialisation en financeSolide expérience des marchés de capitaux liés aux matières premières, acquise en Front Office et/ou dans un rôle de gestion des risques (minimum 5 ans)Expertise technique approfondie en évaluation des risques : risques de marché et de contrepartieCapacité à tenir des délais exigeants et à travailler de manière autonomeExcellentes compétences en communication, tant à l’oral qu’à l’écritCapacité à évoluer dans un environnement internationalEsprit d’équipe : contribuer à un environnemen",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/06/18",
+    "firstSeenAt": "2026-08-30T11:42:14.034Z",
+    "datePubFiable": true
+  },
+  {
+    "emp": "Société Générale",
+    "title": "Chargé de mission conformité",
+    "sector": "Banque",
+    "famille": "Risques & Conformité",
+    "volet": "stage",
+    "loc": "La Defense",
+    "zone": "Paris / Île-de-France",
+    "maison": "Société Générale",
+    "place": "France",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-conformite-26000DDU-fr",
+    "source": "sitemapld:Société Générale",
+    "_descr": "Vos missions au quotidienVous avez développé au travers de vos études une appétence pour les sujets en lien avec le respect des règles de conduite et la conformité ?Vous souhaitez intégrer une équipe dynamique ? Rejoignez-nous !En tant que stagiaire chargé de mission conformité, au sein de l’équipe conformité du réseau France, vous interviendrez sur des sujets portant principalement sur le pilotage des formations réglementaires et du risque de conduite, ainsi que sur le développement de la culture éthique au sein de l’entreprise. Vous serez aussi amené à apporter votre contribution dans les domaines de la Sécurité Financière et KYC (connaissance des clients), la gestion des sanctions internationales et Embargos, la lutte anti-blanchiment, la lutte anti-corruption, la RSE, la protection des données (RGPD), la protection réglementaire des clients.L’équipe, composée de dix personnes au siège (et de plus de 150 en régions), pilote, anime et accompagne la filière conformité des activités de la Banque de Détail en France. Dans un contexte à fort enjeu réglementaire, ce sujet est au cœur du fonctionnement de la Banque et des projets menés pour répondre aux exigences des régulateurs. Concrètement, vous serez amené à : Contribuer au pilotage des formations réglementaires (conception de TCD, alimentation d’outils tactiques de relance des overdues, etc.)Contribuer à la mise en place et au suivi de notre plan d’actions annuel Culture & conduite avec le siège et les régionsApporter votre contribution dans les domaines de la Sécurité Financière et KYC (connaissance des clients), la gestion des sanctions internationales et Embargos, la Lutte anti-blanchiment, la Lutte anti corruption, la RSE, la protection des données (RGPD), la protection réglementaire des clientsPlus globalement, contribuer aux chantiers d’actualités de la filièreDurée du stage : 6 moisEt si c’était vous ?Vous préparez un Bac + 4/5 en Ecole de Commerce, d'Ingénieur ou Université, avec une spécialisation en Finance, Banque, ConformitéVous maîtrisez parfaitement les outils de bureautique, dont Excel et ses différentes fonctionnalitésVous appréciez le travail collaboratif en équipe et vous disposez de bonnes capacités d’analyseVous avez le sens de la précision, l'esprit de synthèse et une capacité de gestion, d’exploitation et de restitution des données Vous êtes réactif, rigoureux, curieux et vous disposez d’une aisance rédactionnelle et relationnellePlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/06/11",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10352,26 +10370,26 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-conformite-sanctions-internationales-et-embargos-26000GZZ-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous aimeriez découvrir le domaine passionnant de la conformité (sécurité financière, protection réglementaire des clients, dispositifs anti-blanchiment, dispositifs liés aux sanctions internationales et embargos, etc.) au sein d’un des plus grands établissements bancaires ?Vous êtes curieux et vous aimez collecter et analyser des indicateurs, rechercher des informations, restituer une synthèse d’analyses, effectuer des reportings ?Vous êtes entouhiaste à l’idée de contribuer à des projets variés et structurants ?Rejoignez-nous !La mission proposée est située au sein de l’équipe Siège des Expertises Conformité de la Direction des Risques Opérationnels et Conformité  de Société Générale Réseau en France (SGRF).L’équipe est composée de 7 personnes au siège. Elle est en charge de piloter les risques de non-conformité au sein de la Banque de Détail France, tels que : les risques liés à la sécurité financière (anti-blanchiment), à la protection des clients, au non respect des règles de conduite et d’éthique, à la corruption, à l’intégrité des marchés, aux règlementations sanctions et embargo. Elle anime et accompagne au quotidien les équipes de la filière conformité localisées au sein des 9  Directions Régionales.Votre mission :Vous travaillerez au sein de cette équipe particulièrement sur le volet des Sanctions internationales & Embargos.Concrètement, vous serez amené à :Réaliser certains traitements périodiques visant au respect des exigences réglementaires en matière de sanctions et embargosContribuer aux travaux de pilotage des données nécessaires au respect des sanctions internationales et embargosContribuer à l’actualisation, en vue de la certification par le COO, de la cartographie des activités de la banque sous l’angle sanctions et embargosContribuer à la rédaction ou l’actualisation de la documentation normative, assurer la diffusion des communications internes de la Direction de la ConformitéContribuer aux différents chantiers d’actualité de la filière et plus particulièrement en lien avec la thématique sanctions internationales et embargosDurée du stage : 6 moisEt si c’était vous ?Vous préparez un Bac + 4/5 en Ecole de Commerce, d'Ingénieur ou Université, en cycle Banque/Finance, spécialisation ConformitéVous appréciez le travail collaboratif en équipe et vous disposez de bonnes capacités d’analyseVous avez le sens de la précision, l'esprit de synthèse et une capacité de gestion, d’exploitation et de restitution des donnéesVous êtes réactif, particulièrement rigoureux et organisé, curieuxVous disposez d’une aisance rédactionnelle et relationnelleVous maîtrisez les outils de bureautique : une excellente connaissance EXCEL est requise (a minima maîtrise des TCD)Vous maîtrisez l’anglais à l’oral et à l’écritPlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans ",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/04",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
   },
   {
     "emp": "Société Générale",
-    "title": "Chargé de mission conformité",
+    "title": "ANALYSTE ET PROMOTEUR RSE",
     "sector": "Banque",
     "famille": "Risques & Conformité",
     "volet": "stage",
-    "loc": "La Defense",
+    "loc": "Saint-Denis",
     "zone": "Paris / Île-de-France",
     "maison": "Société Générale",
     "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-conformite-26000DDU-fr",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/stage-analyste-et-promoteur-rse-26000FI0-fr",
     "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienVous avez développé au travers de vos études une appétence pour les sujets en lien avec le respect des règles de conduite et la conformité ?Vous souhaitez intégrer une équipe dynamique ? Rejoignez-nous !En tant que stagiaire chargé de mission conformité, au sein de l’équipe conformité du réseau France, vous interviendrez sur des sujets portant principalement sur le pilotage des formations réglementaires et du risque de conduite, ainsi que sur le développement de la culture éthique au sein de l’entreprise. Vous serez aussi amené à apporter votre contribution dans les domaines de la Sécurité Financière et KYC (connaissance des clients), la gestion des sanctions internationales et Embargos, la lutte anti-blanchiment, la lutte anti-corruption, la RSE, la protection des données (RGPD), la protection réglementaire des clients.L’équipe, composée de dix personnes au siège (et de plus de 150 en régions), pilote, anime et accompagne la filière conformité des activités de la Banque de Détail en France. Dans un contexte à fort enjeu réglementaire, ce sujet est au cœur du fonctionnement de la Banque et des projets menés pour répondre aux exigences des régulateurs. Concrètement, vous serez amené à : Contribuer au pilotage des formations réglementaires (conception de TCD, alimentation d’outils tactiques de relance des overdues, etc.)Contribuer à la mise en place et au suivi de notre plan d’actions annuel Culture & conduite avec le siège et les régionsApporter votre contribution dans les domaines de la Sécurité Financière et KYC (connaissance des clients), la gestion des sanctions internationales et Embargos, la Lutte anti-blanchiment, la Lutte anti corruption, la RSE, la protection des données (RGPD), la protection réglementaire des clientsPlus globalement, contribuer aux chantiers d’actualités de la filièreDurée du stage : 6 moisEt si c’était vous ?Vous préparez un Bac + 4/5 en Ecole de Commerce, d'Ingénieur ou Université, avec une spécialisation en Finance, Banque, ConformitéVous maîtrisez parfaitement les outils de bureautique, dont Excel et ses différentes fonctionnalitésVous appréciez le travail collaboratif en équipe et vous disposez de bonnes capacités d’analyseVous avez le sens de la précision, l'esprit de synthèse et une capacité de gestion, d’exploitation et de restitution des données Vous êtes réactif, rigoureux, curieux et vous disposez d’une aisance rédactionnelle et relationnellePlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/06/11",
+    "_descr": "Vos missions au quotidienVous avez envie de propager la durabilité et l'accompagnement des clients dans leur transition, tout en conciliant performance économique et impact positif pour le client et l'environnement ? Ce stage est fait pour vous !Concrètement vous serez amené à :Accompagner nos clients dans leurs transitions énergétiques en leur proposant des financements à caractère et impact durable,Participer à la revue du portefeuille client et évaluer en détail de la maturité du client d'un point de vue environnementale et sociétale,Accompagner les collaborateurs sur des types de financements à impact positif et durable. Participer à la construction de la stratégie commerciale sur la dimension environnementale, ainsi qu’à l’intégration des enjeux E&S au sein de la banque.Et si c’était vous ? Etudiant en Master 1 ou 2 en Finance ou Ecole Commerce, Vous avez une appétence pour la RSE et le développement durable, Vous êtes curieux, autonome et force de proposition, Vous savez également travailler en synergie avec différents services, Vous avez des connaissances sur les principes de la finance durable et des réglementations spécifiques (taxonomie, CRSD...). Plus qu’un poste, un tremplinIntégrer ce poste c’est la possibilité de rejoindre une banque locale de plein exercice sur ses territoires à La Réunion et à Mayotte, pour vous ouvrir ensuite à d’autres opportunités à l’international ou en France.Pourquoi nous choisir ?Rejoindre la BFC,C’est rejoindre une banque régionale de 400 collaborateurs avec des agences situées à La Réunion, à Mayotte et à Paris,C’est se donner la chance d’acquérir une belle expérience dans un secteur d'activité en pleine transformation,·     C’est évoluer vers des métiers d’expertise ou de management au sein d’une banque à taille humaine !",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/06/25",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10388,26 +10406,8 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-controle-permanent-240008FV-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienLa BFC recrute, pour son site de La Réunion, un(e) Alternant(e) Chargé(e) de Contrôle Permanent F/H pour rejoindre l’équipe du Secrétariat Général.La raison d’être du poste consiste à améliorer en continue le dispositif de supervision managériale ainsi que celui de gestion des risques opérationnels en vue de mesurer et maitriser les risques, augmenter la performance opérationnelle collective et la satisfaction de nos clientsAu sein du Contrôle Permanent, le(a) Chargé(e) du Contrôle Permanent de niveau 1 :est en charge de l’animation du dispositif de supervision managériale et de l’amélioration de la qualité de la supervision managériale en liaison avec les responsables d’agences et de services, la Direction du Réseau et la Direction Générale.Intervient dans le domaine des risques opérationnels (Collecte des pertes, RCSA, PCA, PSE(E)) et sur certains sujets de conformité incombant à la LOD 1 (dispositif ABC, Sanctions &Embargos…), en raison des interactions existantes entre ces domaines, regroupés au sein du Contrôle Permanent.Sous la supervision de votre tuteur/tutrice  vous serez amené(e) à :Prendre en charge les déclarations de Risques Opérationnels  et effectuer le suivi des plans d’actionsRédiger les reportings et rapports à destination du Groupe ou du RégulateurAnimer les ateliers organisés avec les métiersAdministrer l’outil de suivi des Prestataires de Services ExternalisésRéaliser les travaux liés au Plan de continuité d’Activité : organisation des tests, reportingsIntervenir dans le domaine de la supervision managériale (animation et amélioration de la qualité) ainsi que certains sujets de conformité incombant à la LOD 1 (dispositif ABC, Sanctions &Embargos ...), en raison des interactions existantes entre ces domaines, regroupés au Contrôle Permanent.Assurer la collecte et le suivi des KRI (Key Risk Indicators)Déployer et mettre en qualité les contrôles normatifs Groupe de Supervision Managériale.Accompagner les responsables des différents périmètres dans la réalisation de la SM et dans l’acquisition de la culture Risques OpérationnelsAnalyser les résultats de SM des différents périmètres, suivre les plans d’actions définis et la régularisation des anomalies identifiées lors des travauxEt si c’était vous ?Vous préparez un Bac+4/5 dans le domaine bancaireOrganisé(e), vous êtes reconnu(e) pour gérer votre temps et respecter les délais.Doté(e) de bonnes capacités d’analyse et de synthèse, vous disposez d’un bon relationnel & d’un fort esprit d’équipe.Votre sens du risque, votre rigueur et vos capacités rédactionnelles vous permettront de mener à bien vos diverses missions.Modalités :Localisation : île de La RéunionPlus qu’un poste, un tremplinIntégrer ce poste c’est la possibilité de rejoindre une banque locale de plein exercice sur ses territoires à La Réunion et à Mayotte, pour vous ouvrir ensuite à d’autres opportunités à l’international ou en France.Pourquoi nous choisir ?Rejoindre la BFC,c’est rejoindre une ba",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/06/09",
-    "firstSeenAt": "2026-08-30T11:42:14.034Z",
-    "datePubFiable": true
-  },
-  {
-    "emp": "Société Générale",
-    "title": "ANALYSTE ET PROMOTEUR RSE",
-    "sector": "Banque",
-    "famille": "Risques & Conformité",
-    "volet": "stage",
-    "loc": "Saint-Denis",
-    "zone": "Paris / Île-de-France",
-    "maison": "Société Générale",
-    "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/stage-analyste-et-promoteur-rse-26000FI0-fr",
-    "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienVous avez envie de propager la durabilité et l'accompagnement des clients dans leur transition, tout en conciliant performance économique et impact positif pour le client et l'environnement ? Ce stage est fait pour vous !Concrètement vous serez amené à :Accompagner nos clients dans leurs transitions énergétiques en leur proposant des financements à caractère et impact durable,Participer à la revue du portefeuille client et évaluer en détail de la maturité du client d'un point de vue environnementale et sociétale,Accompagner les collaborateurs sur des types de financements à impact positif et durable. Participer à la construction de la stratégie commerciale sur la dimension environnementale, ainsi qu’à l’intégration des enjeux E&S au sein de la banque.Et si c’était vous ? Etudiant en Master 1 ou 2 en Finance ou Ecole Commerce, Vous avez une appétence pour la RSE et le développement durable, Vous êtes curieux, autonome et force de proposition, Vous savez également travailler en synergie avec différents services, Vous avez des connaissances sur les principes de la finance durable et des réglementations spécifiques (taxonomie, CRSD...). Plus qu’un poste, un tremplinIntégrer ce poste c’est la possibilité de rejoindre une banque locale de plein exercice sur ses territoires à La Réunion et à Mayotte, pour vous ouvrir ensuite à d’autres opportunités à l’international ou en France.Pourquoi nous choisir ?Rejoindre la BFC,C’est rejoindre une banque régionale de 400 collaborateurs avec des agences situées à La Réunion, à Mayotte et à Paris,C’est se donner la chance d’acquérir une belle expérience dans un secteur d'activité en pleine transformation,·     C’est évoluer vers des métiers d’expertise ou de management au sein d’une banque à taille humaine !",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/06/25",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10424,7 +10424,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-analyste-reporting-reglementaire-pilotage-26000HWE-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienEn tant qu’Assistant Analyste reporting réglementaire et pilotage, vous produisez et certifiez les reportings réglementaires et accompagnez le Groupe à travers des actions d’amélioration continue, sous la supervision de votre maitre de stage.Concrètement vous serez amené, sous la responsabilité de votre maître de stage, à :Produire et certifier les reportings annuels FMIR (Financial Market Infrastructure Report) et CFR (Critical Functions Report) à destination du régulateur SRB (Single Resolution Board)S’assurer que les évolutions normatives sont bien prises en compte dans les reports produitsSuivre le déroulement de l’arrêté, alerter sur les incidents survenus et suivre leur résolutionParticiper aux actions d’amélioration des processParticiperez à assurer un lien fonctionnel avec les équipes IT et les entitésDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac +5 en école de Commerce, d'Ingénieur ou Université avec une spécialisation en FinanceAgile d’esprit, curieux, vous êtes organisé et vous avez une bonne capacité d’adaptation et d’analyseVous êtes autonome et vous savez gérer vos priorités, c’est tout à votre avantage !Vous êtes force de proposition et vous aimez travailler en équipeYou’re fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence. A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail : parrainer des personnes en difficulté dans leur orientation ou leur insertion professionnelle, participer à l’éducation financière de jeunes en apprentissage ou encore partager leurs compétences avec une association. Les formats d’e",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/14",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10442,26 +10442,8 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/gestionnaire-back-office-financements-entreprises-26000HEB-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienLes Centres de Services (CDS) assurent la mise en œuvre des traitements, prestations et engagements de services afférents aux opérations bancaires pour l’ensemble de notre clientèle (particuliers, professionnels, associations et entreprises) en étroite collaboration avec les Agences.Nous vous proposons de rejoindre les équipes de la filière Financements FPE dont l’activité sur le site de Cergy est d’analyser et gérer les crédits complexes et/ou correspondant à des financements « haut de bilan » pour le marché Entreprises et Institutionnels. Qualifier et s'assurer de la complétude et de la conformité des dossiers de financements validés Prendre en charge la mise en place des financements complexes ou des financements non frontalisés, prendre les sûretés et gérer les événements de la vie du crédit  Assurer la gestion courante de l'utilisation de toutes lignes de crédits et des échéances impayées Assurer le suivi des crédits complexes comme les LBO ou crédits à covenants lorsqu'il est requis  Analyser les éléments financiers des dossiers suivis en cas de bris de covenants et rédiger une recommandation le cas échéant  Assurer des relations de qualité auprès des clients externes et internes  Lors de ces différentes phases vous êtes en lien direct avec le client.Vous serez pilotés et objectivés sur vos réalisations.En plus d'une première expérience réussie en relation avec la clientèle du marché Entreprises et Institutionnels, votre expérience au sein du réseau France, vous a permis d'acquérir la maîtrise de l'offre bancaire destinée à cette clientèle et une aisance dans la relation directe avec les clients : autonomie et réactivité.Vous maîtrisez par ailleurs les bases comptables et financières d'une entrepriseEt si c’était vous ?Diplômé d’un Master 1 ou 2 en Banque Finance ou Droit Commercial des Affaires, vous justifiez d’une première expérience réussie dans la Banque de détail en France ou en back office bancaire et avez développé les compétences suivantes : - Connaissance de l’offre commerciale à destination de la clientèle entreprise- Bonnes connaissances comptables, analyse financière, juridiques et fiscales des entreprises- bonne vision des processus Front to Back- Maîtrise du risque opérationnel - Bureautique- Respect des procéduresAutonome et rigoureux, vous avez démontré votre sens de la négociation et êtes orientés satisfaction client. Vous faites preuve d’esprit d’équipe et de curiosité.Plus qu’un poste, un tremplinRejoindre une telle équipe constitue une réelle opportunité : vous pourrez acquérir des expertises dans un domaine innovant et en plein essor au sein de la banque de détail.Grâce à une politique de mobilité interne forte, les compétences que vous développerez vous permettront d’évoluer au sein de notre Groupe où vous découvrirez toute la diversité de nos parcours et de nos métiers.Rejoindre SG permet de bénéficier de nombreux avantages : jours de télétravail selon le rythme de votre service, rémunération",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/26",
-    "firstSeenAt": "2026-08-29T23:37:35.506Z",
-    "datePubFiable": true
-  },
-  {
-    "emp": "Société Générale",
-    "title": "1 STAGE EN 1 JOUR - Analyste Quantitatif",
-    "sector": "Banque",
-    "famille": "Data & Quant",
-    "volet": "stage",
-    "loc": "La Defense",
-    "zone": "Paris / Île-de-France",
-    "maison": "Société Générale",
-    "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/1-stage-en-1-jour-analyste-quantitatif-26000IMP-fr",
-    "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienDécrocher un stage en 1 jour et vivre au rythme trépidant d’une salle de marché et participer de manière active à l'activité du desk, cela vous tente ? Vous souhaitez acquérir une expérience au sein de la Division des Marchés de Capitaux de la Société Générale ? Rejoignez-nous !Société Générale occupe une place de leader mondial dans les activités de trading, sur les marchés dérivés actions, ou taux, change et crédit. De nombreuses distinctions ces dernières années ont récompensé l’innovation et la performance du groupe dans ces métiers, en même temps que des distinctions sur les projets Environnement, Social et Gouvernance.Les analystes quantitatifs du département des activités de marché conçoivent des solutions industrielles de pricing, de market making électronique et de gestion des risques. Ils jouent un rôle clé dans les projets de développement et de transformation des activités de marché, ainsi que dans l’évolution des dispositifs de gestion et de pilotage des risques.Au cours de votre stage, vous développerez, dans un environnement dynamique et exigeant, une expertise approfondie en programmation, mathématiques appliquées et finance. Cette triple compétence est essentielle pour concevoir des solutions innovantes respectant les standards de qualité industrielle propres aux activités de marché.Selon l’équipe que vous intégrerez, vous serez particulièrement impliqué dans des problématiques cross-asset (taux, change, crédit, equity, hybrid, XVA) et contribuerez activement au développement des activités liées aux produits dérivés et/ou au trading algorithmique, domaines dans lesquels Société Générale bénéficie d’une expertise reconnue. La collaboration étroite avec les pôles de recherche et développement, les équipes de trading, le département des risques, la direction financière ainsi que les équipes IT, constituera un atout majeur.Concrètement, deux types de postes d’analystes quantitatifs sont proposés :Quant (pricing de produits dérivés) :Mener des études théoriques sur les modèles de valorisation et de couvertureRéaliser des implémentations et des tests sur des données de marché réellesIntégrer les implémentations dans les pricers de production de la banque lorsque les résultats sont validésE-Quant (market making électronique) :Appliquer des techniques statistiques et de machine learning pour analyser les dynamiques de marchéRechercher et développer des modèles et stratégies de tradingConcevoir des outils destinés à améliorer la rentabilité des stratégies de tradingNous offrons:Un environnement de travail exigeant, stimulant et dynamiqueUne expérience pratiqueLa possibilité de travailler avec des professionnels expérimentés et reconnusPour le pourvoi des différentes offres de stages, une journée d’évaluation (assessment center) sera organisée le 25 septembre 2026. Cette journée comprendra deux parties : une première partie dédiée à la réalisation de tests et une seconde partie consacrée aux entretiens avec nos man",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
   },
@@ -10478,7 +10460,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/analyste-risques-de-marche-26000HQS-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienAu sein de Société Générale, vous rejoindrez la Direction des Risques.La Direction des Risques est au cœur de l’activité du Groupe avec pour principale mission de contribuer au développement des métiers et de leur rentabilité par la mise en œuvre de l’appétit au risque.Travailler au sein de la Direction des Risques, c’est exercer un métier intellectuellement passionnant et vivre un quotidien stimulant, rythmé par l’actualité économique. C’est, en tant que partenaire clé du business, être en proximité avec l’ensemble des métiers du Groupe. Enfin, nous rejoindre, c’est intégrer une filière d’excellence pour acquérir une expertise au cœur de la banque et accéder à de nouvelles opportunités de développement.Vous serez rattaché à une équipe d'analyste suivi des activités de marché pour le business line Prime Services.A ce titre et en collaboration avec votre maître de stage qui assurera votre formation, vous participez aux missions suivantes :Analyse et certification de l'impact des évolutions du système d'information et business pour l'ensemble des métriques de risque de contrepartieAccompagnement du métier suite à la mise en place et activation des nouvelles évolutions impactant les métriques de risque de contrepartieDéveloppement d’outils d’aide à l’analyse (Python) et participation aux différents tests des nouveaux outils développés par nos partenaires  Durée du stage : 6 mois.Prenez votre place dans LA banque relationnelle, engagée pour ses clients et ses collaborateurs !Et si c’était vous ?Vous êtes étudiant de niveau Bac+4/5 en Université, école de Commerce, ou d’Ingénieur, avec une spécialité en Mathématique ou Informatique Des connaissances en finances de marché seraient un plus Vous avez une parfaite maîtrise du Pack Office notamment en Excel VBA ainsi qu'une bonne connaissance en Python You're fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aus",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10496,7 +10478,25 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/1-stage-en-1-jour-ingenieur-produits-structures-26000IMI-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienDécrocher un stage en 1 jour et vivre au rythme trépidant d’une salle de marché et participer de manière active à l'activité du desk, cela vous tente ? Au sein du groupe Société Générale, vous rejoindrez la Banque de Financement et d'Investissement et intégrerez le département des activités de marché. Ce département traite l’ensemble des opérations de marché de Société Générale et ce, pour tous les types de clientèle : institutionnels, distributeurs, et grandes entreprises. Société Générale fait partie des leaders mondiaux sur les marchés dérivés et structurés de Taux/Change et Actions, et accompagne ses clients avec non seulement des solutions et produits cross-asset, mais également du conseil, notamment grâce à ses équipes de recherche.L’ingénierie du département Global Markets est en charge de concevoir, structurer et de mettre en œuvre des transactions structurées sur produits dérivés Cross Asset pour tous types de clientèles (corporate, institutionnels, distributeurs). Cette équipe a pour rôle de répondre aux demandes de structuration sur toutes classes d’actifs émanant de la vente, en liaison avec le trading.Plus concrètement, vous serez notamment amené à :Concevoir des structures innovantes d’investissement pour divers types de clientèle et coter des structures pour les équipes de vente sur la clientèle de distribution et institutionnelle en Europe, définir, mettre en place et promouvoir de nouveaux produits adaptés aux demandes des investisseurs finaux et distributeursParticiper à l’élaboration des documents transactionnels, à des rendez-vous clients le cas échéant, à l’élaboration de marketings internes ou externes sur les produits nouvellement définis par vous ou votre équipeExécuter les trades avec le tradingDévelopper des scripts permettant d’automatiser les cotations et de rester en alerte sur les payoffs les plus courantsMettre en place et fournir les analyses quantitatives (simulations, back testing, régressions, études statistiques) nécessaires à la vente de ces produits, analyser le profil de risque de ces produits, en interactions avec les équipes quantParticiper au pricing des metrics XVA (risque de contrepartie) sur des transactions stratégiques et analyser les performances de certains indicesIntervenir sur des sujets d'automatisation d'outils à destination des vendeurs Corporates et Cross AssetTravailler sur des sujets d'advisory à destination de clientsParticiper à l'élaboration de Back tests de stratégies de couvertures optionnellesNous offrons :Un environnement de travail exigeant, stimulant et dynamiqueUne expérience pratiqueLa possibilité de travailler avec des professionnels expérimentés et reconnusPour le pourvoi des différentes offres de stages, une journée d’évaluation (assessment center) sera organisée le 25 septembre 2026. Cette journée comprendra deux parties : une première partie dédiée à la réalisation de tests et une seconde partie consacrée aux entretiens avec nos managers recruteurs.M",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/08/27",
+    "firstSeenAt": "2026-08-29T23:37:35.506Z",
+    "datePubFiable": true
+  },
+  {
+    "emp": "Société Générale",
+    "title": "1 STAGE EN 1 JOUR - Analyste Quantitatif",
+    "sector": "Banque",
+    "famille": "Data & Quant",
+    "volet": "stage",
+    "loc": "La Defense",
+    "zone": "Paris / Île-de-France",
+    "maison": "Société Générale",
+    "place": "France",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/1-stage-en-1-jour-analyste-quantitatif-26000IMP-fr",
+    "source": "sitemapld:Société Générale",
+    "_descr": "Vos missions au quotidienDécrocher un stage en 1 jour et vivre au rythme trépidant d’une salle de marché et participer de manière active à l'activité du desk, cela vous tente ? Vous souhaitez acquérir une expérience au sein de la Division des Marchés de Capitaux de la Société Générale ? Rejoignez-nous !Société Générale occupe une place de leader mondial dans les activités de trading, sur les marchés dérivés actions, ou taux, change et crédit. De nombreuses distinctions ces dernières années ont récompensé l’innovation et la performance du groupe dans ces métiers, en même temps que des distinctions sur les projets Environnement, Social et Gouvernance.Les analystes quantitatifs du département des activités de marché conçoivent des solutions industrielles de pricing, de market making électronique et de gestion des risques. Ils jouent un rôle clé dans les projets de développement et de transformation des activités de marché, ainsi que dans l’évolution des dispositifs de gestion et de pilotage des risques.Au cours de votre stage, vous développerez, dans un environnement dynamique et exigeant, une expertise approfondie en programmation, mathématiques appliquées et finance. Cette triple compétence est essentielle pour concevoir des solutions innovantes respectant les standards de qualité industrielle propres aux activités de marché.Selon l’équipe que vous intégrerez, vous serez particulièrement impliqué dans des problématiques cross-asset (taux, change, crédit, equity, hybrid, XVA) et contribuerez activement au développement des activités liées aux produits dérivés et/ou au trading algorithmique, domaines dans lesquels Société Générale bénéficie d’une expertise reconnue. La collaboration étroite avec les pôles de recherche et développement, les équipes de trading, le département des risques, la direction financière ainsi que les équipes IT, constituera un atout majeur.Concrètement, deux types de postes d’analystes quantitatifs sont proposés :Quant (pricing de produits dérivés) :Mener des études théoriques sur les modèles de valorisation et de couvertureRéaliser des implémentations et des tests sur des données de marché réellesIntégrer les implémentations dans les pricers de production de la banque lorsque les résultats sont validésE-Quant (market making électronique) :Appliquer des techniques statistiques et de machine learning pour analyser les dynamiques de marchéRechercher et développer des modèles et stratégies de tradingConcevoir des outils destinés à améliorer la rentabilité des stratégies de tradingNous offrons:Un environnement de travail exigeant, stimulant et dynamiqueUne expérience pratiqueLa possibilité de travailler avec des professionnels expérimentés et reconnusPour le pourvoi des différentes offres de stages, une journée d’évaluation (assessment center) sera organisée le 25 septembre 2026. Cette journée comprendra deux parties : une première partie dédiée à la réalisation de tests et une seconde partie consacrée aux entretiens avec nos man",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10514,7 +10514,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/1-stage-en-1-jour-assistant-trader-26000IMH-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienDécrocher un stage en 1 jour et vivre au rythme trépidant d’une salle de marché et participer de manière active à l'activité du desk, cela vous tente ? Vous cherchez un stage dans une salle des marchés, sur un desk de trading, au cœur de l’action ? Rejoignez-nous !Société Générale occupe une place de leader mondial dans les activités de trading, sur les marchés dérivés actions, ou taux, change et crédit. De nombreuses distinctions ces dernières années ont récompensé l’innovation et la performance du groupe dans ces métiers, en même temps que des distinctions sur les projets Environnement, Social et Gouvernance.Vous travaillerez en étroite collaboration avec les traders et les quants pour nous aider à développer et améliorer nos outils d’aide à la décision, à la production, au suivi des risques et du PNL.En participant quotidiennement à la vie du desk, vous serez à même d’en saisir les enjeux, les problématiques et les succès.Nous offrons :Un environnement de travail exigeant, stimulant et dynamiqueUne expérience pratique dans le domaine du trading de produits dérivés, au sein du leader du marchéLa possibilité de travailler avec des professionnels expérimentés et reconnusPour le pourvoi des différentes offres de stages, une journée d’évaluation (assessment center) sera organisée le 25 septembre 2026. Cette journée comprendra deux parties : une première partie dédiée à la réalisation de tests et une seconde partie consacrée aux entretiens avec nos managers recruteurs. Merci de nous indiquer dans votre CV :Vos dates de disponibilité pour la réalisation de ce stageSi vous avez une préférence pour les activités de trading dans le domaine du fixed income ou de l'equity (si tel est le cas)Et si c’était vous ?Vous êtes étudiant de niveau Bac+4/5 en École d’Ingénieur ou en Université, avec une spécialisation en Mathématiques appliquées ou en FinanceVous avez de l’expérience en algorithmique et en projet informatique (pour certains périmètres de trading, la maîtrise de Python : pandas / polars / Numpy est un prérequis)Vous possédez une excellente maîtrise du Pack OfficeVous êtes curieux, passionné, rigoureux, avec de très fortes capacités d’analyse et de synthèse (compétences analytiques et quantitatives) et possédez des qualités rédactionnelles ainsi qu’une bonne aisance relationnelleVous êtes capable de travailler dans un environnement dynamique et exigeant et vous savez gérer plusieurs tâches simultanémentVous aimez relever des challenges, être force de proposition et vous avez le sens du travail en équipeUne première expérience en finance de marchés est souhaitableYou're fluent in English ? Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette exp",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10532,7 +10532,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/1-stage-en-1-jour-assistant-ou-analyste-strategiste-26000IML-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienDécrocher un stage en 1 jour et vivre au rythme trépidant d’une salle de marché cela vous tente ? Au sein du groupe Société Générale, vous rejoindrez la Banque de Financement et d'Investissement.Vous accompagnerez la plateforme intégrée Global Markets, qui propose une approche multi produits sur l'ensemble des classes d'actifs et qui compte environ 200 analystes, stratèges et économistes travaillant dans la banque d'investissement.L'objectif est de proposer des solutions de qualité en matière d'investissement et de gestion des risques aux gestionnaires d'actifs, fonds de pension, entreprises, banques privées, assurances, hedge funds, family offices, fonds souverains et distributeurs à travers le monde.À ce titre et en collaboration avec votre maître de stage qui assurera votre formation, vous participerez aux missions suivantes :Contribuer aux rapports de recherche publiés par l’équipe (focus sectoriel, pays européens ou thématique comme l’impact des événements majeurs par exemple)Réaliser des présentations marketing pour le rdv clientsDévelopper et améliorer les outils de veille des marchés financiers / indicateurs économiques / résultats d’entreprises européennesSuivre le newsflow sur la transition énergétique (politique, technologique et financier)Travailler sur les potentiels impacts de variables macro-économique ou d’événements géopolitiques ou climatiques sur les marchés européensInteragir avec les différents interlocuteurs au sein de la Banque : stratégistes, analystes, économistesNous offrons :Un environnement de travail exigeant, stimulant et dynamiqueUne expérience pratique dans le domaine du trading de produits dérivés, au sein du leader du marchéLa possibilité de travailler avec des professionnels expérimentés et reconnusPour le pourvoi des différentes offres de stages, une journée d’évaluation (assessment center) sera organisée le 25 septembre 2026. Cette journée comprendra deux parties : une première partie dédiée à la réalisation de tests et une seconde partie consacrée aux entretiens avec nos managers recruteurs.Merci de nous indiquer dans votre CV : vos dates de disponibilité pour la réalisation de ce stage.Et si c’était vous ?Vous êtes étudiant de niveau Bac + 4/5 en école de Commerce, d'Ingénieur ou Université avec une spécialisation en FinanceVous avez une bonne connaissance des marchés financiers, des stratégies d'investissement et si possible de l’économieVous maîtrisez les outils de gestion des donnéesVous avez des compétences en programmation (Python)Vous êtes à l’aise en mathématique et plus particulièrement les statistiquesVous maîtrisez le Pack OfficeYou're fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10550,44 +10550,8 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/commando-en-controle-de-gestion-26000G28-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous avez envie de recourir à vos connaissances de code dans un environnement stimulant ? Vous êtes passionné par la finance et avez envie de travailler sur des sujets stratégiques et fonctionnels ? Vous avez envie d’exercer un métier intellectuellement stimulant, rythmé par l’information et ce que l’on appelle « l’effet papillon » ? Le poste de stagiaire commando dans notre équipe est fait pour vous !En tant que partenaire clé du business, vous contribuez à la bonne compréhension des résultats des métiers et à la définition des budgets.Vous travaillerez plus spécifiquement sur les activités de contrôle de gestion, dans l’équipe en charge du suivi des résultats de l'ALM (Asset Liabilities Management).Concrètement, vous serez amené à :  Développer des outils d'automatisation, d’optimisation et d’analyse des différents indicateurs (développements limités, projections, etc.) sous Python/VBAAccompagner les évolutions métiers, que ce soit sur un aspect analyse, restitution ou monitoringAnalyser et certifier les résultats mensuels des activités d'ALMDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac+4/5 en École d’Ingénieur, de Commerce ou Université, avec une spécialisation en FinanceVous maîtrisez les outils de gestion de bases de données (Excel, Access), ainsi que les langages de programmation (Python, VBA, SQL, etc.)Rigoureux et réactif, vous avez le sens du travail en équipe, l’esprit d’initiative et de bonnes capacités d’analyse et de synthèseYou’re fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/07/07",
-    "firstSeenAt": "2026-08-30T11:42:14.034Z",
-    "datePubFiable": true
-  },
-  {
-    "emp": "Société Générale",
-    "title": "Assistant Chef de projet - Filière Finance",
-    "sector": "Banque",
-    "famille": "Risques & Conformité",
-    "volet": "stage",
-    "loc": "La Defense",
-    "zone": "Paris / Île-de-France",
-    "maison": "Société Générale",
-    "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-chef-de-projet-filiere-finance-26000HLM-fr",
-    "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienVous êtes intéressé par le monde du Projet et de la Finance ? Vous aimez faire parler les chiffres, les mettre en perspective, les analyser, les croiser ? Vous souhaitez aussi participer à des projets de Transformation ?Sans aucun doute vous êtes fait pour rejoindre le Transformation & Operating Office de la Direction Financière du Groupe !En collaboration avec un Transformation Manager et des Directeurs/Chefs de projet, vous travaillerez sur des projets visant à la Transformation d’organisation et de processus métier Finance et réglementaires, sur lesquels vous jouerez un rôle d’assistant chef de projet.Concrètement, vous serez amené à participer à 2 missions :1. « Transformation Finance » à 80% :Prendre en charge avec le Directeur/Chef de projet en place, la PMO (Project Management Office) du projet concerné : assurer la comitologie du projet comprenant la coordination entre acteurs métiers et services informatiques, la production de reportings, le suivi des plannings des différentes initiatives, ainsi que le pilotage budgétaire du projetParticiper activement aux réalisations de la roadmap de l’un des chantiers du projet (à définir en fonction du besoin)2. « GoPro » à 20% :Contribuer également à notre initiative interne « GoPro ». Cette initiative qui organise la Top professionnalisation de nos équipes mondiales, vous permettra d’accéder à la vision et compréhension globales de notre organisation. Les travaux alloués peuvent être très variés et recouvrir des thématiques tels que la méthodologie projet, la formation, la communicationDurée du stage : 6 mois.Et si c’était vous ?Vous êtes étudiant de niveau Bac +4/5 en École de commerce, d’ingénieur ou Université, avec une spécialisation en FinanceVous avez de bonnes capacités d’analyse, de synthèse et vous appréciez le travail en équipe en mode projetVous avez une bonne maîtrise du Pack Office (Excel, Power Point, etc.) et des outils de travail collaboratifs (Teams, SharePoint, etc.)You’re fluent in English ?Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématéri",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/08/13",
-    "firstSeenAt": "2026-08-29T23:37:35.506Z",
-    "datePubFiable": true
-  },
-  {
-    "emp": "Société Générale",
-    "title": "Aviation Advisory Intern",
-    "sector": "Banque",
-    "famille": "Audit & Conseil",
-    "volet": "stage",
-    "loc": "La Defense",
-    "zone": "Paris / Île-de-France",
-    "maison": "Société Générale",
-    "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/aviation-advisory-intern-26000GLU-fr",
-    "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienCe stage se déroule au sein de la Banque de Financement et d'Investissement (BFI) du Groupe Société Générale. En combinant notre expertise mondiale en banque d’investissement, financement et activités de marchés, nous accompagnons nos clients dans leur développement avec des solutions adaptées à leurs besoins et contribuons au financement de l'économie et à la réalisation d’ambitions durables et positives. Nous proposons une large gamme de produits, parmi lesquels la levée de capitaux, la gestion des risques ainsi que les services de conseil en financement de projets, les solutions public-privé et le financement d'actifs.Au sein du département Conseil et Financement Aéronautiques, et plus spécifiquement au sein de l’équipe Conseil Aéronautique, le stagiaire accompagnera les chargés d’affaires dans l’origination et l’exécution de mandats de conseil tout au long de la chaîne de valeur du secteur (transporteurs aériens et loueurs opérationnels, constructeurs/équipementiers aéronautiques, opérateurs aéroportuaires, producteurs de carburant d’aviation durable, etc.). L’équipe Conseil Aéronautique s'appuie sur l’expertise et la présence internationale (New York, Tokyo et Paris) des équipes de financements et intervient sur les thématiques de :Conseil stratégique, commercial et financier (conseil en investissement, M&A, conseil en dette, etc.)Levée de fonds et placement privéConseil ESG Durant votre stage, vous participerez notamment aux missions suivantes :Analyse financière (compagnies aériennes, loueurs d’avions, etc.) Travaux de valorisation financière (DCF, Multiples, valorisation d’actifs, etc.) Participation à l’exécution de transactions (info-mémo, due diligence, etc.)Recherche d’investisseurs, en coordination avec les équipes de coverage internesPréparation de documentation marketing (teaser, pitch, one-pager, etc.) Diverses revues sectorielles (analyses globales de l’industrie, enjeux environnementaux, valorisations d’actifs, études sur la flotte mondiale, analyse de segments de marché spécifiques) Veille de marchéDurée du stage : 6 mois.#JT26Et si c’était vous ?Vous êtes étudiant en Bac+4/5 en Grande Ecole de Commerce, d’Ingénieur ou Université, avec une option Finance ou complétée par un Master spécialisé en FinanceVous avez une expérience préalable de stage ou équivalent en banque (M&A, PE, Audit ou TS)Vous avez un bon niveau de connaissances en comptabilité, évaluation d’entreprises et d’actifsVous maîtrisez le Pack Office (Excel, Word, Powerpoint)Vous êtes courant en Anglais et Français (excellente maîtrise)Vous êtes autonome, rigureus, avec esprit analytique, curiosieus, vous avez aptitude à travailler en équipe, esprit de synthèse et souci du détailVous avez un bon niveau de connaissances en comptabilité et en finance d’entrepriseVous êtes intéressé par le secteur de l’industrie aéronautiquePlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans n",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/07/31",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10604,7 +10568,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/business-analyst-gestion-de-projets-flux-et-transactions-internationales-26000CJ7-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous souhaitez être au cœur de la transformation des Centre de Services Clients de la Banque de Détail en France ? Rejoignez- nous !En tant que stagiaire chargé de projets, intégré dans les équipes de direction, vous contribuerez à l’animation des équipes de back-office en charge des flux et des transactions internationales ainsi qu’à leur pilotage, en lien étroit avec les équipes locales de Centre de Services Clients (8 sites en France métropolitaine).Concrètement, vous serez amené, sous la supervision de votre tutrice à :Assister l’équipe de direction de la filière dans le pilotage de la filière flux et des transactions internationales : suivi et analyse des reportings d’activités, des indicateurs de pilotage, des indicateurs de risque opérationnel et de conformitéContribuer à la définition et à la mise en place de nouveaux indicateurs via notre outil de BIAssister l’équipe de direction de la filière dans le suivi des projetsContribuer à la conduite de chantiers métiers visant à optimiser les processus opérationnels (animation des ateliers métier, création/mise à jour des modes opératoires, livrables de conduite du changement)Contribuer aux actions de communication visant à faire la promotion des activités de la  filière flux et des transactions internationalesDurée du stage : 6 mois#JT26Et si c’était vous ?Vous préparez un BAC + 4/5 en Ecole de Commerce, d’Ingénieurs ou Université, avec un spécialité Banque de détail, Management ou Gestion de projetVous avez le sens du contact et un excellent relationnel, y compris dans le cadre de la communication à distanceVous possédez un bon niveau rédactionnel et des capacités de synthèseVous savez faire preuve de curiosité et démontrer une capacité à mener à bien plusieurs objectifs en parallèleVous savez être force de propositionVous maîtrisez le pack office et plus particulièrement ExcelUne connaissance des outils de BI est un plus (Microsoft Strategy, Power BI)Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, in",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/05/27",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
@@ -10622,14 +10586,32 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/data-analyst-client-service-unit-26000FKI-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienAu sein de l’équipe International Supervisions & Transformation en charge notamment de l’optimisation de la performance opérationnelle et de l’évolution du modèle opérationnel des Services clients/Middle offices, et sous la responsabilité de votre maître de stage, vous avez pour mission de participer à la définition et l'implementation d'un Dashboard central des activités des Middle offices internationaux et en particulier :Identifier les sources de données fiables et appropriées pour les indicateurs définisConcevoir un tableau de bord synthétique, flexible, évolutif restituant les indicateurs en questionParticiper à la réalisation de la conduite du changement auprès des différents acteurs concernésDocumenter précisément l'outil pour permettre sa maintenance ultérieureDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant en Bac+4/5 au sein d’une École de Commerce, d’Ingénieur ou d’une Université, avec une spécialisation en FinanceVous maîtrisez la gestion et le suivi de projetsVous avez une excellente maîtrise de Power BI, Excel et PowerPointVous disposez d’un bon niveau d’anglais, à l’écrit comme à l’oralVous appréciez le travail en équipe et faites preuve de curiositéVous êtes autonome, méthodique, rigoureux et doté d’un bon esprit d’analyseVous êtes proactif, force de proposition et savez rendre compte de manière pertinente à vos interlocuteursPlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail : parrainer des personnes en difficulté dans leur orientation ou leur insertion professionnelle, participer à l’éducation financière de jeunes en ap",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/12",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
   },
   {
     "emp": "Société Générale",
-    "title": "Auditeur sur les activités de marché",
+    "title": "Assistant Chef de projet - Filière Finance",
+    "sector": "Banque",
+    "famille": "Risques & Conformité",
+    "volet": "stage",
+    "loc": "La Defense",
+    "zone": "Paris / Île-de-France",
+    "maison": "Société Générale",
+    "place": "France",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-chef-de-projet-filiere-finance-26000HLM-fr",
+    "source": "sitemapld:Société Générale",
+    "_descr": "Vos missions au quotidienVous êtes intéressé par le monde du Projet et de la Finance ? Vous aimez faire parler les chiffres, les mettre en perspective, les analyser, les croiser ? Vous souhaitez aussi participer à des projets de Transformation ?Sans aucun doute vous êtes fait pour rejoindre le Transformation & Operating Office de la Direction Financière du Groupe !En collaboration avec un Transformation Manager et des Directeurs/Chefs de projet, vous travaillerez sur des projets visant à la Transformation d’organisation et de processus métier Finance et réglementaires, sur lesquels vous jouerez un rôle d’assistant chef de projet.Concrètement, vous serez amené à participer à 2 missions :1. « Transformation Finance » à 80% :Prendre en charge avec le Directeur/Chef de projet en place, la PMO (Project Management Office) du projet concerné : assurer la comitologie du projet comprenant la coordination entre acteurs métiers et services informatiques, la production de reportings, le suivi des plannings des différentes initiatives, ainsi que le pilotage budgétaire du projetParticiper activement aux réalisations de la roadmap de l’un des chantiers du projet (à définir en fonction du besoin)2. « GoPro » à 20% :Contribuer également à notre initiative interne « GoPro ». Cette initiative qui organise la Top professionnalisation de nos équipes mondiales, vous permettra d’accéder à la vision et compréhension globales de notre organisation. Les travaux alloués peuvent être très variés et recouvrir des thématiques tels que la méthodologie projet, la formation, la communicationDurée du stage : 6 mois.Et si c’était vous ?Vous êtes étudiant de niveau Bac +4/5 en École de commerce, d’ingénieur ou Université, avec une spécialisation en FinanceVous avez de bonnes capacités d’analyse, de synthèse et vous appréciez le travail en équipe en mode projetVous avez une bonne maîtrise du Pack Office (Excel, Power Point, etc.) et des outils de travail collaboratifs (Teams, SharePoint, etc.)You’re fluent in English ?Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématéri",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/08/13",
+    "firstSeenAt": "2026-08-29T23:37:35.506Z",
+    "datePubFiable": true
+  },
+  {
+    "emp": "Société Générale",
+    "title": "Aviation Advisory Intern",
     "sector": "Banque",
     "famille": "Audit & Conseil",
     "volet": "stage",
@@ -10637,11 +10619,11 @@ window.__OFFRES__ = [
     "zone": "Paris / Île-de-France",
     "maison": "Société Générale",
     "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/auditeur-sur-les-activites-de-marche-26000HHC-fr",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/aviation-advisory-intern-26000GLU-fr",
     "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienVous avez un vrai talent d’enquêteur et le sens de l’action ? Vous aimez écouter, argumenter et convaincre ? Vous êtes un anti-routine ? Rejoignez nos équipes de l’Audit !En tant qu’Auditeur, vous évaluez le fonctionnement et les pratiques de tous les métiers du Groupe, éclairez les « zones à risques » et préconisez des actions correctrices.Concrètement, vous serez amené, sous la supervision de votre tuteur et/ou votre manager, à :S'approprier la méthodologie d’Audit du Groupe et nos outils,Découvrir l’approche des processus, l’analyse de données et assimiler les principaux risques sous-jacents aux métiers et périmètres couverts,Mener des contrôles sur un périmètre défini et contribuer à la production des fiches (travaux, constats, etc.),Assister aux entretiens et rédiger des comptes-rendus en français et anglais, contribuer au suivi des recommandations,Mettre en application vos connaissances en finance de marché, utiliser vos capacités à travailler la data / coder.Durée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac +5 en Ecole d’Ingénieur, de Commerce ou Université, avec une spécialisation en Finance/AuditUne première expérience réussie en Audit ou en Banque / Finance est un plusVous aimez travailler en équipe et entretenir une relation de proximité avec les métiersRigoureux, curieux et innovant, vous intégrez rapidement des informations, proposez des solutions pragmatiques et vous avez un goût certain pour l’analyseYou're fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…).Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/07/29",
+    "_descr": "Vos missions au quotidienCe stage se déroule au sein de la Banque de Financement et d'Investissement (BFI) du Groupe Société Générale. En combinant notre expertise mondiale en banque d’investissement, financement et activités de marchés, nous accompagnons nos clients dans leur développement avec des solutions adaptées à leurs besoins et contribuons au financement de l'économie et à la réalisation d’ambitions durables et positives. Nous proposons une large gamme de produits, parmi lesquels la levée de capitaux, la gestion des risques ainsi que les services de conseil en financement de projets, les solutions public-privé et le financement d'actifs.Au sein du département Conseil et Financement Aéronautiques, et plus spécifiquement au sein de l’équipe Conseil Aéronautique, le stagiaire accompagnera les chargés d’affaires dans l’origination et l’exécution de mandats de conseil tout au long de la chaîne de valeur du secteur (transporteurs aériens et loueurs opérationnels, constructeurs/équipementiers aéronautiques, opérateurs aéroportuaires, producteurs de carburant d’aviation durable, etc.). L’équipe Conseil Aéronautique s'appuie sur l’expertise et la présence internationale (New York, Tokyo et Paris) des équipes de financements et intervient sur les thématiques de :Conseil stratégique, commercial et financier (conseil en investissement, M&A, conseil en dette, etc.)Levée de fonds et placement privéConseil ESG Durant votre stage, vous participerez notamment aux missions suivantes :Analyse financière (compagnies aériennes, loueurs d’avions, etc.) Travaux de valorisation financière (DCF, Multiples, valorisation d’actifs, etc.) Participation à l’exécution de transactions (info-mémo, due diligence, etc.)Recherche d’investisseurs, en coordination avec les équipes de coverage internesPréparation de documentation marketing (teaser, pitch, one-pager, etc.) Diverses revues sectorielles (analyses globales de l’industrie, enjeux environnementaux, valorisations d’actifs, études sur la flotte mondiale, analyse de segments de marché spécifiques) Veille de marchéDurée du stage : 6 mois.#JT26Et si c’était vous ?Vous êtes étudiant en Bac+4/5 en Grande Ecole de Commerce, d’Ingénieur ou Université, avec une option Finance ou complétée par un Master spécialisé en FinanceVous avez une expérience préalable de stage ou équivalent en banque (M&A, PE, Audit ou TS)Vous avez un bon niveau de connaissances en comptabilité, évaluation d’entreprises et d’actifsVous maîtrisez le Pack Office (Excel, Word, Powerpoint)Vous êtes courant en Anglais et Français (excellente maîtrise)Vous êtes autonome, rigureus, avec esprit analytique, curiosieus, vous avez aptitude à travailler en équipe, esprit de synthèse et souci du détailVous avez un bon niveau de connaissances en comptabilité et en finance d’entrepriseVous êtes intéressé par le secteur de l’industrie aéronautiquePlus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans n",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/07/31",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10658,8 +10640,26 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/referent-conformite-protection-clientele-26000FJL-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous êtes intéressé par les sujets de conformité ? Vous avez envie de rejoindre une équipe récente et dynamique ? En tant que référent conformité protection clientèle, vous aurez en charge les travaux de sensibilisation des métiers ainsi que le maintien et le renforcement des dispositifs réglementaires Groupe. Concrètement, vous serez amené à :  Etre Conseil auprès de la direction commerciale (projets réglementaires, projets métiers) dans le suivi et la participation aux travaux concernant le déploiement des réglementations liées à la thématique des créditsAssurer, en tant que Référent Conformité expérimenté, le suivi, pilotage, accompagnement et aide du métier dans le cadre des Comités Nouveaux produits (CNP)Volet sensibilisation/accompagnement : Accompagner la mise en conformité locale des lignes métiers et entités du Groupe de son périmètre en apportant un support aux analystes et en prenant en charge le traitement des dossiers complexesIntervenir en tant que référent dans les projets réglementairesAnimer un réseau de correspondants « protection de la clientèle » sur son périmètre de responsabilité etAssurer la représentation du Groupe pour les échanges de place et coordonner la contribution des correspondants conformité pour les prises de position externes.Volet développement des process : Contribuer à la veille réglementaire et la mise en œuvre des nouvelles RéglementationsParticiper à la définition du dispositif de conformité et tenir à jour la cartographie des risques de non-conformité au niveau Groupe pour les sujets de protection de la clientèleDurée du contrat : 5 moisEt si c’était vous ?Vous disposez d'une formation Bac +5 de type Master 2Vous avez 1 à 5 ans d’expérience professionnelle dans le domaine bancaire sur une des fonctions suivantes : conformité, juridique, auditConnaissance des sujets réglementaires notamment sur le corpus législatif concernant ces populations vulnérables ainsi que la thématique des crédits Qualités d’animation et de communicationCapacité d’analyse et de synthèse ; esprit critiqueEsprit d'équipe ; bon relationnel ; diplomatie ; appétence pour le travail en équipeRigoureux et organisé, vous disposez d’une bonne capacité d’analyse et de synthèseVous savez identifier et évaluer les risquesVous êtes le candidat idéal !Plus qu’un poste, un tremplinNotre vision est de jouer un rôle moteur dans les transformations positives du monde et de contribuer à un avenir plus écologique, respectueux de la planète !          Choisir Société Générale, c’est intégrer un Groupe où la culture d’entreprise est tournée vers l’inclusion, la diversité et l’esprit d’équipe !C’est construire une carrière dynamique avec la possibilité de changer de poste en moyenne tous les 4 ans, en France et à l'international tout en bénéficiant de formations régulières !Au regard de vos compétences, une rémunération attractive, composée d’un salaire fixe et d’une prime d’intéressement et de participation vous sera proposée.At",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/06/26",
+    "firstSeenAt": "2026-08-30T11:42:14.034Z",
+    "datePubFiable": true
+  },
+  {
+    "emp": "Société Générale",
+    "title": "Auditeur sur les activités de marché",
+    "sector": "Banque",
+    "famille": "Audit & Conseil",
+    "volet": "stage",
+    "loc": "La Defense",
+    "zone": "Paris / Île-de-France",
+    "maison": "Société Générale",
+    "place": "France",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/auditeur-sur-les-activites-de-marche-26000HHC-fr",
+    "source": "sitemapld:Société Générale",
+    "_descr": "Vos missions au quotidienVous avez un vrai talent d’enquêteur et le sens de l’action ? Vous aimez écouter, argumenter et convaincre ? Vous êtes un anti-routine ? Rejoignez nos équipes de l’Audit !En tant qu’Auditeur, vous évaluez le fonctionnement et les pratiques de tous les métiers du Groupe, éclairez les « zones à risques » et préconisez des actions correctrices.Concrètement, vous serez amené, sous la supervision de votre tuteur et/ou votre manager, à :S'approprier la méthodologie d’Audit du Groupe et nos outils,Découvrir l’approche des processus, l’analyse de données et assimiler les principaux risques sous-jacents aux métiers et périmètres couverts,Mener des contrôles sur un périmètre défini et contribuer à la production des fiches (travaux, constats, etc.),Assister aux entretiens et rédiger des comptes-rendus en français et anglais, contribuer au suivi des recommandations,Mettre en application vos connaissances en finance de marché, utiliser vos capacités à travailler la data / coder.Durée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac +5 en Ecole d’Ingénieur, de Commerce ou Université, avec une spécialisation en Finance/AuditUne première expérience réussie en Audit ou en Banque / Finance est un plusVous aimez travailler en équipe et entretenir une relation de proximité avec les métiersRigoureux, curieux et innovant, vous intégrez rapidement des informations, proposez des solutions pragmatiques et vous avez un goût certain pour l’analyseYou're fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…).Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/07/29",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
     "datePubFiable": true
   },
@@ -10676,27 +10676,9 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/agile-business-analyst-26000GRL-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienAu sein de la Direction des Systèmes d'Information de la banque de détail France de la Société Générale vous intégrerez un projet qui dispose d’un historique important construit sur plusieurs années : documentation fonctionnelle et technique, tickets Jira, documentation de la réalisation initiale, documents de chaque évolution et correctif, code Java, base PostgreSQL, Datalake, APIs et supports d’homologation.Vous alliez un esprit de « business development » à une passion pour l’informatique ? Vous êtes adepte du « Being agile and not doing agile » ? En tant qu’Agile Business Analyst, vous collaborez avec le Product Owner et les membres de votre Feature Team pour comprendre les besoins métiers et les traduire ensuite en solutions informatiques.Concrètement, vous serez amené à:Analyser les besoins métiers et les décomposer en stories détaillées en collaboration avec le Product Owner  Rédiger les spécifications fonctionnelles et règles de gestion derrière chaque user stories Collaborer avec l’UX Designer pour créer des prototypes à implémenter Assister les développeurs dans la fabrication du produit informatique Accompagner les homologateurs dans l’exécution des tests (manuels ou automatisés) Suivre le déploiement jusqu’en environnement de production Durée du stage : 6 mois.Et si c’était vous ?Vous êtes étudiant en Bac+4 / Bac+5, avec une forte appétence pour les systèmes d’information, la data, l’IA et l’analyse fonctionnelleCompétences attendues : SQL PostgreSQL en lecture, requêtes avec jointures, filtres, regroupements et agrégations ; lecture rapide de scripts Python simples générés par IA ; VS Code ou équivalent ; Git ; Markdown ; Mermaid apprécié ; intérêt fort pour Copilot et l’IA générativeVous êtes curieux, rigoureux, capable de comprendre les outils techniques, de relire les productions IA et de sécuriser leur usageVous avez un niveau d’anglais courant Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport…)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN.",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/07/22",
     "firstSeenAt": "2026-08-30T11:42:14.034Z",
-    "datePubFiable": true
-  },
-  {
-    "emp": "Société Générale",
-    "title": "Auditeur Interne - Banque de Détail, Banque Privée et Assurance en France",
-    "sector": "Banque",
-    "famille": "Audit & Conseil",
-    "volet": "stage",
-    "loc": "La Defense",
-    "zone": "Paris / Île-de-France",
-    "maison": "Société Générale",
-    "place": "France",
-    "url": "https://careers.societegenerale.com/offres-d-emploi/auditeur-interne-banque-de-detail-banque-privee-et-assurance-en-france-26000HQH-fr",
-    "source": "sitemapld:Société Générale",
-    "_descr": "Vos missions au quotidienAu sein du Groupe Société Générale, vous rejoignez les équipes de la Direction de l’Inspection et de l’Audit interne (IGAD). Notre mission principale est d’accompagner les métiers dans leur développement en les aidant à assurer la maîtrise de leurs risques. Notre positionnement indépendant et stratégique permet d’apporter à la direction de la banque une vision de la maîtrise des risques et de l’efficacité opérationnelle du Groupe. Nous sommes également un des interlocuteurs de référence des autorités de tutelle (ACPR, BCE).En rejoignant l’Audit, vous intégrerez un parcours accélérateur d’expérience dans un environnement dynamique et travaillerez sur une variété de missions qui offrent un accès au top management, une proximité avec les métiers et une vision exhaustive des enjeux de la banque.  De plus, vous développerez vos compétences en matière d’analyse de données, véritable valeur ajoutée dans nos pratiques. L’expérience acquise vous ouvrira ainsi de nombreuses opportunités d’évolution au sein de cette direction et plus globalement au sein du Groupe Société Générale. Plus spécifiquement, vous rejoignez l’équipe d’audit de la Banque de Détail en France, la Banque Privée en France, et les activités d'Assurance.Vous participerez à des missions d’audit portant sur l’ensemble des activités de la Banque de Détail en France, la Banque Privée en France, et les activités d'Assurance dans le cadre de missions thématiques ou de missions portant spécifiquement sur une entité.L’audit interne réalise des missions à forte valeur ajoutée avec une approche sélective par les risques, ce qui consiste à :Identifier et évaluer les risques du périmètre audité : risques de crédit, réglementaires, opérationnelsEvaluer les dispositifs de maîtrise des risques et de contrôle interne des entités auditées ainsi que l’efficacité des processus opérationnelsParticiper à la rédaction des rapports d'audit et présenter vos conclusions ainsi que vos préconisations aux managers des entités auditéesChaque phase de la mission se réalise en collaboration avec l’ensemble des membres de l’équipe, mais également en relation avec les partenaires internes (autres équipes d’audit, Data Lab) et les métiers auditésDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau BAC+5 (École de commerce ou d’ingénieurs, IEP, Universités)Vous faites preuve d’esprit critique et êtes force de propositionVous pouvez communiquer efficacement des conclusions, à l’écrit comme à l’oral (français et occasionnellement anglais), et faites preuve de conviction pour délivrer les messages clésVous êtes reconnu pour vos qualités relationnelles et collaboratives, vous avez le goût du travail en équipe tout en pouvant être autonome sur les sujets confiésVous êtes rigoureux et méthodique dans la réalisation des tâches confiéesVous avez une agilité intellectuelle pour passer d’un sujet à l’autre régulièrement, proposer des idées nouvelles et innovantes et changer d’équipe/ de ma",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026/08/27",
-    "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
   },
   {
@@ -10712,8 +10694,26 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-risque-operationnel-26000IPA-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienVous souhaitez accompagner le département réglementaire de la Direction Financière dans le pilotage de son risque opérationnel ? En tant qu'assistant risque opérationnel, votre rôle sera de participer aux évolutions sur la gestion du risque opérationnel (Contrôle Permanent de niveau 1, suivi des recommandations, exercices sur le suivi des risques liés à nos activités, etc.) et accompagner l’équipe sur des sujets transversaux.Concrètement, sous la supervision de votre maître de stage, vous serez amené à :Suivre le Contrôle Permanent : accompagner les campagnes trimestrielles (exporter, traiter et analyser les résultats et restituer les résultats) Suivre les recommandations BCE, audit et contrôle permanent de niveau 2 : participer au pilotage des recommandations (formaliser l’avancement à travers des reportings/documents de restitution) Automatiser et optimiser les divers process liés au risque opérationnel du département ou sur des sujets transversauxDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac + 4/5 en École d’Ingénieur, de Commerce ou Université, avec idéalement une spécialisation en Finance Vous maîtrisez le pack Office, VBA et/ou Power BI Vous êtes agile d’esprit, curieux, organisé et vous avez une bonne capacité d’adaptation et d’analyse Vous êtes autonome et vous savez gérer vos priorités, c’est tout à votre avantage ! Vous êtes force de proposition et vous aimez travailler en équipe You’re fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre arrivée, vous serez intégré dans nos équipes et apprendrez chaque jour aux côtés de nos experts qui vous accompagneront dans vos missions. Progressivement, vous gagnerez en autonomie sur vos projets pour faire de cette expérience un vrai accélérateur de carrière. Vous découvrirez également toute la diversité de nos métiers, dans un secteur qui évolue et innove en permanence.A la fin de vos études, diverses opportunités pourront s’offrir à vous, en France et à l’international.Pourquoi nous choisir ?Attentif à votre qualité de vie et conditions de travail, vous bénéficiez d’avantages :Télétravail possible selon le rythme de votre servicePrise en charge de 60% de votre titre de transportBilletterie à prix réduits de notre Comité d’Entreprise (concerts, cinéma, sport)Offre variée de restaurants d’entreprise et de cafétérias à tarifs compétitifs ainsi que des titres restaurants dématérialisés quand vous êtes en télétravailCréer, oser, innover, entreprendre font partie de notre ADN. Si vous aussi vous souhaitez être dans l’action, évoluer dans un environnement stimulant et bienveillant, vous sentir utile au quotidien et développer ou renforcer votre expertise, nous sommes faits pour nous rencontrer !Vous hésitez encore ?Sachez que nos collaborateurs peuvent s’engager quelques jours par an pour des actions de solidarité sur leur temps de travail : parrainer des personn",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/21",
+    "firstSeenAt": "2026-08-29T23:37:35.506Z",
+    "datePubFiable": true
+  },
+  {
+    "emp": "Société Générale",
+    "title": "Auditeur Interne - Banque de Détail, Banque Privée et Assurance en France",
+    "sector": "Banque",
+    "famille": "Audit & Conseil",
+    "volet": "stage",
+    "loc": "La Defense",
+    "zone": "Paris / Île-de-France",
+    "maison": "Société Générale",
+    "place": "France",
+    "url": "https://careers.societegenerale.com/offres-d-emploi/auditeur-interne-banque-de-detail-banque-privee-et-assurance-en-france-26000HQH-fr",
+    "source": "sitemapld:Société Générale",
+    "_descr": "Vos missions au quotidienAu sein du Groupe Société Générale, vous rejoignez les équipes de la Direction de l’Inspection et de l’Audit interne (IGAD). Notre mission principale est d’accompagner les métiers dans leur développement en les aidant à assurer la maîtrise de leurs risques. Notre positionnement indépendant et stratégique permet d’apporter à la direction de la banque une vision de la maîtrise des risques et de l’efficacité opérationnelle du Groupe. Nous sommes également un des interlocuteurs de référence des autorités de tutelle (ACPR, BCE).En rejoignant l’Audit, vous intégrerez un parcours accélérateur d’expérience dans un environnement dynamique et travaillerez sur une variété de missions qui offrent un accès au top management, une proximité avec les métiers et une vision exhaustive des enjeux de la banque.  De plus, vous développerez vos compétences en matière d’analyse de données, véritable valeur ajoutée dans nos pratiques. L’expérience acquise vous ouvrira ainsi de nombreuses opportunités d’évolution au sein de cette direction et plus globalement au sein du Groupe Société Générale. Plus spécifiquement, vous rejoignez l’équipe d’audit de la Banque de Détail en France, la Banque Privée en France, et les activités d'Assurance.Vous participerez à des missions d’audit portant sur l’ensemble des activités de la Banque de Détail en France, la Banque Privée en France, et les activités d'Assurance dans le cadre de missions thématiques ou de missions portant spécifiquement sur une entité.L’audit interne réalise des missions à forte valeur ajoutée avec une approche sélective par les risques, ce qui consiste à :Identifier et évaluer les risques du périmètre audité : risques de crédit, réglementaires, opérationnelsEvaluer les dispositifs de maîtrise des risques et de contrôle interne des entités auditées ainsi que l’efficacité des processus opérationnelsParticiper à la rédaction des rapports d'audit et présenter vos conclusions ainsi que vos préconisations aux managers des entités auditéesChaque phase de la mission se réalise en collaboration avec l’ensemble des membres de l’équipe, mais également en relation avec les partenaires internes (autres équipes d’audit, Data Lab) et les métiers auditésDurée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau BAC+5 (École de commerce ou d’ingénieurs, IEP, Universités)Vous faites preuve d’esprit critique et êtes force de propositionVous pouvez communiquer efficacement des conclusions, à l’écrit comme à l’oral (français et occasionnellement anglais), et faites preuve de conviction pour délivrer les messages clésVous êtes reconnu pour vos qualités relationnelles et collaboratives, vous avez le goût du travail en équipe tout en pouvant être autonome sur les sujets confiésVous êtes rigoureux et méthodique dans la réalisation des tâches confiéesVous avez une agilité intellectuelle pour passer d’un sujet à l’autre régulièrement, proposer des idées nouvelles et innovantes et changer d’équipe/ de ma",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026/08/27",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
   },
@@ -10730,7 +10730,7 @@ window.__OFFRES__ = [
     "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-front-office-financements-structures-export-secteurs-shipping-industriel-croisiere-26000IOI-fr",
     "source": "sitemapld:Société Générale",
     "_descr": "Vos missions au quotidienCe stage se déroule au sein de la Banque de Financement et d'Investissement du Groupe Société Générale (SG CIB), qui est un des leaders mondiaux dans les financements structurés. En tant que pionnier de la finance à impact positif, SG CIB est un acteur majeur de la finance au service des transformations positives, et contribue ainsi à l'émergence et au développement d'aventures industrielles pour relever les défis économiques, sociaux et environnementaux de notre temps.La ligne métier du Développement & Financements Export Structurés, qui fait partie du pôle Financement d’Actifs de SG CIB, est un leader mondial dans le domaine des financements export et comprend plus de 60 experts à travers le monde. Nous travaillons avec toutes les principales agences de crédit export (ECAs) et agences internationales et régionales de développement. Nous accompagnons le financement de l’économie réelle à l’international, en particulier dans les secteurs liés à la transition énergétique.Au sein de l'équipe Project Export Solutions, vous agirez sur une activité d'accompagnement des exportateurs et des importateurs au travers de financements structurés sur le secteur du shipping et de la croisière.En liaison avec le responsable du secteur Shipping Industriel et Croisière, le stagiaire assiste les front-officers dans les domaines suivants:Origination :Création de pitchs clients et constitution des outils commerciauxIdentification de nouvelles transactions, modélisation des crédits et analyse des indicateurs de rentabilité, préparation des dossiers de crédits et présentation au comité de crédit interneRédaction des offres commerciales destinées aux clientsStructuration :Structuration des Crédits Export sur base Asset Based, en coopération avec les équipes Shipping Finance pour les financements de navires de commerce, Leasing et les départements de couverture de risques (taux/change) le cas échéant, afin d’apporter au client des solutions adaptées et sur-mesureGestion des accords internes :Participation à l’obtention et la gestion des différents accords internes (risque, environnement, KYC/compliance, réputation …) et aura donc l’opportunité d’être en relation avec ces départementsReporting :Études ponctuelles pour le suivi de l’activité commerciale et de la profitabilité clientAutres :Recherches sectorielles et analyse des technologies et investissements en liaison avec le développement d'une activité durable de nos clientsRevue de presse périodique sur le secteur maritime   Durée du stage : 6 moisEt si c’était vous ?Vous êtes étudiant de niveau Bac +4/5 en Ecole de Commerce, d'Ingénieur ou Université avec une spécialisation en FinanceVous maîtrisez Excel, Word, PowerpointVous savez faire preuve de rigueur, d'organisation, d'implication, de curiositéVous avez des aptitudes à travailler en équipeYou're fluent in English ! Vous êtes notre candidat idéal !Plus qu’un poste, un tremplinRejoignez-nous pour faire grandir vos ambitions ! Dès votre ar",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026/08/28",
     "firstSeenAt": "2026-08-29T23:37:35.506Z",
     "datePubFiable": true
@@ -10750,8 +10750,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "eicards:recrutement.cic.fr"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.690Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.504Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": false
   },
@@ -10767,8 +10767,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115823",
     "source": "eicards:recrutement.creditmutuel.fr",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.690Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": false
   },
@@ -10787,8 +10787,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "eicards:recrutement.creditmutuel.fr"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.690Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": false
   },
@@ -10804,8 +10804,8 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://www.banquetransatlantique.com/fr/offre.html?annonce=114975",
     "source": "eicards:www.banquetransatlantique.com",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": false
   },
@@ -10822,8 +10822,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Delivery-Lead-SI-Tr-sorerie-d-butant-H-F/78049",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -10840,8 +10840,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Hedging-Market-Risk-Analyst-H-F-Alternance/79345",
     "source": "avature",
     "_descr": "Minimum 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -10858,8 +10858,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Contr-leur-de-Gestion-junior-en-alternance-H-F/79624",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -10876,8 +10876,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Back-Office-Analyst-H-F/80202",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": false
   },
@@ -10894,8 +10894,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Analyste-transport-D-butant-H-F/80746",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -10912,8 +10912,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Analyste-Solution-Digitale-d-butant-H-F/82003",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -10930,8 +10930,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-M-A-Acquisitions-Cessions-H-F/82610",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -10948,8 +10948,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Conformit-Anti-fraude-Anti-Corruption-et-digitalisation-H-F/82624",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -10966,8 +10966,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Contr-leur-financier-d-butant-H-F/82703",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -10984,8 +10984,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Business-Analyst-assistant-coordinateur-Plan-Long-Terme-H-F/82830",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11002,8 +11002,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Compliance-Lawyer-et-conformit-d-butant-H-F/83143",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.505Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11020,8 +11020,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Superviseur-et-contr-le-des-activit-s-budg-taires-d-butant-H-F/83369",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.691Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11038,8 +11038,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Analyste-Facturation-Mass-Market/77520",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11056,8 +11056,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Alternance-Analyste-Pricing-B2B/79253",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11074,8 +11074,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/ANALYSTE-BACK-OFFICE-Alternance/79349",
     "source": "avature",
     "_descr": "Minimum 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11095,8 +11095,8 @@ window.__OFFRES__ = [
     "alsoOn": [
       "avature"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11113,8 +11113,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/CONTROLEUR-DE-GESTION-ACTIVITE-H-F/77763",
     "source": "avature",
     "_descr": "Minimum 10 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11131,8 +11131,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/CDD-ANALYST-MARKET-INTELLIGENCE-H-F/77859",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11149,8 +11149,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/ALTERNANT-E-CONTROLE-DE-GESTION-H-F/77892",
     "source": "avature",
     "_descr": "Moins de 3 ans",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11167,8 +11167,8 @@ window.__OFFRES__ = [
     "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/ALTERNANT-Product-Owner-Data-Analyst-H-F/81173",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11185,8 +11185,8 @@ window.__OFFRES__ = [
     "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/STAGE-6-MOIS-partir-de-janvier-2027-Sales-Business-Analyst-Development-Master-1700-mois/251908",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T10:43:42.869Z",
     "datePubFiable": false
   },
@@ -11203,8 +11203,8 @@ window.__OFFRES__ = [
     "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/STAGE-6-MOIS-partir-de-janvier-2027-Contr-le-de-Gestion-Industriel-Master-1700-mois/252513",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T10:43:42.869Z",
     "datePubFiable": false
   },
@@ -11221,8 +11221,8 @@ window.__OFFRES__ = [
     "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/Stage-de-6-mois-Contentieux-Risques-et-Assurances-Janvier-2027/230172",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.692Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T10:43:42.869Z",
     "datePubFiable": false
   },
@@ -11239,8 +11239,8 @@ window.__OFFRES__ = [
     "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/ALTERNANCE-12-MOIS-partir-de-septembre-2026-COMPLIANCE-REGULATORY-AFFAIRS-Master-2/245036",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.693Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T10:43:42.869Z",
     "datePubFiable": false
   },
@@ -11257,8 +11257,8 @@ window.__OFFRES__ = [
     "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/Operation-Finance-Global-ESG-Analyst/254419",
     "source": "avature",
     "_descr": "",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
-    "postedAt": "2026-08-30T12:08:24.693Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
+    "postedAt": "2026-08-30T12:51:51.506Z",
     "firstSeenAt": "2026-08-30T11:33:29.565Z",
     "datePubFiable": false
   },
@@ -11274,7 +11274,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/business-analyst-services-aux-collaborateurs-et-data-fh-reference-2026-2352323/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-16T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:06:52.946Z",
     "datePubFiable": true
@@ -11291,7 +11291,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/controleur-controleuse-de-gestion---budget-reference-2026-2352094/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-16T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:06:52.946Z",
     "datePubFiable": true
@@ -11308,7 +11308,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/analyste-data--risque-operationnel---pole-transverse--normes--reportings-ep---fh-reference-2026-2338327/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:06:52.946Z",
     "datePubFiable": true
@@ -11325,7 +11325,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/charg--charge-de-participations--gps-reference-2026-2299494/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-03T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:06:52.946Z",
     "datePubFiable": true
@@ -11342,7 +11342,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/analyste-controle-permanentrisques-operationnels-fh-reference-2026-2275030/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-05-07T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:06:52.946Z",
     "datePubFiable": true
@@ -11359,7 +11359,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/dgt---aft---as---operateur-trice-post-marche-hf-reference-MEF_2026-31004/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-16T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:08:24.798Z",
     "datePubFiable": true
@@ -11376,7 +11376,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://choisirleservicepublic.gouv.fr/offre-emploi/dgt---aft---ns---operateur-trice-post-marche-hf-reference-MEF_2026-30723/",
     "source": "servicepublic",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-06-10T00:00:00.000Z",
     "firstSeenAt": "2026-08-30T12:08:24.798Z",
     "datePubFiable": true
@@ -11394,7 +11394,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5853692866?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Premier gérant d'actifs européen parmi les 10 premiers acteurs mondiaux (1), Amundi propose à ses 100 millions de clients - particuliers, institutionnels et entreprises - une gamme complète de solutions d'épargne et d'investissement en gestion active et passive, en actifs traditionnels ou réels. Cette offre est enrichie de services et d'outils technologiques qui permettent de couvrir toute la chaîne de valeur de l'épargne. Filiale du groupe Crédit Agricole, Amundi …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-23T17:10:22Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11412,7 +11412,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859755900?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Département : Fund Finance Buyout Durée du stage : 6 mois Lieu : Paris Début : Janvier 2027 Le rôle L’offre de stage est à pourvoir au sein de l’équipe Fund Finance Buyout composée de 7 personnes basées à Paris (6 personnes) et à New York (1 personne). La mission consiste à assurer le suivi des structures d’investissement dédiées à l’activité Buyout et en particulier les aspects suivants : Calcul, analyse et reporting de la performance des fonds ; Revue des arrêtés comptables trimestriels et de…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T17:17:06Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -11430,7 +11430,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5844788703?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en Finance et vous avez un intérêt pour les activités commerciales ? Alors cette offre est faite pour vous ! Les équipes ITB/RSF Origination & Working capital advisory, implantées au sein du Crédit Agricole CIB, sont responsables de : Originer des solutions de receivables & payables finance pour la grande clientèle de la banque, Coordonner les processus d'origination des produits RSF dans les pays d'implantation du métier ITB, Conseiller les clients sur leurs enjeux str…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T03:22:32Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11448,7 +11448,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5823105728?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en Finance et vous avez un intérêt pour la finance de marché et/ou d'entreprise ? Alors postulez ! Au sein du pôle Global Markets Division (GMD), l'équipe en charge de l'Origination obligataire est chargée de traiter les problématiques de financement sur les marchés obligataires des grands corporates français et institutions financières. Vous serez intégré(e) L'équipe en charge de l'Origination obligataire est chargée de traiter les problématiques de financement sur les…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T02:56:14Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11466,7 +11466,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5851811981?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en Finance et vous avez un intérêt pour la finance de marché et/ou d'entreprise ? Alors postulez ! Au sein du pôle Global Markets Division (GMD), l'équipe en charge de l'Origination obligataire est chargée de traiter les problématiques de financement sur les marchés obligataires des grands corporates français et institutions financières. Vous serez intégré(e) au sein de l'équipe DCM couvrant les émetteurs bancaires et assurances, principalement français, hollandais, bel…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-22T03:03:36Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11484,7 +11484,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5831329716?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en finance de marché et avez un intérêt pour la titrisation et la gestion des risques ? Alors cette offre est faite pour vous ! Le département Execution Management (EXM) réalise l'exécution des opérations de marché en respect des instructions des équipes de Pilotage, des plans de financement, et des encadrements en limite des activités et est en charge des opérations de réduction de RWA via des programmes de titrisation pour le compte de la Banque. Il regroupe plusieurs…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T03:10:53Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11502,7 +11502,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5847607919?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en financements structurés et vous avez un intérêt pour l'immobilier? Alors postulez ! Au sein du département Energy & Real Assets (ERA) et plus particulièrement de la \"Real Estate & Lodging\", vous rejoindrez une équipe dynamique en charge de l'origination, de la structuration et du suivi de financements structurés adossés à des actifs immobiliers (bureaux, commerces, hôtels, logistiques, santé, etc.) pour le compte de grands investisseurs (fonds de private equity, fond…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T03:06:14Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11520,7 +11520,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5844788706?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en finance avec une forte dimension IT et vous avez un intérêt pour les enjeux FinOps, cloud et pilotage des coûts ? Alors cette offre est faite pour vous ! Crédit Agricole CIB (CACIB) est la banque de financement et d'investissement du Groupe Crédit Agricole. Au sein de Global IT, la division Capital Markets IT (CMI) est en charge des systèmes d'information supportant les activités de marchés de capitaux. Au sein de CMI, le Cloud Center of Excellence (CCoE) pilote le p…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-17T03:22:32Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11538,7 +11538,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856139606?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en Leveraged Finance et vous avez un intérêt pour les Télécoms? Alors cette offre est faite pour vous ! Les équipes Leveraged Finance et Telecom/Media/Technologies (TMT) originent, structurent et exécutent des opérations de financement à effet de levier pour nos principaux clients corporate, fonds de private equity, fonds d'infrastructures et nos grands clients du secteur TMT. Vous rejoindrez l'équipe Portfolio Management / Leveraged Finance & Telecom, qui suit le porte…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T03:04:22Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11556,7 +11556,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5854827126?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en Finance Durable ? Alors postulez ! Leader mondial sur le marché des Green Bonds, l'équipe Sustainable Banking réunit, au sein du département Coverage, des professionnels ayant une expertise sur les enjeux de finance durable. Divisée en plusieurs localisations, l'équipe Sustainable Banking bénéficie d'un rayonnement mondial. Cette équipe se met ainsi au service de tous les métiers de la banque à l'échelle mondiale pour originer et exécuter des opérations de finance du…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T03:04:11Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11574,7 +11574,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5846941624?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-18T17:39:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11592,7 +11592,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5855459130?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T17:10:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11610,7 +11610,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5855458215?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T17:10:30Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11631,7 +11631,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "adzuna"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T17:23:14Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11649,7 +11649,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834157815?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez une alternance en finance et vous souhaitez travailler en mode projet ? Alors postulez ! Vous travaillerez au sein de la Direction financière de Crédit Agricole CIB, qui accompagne, organise et garantit le développement équilibré de la Banque et de ses Métiers. Vous intégrerez plus précisément le département Finance Project Management (FPM) qui assure la gestion du portefeuille et la conduite des projets de la Direction financière de Crédit Agricole CIB. Il pilote le schéma dire…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T03:14:43Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11667,7 +11667,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5857954948?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Missions, équipe et environnement de travail, ça donne quoi ? Vous rejoindrez le département Asset Management France basé à Paris, composé de 8 analystes travaillant en étroite collaboration avec des Asset Managers sur un portefeuille immobilier diversifié. Vous évoluerez dans un environnement collaboratif, en interaction régulière avec des interlocuteurs internes et externes, et participerez à l’optimisation de la performance opérationnelle, financière et durable des actifs. En soutien des équ…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T07:52:20Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": true
@@ -11685,7 +11685,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5861216134?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Activité Chez ODDO BHF, nous avons le privilège de compter plus de 60000 clients, investisseurs institutionnels, entreprises, partenaires de distribution et grands clients privés dont nous conseillons, gérons et investissons les actifs financiers. Notre mission est de les faire fructifier via nos quatre métiers : Banque Privée, Gestion d'Actifs, Banque de Financement et d'Investissement, Service et Technologies Bancaires. Ancrage européen, esprit entrepreneurial, pluralité d'expertises : ces at…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T17:11:02Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11706,7 +11706,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "adzuna"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:52:44Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11725,7 +11725,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5847547336?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Premier poste après les études, et la crainte de n'être qu'une paire de mains sur des tableurs ? Dans ce cabinet, la montée en compétence passe par l'exposition à des dossiers variés et un encadrement resserré, pas par la saisie répétitive. Vous apprenez le métier sur le terrain, aux côtés d'une équipe qui prend le temps de former. Le cabinet Cabinet pluridisciplinaire indépendant de 45 collaborateurs, implanté à Paris 9e. La structure accompagne une clientèle de PME et de TPE diversifiée, sur …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T02:23:48Z",
     "firstSeenAt": "2026-08-30T01:18:55.845Z",
     "datePubFiable": true
@@ -11744,7 +11744,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5852171513?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Rejoignez Grant Thornton pour une expérience enrichissante en Audit : Un poste chez Grant Thornton est bien plus qu'un simple emploi, c'est une opportunité unique de vous épanouir au sein d'une équipe dynamique et accueillante. Nous accordons une grande importance à l'intégration de nos nouveaux collaborateurs, les accueillant avec considération et les intégrant pleinement à nos équipes. En rejoignant le département Audit de Grant Thornton, vous serez plongé au coeur de missions variées de comm…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-22T09:00:33Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11762,7 +11762,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5823105614?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez une alternance en comptabilité et vous avez un intérêt pour la finance ? Alors postulez ! Vous rejoindrez la Direction Financière de Crédit Agricole CIB, et plus précisément le département Contrôle de Gestion de EXM. EXM est le pôle dédié à l'ensemble de la production financière du métier Execution Management, qui regroupe les 3 métiers de la Gestion financière : ALM, Economies de RWA et Other Non Métier ainsi que la Trésorerie. La mission du département s'étend de l'élaboration…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T02:56:14Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": true
@@ -11780,7 +11780,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5830596625?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description Stage de 6 mois à pouvoir dès janvier 2027 Au sein du pôle Hermès Data Technologie et Information, la Direction Financière veille à la mise en place et au suivi de la stratégie financière dans le respect des budgets alloués. Elle accompagne l’optimisation des processus budgétaires et garantit la fiabilité des analyses et des reportings financiers. Missions principales: Sous la supervision du contrôleur de gestion : Vous participerez au suivi budgétaire et analytique : reporting pour…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T17:08:46Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11798,7 +11798,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5827930868?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description Stage de 6 mois à pouvoir en Janvier 2027 La Direction EME est en charge de l’animation et de la supervision des filiales de distribution en Europe (hors France) et au Moyen-Orient. La zone Europe et Moyen-Orient comprend les filiales de distribution Hermès situées dans 19 pays ainsi que l’activité Internet Europe. Le réseau comprend environ 60 magasins pour un chiffre d’affaires de plus de 3 milliards d’euros. Principales missions En collaboration avec le responsable contrôle de ge…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T17:25:53Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11816,7 +11816,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5860867916?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Eléments de contexte Stage de 6 mois à pourvoir à partir de septembre 2026. ce stage est basé à Saint-Vincent-de-Paul et Loupes (33) et à Loupes (33) proche Bordeaux. Missions principales La direction du Contrôle de Gestion de fabrication des manufactures de Guyenne recherche un(e) stagiaire pour une durée de 6 mois afin d'assister l'équipe. Si vous aimez le terrain, l'opérationnel, que vous avez une appétence pour les systèmes d'information ; si vous avez envie de vous développer et d'être en …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T09:41:27Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11834,7 +11834,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5849327240?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description de l'entreprise A la recherche de ses futurs talents, la Caisse d’Epargne Rhône Alpes propose chaque année des contrats d’alternance sur les départements du Rhône, de l’Isère, de l’Ain, de la Savoie et de la Haute-Savoie . Qui sommes-nous ? Banque commerciale, régionale et coopérative, la Caisse d’Epargne Rhône Alpes est un Acteur clé du développement durable sur son territoire. Notre ambition ? Offrir à nos clients et nos équipes le meilleur de la relation humaine et digitale dans …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T07:48:32Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11852,7 +11852,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859326201?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description de l'entreprise Le domaine bancaire vous passionne ? Vous recherchez une alternance dans le cadre de vos études ? Cette offre est faite pour vous ! Nous recherchons nos futurs alternants pour la rentrée 2026. Mais tout d'abord, qui sommes-nous ? Banque du groupe BPCE, deuxième acteur bancaire français, et par le biais de ses 190 agences et Centres d'Affaires, la Banque Populaire Alsace Lorraine Champagne est forte de ses 2 540 collaborateurs et est présente sur les marchés du partic…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:10:26Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11870,7 +11870,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5853708093?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-23T17:28:45Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11888,7 +11888,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5853698008?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-23T17:18:48Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -11906,7 +11906,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5851811980?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous recherchez un stage en M&A et vous êtes intéressé par les sujets de la transition énergétique ? Alors ce stage est fait pour vous ! Au sein du département Global Investment Banking, l'activité Fusions/Acquisitions regroupe des professionnels travaillant sur différents secteurs (Luxe, Distribution, Infrastructures, Transport, Energies…) et géographies (Europe, Etats-Unis, Hong-Kong, Brésil …). Vous rejoindrez l'équipe Energy Transition, une équipe à taille humaine composée de 4 personnes, q…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-22T03:03:36Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -11924,7 +11924,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832092999?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Job Description & Summary PwC Société d’Avocats rassemble plus de 5 50 professionnels en France et s’inscrit au cœur du réseau mondial PwC, présent dans 136 pays. Chaque jour, nous exerçons des métiers d’excellence pour concrétiser notre ambition : être utiles à nos clients et accélérateurs de mouvement. Grâce à un ancrage local solide et à la puissance de notre réseau international, nous accompagnons des clients de premier plan en France et à l’étranger. Nos équipes interviennent sur l’ensembl…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T17:27:21Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -11942,7 +11942,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856943612?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Département : Growth Durée : 6 mois Lieu : Paris Date de début : Janvier 2027 Le rôle : Le stagiaire est intégré au cœur de l’équipe d’investissement. Il est directement impliqué dans différentes missions, Notamment : Prospection, réception et analyse des nouveaux dossiers & suivi des dossiers en cours Etudes stratégiques des marchés cibles Préparation des dossiers d'investissement Suivi des participations du portefeuille. Compétences requises : Rigueur Motivation Autonomie Réactivité Esprit d’…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T17:14:46Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -11960,7 +11960,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856950763?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Département : Growth Durée : 6 mois Lieu : Paris Date de début : Mars 2027 Le rôle : Le stagiaire est intégré au cœur de l’équipe d’investissement. Il est directement impliqué dans différentes missions, Notamment : Prospection, réception et analyse des nouveaux dossiers & suivi des dossiers en cours Etudes stratégiques des marchés cibles Préparation des dossiers d'investissement Suivi des participations du portefeuille. Compétences requises : Rigueur Motivation Autonomie Réactivité Esprit d’équ…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T17:18:07Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -11978,7 +11978,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832085926?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Département : Buyout Durée du stage : 6 mois Lieu : Paris Début : Janvier 2027 Le rôle : L’équipe Buyout d’Ardian est la première équipe d’Ardian à avoir été créée. Elle a réalisé à ce jour plus de 95 rachats d’entreprise (ainsi que de nombreuses opérations de croissance externe pour ces entreprises en Europe, en Amérique du Nord, en Amérique du Sud et en Asie) et fait partie des fonds européens les plus actifs, couvrant principalement un spectre de valorisation allant de 250 millions à 2,5 mil…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T17:20:23Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -11996,7 +11996,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832073051?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Département : Real Estate Durée du stage : 6 mois Lieu : Paris Début : Mars 2027 Le rôle Au sein d’une équipe de 22 professionnels en Europe, le stagiaire sera rattaché à l’équipe parisienne composée de 8 personnes. Les principales missions seront les suivantes : Assistance à la préparation des modélisations de transactions Assistance et participation à la rédaction des mémorandums d’investissement et visites d’actifs Assistance et participation à la mise en place et mise à jour de présentation…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T17:06:01Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -12014,7 +12014,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859054855?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "A propos de KPMG : * Premier cabinet pluridisciplinaire en France * Employeur préféré du secteur audit & conseil (selon le classement Universum Business 2025) * 4 métiers d'excellence : Audit, Conseil, Droit & Fiscalité (KPMG Avocats) ainsi que leurs fonctions corporate, pour répondre, entre autres, aux enjeux d'innovation et de transformation de ses clients - du CAC 40 aux ETI * Des équipes à taille humaine dans 45 bureaux en France et 140 pays pour Grandir ensemble et Impacter positivement Mo…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T03:04:51Z",
     "firstSeenAt": "2026-08-29T22:41:30.400Z",
     "datePubFiable": true
@@ -12032,7 +12032,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5861016670?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vos challenges Intégrer nos équipes audit, c'est être au cœur de la sécurisation des informations financières et extra-financières des activités économiques stratégiques. Au sein de KPMG, vous interviendrez sur une diversité unique de clients en taille (CAC-40, groupe côté à l'étranger, Family business, LBO) et de secteurs (industrie, consommation, technologie, média, énergie, santé, services…). Selon votre appétence sectorielle, vous rejoindrez une équipe audit spécialisée : CMT : C onsumer M …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T12:46:29Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -12050,7 +12050,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5850925453?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Chez EY, nous sommes « All in » pour façonner votre avenir en toute confiance. Ensemble, nous orienterons votre carrière selon vos aspirations. Rejoignez EY et contribuez à construire un monde meilleur. Vous souhaitez intégrer un cabinet d’avocats international leader sur le marché dont les valeurs sont l’excellence, l’engagement et l’innovation ? Rejoignez nos équipes ! Notre opportunité : Dans le cadre de notre développement, nous recherchons actuellement un Consultant(e) débutant(e) en Subve…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T12:41:12Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -12068,7 +12068,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5831901725?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Dans le cadre de notre développement, nous recherchons actuellement un Avocat débutant en Droit social (F/H) au sein de notre bureau de Lyon. Vos principales responsabilités : Sous la responsabilité d’une Associée : Vous êtes amené à travailler au sein d’une équipe d’avocats sur des missions de conseil en droit social et de la sécurité sociale, de même que sur des dossiers de contentieux, tant sur le plan individuel que collectif. Vous accompagnez les entreprises françaises et étrangères dans l…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T12:46:04Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -12086,7 +12086,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5828549512?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Filiale du Groupe Crédit Agricole depuis 2003, LCL est aujourd'hui l'une des plus grandes banques de détail en France. Grâce à son réseau de 1500 agences et centres d'affaires entreprises, sa banque à distance et sa banque privée, LCL accompagne 6 millions de clients particuliers et professionnels, et est la banque d'une entreprise sur trois. L'ambition de LCL est de devenir la banque relationnelle et digitale de référence en ville en capitalisant, sur une démarche de qualité, d'innovation et d…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T03:13:50Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12104,7 +12104,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5857955133?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Alternance - Bac3 - Conseiller Clientèle Particuliers H/F - Agence Venelles - CFA B-School by BNP Paribas Titulaire d’un Bac2, rejoignez notre formation Conseiller Clientèle Particuliers H/F en agence sur Venelles dès septembre 2026 au sein de B-School by BNP Paribas . Le poste est proposé dans le cadre d’un contrat d’apprentissage d’un an sur un rythme 1 semaine/3 semaines : · 1 semaine en cours : pour suivre le cursus pédagogique de l’Ecole Supérieure de la Banque et les formations métiers di…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T07:52:22Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12122,7 +12122,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859385939?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Titulaire d'un Bac2, rejoignez notre formation Conseiller Clientèle Particuliers H/F en agence sur Lyon et périphérie dès septembre 2026 au sein de B-School by BNP Paribas . Le poste est proposé dans le cadre d'un contrat d'apprentissage d'un an sur un rythme 1 semaine/3 semaines : * 1 semaine en cours : pour suivre le cursus pédagogique de l'Ecole Supérieure de la Banque et les formations métiers dispensées par nos experts. * 3 semaines en agence : pour mettre en pratique vos connaissances sur…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:16:57Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12140,7 +12140,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856446113?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - Chargé de mission Engagement d'Entreprise (RSE / ESG) - H/F AU QUOTIDIEN ÇA DONNE QUOI ? Le plan 2022-25 a permis de positionner BNP Paribas Banque Privée France comme un des laboratoires de la finance durable du groupe BNP Paribas, reconnu pour sa capacité d'innovation et de développement de solutions et services engagés. Chargé(e) de mission Engagement d'Entreprise en appui de la Directrice de l'Engagement d'Entreprise de BNP Paribas Banque Privée, vos missions contribueront aux grand…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T07:49:52Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12158,7 +12158,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859348778?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? Première banque de l'Union Européenne, BNP Paribas est au service de plus de 7 millions de clients particuliers en France. Notre objectif en tant que banque de proximité ? Se rendre disponible pour nos clients à travers notre réseau de 1700 agences en France. Vous interviendrez en renfort de nos agences BNP Paribas en prenant en charge les missions des collaborateurs que vous serez amené à remplacer. Ce poste peut demander potentiellement une bonne mobilité géograph…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:23Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12176,7 +12176,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859388541?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? L'équipe Relations Media Groupe de BNP Paribas compte 12 personnes. Vous travaillerez dans un environnement international, dynamique et stimulant et en proximité avec le top management de BNP Paribas. Vous serez au cœur de l'activité d'un Groupe du CAC40 et de ses enjeux stratégiques. Vos missions principales : - Support à l'équipe Relations Média sur les différentes missions : organisation d'interviews, de conférences de presse, de médiatraining, etc. - Participati…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:17:23Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12195,7 +12195,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841745228?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Dans le cadre de remplacements longue durée, vous intégrerez le Territoire de Pays Rennais et deviendrez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : Accompagnerez vos clients dans leurs projets de vie grâce à des conseils personnalisés pour une satisfaction durable Garantirez une excellence relationnelle, en face-à-face comme à distance par la prise en charge de l'accueil et de rendez-vous. Contribuerez activement à la performance…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T12:46:25Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12213,7 +12213,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859432303?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? Vous serez accueilli au sein du département Communication Groupe de BNP Paribas. Au sein de l'équipe Brand Strategy et Activation, votre mission sera d'aider à l'organisation et la gestion de campagnes publicitaires en prenant en compte l'environnement concurrentiel et l'organisation interne de la banque. Publicité • Recueil et analyse des besoins clients afin de proposer des prises de parole adaptées, • Participation à la création et au développement des prises de …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:55:35Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12231,7 +12231,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5860803505?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? Au sein de BNP Paribas Personal Finance, filiale à 100 % du groupe BNP Paribas et spécialisée dans le financement aux particuliers en France et en Europe au travers de ses activités de crédit à la consommation, nous travaillons dans un environnement international et multiculturel. Vous rejoindrez le Centre de Scoring, rattaché à la Direction RISK Central, au sein de l’équipe Modelling de Mérignac. Vous contribuerez au développement et à l’optimisation de la platefor…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T07:55:19Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12249,7 +12249,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349594?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! Vous aimez convaincre, performer et fidéliser ? Rejoignez BNP Paribas et devenez un acteur clé de la croissance commerciale de votre agence, au plus près des clients. AU QUOTIDIEN, ÇA DONNE QUOI ? Dans le cadre de remplacements longue durée, vous intégrerez le Territoire d'Ivry et deviendrez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez vos clients dans leurs …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:30Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12267,7 +12267,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859341810?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "CDD à pourvoir immédiatement et pour une durée de 6 mois - Agence PARIS 14eme Donnez une nouvelle dimension à votre talent commercial ! Vous aimez convaincre, performer et fidéliser ? Rejoignez BNP Paribas et devenez un acteur clé de la croissance commerciale de votre agence, au plus près des clients. AU QUOTIDIEN, ÇA DONNE QUOI ? Dans le cadre de remplacements longue durée, vous intégrerez l'une de nos agences du 14ème arrondissement de Paris et deviendrez l'interlocuteur privilégié d'un porte…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:12:51Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12285,7 +12285,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859342496?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! Vous aimez convaincre, performer et fidéliser ? Rejoignez BNP Paribas et devenez un acteur clé de la croissance commerciale de votre agence, au plus près des clients. AU QUOTIDIEN, ÇA DONNE QUOI ? Dans le cadre de remplacements longue durée, vous intégrerez le Territoire Saint Etienne et deviendrez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez vos clients dans…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:12:54Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12303,7 +12303,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859432010?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - Projet Management Officer - H/F AU QUOTIDIEN, CA DONNE QUOI? BNP Paribas est une banque leader de la zone euro et un acteur bancaire de premier plan dans le monde, avec une forte présence internationale. Ses collaborateurs accompagnent au quotidien les métiers de la Banque dans leurs grands projets et construisent avec eux la banque de demain. Au sein de la Banque Commerciale en France (BCEF - 22 000 collaborateurs) du Groupe BNP Paribas, vous intégrerez le Centre d'Expertise Gouvernanc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:55:28Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12321,7 +12321,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349446?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN CA DONNE QUOI ? Parce que le monde va trop vite pour s'occuper de ses factures, BNP Paribas Factor propose à ses clients une expérience unique grâce à une gamme complète de services en France et à l'International. En moins de 8h, BNP Paribas Factor finance les factures, des entreprises de toute taille et secteur d'activité. L'affacturage devient simple, rapide, digital et moderne. En tant que Chargé d'Affaires Relation Clientèle Large Coporate, vous rejoindrez une structure à taill…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12339,7 +12339,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859387919?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! AU QUOTIDIEN, ÇA DONNE QUOI ? Au sein de notre Agence situé à Boulogne Billancourt, vous devenez l'interlocuteur privilégié d'un portefeuille clientèle Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez votre clientèle dans ses projets de vie grâce à des conseils personnalisés pour une satisfaction durable * Garantirez une excellence relationnelle, en face-à-face comme à distance par la prise en charge de l'accueil e…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:17:16Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12357,7 +12357,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349535?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! AU QUOTIDIEN, ÇA DONNE QUOI ? Au sein de notre Territoire de Versailles (Velizy, La Celle St Cloud, Le Chesnay, ), vous devenez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez vos clients dans leurs projets de vie grâce à des conseils personnalisés pour une satisfaction durable * Garantirez une excellence relationnelle, en face-à-face comme à distance par la pri…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12375,7 +12375,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859391396?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN, ÇA DONNE QUOI ? Au sein du métier Securities Services, vous rejoindrez les équipes en charge de l'administration de fonds Private Capital (Private Equity, Real Estate et Debt), dont l'objectif est d'accompagner les sociétés de gestion dans la tenue de la comptabilité de leurs fonds. - Vous préparerez les arrêtés comptables et définirez les calendriers de valorisation en lien avec les clients - Vous enregistrerez les opérations sur titres et les flux espèces, et en assurerez la réc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:22:48Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12393,7 +12393,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5860803567?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - Data Scientist / Analyste quantitatif - H/F AU QUOTIDIEN CA DONNE QUOI ? Vous serez intégré(e) au sein de l’équipe Data Science & Quantitative Finance de l’ALM Treasury Head Office de BNP Paribas (9 personnes). Cette équipe a les mandats suivants : · Le développement, le suivi et l’amélioration des modèles comportementaux utilisés par l’ALM Treasury (modèles de remboursements anticipés, modèles de liquidité des dépôts, etc.). · Le suivi des équipes de modélisation locales. · Le développ…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T07:55:19Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12411,7 +12411,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349563?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "BNP Paribas Asset Management (BNPP AM) est la division de gestion d'actifs du groupe BNP Paribas. Depuis le 1er juillet 2025, les activités d'AXA Investment Managers (AXA IM) ont été intégralement rattachées à BNPP AM, créant ainsi une plateforme mondiale unifiée et renforcée. BNPP AM est un leader mondial de la gestion d'actifs, bénéficiant de la taille, de la stabilité et de l'expertise du Groupe. Nous accompagnons une clientèle diversifiée, incluant des investisseurs institutionnels, des ent…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -12429,7 +12429,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349476?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "CDD 7 mois à pourvoir à partir du 01 septembre 2026 au 31 mars 2027 - Territoire de Rueil Donnez une nouvelle dimension à votre talent commercial ! Vous aimez convaincre, performer et fidéliser ? Rejoignez BNP Paribas et devenez un acteur clé de la croissance commerciale de votre agence, au plus près des clients. AU QUOTIDIEN, ÇA DONNE QUOI ? Dans le cadre de remplacements longue durée, vous intégrerez le Territoire de Rueil et deviendrez l'interlocuteur privilégié d'un portefeuille clients Par…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12447,7 +12447,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859948225?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Qui sommes‑nous ? BNP Paribas Asset Management (BNPP AM) est la division de gestion d'actifs du groupe BNP Paribas. Depuis le 1 juillet 2025, les activités d'AXA Investment Managers (AXA IM) sont entièrement intégrées à BNPP AM, créant ainsi une plateforme mondiale unifiée et renforcée. BNPP AM est un leader mondial de la gestion d'actifs, bénéficiant de l'envergure, de la stabilité et de l'expertise du groupe. Nous servons une clientèle diversifiée - investisseurs institutionnels, entreprises,…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T19:43:17Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12465,7 +12465,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349553?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! AU QUOTIDIEN, ÇA DONNE QUOI ? Au sein de notre Agence située à Villeurbanne Charpennes, vous devenez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez vos clients dans leurs projets de vie grâce à des conseils personnalisés pour une satisfaction durable * Garantirez une excellence relationnelle, en face-à-face comme à distance par la prise en charge de l'accueil e…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12483,7 +12483,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859539547?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Donnez une nouvelle dimension à votre talent commercial ! Vous aimez convaincre, performer et fidéliser ? Rejoignez BNP Paribas et devenez un acteur clé de la croissance commerciale de votre agence, au plus près des clients. AU QUOTIDIEN, ÇA DONNE QUOI ? Dans le cadre de remplacements longue durée, vous intégrerez le Territoire de Strasbourg et deviendrez l'interlocuteur privilégié d'un portefeuille clients Particuliers mutualisé. Au sein de notre équipe, vous : * Accompagnerez vos clients dans…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T11:45:02Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12501,7 +12501,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5860803485?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? Au sein de BNP Paribas Personal Finance, filiale à 100 % du groupe BNP Paribas et spécialisée dans le financement aux particuliers en France et en Europe au travers de ses activités de crédit à la consommation, nous travaillons dans un environnement international et multiculturel. Vous rejoindrez l’équipe AI Product au sein du département Data, qui accompagne les projets de Data Science de l’idéation à la mise en production, dans un environnement international avec …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T07:55:19Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12519,7 +12519,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349569?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - Gestion des risques opérationnels - H/F Au quotidien ça donne quoi ? Vous rejoindrez un département dynamique, qui s'est considérablement développé au cours des dernières années pour s'adapter à un environnement réglementaire toujours plus contraignant, un examen plus approfondi des autorités de supervision des institutions financières, des attentes croissantes de la direction de BNP Paribas et aux nouvelles technologies (qui transforment notre manière de travailler et les risques auxqu…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12537,7 +12537,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859432007?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? BNP Paribas Leasing Solutions est le métier spécialisé dans les solutions de crédit-bail et les solutions locatives pour équipements professionnels et immobiliers. Vous intégrerez la Direction Générale Médical TLS, et plus spécifiquement au sein du RESEAU VENDOR MEDICAL TLS , dans le secteur MEDICAL - Financement de Matériel pour les Professionnels de Santé . L'équipe est composé de 7 chargés d'affaires qui gèrent des portefeuilles de partenaires/clients dans toute …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:55:28Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12558,7 +12558,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "adzuna"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:22:44Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12576,7 +12576,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349584?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "BNP Paribas Asset Management (BNPP AM) est la division de gestion d'actifs du groupe BNP Paribas. Depuis le 1er juillet 2025, les activités d'AXA Investment Managers (AXA IM) ont été intégralement rattachées à BNPP AM, créant ainsi une plateforme mondiale unifiée et renforcée. BNPP AM est un leader mondial de la gestion d'actifs, bénéficiant de la taille, de la stabilité et de l'expertise du Groupe. Nous accompagnons une clientèle diversifiée, incluant des investisseurs institutionnels, des ent…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:30Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12594,7 +12594,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859360620?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Auditeur Hub CIB Global Markets H/F BNP Paribas est un groupe bancaire international de premier plan, engagé auprès de ses clientèles et de la société. Au sein du Groupe, l'Inspection Générale intervient de manière indépendante pour le compte de la Direction Générale et conduit des missions d'audit en France et à l'international afin de garantir la qualité des dispositifs de contrôle des risques, le respect des exigences réglementaires et l'efficience du management. Au quotidien ça donne quoi ?…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:14:34Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12612,7 +12612,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349426?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Au quotidien ça donne quoi ? Au sein de BNP Paribas CIB GCO, vous intègrerez un pôle qui regroupe plusieurs équipes, dont une équipe IA générative et une équipe Data Analytics avec lesquelles vous serez amené·e à collaborer principalement. Vous aurez pour mission : * Assister la PM AI dans le pilotage des sujets et la gestion de la workload opérationnelle. * Contribuer aux travaux de prompt engineering sur les outils d'IA générative utilisés par l'équipe (recherche d'informations dans des docum…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12630,7 +12630,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5827453819?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "AU QUOTIDIEN ÇA DONNE QUOI ? Au sein du l'équipe Marque & Publicité du groupe BNP Paribas, l’équipe Media Partenariat & Data conseille et accompagne les différentes entités France & Internationales dans leurs besoins Media. En rejoignant l'équipe Media, Partenariat & Data, tu intégreras une équipe de 3 personnes soudées et dynamiques, travaillant dans une bonne ambiance Le/la stagiaire aura pour mission de nous accompagner sur les sujets suivants : Construire & partager une veille Media : - Inn…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-04T07:38:07Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12648,7 +12648,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349609?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "BNP Paribas Asset Management (BNPP AM) est la division de gestion d'actifs du groupe BNP Paribas. Depuis le 1er juillet 2025, les activités d'AXA Investment Managers (AXA IM) ont été intégralement rattachées à BNPP AM, créant ainsi une plateforme mondiale unifiée et renforcée. BNPP AM est un leader mondial de la gestion d'actifs, bénéficiant de la taille, de la stabilité et de l'expertise du Groupe. Nous accompagnons une clientèle diversifiée, incluant des investisseurs institutionnels, des ent…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:30Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12666,7 +12666,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349576?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - Credit and Compliance Executive Advisory - H/F Au quotidien ça donne quoi ? Corporate Clients Group (CCG), au sein de Global Banking EMEA CIB offre, aux grandes entreprises clientes une gamme de solutions pour leur besoin de financement, conseils financiers et de gestion de trésorerie. CCG rassemble le Corporate Coverage, les Industry Groups ainsi que le M&A EMEA et l'équipe marketing. Au sein du département Executive Advisory, vous intégrerez l'équipe Senior Credit Advisors composée de…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:30Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12684,7 +12684,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859380016?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - AI Project Officer Junior (PMO & Business Analyst) H/F AU QUOTIDIEN ÇA DONNE QUOI ? La fonction RISK a pour mission d'identifier, analyser et maîtriser l'ensemble des risques auxquels le Groupe BNP Paribas est exposé, afin de sécuriser ses activités, garantir sa solidité financière et accompagner le développement durable des métiers dans le respect de sa stratégie et des exigences réglementaires. L'équipe AIR Tech est une JV créée en 2024 entre les deux fonctions Conformité et RISK, ave…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:16:19Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12702,7 +12702,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5857955099?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage - ALMT Resources Management Officer – H/F Au quotidien ça donne quoi ? L’ALM Treasury est une Activité Transverse présente dans l’ensemble du Groupe en charge de gérer les risques de liquidité, de taux et de change du bilan de la Banque. Asset Liability Management Treasury (ALMT) est une activité transversale à l'échelle du Groupe dont la mission est de gérer les risques de liquidité, de taux d'intérêt et de change sur le bilan de la Banque, y compris leur mise en œuvre sur les marchés fi…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T07:52:22Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12720,7 +12720,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859349490?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Au quotidien ça donne quoi ? Dans le cadre de la préparation du Plan 2030, vous accompagnerez l'équipe IPS pour assurer, de manière transversale, la concrétisation de la vision cible dans les projets locaux des différentes entités du groupe BNP Paribas (5 pays). Cela concerne à la fois les banques commerciales et les métiers spécialisés comme la gestion d'actifs et l'assurance et couvre un périmètre international (notamment France, Belgique et Italie). En tant qu'alternant , votre travail consi…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:13:29Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": true
@@ -12738,7 +12738,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859342498?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "La relation client et le monde de la banque vous passionnent ? Vous aimez communiquer, conseiller, accompagner et trouver des solutions adaptées aux besoins de chacun ? Et si vous faisiez tout cela depuis un environnement digital innovant ? AU QUOTIDIEN, ÇA DONNE QUOI ? En tant que Banquier-Assureur au sein de notre Service Client basé à Grenoble, vous serez le conseiller à distance privilégié de nos clients particuliers et entrepreneurs. Facilitateur de solutions bancaires, vous serez présent …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T07:12:54Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": true
@@ -12756,7 +12756,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856446090?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage – Chargé de conformité KYC H/F Ce stage est à pourvoir à partir de mars 2027 pour une durée de 6 mois. AU QUOTIDIEN ÇA DONNE QUOI ? Dans un environnement international et réglementaire en constante évolution, la Compliance veille au respect des lois et des valeurs du Groupe BNP Paribas. Au sein de la Conformité Groupe, et plus particulièrement du domaine de la Sécurité Financière, vous rejoignez l’équipe KYC (9 collaborateurs). Cette équipe assure la maîtrise de la connaissance des client…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T07:49:52Z",
     "firstSeenAt": "2026-08-30T08:55:56.387Z",
     "datePubFiable": true
@@ -12774,7 +12774,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5830622334?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description JOB DESCRIPTION Our core value is building strong relationships with our clients, which include Corporations, Asset Managers/Hedge Funds, Financial Institutions & Sponsors. We help them buy and sell financial products on exchanges around the world, raise funding, and manage risk. This is a dynamic, entrepreneurial team that includes individuals who have a passion for the markets and who thrive in fast-paced, changing environments and are energized by a bustling trading floor. At Gol…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T17:19:23Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12792,7 +12792,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834762387?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description RISK The Risk Division is responsible for independent review of market, credit, operational, model, and liquidity risk throughout the firm as well as enterprise wide stress testing. Our teams develop comprehensive processes to monitor, assess, and manage the risk of expected and unexpected events that may have an adverse impact on the firm. Risk professionals execute critical day-to-day risk management activities, lead projects, and contribute to the ongoing advancement of a robust …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:27:29Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12810,7 +12810,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5858363488?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T17:18:55Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12828,7 +12828,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5833592263?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T17:20:46Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12846,7 +12846,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5822458361?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Filiale du groupe Crédit Agricole, Crédit Agricole Immobilier est un acteur global de l'immobilier qui accompagne les particuliers, les entreprises et les collectivités dans la réalisation de tous leurs projets immobiliers. Bénéficiant d'un solide ancrage territorial, Crédit Agricole Immobilier s'appuie sur trois métiers : les services immobiliers aux particuliers (transaction, location, gestion locative, syndic de copropriété, rénovation), la promotion immobilière…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31T17:29:36Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12864,7 +12864,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856943588?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T17:14:45Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12882,7 +12882,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5855469557?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Filiale du groupe Crédit Agricole, Crédit Agricole Immobilier est un acteur global de l'immobilier qui accompagne les particuliers, les entreprises et les collectivités dans la réalisation de tous leurs projets immobiliers. Bénéficiant d'un solide ancrage territorial, Crédit Agricole Immobilier s'appuie sur trois métiers : les services immobiliers aux particuliers (transaction, location, gestion locative, syndic de copropriété, rénovation), la promotion immobilière…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T17:21:52Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12900,7 +12900,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5824170577?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Filiale du groupe Crédit Agricole, Crédit Agricole Immobilier est un acteur global de l'immobilier qui accompagne les particuliers, les entreprises et les collectivités dans la réalisation de tous leurs projets immobiliers. Bénéficiant d'un solide ancrage territorial, Crédit Agricole Immobilier s'appuie sur trois métiers : les services immobiliers aux particuliers (transaction, location, gestion locative, syndic de copropriété, rénovation), la promotion immobilière…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T17:31:45Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12918,7 +12918,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5858395319?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-27T17:37:20Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12936,7 +12936,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5856973825?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-26T17:28:08Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -12954,7 +12954,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5836847467?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Crédit Agricole Personal Finance & Mobility, filiale à 100% du Groupe Crédit Agricole, est un leader du financement personnel et un fournisseur d'accès à toutes les solutions de mobilités en Europe. Il distribue ces solutions en direct auprès des particuliers, sur les lieux de vente ou sur les plateformes e-commerce de ses partenaires, une gamme étendue de solutions de financement. Ces solutions de crédit amortissable, crédit renouvelable, leasing et rachat de créd…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-11T17:29:31Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12972,7 +12972,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5833604430?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Filiale du groupe Crédit Agricole, Crédit Agricole Immobilier est un acteur global de l'immobilier qui accompagne les particuliers, les entreprises et les collectivités dans la réalisation de tous leurs projets immobiliers. Bénéficiant d'un solide ancrage territorial, Crédit Agricole Immobilier s'appuie sur trois métiers : les services immobiliers aux particuliers (transaction, location, gestion locative, syndic de copropriété, rénovation), la promotion immobilière…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T17:30:37Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -12990,7 +12990,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841918686?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Grâce à notre modèle de bancassurance, à notre expertise et à l'engagement de nos 7100 collaborateurs dans 10 pays, nous sommes le premier assureur en France et le premier bancassureur européen. Crédit Agricole Assurances répond aux besoins en protection et en épargne des particuliers, des agriculteurs, des professionnels et des entreprises. En France, notre gamme complète de produits et de services est distribuée par les Caisses régionales de Crédit Agricole et pa…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T17:10:30Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13008,7 +13008,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5833586464?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Grâce à notre modèle de bancassurance, à notre expertise et à l'engagement de nos 7100 collaborateurs dans 10 pays, nous sommes le premier assureur en France et le premier bancassureur européen. Crédit Agricole Assurances répond aux besoins en protection et en épargne des particuliers, des agriculteurs, des professionnels et des entreprises. En France, notre gamme complète de produits et de services est distribuée par les Caisses régionales de Crédit Agricole et pa…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T17:16:39Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13026,7 +13026,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859766350?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité CA-GIP EN QUELQUES MOTS… Travailler chez CA-GIP, c'est être acteur de la transformation du groupe Crédit Agricole et de ses métiers. C'est travailler dans une entreprise technologique de 1er plan en Europe, au service des Entités du groupe Crédit Agricole. CA-GIP est un collectif de plus de 2000 collaborateurs répartis sur 8 sites en France ! Nous sommes au cœur des métiers technologiques : DevOps, Cloud Hybride, Digital Workplace, Cybersécurité, Télécommunications…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T17:26:54Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13044,7 +13044,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5822431823?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31T17:21:00Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13062,7 +13062,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5840368960?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-13T17:07:02Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13080,7 +13080,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5846951062?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Crédit Agricole Personal Finance & Mobility, filiale à 100% du Groupe Crédit Agricole, est un leader du financement personnel et un fournisseur d'accès à toutes les solutions de mobilités en Europe. Il distribue ces solutions en direct auprès des particuliers, sur les lieux de vente ou sur les plateformes e-commerce de ses partenaires, une gamme étendue de solutions de financement. Ces solutions de crédit amortissable, crédit renouvelable, leasing et rachat de créd…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-18T17:41:06Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13098,7 +13098,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841927698?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T17:17:59Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13116,7 +13116,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832079455?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Crédit Agricole Personal Finance & Mobility, filiale à 100% du Groupe Crédit Agricole, est un leader du financement personnel et un fournisseur d'accès à toutes les solutions de mobilités en Europe. Il distribue ces solutions en direct auprès des particuliers, sur les lieux de vente ou sur les plateformes e-commerce de ses partenaires, une gamme étendue de solutions de financement. Ces solutions de crédit amortissable, crédit renouvelable, leasing et rachat de créd…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T17:12:39Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13134,7 +13134,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5851131177?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Filiale du groupe Crédit Agricole, Crédit Agricole Immobilier est un acteur global de l'immobilier qui accompagne les particuliers, les entreprises et les collectivités dans la réalisation de tous leurs projets immobiliers. Bénéficiant d'un solide ancrage territorial, Crédit Agricole Immobilier s'appuie sur trois métiers : les services immobiliers aux particuliers (transaction, location, gestion locative, syndic de copropriété, rénovation), la promotion immobilière…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T17:08:04Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13152,7 +13152,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5833597797?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T17:25:37Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13170,7 +13170,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859757364?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Rejoignez les équipes de Crédit Agricole CIB, la banque de financement et d'investissement du groupe Crédit Agricole, 10e groupe bancaire mondial en taille de bilan*. Nous accompagnons les grandes entreprises et institutions financières dans leur développement et le financement de leurs projets. Pionniers dans la finance responsable, l'engagement social et environnemental sont au cœur de nos activités. Intégrer nos équipes c'est contribuer au développement d'une éc…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T17:18:40Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13188,7 +13188,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5822433822?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Grâce à notre modèle de bancassurance, à notre expertise et à l'engagement de nos 7100 collaborateurs dans 10 pays, nous sommes le premier assureur en France et le premier bancassureur européen. Crédit Agricole Assurances répond aux besoins en protection et en épargne des particuliers, des agriculteurs, des professionnels et des entreprises. En France, notre gamme complète de produits et de services est distribuée par les Caisses régionales de Crédit Agricole et pa…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-07-31T17:22:54Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13206,7 +13206,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5824122387?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Grâce à notre modèle de bancassurance, à notre expertise et à l'engagement de nos 7100 collaborateurs dans 10 pays, nous sommes le premier assureur en France et le premier bancassureur européen. Crédit Agricole Assurances répond aux besoins en protection et en épargne des particuliers, des agriculteurs, des professionnels et des entreprises. En France, notre gamme complète de produits et de services est distribuée par les Caisses régionales de Crédit Agricole et pa…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T17:13:47Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13224,7 +13224,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5855478594?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Grâce à notre modèle de bancassurance, à notre expertise et à l'engagement de nos 7100 collaborateurs dans 10 pays, nous sommes le premier assureur en France et le premier bancassureur européen. Crédit Agricole Assurances répond aux besoins en protection et en épargne des particuliers, des agriculteurs, des professionnels et des entreprises. En France, notre gamme complète de produits et de services est distribuée par les Caisses régionales de Crédit Agricole et pa…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-25T17:32:54Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13242,7 +13242,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834786266?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Avec près de 1 400 consultants en France et un réseau mondial de 60 000 consultants, Deloitte Conseil accompagne les organisations publiques et privées dans leurs projets de transformation et de recherche de performance. Nous intervenons dans divers secteurs pour concevoir, mettre en œuvre et conduire le changement au sein des organisations, des processus et des systèmes d'information. Vous intégrez Deloitte en tant que consultant alternant pour accompagner nos équipes de Lille, spécialisées da…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:33:06Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13260,7 +13260,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834746273?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage de fin d’études à pouvoir en janvier 2026 (de 3 à 6 mois). Ce stage étant destiné aux candidats en fin d'études, nous vous remercions de ne pas postuler si vous recherchez un stage de césure. Si aucune offre de césure ne correspond à votre recherche, cela signifie que nous ne disposons pas actuellement d'opportunités dans ce cadre. Tous nos postes sont ouverts au télétravail. Rejoindre Deloitte, c'est dire oui à une expérience qui a du sens, celle où les rencontres et les missions vous po…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:14:35Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13278,7 +13278,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834754639?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Tous nos postes sont ouverts au télétravail. Stage de fin d'études à partir de Février 2025 pour une durée de 6 mois. Rejoindre Deloitte , c'est dire oui à une expérience qui a du sens, celle où les rencontres et les missions vous poussent à grandir chaque jour. C’est évoluer dans un environnement de travail fondé sur la confiance, la transmission et l’intelligence collective pour construire l’avenir de nos clients. Un avenir que nous voulons plus responsable, plus durable et respectueux de l’e…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:19:21Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13296,7 +13296,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834756550?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Tous nos postes sont ouverts au télétravail. Rejoindre Deloitte, c'est dire oui à une expérience qui a du sens, celle où les rencontres et les missions vous poussent à grandir chaque jour. C’est évoluer dans un environnement de travail fondé sur la confiance, la transmission et l’intelligence collective pour construire l’avenir de nos clients. Un avenir que nous voulons plus responsable, plus durable et respectueux de l’environnement en prenant des initiatives concrètes à notre échelle. Nous re…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:21:18Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13314,7 +13314,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834744109?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Tous nos postes sont ouverts au télétravail. Rejoindre Deloitte, c'est dire oui à une expérience qui a du sens, celle où les rencontres et les missions vous poussent à grandir chaque jour. C’est évoluer dans un environnement de travail fondé sur la confiance, la transmission et l’intelligence collective pour construire l’avenir de nos clients. Un avenir que nous voulons plus responsable, plus durable et respectueux de l’environnement en prenant des initiatives concrètes à notre échelle. Nous re…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:11:21Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13332,7 +13332,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5859755120?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage de fin d'études à pourvoir à partir de mars 2027. Comptant près de 1000 collaborateurs, notre activité Strategy, Risk & Transactions (SRT) réunit une combinaison d’expertises unique sur le marché. Nous accompagnons nos clients dans leurs transformations, du conseil en stratégie à la mise en œuvre opérationnelle, sur leurs enjeux transactionnels (M&A), de management des risques, de modélisation économique et financière, et de développement durable. En rejoignant le département Transaction …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-28T17:15:52Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13350,7 +13350,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5861239209?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Stage de césure ou de fin d'études à pourvoir à partir de janvier 2027 . Comptant près de 1000 collaborateurs, notre activité Strategy, Risk & Transactions (SRT) réunit une combinaison d’expertises unique sur le marché. Nous accompagnons nos clients dans leurs transformations, du conseil en stratégie à la mise en œuvre opérationnelle, sur leurs enjeux transactionnels (M&A), de management des risques, de modélisation économique et financière, et de développement durable. En rejoignant le départe…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T17:32:16Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13368,7 +13368,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834749607?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "A sein de l’équipe Conseil Grand Ouest , nous accompagnons nos clients dans la réussite de leurs projets complexes dans une optique de création de valeur et de respect des spécificités de l'entreprise. Face aux enjeux stratégiques des métiers ou des fonctions, notre équipe aide à concevoir, à mettre en œuvre et à conduire le changement des organisations, des processus et des systèmes d'information. Notre équipe de 50 collaborateurs, répartie entre les bureaux de Rennes, Nantes, Bordeaux et Toul…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T17:16:37Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13386,7 +13386,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5825753490?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Job Description & Summary PwC, cabinet pluridisciplinaire, rassemble 7 000 collaborateurs en France et au Maghreb, au sein d’un réseau mondial de plus de 364 000 personnes dans 136 pays. Chaque jour, nous exerçons des métiers d’excellence pour concrétiser notre ambition : être utiles à nos clients et accélérateurs de mouvement. Dans un monde en constante évolution, nous investissons dans le développement de nos équipes avec une proposition de valeur forte : Grow here. Go further. Un engagement …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-02T17:08:46Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -13404,7 +13404,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5861226675?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Premier gérant d'actifs européen parmi les 10 premiers acteurs mondiaux (1), Amundi propose à ses 100 millions de clients - particuliers, institutionnels et entreprises - une gamme complète de solutions d'épargne et d'investissement en gestion active et passive, en actifs traditionnels ou réels. Cette offre est enrichie de services et d'outils technologiques qui permettent de couvrir toute la chaîne de valeur de l'épargne. Filiale du groupe Crédit Agricole, Amundi …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T17:22:41Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13422,7 +13422,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5838483600?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Premier gérant d'actifs européen parmi les 10 premiers acteurs mondiaux (1), Amundi propose à ses 100 millions de clients - particuliers, institutionnels et entreprises - une gamme complète de solutions d'épargne et d'investissement en gestion active et passive, en actifs traditionnels ou réels. Cette offre est enrichie de services et d'outils technologiques qui permettent de couvrir toute la chaîne de valeur de l'épargne. Filiale du groupe Crédit Agricole, Amundi …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-12T17:30:06Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13440,7 +13440,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5853694025?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Informations générales Entité Premier gérant d'actifs européen parmi les 10 premiers acteurs mondiaux (1), Amundi propose à ses 100 millions de clients - particuliers, institutionnels et entreprises - une gamme complète de solutions d'épargne et d'investissement en gestion active et passive, en actifs traditionnels ou réels. Cette offre est enrichie de services et d'outils technologiques qui permettent de couvrir toute la chaîne de valeur de l'épargne. Filiale du groupe Crédit Agricole, Amundi …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-23T17:12:38Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13458,7 +13458,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841090613?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service : Amundi Distribution and Wealth Division est une activité stratégique en forte croissance d'Amundi qui vise à répondre aux besoins variés et évolutifs de nos clients de la distribution pour compte de tiers dans le monde entier. Missions : Les principales missions consisteront à : · Créer et mettre à jour des supports visuels de communication à l'aide d'outils (Canva, PowerPoint, etc.). · Participer à l'élaboration de contenus de communication externe (réseaux sociaux, etc.). · Communiq…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T03:33:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13476,7 +13476,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834157822?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "La Direction : Composée de cinq personnes au total, et rattachée au Directeur général délégué, en charge de la division Stratégie, Finance et Contrôle, la direction des Affaires Publiques a la responsabilité de coordonner et d'animer les actions du Groupe AMUNDI auprès des pouvoirs publics (nationaux et européens principalement). Le poste : Rapportant directement à la directrice des Affaires publiques, et en lien avec les autres membres de l'équipe affaires publiques, le titulaire du poste aura…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T03:14:43Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13494,7 +13494,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5851811939?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service : L'équipe ISR (4 collaborateurs) s'intègre dans l'équipe d'Asset Management (28 collaborateurs) d'Amundi Immobilier en charge de la valorisation des actifs sous gestion (bureaux, commerces, logistique, hôtellerie, médical, résidentiel…) en France et à l'étranger. Elle accompagne cette équipe et les autres départements d'Amundi Immobilier dans l'amélioration et le déploiement des pratiques et projets ESG. Amundi Immobilier est la filiale dédiée à la gestion d'actifs immobiliers d'Amundi…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-22T03:03:35Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -13515,7 +13515,7 @@ window.__OFFRES__ = [
     "alsoOn": [
       "adzuna"
     ],
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T17:40:47Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13533,7 +13533,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841090636?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service : Au sein de la direction Global Data Management, l'équipe Market Data Management, composée de 6 personnes à Paris, a pour missions principales la gestion des besoins en market data du groupe Amundi ainsi que la gestion et/ou la participation aux projets incluant : • La gestion du parc des terminaux d'accès aux données de marché • L'acquisition de données externes financières / extra-financières, de données Indices et des services de recherches • Le pilotage et la négocia…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T03:33:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13551,7 +13551,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841090629?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service : Rattaché au HR project manager RH du pôle Employee relations and Social Policies au sein de la DRH France, vous participerez au projet de mise en conformité RGPD des traitements RH Missions : En qualité de chef de mission, vous participerez au projet de mise en conformité RGPD de l'ensemble des traitements de la Direction des Ressources Humaines Dans ce cadre, vos missions sont : Accompagner et conseiller les responsables de traitement des différents départements RH (recrutement, paie…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T03:33:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13569,7 +13569,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832738898?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous serez rattaché(e) au pôle « ETF & Indexing et Liquid Alternatives Funds ». L'équipe juridique a en charge les projets relatifs aux fonds listés et indiciels, les fonds de gestions alternatives et la plateforme de comptes-gérés. L'équipe est composée de 6 collaborateurs, au sein de la Direction juridique d'Amundi Asset Management. Vous aurez pour principales missions la fourniture de conseils juridiques en vue de créer et restructurer les fonds et mandats français et étrangers gérés par les…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T03:12:25Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13587,7 +13587,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5847607879?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: Au sein de l'équipe multi gestion d'Amundi Investment Solutions, vous rejoindrez une équipe de 4 analystes en charge d'analyser et de sélectionner des hedge funds / stratégies alternatives. Description de la mission : Vous travaillerez en étroite collaboration avec l'équipe des analystes hedge funds dans le travail d'analyse et de suivi des hedge funds. Le travail comportera une partie d'analyse de données de performance et de risque ainsi qu'une analyse qualitative des strat…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T03:06:13Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13605,7 +13605,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832739726?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service: L'équipe Recherche ESG et Engagement d'Amundi suit chaque secteur d'activité et les principaux segments d'investissement sur les sujets ESG clés. Les analystes évaluent les risques et les opportunités ESG, sélectionnent les indicateurs clés de performance, et déterminent les pondérations pertinentes pour la notation ESG d'Amundi. Missions: L'alternant fera parti intégrante de l'équipe Recherche ESG & Engagement et sera amené à travailler sur les sujets suivants : Assiste…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T03:12:53Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13623,7 +13623,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5823105726?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service : L'équipe Fund Annual Report (FAR) est composée de /- 15 personnes et est logée au sein du Secrétariat Général du département Business Support et Operations. L'équipe FAR assure les activités suivantes pour le compte des fonds gérés par AMUNDI ASSET MANAGEMENT : * coordination de la production et publication des rapports financiers * coordination et production des reportings AIFM * coordination et production de la documentation fiscale Dans le cadre de ces activités, l'é…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T02:56:14Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13641,7 +13641,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5834157852?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description de la Direction ou de l'équipe d'accueil : Au sein de la ligne métier Structurés, le service Gestion Fonds à Formule regroupe l'ensemble des activités de gestion des fonds à formule et des fonds de stratégie du groupe Amundi. Forte de 8 collaborateurs, l'équipe gérait 19 milliards € au 31/01/2026. Description de la mission : Vous serez pleinement intégré(e) dans les activités des gérant(e)s. Vous participerez ainsi quotidien de la gestion des fonds : Contrôle de premier niveau des v…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-09T03:14:43Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13659,7 +13659,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5828549414?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: L'équipe Credit Research est composée de 15 analystes basés à Paris (2/3) et à Londres (1/3) et a pour mission l'analyse, la recommandation et le suivi des émetteurs obligataires du bench et en portefeuille (banques, corporates). Elle est rattachée à la ligne métier Fixed Income qui regroupe les gestions obligataires. Description de la mission: Au sein de l'Analyse Crédit d'Amundi, vous aurez pour mission de : - Participer à l'analyse crédit d'émetteurs ‘Investment Grade et H…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T03:13:49Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13677,7 +13677,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5849088772?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "SERVICE : La direction « Marketing and Products » est en charge de la conception, de la mise en œuvre et du développement de la stratégie Marketing d'Amundi. Le déploiement des offres, services et outils digitaux développés par Amundi intervient sur les marchés retail en France et à l'international. MISSIONS : Au sein de l'équipe « Education & French content », qui fait partie de la direction Marketing, vous serez en charge des principales missions suivantes : Participer à la rédaction et produ…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T03:06:29Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13695,7 +13695,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5823105731?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service: La Direction de l'Audit Interne d'Amundi, composée de 54 personnes en France et dans différentes entités du Groupe Amundi, réalise des missions d'audit dans l'ensemble des lignes métiers / entités du Groupe, tant en France qu'à l'étranger. Ces missions, d'une durée de 12 semaines en moyenne, ont pour objectif d'apprécier le niveau de risques ainsi que la régularité, la sécurité et l'efficacité des activités auditées. La Direction de l'Audit Interne est ainsi une composante essentielle …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T02:56:14Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13713,7 +13713,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5854057152?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service : Vous rejoindrez l'équipe Investment Specialist / Marketing Produit dont l'objectif est d'animer la commercialisation des solutions d'investissement à l'international et à travers l'utilisation de différents canaux de distribution à disposition en interne, en étroite collaboration avec les équipes de gestion, de vente et de structuration. L'équipe travaille principalement de concert avec les analystes, les gérants et les commerciaux mais aussi avec la structuration, la r…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-24T03:04:26Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13731,7 +13731,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5831329778?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service: Vous intégrez l'équipe Partnership Strategy (5 personnes) qui coordonne les relations avec les grands distributeurs et contreparties d'Amundi. En lien quotidien avec les équipes Commerciales, Data IT et la Direction Générale, vous contribuerez au suivi des groupes partenaires dans le monde entier, à la production de notes de synthèse à destination de la Direction, et au contrôle trimestriel et à la finalisation du transfert d'une base de données de détentions trimestriel…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T03:10:54Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13749,7 +13749,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5832738909?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: La Conformité veille au respect des lois, règlements, codes de bonne conduite et règles internes propres à l'activité. Pour cela, sont menés des contrôles par des équipes d'experts. La Conformité joue également un rôle majeur de sensibilisation et de formation des équipes, ainsi qu'une mission importante de conseil. Au sein de la Direction de la Conformité, vous assisterez au quotidien l'équipe Intégrité des Marchés dans ses travaux : prévention, conseil, contrôles. Les missi…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-08T03:12:26Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13767,7 +13767,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5828549524?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description de la Direction ou du Service d'accueil : Au sein du Middle Office- L'équipe Corporate Actions est en charge du suivi des Opérations Sur Titres pour les gérants de portefeuilles d'Amundi en France et à l'international. L'équipe est composée de 16 collaborateurs. Nous couvrons l'ensemble des produits sur plus de 8 000 portefeuilles. Description de la mission : Dans cette mission vous serez dans un premier temps en charge du suivi et de l'analyse des détachements de dividendes. Vous p…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T03:13:51Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13785,7 +13785,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5828549491?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "L'équipe de Recherche ESG et Engagement d'Amundi cherche à recruter un stagiaire pour une période de 6 mois. L'équipe pilote les stratégies de recherche et d'engagement ESG en interne sur différents secteurs et différentes thématiques. Les analystes ESG rencontrent, engagent et maintiennent un dialogue constant avec les entreprises pour améliorer leurs performances ESG. Il ont également la responsabilité de préparer des recherches approfondies sur des thématiques données en plus d'assurer la qu…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T03:13:50Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13803,7 +13803,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5849088701?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: Au sein de la Direction des Risques d'AMUNDI ASSET MANAGEMENT, l'équipe Regulatory Risk Investment Guidelines Support a pour missions d'apporter notamment aux Risk Managers, aux gérants de fonds, des analyses et consultations réglementaires (en lien avec les investissements effectués par nos équipes de gestion) et la programmation associée à ces réglementations dans nos outils. Cela inclue notamment les aspects suivants : · L'analyse de la règle d'investissement au vu des tex…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T03:06:29Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13821,7 +13821,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5861730472?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "· Research & Quantitative Model Development - Design and develop quantitative approaches and machine learning algorithms to generate investment signals on interest rates (curve dynamics, term premia, vol, macro linkages), and credit markets (spread dynamics, momentum, carry, liquidity, regime effects). - Perform advanced feature engineering (macro, market microstructure, flows, liquidity, ESG, sentiment). - Develop supervised and unsupervised learning models: > regression, classification, clust…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-30T03:05:28Z",
     "firstSeenAt": "2026-08-30T01:18:55.845Z",
     "datePubFiable": true
@@ -13839,7 +13839,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5823105719?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description du Service : L'équipe Service Clients Souverains et Institutionnels (pôle International) est une équipe de 6 personnes en charge du suivi de nos clients institutionnels qui sont basés en France et à l'international, et qui sont suivis au niveau commercial par l'ensemble de nos filiales dans le monde. Nous recherchons un ou une apprenti(e) pour soutenir l'équipe dans son activité. Missions : Nous recherchons un(e) candidat(e) ayant pour mission de prolonger l'action de l'équipe comme…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-01T02:56:14Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13857,7 +13857,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841090601?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "About the role, We are looking for a Master's-level intern to join our Wealth Solutions Business Development team in Paris for a 6-month internship. This internship is an opportunity to contribute to the evolution of our working methods by helping us integrate Artificial Intelligence into our daily processes, with a particular focus on investment solution proposal production and business monitoring for our Wealth & Distribution clients. The successful candidate will support the team in improvin…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T03:33:51Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13875,7 +13875,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5831329648?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: L'équipe Investment Risk Fixed Income a pour mission de suivre l'ensemble des risques des portefeuilles des desks de gestion de l'univers Taux, Crédit et Monétaire, et de contrôler leur bonne gestion. Pour rendre compte de ces contrôles via différents reportings, l'équipe s'appuie sur des reports générés via des traitements de données via Python ou via la base de reporting disponibles via Power BI. Missions: - Vous êtes responsable du suivi de contraintes réglementaires, clie…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T03:10:52Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13893,7 +13893,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5841090522?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: Au sein du service de la maitrise d'ouvrage risque de marché, vous serez encadré par une équipe d'ingénieur informatique pour la partie développement et d'une équipe de maîtrise d'ouvrage spécialisée en risques de marchés. Missions: Etude conception et implémentation d'une bibliothèque de stress , VaR , Vol , TE avec la methode parametrique et historique Apport du stage: Ce stage vous permettra d'appliquer vos connaissances à un domaine concret d'analyse de risques de marché.…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-14T03:33:49Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13911,7 +13911,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5850301474?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Service d'accueil: Le MO Portfolio Administration et Reporting intervient en support auprès des gérants et commerciaux. Il est garant des positions titres et espèces dans les outils de gestion. Il est également responsable du contrôle et traitement des opérations ainsi que de la production et diffusion des reporting clients. Missions: Rattaché au MO Portfolio Administration et Reporting : · Participer aux contrôles mensuels de la production de l'équipe, . Participer aux tâches quotidiennes de l…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-21T03:07:39Z",
     "firstSeenAt": "2026-08-29T22:55:52.591Z",
     "datePubFiable": true
@@ -13930,7 +13930,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5847628097?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Overview Internship position in Paris (ref. 20359) within Natixis Corporate & Investment Banking. Duration: 6 months, starting July 2026. Role: Financial lawyer in the Banking Transactional Regulatory team, Legal department. Responsibilities Assist the team on topics related to banking and financial regulations as well as corporate social responsibility. Contribute to projects related to these regulations. Participate in the legal monitoring of banking and financial regulations and CSR matters.…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-19T03:37:21Z",
     "firstSeenAt": "2026-08-30T10:32:38.972Z",
     "datePubFiable": true
@@ -13948,7 +13948,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5829181913?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Description Intégrer l’équipe Actuariat – Pricing & Experience Analysis chez SCOR pour participer activement aux missions de l’équipe, notamment dans l'amélioration des outils de pricing, la réponse à des appels d’offres en réassurance et l’étude d’expérience en assurance de personnes, tout en mettant à profit mes compétences en actuariat et en programmation. Responsibilities Participer activement à l’ensemble des tâches de l’équipe : Amélioration des outils de pricing (Emprunteur, TNS, LTC, CI…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-05T17:13:43Z",
     "firstSeenAt": "2026-08-29T23:03:36.063Z",
     "datePubFiable": true
@@ -13966,7 +13966,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5830106563?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "Vous souhaitez développer une expertise en relation client et en gestion des réclamations dans l’assurance ? Cette alternance au sein de la Direction Expérience Client vous permettra d’acquérir une vision complète des enjeux de satisfaction client et de collaborer avec de nombreux acteurs internes pour améliorer l’expérience de nos assurés. A ce titre, vos missions seront les suivantes : Assurer la réception, l’identification et le routage des réclamations qui nous sont adressées : recueil d’in…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T07:30:56Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -13984,7 +13984,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5852142257?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "L’Analyste comptable aux ASC assure la gestion et le suivi des opérations comptables dans le respect des normes internes et des délais impartis. Il joue un rôle clé dans la fiabilité des comptes, la conformité des écritures et la production des états financiers. Ce poste requiert rigueur, méthode, et une capacité à intervenir sur des situations complexes ou litigieuses. A ce titre, vos principales missions sont : Effectuer la comptabilisation des opérations selon les délais et les normes intern…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-22T07:50:01Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -14002,7 +14002,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5831609947?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "L’Art de Vivre Edmond de Rothschild s’exprime depuis plus d’un siècle via divers pôles : vinicole, gastronomie et hôtellerie de luxe, exploitation agricole et pépinières. Depuis novembre 2016, ces activités sont rassemblées sous une même marque : Edmond de Rothschild Heritage. Chez Edmond de Rothschild Heritage, nous ne vendons pas seulement des produits ou des services : nous racontons des histoires. Celles de domaines viticoles d'exception, d'hôtels de charme, de restaurants, de savoir-faire …",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-07T07:27:46Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -14020,7 +14020,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5849326065?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "La branche Marketing & Services (MS) regroupe les activités commerciales de la compagnie TotalEnergies. Elle conçoit et commercialise des produits historiques issus d'énergies fossiles, ainsi que des produits innovants, décarbonés, issus d'énergies alternatives ou biosourcées. Au sein de TotalEnergies Marketing & Services, la Direction Services de Mobilité (MS/NM/SDM) définit la stratégie de relation clients et veille à la qualité des services proposés aux clients B2B et B2C pour l'ensemble des…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-20T07:47:12Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -14038,7 +14038,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5830106047?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "La branche Raffinage-Chimie (RC) est la branche industrielle du groupe dont le rôle essentiel est de transformer le pétrole brut et le gaz naturel. Vous souhaitez intégrer une équipe multiculturelle et dynamique et travailler sur des sujets financiers variés en relation avec la Direction Financière du RC, rejoignez l'équipe Contrôle de Gestion Synthèse ! Au niveau central de la Branche, vous travaillerez main dans la main avec les contrôleurs de gestion des Directions Centrales. Votre mission v…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-06T07:30:17Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -14056,7 +14056,7 @@ window.__OFFRES__ = [
     "url": "https://www.adzuna.fr/details/5842761087?utm_medium=api&utm_source=c77c5e66",
     "source": "adzuna",
     "_descr": "La branche Marketing & Services (MS) regroupe les activités commerciales de la compagnie TotalEnergies. Elle conçoit et commercialise des produits historiques issus d'énergies fossiles, ainsi que des produits innovants, décarbonés, issus d'énergies alternatives ou biosourcées. Vous ferez partie de l'équipe Sanctions Economiques, au sein de la direction Conformité de la branche Marketing Services, composée de six juristes spécialisés. Vous serez sollicité(e) dans un contexte international (Europ…",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-15T08:01:54Z",
     "firstSeenAt": "2026-08-29T22:59:15.147Z",
     "datePubFiable": true
@@ -14073,7 +14073,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://www.adzuna.fr/details/5852109657",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14090,7 +14090,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://groupecreditagricole.jobs/en/our-jobs-offer/577-170470-4-analyste-quantitatif-hf-reference--2026-107489--/",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14107,7 +14107,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://higher.gs.com/roles/183140",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14124,7 +14124,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210741915",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14141,7 +14141,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.bankofamerica.com/en-us/job-detail/26006566/investment-banking-associate-paris-paris-france",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14158,7 +14158,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://db.recsolu.com/jobs/BnmAwjhvBRBs-ZnLyn4Tcg?locale=en",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14175,7 +14175,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=JobDetails&jobid=349751",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14192,7 +14192,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.societegenerale.com/offres-d-emploi/analyste-alm-pilotage-et-tresorerie-25000L0L-fr",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14209,7 +14209,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://careers.marsh.com/global/en/job/R_363857/Oliver-Wyman-Entry-Level-Consultant-Paris",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14226,7 +14226,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/LazardProfessionalCareers/job/6501",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14243,7 +14243,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-investment-specialist-intern-private-markets-h-f_115134.aspx",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14260,7 +14260,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://www.comgest.com/-/media/files/jobs-and-internships/internships/internship_financial-analyst_talent-program.pdf",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14277,7 +14277,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Buyout-Stage---Septembre-2026-I-Paris--M-F-_JR1001721",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T23:17:47.518Z",
     "datePubFiable": true
@@ -14294,7 +14294,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://www.anderapartners.com/fr/offre-stage-andera-infra-septembre-2026/",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14311,7 +14311,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://startup.jobs/analyst-for-partech-venture-fund-series-a-b-internship-partech-4320025",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14328,7 +14328,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://labonnealternance.apprentissage.beta.gouv.fr/emploi/offres_emploi_partenaires/69d979035f615d8918dba83a/conseil-vente-de-produits-bancaires-ou-d-assurance-gestion-de-client%C3%A8le",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true
@@ -14345,7 +14345,7 @@ window.__OFFRES__ = [
     "place": "France",
     "url": "https://recrutement.covea.com/job/data-scientist-f-h-in-paris-fr-jid-988",
     "source": "manuel",
-    "verifiedAt": "2026-08-30T12:08:24.798Z",
+    "verifiedAt": "2026-08-30T12:51:51.639Z",
     "postedAt": "2026-08-29T00:00:00.000Z",
     "firstSeenAt": "2026-08-29T20:51:44.425Z",
     "datePubFiable": true

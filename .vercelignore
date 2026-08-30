@@ -1,0 +1,13 @@
+# Ce qui ne doit PAS être servi par le site public.
+#
+# Vercel publie tout ce qu'il trouve à la racine du dépôt. Sans ce fichier, le
+# code d'ingestion, les listes d'entreprises et la note de conception seraient
+# lisibles à l'adresse du site. Rien de secret là-dedans (les clés sont dans les
+# secrets GitHub), mais ça n'a rien à faire en ligne.
+ingestion/
+automatisation/
+journaux/
+.github/
+.claude/
+dev-server.js
+PROJET.md
