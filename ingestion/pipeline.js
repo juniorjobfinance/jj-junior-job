@@ -1360,6 +1360,22 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src === 'goldman') {
+    // Les intitulés Goldman commencent par du contexte : « 2027 | EMEA | Paris |
+    // Investment Banking, Classic | Seasonal ». On retire ces segments de tête
+    // pour ne garder que le métier, que la division précise ensuite.
+    emp = item.emp;
+    title = String(raw.titre || '')
+      .split('|')
+      .map((x) => x.trim())
+      .filter((x) => x && !/^20dd$|^emea$|^paris$|^amer$|^apac$/i.test(x))
+      .join(' - ');
+    ville = raw.ville;
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
+    romeLibelle = raw.division;
+    postedAt = raw.date || null;
   } else if (__src.startsWith('yello:')) {
     // Carte d'un job board Yello : seuls l'intitulé et le lien sont exposés.
     emp = item.emp;
@@ -1611,7 +1627,8 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('liste:') || // liste officielle de la maison = fiche employeur
     src.startsWith('bpce:') || // API officielle du groupe
     src === 'mckinsey' ||
-    src.startsWith('yello:')
+    src.startsWith('yello:') ||
+    src === 'goldman'
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.

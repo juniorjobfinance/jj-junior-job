@@ -1000,6 +1000,76 @@ async function fetchYelloBoard(cfg) {
   return offres;
 }
 
+// ---------------------------------------------------------------------------
+// Goldman Sachs — API GraphQL de leur portail « higher »
+//
+// C'est le sommet de ce que visent les étudiants en finance, et l'API est
+// entièrement ouverte : l'introspection GraphQL fonctionne, ce qui a permis de
+// découvrir le schéma sans rien deviner. Elle expose les niveaux d'expérience —
+// dont EARLY_CAREER et CAMPUS, exactement le public de JJ.
+//
+// Le catalogue est mondial (plus de 1 300 postes) et ne propose pas de filtre
+// pays fiable : on pagine et on retient la France. Sept pages suffisent.
+const GS_API = 'https://api-higher.gs.com/gateway/api/v1/graphql';
+const GS_QUERY =
+  'query($i:RoleSearchQueryInput!){roleSearch(searchQueryInput:$i){totalCount items{' +
+  'roleId jobTitle division jobType{description} locations{city country} lastPostedDate}}}';
+
+async function fetchGoldmanSachs() {
+  const retenues = [];
+  try {
+    for (let page = 1; page <= 10; page++) {
+      const res = await fetch(GS_API, {
+        method: 'POST',
+        headers: {
+          'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
+          'content-type': 'application/json',
+          accept: 'application/json',
+        },
+        body: JSON.stringify({
+          query: GS_QUERY,
+          variables: {
+            i: {
+              page: { pageSize: 200, pageNumber: page },
+              experiences: ['EARLY_CAREER', 'CAMPUS', 'PROFESSIONAL'],
+              filters: [],
+              searchTerm: '',
+            },
+          },
+        }),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.errors) throw new Error(JSON.stringify(json.errors).slice(0, 120));
+      const items = json.data.roleSearch.items || [];
+      if (!items.length) break;
+      retenues.push(...items.filter((o) => (o.locations || []).some((l) => /^france$/i.test(l.country || ''))));
+      if (items.length < 200) break;
+      await new Promise((r) => setTimeout(r, 300));
+    }
+  } catch (err) {
+    console.warn('[sources] Goldman Sachs indisponible:', err.message);
+  }
+
+  return retenues
+    .filter((o) => isFinanceOfferFor('Goldman Sachs', o.jobTitle, o.division || ''))
+    .map((o) => ({
+      __src: 'goldman',
+      emp: 'Goldman Sachs',
+      raw: {
+        titre: o.jobTitle,
+        // « 2027 | EMEA | Paris | Investment Banking, Classic | Seasonal » :
+        // les segments de tête ne sont que du contexte géographique.
+        division: o.division,
+        ville: (o.locations || []).map((l) => l.city).filter(Boolean)[0] || 'Paris',
+        url: `https://higher.gs.com/roles/${o.roleId}`,
+        date: o.lastPostedDate,
+        type: (o.jobType && o.jobType.description) || '',
+      },
+    }));
+}
+
 async function fetchTousYello() {
   const lots = await Promise.all(YELLO_BOARDS.map((c) => fetchYelloBoard(c).catch(() => [])));
   return lots.flat();
@@ -2396,7 +2466,7 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
@@ -2406,8 +2476,9 @@ async function fetchAllSources() {
     fetchToutesApisBpce(),
     fetchMcKinsey(),
     fetchTousYello(),
+    fetchGoldmanSachs(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
