@@ -1326,13 +1326,21 @@ function normalize(item) {
     // France ». La liste ne porte aucune date de publication — on le dit
     // franchement plutôt que d'afficher la date de collecte comme si c'était
     // celle de l'annonce (datePubFiable reste à false, cf. writeOutput).
-    emp = item.emp;
+    // Quand la carte nomme l'entité qui recrute (LCL, CACIB, Amundi...), c'est
+    // elle qu'on affiche : un stage M&A chez Crédit Agricole CIB n'est pas un
+    // poste en caisse régionale, et le type d'entreprise en dépend.
+    emp = raw.entite || item.emp;
     title = raw.titre;
-    ville = (raw.lieu || '').split(',')[0].trim();
-    pays = 'France'; // déjà filtré sur le libellé du lieu côté connecteur
+    // « Reims - France » ou « Paris, Ile-de-France, France » -> la ville seule.
+    ville = (raw.lieu || '').split(/[,\-–]/)[0].trim();
+    pays = 'France'; // déjà filtré côté connecteur
     url = raw.url;
     typeContratRaw = raw.type;
-    postedAt = null;
+    // « Mis à jour le 31/08/2026 » -> date réelle quand la source la donne.
+    {
+      const m = (raw.date || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
+      postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
+    }
   } else if (__src.startsWith('successfactors:')) {
     emp = item.emp;
     title = raw.title;

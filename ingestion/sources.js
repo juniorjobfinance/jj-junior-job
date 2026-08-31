@@ -567,22 +567,57 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 // son lieu. On filtre la France et la finance SUR LA LISTE, sans ouvrir les
 // fiches — c'est ce qui rend l'exercice tenable quand un groupe publie des
 // milliers d'offres dans le monde.
+// Deux façons de lire une carte, selon le site :
+//   - « champs » : on lit le TEXTE du bloc dans l'ordre (BNP) ;
+//   - « attributs » : le bloc porte déjà les données dans ses attributs HTML
+//     (Crédit Agricole et ses data-gtm-*), ce qui est plus sûr — un changement
+//     de mise en page ne casse rien tant que les attributs restent.
 const LISTES_HTML = [
   {
     emp: 'BNP Paribas',
     base: 'https://group.bnpparibas',
-    liste: 'https://group.bnpparibas/emploi-carriere/toutes-offres-emploi',
-    pageParam: 'page',
-    pageDepart: 1,
-    // Le bloc qui entoure une offre, et le lien qui mène à sa fiche.
+    page: (n) => `https://group.bnpparibas/emploi-carriere/toutes-offres-emploi?page=${n}`,
     blocRe: /<article[^>]+class="[^"]*card-offer[^"]*"/i,
     blocFin: '</article>',
     lienRe: /href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/,
-    // Ordre de lecture du texte de la carte.
     champs: { type: 0, titre: 1, lieu: 2 },
     maxPages: 400,
   },
+  {
+    emp: 'Crédit Agricole',
+    base: 'https://groupecreditagricole.jobs',
+    // Pagination par chemin, pas par paramètre.
+    page: (n) => `https://groupecreditagricole.jobs/fr/nos-offres/page/${n}/`,
+    blocRe: /<article[^>]+class="[^"]*card offer[^"]*"/i,
+    blocFin: '</article>',
+    lienRe: /href="([^"]*nos-offres-emploi\/[^"]+)"/,
+    attributs: {
+      titre: 'data-gtm-jobTitle',
+      pays: 'data-gtm-jobCountry',
+      lieu: 'data-gtm-jobCity',
+      type: 'data-gtm-jobContract',
+      date: 'data-gtm-jobPublishDate',
+      // L'entité qui recrute : LCL, CACIB, Amundi... C'est elle qu'on affiche,
+      // car un stage M&A chez CACIB n'est pas un poste en caisse régionale.
+      entite: 'data-gtm-jobEntity',
+    },
+    // 1 186 offres à 33 par page : 40 pages suffisent, avec de la marge.
+    maxPages: 45,
+    // Leur robots.txt demande 3 secondes aux agents Claude ; on s'aligne sur
+    // cette courtoisie même si la règle générique ne nous l'impose pas.
+    delaiMs: 3000,
+  },
 ];
+
+// Les intitulés arrivent avec les entités HTML de la source (&apos;, &amp;).
+function decodeAttribut(v) {
+  return (v || '')
+    .replace(/&apos;|&#0?39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .trim();
+}
 
 // Découpe une page de liste en offres, selon la description du site.
 function parseListeHtml(html, cfg) {
@@ -593,6 +628,30 @@ function parseListeHtml(html, cfg) {
     const bloc = fin > 0 ? b.slice(0, fin) : b;
     const href = (bloc.match(cfg.lienRe) || [])[1];
     if (!href) continue;
+    const url = href.startsWith('http') ? href : cfg.base + href;
+
+    if (cfg.attributs) {
+      // Les données sont portées par les attributs du bloc : on les lit dans
+      // l'en-tête de balise, qui a été coupée juste avant par le split.
+      const enTete = bloc.slice(0, bloc.indexOf('>') + 1);
+      const attr = (nom) => {
+        const m = enTete.match(new RegExp(`${nom}="([^"]*)"`, 'i'));
+        return decodeAttribut(m && m[1]);
+      };
+      const titre = attr(cfg.attributs.titre);
+      if (!titre) continue;
+      offres.push({
+        url,
+        titre,
+        type: attr(cfg.attributs.type),
+        lieu: attr(cfg.attributs.lieu),
+        pays: attr(cfg.attributs.pays),
+        date: attr(cfg.attributs.date),
+        entite: attr(cfg.attributs.entite),
+      });
+      continue;
+    }
+
     const champs = bloc
       .replace(/<[^>]+>/g, '\n')
       .replace(/&nbsp;/g, ' ')
@@ -603,12 +662,7 @@ function parseListeHtml(html, cfg) {
     const lire = (i) => (i == null ? '' : champs[i] || '');
     const titre = lire(cfg.champs.titre);
     if (!titre) continue;
-    offres.push({
-      url: href.startsWith('http') ? href : cfg.base + href,
-      type: lire(cfg.champs.type),
-      titre,
-      lieu: lire(cfg.champs.lieu),
-    });
+    offres.push({ url, type: lire(cfg.champs.type), titre, lieu: lire(cfg.champs.lieu) });
   }
   return offres;
 }
@@ -617,11 +671,10 @@ async function fetchListeHtml(cfg) {
   const retenues = [];
   let echecs = 0;
 
-  for (let p = cfg.pageDepart; p < cfg.pageDepart + cfg.maxPages; p++) {
+  for (let p = 1; p <= cfg.maxPages; p++) {
     let html;
     try {
-      const sep = cfg.liste.includes('?') ? '&' : '?';
-      const res = await fetch(`${cfg.liste}${sep}${cfg.pageParam}=${p}`, {
+      const res = await fetch(cfg.page(p), {
         headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
         signal: AbortSignal.timeout(25000),
       });
@@ -636,14 +689,19 @@ async function fetchListeHtml(cfg) {
     if (!lot.length) break; // dernière page atteinte
 
     for (const o of lot) {
-      // Le lieu se lit « Ville, Région, Pays » : on ne garde que la France.
-      if (cfg.champs.lieu != null && !/\bfrance\b/i.test(o.lieu)) continue;
-      if (!isFinanceOfferFor(cfg.emp, o.titre)) continue;
+      // La France se lit soit dans un attribut « pays » dédié, soit dans le
+      // libellé du lieu (« Ville, Région, Pays »).
+      const enFrance = o.pays ? /^france$/i.test(o.pays) : /\bfrance\b/i.test(o.lieu || '');
+      if (!enFrance) continue;
+      // On juge la finance sur l'entité qui recrute quand elle est connue :
+      // « Analyste » chez CACIB et « Analyste » chez une caisse régionale ne
+      // pèsent pas pareil.
+      if (!isFinanceOfferFor(o.entite || cfg.emp, o.titre)) continue;
       retenues.push(o);
     }
 
     // Courtoisie : une pause entre chaque page, comme pour les autres sources.
-    await new Promise((r) => setTimeout(r, 250));
+    await new Promise((r) => setTimeout(r, cfg.delaiMs || 250));
   }
 
   if (echecs) {
