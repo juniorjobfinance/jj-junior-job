@@ -1394,7 +1394,12 @@ const TARGET_COMPANIES = {
   // candidature de leur site carrières), "site" est le siteNumber (CX_1, CX_2...).
   oraclecloud: [
     { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX_1', emp: 'Groupe BPCE' },
-    { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardProfessionalCareers', emp: 'Lazard' },
+    // Sans filtre de lieu, le portail « professionnels » noyait ses deux postes
+    // français dans un catalogue mondial dominé par New York.
+    { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardProfessionalCareers', emp: 'Lazard', location: 'France' },
+    // Portail « étudiants », distinct du précédent et bien plus riche pour JJ :
+    // 47 postes en France contre 2, dont les stages M&A et Restructuring.
+    { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardStudentCareers', emp: 'Lazard', location: 'France' },
     // Oracle Cloud accepte un vrai filtre de lieu, plus juste qu'une recherche
     // par mots-clés : « location=France » rend 21 postes français sur 22, là où
     // « keyword=Paris » en manquait quatre. Le catalogue mondial de JPMorgan
