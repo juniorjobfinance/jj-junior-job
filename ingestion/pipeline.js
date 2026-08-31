@@ -167,8 +167,16 @@ const FAMILLE_RULES = [
   [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurance (?:collective|emprunteur|construction|sant[ée])|\binsurance\b/i, 'Assurance — distribution & sinistres'],
 
   // --- Marchés, gestion, opérations ---------------------------------------
-  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits d[ée]riv[ée]|march[ée]s financiers|structuring|\bpricing\b/i, 'Marchés & Front Office'],
-  [/asset management|gestion d'actifs|gestion de portefeuille|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi/i, "Gestion d'actifs & Wealth"],
+  // Marchés & Front Office : le vocabulaire du métier, en français comme en
+  // anglais. Sans « fixed income », « cross asset », « produits structurés » ou
+  // « dérivés », les postes les plus recherchés de Lazard, Goldman, BNP ou ODDO
+  // tombaient tous dans « Autres métiers de la finance ».
+  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits? d[ée]riv[ée]|d[ée]riv[ée]s?\b|derivativ|march[ée]s financiers|finance de march[ée]|financial market|structuring|\bpricing\b|cross[\s-]?asset|fixed income|high yield|\bobligataire\b|produits? structur|solutions? structur|blended finance|execution and clearing|\bclearing\b|\bsales\b\s*(?:&|et)\s*trading|equity capital|debt capital|\bdcm\b|\becm\b|\bcoverage\b/i, 'Marchés & Front Office'],
+  // Gestion d'actifs : la vente institutionnelle (« sales gestion
+  // institutionnelle », « coverage institutionnel ») est un métier de la gestion
+  // d'actifs, pas du réseau — c'est la distribution de produits financiers à des
+  // investisseurs professionnels.
+  [/asset management|gestion d'actifs|gestion de portefeuille|portfolio|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi|gestion institutionnelle|client[èe]les? institutionnel|investisseurs? institutionnel|fonds structur|multi[\s-]?gestion|s[ée]lection de fonds|fund selection/i, "Gestion d'actifs & Wealth"],
   [/middle[\s-]?office|back[\s-]?office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
 
   // --- Finance d'entreprise ------------------------------------------------
@@ -195,7 +203,12 @@ const FAMILLE_RULES = [
   [/originat|syndication|financement de projet|project finance|sustainable banking|financement durable|leveraged finance|debt capital|equity capital|\bdcm\b|\becm\b|banque d'affaires|corporate (?:&|et) investment|\bcib\b|lenders? (?:insurance )?advisory/i, 'Marchés & Front Office'],
 
   // --- Réseau bancaire et commercial : le plus large, donc en dernier -------
-  [/conseill|charg.{0,4} (?:de client|d'affaires|de stmt)|client[èe]le|agence bancaire|banque de d[ée]tail|commercial|d[ée]veloppement|coverage|relation client|account manager|charg.{0,4} d'affaires|business development|\bagence\b/i, 'Banque de détail & clientèle'],
+  // « coverage » a été retiré d'ici : en banque de financement comme en gestion
+  // d'actifs, c'est un poste de front office (couverture d'un portefeuille de
+  // clients institutionnels), jamais du guichet. Ajoutés en revanche l'accueil
+  // et le guichet, qui n'étaient captés par aucune règle et se retrouvaient
+  // dans « Autres métiers de la finance ».
+  [/conseill|charg.{0,4} (?:de client|d'affaires|de stmt)|client[èe]le|agence bancaire|banque de d[ée]tail|commercial|d[ée]veloppement|relation client|account manager|charg.{0,4} d'affaires|business development|\bagence\b|\baccueil\b|\bguichet\b/i, 'Banque de détail & clientèle'],
 ];
 
 // Les intitulés français sont truffés d'écriture inclusive :
@@ -220,6 +233,16 @@ function normaliserPourClassement(text) {
 }
 
 function inferFamille(title, romeLibelle) {
+  // L'INTITULÉ d'abord, seul. Le libellé ROME des agrégateurs est un code
+  // administratif large ("Comptabilité" pour tout ce qui touche aux chiffres) :
+  // mélangé au titre, il gagnait la course et rangeait « Analyste Chargé
+  // d'affaires — Financements Structurés » de Crédit Agricole CIB en
+  // Comptabilité. On ne s'en sert donc qu'en dernier recours, quand l'intitulé
+  // seul ne dit rien.
+  const titreSeul = normaliserPourClassement(title || '');
+  for (const [re, famille] of FAMILLE_RULES) {
+    if (re.test(titreSeul)) return CONSOLIDATION_FAMILLES[famille] || famille;
+  }
   const text = normaliserPourClassement(`${title} ${romeLibelle || ''}`);
   for (const [re, famille] of FAMILLE_RULES) {
     if (re.test(text)) return CONSOLIDATION_FAMILLES[famille] || famille;
