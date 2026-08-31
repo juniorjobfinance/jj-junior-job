@@ -716,6 +716,93 @@ async function fetchListeHtml(cfg) {
   return retenues.map((o) => ({ __src: `liste:${cfg.emp}`, emp: cfg.emp, raw: o }));
 }
 
+// ---------------------------------------------------------------------------
+// API « BPCE jobs » — Natixis et les autres marques du groupe
+//
+// Leur site carrières est une application JavaScript : le HTML servi ne fait
+// que 3 Ko et ne contient aucune offre. Mais la page interroge une véritable
+// API JSON, bien plus solide qu'un balisage à découper — elle ne changera pas
+// parce qu'un graphiste a refait une carte.
+//
+// Une seule requête suffit : le paramètre `size` n'est pas plafonné, et la
+// réponse porte l'intitulé, la date, le contrat, le lieu, le lien ET la marque
+// qui recrute (Natixis CIB France, Natixis IM...), ce qui évite de ranger un
+// stage de banque de financement sous une enseigne générique.
+const BPCE_APIS = [
+  { host: 'https://recrutement.natixis.com', emp: 'Natixis' },
+];
+
+async function fetchBpceApi({ host, emp }) {
+  let items;
+  try {
+    const res = await fetch(`${host}/app/wp-json/bpce/v1/search/jobs`, {
+      method: 'POST',
+      headers: {
+        'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
+        accept: 'application/json',
+        'content-type': 'application/json',
+      },
+      // 500 laisse de la marge : ils en annonçaient 148 au moment du câblage.
+      body: JSON.stringify({ size: 500 }),
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const j = await res.json();
+    items = (j.data && j.data.items) || [];
+  } catch (err) {
+    console.warn(`[sources] API BPCE (${emp}) indisponible:`, err.message);
+    return [];
+  }
+
+  // Les champs arrivent sous trois formes selon la clé : chaîne simple
+  // (« Paris »), tableau de chaînes (contract, brand) ou tableau d'objets
+  // (localisations, qui porte ville ET pays). On les lit chacun pour ce
+  // qu'ils sont plutôt que de tenter un repli générique — c'est ce mélange
+  // qui a fait tomber la première version.
+  const texte = (v) => (Array.isArray(v) ? String(v[0] ?? '') : String(v ?? ''));
+  const lieuDe = (o) => {
+    const l = Array.isArray(o.localisations) ? o.localisations[0] : null;
+    return { ville: texte(o.localisation) || (l && l.city) || '', pays: (l && l.country) || '' };
+  };
+  // Les liens sont des objets { url, title, target } ; la fiche publique est
+  // relative au site, le lien de candidature pointe vers l'ATS.
+  const lienDe = (o) => {
+    const u = (o.link && o.link.url) || '';
+    if (u) return u.startsWith('http') ? u : host + u;
+    return (o.postulate_link && o.postulate_link.url) || '';
+  };
+
+  return items
+    .filter((o) => {
+      const { pays } = lieuDe(o);
+      // Le groupe recrute dans le monde entier : leur champ pays vaut
+      // « France » ou « International ». On ne garde que la France.
+      if (pays && !/^france$/i.test(pays)) return false;
+      return isFinanceOfferFor(texte(o.brand) || emp, o.title);
+    })
+    .map((o) => {
+      const { ville } = lieuDe(o);
+      return {
+        __src: `bpce:${emp}`,
+        emp: texte(o.brand) || emp,
+        raw: {
+          titre: o.title,
+          lieu: ville,
+          type: texte(o.contract),
+          date: o.date,
+          url: lienDe(o),
+          description: String(o.description || ''),
+        },
+      };
+    })
+    .filter((o) => o.raw.url);
+}
+
+async function fetchToutesApisBpce() {
+  const lots = await Promise.all(BPCE_APIS.map((c) => fetchBpceApi(c).catch(() => [])));
+  return lots.flat();
+}
+
 async function fetchToutesListesHtml() {
   const lots = await Promise.all(LISTES_HTML.map((c) => fetchListeHtml(c).catch(() => [])));
   return lots.flat();
@@ -2018,15 +2105,16 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
     fetchAdzuna(),
     fetchVie(),
     fetchToutesListesHtml(),
+    fetchToutesApisBpce(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

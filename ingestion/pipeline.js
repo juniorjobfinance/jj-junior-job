@@ -81,7 +81,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -1321,6 +1321,18 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src.startsWith('bpce:')) {
+    // API JSON du groupe : l'enseigne qui recrute (Natixis CIB France, Natixis
+    // IM...) prime sur le nom du groupe, comme pour les entités du Crédit
+    // Agricole. La date est donnée au format ISO court.
+    emp = item.emp;
+    title = raw.titre;
+    ville = (raw.lieu || '').split(/[,\-–(]/)[0].trim();
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.type;
+    descr = (raw.description || '').replace(/<[^>]*>/g, ' ').slice(0, 3000);
+    postedAt = raw.date ? new Date(`${raw.date}T00:00:00Z`).toISOString() : null;
   } else if (__src.startsWith('liste:')) {
     // Carte d'une liste HTML officielle : type de contrat, intitulé et lieu
     // France ». La liste ne porte aucune date de publication — on le dit
@@ -1521,7 +1533,8 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('ashby:') ||
     src.startsWith('phenom:') ||
     src.startsWith('sitemapld:') || // fiche lue sur le site officiel = source de vérité
-    src.startsWith('liste:') // liste officielle de la maison = fiche employeur
+    src.startsWith('liste:') || // liste officielle de la maison = fiche employeur
+    src.startsWith('bpce:') // API officielle du groupe
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.
