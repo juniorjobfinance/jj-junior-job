@@ -38,8 +38,12 @@ async function getJSON(url, options = {}) {
 // Filtre finance strict pour les ATS d'entreprises généralistes (PROJET.md §7.4) :
 // une boîte comme Qonto ou Younited publie aussi des postes marketing/sales/tech,
 // on ne garde que ce qui relève clairement de la finance (titre ou département).
+// Attention en modifiant : ces motifs doivent reconnaître aussi bien la FONCTION
+// que la PERSONNE qui l'exerce. "contrôle de gestion" seul ratait "contrôleur de
+// gestion" — l'intitulé le plus répandu du métier — et "actuari" ratait
+// "actuaire". Ces deux trous écartaient de vraies offres depuis le début.
 const FINANCE_KEYWORDS_RE =
-  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]le de gestion|controlling|audit|risqu|\brisk\b|conformit|complian|actuari|underwrit|assuranc|insuranc|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
+  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]l\w* de gestion|controlling|audit|risqu|\brisk\b|conformit|complian|actua[ir]|underwrit|souscript|sinistre|recouvrement|consolid|commissaire aux comptes|assuranc|insuranc|banqu|bancaire|courtage|courtier|patrimoine|fiscalist|(?:back|middle|front)[- ]office|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|g[ée]ran\w* de portefeuille|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
 
 // Contre-filtre : certains intitulés matchent un mot-clé finance par accident
 // ("IT Support **Analyst**", "**Legal** Assistant", "Product **Analyst**").
@@ -49,7 +53,7 @@ const FINANCE_KEYWORDS_RE =
 // "Ingénieur financier risques" et "Technicien comptable" sont de vrais postes
 // finance. On ne vise que les intitulés techniques explicites.
 const NON_FINANCE_RE =
-  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|data scien|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
+  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|data scien|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|\bm[ée]dia|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
 
 // Entreprises dont le MÉTIER est la finance (banque, gestion d'actifs, private
 // equity, audit, conseil financier/stratégie, assurance). Chez elles, des
@@ -66,8 +70,23 @@ function looksLikeFinance(...fields) {
   // Un signal finance FORT (comptabilité, contrôle de gestion, M&A, actuariat...)
   // l'emporte sur le contre-filtre : "Contrôleur de gestion IT" reste de la finance.
   const strongFinance =
-    /comptab|accounti|accountant|contr[ôo]le de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets/i;
-  if (strongFinance.test(text)) return true;
+    /comptab|accounti|accountant|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets/i;
+  // Ce signal fort doit venir de l'INTITULÉ du poste (toujours le premier champ),
+  // jamais d'un libellé de rubrique passé ensuite (catégorie Adzuna, département,
+  // équipe). Ces libellés sont des paniers grossiers : Adzuna range sous
+  // "Accounting & Finance Jobs" tout ce qui touche de près ou de loin à la
+  // finance. Le mot "accounting" du LIBELLÉ faisait donc passer n'importe quel
+  // intitulé — un "Chargé de communication événementielle" chez Amundi compris —
+  // en court-circuitant le contre-filtre. L'intitulé, lui, décrit le poste réel.
+  // Exception à l'exception : certains mots ne qualifient pas le poste, ils le
+  // NOMMENT. "Contrôleur de gestion IT" reste un contrôleur de gestion, mais un
+  // "Juriste M&A" est un juriste — le M&A n'est que son domaine d'intervention,
+  // et le juridique ne relève d'aucune des 9 familles de JJ. Ces métiers-là
+  // l'emportent donc même sur un signal finance fort.
+  const METIER_HORS_PERIMETRE_RE =
+    /\bjuriste\b|\bavocat\b|\bd[ée]veloppeur\b|\bdeveloper\b|ing[ée]nieur logiciel|\bcommunity manager\b|\bcommunicant\b/i;
+  if (METIER_HORS_PERIMETRE_RE.test(fields[0] || '')) return false;
+  if (strongFinance.test(fields[0] || '')) return true;
   return !NON_FINANCE_RE.test(text);
 }
 

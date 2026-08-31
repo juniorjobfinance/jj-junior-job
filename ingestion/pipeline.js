@@ -727,8 +727,17 @@ const DESCR_JUNIOR_RE =
 // reviendrait à publier des ghost jobs, exactement ce que JJ combat (§2).
 const SPONTANEOUS_RE = /candidatures?\s+spontan[ée]es?|spontaneous\s+application|vivier\s+de\s+candidat|\bjob\s+test\b/i;
 
+// Recrutement d'indépendants : agent général, mandataire, profession libérale,
+// franchise. Ce ne sont pas des emplois juniors salariés mais des propositions
+// de créer sa propre activité — et les assureurs les publient dupliquées
+// département par département, ce qui noie les vraies offres (32 annonces AXA
+// identiques à un numéro de département près). Hors périmètre de JJ.
+const INDEPENDANT_RE =
+  /profession\s+lib[ée]rale|agent\s+g[ée]n[ée]ral|\bmandataire\b|ind[ée]pendant|franchis[ée]|cr[ée]ateur\s+d.entreprise|auto-?entrepreneur|\bentrepreneur\s+en\b|votre\s+propre\s+(?:cabinet|agence|activit[ée])|\bVDI\b/i;
+
 function passesJuniorFilter(volet, title, descr) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
+  if (INDEPENDANT_RE.test(title || '')) return false;
   if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
   if (SENIOR_RE.test(title)) return false;
   if (descr) {
