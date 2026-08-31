@@ -1552,7 +1552,14 @@ function normalize(item) {
     loc: nettoyerLieu(decodeEntities(ville || '').trim()) || 'Non précisé',
     // Zone d'affichage (calculée ici pour que la page n'ait pas à reconnaître
     // 300 orthographes de villes en JavaScript).
-    zone: inferZone(decodeEntities(ville || '').trim()),
+    // Le filtre « Lieu » raisonne en géographie française. Pour le VIE, qui est
+    // par nature à l'étranger, cette grille n'a aucun sens : Madrid et Tokyo s'y
+    // rangeaient sous « Autres villes ». C'est le PAYS qui sert de repère —
+    // c'est d'ailleurs le premier critère de choix d'un VIE.
+    zone:
+      volet === 'vie' && pays && !/^france$/i.test(pays)
+        ? pays
+        : inferZone(decodeEntities(ville || '').trim()),
     // Maison de rattachement pour le filtre "Entreprise". "Caisse d'Épargne
     // Île-de-France" garde son nom sur la carte — le candidat postule bien là —
     // mais se range sous "BPCE". Les employeurs hors liste se regroupent sous
@@ -1856,12 +1863,17 @@ function choisirPepites(offers) {
       .map((o) => ({ o, s: scorePepite(o) }))
       .filter((x) => x.s >= 4)
       .sort((a, b) => b.s - a.s);
-    const parMaison = {};
+    // Une seule pépite par maison et par onglet : un carrousel qui affiche deux
+    // fois Lazard donne l'impression d'un catalogue étroit, alors que la
+    // promesse est justement de faire découvrir. La même maison peut en
+    // revanche reparaître dans un autre onglet — un stage chez Amundi et un VIE
+    // chez Amundi sont deux opportunités distinctes pour le candidat.
+    const maisonsVues = new Set();
     let n = 0;
     for (const { o } of notes) {
-      const cle = o.maison + '|' + o.emp;
-      parMaison[cle] = (parMaison[cle] || 0) + 1;
-      if (parMaison[cle] > 2) continue;
+      const cle = o.maison || o.emp;
+      if (maisonsVues.has(cle)) continue;
+      maisonsVues.add(cle);
       retenus.add(o._key);
       if (++n >= 8) break;
     }
