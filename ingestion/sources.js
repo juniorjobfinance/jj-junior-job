@@ -635,6 +635,23 @@ const LISTES_HTML = [
     concurrence: 3,
   },
   {
+    emp: 'Rothschild & Co',
+    base: 'https://www.rothschildandco.com',
+    // Leur site français liste tout sur une page unique, sans pagination : le
+    // Workday branché par ailleurs ne porte que les profils confirmés, et
+    // aucune de ces 37 offres — dont les alternances — n'y figure.
+    page: () => 'https://www.rothschildandco.com/fr/carrieres/profils-experimentes/nos-carrieres/',
+    blocRe: /<a[^>]+href="\/fr\/carrieres\/profils-experimentes\/nos-carrieres\//i,
+    blocFin: '</a>',
+    lienRe: /^([^"?]+)"/,
+    lienPrefixe: '/fr/carrieres/profils-experimentes/nos-carrieres/',
+    depuisLien: true,
+    // /fr/carrieres/profils-experimentes/nos-carrieres/{intitulé}/ : le titre
+    // est le cinquième segment.
+    positionTitre: 4,
+    maxPages: 1,
+  },
+  {
     emp: 'KPMG',
     base: 'https://emplois.kpmg.fr',
     page: (n) => `https://emplois.kpmg.fr/recherche-d%27offres?p=${n}`,
@@ -646,6 +663,8 @@ const LISTES_HTML = [
     lienPrefixe: '/emploi/',
     // Tout se lit dans l'adresse : /emploi/{ville}/{intitulé}/{id}/{réf}
     depuisLien: true,
+    positionTitre: 2,
+    positionLieu: 1,
     maxPages: 12,
     concurrence: 4,
   },
@@ -670,12 +689,16 @@ function parseListeHtml(html, cfg) {
   // (/emploi/{ville}/{intitulé}/{id}/{réf}). On lit alors les liens eux-mêmes.
   if (cfg.depuisLien) {
     const vus = new Set();
-    for (const m of html.matchAll(new RegExp(`href="(${cfg.lienPrefixe}[^"]+)"`, 'g'))) {
+    // Les liens à paramètres sont des filtres de la page, pas des offres.
+    for (const m of html.matchAll(new RegExp(`href="(${cfg.lienPrefixe}[^"?]+)"`, 'g'))) {
       const chemin = m[1];
       if (vus.has(chemin)) continue;
       vus.add(chemin);
-      const parts = chemin.split('/').filter(Boolean); // emploi, ville, intitulé, id, réf
-      if (parts.length < 3) continue;
+      const parts = chemin.split('/').filter(Boolean);
+      // Le titre n'est pas au même rang selon les sites : troisième segment
+      // chez KPMG (/emploi/{ville}/{intitulé}), dernier chez Rothschild.
+      const rangTitre = cfg.positionTitre != null ? cfg.positionTitre : 2;
+      if (parts.length <= rangTitre) continue;
       // L'adresse est en minuscules et sans accents : « auditeur-financier-f-h »
       // deviendrait « auditeur financier f h ». On rend une capitale initiale
       // et on retire la mention de genre, que le nettoyage général attend
@@ -689,8 +712,9 @@ function parseListeHtml(html, cfg) {
           .replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());
       offres.push({
         url: cfg.base + chemin,
-        titre: versTexte(parts[2]),
-        lieu: versTexte(parts[1]),
+        titre: versTexte(parts[rangTitre]),
+        // Certains chemins portent la ville avant l'intitulé, d'autres non.
+        lieu: cfg.positionLieu != null ? versTexte(parts[cfg.positionLieu]) : '',
         type: '',
       });
     }

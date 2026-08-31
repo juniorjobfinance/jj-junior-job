@@ -1503,6 +1503,12 @@ function normalize(item) {
     return null; // source inconnue -> ignorée
   }
 
+  // L'intitulé brut est conservé : le nettoyage lui retire les mentions de
+  // contrat (« Alternance », « Stage »), qui sont pourtant le seul indice de
+  // l'onglet quand la source n'annonce pas le type. Les alternances de
+  // Rothschild, dont le mot ne figure que dans l'adresse, se retrouvaient
+  // rangées en CDI.
+  const titreBrut = title;
   title = adoucirMajuscules(cleanTitle(title));
   if (!title || !url) return null;
   if (!estUneOffreFinance(title)) return null;
@@ -1514,7 +1520,7 @@ function normalize(item) {
   // écarte quelle que soit la source, y compris les ajouts manuels.
   if (INTERMEDIAIRE_RE.test(url)) return null;
 
-  const volet = classifyVolet({ src: __src, typeContratRaw, title });
+  const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
   const famille = inferFamille(title, romeLibelle, emp);
   if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
   emp = normaliserEmployeur(emp);
