@@ -108,14 +108,22 @@ const SOURCES_DATE_FIABLE_RE =
 // vivent déjà dans le filtre correspondant. Un gestionnaire de sinistres et un
 // conseiller bancaire font le même métier de fond — la relation client — chez
 // deux employeurs différents.
+// Deux axes, deux vocabulaires. Les FAMILLES nomment une ACTIVITÉ (ce qu'on
+// fait) ; les SECTEURS nomment une INSTITUTION (qui emploie) et commencent tous
+// par Banque, Société, Cabinet, Compagnie, Entreprise ou Institution. Aucune
+// expression n'apparaît sur les deux axes — sans quoi le lecteur ne sait plus
+// lequel il filtre : « M&A & Banque d'affaires » côté métier et « Banque
+// d'affaires & marchés » côté entreprise se marchaient dessus.
 const FAMILLES = [
-  'Comptabilité & Consolidation',
+  'Fusions & Acquisitions',
+  'Marchés financiers',
+  'Investissement & Private equity',
+  'Audit',
+  'Conseil',
+  'Comptabilité',
   'Contrôle de gestion & Trésorerie',
-  'Audit & Conseil',
-  'M&A & Marchés financiers',
-  "Gestion d'actifs & Investissement",
-  'Risques, Conformité & Actuariat',
-  'Data, Tech & Opérations',
+  'Risques & Conformité',
+  'Data & Quant',
   'Autres métiers de la finance',
 ];
 
@@ -133,19 +141,24 @@ const FAMILLE_HORS_PERIMETRE = 'Commercial & Relation client';
 const CONSOLIDATION_FAMILLES = {
   'Banque de détail & clientèle': 'Commercial & Relation client',
   'Assurance — distribution & sinistres': 'Commercial & Relation client',
-  'Comptabilité & Consolidation': 'Comptabilité & Consolidation',
+  'Comptabilité & Consolidation': 'Comptabilité',
   'Contrôle de gestion & FP&A': 'Contrôle de gestion & Trésorerie',
   'Trésorerie & Financement': 'Contrôle de gestion & Trésorerie',
-  'Audit & Contrôle interne': 'Audit & Conseil',
-  'Conseil': 'Audit & Conseil',
-  'M&A & Transaction Services': 'M&A & Marchés financiers',
-  'Marchés & Front Office': 'M&A & Marchés financiers',
-  "Gestion d'actifs & Wealth": "Gestion d'actifs & Investissement",
-  'Risques & Conformité': 'Risques, Conformité & Actuariat',
-  'Actuariat': 'Risques, Conformité & Actuariat',
-  'Data & Quant': 'Data, Tech & Opérations',
-  'Middle & Back Office': 'Data, Tech & Opérations',
-  'Organisation & Projets': 'Data, Tech & Opérations',
+  // Audit et conseil se séparent : vérifier les comptes d'un client (Big Four)
+  // et accompagner une transformation (McKinsey, BCG) sont deux métiers, deux
+  // recrutements et deux carrières. Les fondre masquait cette différence.
+  'Audit & Contrôle interne': 'Audit',
+  'Conseil': 'Conseil',
+  // M&A et marchés se séparent aussi : ce sont les deux voies distinctes que
+  // vise un étudiant en finance, on ne postule pas aux mêmes stages.
+  'M&A & Transaction Services': 'Fusions & Acquisitions',
+  'Marchés & Front Office': 'Marchés financiers',
+  "Gestion d'actifs & Wealth": 'Investissement & Private equity',
+  'Risques & Conformité': 'Risques & Conformité',
+  'Actuariat': 'Risques & Conformité',
+  'Data & Quant': 'Data & Quant',
+  'Middle & Back Office': 'Data & Quant',
+  'Organisation & Projets': 'Data & Quant',
   'Autres métiers de la finance': 'Autres métiers de la finance',
 };
 
@@ -160,7 +173,10 @@ const CONSOLIDATION_FAMILLES = {
 const FAMILLE_RULES = [
   // --- Spécialités identifiables sans ambiguïté ---------------------------
   [/actuari|actuair|tarification (?:vie|sant|iard)|provisionnement|\bsolvab(?:ilit[ée])? ?ii\b/i, 'Actuariat'],
-  [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|corporate finance|leveraged finance|\becm\b|\bdcm\b|private equity|capital[\s-]?investissement|venture capital|\blbo\b|deal advisory|[ée]valuation d'entreprise|fund finance|buyout|co[\s-]?investment/i, 'M&A & Transaction Services'],
+  // Fusions & Acquisitions : le conseil aux entreprises qui achètent, vendent ou
+  // lèvent des fonds. Le private equity, lui, part vers l'INVESTISSEMENT — on
+  // n'y conseille pas une opération, on la finance et on détient la société.
+  [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|corporate finance|leveraged finance|\becm\b|\bdcm\b|deal advisory|[ée]valuation d'entreprise|origination|syndication|introduction en bourse|\bipo\b|banque d'affaires|investment banking|\bgib\b|debt advisory|restructuring/i, 'M&A & Transaction Services'],
   [/data scien|data analyst|analyste data|\bquant\b|quantitatif|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)/i, 'Data & Quant'],
 
   // --- Assurance : sinistres, contrats, distribution -----------------------
@@ -176,7 +192,11 @@ const FAMILLE_RULES = [
   // institutionnelle », « coverage institutionnel ») est un métier de la gestion
   // d'actifs, pas du réseau — c'est la distribution de produits financiers à des
   // investisseurs professionnels.
-  [/asset management|gestion d'actifs|gestion de portefeuille|portfolio|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi|gestion institutionnelle|client[èe]les? institutionnel|investisseurs? institutionnel|fonds structur|multi[\s-]?gestion|s[ée]lection de fonds|fund selection/i, "Gestion d'actifs & Wealth"],
+  // Investissement & Private equity : on place l'argent de clients — dans des
+  // sociétés (private equity, venture) ou dans des fonds (gestion d'actifs).
+  // La vente institutionnelle en fait partie : c'est la distribution de produits
+  // financiers à des investisseurs professionnels, pas du réseau.
+  [/asset management|gestion d'actifs|gestion de portefeuille|portfolio|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi|gestion institutionnelle|client[èe]les? institutionnel|investisseurs? institutionnel|fonds structur|multi[\s-]?gestion|s[ée]lection de fonds|fund selection|private equity|capital[\s-]?investissement|venture capital|\blbo\b|buyout|co[\s-]?investment|fund finance|\bfonds\b|infrastructure fund|analyste? buy[\s-]?side|\bgp\b stake|secondaries/i, "Gestion d'actifs & Wealth"],
   [/middle[\s-]?office|back[\s-]?office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
 
   // --- Finance d'entreprise ------------------------------------------------
@@ -333,69 +353,69 @@ function normaliserEmployeur(emp) {
 // la plus utile qu'on puisse offrir sur ce site.
 const SECTEUR_PAR_MAISON = {
   // Banque de détail : réseaux d'agences, clientèle particuliers et pro.
-  'BPCE': 'Banque de détail', 'Crédit Agricole': 'Banque de détail',
-  'BNP Paribas': 'Banque de détail', 'Société Générale': 'Banque de détail',
-  'Crédit Mutuel': 'Banque de détail', 'La Banque Postale': 'Banque de détail',
+  'BPCE': 'Banque de réseau', 'Crédit Agricole': 'Banque de réseau',
+  'BNP Paribas': 'Banque de réseau', 'Société Générale': 'Banque de réseau',
+  'Crédit Mutuel': 'Banque de réseau', 'La Banque Postale': 'Banque de réseau',
 
   // Banque d'affaires et de marchés : CIB, boutiques M&A, courtiers.
-  'BNP Paribas CIB': "Banque d'affaires & marchés", 'Société Générale CIB': "Banque d'affaires & marchés",
-  'Crédit Agricole CIB': "Banque d'affaires & marchés", 'Natixis': "Banque d'affaires & marchés",
-  'Goldman Sachs': "Banque d'affaires & marchés", 'JPMorgan': "Banque d'affaires & marchés",
-  'Morgan Stanley': "Banque d'affaires & marchés", 'Bank of America': "Banque d'affaires & marchés",
-  'Citi': "Banque d'affaires & marchés", 'Barclays': "Banque d'affaires & marchés",
-  'Deutsche Bank': "Banque d'affaires & marchés", 'UBS': "Banque d'affaires & marchés",
-  'HSBC France': "Banque d'affaires & marchés", 'Lazard': "Banque d'affaires & marchés",
-  'Rothschild & Co': "Banque d'affaires & marchés", 'Edmond de Rothschild': "Banque d'affaires & marchés",
-  'Oddo BHF': "Banque d'affaires & marchés", 'Messier & Associés': "Banque d'affaires & marchés",
-  'Centerview Partners': "Banque d'affaires & marchés", 'Perella Weinberg': "Banque d'affaires & marchés",
-  'Kepler Cheuvreux': "Banque d'affaires & marchés",
+  'BNP Paribas CIB': "Banque d'affaires & d'investissement", 'Société Générale CIB': "Banque d'affaires & d'investissement",
+  'Crédit Agricole CIB': "Banque d'affaires & d'investissement", 'Natixis': "Banque d'affaires & d'investissement",
+  'Goldman Sachs': "Banque d'affaires & d'investissement", 'JPMorgan': "Banque d'affaires & d'investissement",
+  'Morgan Stanley': "Banque d'affaires & d'investissement", 'Bank of America': "Banque d'affaires & d'investissement",
+  'Citi': "Banque d'affaires & d'investissement", 'Barclays': "Banque d'affaires & d'investissement",
+  'Deutsche Bank': "Banque d'affaires & d'investissement", 'UBS': "Banque d'affaires & d'investissement",
+  'HSBC France': "Banque d'affaires & d'investissement", 'Lazard': "Banque d'affaires & d'investissement",
+  'Rothschild & Co': "Banque d'affaires & d'investissement", 'Edmond de Rothschild': "Banque d'affaires & d'investissement",
+  'Oddo BHF': "Banque d'affaires & d'investissement", 'Messier & Associés': "Banque d'affaires & d'investissement",
+  'Centerview Partners': "Banque d'affaires & d'investissement", 'Perella Weinberg': "Banque d'affaires & d'investissement",
+  'Kepler Cheuvreux': "Banque d'affaires & d'investissement",
 
   // Infrastructure de marché et données financières.
-  'LSEG': 'Secteur public & institutions',
+  'LSEG': 'Institution publique',
 
   // Gestion d'actifs.
-  'Amundi': "Gestion d'actifs & Private equity", 'AXA IM': "Gestion d'actifs & Private equity",
-  'BNP Paribas AM': "Gestion d'actifs & Private equity", 'Natixis IM': "Gestion d'actifs & Private equity",
-  'Carmignac': "Gestion d'actifs & Private equity", 'Comgest': "Gestion d'actifs & Private equity",
-  'Sycomore': "Gestion d'actifs & Private equity", 'Groupama AM': "Gestion d'actifs & Private equity",
-  'CPR AM': "Gestion d'actifs & Private equity", 'Lazard Frères Gestion': "Gestion d'actifs & Private equity",
-  "La Financière de l'Échiquier": "Gestion d'actifs & Private equity",
+  'Amundi': "Société de gestion d'actifs", 'AXA IM': "Société de gestion d'actifs",
+  'BNP Paribas AM': "Société de gestion d'actifs", 'Natixis IM': "Société de gestion d'actifs",
+  'Carmignac': "Société de gestion d'actifs", 'Comgest': "Société de gestion d'actifs",
+  'Sycomore': "Société de gestion d'actifs", 'Groupama AM': "Société de gestion d'actifs",
+  'CPR AM': "Société de gestion d'actifs", 'Lazard Frères Gestion': "Société de gestion d'actifs",
+  "La Financière de l'Échiquier": "Société de gestion d'actifs",
 
   // Private equity, infrastructure, capital-risque.
-  'Ardian': "Gestion d'actifs & Private equity", 'Eurazeo': "Gestion d'actifs & Private equity",
-  'PAI Partners': "Gestion d'actifs & Private equity", 'Tikehau': "Gestion d'actifs & Private equity",
-  'Antin Infrastructure': "Gestion d'actifs & Private equity", 'Astorg': "Gestion d'actifs & Private equity",
-  'Sagard': "Gestion d'actifs & Private equity", 'Andera Partners': "Gestion d'actifs & Private equity",
-  'LBO France': "Gestion d'actifs & Private equity", 'IK Partners': "Gestion d'actifs & Private equity",
-  'Siparex': "Gestion d'actifs & Private equity", 'Partech': "Gestion d'actifs & Private equity",
-  'Alven': "Gestion d'actifs & Private equity", 'Bpifrance': "Gestion d'actifs & Private equity",
+  'Ardian': "Société de gestion d'actifs", 'Eurazeo': "Société de gestion d'actifs",
+  'PAI Partners': "Société de gestion d'actifs", 'Tikehau': "Société de gestion d'actifs",
+  'Antin Infrastructure': "Société de gestion d'actifs", 'Astorg': "Société de gestion d'actifs",
+  'Sagard': "Société de gestion d'actifs", 'Andera Partners': "Société de gestion d'actifs",
+  'LBO France': "Société de gestion d'actifs", 'IK Partners': "Société de gestion d'actifs",
+  'Siparex': "Société de gestion d'actifs", 'Partech': "Société de gestion d'actifs",
+  'Alven': "Société de gestion d'actifs", 'Bpifrance': "Société de gestion d'actifs",
 
   // Assurance, mutuelles et courtage.
-  'AXA': 'Assurance & mutuelles', 'Allianz France': 'Assurance & mutuelles',
-  'CNP Assurances': 'Assurance & mutuelles', 'Scor': 'Assurance & mutuelles',
-  'Covéa': 'Assurance & mutuelles', 'Generali France': 'Assurance & mutuelles',
-  'AG2R La Mondiale': 'Assurance & mutuelles', 'Groupama': 'Assurance & mutuelles',
-  'Matmut': 'Assurance & mutuelles', 'MAIF': 'Assurance & mutuelles',
-  'Macif': 'Assurance & mutuelles', 'Malakoff Humanis': 'Assurance & mutuelles',
-  'Marsh McLennan': 'Assurance & mutuelles',
-  'Verlingue': 'Assurance & mutuelles', 'Coface': 'Assurance & mutuelles',
+  'AXA': "Compagnie d'assurance & mutuelle", 'Allianz France': "Compagnie d'assurance & mutuelle",
+  'CNP Assurances': "Compagnie d'assurance & mutuelle", 'Scor': "Compagnie d'assurance & mutuelle",
+  'Covéa': "Compagnie d'assurance & mutuelle", 'Generali France': "Compagnie d'assurance & mutuelle",
+  'AG2R La Mondiale': "Compagnie d'assurance & mutuelle", 'Groupama': "Compagnie d'assurance & mutuelle",
+  'Matmut': "Compagnie d'assurance & mutuelle", 'MAIF': "Compagnie d'assurance & mutuelle",
+  'Macif': "Compagnie d'assurance & mutuelle", 'Malakoff Humanis': "Compagnie d'assurance & mutuelle",
+  'Marsh McLennan': "Compagnie d'assurance & mutuelle",
+  'Verlingue': "Compagnie d'assurance & mutuelle", 'Coface': "Compagnie d'assurance & mutuelle",
 
   // Audit, conseil, transaction services.
-  'Deloitte': "Cabinet d'audit & conseil", 'EY': "Cabinet d'audit & conseil", 'KPMG': "Cabinet d'audit & conseil",
-  'PwC': "Cabinet d'audit & conseil", 'Forvis Mazars': "Cabinet d'audit & conseil", 'Grant Thornton': "Cabinet d'audit & conseil",
-  'BDO': "Cabinet d'audit & conseil", 'Eight Advisory': "Cabinet d'audit & conseil", 'Accuracy': "Cabinet d'audit & conseil",
-  'McKinsey': "Cabinet d'audit & conseil", 'BCG': "Cabinet d'audit & conseil", 'Bain': "Cabinet d'audit & conseil",
-  'Oliver Wyman': "Cabinet d'audit & conseil", 'Roland Berger': "Cabinet d'audit & conseil",
-  'Sia Partners': "Cabinet d'audit & conseil", 'Talan': "Cabinet d'audit & conseil", 'Capgemini': "Cabinet d'audit & conseil",
+  'Deloitte': "Cabinet d'audit (Big 4)", 'EY': "Cabinet d'audit (Big 4)", 'KPMG': "Cabinet d'audit (Big 4)",
+  'PwC': "Cabinet d'audit (Big 4)", 'Forvis Mazars': "Cabinet d'audit (Big 4)", 'Grant Thornton': "Cabinet d'audit (Big 4)",
+  'BDO': "Cabinet d'audit (Big 4)", 'Eight Advisory': "Cabinet de conseil & stratégie", 'Accuracy': "Cabinet de conseil & stratégie",
+  'McKinsey': "Cabinet de conseil & stratégie", 'BCG': "Cabinet de conseil & stratégie", 'Bain': "Cabinet de conseil & stratégie",
+  'Oliver Wyman': "Cabinet de conseil & stratégie", 'Roland Berger': "Cabinet de conseil & stratégie",
+  'Sia Partners': "Cabinet de conseil & stratégie", 'Talan': "Cabinet de conseil & stratégie", 'Capgemini': "Cabinet de conseil & stratégie",
 
   // Institutions publiques.
-  'Banque de France': 'Secteur public & institutions', 'AMF': 'Secteur public & institutions',
-  'ACPR': 'Secteur public & institutions', 'Caisse des Dépôts': 'Secteur public & institutions',
-  'Agence France Trésor': 'Secteur public & institutions',
+  'Banque de France': 'Institution publique', 'AMF': 'Institution publique',
+  'ACPR': 'Institution publique', 'Caisse des Dépôts': 'Institution publique',
+  'Agence France Trésor': 'Institution publique',
 
   // Fintech.
-  'Qonto': 'Fintech', 'Swile': 'Fintech', 'Pennylane': 'Fintech',
-  'Spendesk': 'Fintech', 'Alan': 'Fintech', 'Ledger': 'Fintech', 'Younited': 'Fintech',
+  'Qonto': 'Fintech & start-up', 'Swile': 'Fintech & start-up', 'Pennylane': 'Fintech & start-up',
+  'Spendesk': 'Fintech & start-up', 'Alan': 'Fintech & start-up', 'Ledger': 'Fintech & start-up', 'Younited': 'Fintech & start-up',
 };
 
 // Employeurs hors liste de référence : on ne connaît pas leur maison, seulement
@@ -406,20 +426,36 @@ const SECTEUR_PAR_MAISON = {
 // Le vocabulaire est le MÊME que celui de SECTEUR_PAR_MAISON : deux tables qui
 // nomment différemment la même chose fabriquent des doublons dans le filtre.
 const SECTEUR_PAR_MOT = [
-  [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de détail'],
-  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Gestion d'actifs & Private equity"],
-  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, "Gestion d'actifs & Private equity"],
-  [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, 'Assurance & mutuelles'],
-  [/courtage|courtier|\bbroker\b/i, 'Assurance & mutuelles'],
-  [/audit|conseil|consulting|advisory|cabinet|expertise comptable|commissariat/i, "Cabinet d'audit & conseil"],
-  [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech'],
-  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Secteur public & institutions'],
+  [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de réseau'],
+  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Société de gestion d'actifs"],
+  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, "Société de gestion d'actifs"],
+  [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, "Compagnie d'assurance & mutuelle"],
+  [/courtage|courtier|\bbroker\b/i, "Compagnie d'assurance & mutuelle"],
+  // L'expertise comptable AVANT l'audit : un cabinet indépendant qui tient la
+  // compta de PME n'est pas un Big Four, et c'était le plus gros contingent du
+  // fourre-tout « PME & start-up » (163 offres sur 383).
+  [/expertise comptable|expert[\s-]?comptable|\bcomptab|fiducia|\bec\b\s|commissariat aux comptes/i, "Cabinet d'expertise comptable"],
+  [/conseil|consulting|advisory|strat[ée]g/i, 'Cabinet de conseil & stratégie'],
+  [/audit|cabinet/i, "Cabinet d'audit (Big 4)"],
+  [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech & start-up'],
+  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Institution publique'],
 ];
 
 // Étiquette des employeurs qu'aucun mot ne permet de rattacher. Elle correspond
 // au groupe "PME et start-ups" du filtre entreprise : les deux se lisent
 // ensemble.
-const SECTEUR_AUTRES = 'PME & start-up';
+// Un employeur qu'aucun mot ne rattache à la finance et qui recrute pourtant un
+// profil financier est, presque toujours, une société ordinaire dotée d'une
+// direction financière. Le dire est plus juste et plus utile que l'ancien
+// « PME & start-up », qui décrivait une TAILLE et non un type, et qui servait de
+// fourre-tout à 38 % du catalogue — Candriam et Caixa Geral s'y retrouvaient.
+const SECTEUR_AUTRES = 'Entreprise (direction financière)';
+
+// Ce qu'on ne dit que dans un cabinet : on y suit un PORTEFEUILLE DE CLIENTS.
+// « Comptable fournisseur » ou « comptable général » désignent au contraire la
+// comptabilité interne d'une société — on ne les retient donc pas.
+const CABINET_COMPTABLE_TITRE_RE =
+  /expertise[\s-]?comptable|expert[\s-]?comptable|charg[ée].{0,6} de dossiers?|collaborateur\w*[\s-]comptable|collaborateur\w* d'expertise|r[ée]viseur|commissariat aux comptes|commissaire aux comptes|\ben cabinet\b|portefeuille (?:de )?clients?|\bdcg\b|\bdscg\b/i;
 
 // Une même maison recrute dans plusieurs mondes : BNP Paribas a un réseau
 // d'agences, une banque d'affaires (CIB), un gérant d'actifs (AM) et un
@@ -440,12 +476,40 @@ const MAISONS_MULTI_ENTITES = new Set([
   'La Banque Postale', 'Natixis', 'HSBC France',
 ]);
 
-function inferSector(emp, maison, title) {
+// Maisons qui font à la fois du conseil/marché et de la gestion, sous un seul
+// nom. Lazard publie ses stages M&A et ceux de Lazard Frères Gestion sous
+// « Lazard » : le nom ne dit rien, seule la famille métier peut arbitrer.
+const MAISONS_BANQUE_ET_GESTION = new Set([
+  'Lazard', 'Rothschild & Co', 'Oddo BHF', 'Edmond de Rothschild',
+  'Goldman Sachs', 'JPMorgan', 'Morgan Stanley', 'Barclays', 'Deutsche Bank',
+  'UBS', 'Bank of America', 'Citi', 'BNP Paribas CIB', 'Société Générale CIB',
+  'Crédit Agricole CIB',
+]);
+
+// Quand le nom de l'entité ne tranche pas, la FAMILLE MÉTIER de l'offre le
+// fait : un stage M&A chez Lazard relève de la banque d'affaires, un stage de
+// gestion chez Lazard Frères Gestion de la société de gestion — et Lazard
+// apparaît alors, à juste titre, dans les deux catégories. Ce n'est pas la
+// maison qu'on classe, c'est l'offre.
+const SECTEUR_PAR_FAMILLE = {
+  'Fusions & Acquisitions': "Banque d'affaires & d'investissement",
+  'Marchés financiers': "Banque d'affaires & d'investissement",
+  'Investissement & Private equity': "Société de gestion d'actifs",
+};
+
+function inferSector(emp, maison, title, famille) {
   if (maison && MAISONS_MULTI_ENTITES.has(maison)) {
     const texte = (emp || '') + ' ' + (title || '');
-    if (ENTITE_GESTION_RE.test(texte)) return "Gestion d'actifs & Private equity";
-    if (ENTITE_BFI_RE.test(texte)) return "Banque d'affaires & marchés";
-    if (ENTITE_ASSURANCE_RE.test(emp || '')) return 'Assurance & mutuelles';
+    if (ENTITE_GESTION_RE.test(texte)) return "Société de gestion d'actifs";
+    if (ENTITE_BFI_RE.test(texte)) return "Banque d'affaires & d'investissement";
+    if (ENTITE_ASSURANCE_RE.test(emp || '')) return "Compagnie d'assurance & mutuelle";
+    if (famille && SECTEUR_PAR_FAMILLE[famille]) return SECTEUR_PAR_FAMILLE[famille];
+  }
+  // Même arbitrage pour les maisons mono-nom qui abritent plusieurs métiers
+  // (Lazard et sa filiale de gestion, Rothschild et sa gestion de fortune) :
+  // sans entité explicite dans le nom, seule la famille métier peut trancher.
+  if (maison && MAISONS_BANQUE_ET_GESTION.has(maison) && famille && SECTEUR_PAR_FAMILLE[famille]) {
+    return SECTEUR_PAR_FAMILLE[famille];
   }
 
   if (maison && SECTEUR_PAR_MAISON[maison]) return SECTEUR_PAR_MAISON[maison];
@@ -457,6 +521,14 @@ function inferSector(emp, maison, title) {
   for (const [re, secteur] of SECTEUR_PAR_MOT) {
     if (re.test(key)) return secteur;
   }
+  // Cabinets d'expertise comptable indépendants : leur raison sociale ne dit
+  // presque jamais leur métier (« STECO », « GMBA », « Groupe IGF »). C'est
+  // l'INTITULÉ qui les trahit — on y travaille sur un portefeuille de clients
+  // (« chargé de dossiers », « collaborateur comptable », « réviseur »), là où
+  // la comptabilité d'une entreprise parle de fournisseurs, de clients ou
+  // d'immobilisations. Sans cette lecture, ces cabinets tombaient tous dans
+  // « Entreprise (direction financière) », qui gonflait à 44 % du catalogue.
+  if (CABINET_COMPTABLE_TITRE_RE.test(title || '')) return "Cabinet d'expertise comptable";
   return SECTEUR_AUTRES;
 }
 
@@ -1298,7 +1370,7 @@ function normalize(item) {
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
   const maisonRef = trouverMaison(emp);
-  const sector = inferSector(emp, maisonRef, title);
+  const sector = inferSector(emp, maisonRef, title, famille);
 
   return {
     emp,

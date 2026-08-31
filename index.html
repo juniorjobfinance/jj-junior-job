@@ -771,14 +771,19 @@
   // les tables de secteurs) : dupliquées en dur ici, elles ont déjà divergé une
   // fois — la page affichait neuf familles à zéro pendant que les données en
   // comptaient seize. L'ordre est l'ordre d'affichage du volet de gauche.
+  // Deux axes, deux vocabulaires : les familles nomment une ACTIVITÉ, les
+  // structures une INSTITUTION. Aucune expression ne figure dans les deux
+  // listes, sinon on ne sait plus lequel des deux filtres on manipule.
   var FAMILLES = [
-    'Comptabilité & Consolidation',
+    'Fusions & Acquisitions',
+    'Marchés financiers',
+    'Investissement & Private equity',
+    'Audit',
+    'Conseil',
+    'Comptabilité',
     'Contrôle de gestion & Trésorerie',
-    'Audit & Conseil',
-    'M&A & Marchés financiers',
-    "Gestion d'actifs & Investissement",
-    'Risques, Conformité & Actuariat',
-    'Data, Tech & Opérations',
+    'Risques & Conformité',
+    'Data & Quant',
     'Autres métiers de la finance'
   ];
 
@@ -786,29 +791,37 @@
   // qui découvre le secteur ne sait pas ce que cache « M&A & Marchés » — ces
   // mots-clés le lui disent sans qu'il ait à deviner. Format volontairement
   // court : des mots-clés, jamais des phrases.
+  // Le nom parle au connaisseur, la description parle à celui qui débute. On y
+  // dit ce qu'on FAIT — et on cite des maisons connues, qui orientent le
+  // débutant autant qu'elles rassurent l'initié.
   var FAMILLE_DESCRIPTIONS = {
-    'Comptabilité & Consolidation': 'comptable, aide-comptable, consolidation, reporting',
-    'Contrôle de gestion & Trésorerie': 'contrôle de gestion, FP&A, trésorerie, financement',
-    'Audit & Conseil': 'audit financier, commissariat aux comptes, contrôle interne, transaction services',
-    'M&A & Marchés financiers': 'fusions-acquisitions, corporate finance, front office, sales, trading',
-    "Gestion d'actifs & Investissement": 'asset management, gérant, private equity, analyse buy-side',
-    'Risques, Conformité & Actuariat': 'risk management, compliance, contrôle des risques, actuariat',
-    'Data, Tech & Opérations': 'data science, quant, modélisation, middle & back office, MOA',
+    'Fusions & Acquisitions': "conseiller une entreprise qui en achète ou en vend une autre — Lazard, Rothschild, Goldman",
+    'Marchés financiers': 'salle de marché : acheter, vendre et structurer des produits — trading, sales',
+    'Investissement & Private equity': "placer l'argent de clients dans des sociétés ou des fonds — Amundi, Ardian",
+    'Audit': "vérifier les comptes d'autres entreprises — Deloitte, EY, KPMG, PwC",
+    'Conseil': 'aider une entreprise à décider et à se transformer — McKinsey, BCG, Bain',
+    'Comptabilité': 'tenir et clôturer les comptes de sa propre entreprise',
+    'Contrôle de gestion & Trésorerie': "budgets, marges, financement : piloter l'argent de sa boîte",
+    'Risques & Conformité': 'mesurer les risques et respecter la réglementation — risk, compliance, actuariat',
+    'Data & Quant': 'modéliser et chiffrer — quant, middle et back office',
     'Autres métiers de la finance': 'ce qui ne rentre dans aucune autre case'
   };
 
-  // Neuf types, jamais de quasi-vide, PME en dernier. Comme pour les familles,
-  // cette liste doit suivre les tables d'ingestion/pipeline.js.
+  // Dix institutions. Chaque libellé commence par un nom de structure — Banque,
+  // Société, Compagnie, Cabinet, Entreprise, Institution — pour qu'on voie d'un
+  // coup d'œil qu'on est sur l'axe « qui emploie » et non « quel métier ».
+  // Comme pour les familles, cette liste doit suivre ingestion/pipeline.js.
   var STRUCTURES = [
-    'Banque de détail',
-    "Banque d'affaires & marchés",
-    "Gestion d'actifs & Private equity",
-    'Assurance & mutuelles',
-    "Cabinet d'audit & conseil",
+    "Banque d'affaires & d'investissement",
+    'Banque de réseau',
+    "Société de gestion d'actifs",
+    "Compagnie d'assurance & mutuelle",
+    "Cabinet d'audit (Big 4)",
+    'Cabinet de conseil & stratégie',
+    "Cabinet d'expertise comptable",
     'Entreprise (direction financière)',
-    'Fintech',
-    'Secteur public & institutions',
-    'PME & start-up'
+    'Fintech & start-up',
+    'Institution publique'
   ];
 
   var PAGE_SIZE = 50;
