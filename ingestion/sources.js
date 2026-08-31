@@ -443,7 +443,7 @@ async function fetchAdzuna() {
 // "algo-developer" pour la jeter ensuite. On ne visite que les pages dont
 // l'adresse évoque la finance ou un contrat junior.
 const SLUG_FINANCE_RE =
-  /financ|audit|risk|risque|complian|conformit|comptab|tresor|treasury|credit|analyst|m-?and-?a|\bm-a\b|inspecteur|actuar|asset|invest|banking|banquier|kyc|middle-office|back-office|controle|controller|patrimoine|clientele|conseiller|stage|alternan|apprenti|intern|graduate|junior|vie-/i;
+  /financ|audit|risk|risque|complian|conformit|comptab|tresor|treasury|credit|analyst|m-?and-?a|\bm-a\b|inspecteur|actuar|asset|invest|banking|banquier|kyc|middle-office|back-office|controle|controller|patrimoine|clientele|conseiller|stage|alternan|apprenti|intern|graduate|junior|vie-|equity|research|\balm\b|quant|marche|trading|structur|portefeuille|fiscal|consolid|reporting|souscript|sinistre/i;
 
 async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4 }) {
   let urls;
@@ -554,19 +554,45 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //
 // robots.txt (vérifié) autorise ce chemin : seules les URL à paramètres
 // nommés y sont interdites, « ?page= » n'en fait pas partie.
-const BNP_LISTE = 'https://group.bnpparibas/emploi-carriere/toutes-offres-emploi';
-const BNP_BASE = 'https://group.bnpparibas';
-const BNP_MAX_PAGES = 400;
+// Le principe de JJ reste « un connecteur par PLATEFORME, pas par entreprise ».
+// Ce connecteur-ci est l'exception assumée : il vise les maisons majeures qui
+// n'utilisent aucune plateforme connue et qu'aucune sonde ne trouve. Plutôt
+// qu'un scraper par maison — autant de codes fragiles à surveiller — on décrit
+// chaque site par QUELQUES PARAMÈTRES et on garde une seule mécanique. Ajouter
+// une maison devient une ligne de configuration ; le jour où un site est refait,
+// seule sa ligne bouge.
+//
+// Ce que la mécanique suppose : une page de liste rendue côté serveur, paginée
+// par un paramètre d'URL, où chaque offre est un bloc portant son intitulé et
+// son lieu. On filtre la France et la finance SUR LA LISTE, sans ouvrir les
+// fiches — c'est ce qui rend l'exercice tenable quand un groupe publie des
+// milliers d'offres dans le monde.
+const LISTES_HTML = [
+  {
+    emp: 'BNP Paribas',
+    base: 'https://group.bnpparibas',
+    liste: 'https://group.bnpparibas/emploi-carriere/toutes-offres-emploi',
+    pageParam: 'page',
+    pageDepart: 1,
+    // Le bloc qui entoure une offre, et le lien qui mène à sa fiche.
+    blocRe: /<article[^>]+class="[^"]*card-offer[^"]*"/i,
+    blocFin: '</article>',
+    lienRe: /href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/,
+    // Ordre de lecture du texte de la carte.
+    champs: { type: 0, titre: 1, lieu: 2 },
+    maxPages: 400,
+  },
+];
 
-function parseBnpListe(html) {
+// Découpe une page de liste en offres, selon la description du site.
+function parseListeHtml(html, cfg) {
   const offres = [];
-  const blocs = html.split(/<article[^>]+class="[^"]*card-offer[^"]*"/i).slice(1);
+  const blocs = html.split(cfg.blocRe).slice(1);
   for (const b of blocs) {
-    const fin = b.indexOf('</article>');
+    const fin = b.indexOf(cfg.blocFin);
     const bloc = fin > 0 ? b.slice(0, fin) : b;
-    const href = (bloc.match(/href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/) || [])[1];
+    const href = (bloc.match(cfg.lienRe) || [])[1];
     if (!href) continue;
-    // Le texte de la carte se lit dans l'ordre : type de contrat, intitulé, lieu.
     const champs = bloc
       .replace(/<[^>]+>/g, '\n')
       .replace(/&nbsp;/g, ' ')
@@ -574,25 +600,28 @@ function parseBnpListe(html) {
       .split('\n')
       .map((s) => s.trim())
       .filter((s) => s && s !== '>');
-    if (champs.length < 3) continue;
+    const lire = (i) => (i == null ? '' : champs[i] || '');
+    const titre = lire(cfg.champs.titre);
+    if (!titre) continue;
     offres.push({
-      url: BNP_BASE + href,
-      type: champs[0],
-      titre: champs[1],
-      lieu: champs[2],
+      url: href.startsWith('http') ? href : cfg.base + href,
+      type: lire(cfg.champs.type),
+      titre,
+      lieu: lire(cfg.champs.lieu),
     });
   }
   return offres;
 }
 
-async function fetchBnpCareers() {
+async function fetchListeHtml(cfg) {
   const retenues = [];
   let echecs = 0;
 
-  for (let page = 1; page <= BNP_MAX_PAGES; page++) {
+  for (let p = cfg.pageDepart; p < cfg.pageDepart + cfg.maxPages; p++) {
     let html;
     try {
-      const res = await fetch(`${BNP_LISTE}?page=${page}`, {
+      const sep = cfg.liste.includes('?') ? '&' : '?';
+      const res = await fetch(`${cfg.liste}${sep}${cfg.pageParam}=${p}`, {
         headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
         signal: AbortSignal.timeout(25000),
       });
@@ -603,13 +632,13 @@ async function fetchBnpCareers() {
       continue;
     }
 
-    const lot = parseBnpListe(html);
+    const lot = parseListeHtml(html, cfg);
     if (!lot.length) break; // dernière page atteinte
 
     for (const o of lot) {
       // Le lieu se lit « Ville, Région, Pays » : on ne garde que la France.
-      if (!/\bfrance\b/i.test(o.lieu)) continue;
-      if (!isFinanceOfferFor('BNP Paribas', o.titre)) continue;
+      if (cfg.champs.lieu != null && !/\bfrance\b/i.test(o.lieu)) continue;
+      if (!isFinanceOfferFor(cfg.emp, o.titre)) continue;
       retenues.push(o);
     }
 
@@ -618,10 +647,20 @@ async function fetchBnpCareers() {
   }
 
   if (echecs) {
-    console.warn(`[sources] BNP Paribas : ${echecs} page(s) en échec, le reste est conservé.`);
+    console.warn(`[sources] Liste ${cfg.emp} : ${echecs} page(s) en échec, le reste est conservé.`);
+  }
+  if (!retenues.length) {
+    // Un site refait ne renvoie plus rien SANS erreur : le dire évite qu'une
+    // maison disparaisse en silence du catalogue.
+    console.warn(`[sources] Liste ${cfg.emp} : aucune offre — structure du site peut-être modifiée.`);
   }
 
-  return retenues.map((o) => ({ __src: 'bnp', emp: 'BNP Paribas', raw: o }));
+  return retenues.map((o) => ({ __src: `liste:${cfg.emp}`, emp: cfg.emp, raw: o }));
+}
+
+async function fetchToutesListesHtml() {
+  const lots = await Promise.all(LISTES_HTML.map((c) => fetchListeHtml(c).catch(() => [])));
+  return lots.flat();
 }
 
 async function fetchEiCards({ host, emp }) {
@@ -908,7 +947,7 @@ const TARGET_COMPANIES = {
       sitemap: 'https://careers.societegenerale.com/sitemap.xml',
       emp: 'Société Générale',
       jobPathRe: /(job-offers|offres-d-emploi)\//,
-      maxFiches: 400,
+      maxFiches: 600,
       delayMs: 200,
     },
   ],
@@ -1921,15 +1960,15 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, bnp] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
     fetchAdzuna(),
     fetchVie(),
-    fetchBnpCareers(),
+    fetchToutesListesHtml(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...bnp, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

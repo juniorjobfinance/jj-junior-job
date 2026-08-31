@@ -1321,8 +1321,8 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
-  } else if (__src === 'bnp') {
-    // Carte de la liste BNP : type de contrat, intitulé et lieu « Ville, Région,
+  } else if (__src.startsWith('liste:')) {
+    // Carte d'une liste HTML officielle : type de contrat, intitulé et lieu
     // France ». La liste ne porte aucune date de publication — on le dit
     // franchement plutôt que d'afficher la date de collecte comme si c'était
     // celle de l'annonce (datePubFiable reste à false, cf. writeOutput).
@@ -1513,7 +1513,7 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('ashby:') ||
     src.startsWith('phenom:') ||
     src.startsWith('sitemapld:') || // fiche lue sur le site officiel = source de vérité
-    src === 'bnp' // liste officielle BNP : même statut qu'une fiche employeur
+    src.startsWith('liste:') // liste officielle de la maison = fiche employeur
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.
