@@ -1015,6 +1015,56 @@ const GS_QUERY =
   'query($i:RoleSearchQueryInput!){roleSearch(searchQueryInput:$i){totalCount items{' +
   'roleId jobTitle division jobType{description} locations{city country} lastPostedDate}}}';
 
+// ---------------------------------------------------------------------------
+// Eightfold — portails carrières hébergés (Morgan Stanley)
+//
+// Plateforme utilisée par plusieurs grandes maisons : une ligne de plus suffira
+// pour la suivante. Son point d'entrée « pcsx/search » accepte une ville et un
+// rayon en kilomètres, ce qui évite d'avoir à parcourir un catalogue mondial.
+const EIGHTFOLD_PORTAILS = [
+  {
+    emp: 'Morgan Stanley',
+    host: 'morganstanley.eightfold.ai',
+    domain: 'morganstanley.com',
+    lieu: 'Paris,  IDF,  France',
+    rayonKm: 160,
+  },
+];
+
+async function fetchEightfold(cfg) {
+  let positions;
+  try {
+    const url =
+      `https://${cfg.host}/api/pcsx/search?domain=${encodeURIComponent(cfg.domain)}` +
+      `&query=&location=${encodeURIComponent(cfg.lieu)}` +
+      `&start=0&num=100&sort_by=distance&filter_distance=${cfg.rayonKm}`;
+    const json = await getJSON(url);
+    positions = (json.data && json.data.positions) || json.positions || [];
+  } catch (err) {
+    console.warn(`[sources] Eightfold (${cfg.emp}) indisponible:`, err.message);
+    return [];
+  }
+
+  return positions
+    .filter((p) => isFinanceOfferFor(cfg.emp, p.name, p.department || ''))
+    .map((p) => ({
+      __src: `eightfold:${cfg.emp}`,
+      emp: cfg.emp,
+      raw: {
+        titre: p.name,
+        ville: (p.locations && p.locations[0]) || 'Paris',
+        url: `https://${cfg.host}/careers?domain=${cfg.domain}&pid=${p.id}`,
+        departement: p.department,
+        date: p.postedTs ? new Date(p.postedTs * 1000).toISOString() : null,
+      },
+    }));
+}
+
+async function fetchTousEightfold() {
+  const lots = await Promise.all(EIGHTFOLD_PORTAILS.map((c) => fetchEightfold(c).catch(() => [])));
+  return lots.flat();
+}
+
 async function fetchGoldmanSachs() {
   const retenues = [];
   try {
@@ -2473,7 +2523,7 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs, ef] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
@@ -2484,8 +2534,9 @@ async function fetchAllSources() {
     fetchMcKinsey(),
     fetchTousYello(),
     fetchGoldmanSachs(),
+    fetchTousEightfold(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...ef, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

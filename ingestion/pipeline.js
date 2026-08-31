@@ -1360,6 +1360,15 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src.startsWith('eightfold:')) {
+    emp = item.emp;
+    title = raw.titre;
+    ville = raw.ville;
+    pays = 'France'; // filtré par ville et rayon côté connecteur
+    url = raw.url;
+    typeContratRaw = raw.titre;
+    romeLibelle = raw.departement;
+    postedAt = raw.date;
   } else if (__src === 'goldman') {
     // Les intitulés Goldman commencent par du contexte : « 2027 | EMEA | Paris |
     // Investment Banking, Classic | Seasonal ». On retire ces segments de tête
@@ -1628,7 +1637,8 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('bpce:') || // API officielle du groupe
     src === 'mckinsey' ||
     src.startsWith('yello:') ||
-    src === 'goldman'
+    src === 'goldman' ||
+    src.startsWith('eightfold:')
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.
