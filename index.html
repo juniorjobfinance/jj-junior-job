@@ -641,28 +641,42 @@
     content: "◍ ";
     color: var(--brass);
   }
-  /* Ancienneté de l'annonce. Un candidat trie d'abord là-dessus : une offre
-     de trois mois ne se traite pas comme celle d'hier. Elle est donc lue en
-     même temps que le lieu, pas reléguée en pied de carte. */
-  .card .meta .tag-date {
+  /* Ancienneté de l'annonce, sur sa propre ligne. Noyée parmi les autres
+     pastilles, elle se lisait comme un détail de plus ; c'est pourtant le
+     critère qui décide si l'on postule maintenant ou si l'on passe. La couleur
+     porte l'information avant la lecture, le liseré à gauche la rend repérable
+     en balayant la liste du regard. */
+  .card .carte-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.15rem 0 0.55rem;
+    padding: 0.28rem 0.6rem 0.28rem 0.5rem;
+    border-left: 3px solid currentColor;
+    border-radius: 0 4px 4px 0;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    white-space: nowrap;
-  }
-  .card .meta .tag-date::before {
-    content: "◷ ";
-    color: var(--brass);
-  }
-  /* Moins d'une semaine : la seule information de la ligne qui mérite une
-     couleur, parce qu'elle change la décision de postuler tout de suite. */
-  .card .meta .tag-date.recente {
-    color: var(--ok);
+    font-size: 0.8rem;
     font-weight: 600;
+    letter-spacing: 0.01em;
   }
-  .card .meta .tag-date.recente::before {
-    content: "● ";
-    color: var(--ok);
+  .card .carte-date::before { content: "●"; font-size: 0.7em; }
+
+  /* Moins d'une semaine : l'offre est vivante, on y va. */
+  .card .carte-date.recente { color: var(--ok); background: #e8f2ec; }
+  /* Jusqu'à un mois : encore jouable, mais il faut se dépêcher. */
+  .card .carte-date.moyenne { color: var(--brass-dark); background: var(--brass-soft); }
+  /* Au-delà : souvent déjà pourvue. On ne la cache pas — on prévient. */
+  .card .carte-date.ancienne { color: #7a5c52; background: #f0e7e3; }
+  /* Sans date, on le dit franchement plutôt que de laisser un trou : le
+     candidat sait alors que le silence vient de l'employeur, pas de nous. */
+  .card .carte-date.inconnue {
+    color: var(--ink-soft);
+    background: transparent;
+    border-left-color: var(--line);
+    font-weight: 400;
+    font-style: italic;
   }
+  .card .carte-date.inconnue::before { content: "○"; }
   .card .badges { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
   .card .foot {
     display: flex;
@@ -1258,6 +1272,28 @@
       .replace(/"/g, '&quot;');
   }
 
+  // « Depuis quand est-elle en ligne ? » est la question qu'un candidat se pose
+  // avant même de cliquer : une annonce de trois mois est souvent déjà pourvue.
+  // Elle a donc sa propre ligne, sous les pastilles, et la couleur fait le
+  // travail avant même la lecture — vert on y va, ambre on se dépêche, gris
+  // c'est une vieille annonce. Trois seuils suffisent : au-delà, la précision
+  // au jour près n'aide plus personne à décider.
+  function ligneDate(o) {
+    var jours = o.datePubFiable === false ? null : daysAgo(o.postedAt);
+    if (jours === null || jours < 0) {
+      return '<div class="carte-date inconnue">Date de publication non communiquée</div>';
+    }
+    var texte = jours === 0 ? "Publiée aujourd'hui"
+      : jours === 1 ? 'Publiée hier'
+      : jours < 7 ? 'Publiée il y a ' + jours + ' jours'
+      : jours < 14 ? 'Publiée il y a 1 semaine'
+      : jours < 31 ? 'Publiée il y a ' + Math.round(jours / 7) + ' semaines'
+      : jours < 61 ? 'Publiée il y a 1 mois'
+      : 'Publiée il y a ' + Math.round(jours / 30) + ' mois';
+    var age = jours <= 7 ? 'recente' : jours <= 30 ? 'moyenne' : 'ancienne';
+    return '<div class="carte-date ' + age + '">' + texte + '</div>';
+  }
+
   function cardHTML(o) {
     // Le lieu devient une pastille au même titre que la famille et la
     // structure : il ne doit plus traîner dans l'intitulé.
@@ -1269,20 +1305,6 @@
       '<span class="tag-struct">' + esc(o.sector) + '</span>'
     ];
     if (lieuTexte) metaBits.push('<span class="tag-loc">' + esc(lieuTexte) + '</span>');
-
-    // « Depuis quand cette offre est-elle en ligne ? » est la question que se
-    // pose un candidat avant même de cliquer : une annonce de trois mois a peu
-    // de chances d'aboutir. On la met donc parmi les pastilles, en évidence,
-    // plutôt qu'en petit en bas de carte.
-    var jours = daysAgo(o.postedAt);
-    if (o.datePubFiable !== false && jours !== null && jours >= 0) {
-      var quand = jours === 0 ? "Publiée aujourd'hui"
-        : jours === 1 ? 'Publiée hier'
-        : jours < 7 ? 'Publiée il y a ' + jours + ' jours'
-        : jours < 31 ? 'Publiée il y a ' + Math.round(jours / 7) + ' sem.'
-        : 'Publiée il y a ' + Math.round(jours / 30) + ' mois';
-      metaBits.push('<span class="tag-date' + (jours <= 7 ? ' recente' : '') + '">' + quand + '</span>');
-    }
 
     if (o.sal) metaBits.push('<span class="mono">' + esc(o.sal) + '</span>');
     if (o.dl) metaBits.push('<span class="mono">avant le ' + esc(o.dl) + '</span>');
@@ -1299,6 +1321,7 @@
         '<h3>' + esc(o.title) + '</h3>' +
         '<div class="emp">' + esc(o.emp) + '</div>' +
         '<div class="meta">' + metaBits.join('') + '</div>' +
+        ligneDate(o) +
         '<div class="foot">' +
           '<div class="badges">' + freshnessBadge(o) + '</div>' +
           '<span class="link-out">Voir l\'annonce →</span>' +

@@ -1004,6 +1004,16 @@ async function fetchMcKinsey() {
       emp: 'McKinsey',
       raw: {
         titre: d.title,
+        // Date réelle de mise en ligne. Le flux la porte sous ce nom parce
+        // qu'elle sert à leur diffusion LinkedIn, mais c'est bien la date de
+        // publication de l'annonce — et elle révèle des postes ouverts depuis
+        // 2016 que leur propre site déclare pourtant fermés.
+        date: d.postedToLinkedInDate || null,
+        // Nombre de villes : une même annonce peut être ouverte dans 113 villes
+        // à la fois. Ce n'est plus une offre parisienne, c'est un entonnoir de
+        // candidature permanent — celui-là même dont le lien renvoyait
+        // « This position is no longer available ».
+        nbVilles: (d.cities || []).length,
         // L'adresse se reconstruit à partir de l'intitulé sans espace ni
         // ponctuation, suivi de l'identifiant — c'est le format de leur site.
         url: `https://www.mckinsey.com/careers/search-jobs/jobs/${String(d.title)

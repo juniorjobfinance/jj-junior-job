@@ -81,7 +81,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|mckinsey)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -944,8 +944,40 @@ const SPONTANEOUS_RE = /candidatures?\s+spontan[ée]es?|spontaneous\s+applicatio
 // de créer sa propre activité — et les assureurs les publient dupliquées
 // département par département, ce qui noie les vraies offres (32 annonces AXA
 // identiques à un numéro de département près). Hors périmètre de JJ.
+// Intitulés qui ne nomment aucun métier. Certaines sources construisent le
+// titre à partir de l'URL ou d'un gabarit : Andera publiait « Offre - Andera
+// Infra », LSEG « Intern », Oliver Wyman « Entry ». Le candidat ne peut rien en
+// faire — il ne sait même pas de quel poste il s'agit — et ces cartes donnent
+// l'impression d'un catalogue bâclé. Mieux vaut une offre de moins.
+const TITRE_SANS_METIER_RE =
+  /^(?:offres?|postes?|jobs?|opportunit[ée]s?|candidature|recrutement|annonce)\b/i;
+const TITRE_CREUX_RE =
+  /^(?:interns?|internships?|entry(?:\s+level)?|off[\s-]?cycle|graduate|trainee|junior|d[ée]butant|profils?|divers|autres?)$/i;
+
+// Un intitulé qui se réduit au nom de la maison ne dit rien non plus : après
+// avoir retiré l'employeur, il doit rester de quoi reconnaître un métier.
+function titreNommeUnMetier(titre, emp) {
+  const t = (titre || '').trim();
+  if (!t || TITRE_SANS_METIER_RE.test(t) || TITRE_CREUX_RE.test(t)) return false;
+  const cle = (s) =>
+    (s || '')
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z]/g, '');
+  const sansEmployeur = cle(t).replace(cle(emp), '');
+  return sansEmployeur.length >= 4;
+}
+
 const INDEPENDANT_RE =
   /profession\s+lib[ée]rale|agent\s+g[ée]n[ée]ral|\bmandataire\b|ind[ée]pendant|franchis[ée]|cr[ée]ateur\s+d.entreprise|auto-?entrepreneur|\bentrepreneur\s+en\b|votre\s+propre\s+(?:cabinet|agence|activit[ée])|\bVDI\b/i;
+
+// Intitulés de vente / développement commercial. Cette liste ne suffit jamais
+// à écarter une offre à elle seule : elle n'a de sens que croisée avec le type
+// de maison (voir son unique point d'appel). « Sales trader », « Sales Front
+// Office » ou « Sales ESG » dans une société de gestion restent en périmètre.
+const VENTE_HORS_FINANCE_RE =
+  /\bsales\b|\bcommercial(?:e|es|aux)?\b|business\s+develop|d[ée]veloppement\s+commercial|\bkey\s+account\b|chargé\w*\s+d[e']\s*affaires?\s+commercial/i;
 
 function passesJuniorFilter(volet, title, descr) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
@@ -1151,6 +1183,19 @@ function cleanTitle(title) {
   );
   t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:${MOIS})${FIN_MOT}\\s*[)]?\\s*$`, 'i'), ' ');
 
+  // 5 bis) Niveau d'études : « - Master 1/2 », « (Bac+5) », « M2 ». C'est un
+  //    critère de candidature, pas le nom du poste — et les sources l'écrivent
+  //    chacune à leur façon, ce qui casse l'alignement de la liste. L'Oréal
+  //    affichait « Sales Business Analyst & Development – Master ½ », la
+  //    fraction venant de leur propre « 1/2 ».
+  //    La sentinelle est un test de non-lettre, pas « \b » : « Master ½ » finit
+  //    sur un caractère qui n'est pas un mot, et « \b » n'y voyait donc aucune
+  //    limite — la mention restait dans le titre.
+  t = t.replace(
+    /[\s\-–—(,|]*\b(?:master\s*(?:½|[12]\s*\/\s*2|[12])|bac\s*\+\s*\d|m[12])(?![A-Za-zÀ-ÿ0-9])[)\s]*/gi,
+    ' '
+  );
+
   // 6) Rémunérations : « - 1700€/mois », « 1 700 € brut », « 2000 euros ».
   //    Le champ salaire existe déjà ; dans l'intitulé, c'est du bruit.
   t = t.replace(/[\s\-–—(,|]*\d[\d\s.,]*\s*(?:€|euros?)\s*(?:\/\s*mois|par mois|brut|net)?[)\s]*/gi, ' ');
@@ -1169,7 +1214,13 @@ function cleanTitle(title) {
   //    Auditeur Financier ».
   const sansContrat = t
     .replace(
-      /[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d['’]?[ée]tudes?)?|stagiaire|internship|cdi|cdd)\b[)\s]*/gi,
+      //    « internship » d'abord, sinon l'alternative s'arrêterait sur
+      //    « intern » et laisserait « ship » derrière elle. Et « intern » seul
+      //    manquait à la liste : BNP publiait « Portfolio Manager (ABL)Intern ».
+      //    La parenthèse fermante n'est pas ajoutée aux séparateurs — elle
+      //    appartient au groupe précédent, et la manger donnerait « (ABL ».
+      //    La limite de mot suffit à accrocher un « Intern » collé.
+      /[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d['’]?[ée]tudes?)?|stagiaire|internships?|interns?|cdi|cdd)\b[)\s]*/gi,
       ' '
     )
     .replace(/\s+/g, ' ')
@@ -1466,8 +1517,13 @@ function normalize(item) {
     typeContratRaw = raw.titre;
     postedAt = null;
   } else if (__src === 'mckinsey') {
-    // Une même offre est ouverte dans des dizaines de villes : on ne retient que
-    // Paris, seul lieu qui nous concerne, et la date n'est pas fournie.
+    // Une annonce ouverte dans des dizaines de villes n'est pas une offre
+    // parisienne : c'est un entonnoir de candidature permanent, que McKinsey
+    // laisse dans son flux longtemps après l'avoir fermé sur son site. Leur
+    // « Associate » couvrait 113 villes, datait de 2023, et son lien affichait
+    // « This position is no longer available » — exactement la promesse que JJ
+    // ne doit jamais casser. Au-delà de cinq villes, on ne publie pas.
+    if ((raw.nbVilles || 0) > 5) return null;
     emp = item.emp;
     title = raw.titre;
     ville = 'Paris';
@@ -1476,7 +1532,10 @@ function normalize(item) {
     typeContratRaw = raw.titre;
     romeLibelle = raw.interet;
     descr = raw.description;
-    postedAt = null;
+    // Le flux donne bien une date. La renseigner fait entrer McKinsey dans le
+    // filtre d'âge commun, qui écarte alors de lui-même les annonces de 2016 et
+    // 2019 encore présentes dans leur catalogue.
+    postedAt = raw.date ? new Date(`${raw.date}T00:00:00Z`).toISOString() : null;
   } else if (__src.startsWith('bpce:')) {
     // API JSON du groupe : l'enseigne qui recrute (Natixis CIB France, Natixis
     // IM...) prime sur le nom du groupe, comme pour les entités du Crédit
@@ -1627,14 +1686,32 @@ function normalize(item) {
       }
     }
 
-    // 2) Lieu en fin d'intitulé, éventuellement répété (« ... - Paris, France »).
+    // 2) Lieu en fin d'intitulé, éventuellement répété (« ... - Paris, France »)
+    //    ou donné en liste quand le poste est ouvert sur plusieurs bureaux
+    //    (« Auditeur financier -Annecy / Chambéry »).
+    //
+    //    Une seule ville reconnue suffit à identifier le bloc comme un lieu :
+    //    Annecy nous est donné par la source, Chambéry ne figure dans aucune
+    //    liste. Exiger de reconnaître les deux laisserait le bloc entier dans
+    //    le titre. On demande donc qu'une ville au moins soit certaine, et que
+    //    les autres aient la forme d'un nom de lieu — un ou deux mots
+    //    capitalisés — pour ne pas emporter la fin d'un vrai intitulé.
+    const formeDeLieu = (s) => /^[A-ZÀ-Ö][A-Za-zÀ-ÿ'’-]{1,19}(?:[\s-][A-ZÀ-Ö]?[A-Za-zÀ-ÿ'’-]{1,19}){0,2}$/.test(s.trim());
+
     for (let i = 0; i < 2; i++) {
-      const m = title.match(/[\s,]*[-–—|,]\s*([A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{2,28}?\d{0,2})\s*$/);
-      if (!m || !estUnLieu(m[1])) break;
+      const m = title.match(
+        /[\s,]*[-–—|,]\s*([A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{1,28}(?:\s*[\/&]\s*[A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{1,28})*\s*\d{0,2})\s*$/
+      );
+      if (!m) break;
+      const morceaux = m[1]
+        .split(/\s*[\/&]\s*/)
+        .map((s) => s.replace(/\s*\d{1,2}\s*$/, '').trim())
+        .filter(Boolean);
+      if (!morceaux.length || !morceaux.some(estUnLieu) || !morceaux.every(formeDeLieu)) break;
       const reste = title.slice(0, m.index).trim();
       if (!resteLisible(reste)) break;
       title = reste;
-      villeDuTitre(m[1].replace(/\s*\d{1,2}\s*$/, '').trim());
+      villeDuTitre(morceaux[0]);
     }
   }
   if (!title || !url) return null;
@@ -1677,6 +1754,21 @@ function normalize(item) {
   if (!maisonRef && volet !== 'vie') return null;
 
   const sector = inferSector(emp, maisonRef, title, famille);
+
+  // Vente et développement commercial : la distinction tient à la MAISON, pas
+  // à l'intitulé. Chez un gérant d'actifs, une banque ou un dépositaire, un
+  // poste de « Sales » porte sur des produits financiers — c'est un vrai métier
+  // de la finance, et l'un des mieux payés (le « Sales Front Office Securities
+  // Finance » de Caceis a toute sa place ici). Dans une entreprise industrielle
+  // ou de grande consommation, le même mot désigne la vente de son catalogue :
+  // le « Sales Business Analyst & Development » de L'Oréal n'a rien d'un poste
+  // financier, il est seulement rattaché à une direction qui l'est.
+  if (sector === 'Entreprise (direction financière)' && VENTE_HORS_FINANCE_RE.test(title)) return null;
+
+  // Dernier contrôle, une fois l'employeur normalisé : le titre doit nommer un
+  // métier. C'est ici, et pas plus haut, parce que le nettoyage a pu vider un
+  // intitulé qui semblait fourni au départ (« Internship - Andera Infra »).
+  if (!titreNommeUnMetier(title, emp)) return null;
 
   return {
     emp,
