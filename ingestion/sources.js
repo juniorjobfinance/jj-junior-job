@@ -1167,6 +1167,7 @@ const TARGET_COMPANIES = {
   phenom: [
     { host: 'careers.axa.com', emp: 'AXA' },
     { host: 'portal.careers.hsbc.com', pid: '563774609123718', domain: 'hsbc.com', emp: 'HSBC France' },
+    { host: 'careers.bcg.com', widgets: true, emp: 'BCG' },
   ],
   ashby: [
     { company: 'qonto', emp: 'Qonto' },
@@ -1673,8 +1674,58 @@ async function fetchPhenomV2({ host, pid, domain, emp, country = 'France' }) {
     .map((p) => ({ __src: `phenom:${host}`, emp, raw: p }));
 }
 
-async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain }) {
-  // Portail de deuxième génération : on passe la main.
+// Troisième forme : le point d'entrée « widgets », interrogé en POST avec la
+// charge utile standard de Phenom. C'est celle des sites récents (BCG), et elle
+// pagine par tranches de 30. Comme les deux autres, une maison de plus n'est
+// qu'une ligne de configuration.
+async function fetchPhenomWidgets({ host, emp, country = 'France', maxPages = 12 }) {
+  const jobs = [];
+  try {
+    for (let page = 0; page < maxPages; page++) {
+      const corps = {
+        lang: 'en_global', deviceType: 'desktop', country: 'global',
+        pageName: 'search-results', ddoKey: 'refineSearch', sortBy: '', subsearch: '',
+        from: page * 30, jobs: true, counts: true,
+        all_fields: ['country', 'city', 'category'], size: 30, clearAll: false,
+        jdsource: 'facets', isSliderEnable: false, pageId: 'page11',
+        siteType: 'external', keywords: '', global: true,
+        selected_fields: { country: [country] }, locationData: {},
+      };
+      const res = await fetch(`https://${host}/widgets`, {
+        method: 'POST',
+        headers: {
+          'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(corps),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      const lot = ((json.refineSearch || {}).data || {}).jobs || [];
+      if (!lot.length) break;
+      jobs.push(...lot);
+      if (lot.length < 30) break;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  } catch (err) {
+    console.warn(`[sources] Phenom widgets (${emp}) indisponible:`, err.message);
+    return jobs.length ? finaliserPhenomWidgets(jobs, host, emp, country) : [];
+  }
+  return finaliserPhenomWidgets(jobs, host, emp, country);
+}
+
+function finaliserPhenomWidgets(jobs, host, emp, country) {
+  return jobs
+    .filter((j) => new RegExp(`^${country}$`, 'i').test(String(j.country || '')))
+    .filter((j) => isFinanceOfferFor(emp, j.title, j.category || ''))
+    .map((j) => ({ __src: `phenom:${host}`, emp, raw: j }));
+}
+
+async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain, widgets }) {
+  // Portails de deuxième et troisième génération : on passe la main.
+  if (widgets) return fetchPhenomWidgets({ host, emp, country });
   if (pid) return fetchPhenomV2({ host, pid, domain: domain || host, emp, country });
 
   const all = [];

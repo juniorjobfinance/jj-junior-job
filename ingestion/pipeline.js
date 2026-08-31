@@ -1425,9 +1425,16 @@ function normalize(item) {
     url =
       raw.apply_url ||
       raw.meta_data?.canonical_url ||
+      raw.jobUrl ||
+      raw.applyUrl ||
       (raw.id ? `https://portal.careers.hsbc.com/job/${raw.id}` : null);
     typeContratRaw = title;
-    romeLibelle = (raw.categories || raw.category || [raw.business_unit, raw.department].filter(Boolean)).join(' ');
+    // Les trois générations de l'API ne s'accordent pas sur la forme : tableau
+    // chez la première, chaîne chez la troisième. On aplatit sans supposer.
+    romeLibelle = []
+      .concat(raw.categories || [], raw.category || [], raw.business_unit || [], raw.department || [])
+      .filter(Boolean)
+      .join(' ');
     postedAt = raw.posted_date || (raw.t_create ? new Date(raw.t_create).toISOString() : null) || new Date().toISOString();
   } else if (__src === 'manuel') {
     emp = item.emp;
