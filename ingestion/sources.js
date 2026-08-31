@@ -539,6 +539,91 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //    première page (~15 offres) est servie sans JavaScript — on prend ce qui
 //    est accessible proprement, rien de plus.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// BNP Paribas — liste paginée du site groupe
+//
+// BNP ne déclare aucune fiche d'emploi dans son sitemap et son pare-feu renvoie
+// 403 à curl : ni le connecteur sitemap+JSON-LD ni les sondes automatiques ne
+// pouvaient l'atteindre. Le fetch de Node, lui, passe.
+//
+// Leur page « toutes nos offres » est rendue côté serveur et paginée par dix.
+// Chaque carte porte déjà le type de contrat, l'intitulé et le lieu : on filtre
+// donc la France et la finance SUR LA LISTE, sans ouvrir les 3 800 fiches du
+// groupe dans le monde. On lit quelques centaines de pages au lieu de quelques
+// milliers de fiches.
+//
+// robots.txt (vérifié) autorise ce chemin : seules les URL à paramètres
+// nommés y sont interdites, « ?page= » n'en fait pas partie.
+const BNP_LISTE = 'https://group.bnpparibas/emploi-carriere/toutes-offres-emploi';
+const BNP_BASE = 'https://group.bnpparibas';
+const BNP_MAX_PAGES = 400;
+
+function parseBnpListe(html) {
+  const offres = [];
+  const blocs = html.split(/<article[^>]+class="[^"]*card-offer[^"]*"/i).slice(1);
+  for (const b of blocs) {
+    const fin = b.indexOf('</article>');
+    const bloc = fin > 0 ? b.slice(0, fin) : b;
+    const href = (bloc.match(/href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/) || [])[1];
+    if (!href) continue;
+    // Le texte de la carte se lit dans l'ordre : type de contrat, intitulé, lieu.
+    const champs = bloc
+      .replace(/<[^>]+>/g, '\n')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .split('\n')
+      .map((s) => s.trim())
+      .filter((s) => s && s !== '>');
+    if (champs.length < 3) continue;
+    offres.push({
+      url: BNP_BASE + href,
+      type: champs[0],
+      titre: champs[1],
+      lieu: champs[2],
+    });
+  }
+  return offres;
+}
+
+async function fetchBnpCareers() {
+  const retenues = [];
+  let echecs = 0;
+
+  for (let page = 1; page <= BNP_MAX_PAGES; page++) {
+    let html;
+    try {
+      const res = await fetch(`${BNP_LISTE}?page=${page}`, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+        signal: AbortSignal.timeout(25000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      html = await res.text();
+    } catch {
+      if (++echecs >= 5) break; // le site ne répond plus : on garde l'acquis
+      continue;
+    }
+
+    const lot = parseBnpListe(html);
+    if (!lot.length) break; // dernière page atteinte
+
+    for (const o of lot) {
+      // Le lieu se lit « Ville, Région, Pays » : on ne garde que la France.
+      if (!/\bfrance\b/i.test(o.lieu)) continue;
+      if (!isFinanceOfferFor('BNP Paribas', o.titre)) continue;
+      retenues.push(o);
+    }
+
+    // Courtoisie : une pause entre chaque page, comme pour les autres sources.
+    await new Promise((r) => setTimeout(r, 250));
+  }
+
+  if (echecs) {
+    console.warn(`[sources] BNP Paribas : ${echecs} page(s) en échec, le reste est conservé.`);
+  }
+
+  return retenues.map((o) => ({ __src: 'bnp', emp: 'BNP Paribas', raw: o }));
+}
+
 async function fetchEiCards({ host, emp }) {
   let html;
   try {
@@ -1836,14 +1921,15 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, bnp] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
     fetchAdzuna(),
     fetchVie(),
+    fetchBnpCareers(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...bnp, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
