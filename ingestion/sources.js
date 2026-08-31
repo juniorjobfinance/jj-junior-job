@@ -798,6 +798,51 @@ async function fetchBpceApi({ host, emp }) {
     .filter((o) => o.raw.url);
 }
 
+// ---------------------------------------------------------------------------
+// McKinsey — API de recherche de leur site carrières
+//
+// Le conseil en stratégie était le seul étage de la hiérarchie totalement
+// absent du site : aucune sonde ne trouvait McKinsey, dont la page carrières
+// est une application JavaScript. Elle interroge en fait une API publique,
+// repérée en listant les requêtes réellement effectuées par le navigateur.
+//
+// Particularité : une même offre est ouverte dans des dizaines de villes du
+// monde (« Business Analyst » en liste plus de cent). On ne garde donc que
+// celles dont la liste contient Paris, et on affiche Paris comme lieu.
+const MCKINSEY_API =
+  'https://gateway.mckinsey.com/apigw-x0cceuow60/v1/api/jobs/search?pageSize=200&start=1&cities=Paris&lang=en';
+
+async function fetchMcKinsey() {
+  let docs;
+  try {
+    const json = await getJSON(MCKINSEY_API);
+    docs = json.docs || [];
+  } catch (err) {
+    console.warn('[sources] McKinsey indisponible:', err.message);
+    return [];
+  }
+
+  return docs
+    .filter((d) => (d.cities || []).some((v) => /^paris$/i.test(String(v).trim())))
+    .filter((d) => isFinanceOfferFor('McKinsey', d.title, [d.interestCategory, d.functions].flat().filter(Boolean).join(' ')))
+    .map((d) => ({
+      __src: 'mckinsey',
+      emp: 'McKinsey',
+      raw: {
+        titre: d.title,
+        // L'adresse se reconstruit à partir de l'intitulé sans espace ni
+        // ponctuation, suivi de l'identifiant — c'est le format de leur site.
+        url: `https://www.mckinsey.com/careers/search-jobs/jobs/${String(d.title)
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[̀-ͯ]/g, '')
+          .replace(/[^a-z0-9]/g, '')}-${d.jobID}`,
+        interet: [d.interestCategory, d.functions].flat().filter(Boolean).join(' '),
+        description: [d.whatYouWillDo, d.yourBackground].filter(Boolean).join(' ').replace(/<[^>]*>/g, ' '),
+      },
+    }));
+}
+
 async function fetchToutesApisBpce() {
   const lots = await Promise.all(BPCE_APIS.map((c) => fetchBpceApi(c).catch(() => [])));
   return lots.flat();
@@ -2133,7 +2178,7 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
@@ -2141,8 +2186,9 @@ async function fetchAllSources() {
     fetchVie(),
     fetchToutesListesHtml(),
     fetchToutesApisBpce(),
+    fetchMcKinsey(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

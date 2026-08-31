@@ -252,7 +252,35 @@ function normaliserPourClassement(text) {
   );
 }
 
-function inferFamille(title, romeLibelle) {
+// Chez un cabinet de conseil, les intitulés génériques désignent le métier du
+// cabinet : « Business Analyst » et « Associate » chez McKinsey ou BCG sont les
+// deux premiers échelons du consultant, pas de la maîtrise d'ouvrage ni de la
+// banque d'affaires. Le titre seul ne peut pas le dire — l'employeur, si.
+const MAISON_DE_CONSEIL_RE =
+  /mckinsey|boston consulting|\bbcg\b|\bbain\b|roland berger|oliver wyman|kearney|alixpartners|accenture|capgemini|wavestone|sia partners|julhiet|eight advisory|talan|\bstrategy&\b/i;
+const TITRE_GENERIQUE_CONSEIL_RE =
+  /business analyst|\bassociate\b|\bconsultant\b|\banalyst\b|\banalyste\b|\bpartner\b|engagement manager/i;
+
+function inferFamille(title, romeLibelle, emp) {
+  const parTitre = inferFamilleParTitre(title, romeLibelle);
+  // L'employeur ne tranche que si l'intitulé n'a rien dit de précis. « Business
+  // Analyst Risque de crédit » chez Talan reste rangé sous les risques : sa
+  // spécialité en apprend plus au candidat que le métier du cabinet. Mais
+  // « Business Analyst » tout court chez McKinsey n'est pas de la maîtrise
+  // d'ouvrage — c'est le premier échelon du consultant.
+  const generique = parTitre === 'Data & Quant' || parTitre === 'Autres métiers de la finance';
+  if (
+    generique &&
+    emp &&
+    MAISON_DE_CONSEIL_RE.test(emp) &&
+    TITRE_GENERIQUE_CONSEIL_RE.test(title || '')
+  ) {
+    return CONSOLIDATION_FAMILLES['Conseil'] || 'Conseil';
+  }
+  return parTitre;
+}
+
+function inferFamilleParTitre(title, romeLibelle) {
   // L'INTITULÉ d'abord, seul. Le libellé ROME des agrégateurs est un code
   // administratif large ("Comptabilité" pour tout ce qui touche aux chiffres) :
   // mélangé au titre, il gagnait la course et rangeait « Analyste Chargé
@@ -1321,6 +1349,18 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src === 'mckinsey') {
+    // Une même offre est ouverte dans des dizaines de villes : on ne retient que
+    // Paris, seul lieu qui nous concerne, et la date n'est pas fournie.
+    emp = item.emp;
+    title = raw.titre;
+    ville = 'Paris';
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.titre;
+    romeLibelle = raw.interet;
+    descr = raw.description;
+    postedAt = null;
   } else if (__src.startsWith('bpce:')) {
     // API JSON du groupe : l'enseigne qui recrute (Natixis CIB France, Natixis
     // IM...) prime sur le nom du groupe, comme pour les entités du Crédit
@@ -1414,7 +1454,7 @@ function normalize(item) {
   if (INTERMEDIAIRE_RE.test(url)) return null;
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title });
-  const famille = inferFamille(title, romeLibelle);
+  const famille = inferFamille(title, romeLibelle, emp);
   if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
@@ -1542,7 +1582,8 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('phenom:') ||
     src.startsWith('sitemapld:') || // fiche lue sur le site officiel = source de vérité
     src.startsWith('liste:') || // liste officielle de la maison = fiche employeur
-    src.startsWith('bpce:') // API officielle du groupe
+    src.startsWith('bpce:') || // API officielle du groupe
+    src === 'mckinsey'
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.
