@@ -631,19 +631,40 @@ function estGrandeVille(loc) {
 // ---------------------------------------------------------------------------
 // Classement dans l'onglet (volet) — déterministe (PROJET.md §8.2)
 // ---------------------------------------------------------------------------
+// Le V.I.E est un contrat à part entière, mais quand une maison le publie sur
+// son propre ATS (et non via Business France), le champ "type de contrat" dit
+// simplement "Full-time" : seul l'intitulé le signale ("VIE Prague — Compliance
+// Officer", "VIE, Risk Analyst"). Piège à éviter : l'ASSURANCE VIE, qui n'a rien
+// à voir. On exige donc VIE en capitales, isolé, et jamais dans un contexte
+// d'assurance ou d'épargne.
+const ASSURANCE_VIE_RE = /assurance[\s-]*vie|contrat[\s-]*vie|[ée]pargne/i;
+const VIE_TITRE_RE = /(?:^|[^A-Za-zÀ-ÿ])V\.?I\.?E\.?(?:[^A-Za-zÀ-ÿ]|$)/;
+
+function estOffreVIE(title) {
+  if (!title || ASSURANCE_VIE_RE.test(title)) return false;
+  return VIE_TITRE_RE.test(title);
+}
+
 function classifyVolet({ src, typeContratRaw, title }) {
   if (src === 'labonnealternance') return 'alternance';
-  if (src === 'vie') return 'vie'; // aucun connecteur VIE actif (§4.1) — pour complétude future
+  if (src === 'vie') return 'vie';
+
+  // L'INTITULÉ prime sur le type de contrat déclaré. Les ATS d'entreprise
+  // renseignent massivement "Full-time", qui décrit les HORAIRES et non le
+  // contrat — un stage est lui aussi à temps plein. Cette valeur faisait donc
+  // basculer en CDI des stages et alternances que leur titre annonçait sans la
+  // moindre ambiguïté ("Stagiaire Consultant", "Alternance Expertise Comptable").
+  const ti = (title || '').toLowerCase();
+  if (estOffreVIE(title)) return 'vie';
+  // L'alternance d'abord : "Alternance - stage de 12 mois" est une alternance.
+  if (/alternan|apprenti|apprentice|contrat pro/.test(ti)) return 'alternance';
+  if (/\bstage\b|stagiaire|internship|\bintern\b|\btrainee\b/.test(ti)) return 'stage';
 
   const t = (typeContratRaw || '').toLowerCase();
   if (/stage|\bmis\b|internship|\bintern\b/.test(t)) return 'stage';
   if (/alternance|apprentissage|professionnalisation|apprentice/.test(t)) return 'alternance';
   if (/cdi|cdd|full[\s-]?time|permanent|fixed[\s-]?term/.test(t)) return 'cdi-cdd';
 
-  // fallback mots-clés de l'intitulé
-  const ti = (title || '').toLowerCase();
-  if (/stage|stagiaire/.test(ti)) return 'stage';
-  if (/alternance|alternant|apprenti/.test(ti)) return 'alternance';
   return 'cdi-cdd';
 }
 
