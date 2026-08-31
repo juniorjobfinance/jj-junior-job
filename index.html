@@ -468,15 +468,18 @@
     color: #6b3d7a;
     border: 1px solid rgba(107, 61, 122, 0.28);
   }
+  /* VIE et CDI se ressemblaient trop (deux verts) : le VIE passe en terracotta,
+     qui n'entre en conflit ni avec le laiton de la famille ni avec les autres
+     pastilles. Le CDI garde le vert, seul de sa teinte. */
   .card .contrat.vie {
-    background: #dcefee;
-    color: #1f5f5b;
-    border: 1px solid rgba(31, 95, 91, 0.3);
+    background: #f6e3dc;
+    color: #9c4a2f;
+    border: 1px solid rgba(156, 74, 47, 0.32);
   }
   .card .contrat.cdi-cdd {
-    background: #e7f0ea;
-    color: #2a5f47;
-    border: 1px solid rgba(47, 107, 79, 0.3);
+    background: #dfeee4;
+    color: #226b45;
+    border: 1px solid rgba(34, 107, 69, 0.32);
   }
   .card h3 {
     margin: 0 0 0.15rem;
@@ -700,6 +703,11 @@
       <span class="count" id="new-count"></span>
     </label>
 
+    <label class="new-only" for="ref-only">
+      <span><input type="checkbox" id="ref-only"> Grandes maisons</span>
+      <span class="count" id="ref-count"></span>
+    </label>
+
     <h2>Famille métier</h2>
     <fieldset id="familles-fieldset"></fieldset>
 
@@ -812,6 +820,10 @@
     structure: '',
     q: '',
     newOnly: false,
+    // Filtre « grandes maisons » : ne montrer que les offres d'un employeur de la
+    // liste de référence (banques, Big 4, sociétés de gestion, assureurs...).
+    // Ces offres existaient déjà mais restaient invisibles, noyées dans le reste.
+    refOnly: false,
     lieu: '',
     emp: '',
     sort: 'recent',
@@ -832,6 +844,7 @@
     if (state.emp) p.set('entreprise', state.emp);
     if (state.q) p.set('q', state.q);
     if (state.newOnly) p.set('nouveau', '1');
+    if (state.refOnly) p.set('maisons', '1');
     if (state.sort !== 'recent') p.set('tri', state.sort);
     var qs = p.toString();
     history.replaceState(null, '', qs ? '?' + qs : location.pathname);
@@ -849,6 +862,7 @@
     state.emp = p.get('entreprise') || '';
     state.q = p.get('q') || '';
     state.newOnly = p.get('nouveau') === '1';
+    state.refOnly = p.get('maisons') === '1';
     var tri = p.get('tri');
     if (tri === 'entreprise' || tri === 'poste') state.sort = tri;
   }
@@ -886,6 +900,8 @@
     empSelect: document.getElementById('emp-filter'),
     q: document.getElementById('q'),
     newOnly: document.getElementById('new-only'),
+    refOnly: document.getElementById('ref-only'),
+    refCount: document.getElementById('ref-count'),
     sort: document.getElementById('sort'),
     newCount: document.getElementById('new-count'),
     resetBtn: document.getElementById('reset-filters'),
@@ -1043,6 +1059,7 @@
 
   function matchesFilters(o) {
     if (state.newOnly && !isNew(o)) return false;
+    if (state.refOnly && !o.maisonReference) return false;
     if (state.familles.size && !state.familles.has(o.famille)) return false;
     if (state.structure && o.sector !== state.structure) return false;
     if (state.lieu && zoneDe(o) !== state.lieu) return false;
@@ -1190,9 +1207,11 @@
     els.newOnly.closest('label').hidden = !etatNouveauteUtile;
     if (!etatNouveauteUtile && state.newOnly) {
       state.newOnly = false;
+    state.refOnly = false;
       els.newOnly.checked = false;
     }
     els.newCount.textContent = base.filter(isNew).length;
+    els.refCount.textContent = base.filter(function (o) { return !!o.maisonReference; }).length;
     // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que
     // le menu n'existe), pas du DOM.
     // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
@@ -1252,6 +1271,12 @@
 
   els.sort.addEventListener('change', function () {
     state.sort = els.sort.value;
+    state.page = 1;
+    render();
+  });
+
+  els.refOnly.addEventListener('change', function () {
+    state.refOnly = els.refOnly.checked;
     state.page = 1;
     render();
   });
@@ -1330,6 +1355,7 @@
   });
   els.q.value = state.q;
   els.newOnly.checked = state.newOnly;
+  els.refOnly.checked = state.refOnly;
   els.sort.value = state.sort;
   els.structureSelect.value = state.structure;
   Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {

@@ -171,3 +171,7 @@ Houlihan Lokey           | houlihan lokey|^hl\b
 BlackRock                | ^blackrock\b|black rock
 Nomura                   | ^nomura\b
 Santander                | ^santander\b
+State Street             | state street|^ssga\b
+BBVA                     | ^bbva\b
+Julius Baer              | julius baer|^gzo\b
+Intesa Sanpaolo          | intesa

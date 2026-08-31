@@ -765,6 +765,9 @@ const TARGET_COMPANIES = {
     { tenant: 'hl', dc: 'wd1', site: 'External', emp: 'Houlihan Lokey' },
     { tenant: 'blackrock', dc: 'wd1', site: 'BlackRock_Professional', emp: 'BlackRock' },
     { tenant: 'santander', dc: 'wd3', site: 'santanderCareers', emp: 'Santander' },
+    { tenant: 'statestreet', dc: 'wd1', site: 'Global', emp: 'State Street' },
+    { tenant: 'bbva', dc: 'wd3', site: 'bbva', emp: 'BBVA' },
+    { tenant: 'juliusbaer', dc: 'wd3', site: 'External', emp: 'Julius Baer' },
   ],
   opendatasoft: [
     { domain: 'bpce.opendatasoft.com', dataset: 'groupe-bpce-offres-emploi', emp: 'Groupe BPCE' },
@@ -833,6 +836,7 @@ const TARGET_COMPANIES = {
     { host: 'careers.capgemini.com', tenant: 'capgemini', emp: 'Capgemini' },
     { host: 'apply.careers.hsbc.com', tenant: '', emp: 'HSBC France' },
     { host: 'careers.nomura.com', tenant: 'nomura', emp: 'Nomura' },
+    { host: 'jobs.intesasanpaolo.com', tenant: 'intesa', emp: 'Intesa Sanpaolo' },
   ],
   talentsoft: [
     { host: 'jobs.amundi.com', emp: 'Amundi' },
