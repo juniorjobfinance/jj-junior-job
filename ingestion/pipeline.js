@@ -1698,20 +1698,33 @@ function normalize(item) {
     //    capitalisés — pour ne pas emporter la fin d'un vrai intitulé.
     const formeDeLieu = (s) => /^[A-ZÀ-Ö][A-Za-zÀ-ÿ'’-]{1,19}(?:[\s-][A-ZÀ-Ö]?[A-Za-zÀ-ÿ'’-]{1,19}){0,2}$/.test(s.trim());
 
+    //    On part du séparateur le plus à DROITE. Un intitulé en contient
+    //    souvent plusieurs — « Consultant - Financial Services - Nantes » — et
+    //    lire à partir du premier ferait prendre « Financial Services - Nantes »
+    //    pour un seul bloc, qui ne ressemble à aucune ville : la ville restait
+    //    alors dans le titre.
     for (let i = 0; i < 2; i++) {
-      const m = title.match(
-        /[\s,]*[-–—|,]\s*([A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{1,28}(?:\s*[\/&]\s*[A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{1,28})*\s*\d{0,2})\s*$/
-      );
-      if (!m) break;
-      const morceaux = m[1]
-        .split(/\s*[\/&]\s*/)
-        .map((s) => s.replace(/\s*\d{1,2}\s*$/, '').trim())
-        .filter(Boolean);
-      if (!morceaux.length || !morceaux.some(estUnLieu) || !morceaux.every(formeDeLieu)) break;
-      const reste = title.slice(0, m.index).trim();
-      if (!resteLisible(reste)) break;
-      title = reste;
-      villeDuTitre(morceaux[0]);
+      const coupures = [];
+      const sep = /[\s,]*[-–—|,]\s+|\s+[-–—|]\s*/g;
+      let s;
+      while ((s = sep.exec(title))) coupures.push({ debut: s.index, fin: s.index + s[0].length });
+
+      let retire = false;
+      for (let k = coupures.length - 1; k >= 0 && !retire; k--) {
+        const queue = title.slice(coupures[k].fin).trim();
+        if (!queue) continue;
+        const morceaux = queue
+          .split(/\s*[\/&]\s*/)
+          .map((x) => x.replace(/\s*\d{1,2}\s*$/, '').trim())
+          .filter(Boolean);
+        if (!morceaux.length || !morceaux.some(estUnLieu) || !morceaux.every(formeDeLieu)) continue;
+        const reste = title.slice(0, coupures[k].debut).trim();
+        if (!resteLisible(reste)) continue;
+        title = reste;
+        villeDuTitre(morceaux[0]);
+        retire = true;
+      }
+      if (!retire) break;
     }
   }
   if (!title || !url) return null;
@@ -2184,7 +2197,11 @@ function ficheJsonLd(html) {
         .replace(/<[^>]*>/g, ' ')
         .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
         .replace(/\s+/g, ' ');
-      const LIBELLE = `(?:date\\s+de\\s+publication|publication\\s+date|publi[ée]e?\\s+le|mise?\\s+en\\s+ligne\\s+le|posted\\s+on)`;
+      // « Date de parution » est la formulation des pages TalentSoft en
+      // français, quand leur version anglaise dit « Publication date ».
+      const LIBELLE =
+        `(?:date\\s+de\\s+(?:publication|parution)|publication\\s+date|publi[ée]e?\\s+le|` +
+        `mise?\\s+en\\s+ligne\\s+le|posted\\s+on)`;
       const fr = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})`, 'i'));
       const iso = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})`, 'i'));
       if (fr) d = new Date(`${fr[3]}-${fr[2].padStart(2, '0')}-${fr[1].padStart(2, '0')}T00:00:00Z`);
