@@ -1670,6 +1670,43 @@ async function fetchLever({ company, emp }) {
   }
 }
 
+// Va chercher le corps de l'annonce pour chaque offre retenue. SmartRecruiters
+// expose la fiche complète sur /postings/{id}, où `jobAd.sections` contient la
+// description et surtout les qualifications — la seule mention du niveau requis.
+async function enrichirDescriptions(offres, id, concurrence = 3) {
+  let idx = 0;
+  await Promise.all(
+    Array.from({ length: concurrence }, async () => {
+      while (idx < offres.length) {
+        const o = offres[idx++];
+        try {
+          const r = await fetch(
+            `https://api.smartrecruiters.com/v1/companies/${id}/postings/${o.raw.id}`,
+            {
+              headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+              signal: AbortSignal.timeout(15000),
+            }
+          );
+          if (!r.ok) continue;
+          const fiche = await r.json();
+          const sections = (fiche.jobAd && fiche.jobAd.sections) || {};
+          // Uniquement le bloc « qualifications » : c'est là qu'est écrit le
+          // niveau attendu. La présentation de l'entreprise ("nos 5 200
+          // experts", "80 ans d'expérience") et le descriptif du poste
+          // emploient des tournures qui déclencheraient à tort le filtre.
+          o.raw.description = ((sections.qualifications && sections.qualifications.text) || '')
+            .replace(/<[^>]*>/g, ' ')
+            .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .slice(0, 3000);
+        } catch {
+          /* fiche indisponible : on garde l'offre, jugée sur son seul intitulé */
+        }
+      }
+    })
+  );
+}
+
 async function fetchSmartRecruiters({ id, emp }) {
   // country=fr : indispensable pour les groupes internationaux (Accor publie
   // des centaines d'offres monde entier sur le même compte) — JJ ne référence
@@ -1684,7 +1721,7 @@ async function fetchSmartRecruiters({ id, emp }) {
       all.push(...page);
       if (page.length < pageSize || all.length >= (json.totalFound || 0)) break;
     }
-    return all
+    const retenues = all
       .filter((o) => (o.location?.country || '').toLowerCase() === 'fr')
       .filter((o) => isFinanceOfferFor(emp, o.name, o.department?.label))
       .map((o) => ({
@@ -1695,6 +1732,16 @@ async function fetchSmartRecruiters({ id, emp }) {
         // l'identifiant de société et de l'id de l'offre (format vérifié).
         raw: { ...o, applyUrl: `https://jobs.smartrecruiters.com/${o.company?.identifier || id}/${o.id}` },
       }));
+
+    // La liste ne porte pas le texte de l'annonce, or c'est le seul endroit où
+    // le niveau requis est écrit : l'intitulé « ARBITRE / ANALYSTE CREDIT »
+    // ne dit rien, et il fallait lire « 3 à 5 ans d'expérience » dans les
+    // qualifications pour voir que le poste n'est pas junior. Sans cette
+    // seconde requête, le filtre 0-3 ans du pipeline tourne à vide sur tout
+    // ce connecteur. Une fiche par offre retenue (quelques dizaines), en
+    // séquence limitée pour ne pas matraquer l'API.
+    await enrichirDescriptions(retenues, id);
+    return retenues;
   } catch (err) {
     console.warn(`[sources] SmartRecruiters (${id}) indisponible:`, err.message);
     return [];

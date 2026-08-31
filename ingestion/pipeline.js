@@ -892,13 +892,41 @@ const JUNIOR_RE = new RegExp(
 // Clientèle (F/H)" peut demander 5 ans d'expérience. Quand la source fournit
 // une description, on l'exploite — c'est le seul moyen de tenir la promesse
 // "0-3 ans" du brief (§4.1).
+// Apostrophe : les annonces bien composées utilisent l'apostrophe
+// typographique U+2019 ("d’expérience"), pas la touche du clavier. La classe
+// ci-dessous accepte les deux — sans elle, la règle ratait silencieusement
+// toutes les annonces françaises correctement typographiées, dont le "3 à 5
+// ans d’expérience" de Coface.
+const AP_ = `['’]`;
+
+// Un seuil, deux écritures. En français on lit "5 ans d'expérience" ; en
+// anglais "5+ years of experience" ou "minimum of 5 years". Les deux langues
+// cohabitent dans le même catalogue — Coface, Talan et Sia Partners publient
+// indifféremment dans l'une ou l'autre — donc les deux doivent être couvertes.
 const DESCR_SENIOR_RE = new RegExp(
-  // "4 ans", "5 ans", "10 ans" d'expérience (3 ans reste dans la cible 0-3)
-  `\\b([4-9]|[1-9]\\d)\\s*(?:à\\s*\\d+\\s*)?ans?\\s+(?:minimum\\s+)?d[e']\\s*exp[ée]rience|` +
-    `exp[ée]rience\\s+(?:professionnelle\\s+)?(?:de\\s+)?([4-9]|[1-9]\\d)\\s*ans?|` +
-    `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative|` +
-    `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste|` +
-    `justifiez\\s+d[e']\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
+  [
+    // FR — "4 ans d'expérience", "3 à 5 ans d'expérience" (on lit la borne
+    // haute : un poste "3 à 5 ans" recrute un profil confirmé).
+    `\\b\\d+\\s*(?:à|-|/)\\s*([4-9]|[1-9]\\d)\\s*ans?`,
+    `\\b([4-9]|[1-9]\\d)\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
+    // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
+    `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+([4-9]|[1-9]\\d)\\s*ans?`,
+    // Un plancher, même bas, disqualifie : "minimum 3 ans" exclut le débutant.
+    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?([3-9]|[1-9]\\d)\\s*ans?`,
+    `\\b([3-9]|[1-9]\\d)\\s*\\+\\s*ans?`,
+    `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative`,
+    `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste`,
+    `justifiez\\s+d${AP_}?\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
+    // EN — "5 years of experience", "5+ years", "10 years in Sales Operations".
+    // On exige un mot d'expérience derrière le nombre : sans cette contrainte,
+    // "Master's degree (5 years of study)" ferait sortir un vrai junior.
+    `\\b([4-9]|[1-9]\\d)\\s*(?:\\+|to\\s*\\d+|-\\s*\\d+)?\\s*years?` +
+      `(?:\\s+of)?\\s+(?:relevant\\s+|professional\\s+|proven\\s+|solid\\s+|hands-?on\\s+|work\\s+|prior\\s+)*` +
+      `(?:experience|expertise|in\\b|as\\s+a)`,
+    `\\b([3-9]|[1-9]\\d)\\s*\\+\\s*years?\\s+(?:of\\s+)?(?:relevant\\s+|professional\\s+)*experience`,
+    `(?:minimum|at\\s+least|min\\.?)\\s+(?:of\\s+)?([3-9]|[1-9]\\d)\\s*years?\\s+(?:of\\s+)?(?:\\w+\\s+){0,2}experience`,
+    `proven\\s+(?:track\\s+record|experience)|extensive\\s+experience|senior\\s+level`,
+  ].join('|'),
   'i'
 );
 
@@ -1085,7 +1113,7 @@ function cleanTitle(title) {
 
   // 1) Préfixes de contrat répétés en tête, éventuellement plusieurs fois :
   //    "Stage : Stage - Finance" -> "Finance"
-  const prefixe = /^(?:stage|stagiaire|alternance|alternant|apprentissage|apprenti|internship|intern|cdi|cdd|vie|job d'?[ée]t[ée])\s*(?:de fin d'?[ée]tudes?\s*)?(?:\d+\s*mois\s*)?[:\-–—]\s*/i;
+  const prefixe = /^(?:stage|stagiaire|alternance|alternant|apprentissage|apprenti|internship|intern|cdi|cdd|vie|job d['’]?[ée]t[ée])\s*(?:de fin d['’]?[ée]tudes?\s*)?(?:\d+\s*mois\s*)?[:\-–—]\s*/i;
   for (let i = 0; i < 3 && prefixe.test(t); i++) t = t.replace(prefixe, '');
 
   // 2) Durées et dates résiduelles en tête : "6 mois - ", "- Janvier 2027 - "
@@ -1122,11 +1150,20 @@ function cleanTitle(title) {
   //    Garde-fou : on ne retire que si le titre garde du sens. « Stage Audit »
   //    doit rester « Audit », mais « Stage » tout court ne doit pas devenir vide,
   //    et « Stage en audit » ne doit pas donner « En audit ».
+  //    L'apostrophe peut être typographique ("fin d’études") : sans les deux
+  //    formes, seul le mot "stage" partait et le titre gardait « fin d’études
+  //    Auditeur Financier ».
   const sansContrat = t
-    .replace(/[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d'?[ée]tudes?)?|stagiaire|internship|cdi|cdd)\b[)\s]*/gi, ' ')
+    .replace(
+      /[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d['’]?[ée]tudes?)?|stagiaire|internship|cdi|cdd)\b[)\s]*/gi,
+      ' '
+    )
     .replace(/\s+/g, ' ')
-    .replace(/^[\s:\-–—,|]+/, '')
-    .replace(/^(?:en|de|du|des|d'|pour|au|aux)\s+/i, '')
+    // Le séparateur laissé par le retrait peut être une barre oblique
+    // ("Stage / Expertise Comptable") ou un guillemet français.
+    .replace(/^[\s:\-–—,|\/«»]+/, '')
+    .replace(/^(?:en|de|du|des|d['’]|pour|au|aux)\s+/i, '')
+    .replace(/^fin\s+d['’]?[ée]tudes?\s+/i, '')
     .trim();
   if (sansContrat.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 4) t = sansContrat;
 
@@ -1134,10 +1171,17 @@ function cleanTitle(title) {
   //    ("Consultant - 2027") et les tournures d'annonce qui introduisaient une
   //    date qu'on vient d'enlever ("À partir de – Sales Analyst").
   t = t.replace(/[\s\-–—(,|]*\b20\d\d\b[)\s]*/g, ' ');
-  t = t.replace(/^\s*(?:[àa]\s+partir\s+d[eu]|[àa]\s+compter\s+d[eu]|d[èe]s|pour)\s*[:\-–—,]*\s*/i, '');
+  //    Limite de mot obligatoire après l'alternance : sans elle, « d[èe]s »
+  //    mordait dans le premier mot venu et « Design Authority IA » devenait
+  //    « ign Authority IA ».
+  t = t.replace(/^\s*(?:[àa]\s+partir\s+d[eu]|[àa]\s+compter\s+d[eu]|d[èe]s|pour)\b\s*[:\-–—,]*\s*/i, '');
+  //    Le mois que cette tournure introduisait reste alors seul en tête
+  //    ("Dès septembre - Analyste Crédit"). L'étape 5 ne l'avait pas vu : elle
+  //    ne retire un mois que s'il est suivi d'une année ou placé en fin.
+  t = t.replace(new RegExp(`^\\s*(?:${MOIS})\\b\\s*[:\\-–—,]*\\s*`, 'i'), '');
 
-  // 10) Ponctuation résiduelle en bord
-  t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|]+|[\s:\-–—,|]+$/g, '').trim();
+  // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
+  t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
 
   return t;
 }
@@ -1242,6 +1286,7 @@ function normalize(item) {
     url = raw.applyUrl;
     typeContratRaw = raw.typeOfEmployment?.label;
     postedAt = raw.releasedDate;
+    descr = raw.description; // rapatriée depuis la fiche : absente de la liste
   } else if (__src.startsWith('workday:')) {
     emp = item.emp;
     title = raw.title;
@@ -1510,6 +1555,71 @@ function normalize(item) {
   // rangées en CDI.
   const titreBrut = title;
   title = adoucirMajuscules(cleanTitle(title));
+
+  // --- Le lieu et le contrat n'ont rien à faire dans l'intitulé ------------
+  // Les sources collent très souvent la ville au titre (« Audit Banque
+  // Assurance - Paris », « Consultant(e) en data - Paris 1 ») et, pour le VIE,
+  // le type de contrat en plus (« VIE Prague - Compliance Officer », « V.I.E.
+  // - Analyste opérations et processus junior - Luxembourg »). La carte porte
+  // déjà une pastille de contrat et une pastille de lieu : répétés dans le
+  // titre, ils désalignent toute la liste et noient le seul élément qui
+  // distingue une offre d'une autre — le métier.
+  //
+  // Et quand la source n'a pas donné de ville, on récupère celle du titre au
+  // lieu d'afficher « Non précisé » à côté d'un intitulé qui, lui, la nomme.
+  {
+    const cle = (s) =>
+      decodeEntities(String(s || ''))
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z]/g, '');
+    const villeConnue = cle(ville);
+    const paysConnu = cle(pays);
+
+    // Un segment est un lieu s'il correspond à ce que la source nous a déjà
+    // dit (ville ou pays de la mission), ou si c'est une grande ville
+    // française — éventuellement suivie de son arrondissement (« Paris 1 »).
+    const estUnLieu = (mot) => {
+      const brut = mot.trim();
+      const k = cle(brut);
+      if (k.length < 3) return false;
+      if (villeConnue && k === villeConnue) return true;
+      if (paysConnu && paysConnu !== 'france' && k === paysConnu) return true;
+      return estGrandeVille(brut.replace(/\s*\d{1,2}\s*$/, '').trim().toLowerCase());
+    };
+
+    const villeDuTitre = (v) => {
+      if (!ville || /^non pr[ée]cis[ée]$|^france$/i.test(String(ville).trim())) ville = v;
+    };
+    // On ne tronque jamais jusqu'à rendre l'intitulé inintelligible.
+    const resteLisible = (s) => s.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 5;
+
+    // 1) Préfixe « VIE » / « V.I.E. », seul ou suivi de la destination.
+    //    Pas de \b après le sigle : sur « V.I.E. - Analyste », il forçait un
+    //    retour arrière qui laissait le point final orphelin (« . - Analyste »).
+    //    Et pas de drapeau insensible à la casse sur la forme sans points, pour
+    //    ne pas amputer un titre commençant par « Vie » (assurance vie).
+    const pre = title.match(/^(?:V\.\s*I\.\s*E\.?|VIE)[\s.:,\/–—-]+(?:([A-ZÀ-Ö][A-Za-zÀ-ÿ'’-]{2,20})\s*[–—-]\s*)?/);
+    if (pre) {
+      const reste = title.slice(pre[0].length).trim();
+      if (resteLisible(reste)) {
+        if (pre[1] && estUnLieu(pre[1])) villeDuTitre(pre[1].trim());
+        // « VIE Compliance Officer » : pas un lieu, le mot appartient au titre.
+        title = pre[1] && !estUnLieu(pre[1]) ? `${pre[1]} ${reste}`.trim() : reste;
+      }
+    }
+
+    // 2) Lieu en fin d'intitulé, éventuellement répété (« ... - Paris, France »).
+    for (let i = 0; i < 2; i++) {
+      const m = title.match(/[\s,]*[-–—|,]\s*([A-ZÀ-Ö][A-Za-zÀ-ÿ'’\- ]{2,28}?\d{0,2})\s*$/);
+      if (!m || !estUnLieu(m[1])) break;
+      const reste = title.slice(0, m.index).trim();
+      if (!resteLisible(reste)) break;
+      title = reste;
+      villeDuTitre(m[1].replace(/\s*\d{1,2}\s*$/, '').trim());
+    }
+  }
   if (!title || !url) return null;
   if (!estUneOffreFinance(title)) return null;
 
@@ -1521,6 +1631,14 @@ function normalize(item) {
   if (INTERMEDIAIRE_RE.test(url)) return null;
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
+
+  // Le VIE ne vient que de Business France. C'est le registre officiel du
+  // dispositif : l'indemnité, la durée, le pays et le statut y sont normés, et
+  // c'est de toute façon par ce portail que le candidat dépose sa candidature.
+  // Une maison qui annonce un VIE sur son seul ATS sans l'y déposer donne une
+  // fiche invérifiable — souvent sans ville ni indemnité, comme les deux
+  // « VIE » d'Amundi qui n'existent nulle part chez Business France.
+  if (volet === 'vie' && __src !== 'vie') return null;
   const famille = inferFamille(title, romeLibelle, emp);
   if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
   emp = normaliserEmployeur(emp);
@@ -1881,12 +1999,142 @@ function choisirPepites(offers) {
   return retenus;
 }
 
+// ---------------------------------------------------------------------------
+// Récupération des dates de publication manquantes
+// ---------------------------------------------------------------------------
+// Certaines sources ne donnent aucune date dans leur liste : on affichait alors
+// une carte muette sur « depuis quand est-ce en ligne ? », qui est pourtant la
+// première question d'un candidat. Leur FICHE, elle, porte presque toujours la
+// date — les ATS émettent un JSON-LD JobPosting pour le référencement Google,
+// et `datePosted` y est normalisé. On va donc la chercher.
+//
+// Deux règles de conduite :
+//  - on ne le fait qu'en toute fin de pipeline, sur les offres qui seront
+//    réellement publiées : inutile de solliciter un site pour une annonce
+//    qu'on s'apprête à écarter ;
+//  - on n'invente jamais. Si la fiche ne porte pas de date, l'offre reste sans
+//    date plutôt que de recevoir celle de la collecte.
+// La fiche rend deux services pour une seule requête : la date de publication,
+// et le texte de l'annonce. Ce texte est la seule mention du niveau requis —
+// sans lui, le filtre « 0-3 ans » ne peut se prononcer que sur l'intitulé, et
+// un poste à cinq ans d'expérience passe dès que son titre ne dit pas
+// « senior ». On récupère donc les deux d'un coup.
+function ficheJsonLd(html) {
+  const resultat = { date: null, description: null };
+  for (const bloc of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
+    let noeuds;
+    try {
+      noeuds = [].concat(JSON.parse(bloc[1].trim()));
+    } catch {
+      continue; // JSON-LD malformé : fréquent, on passe au bloc suivant
+    }
+    for (const n of noeuds) {
+      if (!n) continue;
+      if (!resultat.description && typeof n.description === 'string' && n.description.length > 80) {
+        resultat.description = n.description
+          .replace(/<[^>]*>/g, ' ')
+          .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+          .replace(/\s+/g, ' ')
+          .slice(0, 4000);
+      }
+      const brut = n.datePosted || (n['@graph'] || []).map((g) => g && g.datePosted).find(Boolean);
+      if (!brut || resultat.date) continue;
+      // Deux écritures selon les sites : « 31/08/2026 » (Crédit Agricole) et
+      // ISO « 2026-08-31 », parfois sans zéro initial (KPMG : « 2026-8-25 »).
+      const fr = String(brut).match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      const iso = String(brut).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+      let d = null;
+      if (fr) d = new Date(`${fr[3]}-${fr[2]}-${fr[1]}T00:00:00Z`);
+      else if (iso) d = new Date(`${iso[1]}-${String(iso[2]).padStart(2, '0')}-${String(iso[3]).padStart(2, '0')}T00:00:00Z`);
+      if (!d || isNaN(d)) continue;
+      // Garde-fou : une date future ou antérieure à 2015 est une erreur de la
+      // source, pas une information. On préfère ne rien dire.
+      const an = d.getUTCFullYear();
+      if (d.getTime() > Date.now() + 86400000 || an < 2015) continue;
+      resultat.date = d.toISOString();
+    }
+  }
+
+  // Tous les ATS n'émettent pas de JSON-LD. Deux formats de repli, relevés sur
+  // les sites concernés : une balise meta (SuccessFactors — EY, HSBC) et la
+  // date en clair dans la page (framework e-i — Crédit Mutuel, CIC).
+  if (!resultat.date) {
+    const meta = html.match(/<meta[^>]+(?:datePosted|published_time|pubdate|DC\.date)[^>]*content="([^"]+)"/i);
+    const clair = html.match(
+      /(?:publi[ée]e?|mise? en ligne|date de publication)\s*(?:le)?\s*:?\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/i
+    );
+    let d = null;
+    if (meta) d = new Date(meta[1]);
+    else if (clair) d = new Date(`${clair[3]}-${String(clair[2]).padStart(2, '0')}-${String(clair[1]).padStart(2, '0')}T00:00:00Z`);
+    if (d && !isNaN(d) && d.getTime() <= Date.now() + 86400000 && d.getUTCFullYear() >= 2015) {
+      resultat.date = d.toISOString();
+    }
+  }
+
+  return resultat;
+}
+
+async function completerDatesManquantes(offers) {
+  // Le drapeau `datePubFiable` n'existe qu'à l'écriture : ici on applique la
+  // même règle sur la source, c'est elle qui fait foi.
+  const aCompleter = offers.filter((o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o.url);
+  if (!aCompleter.length) return 0;
+
+  // Une file par hôte : deux sites différents peuvent être interrogés en
+  // parallèle, mais on ne bombarde jamais le même. BNP nous avait renvoyé des
+  // 403 pour l'avoir oublié, et le robots.txt du Crédit Agricole demande 3 s.
+  const parHote = new Map();
+  for (const o of aCompleter) {
+    let hote;
+    try {
+      hote = new URL(o.url).host;
+    } catch {
+      continue;
+    }
+    if (!parHote.has(hote)) parHote.set(hote, []);
+    parHote.get(hote).push(o);
+  }
+
+  const DELAI_PAR_HOTE = { 'groupecreditagricole.jobs': 3000, 'group.bnpparibas': 1500 };
+  let trouvees = 0;
+
+  await Promise.all(
+    [...parHote.entries()].map(async ([hote, liste]) => {
+      const delai = DELAI_PAR_HOTE[hote] || 700;
+      for (const o of liste) {
+        try {
+          const r = await fetch(o.url, {
+            headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+            signal: AbortSignal.timeout(20000),
+          });
+          if (r.ok) {
+            const fiche = ficheJsonLd(await r.text());
+            if (fiche.date) {
+              o._postedAt = fiche.date;
+              o._dateRecuperee = true;
+              trouvees++;
+            }
+            // La description ne sert qu'à juger la séniorité, et seulement si
+            // la source n'en avait pas déjà fourni une.
+            if (fiche.description && !o._descr) o._descr = fiche.description;
+          }
+        } catch {
+          /* fiche injoignable : l'offre reste sans date, on n'invente pas */
+        }
+        await new Promise((res) => setTimeout(res, delai));
+      }
+    })
+  );
+
+  return trouvees;
+}
+
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
 
   const publicOffers = offers.map((o) => {
-    const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, ...rest } = o;
+    const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, _dateRecuperee, ...rest } = o;
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
     // C'est ce qui alimente le filtre "nouvelles offres" de la page : plus
     // fiable que postedAt, que certaines sources ne fournissent pas ou mal.
@@ -1897,7 +2145,9 @@ function writeOutput(offers) {
       firstSeenAt: _firstSeenAt,
       // false = la source ne date pas ses offres : _postedAt vaut la date de
       // collecte, la page ne doit donc pas l'afficher comme date de publication.
-      datePubFiable: SOURCES_DATE_FIABLE_RE.test(o.source),
+      // _dateRecuperee = la liste ne datait pas l'offre, mais sa fiche l'a fait
+      // (JSON-LD `datePosted`) : la date est alors tout aussi réelle.
+      datePubFiable: SOURCES_DATE_FIABLE_RE.test(o.source) || o._dateRecuperee === true,
       // true = « Pépite JJ », mise en avant dans le bandeau du haut.
       pepite: pepites.has(o._key),
     };
@@ -2070,7 +2320,28 @@ async function run() {
   const final = await applyFreshnessAndDeadRemoval(deduped);
   console.log(`[pipeline] ${final.length} offres finales après vérification de fraîcheur${CHECK_LINKS ? ' + liens' : ''}.`);
 
-  writeOutput(final);
+  const nonDatee = (o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateRecuperee !== true;
+  const sansDateAvant = final.filter(nonDatee).length;
+  const recuperees = await completerDatesManquantes(final);
+  const sansDateApres = final.filter(nonDatee).length;
+  console.log(
+    `[pipeline] Dates de publication : ${recuperees} récupérées sur les fiches ` +
+      `(${sansDateAvant} manquantes -> ${sansDateApres}). ` +
+      `${final.length - sansDateApres}/${final.length} offres datées.`
+  );
+
+  // Second passage du filtre junior. Les fiches qu'on vient de lire ont donné
+  // à des centaines d'offres la description qui leur manquait : jusqu'ici leur
+  // séniorité n'était jugée que sur l'intitulé, et un poste demandant cinq ans
+  // d'expérience passait dès que son titre ne disait pas « senior ».
+  const avantSeniorite = final.length;
+  const publiables = final.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr));
+  console.log(
+    `[pipeline] ${publiables.length} offres après second filtre 0-3 ans sur les fiches ` +
+      `(${avantSeniorite - publiables.length} postes confirmés démasqués par leur description).`
+  );
+
+  writeOutput(publiables);
   console.log(
     `[pipeline] Écrit dans ${path.relative(process.cwd(), OUTPUT_PATH)}` +
       `, ${path.relative(process.cwd(), RSS_PATH)} (flux RSS) et ${path.relative(process.cwd(), SITEMAP_PATH)}.`
@@ -2079,18 +2350,18 @@ async function run() {
   // Résumé par onglet et par famille
   const byVolet = {};
   const byFamille = {};
-  for (const o of final) {
+  for (const o of publiables) {
     byVolet[o.volet] = (byVolet[o.volet] || 0) + 1;
     byFamille[o.famille] = (byFamille[o.famille] || 0) + 1;
   }
   // Origine des offres : montre ce qu'apporte chaque source, et combien
   // d'offres ont été retrouvées dans plusieurs sources puis fusionnées.
   const parSource = {};
-  for (const o of final) {
+  for (const o of publiables) {
     const p = o.source.split(':')[0];
     parSource[p] = (parSource[p] || 0) + 1;
   }
-  const fusionnees = final.filter((o) => o.alsoOn && o.alsoOn.length).length;
+  const fusionnees = publiables.filter((o) => o.alsoOn && o.alsoOn.length).length;
   console.log('\n--- Origine des offres ---');
   for (const [p, n] of Object.entries(parSource).sort((a, b) => b[1] - a[1])) {
     console.log('  ' + p.padEnd(18) + String(n).padStart(5));
@@ -2099,7 +2370,7 @@ async function run() {
 
   {
     const parMaison = {};
-    for (const o of final) parMaison[o.maison] = (parMaison[o.maison] || 0) + 1;
+    for (const o of publiables) parMaison[o.maison] = (parMaison[o.maison] || 0) + 1;
     // Le groupe des PME se compte à part : mêlé au classement, il écraserait
     // tout et on ne verrait plus quelles maisons de référence recrutent.
     const classees = Object.entries(parMaison)

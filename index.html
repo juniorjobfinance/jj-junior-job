@@ -516,6 +516,28 @@
     content: "◍ ";
     color: var(--brass);
   }
+  /* Ancienneté de l'annonce. Un candidat trie d'abord là-dessus : une offre
+     de trois mois ne se traite pas comme celle d'hier. Elle est donc lue en
+     même temps que le lieu, pas reléguée en pied de carte. */
+  .card .meta .tag-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .card .meta .tag-date::before {
+    content: "◷ ";
+    color: var(--brass);
+  }
+  /* Moins d'une semaine : la seule information de la ligne qui mérite une
+     couleur, parce qu'elle change la décision de postuler tout de suite. */
+  .card .meta .tag-date.recente {
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .card .meta .tag-date.recente::before {
+    content: "● ";
+    color: var(--ok);
+  }
   .card .badges { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
   .card .foot {
     display: flex;
@@ -703,11 +725,6 @@
       <span class="count" id="new-count"></span>
     </label>
 
-    <label class="new-only" for="ref-only">
-      <span><input type="checkbox" id="ref-only"> Grandes maisons</span>
-      <span class="count" id="ref-count"></span>
-    </label>
-
     <h2>Famille métier</h2>
     <fieldset id="familles-fieldset"></fieldset>
 
@@ -823,7 +840,6 @@
     // Filtre « grandes maisons » : ne montrer que les offres d'un employeur de la
     // liste de référence (banques, Big 4, sociétés de gestion, assureurs...).
     // Ces offres existaient déjà mais restaient invisibles, noyées dans le reste.
-    refOnly: false,
     lieu: '',
     emp: '',
     sort: 'recent',
@@ -844,7 +860,6 @@
     if (state.emp) p.set('entreprise', state.emp);
     if (state.q) p.set('q', state.q);
     if (state.newOnly) p.set('nouveau', '1');
-    if (state.refOnly) p.set('maisons', '1');
     if (state.sort !== 'recent') p.set('tri', state.sort);
     var qs = p.toString();
     history.replaceState(null, '', qs ? '?' + qs : location.pathname);
@@ -862,13 +877,17 @@
     state.emp = p.get('entreprise') || '';
     state.q = p.get('q') || '';
     state.newOnly = p.get('nouveau') === '1';
-    state.refOnly = p.get('maisons') === '1';
     var tri = p.get('tri');
     if (tri === 'entreprise' || tri === 'poste') state.sort = tri;
   }
 
-  // "Nouvelle" = repérée par JJ lors du dernier passage quotidien, c.-à-d.
-  // vue pour la première fois il y a moins de 24 h.
+  // "Nouvelle" = PUBLIÉE par l'employeur il y a moins de 24 h. C'est la date
+  // qui intéresse le candidat : une annonce parue la semaine dernière n'est
+  // pas neuve parce que JJ vient de la découvrir. La date de première vue,
+  // qu'on utilisait avant, mesurait notre couverture, pas la fraîcheur de
+  // l'offre — et elle se réinitialisait dès qu'un intitulé changeait, ce qui
+  // faisait passer 78 % du catalogue pour nouveau du jour au lendemain.
+  // Sans date de publication fiable, on ne prétend rien.
   // "Lien direct" = l'URL mène chez l'entreprise (ou son ATS), pas sur un
   // agrégateur intermédiaire.
   function estDirect(offer) {
@@ -876,8 +895,9 @@
   }
 
   function isNew(offer) {
-    if (!offer.firstSeenAt) return false;
-    return (Date.now() - new Date(offer.firstSeenAt).getTime()) < 86400000;
+    if (offer.datePubFiable === false || !offer.postedAt) return false;
+    var d = daysAgo(offer.postedAt);
+    return d !== null && d <= 1;
   }
 
   // Vrai quand « nouveau » ne distingue plus rien : au tout premier passage de
@@ -900,8 +920,6 @@
     empSelect: document.getElementById('emp-filter'),
     q: document.getElementById('q'),
     newOnly: document.getElementById('new-only'),
-    refOnly: document.getElementById('ref-only'),
-    refCount: document.getElementById('ref-count'),
     sort: document.getElementById('sort'),
     newCount: document.getElementById('new-count'),
     resetBtn: document.getElementById('reset-filters'),
@@ -1001,25 +1019,10 @@
     var badges = viaBadge(offer);
     if (etatNouveauteUtile && isNew(offer)) badges += '<span class="badge new">NOUVEAU</span> ';
 
-    // Date de PUBLICATION par l'employeur, en clair. Les concurrents affichent
-    // des offres de 2 mois mêlées à des offres de 12 h sans le dire (et Indeed
-    // tague "nouveau" une annonce de janvier). L'afficher, c'est laisser le
-    // candidat juger lui-même de la fraîcheur.
-    // Quelques ATS (TalentSoft, SuccessFactors, framework e-i) ne publient
-    // aucune date, ni en liste ni sur la fiche. Leur postedAt vaut la date de
-    // collecte : l'afficher comme date de publication serait faux. Plutôt que
-    // d'occuper la carte avec une pastille qui dit qu'on ne sait pas — ce qui
-    // n'aide personne et fait négligé sur une carte sur dix — on n'affiche
-    // simplement rien. L'absence de date se comprend d'elle-même.
-    if (offer.datePubFiable === false) {
-      // rien : pas de pastille de date
-    } else {
-      var p = daysAgo(offer.postedAt);
-      if (p !== null && p >= 0) {
-        var txt = p === 0 ? "Publiée aujourd'hui" : p === 1 ? 'Publiée hier' : 'Publiée il y a ' + p + ' j';
-        badges += '<span class="badge posted">' + txt + '</span> ';
-      }
-    }
+    // La date de publication est remontée en haut de carte, parmi les
+    // pastilles (voir cardHTML) : « depuis quand est-ce en ligne » se lit en
+    // même temps que le métier et le lieu, au lieu d'attendre le pied de
+    // carte. Elle n'est donc plus répétée ici.
 
     // "Vérifiée aujourd'hui" figurait sur la quasi-totalité des cartes : une
     // pastille que tout le monde porte n'informe personne, et l'en-tête l'annonce
@@ -1042,12 +1045,25 @@
       // aucune date (datePubFiable === false) portent la date de collecte : à
       // jour égal elles passent DERRIÈRE celles réellement publiées ce jour-là,
       // sinon 150 offres sans date trusteraient le haut de la liste.
+      // La comparaison se fait au JOUR, pas à la milliseconde. Les offres sans
+      // date portent l'heure de collecte (18 h 12), plus tardive que toute
+      // publication réelle du même jour : comparées à la milliseconde, elles
+      // gagnaient toujours et le départage ci-dessous n'était jamais atteint.
+      // Résultat, les offres sans date occupaient le haut de chaque onglet —
+      // précisément ce que le drapeau de fiabilité devait empêcher.
+      var jourDe = function (iso) {
+        if (!iso) return -Infinity;
+        var d = new Date(iso);
+        return isNaN(d) ? -Infinity : Math.floor(new Date(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+      };
       arr.sort(function (a, b) {
-        var da = new Date(b.postedAt || 0) - new Date(a.postedAt || 0);
-        if (da !== 0) return da;
+        var ja = jourDe(a.postedAt);
+        var jb = jourDe(b.postedAt);
+        if (ja !== jb) return jb - ja;
         var fa = a.datePubFiable === false ? 1 : 0;
         var fb = b.datePubFiable === false ? 1 : 0;
-        return fa - fb;
+        if (fa !== fb) return fa - fb;
+        return new Date(b.postedAt || 0) - new Date(a.postedAt || 0);
       });
     }
     return arr;
@@ -1059,7 +1075,6 @@
 
   function matchesFilters(o) {
     if (state.newOnly && !isNew(o)) return false;
-    if (state.refOnly && !o.maisonReference) return false;
     if (state.familles.size && !state.familles.has(o.famille)) return false;
     if (state.structure && o.sector !== state.structure) return false;
     if (state.lieu && zoneDe(o) !== state.lieu) return false;
@@ -1097,11 +1112,31 @@
   }
 
   function cardHTML(o) {
+    // Le lieu devient une pastille au même titre que la famille et la
+    // structure : il ne doit plus traîner dans l'intitulé.
+    var lieuTexte = o.loc && !/^non précisé$/i.test(o.loc) ? o.loc : '';
+    if (o.place && o.place !== 'France') lieuTexte = lieuTexte ? lieuTexte + ', ' + o.place : o.place;
+
     var metaBits = [
       '<span class="tag-famille">' + esc(o.famille) + '</span>',
-      '<span class="tag-struct">' + esc(o.sector) + '</span>',
-      '<span class="tag-loc">' + esc(o.loc) + (o.place && o.place !== 'France' ? ', ' + esc(o.place) : '') + '</span>'
+      '<span class="tag-struct">' + esc(o.sector) + '</span>'
     ];
+    if (lieuTexte) metaBits.push('<span class="tag-loc">' + esc(lieuTexte) + '</span>');
+
+    // « Depuis quand cette offre est-elle en ligne ? » est la question que se
+    // pose un candidat avant même de cliquer : une annonce de trois mois a peu
+    // de chances d'aboutir. On la met donc parmi les pastilles, en évidence,
+    // plutôt qu'en petit en bas de carte.
+    var jours = daysAgo(o.postedAt);
+    if (o.datePubFiable !== false && jours !== null && jours >= 0) {
+      var quand = jours === 0 ? "Publiée aujourd'hui"
+        : jours === 1 ? 'Publiée hier'
+        : jours < 7 ? 'Publiée il y a ' + jours + ' jours'
+        : jours < 31 ? 'Publiée il y a ' + Math.round(jours / 7) + ' sem.'
+        : 'Publiée il y a ' + Math.round(jours / 30) + ' mois';
+      metaBits.push('<span class="tag-date' + (jours <= 7 ? ' recente' : '') + '">' + quand + '</span>');
+    }
+
     if (o.sal) metaBits.push('<span class="mono">' + esc(o.sal) + '</span>');
     if (o.dl) metaBits.push('<span class="mono">avant le ' + esc(o.dl) + '</span>');
 
@@ -1207,11 +1242,9 @@
     els.newOnly.closest('label').hidden = !etatNouveauteUtile;
     if (!etatNouveauteUtile && state.newOnly) {
       state.newOnly = false;
-    state.refOnly = false;
       els.newOnly.checked = false;
     }
     els.newCount.textContent = base.filter(isNew).length;
-    els.refCount.textContent = base.filter(function (o) { return !!o.maisonReference; }).length;
     // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que
     // le menu n'existe), pas du DOM.
     // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
@@ -1271,12 +1304,6 @@
 
   els.sort.addEventListener('change', function () {
     state.sort = els.sort.value;
-    state.page = 1;
-    render();
-  });
-
-  els.refOnly.addEventListener('change', function () {
-    state.refOnly = els.refOnly.checked;
     state.page = 1;
     render();
   });
@@ -1355,7 +1382,6 @@
   });
   els.q.value = state.q;
   els.newOnly.checked = state.newOnly;
-  els.refOnly.checked = state.refOnly;
   els.sort.value = state.sort;
   els.structureSelect.value = state.structure;
   Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
