@@ -1108,6 +1108,9 @@ const TARGET_COMPANIES = {
     // Ces deux tenants sont mondiaux et n'ont pas de niveau "pays" : le
     // connecteur coche les villes françaises de la facette lieux.
     { tenant: 'pwc', dc: 'wd3', site: 'Global_Experienced_Careers', emp: 'PwC' },
+    // Le portail « Campus » porte les stages et jeunes diplômés — la cible de JJ.
+    // Seul celui des expérimentés était branché.
+    { tenant: 'pwc', dc: 'wd3', site: 'Global_Campus_Careers', emp: 'PwC' },
     { tenant: 'accenture', dc: 'wd103', site: 'accentureCareers', emp: 'Accenture' },
     { tenant: 'ms', dc: 'wd5', site: 'External', emp: 'Morgan Stanley' },
     { tenant: 'kering', dc: 'wd3', site: 'kering', emp: 'Kering' },
