@@ -43,7 +43,7 @@ async function getJSON(url, options = {}) {
 // gestion" — l'intitulé le plus répandu du métier — et "actuari" ratait
 // "actuaire". Ces deux trous écartaient de vraies offres depuis le début.
 const FINANCE_KEYWORDS_RE =
-  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|cost control|\bfp&a\b|audit|risqu|\brisk\b|conformit|complian|actua[ir]|underwrit|souscript|sinistre|recouvrement|consolid|commissaire aux comptes|assuranc|insuranc|banqu|bancaire|courtage|courtier|patrimoine|fiscalist|(?:back|middle|front)[- ]office|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|g[ée]ran\w* de portefeuille|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
+  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|cost control|\bfp&a\b|audit|risqu|\brisk\b|conformit|complian|actua[ir]|underwrit|souscript|sinistre|recouvrement|consolid|commissaire aux comptes|assuranc|insuranc|banqu|bancaire|\bbanking\b|\bbanker\b|\bbank\b|courtage|courtier|patrimoine|fiscalist|(?:back|middle|front)[- ]office|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|\bfx\b|\bequities\b|delta one|fixed income|g[ée]ran\w* de portefeuille|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
 
 // Contre-filtre : certains intitulés matchent un mot-clé finance par accident
 // ("IT Support **Analyst**", "**Legal** Assistant", "Product **Analyst**").
@@ -70,7 +70,7 @@ function looksLikeFinance(...fields) {
   // Un signal finance FORT (comptabilité, contrôle de gestion, M&A, actuariat...)
   // l'emporte sur le contre-filtre : "Contrôleur de gestion IT" reste de la finance.
   const strongFinance =
-    /comptab|accounti|accountant|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets/i;
+    /comptab|accounti|accountant|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets|\bfx\b|\bequities\b|delta one|\bstirt\b/i;
   // Ce signal fort doit venir de l'INTITULÉ du poste (toujours le premier champ),
   // jamais d'un libellé de rubrique passé ensuite (catégorie Adzuna, département,
   // équipe). Ces libellés sont des paniers grossiers : Adzuna range sous
@@ -1345,7 +1345,11 @@ const TARGET_COMPANIES = {
   oraclecloud: [
     { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX_1', emp: 'Groupe BPCE' },
     { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardProfessionalCareers', emp: 'Lazard' },
-    { host: 'jpmc.fa.oraclecloud.com', site: 'CX_1001', emp: 'JPMorgan', keywords: ['Paris', 'France'] },
+    // Oracle Cloud accepte un vrai filtre de lieu, plus juste qu'une recherche
+    // par mots-clés : « location=France » rend 21 postes français sur 22, là où
+    // « keyword=Paris » en manquait quatre. Le catalogue mondial de JPMorgan
+    // approche les 7 000 postes : sans filtre, il serait hors de portée.
+    { host: 'jpmc.fa.oraclecloud.com', site: 'CX_1001', emp: 'JPMorgan', location: 'France' },
   ],
   // Ashby : https://api.ashbyhq.com/posting-api/job-board/{company}
   // Framework e-i.com (Crédit Mutuel Alliance Fédérale)
@@ -1707,7 +1711,7 @@ async function fetchRecruitee({ company, emp }) {
 // majoritairement aux États-Unis), parcourir toute la liste puis filtrer côté
 // client ne marche pas — les offres françaises se trouvent bien au-delà de la
 // limite de pagination. On interroge alors le serveur ville par ville.
-async function fetchOracleCloud({ host, site, emp, keywords }) {
+async function fetchOracleCloud({ host, site, emp, keywords, location }) {
   const jobs = [];
   const pageSize = 200;
   const queries = keywords && keywords.length ? keywords : [null];
@@ -1718,6 +1722,9 @@ async function fetchOracleCloud({ host, site, emp, keywords }) {
           `https://${host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions` +
           `?onlyData=true&expand=requisitionList&finder=findReqs;siteNumber=${site},` +
           (kw ? `keyword=${encodeURIComponent(kw)},` : '') +
+          // Filtre de lieu natif : plus fiable qu'un mot-clé, qui cherche aussi
+          // dans l'intitulé et rate les postes dont le titre ne dit pas la ville.
+          (location ? `location=${encodeURIComponent(location)},` : '') +
           `limit=${pageSize},offset=${offset}`;
         const json = await getJSON(url);
         const bloc = (json.items || [])[0] || {};
