@@ -1360,6 +1360,15 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src.startsWith('yello:')) {
+    // Carte d'un job board Yello : seuls l'intitulé et le lien sont exposés.
+    emp = item.emp;
+    title = raw.titre;
+    ville = '';
+    pays = 'France'; // filtré par l'identifiant pays du tableau
+    url = raw.url;
+    typeContratRaw = raw.titre;
+    postedAt = null;
   } else if (__src === 'mckinsey') {
     // Une même offre est ouverte dans des dizaines de villes : on ne retient que
     // Paris, seul lieu qui nous concerne, et la date n'est pas fournie.
@@ -1601,7 +1610,8 @@ const SOURCE_PRIORITY = (src) => {
     src.startsWith('sitemapld:') || // fiche lue sur le site officiel = source de vérité
     src.startsWith('liste:') || // liste officielle de la maison = fiche employeur
     src.startsWith('bpce:') || // API officielle du groupe
-    src === 'mckinsey'
+    src === 'mckinsey' ||
+    src.startsWith('yello:')
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.

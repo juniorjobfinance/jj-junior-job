@@ -881,6 +881,77 @@ async function fetchMcKinsey() {
     }));
 }
 
+// ---------------------------------------------------------------------------
+// Yello — job boards hébergés (EY)
+//
+// Le tableau d'offres est mondial : 1 767 annonces, dont 172 en France. Le
+// filtre pays est un identifiant numérique propre à chaque tableau, relevé une
+// fois dans la requête que la page émet quand on coche « France ».
+//
+// L'endpoint renvoie du JSON dont le champ `html` contient les cartes : on
+// récupère donc un fragment de page, pas un objet structuré. C'est moins solide
+// qu'une vraie API mais infiniment plus que de deviner des URL.
+const YELLO_BOARDS = [
+  {
+    emp: 'EY',
+    host: 'https://eyglobal.yello.co',
+    board: 'c1riT--B2O-KySgYWsZO1Q',
+    filtrePays: '29994', // « France » dans leur référentiel
+    maxPages: 12,
+  },
+];
+
+async function fetchYelloBoard(cfg) {
+  const offres = [];
+  const vus = new Set();
+
+  try {
+    for (let page = 1; page <= cfg.maxPages; page++) {
+      const url =
+        `${cfg.host}/job_boards/${cfg.board}/search` +
+        `?locale=fr&query=&filters=${cfg.filtrePays}&page=${page}`;
+      const res = await fetch(url, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)', accept: 'application/json' },
+        signal: AbortSignal.timeout(25000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = (await res.json()).html || '';
+
+      const cartes = [...html.matchAll(
+        /<a class="search-results__req_title"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g
+      )];
+      if (!cartes.length) break;
+
+      let nouveaux = 0;
+      for (const [, href, titreBrut] of cartes) {
+        const chemin = href.replace(/&amp;/g, '&');
+        if (vus.has(chemin)) continue;
+        vus.add(chemin);
+        nouveaux++;
+        const titre = titreBrut.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+        if (!titre || !isFinanceOfferFor(cfg.emp, titre)) continue;
+        offres.push({
+          __src: `yello:${cfg.emp}`,
+          emp: cfg.emp,
+          raw: { titre, url: chemin.startsWith('http') ? chemin : cfg.host + chemin },
+        });
+      }
+      // Une page qui ne renvoie que du déjà-vu signale la fin de la liste.
+      if (!nouveaux) break;
+      await new Promise((r) => setTimeout(r, 400));
+    }
+  } catch (err) {
+    console.warn(`[sources] Yello (${cfg.emp}) indisponible:`, err.message);
+  }
+
+  return offres;
+}
+
+async function fetchTousYello() {
+  const lots = await Promise.all(YELLO_BOARDS.map((c) => fetchYelloBoard(c).catch(() => [])));
+  return lots.flat();
+}
+
 async function fetchToutesApisBpce() {
   const lots = await Promise.all(BPCE_APIS.map((c) => fetchBpceApi(c).catch(() => [])));
   return lots.flat();
@@ -2272,7 +2343,7 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
@@ -2281,8 +2352,9 @@ async function fetchAllSources() {
     fetchToutesListesHtml(),
     fetchToutesApisBpce(),
     fetchMcKinsey(),
+    fetchTousYello(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
