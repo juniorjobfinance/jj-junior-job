@@ -758,6 +758,13 @@ const TARGET_COMPANIES = {
     { tenant: 'accenture', dc: 'wd103', site: 'accentureCareers', emp: 'Accenture' },
     { tenant: 'ms', dc: 'wd5', site: 'External', emp: 'Morgan Stanley' },
     { tenant: 'kering', dc: 'wd3', site: 'kering', emp: 'Kering' },
+    // Maisons du haut de la hiérarchie, trouvées par le sondeur grands comptes.
+    // Elles n'ont pas d'identifiant devinable : leur tenant Workday a dû être
+    // sondé motif par motif.
+    { tenant: 'pjtpartners', dc: 'wd1', site: 'Careers', emp: 'PJT Partners' },
+    { tenant: 'hl', dc: 'wd1', site: 'External', emp: 'Houlihan Lokey' },
+    { tenant: 'blackrock', dc: 'wd1', site: 'BlackRock_Professional', emp: 'BlackRock' },
+    { tenant: 'santander', dc: 'wd3', site: 'santanderCareers', emp: 'Santander' },
   ],
   opendatasoft: [
     { domain: 'bpce.opendatasoft.com', dataset: 'groupe-bpce-offres-emploi', emp: 'Groupe BPCE' },
@@ -825,6 +832,7 @@ const TARGET_COMPANIES = {
     { host: 'jobs.servier.com', tenant: 'servier', emp: 'Servier' },
     { host: 'careers.capgemini.com', tenant: 'capgemini', emp: 'Capgemini' },
     { host: 'apply.careers.hsbc.com', tenant: '', emp: 'HSBC France' },
+    { host: 'careers.nomura.com', tenant: 'nomura', emp: 'Nomura' },
   ],
   talentsoft: [
     { host: 'jobs.amundi.com', emp: 'Amundi' },

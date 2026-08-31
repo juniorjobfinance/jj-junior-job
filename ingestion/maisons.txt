@@ -163,3 +163,11 @@ Caisse des Dépôts        | caisse des depots|^cdc\b|banque des territoires
 # L'AFT n'est pas un employeur distinct sur le portail de l'État : ses postes y
 # sont publiés par sa tutelle, la Direction générale du Trésor ("DGT - AFT - ...").
 Agence France Trésor     | agence france tresor|^aft\b|direction generale du tresor|^dgt\b
+
+# Maisons du haut de la hiérarchie branchées le 01/09/2026 : leur ATS n'a pas
+# d'identifiant devinable, il a fallu sonder les motifs d'URL un par un.
+PJT Partners             | ^pjt\b|pjt partners
+Houlihan Lokey           | houlihan lokey|^hl\b
+BlackRock                | ^blackrock\b|black rock
+Nomura                   | ^nomura\b
+Santander                | ^santander\b
