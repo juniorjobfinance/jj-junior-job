@@ -640,6 +640,23 @@ const LISTES_HTML = [
     concurrence: 3,
   },
   {
+    emp: 'Citi',
+    base: 'https://jobs.citi.com',
+    // Leur page « France » est rendue côté serveur et tient sur une seule page.
+    // Attention : ajouter un numéro de page casse le filtre pays et fait
+    // remonter le catalogue mondial — on n'en lit donc qu'une.
+    page: () => 'https://jobs.citi.com/search-jobs/France/',
+    blocRe: /<a[^>]+href="\/job\//i,
+    blocFin: '</a>',
+    lienRe: /^([^"?]+)"/,
+    lienPrefixe: '/job/',
+    depuisLien: true,
+    // /job/{ville}/{intitulé}/{id}/{réf}
+    positionTitre: 2,
+    positionLieu: 1,
+    maxPages: 1,
+  },
+  {
     emp: 'Rothschild & Co',
     base: 'https://www.rothschildandco.com',
     // Leur site français liste tout sur une page unique, sans pagination : le
