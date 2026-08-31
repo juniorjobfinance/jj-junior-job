@@ -115,10 +115,19 @@ const FAMILLES = [
   'M&A & Marchés financiers',
   "Gestion d'actifs & Investissement",
   'Risques, Conformité & Actuariat',
-  'Commercial & Relation client',
   'Data, Tech & Opérations',
   'Autres métiers de la finance',
 ];
+
+// JJ s'adresse aux étudiants et jeunes diplômés qui visent un MÉTIER de la
+// finance : analyse, audit, M&A, marchés, gestion d'actifs, risques, contrôle
+// de gestion. Le recrutement de réseau — conseiller d'agence, commercial en
+// assurance, chargé de clientèle particuliers — relève d'un autre métier et
+// d'un autre public. Il représentait 480 offres sur 1 484 (32 % du site),
+// presque toutes en CDI, publiées en masse ville par ville : il écrasait le
+// catalogue et noyait les postes réellement recherchés. Les offres qui
+// retombent dans cette famille ne sont donc pas publiées.
+const FAMILLE_HORS_PERIMETRE = 'Commercial & Relation client';
 
 // Famille fine (celle des règles) -> famille affichée.
 const CONSOLIDATION_FAMILLES = {
@@ -177,6 +186,13 @@ const FAMILLE_RULES = [
 
   // --- Organisation, MOA, projets ------------------------------------------
   [/business analyst|\bmoa\b|\bamoa\b|ma[îi]trise d'ouvrage|chef(?:fe)? de projet|product owner|organisation et projets|\bpmo\b/i, 'Organisation & Projets'],
+
+  // --- Banque de financement : à sauver AVANT la règle « réseau » -----------
+  // Un « Originateur Sustainable Banking » ou un « Chargé d'affaires » en
+  // financement de projet sont des postes de banque de financement, pas des
+  // conseillers d'agence. Sans cette règle, le motif très large ci-dessous les
+  // happerait et ils disparaîtraient avec le réseau.
+  [/originat|syndication|financement de projet|project finance|sustainable banking|financement durable|leveraged finance|debt capital|equity capital|\bdcm\b|\becm\b|banque d'affaires|corporate (?:&|et) investment|\bcib\b|lenders? (?:insurance )?advisory/i, 'Marchés & Front Office'],
 
   // --- Réseau bancaire et commercial : le plus large, donc en dernier -------
   [/conseill|charg.{0,4} (?:de client|d'affaires|de stmt)|client[èe]le|agence bancaire|banque de d[ée]tail|commercial|d[ée]veloppement|coverage|relation client|account manager|charg.{0,4} d'affaires|business development|\bagence\b/i, 'Banque de détail & clientèle'],
@@ -1159,6 +1175,7 @@ function normalize(item) {
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title });
   const famille = inferFamille(title, romeLibelle);
+  if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
   emp = normaliserEmployeur(emp);
   const maisonRef = trouverMaison(emp);
   const sector = inferSector(emp, maisonRef, title);
