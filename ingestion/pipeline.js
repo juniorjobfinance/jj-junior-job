@@ -1133,9 +1133,23 @@ function cleanTitle(title) {
   //    « (octobre 2026) », « Rentrée de Mars 2026 ». L'onglet et la date de
   //    publication portent déjà cette information ; dans le titre, elle ne fait
   //    que casser l'alignement d'une liste à l'autre.
-  const MOIS = 'janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[ûu]t|septembre|octobre|novembre|d[ée]cembre';
-  t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:rentr[ée]e\\s+(?:de\\s+)?)?(?:${MOIS})\\s+20\\d\\d\\b[)\\s]*`, 'gi'), ' ');
-  t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:${MOIS})\\b\\s*[)]?\\s*$`, 'i'), ' ');
+  // Les mois anglais comptent autant que les français : les banques d'affaires
+  // datent leurs promotions de stagiaires dans l'intitulé, en anglais. Sans
+  // eux, Lazard s'affichait « January - Lazard Investment Banking Intern » —
+  // le mois passe avant le métier, et la liste ne s'aligne plus.
+  const MOIS =
+    'janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[ûu]t|septembre|octobre|novembre|d[ée]cembre|' +
+    'january|february|march|april|may|june|july|august|september|october|november|december';
+  //    « \b » raisonne en ASCII : il voit une limite de mot entre le « h » de
+  //    « March » et le « é » de « Marchés », et amputait donc « Marchés
+  //    financiers » en « és financiers ». D'où la sentinelle explicite, qui
+  //    inclut les lettres accentuées.
+  const FIN_MOT = '(?![A-Za-zÀ-ÿ])';
+  t = t.replace(
+    new RegExp(`[\\s\\-–—(,|]*\\b(?:rentr[ée]e\\s+(?:de\\s+)?)?(?:${MOIS})${FIN_MOT}\\s+20\\d\\d\\b[)\\s]*`, 'gi'),
+    ' '
+  );
+  t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:${MOIS})${FIN_MOT}\\s*[)]?\\s*$`, 'i'), ' ');
 
   // 6) Rémunérations : « - 1700€/mois », « 1 700 € brut », « 2000 euros ».
   //    Le champ salaire existe déjà ; dans l'intitulé, c'est du bruit.
@@ -1178,7 +1192,10 @@ function cleanTitle(title) {
   //    Le mois que cette tournure introduisait reste alors seul en tête
   //    ("Dès septembre - Analyste Crédit"). L'étape 5 ne l'avait pas vu : elle
   //    ne retire un mois que s'il est suivi d'une année ou placé en fin.
-  t = t.replace(new RegExp(`^\\s*(?:${MOIS})\\b\\s*[:\\-–—,]*\\s*`, 'i'), '');
+  //    Le séparateur est exigé : « January - Lazard... » est bien une date de
+  //    promotion, « May Day Analyst » est un intitulé où le mot appartient au
+  //    titre. Sans cette exigence, on amputait le second.
+  t = t.replace(new RegExp(`^\\s*(?:${MOIS})${FIN_MOT}\\s*[:\\-–—,]+\\s*`, 'i'), '');
 
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
@@ -2060,12 +2077,28 @@ function ficheJsonLd(html) {
   // date en clair dans la page (framework e-i — Crédit Mutuel, CIC).
   if (!resultat.date) {
     const meta = html.match(/<meta[^>]+(?:datePosted|published_time|pubdate|DC\.date)[^>]*content="([^"]+)"/i);
-    const clair = html.match(
-      /(?:publi[ée]e?|mise? en ligne|date de publication)\s*(?:le)?\s*:?\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/i
-    );
-    let d = null;
-    if (meta) d = new Date(meta[1]);
-    else if (clair) d = new Date(`${clair[3]}-${String(clair[2]).padStart(2, '0')}-${String(clair[1]).padStart(2, '0')}T00:00:00Z`);
+    let d = meta ? new Date(meta[1]) : null;
+
+    // Dernier recours : la date écrite en toutes lettres dans la page. On
+    // travaille sur le texte débalisé, car le libellé et la valeur sont
+    // souvent séparés par des balises — TalentSoft écrit « <h3>Publication
+    // date</h3> 27/08/2026 », qu'aucune recherche ligne à ligne ne trouve.
+    //
+    // Le libellé est obligatoire : la même page porte « Expected start date
+    // 01/11/2026 », qui est la date de PRISE DE POSTE. Attraper une date au
+    // hasard reviendrait à en inventer une.
+    if (!d || isNaN(d)) {
+      const texte = html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+        .replace(/\s+/g, ' ');
+      const LIBELLE = `(?:date\\s+de\\s+publication|publication\\s+date|publi[ée]e?\\s+le|mise?\\s+en\\s+ligne\\s+le|posted\\s+on)`;
+      const fr = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})`, 'i'));
+      const iso = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})`, 'i'));
+      if (fr) d = new Date(`${fr[3]}-${fr[2].padStart(2, '0')}-${fr[1].padStart(2, '0')}T00:00:00Z`);
+      else if (iso) d = new Date(`${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}T00:00:00Z`);
+    }
+
     if (d && !isNaN(d) && d.getTime() <= Date.now() + 86400000 && d.getUTCFullYear() >= 2015) {
       resultat.date = d.toISOString();
     }

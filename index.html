@@ -239,8 +239,133 @@
      des offres et les recouvre. Il ne doit coller que dans la mise en page à
      deux colonnes, où il occupe sa propre gouttière. Cette règle doit venir
      APRÈS la déclaration sticky ci-dessus pour l'emporter. */
+  /* Bascule des filtres, téléphone uniquement. */
+  .filtres-bascule { display: none; }
   @media (max-width: 820px) {
     aside.filters { position: static; }
+    .filtres-bascule {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font: inherit;
+      font-weight: 600;
+      color: var(--navy-950);
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .filtres-bascule::after {
+      content: "▾";
+      color: var(--brass);
+      transition: transform 0.15s;
+    }
+    .filtres-bascule[aria-expanded="true"]::after { transform: rotate(180deg); }
+    .filtres-bascule-etat {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+    /* Tiroir. Déplier les filtres à leur place reviendrait à repousser les
+       offres encore plus bas : on aurait remplacé un défilement par un autre.
+       Le panneau glisse donc PAR-DESSUS la page, la liste reste où elle est,
+       et on revient aux offres en fermant. */
+    aside.filters {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(86vw, 340px);
+      max-width: 100%;
+      z-index: 60;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--paper-raised);
+      border-right: 1px solid var(--line);
+      box-shadow: 8px 0 32px rgba(10, 20, 36, 0.22);
+      padding: 1rem 1rem 5.5rem;
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: transform 0.22s ease, visibility 0.22s;
+    }
+    aside.filters.ouvert { transform: none; visibility: visible; }
+
+    .filtres-voile {
+      position: fixed;
+      inset: 0;
+      z-index: 55;
+      background: rgba(10, 20, 36, 0.45);
+      border: 0;
+      padding: 0;
+    }
+
+    /* Barre de tête du tiroir, collante : le bouton de fermeture reste à
+       portée de pouce même après avoir fait défiler dix familles métier. */
+    .tiroir-tete {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: -1rem;
+      margin: -1rem -1rem 0.5rem;
+      padding: 0.85rem 1rem;
+      background: var(--paper-raised);
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+      color: var(--navy-950);
+    }
+    .tiroir-fermer {
+      appearance: none;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      width: 2rem;
+      height: 2rem;
+      font: inherit;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+    /* Retour aux offres sans remonter tout le tiroir : le nombre affiché dit
+       ce que les filtres ont donné, donc l'action et son résultat au même
+       endroit. */
+    .tiroir-valider {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: min(86vw, 340px);
+      padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+      background: var(--paper-raised);
+      border-top: 1px solid var(--line);
+      z-index: 61;
+    }
+    .tiroir-valider button {
+      width: 100%;
+      padding: 0.8rem;
+      font: inherit;
+      font-weight: 600;
+      color: var(--paper);
+      background: var(--navy-800);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    body.tiroir-ouvert { overflow: hidden; }
+  }
+  /* Hors téléphone, ni tiroir ni voile : la colonne est toujours là. */
+  .filtres-voile, .tiroir-tete, .tiroir-valider { display: none; }
+  @media (max-width: 820px) {
+    .filtres-voile[hidden] { display: none; }
+    .filtres-voile { display: block; }
+    .tiroir-tete { display: flex; }
+    .tiroir-valider { display: block; }
+    .tiroir-valider[hidden] { display: none; }
   }
   aside.filters h2 {
     font-size: 0.75rem;
@@ -716,7 +841,21 @@
 </div>
 
 <main id="panel-offres">
+  <!-- Sur téléphone, la colonne de filtres se place au-dessus des offres et
+       repousse la première annonce à plus d'un écran et demi de défilement.
+       Un candidat vient voir des offres, pas des cases à cocher : le panneau
+       est donc replié derrière ce bouton, et les offres arrivent tout de
+       suite. Sur grand écran le bouton n'existe pas, la colonne reste visible. -->
+  <button type="button" class="filtres-bascule" id="filtres-bascule" aria-expanded="false" aria-controls="filters-panel">
+    <span>Rechercher et filtrer</span>
+    <span class="filtres-bascule-etat" id="filtres-bascule-etat"></span>
+  </button>
+  <button type="button" class="filtres-voile" id="filtres-voile" hidden aria-label="Fermer les filtres"></button>
   <aside class="filters" id="filters-panel">
+    <div class="tiroir-tete">
+      <span>Filtres</span>
+      <button type="button" class="tiroir-fermer" id="tiroir-fermer" aria-label="Fermer les filtres">✕</button>
+    </div>
     <h2>Recherche</h2>
     <input type="search" id="q" placeholder="Poste, entreprise…" aria-label="Rechercher un poste ou une entreprise">
 
@@ -744,6 +883,9 @@
     </select>
 
     <button id="reset-filters" type="button">Réinitialiser les filtres</button>
+    <div class="tiroir-valider">
+      <button type="button" id="tiroir-valider">Voir les offres</button>
+    </div>
   </aside>
 
   <section aria-live="polite">
@@ -921,6 +1063,11 @@
     q: document.getElementById('q'),
     newOnly: document.getElementById('new-only'),
     sort: document.getElementById('sort'),
+    filtresBascule: document.getElementById('filtres-bascule'),
+    filtresBasculeEtat: document.getElementById('filtres-bascule-etat'),
+    filtresVoile: document.getElementById('filtres-voile'),
+    tiroirFermer: document.getElementById('tiroir-fermer'),
+    tiroirValider: document.getElementById('tiroir-valider'),
     newCount: document.getElementById('new-count'),
     resetBtn: document.getElementById('reset-filters'),
     cards: document.getElementById('cards'),
@@ -1182,7 +1329,11 @@
 
     piste.innerHTML = pepitesCourantes.map(function (o) {
       var lieu = o.loc && !/non précisé/i.test(o.loc) ? o.loc : (o.place && o.place !== 'France' ? o.place : '');
-      var bits = [esc(o.maison || o.emp)];
+      // La maison n'est reprise que si elle dit autre chose que l'employeur :
+      // « Crédit Agricole » sous « Crédit Agricole CIB » situe l'entité, mais
+      // « Lazard » sous « Lazard » écrivait deux fois le même mot.
+      var bits = [];
+      if (o.maison && o.maison !== o.emp) bits.push(esc(o.maison));
       if (lieu) bits.push(esc(lieu));
       bits.push(esc(o.famille));
       return (
@@ -1245,6 +1396,7 @@
       els.newOnly.checked = false;
     }
     els.newCount.textContent = base.filter(isNew).length;
+    majEtatFiltres();
     // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que
     // le menu n'existe), pas du DOM.
     // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
@@ -1272,6 +1424,11 @@
     stateToUrl();
 
     els.resultsCount.textContent = filtered.length + ' offre' + (filtered.length > 1 ? 's' : '');
+    // Le bouton du tiroir dit le résultat avant qu'on le voie : on referme en
+    // sachant sur combien d'offres on retombe.
+    els.tiroirValider.textContent = filtered.length
+      ? 'Voir les ' + filtered.length + ' offre' + (filtered.length > 1 ? 's' : '')
+      : 'Aucune offre — élargir';
 
     if (!filtered.length) {
       els.cards.innerHTML = '<div class="empty-state">Aucune offre ne correspond à ces filtres pour le moment.</div>';
@@ -1300,6 +1457,53 @@
     state.q = els.q.value.trim();
     state.page = 1;
     render();
+  });
+
+  // Replier les filtres ne doit pas les faire oublier : le bouton annonce
+  // combien sont actifs, sans quoi un candidat pourrait chercher longtemps
+  // pourquoi il ne voit que douze offres.
+  function majEtatFiltres() {
+    var n = state.familles.size;
+    if (state.q) n++;
+    if (state.newOnly) n++;
+    if (state.structure) n++;
+    if (state.lieu) n++;
+    if (state.emp) n++;
+    els.filtresBasculeEtat.textContent = n ? n + (n > 1 ? ' filtres actifs' : ' filtre actif') : '';
+  }
+
+  // Le tiroir recouvre la page : tant qu'il est ouvert, le fond ne doit pas
+  // défiler sous le doigt, et la touche Échap doit le refermer comme n'importe
+  // quelle fenêtre modale.
+  function ouvrirTiroir(ouvert) {
+    els.filtersPanel.classList.toggle('ouvert', ouvert);
+    els.filtresBascule.setAttribute('aria-expanded', String(ouvert));
+    els.filtresVoile.hidden = !ouvert;
+    document.body.classList.toggle('tiroir-ouvert', ouvert);
+    if (ouvert) els.q.focus();
+    else els.filtresBascule.focus();
+  }
+
+  els.filtresBascule.addEventListener('click', function () {
+    ouvrirTiroir(!els.filtersPanel.classList.contains('ouvert'));
+  });
+  els.filtresVoile.addEventListener('click', function () { ouvrirTiroir(false); });
+  els.tiroirFermer.addEventListener('click', function () { ouvrirTiroir(false); });
+  els.tiroirValider.addEventListener('click', function () { ouvrirTiroir(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && els.filtersPanel.classList.contains('ouvert')) ouvrirTiroir(false);
+  });
+
+  // Repasser en grand écran alors que le tiroir était ouvert laisserait le
+  // voile et le blocage du défilement en place sur une mise en page qui n'en
+  // veut pas. On remet tout à plat.
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 820 && els.filtersPanel.classList.contains('ouvert')) {
+      els.filtersPanel.classList.remove('ouvert');
+      els.filtresBascule.setAttribute('aria-expanded', 'false');
+      els.filtresVoile.hidden = true;
+      document.body.classList.remove('tiroir-ouvert');
+    }
   });
 
   els.sort.addEventListener('change', function () {
