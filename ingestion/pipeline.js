@@ -576,8 +576,19 @@ function inferSector(emp, maison, title, famille) {
 // la promesse centrale de JJ et impose souvent un compte tiers pour postuler.
 // Note : Adzuna est une SOURCE (on l'interroge par API) mais ses redirect_url
 // pointent vers l'annonce d'origine — c'est bien le domaine final qui compte.
+// Depuis le 01/09/2026, la règle est absolue : JJ ne publie QUE des annonces
+// dont le lien mène chez l'employeur. Les agrégateurs y entrent donc aussi —
+// y compris ceux qu'on interroge comme sources. Aucun des 92 liens d'Adzuna ne
+// menait ailleurs que sur adzuna.fr : cliquer sur une offre affichait une page
+// intermédiaire, parfois avec un type de contrat faux, ce qui vidait de son
+// sens la promesse centrale du site.
+//
+// On ne coupe pas les connecteurs pour autant : France Travail donne parfois
+// l'adresse de l'annonce d'origine, et ces offres-là restent les bienvenues.
+// C'est le LIEN qu'on juge, pas la source — si demain un agrégateur renvoie
+// vers l'employeur, ses offres entrent sans qu'on touche à rien.
 const INTERMEDIAIRE_RE =
-  /jobteaser\.com|welcometothejungle\.com|welcomekit\.co|hellowork\.com|wizbii\.com|jobijoba\.com|consultor\.fr|indeed\.[a-z.]+|linkedin\.com|glassdoor\.[a-z.]+|apec\.fr|studyrama|letudiant\.fr|monster\.[a-z.]+|cadremploi\.fr|regionsjob\.com|meteojob\.com|talent\.com|jooble\.org|neuvoo|jobrapido|optioncarriere|keljob\.com|aplitrak\.com|handicap-job\.com|contactrh\.com|mytalentplug|talentplug|beetween|jobvitae|hellowork|figaro\s?emploi|profilculture|choosemycompany|engagement-jeunes|walkngo|jobteaser|placedesmetiers|emploi-collectivites/i;
+  /adzuna\.[a-z.]+|candidat\.francetravail\.fr|labonnealternance\.apprentissage\.beta\.gouv\.fr|choisirleservicepublic\.gouv\.fr|jobteaser\.com|welcometothejungle\.com|welcomekit\.co|hellowork\.com|wizbii\.com|jobijoba\.com|consultor\.fr|indeed\.[a-z.]+|linkedin\.com|glassdoor\.[a-z.]+|apec\.fr|studyrama|letudiant\.fr|monster\.[a-z.]+|cadremploi\.fr|regionsjob\.com|meteojob\.com|talent\.com|jooble\.org|neuvoo|jobrapido|optioncarriere|keljob\.com|aplitrak\.com|handicap-job\.com|contactrh\.com|mytalentplug|talentplug|beetween|jobvitae|hellowork|figaro\s?emploi|profilculture|choosemycompany|engagement-jeunes|walkngo|jobteaser|placedesmetiers|emploi-collectivites/i;
 
 // ---------------------------------------------------------------------------
 // Filtre géographique : grandes villes uniquement

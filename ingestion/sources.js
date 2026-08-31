@@ -182,7 +182,20 @@ async function franceTravailPage(token, params, debut, fin) {
   return { resultats: json.resultats || [], fini: res.status === 200 };
 }
 
+// France Travail et La Bonne Alternance sont débranchés depuis le 01/09/2026.
+// Leurs annonces renvoient vers candidat.francetravail.fr ou vers le portail de
+// l'alternance, jamais vers le site de l'employeur : la règle « 100 % direct »
+// les écartait donc en fin de chaîne. Sur 192 offres France Travail, 21
+// seulement portaient un lien direct — pour 27 codes métier interrogés avec
+// pagination à chaque passage. Le rapport ne se justifiait plus.
+//
+// Ces sources apportaient surtout des employeurs inconnus : 180 de leurs 192
+// offres n'étaient rattachées à aucune maison de référence. JJ se concentre
+// désormais sur les grandes maisons, branchées une à une en direct.
+const AGREGATEURS_PUBLICS_ACTIFS = false;
+
 async function fetchFranceTravail() {
+  if (!AGREGATEURS_PUBLICS_ACTIFS) return [];
   if (!FRANCE_TRAVAIL_CLIENT_ID || !FRANCE_TRAVAIL_CLIENT_SECRET) {
     // Pas de clé configurée -> pas d'appel réseau. On ne remonte des offres
     // d'exemple (non cliquables) que si explicitement demandé (DEMO_DATA=1).
@@ -368,7 +381,18 @@ const ADZUNA_CIBLES = [
   { what: 'TotalEnergies', employeur: /^total ?[ée]?nergies/i },
 ];
 
+// Adzuna est débranché depuis le 01/09/2026. Aucun de ses liens ne menait chez
+// l'employeur : ils renvoyaient tous vers adzuna.fr, où le candidat retrouvait
+// une page intermédiaire affichant parfois un type de contrat faux. Le filtre
+// des liens intermédiaires les écartait donc tous en fin de chaîne — autant ne
+// plus appeler leur API du tout, et laisser leur quota tranquille.
+//
+// Le code reste en place : si JJ décidait un jour d'accepter à nouveau des
+// liens indirects, il suffirait de retirer ce retour anticipé.
+const ADZUNA_ACTIF = false;
+
 async function fetchAdzuna() {
+  if (!ADZUNA_ACTIF) return [];
   if (!ADZUNA_APP_ID || !ADZUNA_APP_KEY) return [];
 
   const toutes = [];
@@ -582,6 +606,7 @@ const LISTES_HTML = [
     lienRe: /href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/,
     champs: { type: 0, titre: 1, lieu: 2 },
     maxPages: 400,
+    concurrence: 6,
   },
   {
     emp: 'Crédit Agricole',
@@ -603,6 +628,7 @@ const LISTES_HTML = [
     },
     // 1 186 offres à 33 par page : 40 pages suffisent, avec de la marge.
     maxPages: 45,
+    concurrence: 3,
     // Leur robots.txt demande 3 secondes aux agents Claude ; on s'aligne sur
     // cette courtoisie même si la règle générique ne nous l'impose pas.
     delaiMs: 3000,
@@ -671,21 +697,33 @@ async function fetchListeHtml(cfg) {
   const retenues = [];
   let echecs = 0;
 
-  for (let p = 1; p <= cfg.maxPages; p++) {
-    let html;
-    try {
-      const res = await fetch(cfg.page(p), {
-        headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
-        signal: AbortSignal.timeout(25000),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      html = await res.text();
-    } catch {
-      if (++echecs >= 5) break; // le site ne répond plus : on garde l'acquis
-      continue;
-    }
+  // Quelques centaines de pages lues une par une allongeaient le passage
+  // quotidien de plusieurs minutes. On en lit un petit paquet en parallèle —
+  // sans dépasser la courtoisie due au site, qui reste réglée par delaiMs.
+  const parLot = cfg.concurrence || 1;
 
-    const lot = parseListeHtml(html, cfg);
+  for (let p = 1; p <= cfg.maxPages; p += parLot) {
+    const numeros = [];
+    for (let k = 0; k < parLot && p + k <= cfg.maxPages; k++) numeros.push(p + k);
+
+    const pages = await Promise.all(
+      numeros.map(async (n) => {
+        try {
+          const res = await fetch(cfg.page(n), {
+            headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+            signal: AbortSignal.timeout(25000),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return await res.text();
+        } catch {
+          echecs++;
+          return null;
+        }
+      })
+    );
+
+    if (echecs >= 5 && !pages.some(Boolean)) break; // le site ne répond plus
+    const lot = pages.filter(Boolean).flatMap((h) => parseListeHtml(h, cfg));
     if (!lot.length) break; // dernière page atteinte
 
     for (const o of lot) {
@@ -920,6 +958,7 @@ const LBA_DEPARTEMENTS = [
 ];
 
 async function fetchLaBonneAlternance() {
+  if (!AGREGATEURS_PUBLICS_ACTIFS) return [];
   if (!LBA_API_TOKEN) {
     return DEMO_DATA ? SAMPLE_LBA : [];
   }
@@ -2042,6 +2081,7 @@ function texteBrut(html) {
 }
 
 async function fetchServicePublic({ organisme, emp, maxPages = 5, delayMs = 800 }) {
+  if (!AGREGATEURS_PUBLICS_ACTIFS) return [];
   const offres = [];
   try {
     for (let page = 1; page <= maxPages; page++) {
