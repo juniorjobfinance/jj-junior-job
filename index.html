@@ -274,13 +274,6 @@
   }
   .famille-option + .famille-option { border-top: 1px solid rgba(220, 214, 201, 0.45); }
   .famille-option .famille-nom { display: flex; align-items: center; gap: 0.4rem; }
-  .famille-option .famille-desc {
-    grid-column: 1 / -1;
-    padding-left: 1.15rem;
-    font-size: 0.7rem;
-    line-height: 1.35;
-    color: #8b93a3;
-  }
   .famille-option input { margin: 0; }
   .famille-option .count {
     font-family: var(--font-mono);
@@ -791,21 +784,6 @@
   // qui découvre le secteur ne sait pas ce que cache « M&A & Marchés » — ces
   // mots-clés le lui disent sans qu'il ait à deviner. Format volontairement
   // court : des mots-clés, jamais des phrases.
-  // Le nom parle au connaisseur, la description parle à celui qui débute. On y
-  // dit ce qu'on FAIT — et on cite des maisons connues, qui orientent le
-  // débutant autant qu'elles rassurent l'initié.
-  var FAMILLE_DESCRIPTIONS = {
-    'Fusions & Acquisitions': "conseiller une entreprise qui en achète ou en vend une autre — Lazard, Rothschild, Goldman",
-    'Marchés financiers': 'salle de marché : acheter, vendre et structurer des produits — trading, sales',
-    'Investissement & Private equity': "placer l'argent de clients dans des sociétés ou des fonds — Amundi, Ardian",
-    'Audit': "vérifier les comptes d'autres entreprises — Deloitte, EY, KPMG, PwC",
-    'Conseil': 'aider une entreprise à décider et à se transformer — McKinsey, BCG, Bain',
-    'Comptabilité': 'tenir et clôturer les comptes de sa propre entreprise',
-    'Contrôle de gestion & Trésorerie': "budgets, marges, financement : piloter l'argent de sa boîte",
-    'Risques & Conformité': 'mesurer les risques et respecter la réglementation — risk, compliance, actuariat',
-    'Data & Quant': 'modéliser et chiffrer — quant, middle et back office',
-    'Autres métiers de la finance': 'ce qui ne rentre dans aucune autre case'
-  };
 
   // Dix institutions. Chaque libellé commence par un nom de structure — Banque,
   // Société, Compagnie, Cabinet, Entreprise, Institution — pour qu'on voie d'un
@@ -920,11 +898,9 @@
   function buildFamilleFieldset() {
     els.familleFieldset.innerHTML = FAMILLES.map(function (f, i) {
       var id = 'famille-' + i;
-      var desc = FAMILLE_DESCRIPTIONS[f] || '';
       return '<label class="famille-option" for="' + id + '">' +
         '<span class="famille-nom"><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
         '<span class="count" data-famille="' + f + '"></span>' +
-        (desc ? '<span class="famille-desc">' + desc + '</span>' : '') +
         '</label>';
     }).join('');
     Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
