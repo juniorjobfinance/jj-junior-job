@@ -632,6 +632,22 @@ const LISTES_HTML = [
     // Leur robots.txt demande 3 secondes aux agents Claude ; on s'aligne sur
     // cette courtoisie même si la règle générique ne nous l'impose pas.
     delaiMs: 3000,
+    concurrence: 3,
+  },
+  {
+    emp: 'KPMG',
+    base: 'https://emplois.kpmg.fr',
+    page: (n) => `https://emplois.kpmg.fr/recherche-d%27offres?p=${n}`,
+    // Les cartes n'ont pas de balise propre : on découpe sur le lien lui-même,
+    // dont le chemin porte déjà la ville et l'intitulé.
+    blocRe: /<a[^>]+href="\/emploi\//i,
+    blocFin: '</a>',
+    lienRe: /^([^"]+)"/,
+    lienPrefixe: '/emploi/',
+    // Tout se lit dans l'adresse : /emploi/{ville}/{intitulé}/{id}/{réf}
+    depuisLien: true,
+    maxPages: 12,
+    concurrence: 4,
   },
 ];
 
@@ -648,6 +664,39 @@ function decodeAttribut(v) {
 // Découpe une page de liste en offres, selon la description du site.
 function parseListeHtml(html, cfg) {
   const offres = [];
+
+  // Certains sites n'entourent pas leurs offres d'une balise identifiable :
+  // tout est dans l'adresse, qui porte la ville et l'intitulé
+  // (/emploi/{ville}/{intitulé}/{id}/{réf}). On lit alors les liens eux-mêmes.
+  if (cfg.depuisLien) {
+    const vus = new Set();
+    for (const m of html.matchAll(new RegExp(`href="(${cfg.lienPrefixe}[^"]+)"`, 'g'))) {
+      const chemin = m[1];
+      if (vus.has(chemin)) continue;
+      vus.add(chemin);
+      const parts = chemin.split('/').filter(Boolean); // emploi, ville, intitulé, id, réf
+      if (parts.length < 3) continue;
+      // L'adresse est en minuscules et sans accents : « auditeur-financier-f-h »
+      // deviendrait « auditeur financier f h ». On rend une capitale initiale
+      // et on retire la mention de genre, que le nettoyage général attend
+      // écrite « F/H » et ne reconnaîtrait pas séparée par des espaces.
+      const versTexte = (s) =>
+        decodeURIComponent(s)
+          .replace(/-/g, ' ')
+          .replace(/\s+[fh]\s+[hf]\s*$/i, '')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());
+      offres.push({
+        url: cfg.base + chemin,
+        titre: versTexte(parts[2]),
+        lieu: versTexte(parts[1]),
+        type: '',
+      });
+    }
+    return offres;
+  }
+
   const blocs = html.split(cfg.blocRe).slice(1);
   for (const b of blocs) {
     const fin = b.indexOf(cfg.blocFin);
@@ -729,7 +778,11 @@ async function fetchListeHtml(cfg) {
     for (const o of lot) {
       // La France se lit soit dans un attribut « pays » dédié, soit dans le
       // libellé du lieu (« Ville, Région, Pays »).
-      const enFrance = o.pays ? /^france$/i.test(o.pays) : /\bfrance\b/i.test(o.lieu || '');
+      // Un site franco-français ne répète pas « France » dans chaque lieu : on
+      // ne l'exige que là où le libellé porte le pays (BNP) ou un champ dédié.
+      const enFrance = o.pays
+        ? /^france$/i.test(o.pays)
+        : cfg.depuisLien || /\bfrance\b/i.test(o.lieu || '');
       if (!enFrance) continue;
       // On juge la finance sur l'entité qui recrute quand elle est connue :
       // « Analyste » chez CACIB et « Analyste » chez une caisse régionale ne
