@@ -1563,6 +1563,7 @@ const TARGET_COMPANIES = {
     { host: 'careers.axa.com', emp: 'AXA' },
     { host: 'portal.careers.hsbc.com', pid: '563774609123718', domain: 'hsbc.com', emp: 'HSBC France' },
     { host: 'careers.bcg.com', widgets: true, emp: 'BCG' },
+    { host: 'careers.allianz.com', widgets: true, emp: 'Allianz France' },
   ],
   ashby: [
     { company: 'qonto', emp: 'Qonto' },
