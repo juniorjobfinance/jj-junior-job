@@ -457,6 +457,33 @@
     color: inherit;
   }
   .card:hover { border-color: var(--brass); }
+  /* Pastille de contrat : toujours au même endroit, toujours de la même forme.
+     C'est elle qui porte "Stage / Alternance / VIE / CDI", pour que l'intitulé
+     n'ait plus à le faire — les sources l'écrivaient chacune à leur manière. */
+  .card .contrat {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    background: var(--brass-soft);
+    color: var(--brass-dark);
+    border: 1px solid rgba(168, 118, 63, 0.35);
+  }
+  .card .contrat.vie {
+    background: #e6eef7;
+    color: #1d4470;
+    border-color: rgba(34, 69, 107, 0.3);
+  }
+  .card .contrat.cdi-cdd {
+    background: #e7f0ea;
+    color: #2a5f47;
+    border-color: rgba(47, 107, 79, 0.3);
+  }
   .card h3 {
     margin: 0 0 0.15rem;
     font-size: 1.05rem;
@@ -682,11 +709,6 @@
       <span class="count" id="new-count"></span>
     </label>
 
-    <label class="new-only" for="direct-only">
-      <span><input type="checkbox" id="direct-only"> Lien direct entreprise</span>
-      <span class="count" id="direct-count"></span>
-    </label>
-
     <h2>Famille métier</h2>
     <fieldset id="familles-fieldset"></fieldset>
 
@@ -801,7 +823,6 @@
     structure: '',
     q: '',
     newOnly: false,
-    directOnly: false,
     lieu: '',
     emp: '',
     sort: 'recent',
@@ -822,7 +843,6 @@
     if (state.emp) p.set('entreprise', state.emp);
     if (state.q) p.set('q', state.q);
     if (state.newOnly) p.set('nouveau', '1');
-    if (state.directOnly) p.set('direct', '1');
     if (state.sort !== 'recent') p.set('tri', state.sort);
     var qs = p.toString();
     history.replaceState(null, '', qs ? '?' + qs : location.pathname);
@@ -840,7 +860,6 @@
     state.emp = p.get('entreprise') || '';
     state.q = p.get('q') || '';
     state.newOnly = p.get('nouveau') === '1';
-    state.directOnly = p.get('direct') === '1';
     var tri = p.get('tri');
     if (tri === 'entreprise' || tri === 'poste') state.sort = tri;
   }
@@ -878,8 +897,6 @@
     empSelect: document.getElementById('emp-filter'),
     q: document.getElementById('q'),
     newOnly: document.getElementById('new-only'),
-    directOnly: document.getElementById('direct-only'),
-    directCount: document.getElementById('direct-count'),
     sort: document.getElementById('sort'),
     newCount: document.getElementById('new-count'),
     resetBtn: document.getElementById('reset-filters'),
@@ -987,9 +1004,12 @@
     // candidat juger lui-même de la fraîcheur.
     // Quelques ATS (TalentSoft, SuccessFactors, framework e-i) ne publient
     // aucune date, ni en liste ni sur la fiche. Leur postedAt vaut la date de
-    // collecte : l'afficher comme date de publication serait faux. On le dit.
+    // collecte : l'afficher comme date de publication serait faux. Plutôt que
+    // d'occuper la carte avec une pastille qui dit qu'on ne sait pas — ce qui
+    // n'aide personne et fait négligé sur une carte sur dix — on n'affiche
+    // simplement rien. L'absence de date se comprend d'elle-même.
     if (offer.datePubFiable === false) {
-      badges += '<span class="badge posted unknown">Date de publication non communiquée</span> ';
+      // rien : pas de pastille de date
     } else {
       var p = daysAgo(offer.postedAt);
       if (p !== null && p >= 0) {
@@ -1036,7 +1056,6 @@
 
   function matchesFilters(o) {
     if (state.newOnly && !isNew(o)) return false;
-    if (state.directOnly && !estDirect(o)) return false;
     if (state.familles.size && !state.familles.has(o.famille)) return false;
     if (state.structure && o.sector !== state.structure) return false;
     if (state.lieu && zoneDe(o) !== state.lieu) return false;
@@ -1048,7 +1067,12 @@
         return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
       };
       var q = sansAccents(state.q);
-      var hay = sansAccents(o.title + ' ' + o.emp);
+      // Le type de contrat ne figure plus dans l'intitulé (l'onglet le dit
+      // déjà, et le répéter sur chaque carte cassait l'alignement de la liste).
+      // On l'ajoute donc à la matière recherchée : taper « alternance » ou
+      // « stage » dans la barre doit continuer à fonctionner.
+      var contrat = o.volet === 'cdi-cdd' ? 'cdi cdd' : o.volet;
+      var hay = sansAccents(o.title + ' ' + o.emp + ' ' + contrat + ' ' + (o.famille || ''));
       if (hay.indexOf(q) === -1) return false;
     }
     return true;
@@ -1077,8 +1101,15 @@
     if (o.sal) metaBits.push('<span class="mono">' + esc(o.sal) + '</span>');
     if (o.dl) metaBits.push('<span class="mono">avant le ' + esc(o.dl) + '</span>');
 
+    // Pastille de contrat en tête de carte. L'intitulé ne porte plus le mot
+    // "Stage"/"Alternance" (les sources l'écrivaient chacune à leur façon, en
+    // préfixe, en suffixe, en majuscules, ce qui rendait la liste illisible) :
+    // l'information est désormais toujours au même endroit et de la même forme.
+    var LIBELLE_CONTRAT = { stage: 'Stage', alternance: 'Alternance', vie: 'VIE', 'cdi-cdd': 'CDI · CDD' };
+
     return (
       '<a class="card" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
+        '<span class="contrat ' + esc(o.volet) + '">' + esc(LIBELLE_CONTRAT[o.volet] || o.volet) + '</span>' +
         '<h3>' + esc(o.title) + '</h3>' +
         '<div class="emp">' + esc(o.emp) + '</div>' +
         '<div class="meta">' + metaBits.join('') + '</div>' +
@@ -1175,7 +1206,6 @@
       els.newOnly.checked = false;
     }
     els.newCount.textContent = base.filter(isNew).length;
-    els.directCount.textContent = base.filter(estDirect).length;
     // La valeur voulue vient de l'état (elle peut arriver de l'URL avant que
     // le menu n'existe), pas du DOM.
     // Les deux fourre-tout passent en fin de liste quel que soit leur volume :
@@ -1239,12 +1269,6 @@
     render();
   });
 
-  els.directOnly.addEventListener('change', function () {
-    state.directOnly = els.directOnly.checked;
-    state.page = 1;
-    render();
-  });
-
   els.newOnly.addEventListener('change', function () {
     state.newOnly = els.newOnly.checked;
     state.page = 1;
@@ -1276,11 +1300,9 @@
     state.emp = '';
     state.q = '';
     state.newOnly = false;
-    state.directOnly = false;
     state.page = 1;
     els.q.value = '';
     els.newOnly.checked = false;
-    els.directOnly.checked = false;
     els.structureSelect.value = '';
     els.lieuSelect.value = '';
     els.empSelect.value = '';
@@ -1321,7 +1343,6 @@
   });
   els.q.value = state.q;
   els.newOnly.checked = state.newOnly;
-  els.directOnly.checked = state.directOnly;
   els.sort.value = state.sort;
   els.structureSelect.value = state.structure;
   Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {

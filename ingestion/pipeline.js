@@ -672,6 +672,10 @@ function classifyVolet({ src, typeContratRaw, title }) {
   // moindre ambiguïté ("Stagiaire Consultant", "Alternance Expertise Comptable").
   const ti = (title || '').toLowerCase();
   if (estOffreVIE(title)) return 'vie';
+  // "Débutant" décrit un NIVEAU D'EXPÉRIENCE, pas un contrat : « Contrôleur
+  // financier débutant » est un poste d'embauche, pas une alternance. Ces
+  // offres (TotalEnergies) atterrissaient pourtant dans l'onglet Alternance.
+  if (/d[ée]butant/.test(ti) && !/alternan|apprenti|\bstage\b|stagiaire/.test(ti)) return 'cdi-cdd';
   // L'alternance d'abord : "Alternance - stage de 12 mois" est une alternance.
   if (/alternan|apprenti|apprentice|contrat pro/.test(ti)) return 'alternance';
   if (/\bstage\b|stagiaire|internship|\bintern\b|\btrainee\b/.test(ti)) return 'stage';
@@ -845,7 +849,13 @@ const SIGLES = new Set(['CDI', 'CDD', 'RH', 'ESG', 'KYC', 'LCB', 'FT', 'ALM', 'I
   'SI', 'IT', 'BI', 'PME', 'ETI', 'ADV', 'DAF', 'FPA', 'MOA', 'MOE', 'VIE', 'CVC']);
 
 function adoucirMajuscules(titre) {
-  if (!titre || titre !== titre.toUpperCase()) return titre;
+  if (!titre) return titre;
+  // Titres tout en minuscules ("comptable général h/f") : on met au moins la
+  // première lettre en capitale, pour que la liste ne mélange pas les styles.
+  if (titre === titre.toLowerCase() && /[a-zà-öø-ÿ]/.test(titre)) {
+    return titre.replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());
+  }
+  if (titre !== titre.toUpperCase()) return titre;
   if (titre.replace(/[^A-ZÀ-Ö]/g, '').length < 8) return titre;
   return titre
     .split(' ')
@@ -870,13 +880,61 @@ function adoucirMajuscules(titre) {
 // l'employeur : juristes, avocats, recruteurs. Les laisser passer, c'est faire
 // perdre son temps au candidat sur une liste qui promet des offres.
 const PAS_UNE_OFFRE_RE =
-  /afterwork|after[\s-]work|webinar|webinaire|job ?dating|portes ouvertes|forum (?:de |des )?(?:recrutement|m[ée]tiers|[ée]coles)|\bsalon\b|meet ?up|conf[ée]rence|d[ée]couvrez|rejoignez[\s-]nous|candidature spontan[ée]e|talent ?pool|cooptation/i;
+  /afterwork|after[\s-]work|webinar|webinaire|job ?dating|portes ouvertes|forum (?:de |des )?(?:recrutement|m[ée]tiers|[ée]coles)|\bsalon\b|meet ?up|conf[ée]rence|d[ée]couvrez|rejoignez[\s-]nous|candidature spontan[ée]e|talent ?pool|cooptation|stage en 1 jour|stage d.un jour|\b1 jour pour\b/i;
 
+// Une offre dont l'intitulé annonce une prise de poste DÉJÀ PASSÉE n'est plus
+// pourvoyable : "Assistant Contrôle de Gestion – Janvier 2026" affiché en août
+// 2026 fait perdre son temps au candidat. Les maisons laissent traîner ces
+// annonces sur leur site longtemps après la date. On ne retient que le mois à
+// venir (avec un mois de tolérance, le temps que la campagne se termine).
+const MOIS_FR = {
+  janvier: 1, fevrier: 2, mars: 3, avril: 4, mai: 5, juin: 6,
+  juillet: 7, aout: 8, septembre: 9, octobre: 10, novembre: 11, decembre: 12,
+};
+
+function dateDePosteDepassee(titre, maintenant = new Date()) {
+  const t = (titre || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const m = t.match(
+    /(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)\s+(20\d\d)/
+  );
+  if (!m) return false;
+  const annonce = new Date(Number(m[2]), MOIS_FR[m[1]] - 1, 1);
+  const limite = new Date(maintenant.getFullYear(), maintenant.getMonth() - 1, 1);
+  return annonce < limite;
+}
+
+// Métiers qui n'ont de financier que l'employeur. Le droit et la fiscalité en
+// font partie : chez un Big Four, un « Stage Fiscalité » relève du pôle
+// juridique et fiscal, pas d'une des familles de JJ — et le public visé n'est
+// pas le même. Idem pour la communication, le design, la gestion de projet et
+// la facturation, qui remontaient par des intitulés hébergés chez des maisons
+// de finance (Community manager chez Rothschild, Design Authority chez Crédit
+// Agricole, Assistant chef de projet chez BNP).
 const METIER_HORS_PERIMETRE_RE =
-  /general counsel|\bavocat|recruiter|talent acquisition|charg[ée]e? de recrutement|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b/i;
+  /general counsel|\bavocat|\blawyer\b|\bjuriste\b|\bjuridique\b|fiscalit[ée]|\bfiscalist|\btax\b|recruiter|talent acquisition|charg[ée]e? de recrutement|community manager|\bdesign\b|\bdesigner\b|chef(?:fe)? de projet|charg[ée]e? de facturation|\bfacturation\b|centre d.affaires?|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b/i;
+
+// JJ s'adresse aux profils Bac+5 : grande école de commerce, école d'ingénieur,
+// master universitaire. Les intitulés qui annoncent explicitement un niveau
+// inférieur — BTS, DUT, licence, bachelor, Bac+2/+3 — visent un autre public, et
+// noyaient l'alternance sous des annonces d'assistanat comptable.
+const NIVEAU_TROP_BAS_RE =
+  /\bbts\b|\bdut\b|\bcap\b|licence pro|\blicence\b|bachelor|bac\s*\+?\s*[23]\b|bac\s*obtenu|niveau bac\b/i;
+
+// Écoles, CFA et organismes de formation qui publient l'annonce À LA PLACE de
+// l'entreprise. Le candidat ne travaillerait pas pour eux : on lui vend une
+// formation, et le « lien direct entreprise » promis par JJ n'existe pas. Ces
+// annonces sont en outre dupliquées d'une ville à l'autre et jamais rattachées
+// à une maison réelle.
+const EMPLOYEUR_ECOLE_RE =
+  /\b[ée]coles?\b|\bcfa\b|\bcampus\b|centre de formation|\bmbway\b|\besam\b|\baftec\b|\bihecf\b|\be2se\b|aivancity|inted group|studency|\biesa\b|groupe alternance|\bipac\b|formation/i;
 
 function estUneOffreFinance(titre) {
-  return !PAS_UNE_OFFRE_RE.test(titre) && !METIER_HORS_PERIMETRE_RE.test(titre);
+  return (
+    !PAS_UNE_OFFRE_RE.test(titre) &&
+    !METIER_HORS_PERIMETRE_RE.test(titre) &&
+    !NIVEAU_TROP_BAS_RE.test(titre) &&
+    !dateDePosteDepassee(titre)
+  );
 }
 
 function cleanTitle(title) {
@@ -890,15 +948,53 @@ function cleanTitle(title) {
   // 2) Durées et dates résiduelles en tête : "6 mois - ", "- Janvier 2027 - "
   t = t.replace(/^\d+\s*mois\s*[:\-–—]\s*/i, '');
 
-  // 3) Mentions de genre : on n'en garde aucune (redondant, alourdit la lecture)
-  t = t.replace(/[\s\-–—(]*\b[hf]\s*\/\s*[hfx](?:\s*\/\s*x)?\b[)\s]*/gi, ' ');
-  t = t.replace(/\((?:h|f|m)\/(?:f|h|w)\)/gi, ' ');
+  // 3) Mentions de genre : on n'en garde aucune (redondant, alourdit la lecture).
+  //    Les sources écrivent aussi bien "H/F" que "M/F", "F/M" ou "M/W" — la
+  //    règle ne couvrait que la forme française et laissait passer les autres.
+  t = t.replace(/[\s\-–—(]*\b[hfmw]\s*\/\s*[hfmwx](?:\s*\/\s*[dx])?\b[)\s]*/gi, ' ');
+  t = t.replace(/\((?:h|f|m)\s*\/\s*(?:f|h|w|d)\)/gi, ' ');
 
-  // 4) Codes internes et hashtags : "#TDFE2026", "(réf. 12345)"
+  // 4) Codes internes et hashtags : "#TDFE2026", "(réf. 12345)", "(10266)"
   t = t.replace(/#\S+/g, ' ').replace(/\(\s*r[ée]f\.?[^)]*\)/gi, ' ');
+  t = t.replace(/\(\s*\d{3,}\s*\)/g, ' ');
 
-  // 5) Ponctuation résiduelle en bord
-  t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,]+|[\s:\-–—,]+$/g, '').trim();
+  // 5) Dates de prise de poste, où qu'elles soient : « - Janvier 2027 »,
+  //    « (octobre 2026) », « Rentrée de Mars 2026 ». L'onglet et la date de
+  //    publication portent déjà cette information ; dans le titre, elle ne fait
+  //    que casser l'alignement d'une liste à l'autre.
+  const MOIS = 'janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[ûu]t|septembre|octobre|novembre|d[ée]cembre';
+  t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:rentr[ée]e\\s+(?:de\\s+)?)?(?:${MOIS})\\s+20\\d\\d\\b[)\\s]*`, 'gi'), ' ');
+  t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:${MOIS})\\b\\s*[)]?\\s*$`, 'i'), ' ');
+
+  // 6) Rémunérations : « - 1700€/mois », « 1 700 € brut », « 2000 euros ».
+  //    Le champ salaire existe déjà ; dans l'intitulé, c'est du bruit.
+  t = t.replace(/[\s\-–—(,|]*\d[\d\s.,]*\s*(?:€|euros?)\s*(?:\/\s*mois|par mois|brut|net)?[)\s]*/gi, ' ');
+
+  // 7) Durées résiduelles : « - 6 mois », « (12 mois) »
+  t = t.replace(/[\s\-–—(,|]*\b\d{1,2}\s*mois\b[)\s]*/gi, ' ');
+
+  // 8) Mentions de contrat restées en milieu ou fin de titre : la pastille de la
+  //    carte le dit déjà (« Comptable en Alternance » -> « Comptable »). On ne
+  //    touche PAS au VIE, qui n'est reconnaissable qu'à cet endroit.
+  //    Garde-fou : on ne retire que si le titre garde du sens. « Stage Audit »
+  //    doit rester « Audit », mais « Stage » tout court ne doit pas devenir vide,
+  //    et « Stage en audit » ne doit pas donner « En audit ».
+  const sansContrat = t
+    .replace(/[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d'?[ée]tudes?)?|stagiaire|internship)\b[)\s]*/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/^[\s:\-–—,|]+/, '')
+    .replace(/^(?:en|de|du|des|d'|pour|au|aux)\s+/i, '')
+    .trim();
+  if (sansContrat.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 4) t = sansContrat;
+
+  // 9) Scories laissées par les retraits ci-dessus : une année orpheline
+  //    ("Consultant - 2027") et les tournures d'annonce qui introduisaient une
+  //    date qu'on vient d'enlever ("À partir de – Sales Analyst").
+  t = t.replace(/[\s\-–—(,|]*\b20\d\d\b[)\s]*/g, ' ');
+  t = t.replace(/^\s*(?:[àa]\s+partir\s+d[eu]|[àa]\s+compter\s+d[eu]|d[èe]s|pour)\s*[:\-–—,]*\s*/i, '');
+
+  // 10) Ponctuation résiduelle en bord
+  t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|]+|[\s:\-–—,|]+$/g, '').trim();
 
   return t;
 }
@@ -1177,6 +1273,7 @@ function normalize(item) {
   const famille = inferFamille(title, romeLibelle);
   if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
   emp = normaliserEmployeur(emp);
+  if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
   const maisonRef = trouverMaison(emp);
   const sector = inferSector(emp, maisonRef, title);
 
@@ -1238,27 +1335,52 @@ function slugLieu(loc) {
   );
 }
 
+// Les sources suffixent le nom de l'employeur de façon incohérente : "Chanel"
+// et "Chanel Fr", "KPMG France" et "Kpmg France", "Marriott" et "Marriott
+// Hotels Resorts". Deux clés pour la même maison = un doublon qui survit. On
+// retire ce suffixe de pays pour le RAPPROCHEMENT uniquement — le nom affiché,
+// lui, n'est jamais modifié. On ne touche pas aux suffixes qui désignent une
+// entité réellement distincte ("Crédit Agricole CIB" n'est pas "Crédit Agricole").
+function slugEmp(emp) {
+  return slug(emp).replace(/\s+(?:fr|france)$/, '').trim();
+}
+
 function canonicalKey(offer) {
-  return `${slug(offer.emp)}|${slugTitleFuzzy(offer.title)}|${slugLieu(offer.loc)}`;
+  return `${slugEmp(offer.emp)}|${slugTitleFuzzy(offer.title)}|${slugLieu(offer.loc)}`;
 }
 
 // Clé sans le lieu : sert au rattrapage des offres dont une source donne la ville
 // et l'autre pas. Un même poste chez une même maison publié deux fois, une fois
 // localisé et une fois "Non précisé", est la même offre.
 function cleSansLieu(offer) {
-  return `${slug(offer.emp)}|${slugTitleFuzzy(offer.title)}`;
+  return `${slugEmp(offer.emp)}|${slugTitleFuzzy(offer.title)}`;
 }
 
 // Retire les offres sans lieu quand la même offre existe ailleurs avec un lieu.
 // On garde toujours la version la plus informative pour le candidat.
+// Un lieu est "vague" quand il ne désigne aucun lieu de travail précis :
+// "France", "Non précisé", une région ou un département seul. Les agrégateurs
+// publient volontiers la même offre avec un lieu vague là où la source directe
+// donne la ville — "Groupe Samse / Isère" contre "Groupe Samse / Grenoble",
+// "Chanel / France" contre "Chanel Fr / Paris". Deux clés, donc un doublon qui
+// passait au travers.
+function lieuEstVague(loc) {
+  const v = (loc || '').trim().toLowerCase();
+  if (!v || /^non précisé$|^france$/.test(v)) return true;
+  if (REGIONS_ET_INCONNU.some((r) => v === r || v.startsWith(r + ','))) return true;
+  if (DEPARTEMENTS.some((d) => v === d || v.startsWith(d + ','))) return true;
+  return false;
+}
+
+// Retire la version vague d'une offre quand la même existe avec une vraie ville.
+// Deux VILLES différentes restent deux postes distincts (un stage à Lyon et un
+// à Strasbourg chez Deloitte sont bien deux offres) : on ne fusionne jamais ça.
 function retirerSansLieuRedondantes(offers) {
   const localisees = new Set();
   for (const o of offers) {
-    if (!/^non précisé$|^france$/i.test((o.loc || '').trim())) localisees.add(cleSansLieu(o));
+    if (!lieuEstVague(o.loc)) localisees.add(cleSansLieu(o));
   }
-  return offers.filter(
-    (o) => !(/^non précisé$|^france$/i.test((o.loc || '').trim()) && localisees.has(cleSansLieu(o)))
-  );
+  return offers.filter((o) => !(lieuEstVague(o.loc) && localisees.has(cleSansLieu(o))));
 }
 
 const SOURCE_PRIORITY = (src) => {
