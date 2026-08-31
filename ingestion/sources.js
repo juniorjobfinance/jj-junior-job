@@ -1121,6 +1121,7 @@ const TARGET_COMPANIES = {
   ],
   phenom: [
     { host: 'careers.axa.com', emp: 'AXA' },
+    { host: 'portal.careers.hsbc.com', pid: '563774609123718', domain: 'hsbc.com', emp: 'HSBC France' },
   ],
   ashby: [
     { company: 'qonto', emp: 'Qonto' },
@@ -1603,7 +1604,34 @@ async function fetchTalentSoft({ host, emp, maxPages = 20, delayMs = 1500 }) {
 //   GET https://{host}/api/jobs?country=France&limit=...
 // robots.txt d'AXA : "Allow: /" avec "crawl-delay: 5" — accès explicitement
 // autorisé, on respecte le délai demandé entre les pages.
-async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000 }) {
+// Phenom se décline en deux générations d'API. La première expose /api/jobs ;
+// la seconde, /api/apply/v2/jobs/{pid}/jobs, où pid identifie le portail de la
+// maison — il se lit dans les requêtes que leur page carrières effectue. Les
+// deux vivent dans le même connecteur : c'est la plateforme qu'on branche, pas
+// l'entreprise, et une maison de plus reste une ligne de configuration.
+async function fetchPhenomV2({ host, pid, domain, emp, country = 'France' }) {
+  let positions;
+  try {
+    const url =
+      `https://${host}/api/apply/v2/jobs/${pid}/jobs` +
+      `?domain=${encodeURIComponent(domain)}&location=${encodeURIComponent(country)}&num=200`;
+    const json = await getJSON(url);
+    positions = json.positions || [];
+  } catch (err) {
+    console.warn(`[sources] Phenom v2 (${emp}) indisponible:`, err.message);
+    return [];
+  }
+
+  return positions
+    .filter((p) => new RegExp(`\\b${country}\\b`, 'i').test(p.location || ''))
+    .filter((p) => isFinanceOfferFor(emp, p.name, p.business_unit || p.department || ''))
+    .map((p) => ({ __src: `phenom:${host}`, emp, raw: p }));
+}
+
+async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain }) {
+  // Portail de deuxième génération : on passe la main.
+  if (pid) return fetchPhenomV2({ host, pid, domain: domain || host, emp, country });
+
   const all = [];
   const pageSize = 100;
   try {

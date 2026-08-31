@@ -1373,14 +1373,22 @@ function normalize(item) {
     postedAt = new Date().toISOString(); // la liste ne porte pas de date
   } else if (__src.startsWith('phenom:')) {
     emp = item.emp;
-    title = raw.title;
-    // Format AXA : "75-PARIS" -> on retire le code département en préfixe.
-    ville = (raw.city || '').replace(/^\d{2,3}\s*-\s*/, '').trim();
+    // Les deux générations de l'API ne nomment pas les champs pareil :
+    // la première dit title/city/apply_url, la seconde name/location/id.
+    title = raw.title || raw.name;
+    ville = raw.city
+      ? // Format AXA : "75-PARIS" -> on retire le code département en préfixe.
+        raw.city.replace(/^\d{2,3}\s*-\s*/, '').trim()
+      : // Format v2 : "PARIS, Paris, France" -> la ville seule.
+        (raw.location || '').split(',')[0].trim();
     pays = 'France';
-    url = raw.apply_url || raw.meta_data?.canonical_url;
-    typeContratRaw = raw.title;
-    romeLibelle = (raw.categories || raw.category || []).join(' ');
-    postedAt = raw.posted_date || new Date().toISOString();
+    url =
+      raw.apply_url ||
+      raw.meta_data?.canonical_url ||
+      (raw.id ? `https://portal.careers.hsbc.com/job/${raw.id}` : null);
+    typeContratRaw = title;
+    romeLibelle = (raw.categories || raw.category || [raw.business_unit, raw.department].filter(Boolean)).join(' ');
+    postedAt = raw.posted_date || (raw.t_create ? new Date(raw.t_create).toISOString() : null) || new Date().toISOString();
   } else if (__src === 'manuel') {
     emp = item.emp;
     title = raw.title;
