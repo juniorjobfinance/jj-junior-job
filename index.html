@@ -698,13 +698,6 @@
     border: 1px dashed var(--line);
     font-style: italic;
   }
-  .badge.new {
-    background: var(--navy-950);
-    color: var(--paper);
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-
   /* L'attribut hidden vaut "display: none", mais il vient de la feuille de style
      du navigateur : n'importe quel "display" déclaré ici l'emporte sur lui. Sans
      cette règle, masquer un élément en JavaScript par .hidden = true ne produit
@@ -1164,7 +1157,14 @@
 
   function freshnessBadge(offer) {
     var badges = viaBadge(offer);
-    if (etatNouveauteUtile && isNew(offer)) badges += '<span class="badge new">NOUVEAU</span> ';
+    // Plus de badge « NOUVEAU » : il disait la même chose que la pastille
+    // « Publiée aujourd'hui » du haut de carte. Les deux étaient distincts tant
+    // que « nouveau » signifiait « JJ vient de la découvrir » ; depuis que les
+    // deux se lisent sur la date de publication, c'était écrire deux fois la
+    // même information. La pastille est gardée : elle sait aussi dire « il y a
+    // 3 jours » ou « il y a 2 semaines », là où le badge ne disait qu'oui ou non.
+    // Le filtre « Nouvelles offres (24 h) », lui, reste : filtrer est utile même
+    // quand l'étiquette est redondante.
 
     // La date de publication est remontée en haut de carte, parmi les
     // pastilles (voir cardHTML) : « depuis quand est-ce en ligne » se lit en
