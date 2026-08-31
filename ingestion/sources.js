@@ -755,8 +755,11 @@ async function fetchListeHtml(cfg) {
     const numeros = [];
     for (let k = 0; k < parLot && p + k <= cfg.maxPages; k++) numeros.push(p + k);
 
-    const pages = await Promise.all(
-      numeros.map(async (n) => {
+    // Une page qui échoue est retentée deux fois avant d'être abandonnée : ces
+    // sites limitent le débit, et un refus passager faisait perdre les deux
+    // tiers du catalogue d'une maison sans la moindre erreur visible.
+    const lirePage = async (n) => {
+      for (let essai = 0; essai < 3; essai++) {
         try {
           const res = await fetch(cfg.page(n), {
             headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
@@ -765,11 +768,15 @@ async function fetchListeHtml(cfg) {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return await res.text();
         } catch {
-          echecs++;
-          return null;
+          // Attente croissante : 1 s, puis 3 s.
+          if (essai < 2) await new Promise((r) => setTimeout(r, 1000 * (essai * 2 + 1)));
         }
-      })
-    );
+      }
+      echecs++;
+      return null;
+    };
+
+    const pages = await Promise.all(numeros.map(lirePage));
 
     if (echecs >= 5 && !pages.some(Boolean)) break; // le site ne répond plus
     const lot = pages.filter(Boolean).flatMap((h) => parseListeHtml(h, cfg));
@@ -1058,6 +1065,53 @@ async function fetchEightfold(cfg) {
         date: p.postedTs ? new Date(p.postedTs * 1000).toISOString() : null,
       },
     }));
+}
+
+// ---------------------------------------------------------------------------
+// Bank of America — servlets de recherche de leur site carrières
+//
+// Deux points d'entrée cohabitent : « campus » pour les stages et programmes
+// jeunes diplômés, et le servlet général pour tous les contrats. On interroge
+// les deux et le dédoublonnage fait le reste — une offre présente des deux
+// côtés n'apparaît qu'une fois.
+const BOFA_SERVLETS = ['campusjobssearchservlet', 'jobssearchservlet'];
+const BOFA_VILLES = ['Paris, France'];
+
+async function fetchBankOfAmerica() {
+  const parId = new Map();
+
+  for (const servlet of BOFA_SERVLETS) {
+    for (const ville of BOFA_VILLES) {
+      try {
+        const url =
+          `https://careers.bankofamerica.com/services/${servlet}` +
+          `?start=0&rows=200&search=jobsByLocation&searchstring=${encodeURIComponent(ville)}&`;
+        const json = await getJSON(url);
+        for (const o of json.jobsList || []) {
+          const id = o.jobRequisitionId || o.jcrURL;
+          if (id && !parId.has(id)) parId.set(id, o);
+        }
+      } catch (err) {
+        console.warn(`[sources] Bank of America (${servlet}) indisponible:`, err.message);
+      }
+      await new Promise((r) => setTimeout(r, 300));
+    }
+  }
+
+  return [...parId.values()]
+    .filter((o) => isFinanceOfferFor('Bank of America', o.postingTitle, o.division || o.family || ''))
+    .map((o) => ({
+      __src: 'bofa',
+      emp: 'Bank of America',
+      raw: {
+        titre: o.postingTitle,
+        ville: 'Paris',
+        url: o.jcrURL ? `https://careers.bankofamerica.com${o.jcrURL}` : null,
+        division: [o.division, o.family].filter(Boolean).join(' '),
+        date: o.postedDate || null,
+      },
+    }))
+    .filter((o) => o.raw.url);
 }
 
 async function fetchTousEightfold() {
@@ -2528,7 +2582,7 @@ async function fetchVie() {
 }
 
 async function fetchAllSources() {
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs, ef] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs, ef, bofa] = await Promise.all([
     fetchFranceTravail(),
     fetchLaBonneAlternance(),
     fetchAllATS(),
@@ -2540,8 +2594,9 @@ async function fetchAllSources() {
     fetchTousYello(),
     fetchGoldmanSachs(),
     fetchTousEightfold(),
+    fetchBankOfAmerica(),
   ]);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...ef, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------

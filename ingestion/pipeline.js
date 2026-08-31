@@ -1054,7 +1054,7 @@ function dateDePosteDepassee(titre, maintenant = new Date()) {
 // de finance (Community manager chez Rothschild, Design Authority chez Crédit
 // Agricole, Assistant chef de projet chez BNP).
 const METIER_HORS_PERIMETRE_RE =
-  /general counsel|\bavocat|\blawyer\b|\bjuriste\b|\bjuridique\b|fiscalit[ée]|\bfiscalist|\btax\b|recruiter|talent acquisition|charg[ée]e? de recrutement|community manager|\bdesign\b|\bdesigner\b|chef(?:fe)? de projet|charg[ée]e? de facturation|\bfacturation\b|centre d.affaires?|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b|s[ûu]ret[ée]|\bacheteur\b|\bachats\b|approvisionn/i;
+  /general counsel|\bavocat|\battorney\b|\blawyer\b|\bjuriste\b|\bjuridique\b|fiscalit[ée]|\bfiscalist|\btax\b|recruiter|talent acquisition|charg[ée]e? de recrutement|community manager|\bdesign\b|\bdesigner\b|chef(?:fe)? de projet|charg[ée]e? de facturation|\bfacturation\b|centre d.affaires?|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b|s[ûu]ret[ée]|\bacheteur\b|\bachats\b|approvisionn/i;
 
 // JJ s'adresse aux profils Bac+5 : grande école de commerce, école d'ingénieur,
 // master universitaire. Les intitulés qui annoncent explicitement un niveau
@@ -1360,6 +1360,15 @@ function normalize(item) {
     typeContratRaw = [raw.type, raw.titre].filter(Boolean).join(' ');
     descr = raw.description;
     postedAt = raw.datePosted || new Date().toISOString();
+  } else if (__src === 'bofa') {
+    emp = item.emp;
+    title = raw.titre;
+    ville = raw.ville;
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = [raw.division, raw.titre].filter(Boolean).join(' ');
+    romeLibelle = raw.division;
+    postedAt = raw.date || null;
   } else if (__src.startsWith('eightfold:')) {
     emp = item.emp;
     title = raw.titre;
@@ -1638,7 +1647,8 @@ const SOURCE_PRIORITY = (src) => {
     src === 'mckinsey' ||
     src.startsWith('yello:') ||
     src === 'goldman' ||
-    src.startsWith('eightfold:')
+    src.startsWith('eightfold:') ||
+    src === 'bofa'
   )
     return 3;
   // France Travail : source officielle, lien vers l'annonce d'origine.
