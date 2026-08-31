@@ -606,7 +606,12 @@ const LISTES_HTML = [
     lienRe: /href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/,
     champs: { type: 0, titre: 1, lieu: 2 },
     maxPages: 400,
-    concurrence: 6,
+    // Lire 400 pages six par six a fini par nous faire bloquer en 403 lors
+    // d'une série de passages rapprochés. Un passage par jour ne déclenche pas
+    // cette limite, mais deux pages à la fois et une seconde d'attente laissent
+    // une marge confortable — le passage complet reste sous les trois minutes.
+    concurrence: 2,
+    delaiMs: 1000,
   },
   {
     emp: 'Crédit Agricole',
