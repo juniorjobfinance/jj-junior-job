@@ -640,6 +640,22 @@ const LISTES_HTML = [
     concurrence: 3,
   },
   {
+    emp: 'Covéa',
+    base: 'https://recrutement.covea.com',
+    page: (n) => `https://recrutement.covea.com/jobs?page=${n}`,
+    blocRe: /<a[^>]+href="\/job\//i,
+    blocFin: '</a>',
+    lienRe: /^([^"?]+)"/,
+    lienPrefixe: '/job/',
+    depuisLien: true,
+    // /job/{intitulé}-in-{ville}-fr-jid-{id} : tout tient dans un seul segment,
+    // dont on retire la queue technique.
+    positionTitre: 1,
+    nettoyerTitre: /-in-[a-z-]+-fr-jid-\d+$|-jid-\d+$/i,
+    maxPages: 20,
+    concurrence: 3,
+  },
+  {
     emp: 'Citi',
     base: 'https://jobs.citi.com',
     // Leur page « France » est rendue côté serveur et tient sur une seule page.
@@ -725,10 +741,24 @@ function parseListeHtml(html, cfg) {
       // deviendrait « auditeur financier f h ». On rend une capitale initiale
       // et on retire la mention de genre, que le nettoyage général attend
       // écrite « F/H » et ne reconnaîtrait pas séparée par des espaces.
+      // Une adresse ne porte ni accent ni majuscule, et colle à l'intitulé des
+      // fragments techniques. On en tire le texte le plus lisible possible.
       const versTexte = (s) =>
         decodeURIComponent(s)
+          // Queue technique propre à chaque site (« -in-paris-fr-jid-1113 »).
+          .replace(cfg.nettoyerTitre || /(?:)/, '')
           .replace(/-/g, ' ')
+          // Mention de genre éclatée par les tirets : « f h », « h f », « e ».
           .replace(/\s+[fh]\s+[hf]\s*$/i, '')
+          // « charge e d etudes » : le « e » de l'écriture inclusive s'est
+          // détaché de son mot en perdant sa parenthèse.
+          .replace(/([a-zà-öø-ÿ])\s+e\s+(?=[a-zà-öø-ÿ])/gi, '$1 ')
+          // Le type de contrat est déjà porté par la pastille de la carte, et
+          // la mention de genre soudée par les tirets (« hf », « fh ») n'a plus
+          // sa barre oblique pour être reconnue par le nettoyage général.
+          .replace(/^\s*(?:cdd|cdi|stage|alternance)\s+/i, '')
+          .replace(/\s+(?:hf|fh|hfx|mf)\b/gi, ' ')
+          .replace(/\s+(?:cdd|cdi)\b/gi, ' ')
           .replace(/\s+/g, ' ')
           .trim()
           .replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());

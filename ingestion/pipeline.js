@@ -1123,7 +1123,7 @@ function cleanTitle(title) {
   //    doit rester « Audit », mais « Stage » tout court ne doit pas devenir vide,
   //    et « Stage en audit » ne doit pas donner « En audit ».
   const sansContrat = t
-    .replace(/[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d'?[ée]tudes?)?|stagiaire|internship)\b[)\s]*/gi, ' ')
+    .replace(/[\s\-–—(,|]*\b(?:en\s+)?(?:alternance|apprentissage|stage(?:\s+de\s+fin\s+d'?[ée]tudes?)?|stagiaire|internship|cdi|cdd)\b[)\s]*/gi, ' ')
     .replace(/\s+/g, ' ')
     .replace(/^[\s:\-–—,|]+/, '')
     .replace(/^(?:en|de|du|des|d'|pour|au|aux)\s+/i, '')
