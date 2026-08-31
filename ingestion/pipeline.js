@@ -1618,6 +1618,16 @@ function cleSansLieu(offer) {
 function lieuEstVague(loc) {
   const v = (loc || '').trim().toLowerCase();
   if (!v || /^non précisé$|^france$/.test(v)) return true;
+  // Une vraie ville n'est jamais vague, même quand elle porte aussi le nom d'un
+  // département : Paris, Lyon, Marseille, Nice et Lille sont dans les deux
+  // listes. Sans cette garde, « Paris » était jugé imprécis — deux annonces
+  // identiques, l'une à Paris et l'autre sans lieu, se retrouvaient toutes deux
+  // « vagues » et aucune n'était retirée. Les doublons survivaient.
+  if (estGrandeVille(v) && !REGIONS_ET_INCONNU.some((r) => v === r)) {
+    const estDepartementSeul =
+      DEPARTEMENTS.some((d) => v === d) && ![...GRAND_PARIS, ...GRANDES_VILLES].some((ville) => contientVille(v, ville)) && !PARIS_RE.test(v);
+    if (!estDepartementSeul) return false;
+  }
   if (REGIONS_ET_INCONNU.some((r) => v === r || v.startsWith(r + ','))) return true;
   if (DEPARTEMENTS.some((d) => v === d || v.startsWith(d + ','))) return true;
   return false;

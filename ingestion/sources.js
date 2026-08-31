@@ -1767,7 +1767,16 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       }
     };
 
-    if (finance) {
+    // Chez une maison qui publie peu — les fonds, les boutiques — le catalogue
+    // entier tient en quelques pages : on le prend tel quel et le filtre finance
+    // du pipeline tranche sur les intitulés. C'est bien plus sûr qu'un balayage
+    // par mots-clés, qui ratait tout ce qui ne les contient pas : « Private
+    // Equity Buyout Stage » chez Ardian n'en portait aucun, et 26 de leurs 30
+    // stages parisiens échappaient au connecteur.
+    const petitCatalogue = (probe.total || 0) > 0 && (probe.total || 0) <= 600;
+    if (petitCatalogue) {
+      await collecte(facetsPays, '', 30);
+    } else if (finance) {
       // Voie normale : la catégorie finance du tenant, 200 offres max.
       await collecte({ ...facetsPays, [finance.key]: [finance.id] }, '', 10);
     }
