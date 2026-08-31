@@ -1526,6 +1526,21 @@ function normalize(item) {
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
   const maisonRef = trouverMaison(emp);
+
+  // JJ ne publie que les maisons de sa liste de référence : banques, sociétés
+  // de gestion, cabinets, assureurs, institutions et grands groupes. Un
+  // employeur qu'on ne reconnaît pas est, dans l'immense majorité des cas, une
+  // petite structure dont l'offre n'intéresse pas le public visé — et rien ne
+  // permet de la vérifier. Mieux vaut un catalogue plus court dont chaque ligne
+  // se tient qu'un catalogue plus long où il faut trier soi-même.
+  //
+  // Le VIE échappe à cette règle, et c'est délibéré : Business France référence
+  // surtout des entreprises exportatrices de taille moyenne, parfaitement
+  // légitimes, qu'aucune liste de maisons de finance ne contiendra jamais.
+  // Appliquer la règle à cet onglet le viderait des neuf dixièmes de son
+  // contenu sans rien gagner en qualité.
+  if (!maisonRef && volet !== 'vie') return null;
+
   const sector = inferSector(emp, maisonRef, title, famille);
 
   return {

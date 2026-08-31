@@ -175,3 +175,31 @@ State Street             | state street|^ssga\b
 BBVA                     | ^bbva\b
 Julius Baer              | julius baer|^gzo\b
 Intesa Sanpaolo          | intesa
+
+# Maisons de finance repérées le 01/09/2026 parmi les employeurs « inconnus » :
+# elles n'étaient pas dans la liste, ce qui les faisait passer pour de petites
+# structures alors que plusieurs sont des acteurs majeurs (Caceis, Candriam).
+Caceis                   | ^caceis
+Candriam                 | ^candriam
+Mirova                   | ^mirova
+BforBank                 | ^bforbank
+Wakam                    | ^wakam
+AlixPartners             | alixpartners|alix partners
+Julhiet Sterwen          | julhiet
+N26                      | ^n26\b
+Uptevia                  | ^uptevia
+EuroTitres               | ^eurotitres
+VEGA Investment Solutions| ^vega invest
+IDIA Capital             | ^idia\b
+Akur8                    | ^akur8
+Yousign                  | ^yousign
+Seyna                    | ^seyna
+Finary                   | ^finary
+Verspieren               | ^verspieren
+RSM France               | ^rsm\b
+Meridiam                 | ^meridiam
+Sesamm                   | ^sesamm
+Photosol                 | ^photosol
+Teora                    | ^teora\b
+Meilleurtaux             | ^meilleurtaux
+Accenture                | ^accenture
