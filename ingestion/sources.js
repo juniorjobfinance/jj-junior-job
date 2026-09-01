@@ -641,6 +641,34 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //     de mise en page ne casse rien tant que les attributs restent.
 const LISTES_HTML = [
   {
+    // La Banque Postale sert sa liste depuis son serveur, quatre offres par
+    // page sur trente-sept pages. Le badge « Nouveau ! » n'apparaît que sur
+    // certaines cartes : lire les champs par leur rang décalait alors tout d'un
+    // cran et donnait le type de contrat en guise d'intitulé. D'où la lecture
+    // par motif, qui désigne chaque champ par sa place dans le balisage.
+    emp: 'La Banque Postale',
+    base: 'https://www.labanquepostale.com',
+    page: (n) =>
+      n === 1
+        ? 'https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.html'
+        : `https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.p-${n}.html`,
+    blocRe: /<div class="o-jobOffer__push js-has-link">/,
+    blocFin: '</article>',
+    lienRe: /href="(\/candidats\/offres-d-emploi\/nos-offres-d-emploi\.job-\d+\.html[^"]*)"/,
+    motifs: {
+      titre: /<h3[^>]*>\s*([^<]+?)\s*<\/h3>/,
+      type: /a-cat-tag--compte"[\s\S]*?<span>\s*([^<]+?)\s*<\/span>/,
+      // La ville suit l'icône : elle est le texte qui vient juste après la
+      // fermeture du premier <svg> de la ligne d'informations.
+      lieu: /o-jobOffer__push__infos[\s\S]*?<\/svg>\s*([^<]+?)\s*<\/span>/,
+    },
+    // Un site franco-français : le lieu ne répète pas « France ».
+    lieuLibre: true,
+    maxPages: 40,
+    concurrence: 2,
+    delaiMs: 400,
+  },
+  {
     // Oddo BHF passe par Altays, dont la liste est intégrée en iframe dans leur
     // site. Les pages « stages » et « alternances » du site ne sont que des
     // vues filtrées de cette même liste (type-contrat=4) : on prend la liste
@@ -840,6 +868,8 @@ function parseListeHtml(html, cfg) {
     return offres;
   }
 
+  if (cfg.motifs) return parseListeMotifs(html, cfg);
+
   const blocs = html.split(cfg.blocRe).slice(1);
   for (const b of blocs) {
     const fin = b.indexOf(cfg.blocFin);
@@ -889,6 +919,40 @@ function parseListeHtml(html, cfg) {
       titre,
       lieu: lire(cfg.champs.lieu),
       pays: lire(cfg.champs.pays),
+    });
+  }
+  return offres;
+}
+
+// Troisième façon de lire une carte : par MOTIF plutôt que par position.
+// La Banque Postale affiche un badge « Nouveau ! » sur certaines offres
+// seulement ; lire les champs par leur rang décalait alors tout d'un cran et
+// donnait le contrat en guise d'intitulé. Chaque champ est ici désigné par
+// l'endroit où il se trouve dans le balisage, ce qui ne dépend plus de la
+// présence des voisins.
+function parseListeMotifs(html, cfg) {
+  const offres = [];
+  for (const b of html.split(cfg.blocRe).slice(1)) {
+    const fin = b.indexOf(cfg.blocFin);
+    const bloc = fin > 0 ? b.slice(0, fin) : b;
+    const href = (bloc.match(cfg.lienRe) || [])[1];
+    if (!href) continue;
+
+    const lire = (re) => {
+      if (!re) return '';
+      const m = bloc.match(re);
+      return m ? decodeEntities(m[1]).replace(/\s+/g, ' ').trim() : '';
+    };
+    const titre = lire(cfg.motifs.titre);
+    if (!titre) continue;
+
+    offres.push({
+      url: href.startsWith('http') ? href : cfg.base + href,
+      titre,
+      type: lire(cfg.motifs.type),
+      lieu: lire(cfg.motifs.lieu),
+      pays: lire(cfg.motifs.pays),
+      date: lire(cfg.motifs.date),
     });
   }
   return offres;
@@ -3349,6 +3413,8 @@ module.exports = {
   fetchCornerstone,
   fetchAxaFrance,
   fetchLvmh,
+  fetchListeHtml,
+  LISTES_HTML,
   fetchSmartRecruiters,
   fetchLever,
   fetchGreenhouse,

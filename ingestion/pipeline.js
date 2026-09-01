@@ -916,9 +916,11 @@ const DESCR_SENIOR_RE = new RegExp(
     `\\b([4-9]|[1-9]\\d)\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
     // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
     `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+([4-9]|[1-9]\\d)\\s*ans?`,
-    // Un plancher, même bas, disqualifie : "minimum 3 ans" exclut le débutant.
-    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?([3-9]|[1-9]\\d)\\s*ans?`,
-    `\\b([3-9]|[1-9]\\d)\\s*\\+\\s*ans?`,
+    // Le seuil est à QUATRE ans, pas trois : la cible annoncée est « 0-3 ans »,
+    // donc une offre qui demande « minimum 3 ans » reste dans le périmètre —
+    // c'est sa borne haute. À partir de quatre, le poste n'est plus junior.
+    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?([4-9]|[1-9]\\d)\\s*ans?`,
+    `\\b([4-9]|[1-9]\\d)\\s*\\+\\s*ans?`,
     `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative`,
     `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste`,
     `justifiez\\s+d${AP_}?\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
@@ -928,8 +930,8 @@ const DESCR_SENIOR_RE = new RegExp(
     `\\b([4-9]|[1-9]\\d)\\s*(?:\\+|to\\s*\\d+|-\\s*\\d+)?\\s*years?` +
       `(?:\\s+of)?\\s+(?:relevant\\s+|professional\\s+|proven\\s+|solid\\s+|hands-?on\\s+|work\\s+|prior\\s+)*` +
       `(?:experience|expertise|in\\b|as\\s+a)`,
-    `\\b([3-9]|[1-9]\\d)\\s*\\+\\s*years?\\s+(?:of\\s+)?(?:relevant\\s+|professional\\s+)*experience`,
-    `(?:minimum|at\\s+least|min\\.?)\\s+(?:of\\s+)?([3-9]|[1-9]\\d)\\s*years?\\s+(?:of\\s+)?(?:\\w+\\s+){0,2}experience`,
+    `\\b([4-9]|[1-9]\\d)\\s*\\+\\s*years?\\s+(?:of\\s+)?(?:relevant\\s+|professional\\s+)*experience`,
+    `(?:minimum|at\\s+least|min\\.?)\\s+(?:of\\s+)?([4-9]|[1-9]\\d)\\s*years?\\s+(?:of\\s+)?(?:\\w+\\s+){0,2}experience`,
     `proven\\s+(?:track\\s+record|experience)|extensive\\s+experience|senior\\s+level`,
   ].join('|'),
   'i'
