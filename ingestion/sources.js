@@ -29,9 +29,52 @@ const { MANUAL_OFFERS } = require('./manuel');
 // ---------------------------------------------------------------------------
 // Utilitaire HTTP minimal (Node 18+ a fetch en global, pas de dépendance)
 // ---------------------------------------------------------------------------
+// Une requête qui échoue une fois n'a pas forcément échoué. Le 1er septembre
+// 2026, une trentaine d'hôtes ont renvoyé « fetch failed » d'un coup sur le
+// runner GitHub : aucun code HTTP, juste une connexion qui n'aboutit pas.
+// Sans reprise, chacun de ces connecteurs rendait une liste vide et le
+// catalogue partait en ligne amputé de 28 %.
+//
+// On ne réessaie que ce qui a une chance d'aboutir : une panne réseau, un
+// délai dépassé, une surcharge serveur (5xx) ou un débit limité (429). Un 403
+// ou un 404 sont des refus ; insister ne ferait que nous faire remarquer.
+const TENTATIVES = 3;
+const ATTENTES_MS = [800, 2500]; // avant la 2e, puis avant la 3e
+
+async function fetchAvecReprise(url, options = {}) {
+  // Le signal de l'appelant est écarté volontairement : un AbortSignal.timeout
+  // est armé à sa création, donc déjà expiré au deuxième essai — la reprise
+  // n'aurait jamais eu lieu. On en fabrique un neuf à chaque tentative.
+  const { signal: _ignore, timeoutMs, ...reste } = options;
+  let derniere;
+  for (let essai = 0; essai < TENTATIVES; essai++) {
+    if (essai > 0) await new Promise((r) => setTimeout(r, ATTENTES_MS[essai - 1]));
+    try {
+      const res = await fetch(url, {
+        ...reste,
+        signal: AbortSignal.timeout(timeoutMs || 25000),
+      });
+      if (res.ok) return res;
+      // 5xx et 429 : le serveur est débordé, pas fâché. On laisse passer un peu.
+      if (res.status >= 500 || res.status === 429) {
+        derniere = new Error(`HTTP ${res.status} sur ${url}`);
+        continue;
+      }
+      throw new Error(`HTTP ${res.status} sur ${url}`);
+    } catch (err) {
+      // Un refus explicite ne se réessaie pas.
+      if (/^HTTP [34]\d\d/.test(err.message) && !/HTTP 429/.test(err.message)) throw err;
+      derniere = err;
+    }
+  }
+  throw derniere;
+}
+
 async function getJSON(url, options = {}) {
-  const res = await fetch(url, { ...options, headers: { accept: 'application/json', ...(options.headers || {}) } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} sur ${url}`);
+  const res = await fetchAvecReprise(url, {
+    ...options,
+    headers: { accept: 'application/json', ...(options.headers || {}) },
+  });
   return res.json();
 }
 
@@ -909,7 +952,7 @@ const BPCE_APIS = [
 async function fetchBpceApi({ host, emp }) {
   let items;
   try {
-    const res = await fetch(`${host}/app/wp-json/bpce/v1/search/jobs`, {
+    const res = await fetchAvecReprise(`${host}/app/wp-json/bpce/v1/search/jobs`, {
       method: 'POST',
       headers: {
         'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
@@ -1056,11 +1099,10 @@ async function fetchYelloBoard(cfg) {
       const url =
         `${cfg.host}/job_boards/${cfg.board}/search` +
         `?locale=fr&query=&filters=${cfg.filtrePays}&page=${page}`;
-      const res = await fetch(url, {
+      const res = await fetchAvecReprise(url, {
         headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)', accept: 'application/json' },
         signal: AbortSignal.timeout(25000),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const html = (await res.json()).html || '';
 
       const cartes = [...html.matchAll(
@@ -1209,7 +1251,7 @@ async function fetchGoldmanSachs() {
   const retenues = [];
   try {
     for (let page = 1; page <= 10; page++) {
-      const res = await fetch(GS_API, {
+      const res = await fetchAvecReprise(GS_API, {
         method: 'POST',
         headers: {
           'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
@@ -1683,7 +1725,9 @@ async function fetchLever({ company, emp }) {
 // Va chercher le corps de l'annonce pour chaque offre retenue. SmartRecruiters
 // expose la fiche complète sur /postings/{id}, où `jobAd.sections` contient la
 // description et surtout les qualifications — la seule mention du niveau requis.
-async function enrichirDescriptions(offres, id, concurrence = 3) {
+// Deux fiches à la fois : ce connecteur tourne déjà à l'intérieur de la file
+// bornée de fetchAllATS, et sa propre rafale s'y ajouterait.
+async function enrichirDescriptions(offres, id, concurrence = 2) {
   let idx = 0;
   await Promise.all(
     Array.from({ length: concurrence }, async () => {
@@ -2186,7 +2230,7 @@ async function fetchPhenomWidgets({ host, emp, country = 'France', maxPages = 12
         siteType: 'external', keywords: '', global: true,
         selected_fields: { country: [country] }, locationData: {},
       };
-      const res = await fetch(`https://${host}/widgets`, {
+      const res = await fetchAvecReprise(`https://${host}/widgets`, {
         method: 'POST',
         headers: {
           'user-agent': 'Mozilla/5.0 (compatible; JJ job board)',
@@ -2609,27 +2653,56 @@ async function fetchServicePublic({ organisme, emp, maxPages = 5, delayMs = 800 
   }
 }
 
+// Exécute des tâches par vagues, jamais plus de `largeur` à la fois.
+// Les tâches sont des fonctions, pas des promesses : une promesse est déjà
+// lancée au moment où on la crée, et tout serait reparti d'un coup.
+async function enFile(taches, largeur) {
+  const resultats = new Array(taches.length);
+  let curseur = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(largeur, taches.length) }, async () => {
+      while (curseur < taches.length) {
+        const i = curseur++;
+        resultats[i] = await taches[i]();
+      }
+    })
+  );
+  return resultats;
+}
+
+// Le 1er septembre 2026, une trentaine d'hôtes ont répondu « fetch failed »
+// simultanément sur le runner GitHub — Workday en entier, Goldman, BPCE,
+// Phenom, Eightfold. Aucun code HTTP : la connexion n'aboutissait pas. Le
+// pipeline lançait alors ses 151 connecteurs d'un seul coup, et la lecture des
+// fiches SmartRecruiters, ajoutée la veille, y ajoutait sa propre rafale. La
+// machine a saturé, et le catalogue a été publié amputé de 28 %.
+//
+// Rien n'oblige à tout demander en même temps : le passage a la nuit devant
+// lui. On borne donc les requêtes simultanées — c'est aussi plus courtois pour
+// les sites interrogés, dont certains nous avaient déjà répondu 403.
+const CONCURRENCE_ATS = 8;
+
 async function fetchAllATS() {
-  const calls = [
-    ...TARGET_COMPANIES.greenhouse.map(fetchGreenhouse),
-    ...TARGET_COMPANIES.lever.map(fetchLever),
-    ...TARGET_COMPANIES.smartrecruiters.map(fetchSmartRecruiters),
-    ...TARGET_COMPANIES.workday.map(fetchWorkday),
-    ...TARGET_COMPANIES.opendatasoft.map(fetchOpenDataSoft),
-    ...TARGET_COMPANIES.recruitee.map(fetchRecruitee),
-    ...TARGET_COMPANIES.oraclecloud.map(fetchOracleCloud),
-    ...TARGET_COMPANIES.teamtailor.map(fetchTeamtailor),
-    ...TARGET_COMPANIES.ashby.map(fetchAshby),
-    ...TARGET_COMPANIES.phenom.map(fetchPhenom),
-    ...TARGET_COMPANIES.talentsoft.map(fetchTalentSoft),
-    ...TARGET_COMPANIES.successfactors.map(fetchSuccessFactors),
-    ...TARGET_COMPANIES.sitemapld.map(fetchSitemapJsonLd),
-    ...TARGET_COMPANIES.eicards.map(fetchEiCards),
-    ...TARGET_COMPANIES.avature.map(fetchAvature),
-    ...TARGET_COMPANIES.servicepublic.map(fetchServicePublic),
+  const taches = [
+    ...TARGET_COMPANIES.greenhouse.map((c) => () => fetchGreenhouse(c)),
+    ...TARGET_COMPANIES.lever.map((c) => () => fetchLever(c)),
+    ...TARGET_COMPANIES.smartrecruiters.map((c) => () => fetchSmartRecruiters(c)),
+    ...TARGET_COMPANIES.workday.map((c) => () => fetchWorkday(c)),
+    ...TARGET_COMPANIES.opendatasoft.map((c) => () => fetchOpenDataSoft(c)),
+    ...TARGET_COMPANIES.recruitee.map((c) => () => fetchRecruitee(c)),
+    ...TARGET_COMPANIES.oraclecloud.map((c) => () => fetchOracleCloud(c)),
+    ...TARGET_COMPANIES.teamtailor.map((c) => () => fetchTeamtailor(c)),
+    ...TARGET_COMPANIES.ashby.map((c) => () => fetchAshby(c)),
+    ...TARGET_COMPANIES.phenom.map((c) => () => fetchPhenom(c)),
+    ...TARGET_COMPANIES.talentsoft.map((c) => () => fetchTalentSoft(c)),
+    ...TARGET_COMPANIES.successfactors.map((c) => () => fetchSuccessFactors(c)),
+    ...TARGET_COMPANIES.sitemapld.map((c) => () => fetchSitemapJsonLd(c)),
+    ...TARGET_COMPANIES.eicards.map((c) => () => fetchEiCards(c)),
+    ...TARGET_COMPANIES.avature.map((c) => () => fetchAvature(c)),
+    ...TARGET_COMPANIES.servicepublic.map((c) => () => fetchServicePublic(c)),
   ];
-  if (calls.length === 0) return DEMO_DATA ? SAMPLE_ATS : [];
-  const results = await Promise.all(calls);
+  if (taches.length === 0) return DEMO_DATA ? SAMPLE_ATS : [];
+  const results = await enFile(taches, CONCURRENCE_ATS);
   return results.flat();
 }
 
@@ -2659,7 +2732,7 @@ const VIE_API_URL = 'https://civiweb-api-prd.azurewebsites.net/api/Offers/search
 const VIE_API_KEY = process.env.VIE_API_KEY || '';
 
 async function fetchViePage(query, skip, limit) {
-  const res = await fetch(VIE_API_URL, {
+  const res = await fetchAvecReprise(VIE_API_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/json', accept: 'application/json', 'X-API-KEY': VIE_API_KEY },
     body: JSON.stringify({

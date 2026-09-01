@@ -2271,6 +2271,68 @@ async function completerDatesManquantes(offers) {
   return trouvees;
 }
 
+// ---------------------------------------------------------------------------
+// Garde-fou de publication
+// ---------------------------------------------------------------------------
+// Le 1er septembre 2026, cinq connecteurs (Workday, VIE, BPCE, Yello, Goldman)
+// ont renvoyé zéro depuis le runner GitHub alors qu'ils répondaient normalement
+// ailleurs. Le pipeline a publié un catalogue amputé de 28 %, VIE entièrement
+// vide, sans que rien ne l'annonce. Une panne de collecte ne doit jamais se
+// traduire par une mise en ligne silencieuse : mieux vaut garder le catalogue
+// de la veille, un peu vieilli, qu'un catalogue creux qui a l'air normal.
+//
+// On compare donc au fichier déjà publié, et on refuse d'écrire si :
+//   - le total s'effondre (une variation quotidienne saine se compte en
+//     dizaines d'offres, pas en centaines) ;
+//   - un connecteur qui pesait sérieusement hier tombe à zéro — signe d'une
+//     panne ciblée, que le total seul peut masquer si d'autres compensent.
+const SEUIL_CHUTE = 0.15; // 15 % du catalogue
+const SEUIL_CONNECTEUR_MUET = 10; // offres la veille à partir desquelles un zéro est suspect
+
+function lireCatalexistant() {
+  try {
+    const src = fs.readFileSync(OUTPUT_PATH, 'utf8');
+    const bac = {};
+    new Function('window', src)(bac);
+    return Array.isArray(bac.__OFFRES__) ? bac.__OFFRES__ : null;
+  } catch {
+    return null; // premier passage, ou fichier illisible : rien à comparer
+  }
+}
+
+function parConnecteur(offres) {
+  const m = new Map();
+  for (const o of offres) {
+    const k = String(o.source || '?').split(':')[0];
+    m.set(k, (m.get(k) || 0) + 1);
+  }
+  return m;
+}
+
+// Renvoie la liste des anomalies. Vide = on peut publier.
+function anomaliesDePublication(nouvelles) {
+  const anciennes = lireCatalexistant();
+  if (!anciennes || anciennes.length < 50) return [];
+
+  const soucis = [];
+  const chute = (anciennes.length - nouvelles.length) / anciennes.length;
+  if (chute > SEUIL_CHUTE) {
+    soucis.push(
+      `le catalogue passe de ${anciennes.length} à ${nouvelles.length} offres ` +
+        `(-${Math.round(chute * 100)} %, seuil ${Math.round(SEUIL_CHUTE * 100)} %)`
+    );
+  }
+
+  const avant = parConnecteur(anciennes);
+  const apres = parConnecteur(nouvelles);
+  for (const [nom, n] of avant) {
+    if (n >= SEUIL_CONNECTEUR_MUET && !apres.get(nom)) {
+      soucis.push(`le connecteur « ${nom} » passe de ${n} offres à zéro`);
+    }
+  }
+  return soucis;
+}
+
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
@@ -2482,6 +2544,23 @@ async function run() {
     `[pipeline] ${publiables.length} offres après second filtre 0-3 ans sur les fiches ` +
       `(${avantSeniorite - publiables.length} postes confirmés démasqués par leur description).`
   );
+
+  // Rien n'est écrit tant que le résultat ne tient pas debout. Une collecte
+  // partielle publiée en silence est pire qu'un catalogue d'un jour de retard :
+  // le site paraît normal, et personne ne voit qu'un onglet entier est vide.
+  const anomalies = anomaliesDePublication(publiables);
+  if (anomalies.length && !process.argv.includes('--forcer')) {
+    console.error('\n[pipeline] PUBLICATION ANNULÉE — la collecte semble incomplète :');
+    for (const a of anomalies) console.error(`  - ${a}`);
+    console.error(
+      '\n  Le catalogue en ligne est conservé tel quel. Relancer le passage suffit\n' +
+        '  le plus souvent : ces pannes sont presque toujours passagères (réseau du\n' +
+        '  runner, API momentanément fermée). Pour publier malgré tout, par exemple\n' +
+        '  si la baisse est voulue : node ingestion/pipeline.js --forcer\n'
+    );
+    process.exitCode = 1;
+    return;
+  }
 
   writeOutput(publiables);
   console.log(
