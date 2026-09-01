@@ -1644,6 +1644,27 @@ const TARGET_COMPANIES = {
   // Détectés avec ingestion/detect-workday.js (le tenant, le datacenter et le
   // nom du site sont propres à chaque entreprise, aucun n'est devinable).
   workday: [
+    // Ipsen : laboratoire pharmaceutique, mais sa direction financière recrute
+    // des stagiaires en relations investisseurs et en M&A. Le filtre finance
+    // écarte de lui-même le médical et le marketing, majoritaires chez eux.
+    { tenant: 'ipsen', dc: 'wd103', site: 'Ipsen_Careers', emp: 'Ipsen' },
+    // CDPQ, le fonds de pension québécois, a un bureau parisien qui recrute
+    // des stagiaires en investissement et en infrastructures. Le filtre
+    // géographique du pipeline écarte de lui-même les postes de Montréal.
+    { tenant: 'cdpq', dc: 'wd10', site: 'CDPQ-recrutement-universitaire', emp: 'CDPQ' },
+    // Deloitte : audit, actuariat, transaction services, M&A. Son tenant
+    // Workday s'appelle « fina », que rien ne relie au nom de la maison —
+    // impossible à deviner, il fallait un lien d'annonce pour le connaître.
+    { tenant: 'fina', dc: 'wd103', site: 'DeloitteRecrute', emp: 'Deloitte' },
+    // Rothschild & Co expose son portail « Lateral » sur Workday, que rien ne
+    // reliait au reste de nos sources : quarante postes, dont les alternances
+    // parisiennes, n'étaient donc jamais vus.
+    { tenant: 'rothschildandco', dc: 'wd3', site: 'RothschildAndCo_Lateral', emp: 'Rothschild & Co' },
+    // La Banque de France : analystes financiers d'entreprises, modèles de
+    // risque, back-office des opérations de marché. Le nom de son site Workday
+    // ne se devine pas — huit variantes testées avant qu'un lien d'annonce ne
+    // le donne. Elle peuple à elle seule « Institution publique & régulateur ».
+    { tenant: 'bdf', dc: 'wd103', site: 'recrutement-banque-de-France', emp: 'Banque de France' },
     // Euronext, opérateur de la Bourse de Paris : infrastructure de marché,
     // compensation, données financières. Cinq postes français au moment du
     // branchement.
@@ -1722,7 +1743,14 @@ const TARGET_COMPANIES = {
     { host: 'ekbq.fa.em2.oraclecloud.com', site: 'CX_2', emp: 'Schroders' },
     // Scor, quatrième réassureur mondial : actuariat, risques, modélisation.
     { host: 'fa-errt-saasfaprod1.fa.ocs.oraclecloud.com', site: 'CX_2001', emp: 'Scor' },
+    // Edmond de Rothschild : banque privée et gestion d'actifs. Son portail
+    // est sur le domaine européen d'Oracle (.eu), que rien ne laissait deviner.
+    { host: 'evht.fa.ocs.oraclecloud.eu', site: 'CX_7001', emp: 'Edmond de Rothschild' },
     { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX_1', emp: 'Groupe BPCE' },
+    // BPCE expose DEUX sites sur le même portail Oracle : « CX_1 » et « CX ».
+    // Le second porte les postes de marché et de back-office du siège, qui
+    // n'apparaissent nulle part dans le premier.
+    { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX', emp: 'Groupe BPCE' },
     // Sans filtre de lieu, le portail « professionnels » noyait ses deux postes
     // français dans un catalogue mondial dominé par New York.
     { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardProfessionalCareers', emp: 'Lazard', location: 'France' },
@@ -1757,6 +1785,16 @@ const TARGET_COMPANIES = {
   ],
   // Sitemap + JSON-LD (fiches lues sur le site officiel de la maison)
   sitemapld: [
+    // KPMG interdit sa page de RECHERCHE dans son robots.txt, mais y publie
+    // son sitemap : on lit donc ce qu'ils offrent et on laisse ce qu'ils
+    // ferment. Soixante-six offres finance, invisibles jusqu'ici.
+    {
+      sitemap: 'https://emplois.kpmg.fr/sitemap.xml',
+      emp: 'KPMG',
+      jobPathRe: /\/emploi\//,
+      maxFiches: 140,
+      delayMs: 250,
+    },
     {
       sitemap: 'https://careers.societegenerale.com/sitemap.xml',
       emp: 'Société Générale',

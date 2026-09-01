@@ -443,6 +443,21 @@ const MANUAL_OFFERS = [
     category: 'Actuariat',
     addedOn: '2026-08-29',
   },
+
+  // --- Crédit Mutuel : la liste du site plafonne à quinze annonces --------
+  // Le connecteur « e-i » lit bien leur page d'offres, mais elle n'en expose
+  // que quinze et aucune pagination ne va au-delà. Ce stage, repéré à la
+  // main, n'y figure pas.
+  {
+    emp: 'Crédit Mutuel',
+    title:
+      "Investisseuse/Investisseur (F/H) - JANVIER 2027 Stage - Stratégie d’Investissement et Allocation d’Actifs",
+    url: 'https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115759',
+    loc: 'Paris',
+    typeContrat: 'Stage',
+    category: 'Gestion d\'actifs',
+    addedOn: '2026-09-02',
+  },
 ];
 
 module.exports = { MANUAL_OFFERS };

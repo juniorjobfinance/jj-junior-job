@@ -979,14 +979,34 @@ function estOffreVIE(title) {
 // Quand rien ne tranche, on ne devine pas : la carte garde alors la mention
 // générale de l'onglet. Afficher « CDI » sur un CDD serait pire que de ne
 // rien afficher.
-function classifyContrat({ typeContratRaw, title, descr }) {
+// Le CDD se trahit par son motif ou par sa durée bien plus souvent que par
+// son sigle : « remplacement », « congé maternité », « surcroît d'activité »,
+// « mission de 6 mois ». On cherche donc les trois.
+const CDD_RE =
+  /\bcdd\b|contrat [àa] dur[ée]e d[ée]termin[ée]e|dur[ée]e d[ée]termin[ée]e|fixed[\s-]?term|temporary contract|\bint[ée]rim\b|remplacement|cong[ée] (?:maternit|parental|sabbatique)|surcro[îi]t d.activit[ée]|maternity cover|\bmission de \d{1,2} mois\b|contrat de \d{1,2} mois|\d{1,2}[\s-]month contract/i;
+const CDI_RE =
+  /\bcdi\b|contrat [àa] dur[ée]e ind[ée]termin[ée]e|dur[ée]e ind[ée]termin[ée]e|permanent(?:e|ly)?\b|poste permanent|open[\s-]?ended/i;
+
+// CDI ou CDD ? Le volet « cdi-cdd » réunit les deux, mais la carte doit dire
+// lequel : on ne postule pas de la même façon à un CDD de six mois et à un
+// CDI. On lit le type déclaré par la source, puis le titre, puis le corps de
+// l'annonce, puis l'adresse — certaines la nomment dans leur URL.
+//
+// Et à défaut, CDI. Ce n'est pas une devinette : la durée et le motif d'un CDD
+// sont obligatoires et toujours annoncés, parce que ce sont les premières
+// choses qu'un candidat regarde. Une offre à pourvoir qui ne dit rien de son
+// terme est un CDI. Le défaut inverse serait faux presque à chaque fois.
+function classifyContrat({ typeContratRaw, title, descr, url }) {
   const dur = (typeContratRaw || '') + ' ' + (title || '');
-  if (/\bcdd\b|dur[ée]e d[ée]termin[ée]e|fixed[\s-]?term|temporary/i.test(dur)) return "CDD";
-  if (/\bcdi\b|dur[ée]e ind[ée]termin[ée]e|permanent/i.test(dur)) return "CDI";
+  if (CDD_RE.test(dur)) return 'CDD';
+  if (CDI_RE.test(dur)) return 'CDI';
+  const adresse = String(url || '').replace(/[^a-z]+/gi, ' ');
+  if (/\bcdd\b/i.test(adresse)) return 'CDD';
+  if (/\bcdi\b/i.test(adresse)) return 'CDI';
   const texte = descr || '';
-  if (/\bcdd\b|contrat [àa] dur[ée]e d[ée]termin[ée]e/i.test(texte)) return "CDD";
-  if (/\bcdi\b|contrat [àa] dur[ée]e ind[ée]termin[ée]e/i.test(texte)) return "CDI";
-  return null;
+  if (CDD_RE.test(texte)) return 'CDD';
+  if (CDI_RE.test(texte)) return 'CDI';
+  return 'CDI';
 }
 
 function classifyVolet({ src, typeContratRaw, title }) {
@@ -1052,6 +1072,11 @@ const SENIOR_RE = new RegExp(
     // ou un "Executive Director" en BFI, c'est 5-10 ans d'expérience.
     `${AV}vice[\\s-]?presidents?${AP}`,
     `${AV}vp${AP}`,
+    // Le grade des banques d'affaires : Associate se situe entre trois et six
+    // ans. Les lookbehind protègent les formes d'entrée de carrière, qui
+    // veulent dire exactement le contraire — « Junior Associate » chez un
+    // cabinet de conseil est un premier poste.
+    `${AV}(?<!junior\\s)(?<!summer\\s)(?<!graduate\\s)(?<!stage\\s)associates?${AP}`,
     `${AV}principals?${AP}`,
     `${AV}partners?${AP}`,
     `${AV}leads?${AP}`,
@@ -2216,7 +2241,7 @@ function normalize(item) {
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
   const contrat =
-    volet === 'cdi-cdd' ? classifyContrat({ typeContratRaw, title: titreBrut, descr }) : null;
+    volet === 'cdi-cdd' ? classifyContrat({ typeContratRaw, title: titreBrut, descr, url }) : null;
 
   // Le VIE ne vient que de Business France. C'est le registre officiel du
   // dispositif : l'indemnité, la durée, le pays et le statut y sont normés, et
@@ -3202,22 +3227,23 @@ async function run() {
       .join(', ');
     console.log(`[pipeline] Offres sans description lisible, par source : ${top}.`);
   }
-  // Second passage sur le type de contrat, pour la même raison : la fiche
-  // qu'on vient de lire dit souvent « CDI » là où l'intitulé restait muet.
-  let contratsRattrapes = 0;
+  // Second passage sur le type de contrat. Tout poste sans mention étant
+  // réputé CDI, une seule chose reste à faire ici : rattraper les CDD que la
+  // fiche révèle et que l'intitulé taisait. Confirmer un CDI n'apprendrait
+  // rien, on ne le fait donc pas.
+  let cddRattrapes = 0;
   for (const o of publiables) {
-    if (o.volet !== 'cdi-cdd' || o.contrat || !o._descr) continue;
-    const c = classifyContrat({ typeContratRaw: '', title: o.title, descr: o._descr });
-    if (c) {
-      o.contrat = c;
-      contratsRattrapes++;
+    if (o.volet !== 'cdi-cdd' || !o._descr || o.contrat === 'CDD') continue;
+    if (CDD_RE.test(o._descr)) {
+      o.contrat = 'CDD';
+      cddRattrapes++;
     }
   }
   const cdiCdd = publiables.filter((o) => o.volet === 'cdi-cdd');
   const nommes = cdiCdd.filter((o) => o.contrat).length;
   console.log(
     `[pipeline] Contrat précisé sur ${nommes}/${cdiCdd.length} offres CDI-CDD ` +
-      `(${contratsRattrapes} retrouvés dans les fiches).`
+      `(${cddRattrapes} CDD démasqués par leur fiche).`
   );
   console.log(
     `[pipeline] ${publiables.length} offres après second filtre 0-3 ans sur les fiches ` +
