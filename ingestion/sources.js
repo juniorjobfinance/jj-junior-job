@@ -1746,11 +1746,10 @@ const TARGET_COMPANIES = {
     // Edmond de Rothschild : banque privée et gestion d'actifs. Son portail
     // est sur le domaine européen d'Oracle (.eu), que rien ne laissait deviner.
     { host: 'evht.fa.ocs.oraclecloud.eu', site: 'CX_7001', emp: 'Edmond de Rothschild' },
+    // Le portail BPCE ignore le paramètre « site » : CX_1, CX ou un nom
+    // inventé renvoient le même catalogue. Une seule entrée suffit donc, et en
+    // ajouter d'autres ferait tourner le connecteur pour rien.
     { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX_1', emp: 'Groupe BPCE' },
-    // BPCE expose DEUX sites sur le même portail Oracle : « CX_1 » et « CX ».
-    // Le second porte les postes de marché et de back-office du siège, qui
-    // n'apparaissent nulle part dans le premier.
-    { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX', emp: 'Groupe BPCE' },
     // Sans filtre de lieu, le portail « professionnels » noyait ses deux postes
     // français dans un catalogue mondial dominé par New York.
     { host: 'icbpjb.fa.ocs.oraclecloud.com', site: 'LazardProfessionalCareers', emp: 'Lazard', location: 'France' },

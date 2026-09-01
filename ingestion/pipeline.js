@@ -2505,6 +2505,10 @@ function saveState(state) {
   fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2));
 }
 
+// Compté pendant la vérification des liens, rapporté à la fin du passage :
+// les deux se passent dans des fonctions différentes.
+let mortesManuelles = 0;
+
 async function applyFreshnessAndDeadRemoval(offers) {
   const now = new Date().toISOString();
   const prevState = loadState();
@@ -2513,13 +2517,20 @@ async function applyFreshnessAndDeadRemoval(offers) {
 
   const seenKeys = new Set(offers.map((o) => o._key));
 
+  // Les offres saisies à la main sont vérifiées à CHAQUE passage, sans avoir
+  // à demander --check-links : n'étant portées par aucune API, rien d'autre
+  // ne peut nous dire que le poste est pourvu. Elles sont assez peu
+  // nombreuses pour que le coût soit sans effet sur la durée du passage.
+  mortesManuelles = 0;
   for (const offer of offers) {
     const prev = prevState[offer._key];
+    const manuelle = String(offer.source || '').startsWith('manuel');
     let linkStatus = 'unknown';
-    if (CHECK_LINKS) linkStatus = await checkLink(offer.url);
+    if (CHECK_LINKS || manuelle) linkStatus = await checkLink(offer.url);
 
     if (linkStatus === 'dead') {
       // Lien mort constaté directement -> retrait immédiat, pas d'entrée conservée.
+      if (manuelle) mortesManuelles++;
       continue;
     }
 
@@ -3154,6 +3165,14 @@ async function run() {
 
   let final = await applyFreshnessAndDeadRemoval(deduped);
   console.log(`[pipeline] ${final.length} offres finales après vérification de fraîcheur${CHECK_LINKS ? ' + liens' : ''}.`);
+
+  if (mortesManuelles) {
+    console.warn(
+      `[pipeline] ${mortesManuelles} offre(s) de manuel.js pointent vers un lien mort : ` +
+        `elles ne sont pas publiées, mais leur ligne reste dans le fichier et sera ` +
+        `retentée demain. À retirer de ingestion/manuel.js.`
+    );
+  }
 
   const nonDatee = (o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateRecuperee !== true;
   const sansDateAvant = final.filter(nonDatee).length;
