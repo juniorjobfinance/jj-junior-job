@@ -86,7 +86,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -1380,6 +1380,43 @@ function normalize(item) {
     romeLibelle = raw.category;
     descr = raw.description;
     postedAt = parseFrenchDateTime(raw.lastmodifieddate);
+  } else if (__src === 'lvmh') {
+    // `requiredExperience` dit le niveau attendu en clair — « Débutant »,
+    // « Minimum 5 ans », « Minimum 10 years ». On le passe au filtre 0-3 ans
+    // comme une description : c'est le signal le plus net qu'une source nous
+    // ait jamais donné sur la séniorité.
+    emp = item.emp;
+    title = raw.name;
+    ville = raw.city || '';
+    pays = 'France';
+    url = raw.link;
+    typeContratRaw = raw.contract || raw.name;
+    romeLibelle = raw.functionFilter;
+    descr = raw.requiredExperience || '';
+    postedAt = raw.publicationTimestamp
+      ? new Date(raw.publicationTimestamp * 1000).toISOString()
+      : null;
+  } else if (__src === 'axafr') {
+    // Le site français d'AXA situe ses offres au département (« Savoie ») plutôt
+    // qu'à la ville. C'est suffisant pour la carte, et le filtre des grandes
+    // villes traite déjà les départements comme les régions.
+    emp = item.emp;
+    title = raw.JobTitle;
+    ville = raw.PrimaryLocationL2 || '';
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.LocalContractType || raw.JobTitle;
+    romeLibelle = raw.ReqTypeId;
+    // Les qualifications d'abord : c'est là qu'est écrit le niveau attendu.
+    descr = [raw.JobQualification, raw.JobDescription]
+      .filter(Boolean)
+      .join(' ')
+      .replace(/<[^>]*>/g, ' ')
+      .slice(0, 4000);
+    {
+      const d = new Date(String(raw.JobOpeningDate || '').replace(' ', 'T'));
+      postedAt = isNaN(d) ? null : d.toISOString();
+    }
   } else if (__src.startsWith('cornerstone:')) {
     // Cornerstone date ses annonces au format français (« 01/09/2026 ») et
     // porte le descriptif complet, qui alimente le filtre 0-3 ans.

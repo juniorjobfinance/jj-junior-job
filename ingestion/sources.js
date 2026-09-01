@@ -1688,6 +1688,11 @@ const TARGET_COMPANIES = {
     { host: 'apply.careers.hsbc.com', tenant: '', emp: 'HSBC France' },
     { host: 'careers.nomura.com', tenant: 'nomura', emp: 'Nomura' },
     { host: 'jobs.intesasanpaolo.com', tenant: 'intesa', emp: 'Intesa Sanpaolo' },
+    // Armateur : ce sont ses fonctions financières qui nous intéressent —
+    // trésorerie groupe, comptabilité, contrôle, assurance, crédit. Les postes
+    // commerciaux en sont écartés par la règle générale, qui ne les retient que
+    // chez les maisons financières.
+    { host: 'jobs.cmacgm-group.com', tenant: '', emp: 'CMA CGM' },
   ],
   talentsoft: [
     { host: 'jobs.amundi.com', emp: 'Amundi' },
@@ -2092,6 +2097,108 @@ async function fetchOpenDataSoft({ domain, dataset, emp }) {
 }
 
 // Recruitee — endpoint public, renvoie déjà le lien direct vers l'annonce.
+// LVMH — le groupe fait passer sa recherche Algolia par son propre serveur
+// (/api/search), donc aucune clé n'est nécessaire. Sur 1195 offres françaises,
+// 93 relèvent de la finance : on filtre sur leur propre facette « Finance »
+// plutôt que sur l'intitulé, ce qui évite d'avoir à distinguer un contrôleur de
+// gestion d'un conseiller de vente Sephora.
+//
+// L'employeur affiché est la MAISON (Moët Hennessy, Christian Dior, Sephora) et
+// non « LVMH » : c'est le nom que le candidat reconnaît, et un contrôle de
+// gestion chez Moët Hennessy ne se présente pas comme un poste au siège.
+async function fetchLvmh({ emp = 'LVMH' } = {}) {
+  const hits = [];
+  try {
+    for (let page = 0; page < 10; page++) {
+      const j = await getJSON('https://www.lvmh.com/api/search', {
+        method: 'POST',
+        headers: {
+          'user-agent': UA_HTML,
+          'content-type': 'application/json',
+          referer: 'https://www.lvmh.com/fr/nous-rejoindre/nos-offres',
+        },
+        body: JSON.stringify({
+          queries: [
+            {
+              indexName: 'PRD-fr-fr-timestamp-desc',
+              params: {
+                hitsPerPage: 50,
+                page,
+                query: '',
+                filters: 'countryRegionFilter:"France" AND functionFilter:"Finance"',
+              },
+            },
+          ],
+        }),
+      });
+      const res = (j.results || [])[0] || {};
+      const lot = res.hits || [];
+      hits.push(...lot);
+      if (lot.length < 50 || hits.length >= (res.nbHits || 0)) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+
+    return hits
+      .filter((h) => h.name && h.link)
+      .map((h) => ({
+        __src: 'lvmh',
+        emp: h.maison || emp,
+        raw: h,
+      }));
+  } catch (err) {
+    console.warn('[sources] LVMH indisponible:', err.message);
+    return [];
+  }
+}
+
+// AXA France — leur site de recrutement français expose une API JSON propre,
+// bien plus complète que le portail mondial du groupe : 383 offres contre 5,
+// avec la date d'ouverture, la description et les qualifications (donc de quoi
+// juger la séniorité). Le portail mondial ne remontait aucun stage ni aucune
+// alternance, alors qu'AXA est l'un des gros recruteurs d'étudiants du pays.
+//
+// La pagination est figée à dix par page — tous les paramètres de taille sont
+// ignorés — d'où le nombre de pages plutôt qu'une taille de lot.
+async function fetchAxaFrance({ emp = 'AXA France' } = {}) {
+  const offres = [];
+  try {
+    for (let page = 1; page <= 45; page++) {
+      const j = await getJSON(`https://recrutement.axa.fr/api/jobs?page=${page}`, {
+        headers: { 'user-agent': UA_HTML },
+      });
+      const lot = j.data || [];
+      if (!lot.length) break;
+      offres.push(...lot);
+      if (offres.length >= (j.total || 0)) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+
+    const slug = (s) =>
+      decodeEntities(String(s || ''))
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    return offres
+      .filter((o) => o.isActive !== false)
+      .filter((o) => isFinanceOfferFor(emp, o.JobTitle, o.ReqTypeId))
+      .map((o) => ({
+        __src: 'axafr',
+        emp: o.LegalEntity || emp,
+        raw: {
+          ...o,
+          // L'adresse publique reprend l'identifiant puis l'intitulé en tirets.
+          url: `https://recrutement.axa.fr/nos-offres-emploi/${o.ReqNo || o.avatureid}-${slug(o.JobTitle)}`,
+        },
+      }));
+  } catch (err) {
+    console.warn('[sources] AXA France indisponible:', err.message);
+    return [];
+  }
+}
+
 // Cornerstone OnDemand (csod.com) — l'ATS d'Eurazeo, et d'autres maisons.
 // Son API de recherche exige un jeton Bearer de courte durée (cinq heures),
 // mais ce jeton est servi dans le HTML de la page carrières : deux requêtes
@@ -2249,7 +2356,12 @@ async function fetchSuccessFactors({ host, tenant, emp, location = 'France', max
       const seenPage = new Set();
       while ((m = aRe.exec(html))) {
         const href = (m[1].match(/href="([^"]+)"/) || [])[1];
-        if (!href || !href.startsWith(`${base}/job/`) || seenPage.has(href)) continue;
+        // Une instance peut héberger plusieurs marques, chacune sous son propre
+        // préfixe : CMA CGM sert ses offres sous « /job/ » et celles de CEVA
+        // Logistics sous « /CEVALogistics/job/ ». Exiger le chemin en début
+        // d'adresse écartait toute une moitié du catalogue. Il suffit que
+        // l'adresse désigne une offre.
+        if (!href || !href.includes('/job/') || seenPage.has(href)) continue;
         seenPage.add(href);
         const suite = html.slice(m.index + m[0].length, m.index + m[0].length + 1500);
         const locMatch = suite.match(/class="jobLocation[^"]*"[^>]*>\s*([^<]+?)\s*</);
@@ -2257,10 +2369,15 @@ async function fetchSuccessFactors({ host, tenant, emp, location = 'France', max
         // liste, mais le slug SuccessFactors commence par la ville
         // ("/job/COURBEVOIE-Prudential-...-92-92400/123/").
         const slugVille = (decodeURIComponent(href).match(/\/job\/([A-Za-zÀ-ÿ' -]+?)-[A-Z]/) || [])[1] || '';
+        // La balise peut exister et être VIDE — c'est le cas chez CMA CGM. Se
+        // contenter de tester sa présence donnait alors un lieu vide, que le
+        // filtre France rejetait ensuite : toutes leurs offres tombaient, sans
+        // erreur. C'est le contenu qui décide du repli, pas la balise.
+        const lieuBalise = locMatch ? locMatch[1].replace(/\s+/g, ' ').trim() : '';
         offers.push({
           title: m[2].replace(/\s+/g, ' ').trim(),
           url: `https://${host}${href}`,
-          lieu: locMatch ? locMatch[1].replace(/\s+/g, ' ').trim() : slugVille,
+          lieu: lieuBalise || slugVille,
         });
         found++;
       }
@@ -3060,7 +3177,7 @@ async function fetchAllSources() {
 
   // Les grandes familles sont récoltées séparément : si l'une tombe, les
   // autres n'en savent rien et le magasin ne rend que celle-là périmée.
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs, ef, bofa] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, mck, yello, gs, ef, bofa] = await Promise.all([
     recolter('France Travail', recoltes, fetchFranceTravail),
     recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
     fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
@@ -3068,6 +3185,8 @@ async function fetchAllSources() {
     recolter('VIE (Business France)', recoltes, fetchVie),
     fetchToutesListesHtml(recoltes), // découpé par enseigne
     fetchToutesApisBpce(recoltes), //   idem
+    recolter('AXA France', recoltes, fetchAxaFrance),
+    recolter('LVMH', recoltes, fetchLvmh),
     // McKinsey est coupé. Leur API de recherche continue de servir des postes
     // que leur propre site déclare fermés : « This position is no longer
     // available ». Deux offres différentes l'ont montré à deux jours d'écart,
@@ -3085,7 +3204,7 @@ async function fetchAllSources() {
   ]);
 
   ecrireRecoltes(recoltes);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
@@ -3228,6 +3347,8 @@ module.exports = {
   fetchTeamtailor,
   fetchRecruitee,
   fetchCornerstone,
+  fetchAxaFrance,
+  fetchLvmh,
   fetchSmartRecruiters,
   fetchLever,
   fetchGreenhouse,
