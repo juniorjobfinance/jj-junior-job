@@ -2727,11 +2727,38 @@ async function fetchPhenomWidgets({ host, emp, country = 'France', maxPages = 12
   return finaliserPhenomWidgets(jobs, host, emp, country);
 }
 
+// L'API widgets ne renvoie qu'une URL de CANDIDATURE — chez Allianz le
+// formulaire SuccessFactors, chez BCG un espace candidat qui demande de se
+// connecter. Ni l'une ni l'autre ne montre l'annonce, alors que c'est tout
+// ce que le visiteur veut voir avant de décider.
+//
+// Phenom construit l'adresse publique de chaque annonce à partir de
+// `jobSeqNo` et du titre : /<pays>/<langue>/job/<jobSeqNo>/<titre-en-slug>.
+// La locale porte les deux premiers segments (« en_GLOBAL » -> /global/en).
+function urlFichePhenom(host, job) {
+  if (!job || !job.jobSeqNo) return null;
+  const [langue, pays] = String(job.locale || 'en_GLOBAL').split('_');
+  const slug = String(job.title || 'poste')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return (
+    `https://${host}/${(pays || 'global').toLowerCase()}/${(langue || 'en').toLowerCase()}` +
+    `/job/${encodeURIComponent(job.jobSeqNo)}/${slug}`
+  );
+}
+
 function finaliserPhenomWidgets(jobs, host, emp, country) {
   return jobs
     .filter((j) => new RegExp(`^${country}$`, 'i').test(String(j.country || '')))
     .filter((j) => isFinanceOfferFor(emp, j.title, j.category || ''))
-    .map((j) => ({ __src: `phenom:${host}`, emp, raw: j }));
+    .map((j) => ({
+      __src: `phenom:${host}`,
+      emp,
+      raw: { ...j, __urlFiche: urlFichePhenom(host, j) },
+    }));
 }
 
 async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain, widgets }) {

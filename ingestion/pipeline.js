@@ -1101,7 +1101,11 @@ const DESCR_SENIOR_RE = new RegExp(
   [
     // FR — "4 ans d'expérience", "3 à 5 ans d'expérience" (on lit la borne
     // haute : un poste "3 à 5 ans" recrute un profil confirmé).
-    `\\b\\d+\\s*(?:à|-|/)\\s*([4-9]|[1-9]\\d)\\s*ans?`,
+    // « et » compte autant que « à » : « entre 3 et 5 ans » est la tournure
+    // la plus courante des annonces françaises, et elle passait entière.
+    `\\b\\d+\\s*(?:à|a|-|/|et|ou)\\s*([4-9]|[1-9]\\d)\\s*ans?`,
+    // Même fourchette en anglais : « between 3 and 5 years ».
+    `\\b\\d+\\s*(?:to|and|-|/)\\s*([4-9]|[1-9]\\d)\\s*years?`,
     `\\b([4-9]|[1-9]\\d)\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
     // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
     `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+([4-9]|[1-9]\\d)\\s*ans?`,
@@ -1243,17 +1247,70 @@ const VENTE_HORS_FINANCE_RE =
 // d'en publier une seule qui demande sept ans d'expérience. Un candidat qui
 // tombe sur un poste hors de sa portée, sur un site qui promet du 0-3 ans, ne
 // revient pas.
+// Toutes les durées d'expérience citées par une annonce, en années.
+//
+// On ne cherche plus des tournures : on cherche des NOMBRES suivis d'« ans »
+// ou d'« années », puis on regarde autour d'eux si l'on parle bien
+// d'expérience professionnelle. Cette inversion est tout l'objet de la
+// refonte — une annonce peut écrire son exigence de mille façons, elle finit
+// toujours par un nombre et le mot « ans ».
+//
+// Trois garde-fous, chacun payé par un faux positif observé :
+//   - au-delà de vingt ans, ce n'est plus une exigence mais l'âge de la
+//     maison (« façonné par plus de 145 ans d'expérience », Indosuez) ;
+//   - « 5 années d'études » ou « Bac+5 » décrivent un diplôme, pas un poste ;
+//   - le mot « expérience » doit être proche, sinon « 3 000 consultants
+//     depuis 48 bureaux » ferait sortir un stage.
+const ANNEES_RE = /(\d{1,2})\s*(?:\+\s*)?(?:ans?|ann[ée]es?|years?)\b/gi;
+const CONTEXTE_EXPERIENCE_RE = /exp[ée]rience|experience|exp\./i;
+const CONTEXTE_A_IGNORER_RE =
+  /[ée]tudes?|study|studies|dipl[ôo]m|bac\s*\+|scolarit|cursus|formation|anciennet[ée]|fond[ée]e?\s+en|depuis\s+plus|histoire|history|savoir[\s-]faire|contrat de|dur[ée]e (?:du|de la|d[eu]) (?:contrat|mission|stage)|\bcdd\b de/i;
+
+function dureesExperienceCitees(texte) {
+  const trouvees = [];
+  if (!texte) return trouvees;
+  for (const m of String(texte).matchAll(ANNEES_RE)) {
+    const n = parseInt(m[1], 10);
+    if (!Number.isFinite(n) || n < 1 || n > 20) continue;
+    // La fenêtre est large devant (« une expérience réussie de 5 ans ») et
+    // plus courte derrière (« 5 ans d'expérience »).
+    const avant = texte.slice(Math.max(0, m.index - 90), m.index);
+    const apres = texte.slice(m.index, m.index + 60);
+    const fenetre = avant + apres;
+    if (!CONTEXTE_EXPERIENCE_RE.test(fenetre)) continue;
+    if (CONTEXTE_A_IGNORER_RE.test(fenetre)) continue;
+    trouvees.push(n);
+  }
+  return trouvees;
+}
+
+// La borne haute de ce qu'une annonce réclame. « Entre 3 et 5 ans » demande
+// cinq ans ; « 0 à 3 ans » en demande trois. On lit donc le maximum.
+const EXPERIENCE_MAX_ANNEES = 3;
+
 function passesJuniorFilter(volet, title, descr, strict) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
   if (INDEPENDANT_RE.test(title || '')) return false;
   if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
   if (SENIOR_RE.test(title)) return false;
-  if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
+
+  // Les durées citées passent AVANT tout le reste, y compris avant le mot
+  // « junior ». Une annonce intitulée « Junior Consultant » qui réclame cinq
+  // ans n'est pas une offre junior : le chiffre est la donnée dure, le
+  // qualificatif est du vocabulaire de marque.
+  const durees = dureesExperienceCitees(descr);
+  if (durees.some((n) => n > EXPERIENCE_MAX_ANNEES)) return false;
+
   if (descr) {
-    if (DESCR_JUNIOR_RE.test(descr)) return true; // ouverture explicite aux débutants
-    if (DESCR_SENIOR_RE.test(descr)) return false;
-    return true; // description lue, aucun signal de séniorité : on publie
+    if (DESCR_SENIOR_RE.test(descr)) return false; // « confirmé », « expertise »
+    if (DESCR_JUNIOR_RE.test(descr)) return true; // ouverture explicite
+    // Une durée citée et compatible vaut acceptation : « 2 ans » est un
+    // niveau annoncé, pas un silence — c'est même le cas le plus fréquent
+    // des offres qui conviennent.
+    if (durees.length) return true;
+    return true; // description lue, aucun signal contraire
   }
+  if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
   return !strict;
 }
 
@@ -1530,6 +1587,13 @@ function cleanTitle(title) {
   // 6) Rémunérations : « - 1700€/mois », « 1 700 € brut », « 2000 euros ».
   //    Le champ salaire existe déjà ; dans l'intitulé, c'est du bruit.
   t = t.replace(/[\s\-–—(,|]*\d[\d\s.,]*\s*(?:€|euros?)\s*(?:\/\s*mois|par mois|brut|net)?[)\s]*/gi, ' ');
+
+  // 6 bis) Semestre ou promotion en fin de titre : « – S1 », « – H2 »,
+  //    parfois suivi d'une année. C'est la période du stage, que l'onglet et
+  //    la date disent déjà. Retiré AVANT le lieu : tant que le semestre ferme
+  //    le titre, la ville n'est jamais en dernière position et échappe au
+  //    nettoyage qui, lui, ne lit que le dernier segment.
+  t = t.replace(/[\s\-–—(,|]*\b[sh][12]\b\s*\d{0,5}\s*[)]?\s*$/i, ' ');
 
   // 7) Durées résiduelles : « - 6 mois », « (12 mois) »
   t = t.replace(/[\s\-–—(,|]*\b\d{1,2}\s*mois\b[)\s]*/gi, ' ');
@@ -2001,10 +2065,15 @@ function normalize(item) {
       : // Format v2 : "PARIS, Paris, France" -> la ville seule.
         (raw.location || '').split(',')[0].trim();
     pays = 'France';
+    // L'annonce d'abord, le formulaire en dernier recours : « apply_url »
+    // était lu en premier, si bien que le clic tombait sur une demande de
+    // connexion au lieu du texte du poste. C'est la règle du projet, déjà
+    // appliquée aux autres connecteurs.
     url =
-      raw.apply_url ||
+      raw.__urlFiche ||
       raw.meta_data?.canonical_url ||
       raw.jobUrl ||
+      raw.apply_url ||
       raw.applyUrl ||
       (raw.id ? `https://portal.careers.hsbc.com/job/${raw.id}` : null);
     typeContratRaw = title;
@@ -2580,27 +2649,18 @@ function choisirPepites(offers) {
 // serait un faux rejet, mais le cas est rare devant les 184 offres perdues
 // faute de tout texte.
 function texteDeLaPage(html) {
-  const ZONES = [
-    /<div[^>]+(?:class|id)="[^"]*(?:job-?description|jobdescription|description-?content|offre-?description|job-?details|jobdetails)[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
-    /<[^>]+itemprop="description"[^>]*>([\s\S]*?)<\//i,
-    /<article[^>]*>([\s\S]*?)<\/article>/i,
-    /<main[^>]*>([\s\S]*?)<\/main>/i,
-  ];
-  let brut = null;
-  for (const re of ZONES) {
-    const m = html.match(re);
-    if (m && m[1].length > 400) {
-      brut = m[1];
-      break;
-    }
-  }
-  if (!brut) brut = html.replace(/<(script|style|nav|header|footer)[\s\S]*?<\/\1>/gi, ' ');
-  const texte = brut
+  // Pas de recherche de conteneur : les pages d'annonce éclatent le niveau
+  // d'expérience, le contrat et les prérequis dans des encadrés séparés du
+  // corps du texte, et viser « la » zone de description en manquait toujours
+  // une. On prend tout, moins ce qui ne relève pas du contenu.
+  const texte = String(html)
+    .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<nav[\s\S]*?<\/nav>/gi, ' ')
     .replace(/<[^>]*>/g, ' ')
     .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-  return texte.length > 300 ? texte.slice(0, 6000) : null;
+  return texte.length > 300 ? texte.slice(0, 12000) : null;
 }
 
 function ficheJsonLd(html) {
@@ -2697,7 +2757,8 @@ async function completerDatesManquantes(offers) {
   const aCompleter = offers.filter(
     (o) =>
       o.url &&
-      (!SOURCES_DATE_FIABLE_RE.test(o.source) || (o.volet === 'cdi-cdd' && !o._descr))
+      (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
+        (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)))
   );
   if (!aCompleter.length) return 0;
 
@@ -2736,11 +2797,13 @@ async function completerDatesManquantes(offers) {
               o._dateRecuperee = true;
               trouvees++;
             }
-            // La description ne sert qu'à juger la séniorité, et seulement si
-            // la source n'en avait pas déjà fourni une. Quand la page ne la
-            // publie pas en JSON-LD, on lit son corps : sans ce repli, ces
-            // offres restaient invérifiables et le filtre strict les écartait.
-            if (!o._descr) o._descr = fiche.description || texteDeLaPage(texteHtml);
+            // La description structurée ET le corps de la page, concaténés.
+            // Prendre l'une OU l'autre laissait passer les annonces qui
+            // décrivent la mission en JSON-LD et posent leurs exigences dans
+            // un encadré — le cas du Crédit Agricole, et de son banquier
+            // conseil à « 6 - 10 ans » resté en ligne.
+            const morceaux = [o._descr, fiche.description, texteDeLaPage(texteHtml)];
+            o._descr = morceaux.filter(Boolean).join(' ').slice(0, 16000) || o._descr;
           }
         } catch {
           /* fiche injoignable : l'offre reste sans date, on n'invente pas */
@@ -2989,6 +3052,18 @@ async function run() {
 
   const normalized = raw.map(normalize).filter(Boolean);
   console.log(`[pipeline] ${normalized.length} offres normalisées (${raw.length - normalized.length} rejetées : champs manquants).`);
+  // Répartition par onglet DÈS la normalisation, avant tout filtrage. Sans
+  // elle, on ne peut pas dire si un onglet est pauvre parce que les maisons
+  // n'y recrutent pas, ou parce qu'on perd ses offres en chemin — la question
+  // s'est posée pour l'alternance, servie uniquement par des sources directes.
+  {
+    const parVolet = {};
+    for (const o of normalized) parVolet[o.volet] = (parVolet[o.volet] || 0) + 1;
+    console.log(
+      '[pipeline] Avant filtrage : ' +
+        Object.entries(parVolet).map(([k, v]) => k + ' ' + v).join(', ')
+    );
+  }
 
   // Le filtre "grandes villes françaises" ne s'applique pas au VIE : par nature
   // à l'étranger, et destiné aux jeunes Français, il est pertinent quelle que

@@ -601,10 +601,25 @@
     color: #9c4a2f;
     border: 1px solid rgba(156, 74, 47, 0.32);
   }
+  /* Le vert est réservé à la ligne de date (« Publiée aujourd'hui ») : il y
+     porte une information de fraîcheur, et l'employer aussi pour un type de
+     contrat faisait lire deux choses différentes dans la même couleur.
+     L'onglet garde son nom « CDI · CDD », mais la pastille dit lequel des
+     deux — et le gris quand on ne le sait pas, plutôt que de trancher. */
   .card .contrat.cdi-cdd {
-    background: #dfeee4;
-    color: #226b45;
-    border: 1px solid rgba(34, 107, 69, 0.32);
+    background: #e7e9ee;
+    color: #4c5565;
+    border: 1px solid rgba(76, 85, 101, 0.3);
+  }
+  .card .contrat.cdi-cdd.cdi {
+    background: #d8ebe9;
+    color: #0f5f5c;
+    border-color: rgba(15, 95, 92, 0.34);
+  }
+  .card .contrat.cdi-cdd.cdd {
+    background: #f8e4ea;
+    color: #8d3a55;
+    border-color: rgba(141, 58, 85, 0.34);
   }
   .card h3 {
     margin: 0 0 0.15rem;
@@ -1365,7 +1380,9 @@
 
     return (
       '<a class="card" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
-        '<span class="contrat ' + esc(o.volet) + '">' + esc(libelleContrat) + '</span>' +
+        '<span class="contrat ' + esc(o.volet) +
+          (o.volet === 'cdi-cdd' && o.contrat ? ' ' + esc(o.contrat.toLowerCase()) : '') +
+          '">' + esc(libelleContrat) + '</span>' +
         '<h3>' + esc(o.title) + '</h3>' +
         '<div class="emp">' + esc(o.emp) + '</div>' +
         '<div class="meta">' + metaBits.join('') + '</div>' +
