@@ -1654,6 +1654,7 @@ const TARGET_COMPANIES = {
     // Maisons du haut de la hiérarchie, trouvées par le sondeur grands comptes.
     // Elles n'ont pas d'identifiant devinable : leur tenant Workday a dû être
     // sondé motif par motif.
+    { tenant: 'ag2rlamondiale', dc: 'wd3', site: 'Candidats', emp: 'AG2R La Mondiale' },
     { tenant: 'pjtpartners', dc: 'wd1', site: 'Careers', emp: 'PJT Partners' },
     // Un même tenant Workday héberge souvent DEUX sites : l'un pour les postes
     // expérimentés, l'autre pour les étudiants — et c'est le second qui nous
@@ -1757,6 +1758,7 @@ const TARGET_COMPANIES = {
     // commerciaux en sont écartés par la règle générale, qui ne les retient que
     // chez les maisons financières.
     { host: 'jobs.cmacgm-group.com', tenant: '', emp: 'CMA CGM' },
+    { host: 'carrieres.generali.fr', tenant: '', emp: 'Generali France' },
   ],
   talentsoft: [
     { host: 'jobs.amundi.com', emp: 'Amundi' },
@@ -1788,6 +1790,11 @@ const TARGET_COMPANIES = {
   ],
   // Teamtailor : endpoint JSON Feed public https://{company}.teamtailor.com/jobs.json
   teamtailor: [
+    // Antin Infrastructure Partners. Leur flux est vide aujourd'hui — le fonds
+    // n'ouvre des postes qu'épisodiquement —, mais le connecteur est en place :
+    // la prochaine offre entrera d'elle-même au passage du matin.
+    // À ne pas confondre avec « Antin+ », un bailleur social sans rapport.
+    { company: 'antininfrastructurepartners-1655458195', emp: 'Antin Infrastructure' },
     { company: 'payfit', emp: 'PayFit' },
     { company: 'shine', emp: 'Shine' },
     { company: 'trustpair', emp: 'Trustpair' },
@@ -2161,6 +2168,52 @@ async function fetchOpenDataSoft({ domain, dataset, emp }) {
 }
 
 // Recruitee — endpoint public, renvoie déjà le lien direct vers l'annonce.
+// TalentLink (tal.net) — la plateforme des boutiques anglo-saxonnes de conseil
+// financier. Elle expose un flux Atom par tableau d'offres, ce qui évite d'avoir
+// à exécuter leur JavaScript : le flux porte l'intitulé, le lien, la date de
+// publication et la date limite de candidature.
+//
+// Les boutiques ouvrent leurs promotions sur PLUSIEURS bureaux à la fois —
+// « Off-Cycle Internship Programme (Paris / London) » — et le lieu ne figure
+// que dans l'intitulé. On retient donc une offre dès que son titre nomme Paris
+// ou la France : un candidat parisien est bien concerné par une promotion
+// Paris/Londres, alors qu'une promotion Munich/Londres ne le regarde pas.
+async function fetchTalentLink({ host, board = 2, emp, chemin }) {
+  try {
+    const url = chemin
+      ? `https://${host}${chemin}`
+      : `https://${host}/vx/mobile-0/appcentre-1/brand-4/candidate/jobboard/vacancy/${board}/feed`;
+    const xml = await (await fetchAvecReprise(url, { headers: { 'user-agent': UA_HTML } })).text();
+
+    const offres = [];
+    for (const m of xml.matchAll(/<entry\b[^>]*>([\s\S]*?)<\/entry>/g)) {
+      const e = m[1];
+      const titre = decodeEntities((e.match(/<title[^>]*>([\s\S]*?)<\/title>/) || [])[1] || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const lien = (e.match(/<link[^>]*href="([^"]+)"/) || [])[1];
+      if (!titre || !lien) continue;
+      if (!/paris|\bfrance\b/i.test(titre)) continue;
+      offres.push({
+        __src: `talentlink:${host}`,
+        emp,
+        raw: {
+          titre,
+          // Le « ?instant=apply » ouvre directement le formulaire : on préfère
+          // envoyer le candidat sur la description de l'offre.
+          url: lien.replace(/\?instant=apply$/, ''),
+          date: (e.match(/<published>([^<]+)<\/published>/) || [])[1] || null,
+          echeance: (e.match(/Application Deadline:\s*([^<]+)/i) || [])[1] || null,
+        },
+      });
+    }
+    return offres;
+  } catch (err) {
+    console.warn(`[sources] TalentLink (${host}) indisponible:`, err.message);
+    return [];
+  }
+}
+
 // LVMH — le groupe fait passer sa recherche Algolia par son propre serveur
 // (/api/search), donc aucune clé n'est nécessaire. Sur 1195 offres françaises,
 // 93 relèvent de la finance : on filtre sur leur propre facette « Finance »
@@ -3241,7 +3294,7 @@ async function fetchAllSources() {
 
   // Les grandes familles sont récoltées séparément : si l'une tombe, les
   // autres n'en savent rien et le magasin ne rend que celle-là périmée.
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, mck, yello, gs, ef, bofa] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
     recolter('France Travail', recoltes, fetchFranceTravail),
     recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
     fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
@@ -3251,6 +3304,13 @@ async function fetchAllSources() {
     fetchToutesApisBpce(recoltes), //   idem
     recolter('AXA France', recoltes, fetchAxaFrance),
     recolter('LVMH', recoltes, fetchLvmh),
+    recolter('Perella Weinberg', recoltes, () =>
+      Promise.all(
+        [1, 2, 3].map((board) =>
+          fetchTalentLink({ host: 'pwpcareers.tal.net', board, emp: 'Perella Weinberg' })
+        )
+      ).then((lots) => lots.flat())
+    ),
     // McKinsey est coupé. Leur API de recherche continue de servir des postes
     // que leur propre site déclare fermés : « This position is no longer
     // available ». Deux offres différentes l'ont montré à deux jours d'écart,
@@ -3268,7 +3328,7 @@ async function fetchAllSources() {
   ]);
 
   ecrireRecoltes(recoltes);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
@@ -3413,6 +3473,7 @@ module.exports = {
   fetchCornerstone,
   fetchAxaFrance,
   fetchLvmh,
+  fetchTalentLink,
   fetchListeHtml,
   LISTES_HTML,
   fetchSmartRecruiters,

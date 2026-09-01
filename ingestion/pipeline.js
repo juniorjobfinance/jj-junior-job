@@ -86,7 +86,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -1437,6 +1437,17 @@ function normalize(item) {
     romeLibelle = raw.category;
     descr = raw.description;
     postedAt = parseFrenchDateTime(raw.lastmodifieddate);
+  } else if (__src.startsWith('talentlink:')) {
+    // Le lieu n'est donné que dans l'intitulé, sous forme de liste de bureaux :
+    // « (Paris / London) ». Le connecteur n'a retenu que celles qui nomment
+    // Paris, on peut donc l'affirmer ici.
+    emp = item.emp;
+    title = raw.titre;
+    ville = 'Paris';
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.titre;
+    postedAt = raw.date ? new Date(raw.date).toISOString() : null;
   } else if (__src === 'lvmh') {
     // `requiredExperience` dit le niveau attendu en clair — « Débutant »,
     // « Minimum 5 ans », « Minimum 10 years ». On le passe au filtre 0-3 ans
