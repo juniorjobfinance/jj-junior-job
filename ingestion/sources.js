@@ -2170,7 +2170,11 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
 async function fetchOpenDataSoft({ domain, dataset, emp }) {
   const pageSize = 100;
   const maxPages = 25; // garde-fou : 2500 offres France max
-  const fields = 'title,category,city,jobtype,apply_url,url,lastmodifieddate,organization';
+  // « description » est indispensable : le filtre 0-3 ans ne peut juger une
+  // offre que sur le texte de son annonce, et sans ce champ soixante offres
+  // BPCE étaient écartées chaque matin faute d'être vérifiables — le pipeline
+  // lisait un champ que la requête ne demandait pas.
+  const fields = 'title,category,city,jobtype,apply_url,url,lastmodifieddate,organization,description';
   const jobs = [];
   try {
     for (let page = 0; page < maxPages; page++) {

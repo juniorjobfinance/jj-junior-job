@@ -58,6 +58,12 @@ const MAX_JOURS_ABSENCE = 3;
 // des annonces de 2018).
 const MAX_AGE_JOURS = 30;
 const MAX_AGE_JOURS_ATS_DIRECT = 120;
+// Un CDI ou un CDD publié il y a plus de deux mois est presque toujours
+// pourvu : l'annonce reste en ligne, mais le poste ne l'est plus. Le seuil
+// long ne vaut que pour les stages, les alternances et les VIE, dont les
+// campagnes s'ouvrent des mois à l'avance — une promotion d'été 2027 se
+// candidate dès l'automne 2026.
+const MAX_AGE_JOURS_CDI_CDD = 60;
 
 // Les sources qui republient les annonces d'autrui, par opposition à celles qui
 // lisent l'ATS de la maison elle-même.
@@ -119,16 +125,44 @@ const SOURCES_DATE_FIABLE_RE =
 // expression n'apparaît sur les deux axes — sans quoi le lecteur ne sait plus
 // lequel il filtre : « M&A & Banque d'affaires » côté métier et « Banque
 // d'affaires & marchés » côté entreprise se marchaient dessus.
+// LES DOUZE MÉTIERS DE LA FINANCE JUNIOR
+//
+// Deux exigences se contredisent et doivent pourtant tenir ensemble : un
+// étudiant qui ne sait pas encore ce qu'il veut doit comprendre chaque intitulé
+// sans glossaire, et celui qui vise déjà le M&A ou la dette privée doit y
+// retrouver SON métier, pas une catégorie vague qui l'englobe.
+//
+// D'où le découpage par MÉTIER RÉEL et non par grande fonction. Trois
+// séparations comptent particulièrement :
+//
+//   - Capital-investissement ≠ Gestion d'actifs. Le premier achète des
+//     entreprises non cotées et siège à leur conseil ; le second gère des
+//     portefeuilles de titres cotés. Ce sont deux voies, deux recrutements,
+//     deux carrières — les fondre revenait à dire à un candidat PE que le
+//     stage chez Amundi lui correspond.
+//   - Banque privée ≠ Gestion d'actifs. On y conseille des particuliers
+//     fortunés, pas des institutionnels.
+//   - Opérations & Middle-office ≠ Data & Quant. Un gestionnaire back-office
+//     titres et un analyste quantitatif n'ont ni le même métier ni la même
+//     formation. Les mêler mettait « Back Office Monétique » sous « Data &
+//     Quant », ce qui trompait les deux publics à la fois.
+//
+// L'ordre suit le parcours d'un étudiant : les métiers de deal et de marché
+// d'abord, la gestion ensuite, les fonctions d'entreprise après, le support
+// pour finir.
 const FAMILLES = [
   'Fusions & Acquisitions',
   'Marchés financiers',
-  'Investissement & Private equity',
-  'Audit',
-  'Conseil',
-  'Comptabilité',
+  'Capital-investissement',
+  "Gestion d'actifs",
+  'Banque privée & Patrimoine',
+  'Audit & Contrôle interne',
+  'Conseil & Transformation',
+  'Comptabilité & Consolidation',
   'Contrôle de gestion & Trésorerie',
   'Risques & Conformité',
   'Data & Quant',
+  'Opérations & Middle-office',
   'Autres métiers de la finance',
 ];
 
@@ -143,27 +177,51 @@ const FAMILLES = [
 const FAMILLE_HORS_PERIMETRE = 'Commercial & Relation client';
 
 // Famille fine (celle des règles) -> famille affichée.
+//
+// Cette table est le point où le classement se joue vraiment : des règles fines
+// justes peuvent être ruinées par une consolidation qui les verse au mauvais
+// endroit. C'était le cas — « Middle & Back Office » et « Organisation &
+// Projets » atterrissaient tous deux dans « Data & Quant », qui affichait donc
+// « Gestionnaire Back Office Monétique » à un étudiant venu chercher du
+// quantitatif.
 const CONSOLIDATION_FAMILLES = {
+  // Hors périmètre : réseau d'agence et distribution d'assurance.
   'Banque de détail & clientèle': 'Commercial & Relation client',
   'Assurance — distribution & sinistres': 'Commercial & Relation client',
-  'Comptabilité & Consolidation': 'Comptabilité',
-  'Contrôle de gestion & FP&A': 'Contrôle de gestion & Trésorerie',
-  'Trésorerie & Financement': 'Contrôle de gestion & Trésorerie',
-  // Audit et conseil se séparent : vérifier les comptes d'un client (Big Four)
-  // et accompagner une transformation (McKinsey, BCG) sont deux métiers, deux
-  // recrutements et deux carrières. Les fondre masquait cette différence.
-  'Audit & Contrôle interne': 'Audit',
-  'Conseil': 'Conseil',
-  // M&A et marchés se séparent aussi : ce sont les deux voies distinctes que
-  // vise un étudiant en finance, on ne postule pas aux mêmes stages.
+
+  // Métiers de deal et de marché.
   'M&A & Transaction Services': 'Fusions & Acquisitions',
   'Marchés & Front Office': 'Marchés financiers',
-  "Gestion d'actifs & Wealth": 'Investissement & Private equity',
+
+  // Les trois métiers de la gestion, désormais distincts. Ils partageaient
+  // auparavant une seule case, ce qui revenait à confondre un fonds de LBO,
+  // un gérant actions et un banquier privé.
+  'Private Equity & Infrastructure': 'Capital-investissement',
+  "Gestion d'actifs & Wealth": "Gestion d'actifs",
+  'Banque privée & Patrimoine': 'Banque privée & Patrimoine',
+
+  // Vérification et accompagnement : deux métiers, deux recrutements, deux
+  // carrières. Les fondre masquait la différence entre auditer les comptes
+  // d'un client et conduire sa transformation.
+  'Audit & Contrôle interne': 'Audit & Contrôle interne',
+  'Conseil': 'Conseil & Transformation',
+  'Organisation & Projets': 'Conseil & Transformation',
+
+  // Fonctions financières de l'entreprise.
+  'Comptabilité & Consolidation': 'Comptabilité & Consolidation',
+  'Contrôle de gestion & FP&A': 'Contrôle de gestion & Trésorerie',
+  'Trésorerie & Financement': 'Contrôle de gestion & Trésorerie',
+
+  // Maîtrise des risques. L'actuariat y reste rattaché : c'est le même univers
+  // réglementaire et les mêmes recruteurs, et le volume ne justifie pas encore
+  // une famille à part.
   'Risques & Conformité': 'Risques & Conformité',
   'Actuariat': 'Risques & Conformité',
+
+  // Chiffre et exécution, enfin séparés.
   'Data & Quant': 'Data & Quant',
-  'Middle & Back Office': 'Data & Quant',
-  'Organisation & Projets': 'Data & Quant',
+  'Middle & Back Office': 'Opérations & Middle-office',
+
   'Autres métiers de la finance': 'Autres métiers de la finance',
 };
 
@@ -181,18 +239,18 @@ const FAMILLE_RULES = [
   // Fusions & Acquisitions : le conseil aux entreprises qui achètent, vendent ou
   // lèvent des fonds. Le private equity, lui, part vers l'INVESTISSEMENT — on
   // n'y conseille pas une opération, on la finance et on détient la société.
-  [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|corporate finance|leveraged finance|\becm\b|\bdcm\b|deal advisory|[ée]valuation d'entreprise|origination|syndication|introduction en bourse|\bipo\b|banque d'affaires|investment banking|\bgib\b|debt advisory|restructuring/i, 'M&A & Transaction Services'],
-  [/data scien|data analyst|analyste data|\bquant\b|quantitatif|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)/i, 'Data & Quant'],
+  [/\bm&a\b|fusions?[\s-]?acquisitions?|due diligence|transaction services|strategy (?:and|&) transactions|corporate finance|leveraged finance|\becm\b|\bdcm\b|deal advisory|[ée]valuation d'entreprise|origination|syndication|introduction en bourse|\bipo\b|banque d'affaires|investment banking|\bgib\b|debt advisory|restructuring/i, 'M&A & Transaction Services'],
+  [/data scien|data analyst|analyste data|\bquant\b|quantitati[fv]|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)|[ée]tudes statistiques|statisticien|donn[ée]es financi[èe]res|data (?:and|&) (?:process|reporting)|chief data officer|data project/i, 'Data & Quant'],
 
   // --- Assurance : sinistres, contrats, distribution -----------------------
-  [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurance (?:collective|emprunteur|construction|sant[ée])|\binsurance\b/i, 'Assurance — distribution & sinistres'],
+  [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurances? collectives?|assurance (?:emprunteur|construction|sant[ée])|assurance de personnes?|prestations? sant[ée]|gestionnaire (?:retraite|pr[ée]vention|technique)|satisfaction adh[ée]rent|r[ée]clamations?|op[ée]rations? d.assurance|relations? grands? clients?|production grands comptes|accompagnement clients?|assurances? professionnelles?|assistance clients?|service clients?|client service|relations? clients?|gestion international|gestion individuelle|comptes? multi[\s-]activit|charg[ée]e? d.affaires entrepreneurs|\bretraite\b|op[ée]rations assurance|assurance vie|gestion internationale|centre de services|gestionnaire op[ée]rationnel|\binsurance\b/i, 'Assurance — distribution & sinistres'],
 
   // --- Marchés, gestion, opérations ---------------------------------------
   // Marchés & Front Office : le vocabulaire du métier, en français comme en
   // anglais. Sans « fixed income », « cross asset », « produits structurés » ou
   // « dérivés », les postes les plus recherchés de Lazard, Goldman, BNP ou ODDO
   // tombaient tous dans « Autres métiers de la finance ».
-  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits? d[ée]riv[ée]|d[ée]riv[ée]s?\b|derivativ|march[ée]s financiers|finance de march[ée]|financial market|structuring|\bpricing\b|cross[\s-]?asset|fixed income|high yield|\bobligataire\b|produits? structur|solutions? structur|blended finance|execution and clearing|\bclearing\b|\bsales\b\s*(?:&|et)\s*trading|equity capital|debt capital|\bdcm\b|\becm\b|\bcoverage\b/i, 'Marchés & Front Office'],
+  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits? d[ée]riv[ée]|d[ée]riv[ée]s?\b|derivativ|march[ée]s financiers|finance de march[ée]|financial market|structuring|\bpricing\b|cross[\s-]?asset|fixed income|high yield|\bobligataire\b|produits? structur|solutions? structur|blended finance|execution and clearing|\bclearing\b|\bsales\b\s*(?:&|et)\s*trading|equity capital|debt capital|\bdcm\b|\becm\b|\bcoverage\b|op[ée]rateur de march[ée]|analyste actions?|\bfo\/fi\b|garanties internationales|financements? syndiqu|syndicated loan|network banking|produits? structur[ée]s? financial|structured product|healthcare sector|march[ée] de l.[ée]nergie|real[\s-]?time analyst|[ée]tudes financi[èe]res|analyse cr[ée]dit|titrisation|\bipv\b|collateral|digital assets|controls on equity|global (?:corporate )?banking|global markets|corporate banking|primary distribution/i, 'Marchés & Front Office'],
   // Gestion d'actifs : la vente institutionnelle (« sales gestion
   // institutionnelle », « coverage institutionnel ») est un métier de la gestion
   // d'actifs, pas du réseau — c'est la distribution de produits financiers à des
@@ -201,18 +259,39 @@ const FAMILLE_RULES = [
   // sociétés (private equity, venture) ou dans des fonds (gestion d'actifs).
   // La vente institutionnelle en fait partie : c'est la distribution de produits
   // financiers à des investisseurs professionnels, pas du réseau.
-  [/asset management|gestion d'actifs|gestion de portefeuille|portfolio|\bopcvm\b|\bg[ée]rant|banque priv[ée]e|gestion priv[ée]e|wealth|gestion de patrimoine|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi|gestion institutionnelle|client[èe]les? institutionnel|investisseurs? institutionnel|fonds structur|multi[\s-]?gestion|s[ée]lection de fonds|fund selection|private equity|capital[\s-]?investissement|venture capital|\blbo\b|buyout|co[\s-]?investment|fund finance|\bfonds\b|infrastructure fund|analyste? buy[\s-]?side|\bgp\b stake|secondaries/i, "Gestion d'actifs & Wealth"],
-  [/middle[\s-]?office|back[\s-]?office|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|op[ée]rations bancaires|moyens de paiement|\bswift\b/i, 'Middle & Back Office'],
+  // Les trois métiers de la gestion, séparés par ce qu'on gère et pour qui.
+  // L'ordre va du plus spécifique au plus large : « Private Equity Real Estate »
+  // doit partir au capital-investissement, pas à la gestion d'actifs.
+
+  // 1) Capital-investissement : on achète des entreprises ou des actifs non
+  //    cotés — LBO, croissance, infrastructure, immobilier, dette privée.
+  //    « Fund management » chez un fonds désigne la gestion du véhicule
+  //    d'investissement lui-même, pas la gestion de portefeuille cotée.
+  [/private equity|private debt|private credit|private assets|private capital|capital[\s-]?investissement|capital d[ée]veloppement|venture capital|\bvc\b fund|\blbo\b|\bmlbo\b|buyout|growth (?:equity|capital)|direct lending|mezzanine|dette priv[ée]e|infrastructure fund|fonds d'infrastructure|real estate (?:fund|equity|investment|debt)|secondaries|co[\s-]?investment|\bgp\b stake|fund of funds|fund finance|fund management|dette d'infrastructure|^real estate\b|^infrastructure\b|^capital\b|secondary opportunities|venture (?:fund|capital)|five arrows|meridiam/i, 'Private Equity & Infrastructure'],
+
+  // 2) Banque privée et patrimoine : on conseille des particuliers fortunés.
+  [/banque priv[ée]e|banquier[\s.]?priv[ée]|private bank|gestion priv[ée]e|gestion de patrimoine|ing[ée]nierie patrimoniale|patrimonia|\bwealth\b|family office/i, 'Banque privée & Patrimoine'],
+
+  // 3) Gestion d'actifs : on gère des portefeuilles pour des institutionnels.
+  //    Les relations investisseurs y sont rattachées — lever et suivre les
+  //    encours est le métier commercial de la gestion, pas du réseau.
+  [/asset management|gestion d'actifs|gestion de portefeuille|portfolio|\bopcvm\b|\bg[ée]rant|conseill.{0,15}investissement|\binvestment\b|\besg\b|extra[\s-]?financi|sustainab|durabilit[ée]|gestion institutionnelle|client[èe]les? institutionnel|investisseurs? institutionnel|institutional client|fonds structur|multi[\s-]?gestion|s[ée]lection de fonds|fund selection|\bfonds\b|analyste? buy[\s-]?side|investor relations|relations? investisseurs?|fundrais|lev[ée]e de fonds|investment solutions|multi[\s-]?management|fund (?:analyst|distributor)|distributeur de fonds|clients? institutionnels?|investissements? actions?|\brse\b|\be&s\b analyst|gestionnaire de portefeuille|investissements? durables?/i, "Gestion d'actifs & Wealth"],
+  // Opérations : tout ce qui fait tourner la machine derrière le front office.
+  // Le mot « operations » seul ne suffisait pas — il fallait « opérations
+  // bancaires » — si bien que « Banking Operations », « Finance Operations
+  // EMEA » ou « Fund Manager Operations Officer » stagnaient dans le
+  // fourre-tout alors que c'est le même métier.
+  [/middle[\s-]?office|back[\s-]?office|front to back|d[ée]positaire|custody|fund admin|r[èe]glement[\s-]livraison|post[\s-]?march[ée]|cr[ée]dits? documentaires?|flux edi|\bt2s\b|succession|moyens de paiement|mon[ée]tique|\bswift\b|settlement|corporate actions|valorisation de fonds|instruments? financiers?|unit[ée]s? de comptes?|services bancaires|client onboarding|(?:banking|finance|fund|central|securities|business|distributor|manager)\s+operations?|operations? officer|op[ée]rations? et processus|documentation drafting|gestionnaire des processus|suivi d.activit[ée]|charg[ée]e? de commissions|business management|op[ée]rations?\s+(?:bancaires?|titres?|financi[èe]res?|de march[ée]|transverses?|fund|infrastructure)/i, 'Middle & Back Office'],
 
   // --- Finance d'entreprise ------------------------------------------------
-  [/comptab|accounting|accountant|consolid|cl[ôo]ture comptable|r[ée]vision comptable|facturation|\bdaf\b|gestionnaire de paie|\bpaie\b|administration des ventes|\badv\b/i, 'Comptabilité & Consolidation'],
-  [/contr[ôo]le de gestion|contr[ôo]leur de gestion|controlling|\bcontroller\b|\bfp&a\b|business partner|budg[ée]t|reporting financier|performance financi[èe]re|cost control|pilotage financier|contr[ôo]leur? financi|contr[ôo]leur op[ée]rations|p&l|business performance|performance op[ée]rationnelle|\balm\b|asset & liability/i, 'Contrôle de gestion & FP&A'],
+  [/comptab|accounting|accountant|consolid|analyste fiscal|fiscalit[ée]|cl[ôo]ture comptable|r[ée]vision comptable|facturation|\bdaf\b|gestionnaire de paie|\bpaie\b|administration des ventes|\badv\b/i, 'Comptabilité & Consolidation'],
+  [/contr[ôo]le de gestion|contr[ôo]leur de gestion|controlling|\bcontroller\b|\bfp&a\b|business partner|budg[ée]t|reporting financier|performance financi[èe]re|cost control|pilotage financier|contr[ôo]leur? financi|contr[ôo]le financier|performance analyst|analyse business unit|contr[ôo]leur op[ée]rations|p&l|business performance|performance op[ée]rationnelle|\balm\b|asset & liability/i, 'Contrôle de gestion & FP&A'],
   [/tr[ée]sorerie|tr[ée]sorier|treasury|cash management|financement structur|financement immobilier|charg.{0,15}financement|credit management|recouvrement|analyste cr[ée]dit|risque de cr[ée]dit|\bcr[ée]dit\b/i, 'Trésorerie & Financement'],
 
   // --- Audit, conseil, risques ---------------------------------------------
-  [/audit|commissariat aux comptes|contr[ôo]le interne|internal control|contr[ôo]le permanent|inspection g[ée]n[ée]rale/i, 'Audit & Contrôle interne'],
-  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux|reporting r[ée]glementaire|regulatory reporting|d[ée]claratif/i, 'Risques & Conformité'],
-  [/consult|conseil\b|advisory|transformation financi/i, 'Conseil'],
+  [/audit|commissariat aux comptes|commissaire aux comptes|contr[ôo]leurs? (?:interne|permanent)|contr[ôo]le (?:interne|permanent)|internal control|inspection g[ée]n[ée]rale/i, 'Audit & Contrôle interne'],
+  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|\baml\b|\bcsrd\b|\bsfdr\b|reporting extra[\s-]?financier|r[ée]tablissement|r[ée]solution|solvabilit[ée]|tarification|gestion de crise|financial crime|gouvernance|surveillance|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux|reporting r[ée]glementaire|regulatory reporting|d[ée]claratif/i, 'Risques & Conformité'],
+  [/consult|conseil\b|advisory|transformation|pilotage de programme|analyste? strat[ée]g|operational project|project (?:officer|manag)|\bpmo\b|market intelligence|business insights|performance et animation|growth strategy|strategy (?:and|&) partnerships|syst[èe]mes? d.informations? finance/i, 'Conseil'],
 
   // --- Analyse et recherche -------------------------------------------------
   [/analyse financi[èe]re|analyste financier|financial analyst|finance analyst|finance officer|[ée]quity research|\bresearch\b|[ée]conomist|[ée]tudes [ée]conomiques|strat[ée]giste/i, 'Marchés & Front Office'],
@@ -378,119 +457,188 @@ function normaliserEmployeur(emp) {
   return nom || emp;
 }
 
-// Type de structure par employeur (heuristique — liste de départ PROJET.md §15).
-// Type de structure. Le découpage précédent rangeait 446 offres sous un seul
-// mot, "Banque" — or un étudiant qui vise le M&A chez Lazard et celui qui vise
-// une agence de la Caisse d'Épargne ne cherchent pas la même chose. La banque
-// de détail et la banque d'affaires sont deux mondes, et c'est la distinction
-// la plus utile qu'on puisse offrir sur ce site.
+// Type de structure : le deuxième axe du site, celui du « chez qui ».
+//
+// Trois principes tiennent ce découpage :
+//
+//  1. Un type nomme un EMPLOYEUR, jamais un métier. Chaque libellé s'ouvre donc
+//     sur un mot d'institution — Banque, Société, Fonds, Compagnie, Cabinet,
+//     Entreprise, Institution — pour qu'on ne confonde jamais ce filtre avec
+//     celui des familles, qui nomme une activité.
+//
+//  2. Aucun libellé ne reprend le nom d'une famille. « Gestion d'actifs » est
+//     un métier ; l'employeur, lui, est une « société de gestion ». La nuance
+//     est celle du secteur, et elle évite de lire deux fois le même mot dans
+//     deux filtres qui ne veulent pas dire la même chose.
+//
+//  3. Les distinctions retenues sont celles qui changent une candidature. Une
+//     boutique de M&A et une BFI recrutent le même profil pour deux métiers
+//     très différents ; un fonds de private equity et une société de gestion
+//     cotée aussi. À l'inverse, séparer les fintechs des autres services
+//     financiers spécialisés ne servait personne : huit offres dans une case
+//     que le candidat ne pense pas à ouvrir.
+const STRUCTURES = [
+  "Banque de financement & d'investissement",
+  "Banque d'affaires indépendante",
+  'Banque de détail',
+  'Société de gestion',
+  "Fonds d'investissement",
+  "Compagnie d'assurance & mutuelle",
+  'Big Four & cabinets d’audit',
+  'Cabinet de conseil & stratégie',
+  'Fintech & services financiers spécialisés',
+  'Entreprise (direction financière)',
+  'Institution publique & régulateur',
+];
+
 const SECTEUR_PAR_MAISON = {
-  // Banque de détail : réseaux d'agences, clientèle particuliers et pro.
-  'BPCE': 'Banque de réseau', 'Crédit Agricole': 'Banque de réseau',
-  'BNP Paribas': 'Banque de réseau', 'Société Générale': 'Banque de réseau',
-  'Crédit Mutuel': 'Banque de réseau', 'La Banque Postale': 'Banque de réseau',
+  // --- Banque de détail : réseaux d'agences, clientèle de particuliers -----
+  // Ce sont des groupes universels : le type ci-dessous n'est que leur défaut,
+  // l'arbitrage d'inferSector les répartit ensuite selon l'entité qui recrute.
+  'BPCE': 'Banque de détail', 'Crédit Agricole': 'Banque de détail',
+  'BNP Paribas': 'Banque de détail', 'Société Générale': 'Banque de détail',
+  'Crédit Mutuel': 'Banque de détail', 'La Banque Postale': 'Banque de détail',
+  'Santander': 'Banque de détail', 'BBVA': 'Banque de détail',
+  'Intesa Sanpaolo': 'Banque de détail',
 
-  // Banque d'affaires et de marchés : CIB, boutiques M&A, courtiers.
-  'BNP Paribas CIB': "Banque d'affaires & d'investissement", 'Société Générale CIB': "Banque d'affaires & d'investissement",
-  'Crédit Agricole CIB': "Banque d'affaires & d'investissement", 'Natixis': "Banque d'affaires & d'investissement",
-  'Goldman Sachs': "Banque d'affaires & d'investissement", 'JPMorgan': "Banque d'affaires & d'investissement",
-  'Morgan Stanley': "Banque d'affaires & d'investissement", 'Bank of America': "Banque d'affaires & d'investissement",
-  'Citi': "Banque d'affaires & d'investissement", 'Barclays': "Banque d'affaires & d'investissement",
-  'Deutsche Bank': "Banque d'affaires & d'investissement", 'UBS': "Banque d'affaires & d'investissement",
-  'HSBC France': "Banque d'affaires & d'investissement", 'Lazard': "Banque d'affaires & d'investissement",
-  'PJT Partners': "Banque d'affaires & d'investissement",
-  'Houlihan Lokey': "Banque d'affaires & d'investissement",
-  'Nomura': "Banque d'affaires & d'investissement",
-  'Santander': 'Banque de réseau',
-  'BBVA': 'Banque de réseau',
-  'Intesa Sanpaolo': 'Banque de réseau',
-  'BlackRock': "Société de gestion d'actifs",
-  'State Street': "Société de gestion d'actifs",
-  'Julius Baer': "Société de gestion d'actifs",
-  'Rothschild & Co': "Banque d'affaires & d'investissement", 'Edmond de Rothschild': "Banque d'affaires & d'investissement",
-  'Oddo BHF': "Banque d'affaires & d'investissement", 'Messier & Associés': "Banque d'affaires & d'investissement",
-  'Centerview Partners': "Banque d'affaires & d'investissement", 'Perella Weinberg': "Banque d'affaires & d'investissement",
-  'Kepler Cheuvreux': "Banque d'affaires & d'investissement",
+  // --- Banque de financement & d'investissement : les BFI ------------------
+  'BNP Paribas CIB': "Banque de financement & d'investissement",
+  'Société Générale CIB': "Banque de financement & d'investissement",
+  'Crédit Agricole CIB': "Banque de financement & d'investissement",
+  'Natixis': "Banque de financement & d'investissement",
+  'Goldman Sachs': "Banque de financement & d'investissement",
+  'JPMorgan': "Banque de financement & d'investissement",
+  'Morgan Stanley': "Banque de financement & d'investissement",
+  'Bank of America': "Banque de financement & d'investissement",
+  'Citi': "Banque de financement & d'investissement",
+  'Barclays': "Banque de financement & d'investissement",
+  'Deutsche Bank': "Banque de financement & d'investissement",
+  'UBS': "Banque de financement & d'investissement",
+  'HSBC France': "Banque de financement & d'investissement",
+  'Nomura': "Banque de financement & d'investissement",
+  'Oddo BHF': "Banque de financement & d'investissement",
 
-  // Infrastructure de marché et données financières.
-  'LSEG': 'Institution publique',
+  // --- Banque d'affaires indépendante : les boutiques ----------------------
+  // Elles ne portent ni bilan ni réseau : elles vendent du conseil financier.
+  // C'est la distinction que cherche un candidat qui vise le M&A.
+  'Lazard': "Banque d'affaires indépendante",
+  'Rothschild & Co': "Banque d'affaires indépendante",
+  'PJT Partners': "Banque d'affaires indépendante",
+  'Houlihan Lokey': "Banque d'affaires indépendante",
+  'Centerview Partners': "Banque d'affaires indépendante",
+  'Perella Weinberg': "Banque d'affaires indépendante",
+  'Messier & Associés': "Banque d'affaires indépendante",
+  'Edmond de Rothschild': "Banque d'affaires indépendante",
+  'Kepler Cheuvreux': "Banque d'affaires indépendante",
 
-  // Gestion d'actifs.
-  'Amundi': "Société de gestion d'actifs", 'AXA IM': "Société de gestion d'actifs",
-  'BNP Paribas AM': "Société de gestion d'actifs", 'Natixis IM': "Société de gestion d'actifs",
-  'Carmignac': "Société de gestion d'actifs", 'Comgest': "Société de gestion d'actifs",
-  'Sycomore': "Société de gestion d'actifs", 'Groupama AM': "Société de gestion d'actifs",
-  'CPR AM': "Société de gestion d'actifs", 'Lazard Frères Gestion': "Société de gestion d'actifs",
-  "La Financière de l'Échiquier": "Société de gestion d'actifs",
+  // --- Sociétés de gestion : l'épargne collective, cotée -------------------
+  'Amundi': 'Société de gestion', 'AXA IM': 'Société de gestion',
+  'BNP Paribas AM': 'Société de gestion', 'Natixis IM': 'Société de gestion',
+  'Carmignac': 'Société de gestion', 'Comgest': 'Société de gestion',
+  'Sycomore': 'Société de gestion', 'Groupama AM': 'Société de gestion',
+  'CPR AM': 'Société de gestion', 'Lazard Frères Gestion': 'Société de gestion',
+  "La Financière de l'Échiquier": 'Société de gestion',
+  'BlackRock': 'Société de gestion', 'Julius Baer': 'Société de gestion',
+  'Candriam': 'Société de gestion', 'Mirova': 'Société de gestion',
+  'Ostrum': 'Société de gestion', 'DNCA': 'Société de gestion',
+  'Rothschild & Co AM': 'Société de gestion',
 
-  // Private equity, infrastructure, capital-risque.
-  'Ardian': "Société de gestion d'actifs", 'Eurazeo': "Société de gestion d'actifs",
-  'PAI Partners': "Société de gestion d'actifs", 'Tikehau': "Société de gestion d'actifs",
-  'Antin Infrastructure': "Société de gestion d'actifs", 'Astorg': "Société de gestion d'actifs",
-  'Sagard': "Société de gestion d'actifs", 'Andera Partners': "Société de gestion d'actifs",
-  'LBO France': "Société de gestion d'actifs", 'IK Partners': "Société de gestion d'actifs",
-  'Siparex': "Société de gestion d'actifs", 'Partech': "Société de gestion d'actifs",
-  'Alven': "Société de gestion d'actifs", 'Bpifrance': "Société de gestion d'actifs",
+  // --- Fonds d'investissement : non coté, infrastructure, capital-risque ---
+  // Séparés des sociétés de gestion : on n'y fait pas le même métier, on n'y
+  // entre pas par la même porte, et le candidat le sait.
+  'Ardian': "Fonds d'investissement", 'Eurazeo': "Fonds d'investissement",
+  'PAI Partners': "Fonds d'investissement", 'Tikehau': "Fonds d'investissement",
+  'Antin Infrastructure': "Fonds d'investissement", 'Astorg': "Fonds d'investissement",
+  'Sagard': "Fonds d'investissement", 'Andera Partners': "Fonds d'investissement",
+  'LBO France': "Fonds d'investissement", 'IK Partners': "Fonds d'investissement",
+  'Siparex': "Fonds d'investissement", 'Partech': "Fonds d'investissement",
+  'Alven': "Fonds d'investissement", 'Meridiam': "Fonds d'investissement",
+  'Infravia': "Fonds d'investissement", 'Apax Partners': "Fonds d'investissement",
 
-  // Assurance, mutuelles et courtage.
+  // --- Assurance, mutuelles, réassurance et courtage -----------------------
   'AXA': "Compagnie d'assurance & mutuelle", 'Allianz France': "Compagnie d'assurance & mutuelle",
   'CNP Assurances': "Compagnie d'assurance & mutuelle", 'Scor': "Compagnie d'assurance & mutuelle",
   'Covéa': "Compagnie d'assurance & mutuelle", 'Generali France': "Compagnie d'assurance & mutuelle",
   'AG2R La Mondiale': "Compagnie d'assurance & mutuelle", 'Groupama': "Compagnie d'assurance & mutuelle",
   'Matmut': "Compagnie d'assurance & mutuelle", 'MAIF': "Compagnie d'assurance & mutuelle",
   'Macif': "Compagnie d'assurance & mutuelle", 'Malakoff Humanis': "Compagnie d'assurance & mutuelle",
-  'Marsh McLennan': "Compagnie d'assurance & mutuelle",
-  'Verlingue': "Compagnie d'assurance & mutuelle", 'Coface': "Compagnie d'assurance & mutuelle",
+  'Marsh McLennan': "Compagnie d'assurance & mutuelle", 'Verlingue': "Compagnie d'assurance & mutuelle",
+  'Coface': "Compagnie d'assurance & mutuelle", 'Swiss Life': "Compagnie d'assurance & mutuelle",
+  'Swiss Life France': "Compagnie d'assurance & mutuelle",
+  'Wakam': "Compagnie d'assurance & mutuelle", 'April': "Compagnie d'assurance & mutuelle",
 
-  // Audit, conseil, transaction services.
-  'Deloitte': "Cabinet d'audit (Big 4)", 'EY': "Cabinet d'audit (Big 4)", 'KPMG': "Cabinet d'audit (Big 4)",
-  'PwC': "Cabinet d'audit (Big 4)", 'Forvis Mazars': "Cabinet d'audit (Big 4)", 'Grant Thornton': "Cabinet d'audit (Big 4)",
-  'BDO': "Cabinet d'audit (Big 4)", 'Eight Advisory': "Cabinet de conseil & stratégie", 'Accuracy': "Cabinet de conseil & stratégie",
-  'McKinsey': "Cabinet de conseil & stratégie", 'BCG': "Cabinet de conseil & stratégie", 'Bain': "Cabinet de conseil & stratégie",
-  'Oliver Wyman': "Cabinet de conseil & stratégie", 'Roland Berger': "Cabinet de conseil & stratégie",
-  'Sia Partners': "Cabinet de conseil & stratégie", 'Talan': "Cabinet de conseil & stratégie", 'Capgemini': "Cabinet de conseil & stratégie",
+  // --- Audit et expertise comptable ----------------------------------------
+  'Deloitte': 'Big Four & cabinets d’audit', 'EY': 'Big Four & cabinets d’audit',
+  'KPMG': 'Big Four & cabinets d’audit', 'PwC': 'Big Four & cabinets d’audit',
+  'Forvis Mazars': 'Big Four & cabinets d’audit', 'Grant Thornton': 'Big Four & cabinets d’audit',
+  'BDO': 'Big Four & cabinets d’audit', 'RSM': 'Big Four & cabinets d’audit',
+  'Baker Tilly': 'Big Four & cabinets d’audit', 'Fiducial': 'Big Four & cabinets d’audit',
+  'In Extenso': 'Big Four & cabinets d’audit',
 
-  // Institutions publiques.
-  'Banque de France': 'Institution publique', 'AMF': 'Institution publique',
-  'ACPR': 'Institution publique', 'Caisse des Dépôts': 'Institution publique',
-  'Agence France Trésor': 'Institution publique',
+  // --- Conseil : stratégie, management, transaction services ---------------
+  'McKinsey': 'Cabinet de conseil & stratégie', 'BCG': 'Cabinet de conseil & stratégie',
+  'Bain': 'Cabinet de conseil & stratégie', 'Oliver Wyman': 'Cabinet de conseil & stratégie',
+  'Roland Berger': 'Cabinet de conseil & stratégie', 'Sia Partners': 'Cabinet de conseil & stratégie',
+  'Talan': 'Cabinet de conseil & stratégie', 'Capgemini': 'Cabinet de conseil & stratégie',
+  'Eight Advisory': 'Cabinet de conseil & stratégie', 'Accuracy': 'Cabinet de conseil & stratégie',
+  'Wavestone': 'Cabinet de conseil & stratégie', 'Alvarez & Marsal': 'Cabinet de conseil & stratégie',
+  'Kearney': 'Cabinet de conseil & stratégie', 'Eleven': 'Cabinet de conseil & stratégie',
 
-  // Fintech.
-  'Qonto': 'Fintech & start-up', 'Swile': 'Fintech & start-up', 'Pennylane': 'Fintech & start-up',
-  'Spendesk': 'Fintech & start-up', 'Alan': 'Fintech & start-up', 'Ledger': 'Fintech & start-up', 'Younited': 'Fintech & start-up',
+  // --- Fintech et services financiers spécialisés --------------------------
+  // Conservation de titres, paiement, affacturage, crédit-bail, cautions : ces
+  // maisons emploient massivement des juniors en middle et back-office. Les
+  // fintechs les rejoignent : même métier rendu, technologie plus récente.
+  'Caceis': 'Fintech & services financiers spécialisés',
+  'Euroclear': 'Fintech & services financiers spécialisés',
+  'Worldline': 'Fintech & services financiers spécialisés',
+  'Edenred': 'Fintech & services financiers spécialisés',
+  'Crédit Logement': 'Fintech & services financiers spécialisés',
+  'LSEG': 'Fintech & services financiers spécialisés',
+  'Qonto': 'Fintech & services financiers spécialisés',
+  'Swile': 'Fintech & services financiers spécialisés',
+  'Pennylane': 'Fintech & services financiers spécialisés',
+  'Spendesk': 'Fintech & services financiers spécialisés',
+  'Alan': 'Fintech & services financiers spécialisés',
+  'Ledger': 'Fintech & services financiers spécialisés',
+  'Younited': 'Fintech & services financiers spécialisés',
+
+  // --- Institutions publiques et régulateurs -------------------------------
+  'Banque de France': 'Institution publique & régulateur',
+  'AMF': 'Institution publique & régulateur',
+  'ACPR': 'Institution publique & régulateur',
+  'Caisse des Dépôts': 'Institution publique & régulateur',
+  'Agence France Trésor': 'Institution publique & régulateur',
+  'Bpifrance': 'Institution publique & régulateur',
+  'Banque Européenne d’Investissement': 'Institution publique & régulateur',
 };
 
 // Employeurs hors liste de référence : on ne connaît pas leur maison, seulement
-// leur raison sociale. Quelques mots suffisent à reconnaître un métier
-// ("Banque de ...", "... Assurances", "Cabinet ... audit"), et tout le reste
-// reçoit une étiquette honnête plutôt qu'un "Entreprise" qui ne dit rien.
+// leur raison sociale. Quelques mots suffisent à reconnaître un type, et tout
+// le reste reçoit une étiquette honnête plutôt qu'un « Entreprise » muet.
 //
 // Le vocabulaire est le MÊME que celui de SECTEUR_PAR_MAISON : deux tables qui
 // nomment différemment la même chose fabriquent des doublons dans le filtre.
+// L'ORDRE compte : du plus précis au plus général.
 const SECTEUR_PAR_MOT = [
-  [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de réseau'],
-  [/asset manag|gestion d.?actifs|\bam\b$|investment manag|\bopcvm\b/i, "Société de gestion d'actifs"],
-  [/private equity|capital|invest(?:issement)?s?\b|\bfonds\b/i, "Société de gestion d'actifs"],
-  [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur/i, "Compagnie d'assurance & mutuelle"],
-  [/courtage|courtier|\bbroker\b/i, "Compagnie d'assurance & mutuelle"],
-  // L'expertise comptable AVANT l'audit : un cabinet indépendant qui tient la
-  // compta de PME n'est pas un Big Four, et c'était le plus gros contingent du
-  // fourre-tout « PME & start-up » (163 offres sur 383).
-  [/expertise comptable|expert[\s-]?comptable|\bcomptab|fiducia|\bec\b\s|commissariat aux comptes/i, "Cabinet d'expertise comptable"],
+  // Services financiers spécialisés d'abord : « CA Leasing & Factoring » ou
+  // « Compagnie Européenne de Garanties et Cautions » contiennent le nom d'un
+  // groupe bancaire et seraient sinon rangés en banque de détail.
+  [/factor|leasing|cr[ée]dit[\s-]?bail|affacturage|garanties et cautions|payment|paiement|monétique|titres? services|asset servicing|conservation de titres|fintech|n[ée]obanque|neobank/i, 'Fintech & services financiers spécialisés'],
+  [/asset manag|gestion d.?actifs|investment solutions|\bam\b$|investment manag|\bopcvm\b|soci[ée]t[ée] de gestion/i, 'Société de gestion'],
+  [/private equity|venture|capital[\s-]?(?:investissement|risque)|\bfonds\b|infrastructure partners/i, "Fonds d'investissement"],
+  [/assurance|mutuelle|\bmutex\b|pr[ée]voyance|assureur|courtage|courtier|\bbroker\b|r[ée]assurance/i, "Compagnie d'assurance & mutuelle"],
+  [/expertise comptable|expert[\s-]?comptable|\bcomptab|fiducia|commissariat aux comptes|\baudit\b/i, 'Big Four & cabinets d’audit'],
   [/conseil|consulting|advisory|strat[ée]g/i, 'Cabinet de conseil & stratégie'],
-  [/audit|cabinet/i, "Cabinet d'audit (Big 4)"],
-  [/fintech|paiement|\bpay\b|neobank|n[ée]obanque/i, 'Fintech & start-up'],
-  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)/i, 'Institution publique'],
+  [/banque d.affaires|corporate finance/i, "Banque d'affaires indépendante"],
+  [/\bcib\b|banque de financement|investment bank/i, "Banque de financement & d'investissement"],
+  [/\bbanque\b|\bbank\b|caisse d.?[ée]pargne|banque populaire|cr[ée]dit (?:agricole|mutuel|coop)/i, 'Banque de détail'],
+  [/minist[èe]re|pr[ée]fecture|agence nationale|[ée]tablissement public|\bcnrs\b|universit[ée]|\bcaisse (?:nationale|primaire)|autorit[ée] de contr[ôo]le|\bacpr\b|\bamf\b/i, 'Institution publique & régulateur'],
 ];
 
-// Étiquette des employeurs qu'aucun mot ne permet de rattacher. Elle correspond
-// au groupe "PME et start-ups" du filtre entreprise : les deux se lisent
-// ensemble.
-// Un employeur qu'aucun mot ne rattache à la finance et qui recrute pourtant un
-// profil financier est, presque toujours, une société ordinaire dotée d'une
-// direction financière. Le dire est plus juste et plus utile que l'ancien
-// « PME & start-up », qui décrivait une TAILLE et non un type, et qui servait de
-// fourre-tout à 38 % du catalogue — Candriam et Caixa Geral s'y retrouvaient.
+// Étiquette des employeurs qu'aucun mot ne rattache à la finance. Ils recrutent
+// pourtant des profils financiers : c'est, presque toujours, une société
+// ordinaire dotée d'une direction financière. Le dire est plus juste que
+// l'ancien « PME & start-up », qui décrivait une TAILLE et non un type.
 const SECTEUR_AUTRES = 'Entreprise (direction financière)';
 
 // Ce qu'on ne dit que dans un cabinet : on y suit un PORTEFEUILLE DE CLIENTS.
@@ -500,17 +648,21 @@ const CABINET_COMPTABLE_TITRE_RE =
   /expertise[\s-]?comptable|expert[\s-]?comptable|charg[ée].{0,6} de dossiers?|collaborateur\w*[\s-]comptable|collaborateur\w* d'expertise|r[ée]viseur|commissariat aux comptes|commissaire aux comptes|\ben cabinet\b|portefeuille (?:de )?clients?|\bdcg\b|\bdscg\b/i;
 
 // Une même maison recrute dans plusieurs mondes : BNP Paribas a un réseau
-// d'agences, une banque d'affaires (CIB), un gérant d'actifs (AM) et un
-// assureur (Cardif). Classer toutes ses offres "Banque de détail" parce que la
+// d'agences, une banque de financement (CIB), un gérant d'actifs (AM) et un
+// assureur (Cardif). Classer ses 77 offres « Banque de détail » parce que la
 // maison s'appelle BNP serait faux une fois sur trois. Quand l'employeur ou
 // l'intitulé désigne l'entité qui recrute, c'est elle qui décide du type.
 const ENTITE_BFI_RE =
-  /\bcib\b|corporate\s*(?:&|and|et)\s*investment|banque de financement|banque d'affaires|global (?:markets|banking)|investment bank|salle des march[ée]s|\bglobal capital markets\b|\bm&a\b|fusions?[\s-]acquisitions?|\btrading\b|\btrader\b|structuration|produits d[ée]riv[ée]s/i;
+  /\bcib\b|corporate\s*(?:&|and|et)\s*investment|banque de financement|banque d'affaires|global (?:markets|banking)|investment bank|salle des march[ée]s|\bglobal capital markets\b|\bm&a\b|strategy (?:and|&) transactions|fusions?[\s-]acquisitions?|\btrading\b|\btrader\b|structuration|produits d[ée]riv[ée]s/i;
 const ENTITE_GESTION_RE =
-  /asset management|\bam\b\s*$|gestion d'actifs|investment managers?|wealth management|banque priv[ée]e|gestion priv[ée]e|private equity|gestion de portefeuille|\bg[ée]rant\b/i;
+  /asset management|\bam\b\s*$|gestion d'actifs|investment managers?|wealth management|banque priv[ée]e|gestion priv[ée]e|gestion de portefeuille|\bg[ée]rant\b/i;
+const ENTITE_FONDS_RE = /private equity|\blbo\b|capital[\s-]investissement|infrastructure fund|venture/i;
 const ENTITE_ASSURANCE_RE = /\bcardif\b|\bassurances?\b|\binsurance\b|\bpr[ée]voyance\b/i;
+// Les filiales de services : elles portent le nom du groupe et un métier propre.
+const ENTITE_SERVICES_RE =
+  /\bfactor\b|factoring|leasing|equipment solutions|payment services|garanties et cautions|personal finance|consumer finance|securities services|asset servicing/i;
 
-// Maisons multi-entités : les groupes bancaires dont le type par défaut est le
+// Maisons multi-entités : les groupes universels dont le type par défaut est le
 // réseau de détail. C'est pour elles seules que la détection d'entité joue —
 // chez Amundi ou Deloitte, il n'y a rien à arbitrer.
 const MAISONS_MULTI_ENTITES = new Set([
@@ -518,14 +670,14 @@ const MAISONS_MULTI_ENTITES = new Set([
   'La Banque Postale', 'Natixis', 'HSBC France',
 ]);
 
-// Maisons qui font à la fois du conseil/marché et de la gestion, sous un seul
-// nom. Lazard publie ses stages M&A et ceux de Lazard Frères Gestion sous
+// Maisons qui font à la fois du conseil, du marché et de la gestion, sous un
+// seul nom. Lazard publie ses stages M&A et ceux de Lazard Frères Gestion sous
 // « Lazard » : le nom ne dit rien, seule la famille métier peut arbitrer.
 const MAISONS_BANQUE_ET_GESTION = new Set([
   'Lazard', 'Rothschild & Co', 'Oddo BHF', 'Edmond de Rothschild',
   'Goldman Sachs', 'JPMorgan', 'Morgan Stanley', 'Barclays', 'Deutsche Bank',
   'UBS', 'Bank of America', 'Citi', 'BNP Paribas CIB', 'Société Générale CIB',
-  'Crédit Agricole CIB',
+  'Crédit Agricole CIB', 'Kepler Cheuvreux',
 ]);
 
 // Quand le nom de l'entité ne tranche pas, la FAMILLE MÉTIER de l'offre le
@@ -533,31 +685,42 @@ const MAISONS_BANQUE_ET_GESTION = new Set([
 // gestion chez Lazard Frères Gestion de la société de gestion — et Lazard
 // apparaît alors, à juste titre, dans les deux catégories. Ce n'est pas la
 // maison qu'on classe, c'est l'offre.
+//
+// Cette table lit les familles AFFICHÉES : elle référençait encore des noms
+// abandonnés lors de la refonte des familles, et n'arbitrait donc plus rien.
 const SECTEUR_PAR_FAMILLE = {
-  'Fusions & Acquisitions': "Banque d'affaires & d'investissement",
-  'Marchés financiers': "Banque d'affaires & d'investissement",
-  'Investissement & Private equity': "Société de gestion d'actifs",
+  'Fusions & Acquisitions': "Banque de financement & d'investissement",
+  'Marchés financiers': "Banque de financement & d'investissement",
+  'Capital-investissement': "Fonds d'investissement",
+  "Gestion d'actifs": 'Société de gestion',
 };
 
 function inferSector(emp, maison, title, famille) {
+  const texte = (emp || '') + ' ' + (title || '');
   if (maison && MAISONS_MULTI_ENTITES.has(maison)) {
-    const texte = (emp || '') + ' ' + (title || '');
-    if (ENTITE_GESTION_RE.test(texte)) return "Société de gestion d'actifs";
-    if (ENTITE_BFI_RE.test(texte)) return "Banque d'affaires & d'investissement";
+    if (ENTITE_SERVICES_RE.test(emp || '')) return 'Fintech & services financiers spécialisés';
+    if (ENTITE_FONDS_RE.test(texte)) return "Fonds d'investissement";
+    if (ENTITE_GESTION_RE.test(texte)) return 'Société de gestion';
+    if (ENTITE_BFI_RE.test(texte)) return "Banque de financement & d'investissement";
     if (ENTITE_ASSURANCE_RE.test(emp || '')) return "Compagnie d'assurance & mutuelle";
     if (famille && SECTEUR_PAR_FAMILLE[famille]) return SECTEUR_PAR_FAMILLE[famille];
   }
   // Même arbitrage pour les maisons mono-nom qui abritent plusieurs métiers
   // (Lazard et sa filiale de gestion, Rothschild et sa gestion de fortune) :
   // sans entité explicite dans le nom, seule la famille métier peut trancher.
+  // Une boutique reste une boutique : elle n'a pas de bilan à prêter, donc son
+  // M&A ne bascule pas en banque de financement.
   if (maison && MAISONS_BANQUE_ET_GESTION.has(maison) && famille && SECTEUR_PAR_FAMILLE[famille]) {
-    return SECTEUR_PAR_FAMILLE[famille];
+    const t = SECTEUR_PAR_FAMILLE[famille];
+    const boutique = SECTEUR_PAR_MAISON[maison] === "Banque d'affaires indépendante";
+    if (boutique && t === "Banque de financement & d'investissement") return SECTEUR_PAR_MAISON[maison];
+    return t;
   }
 
   if (maison && SECTEUR_PAR_MAISON[maison]) return SECTEUR_PAR_MAISON[maison];
   // Une maison de référence absente de la table est un grand groupe industriel
   // ou de services : sa direction financière recrute des juniors, mais ce n'est
-  // pas une maison de finance. Le dire évite de la ranger sous "Banque".
+  // pas une maison de finance. Le dire évite de la ranger sous « Banque ».
   if (maison) return 'Entreprise (direction financière)';
   const key = (emp || '').toLowerCase().trim();
   for (const [re, secteur] of SECTEUR_PAR_MOT) {
@@ -565,12 +728,11 @@ function inferSector(emp, maison, title, famille) {
   }
   // Cabinets d'expertise comptable indépendants : leur raison sociale ne dit
   // presque jamais leur métier (« STECO », « GMBA », « Groupe IGF »). C'est
-  // l'INTITULÉ qui les trahit — on y travaille sur un portefeuille de clients
-  // (« chargé de dossiers », « collaborateur comptable », « réviseur »), là où
-  // la comptabilité d'une entreprise parle de fournisseurs, de clients ou
+  // l'INTITULÉ qui les trahit — on y travaille sur un portefeuille de clients,
+  // là où la comptabilité d'une entreprise parle de fournisseurs ou
   // d'immobilisations. Sans cette lecture, ces cabinets tombaient tous dans
   // « Entreprise (direction financière) », qui gonflait à 44 % du catalogue.
-  if (CABINET_COMPTABLE_TITRE_RE.test(title || '')) return "Cabinet d'expertise comptable";
+  if (CABINET_COMPTABLE_TITRE_RE.test(title || '')) return 'Big Four & cabinets d’audit';
   return SECTEUR_AUTRES;
 }
 
@@ -809,6 +971,24 @@ function estOffreVIE(title) {
   return VIE_TITRE_RE.test(title);
 }
 
+// CDI ou CDD ? Le volet « cdi-cdd » réunit les deux, mais la carte doit dire
+// lequel. On lit d'abord le type de contrat déclaré par la source, qui est
+// explicite quand il existe, puis l'intitulé, où les annonces françaises
+// écrivent presque toujours la mention. En dernier recours le corps du texte.
+//
+// Quand rien ne tranche, on ne devine pas : la carte garde alors la mention
+// générale de l'onglet. Afficher « CDI » sur un CDD serait pire que de ne
+// rien afficher.
+function classifyContrat({ typeContratRaw, title, descr }) {
+  const dur = (typeContratRaw || '') + ' ' + (title || '');
+  if (/\bcdd\b|dur[ée]e d[ée]termin[ée]e|fixed[\s-]?term|temporary/i.test(dur)) return "CDD";
+  if (/\bcdi\b|dur[ée]e ind[ée]termin[ée]e|permanent/i.test(dur)) return "CDI";
+  const texte = descr || '';
+  if (/\bcdd\b|contrat [àa] dur[ée]e d[ée]termin[ée]e/i.test(texte)) return "CDD";
+  if (/\bcdi\b|contrat [àa] dur[ée]e ind[ée]termin[ée]e/i.test(texte)) return "CDI";
+  return null;
+}
+
 function classifyVolet({ src, typeContratRaw, title }) {
   if (src === 'labonnealternance') return 'alternance';
   if (src === 'vie') return 'vie';
@@ -947,8 +1127,11 @@ const DESCR_SENIOR_RE = new RegExp(
 );
 
 // À l'inverse, une mention explicite d'ouverture aux débutants l'emporte.
+// Tous les synonymes de « on prend un jeune ». C'est la porte de sortie du
+// mode strict : une annonce qui se déclare ouverte aux débutants est publiée
+// même si rien d'autre ne permet de vérifier le niveau.
 const DESCR_JUNIOR_RE =
-  /d[ée]butant[e]?s?\s+accept|jeune\s+dipl[ôo]m|premi[èe]re\s+exp[ée]rience|sans\s+exp[ée]rience|profil\s+junior|ouvert\s+aux\s+d[ée]butants/i;
+  /d[ée]butant[e]?s?\s+(?:accept|bienvenu|welcome)|jeune\s+dipl[ôo]m|premi[èe]re\s+exp[ée]rience|sans\s+exp[ée]rience|profil\s+junior|ouvert\s+aux\s+d[ée]butants|sortie?\s+d['’]?[ée]cole|\bjunior\b|\bd[ée]butant|entry[\s-]?level|graduate\s+program|no\s+experience\s+required/i;
 
 // Les "candidatures spontanées" ne sont pas des offres : ce sont des
 // formulaires de dépôt de CV, sans poste réel derrière. Les afficher
@@ -1050,16 +1233,28 @@ const INDEPENDANT_RE =
 const VENTE_HORS_FINANCE_RE =
   /\bsales\b|\bcommercial(?:e|es|aux)?\b|business\s+develop|d[ée]veloppement\s+commercial|\bkey\s+account\b|chargé\w*\s+d[e']\s*affaires?\s+commercial/i;
 
-function passesJuniorFilter(volet, title, descr) {
+// Le dernier paramètre distingue les deux passages du filtre. Au premier, les
+// descriptions n'ont pas encore été récupérées : refuser les offres qui n'en
+// ont pas viderait le catalogue avant même être allé les lire. Au second,
+// après lecture des fiches, l'absence de description signifie qu'on n'a PAS PU
+// vérifier le niveau — et une offre invérifiable n'est pas publiée.
+//
+// C'est un arbitrage assumé : mieux vaut perdre des offres correctes que
+// d'en publier une seule qui demande sept ans d'expérience. Un candidat qui
+// tombe sur un poste hors de sa portée, sur un site qui promet du 0-3 ans, ne
+// revient pas.
+function passesJuniorFilter(volet, title, descr, strict) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
   if (INDEPENDANT_RE.test(title || '')) return false;
   if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
   if (SENIOR_RE.test(title)) return false;
+  if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
   if (descr) {
     if (DESCR_JUNIOR_RE.test(descr)) return true; // ouverture explicite aux débutants
     if (DESCR_SENIOR_RE.test(descr)) return false;
+    return true; // description lue, aucun signal de séniorité : on publie
   }
-  return true;
+  return !strict;
 }
 
 // ---------------------------------------------------------------------------
@@ -1184,8 +1379,73 @@ function dateDePosteDepassee(titre, maintenant = new Date()) {
 // la facturation, qui remontaient par des intitulés hébergés chez des maisons
 // de finance (Community manager chez Rothschild, Design Authority chez Crédit
 // Agricole, Assistant chef de projet chez BNP).
-const METIER_HORS_PERIMETRE_RE =
-  /general counsel|\bavocat|\battorney\b|\blawyer\b|\bjuriste\b|\bjuridique\b|fiscalit[ée]|\bfiscalist|\btax\b|recruiter|talent acquisition|charg[ée]e? de recrutement|community manager|\bdesign\b|\bdesigner\b|chef(?:fe)? de projet|charg[ée]e? de facturation|\bfacturation\b|centre d.affaires?|\binfirmi|aide[\s-]soignant|\bd[ée]veloppeur|\bdeveloper\b|devops|devsecops|software engineer|cloud engineer|network engineer|\bnetops\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)|ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure)|risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\bhse\b|\bqhse\b|s[ûu]ret[ée]|\bacheteur\b|\bachats\b|approvisionn/i;
+// Métiers qui ne relèvent pas de la finance et qui ne doivent JAMAIS paraître
+// sur JJ. Ces offres ne sont pas reclassées ailleurs : elles sont écartées.
+// Les laisser tomber dans « Autres métiers de la finance » revenait à faire
+// passer un ingénieur réseau ou un chargé de communication pour un métier de
+// la finance, ce qui décrédibilise le catalogue entier.
+//
+// La règle est bâtie par familles de métiers, pour rester relisible : un
+// littéral d'expression régulière de trente lignes ne se corrige plus.
+const METIER_HORS_PERIMETRE_RE = new RegExp(
+  [
+    // Juridique, fiscal, ressources humaines
+    "general counsel|\\bavocat|\\battorney\\b|\\blawyer\\b|\\bjuriste\\b|\\bjuridique\\b|\\blegal\\b",
+    "fiscalit[ée]|\\bfiscalist|\\btax\\b",
+    "recruiter|talent acquisition|charg[ée]e? de recrutement|ressources humaines|\\bpaie\\b|payroll",
+    // Informatique et ingénierie
+    "\\bd[ée]veloppeur|\\bdeveloper\\b|devops|devsecops|software engineer|cloud engineer|network engineer",
+    "\\bnetops\\b|sysadmin|administrateur (?:syst|r[ée]seau)|technicien informatique|it (?:security|support|developer)",
+    "ing[ée]nieur (?:logiciel|r[ée]seaux?|cloud|syst[èe]me|infrastructure|s[ée]curit[ée]|digital|[ée]tudes)",
+    "salesforce|\\bmainframe\\b|architecte|\\barchitect\\b|digital workplace|forward deployment",
+    // « IA » en français, « AI » en anglais : les deux graphies cohabitent
+    // dans un même catalogue, parfois chez le même employeur.
+    "intelligence artificielle|\\b[ai]a\\b (?:manager|enablement|engineer)|am[ée]lioration continue",
+    // Communication, marketing, événementiel
+    "community manager|\\bdesign\\b|\\bdesigner\\b|communication|[ée]ditorial|\\bmarketing\\b",
+    "[ée]v[ée]nementiel|\\bevents?\\b|\\bbrand\\b|chef(?:fe)? de produits?",
+    // Achats, logistique, industrie, sécurité
+    "\\bacheteur\\b|\\bachats\\b|approvisionn|supply chain|manufacturing|\\bdouane\\b",
+    "services g[ée]n[ée]raux|business continuity",
+    "risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\\bhse\\b|\\bqhse\\b|s[ûu]ret[ée]",
+    // Divers sans rapport avec la finance
+    "chef(?:fe)? de projet|charg[ée]e? de facturation|\\bfacturation\\b|centre d.affaires?",
+    "\\binfirmi|aide[\\s-]soignant",
+    // Relevés en dépouillant le fourre-tout : sécurité informatique, web,
+    // documentation, assistanat pur, et les intitulés qui ne nomment qu'une
+    // école ou une entreprise.
+    "\\bwebmaster\\b|analyste soc\\b|\\bsoc\\b analyst|\\brag\\b|agents? ia\\b",
+    "\\bauthor\\b|doctrine|publications?$|recherche et d.innovation",
+    "\\bea\\b\\s*/|team assistant|assistance technique|assistant coordination",
+    "coordinateur international|engineering business|industry group",
+    "head of growth|gestionnaire digital",
+    "assurance qualit[ée]|flow assurance|accr[ée]ditation|laboratoire",
+    "sourcing|lead buyer|talent development|gestion administrative",
+    "gestionnaire (?:export|r[ée]sidentiel|immobilier|d.exploitation)",
+    "^[ée]cole$|centralesup|analyste transport",
+    // Immobilier d'exploitation : gérer un parc locatif n'est pas un métier
+    // de la finance, à la différence de l'investissement immobilier.
+    "gestionnaire locatif|property manag|projets? immobiliers?|op[ée]rations? immobili[èe]res?",
+    // Rémunération, personnel, instances : ressources humaines.
+    "r[ée]mun[ée]rations?|avantages sociaux|administration du personnel|\\bcse\\b",
+    // Informatique et web, sous toutes leurs graphies.
+    "dev react|frontend|\\bweb analyst\\b|data ing[ée]nieur|ing[ée]nieur ia\\b|\\bcmdb\\b",
+    "data management office|quality analyst|data protection officer|\\bdpo\\b",
+    "product manag|inside sales|appels? d.offres",
+    // Formation, communication, relations sociales : ressources humaines.
+    "^learning\\b|learning and development|affaires sociales|affaires publiques",
+    "\\bcom\\b interne|communication interne",
+    // Intelligence artificielle : hors périmètre, quel que soit l'habillage.
+    "ai enablement|architecture ai\\b|\\bai\\b (?:engineer|architect)",
+    // Souscription et gestion de contrats d'assurance dommages.
+    "underwrit|dommages aux biens|\\bird\\b and construction|production construction",
+    "professional services implementation",
+    // Un intitulé qui ne nomme qu'une entreprise, ou qu'un mot, ne dit rien
+    // au candidat : mieux vaut ne pas le publier que le publier illisible.
+    "^oliver wyman|^portzamparc|^data$|^gestionnaire administratif$",
+  ].join("|"),
+  "i"
+);
 
 // JJ s'adresse aux profils Bac+5 : grande école de commerce, école d'ingénieur,
 // master universitaire. Les intitulés qui annoncent explicitement un niveau
@@ -1886,6 +2146,8 @@ function normalize(item) {
   if (estExclue(url, emp)) return null;
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
+  const contrat =
+    volet === 'cdi-cdd' ? classifyContrat({ typeContratRaw, title: titreBrut, descr }) : null;
 
   // Le VIE ne vient que de Business France. C'est le registre officiel du
   // dispositif : l'indemnité, la durée, le pays et le statut y sont normés, et
@@ -1937,6 +2199,9 @@ function normalize(item) {
     sector,
     famille,
     volet,
+    // « CDI » ou « CDD » quand on a pu le déterminer, absent sinon : la page
+    // retombe alors sur la mention générale de l'onglet.
+    contrat: contrat || undefined,
     loc: nettoyerLieu(decodeEntities(ville || '').trim()) || 'Non précisé',
     // Zone d'affichage (calculée ici pour que la page n'ait pas à reconnaître
     // 300 orthographes de villes en JavaScript).
@@ -1959,13 +2224,19 @@ function normalize(item) {
     url,
     source: __src,
     _descr: descr,
-    _postedAt: postedAt || new Date().toISOString(),
+    // Normalisée dès ici, et non à la seule écriture : les filtres d’âge lisent
+    // ce champ, et « 09/01/2026 » leur paraissait tout frais — JavaScript le lit
+    // à l’américaine, soit le 1er septembre au lieu du 9 janvier.
+    _postedAt: dateIso(postedAt) || new Date().toISOString(),
     // La source a-t-elle VRAIMENT daté cette offre ? Le drapeau de fiabilité se
     // calculait sur le seul nom de la source, si bien qu'une source réputée
     // fiable mais muette sur une offre précise lui faisait afficher la date de
     // collecte comme date de publication. Une offre McKinsey sans date se
     // présentait ainsi « Publiée aujourd'hui » — une date inventée.
-    _dateDeLaSource: Boolean(postedAt),
+    // Une date que le pipeline n’a pas su lire ne compte pas comme une date :
+    // sinon l’offre serait publiée avec l’heure de collecte présentée comme sa
+    // date de parution, ce qui est précisément le mensonge qu’on évite.
+    _dateDeLaSource: Boolean(dateIso(postedAt)),
   };
 }
 
@@ -2298,6 +2569,40 @@ function choisirPepites(offers) {
 // sans lui, le filtre « 0-3 ans » ne peut se prononcer que sur l'intitulé, et
 // un poste à cinq ans d'expérience passe dès que son titre ne dit pas
 // « senior ». On récupère donc les deux d'un coup.
+// Repli quand la page ne publie pas de description structurée. On ne cherche
+// dans ce texte qu'une mention d'années d'expérience : il n'a pas besoin
+// d'être propre, seulement d'exister. Il n'est jamais publié — comme toute
+// description, il sert au seul filtre de séniorité puis il est retiré.
+//
+// On privilégie le conteneur de l'annonce quand la page le balise ; à défaut
+// on prend le texte entier, débarrassé du script, du style et de la
+// navigation. Une mention « 5 ans d'expérience » égarée dans un pied de page
+// serait un faux rejet, mais le cas est rare devant les 184 offres perdues
+// faute de tout texte.
+function texteDeLaPage(html) {
+  const ZONES = [
+    /<div[^>]+(?:class|id)="[^"]*(?:job-?description|jobdescription|description-?content|offre-?description|job-?details|jobdetails)[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+    /<[^>]+itemprop="description"[^>]*>([\s\S]*?)<\//i,
+    /<article[^>]*>([\s\S]*?)<\/article>/i,
+    /<main[^>]*>([\s\S]*?)<\/main>/i,
+  ];
+  let brut = null;
+  for (const re of ZONES) {
+    const m = html.match(re);
+    if (m && m[1].length > 400) {
+      brut = m[1];
+      break;
+    }
+  }
+  if (!brut) brut = html.replace(/<(script|style|nav|header|footer)[\s\S]*?<\/\1>/gi, ' ');
+  const texte = brut
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return texte.length > 300 ? texte.slice(0, 6000) : null;
+}
+
 function ficheJsonLd(html) {
   const resultat = { date: null, description: null };
   for (const bloc of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -2424,15 +2729,18 @@ async function completerDatesManquantes(offers) {
             signal: AbortSignal.timeout(20000),
           });
           if (r.ok) {
-            const fiche = ficheJsonLd(await r.text());
+            const texteHtml = await r.text();
+            const fiche = ficheJsonLd(texteHtml);
             if (fiche.date) {
               o._postedAt = fiche.date;
               o._dateRecuperee = true;
               trouvees++;
             }
             // La description ne sert qu'à juger la séniorité, et seulement si
-            // la source n'en avait pas déjà fourni une.
-            if (fiche.description && !o._descr) o._descr = fiche.description;
+            // la source n'en avait pas déjà fourni une. Quand la page ne la
+            // publie pas en JSON-LD, on lit son corps : sans ce repli, ces
+            // offres restaient invérifiables et le filtre strict les écartait.
+            if (!o._descr) o._descr = fiche.description || texteDeLaPage(texteHtml);
           }
         } catch {
           /* fiche injoignable : l'offre reste sans date, on n'invente pas */
@@ -2510,6 +2818,29 @@ function anomaliesDePublication(nouvelles) {
   return soucis;
 }
 
+// Une date publiée est toujours en ISO, ou absente. Chaque connecteur rend la
+// sienne dans le format de sa source, et la page ne peut pas deviner si
+// « 09/01/2026 » est le 9 janvier ou le 1er septembre — JavaScript tranche
+// pour le second, à l'américaine, et vieillit l'annonce de huit mois d'un
+// coup. On lève ici cette ambiguïté une fois pour toutes.
+function dateIso(valeur) {
+  if (!valeur) return null;
+  const brut = String(valeur).trim();
+  // JJ/MM/AAAA : la lecture française, la seule qui vaille pour nos sources.
+  const fr = brut.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+  if (fr) {
+    const d = new Date(`${fr[3]}-${fr[2]}-${fr[1]}T00:00:00Z`);
+    return isNaN(d) ? null : d.toISOString();
+  }
+  const d = new Date(brut);
+  if (isNaN(d)) return null;
+  // Une date future, ou antérieure à 2015, est une erreur de la source et non
+  // une information : mieux vaut ne rien dire que dire faux.
+  const t = d.getTime();
+  if (t > Date.now() + 86400000 || d.getUTCFullYear() < 2015) return null;
+  return d.toISOString();
+}
+
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
@@ -2533,17 +2864,23 @@ function writeOutput(offers) {
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
     // C'est ce qui alimente le filtre "nouvelles offres" de la page : plus
     // fiable que postedAt, que certaines sources ne fournissent pas ou mal.
+    // Si la date ne se laisse pas lire, l'offre rejoint les non datées : la
+    // page annoncera franchement une publication inconnue plutôt que de la
+    // dater au jugé.
+    const datePubliee = dateIso(_postedAt);
     return {
       ...rest,
       verifiedAt: _lastSeenAt,
-      postedAt: _postedAt,
+      postedAt: datePubliee || _firstSeenAt,
       firstSeenAt: _firstSeenAt,
       // false = la source ne date pas ses offres : _postedAt vaut la date de
       // collecte, la page ne doit donc pas l'afficher comme date de publication.
       // _dateRecuperee = la liste ne datait pas l'offre, mais sa fiche l'a fait
       // (JSON-LD `datePosted`) : la date est alors tout aussi réelle.
       datePubFiable:
-        (SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateDeLaSource === true) || o._dateRecuperee === true,
+        Boolean(datePubliee) &&
+        ((SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateDeLaSource === true) ||
+          o._dateRecuperee === true),
       // true = « Pépite JJ », mise en avant dans le bandeau du haut.
       pepite: pepites.has(o._key),
     };
@@ -2679,6 +3016,7 @@ async function run() {
   // autres, le seuil dépend du type de source (cf. MAX_AGE_JOURS ci-dessus).
   const seuilAgregateur = Date.now() - MAX_AGE_JOURS * 86400000;
   const seuilAtsDirect = Date.now() - MAX_AGE_JOURS_ATS_DIRECT * 86400000;
+  const seuilCdiCdd = Date.now() - MAX_AGE_JOURS_CDI_CDD * 86400000;
   let coupeesAgregateur = 0;
   let coupeesZombies = 0;
   const fraiches = dansLePerimetre.filter((o) => {
@@ -2690,7 +3028,8 @@ async function run() {
       coupeesAgregateur++;
       return false;
     }
-    if (t >= seuilAtsDirect) return true;
+    const seuil = o.volet === 'cdi-cdd' ? seuilCdiCdd : seuilAtsDirect;
+    if (t >= seuil) return true;
     coupeesZombies++;
     return false;
   });
@@ -2713,7 +3052,7 @@ async function run() {
       `dont ${dedupBrut.length - deduped.length} variantes sans lieu).`
   );
 
-  const final = await applyFreshnessAndDeadRemoval(deduped);
+  let final = await applyFreshnessAndDeadRemoval(deduped);
   console.log(`[pipeline] ${final.length} offres finales après vérification de fraîcheur${CHECK_LINKS ? ' + liens' : ''}.`);
 
   const nonDatee = (o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateRecuperee !== true;
@@ -2726,15 +3065,89 @@ async function run() {
       `${final.length - sansDateApres}/${final.length} offres datées.`
   );
 
+  // Second passage du filtre d'âge, sur les seules offres qui viennent d'être
+  // datées. Le premier passage les avait laissées passer faute de date ; on
+  // sait maintenant que certaines traînent depuis des années. Une annonce de
+  // trois ans est pourvue depuis longtemps : la publier trompe le candidat et
+  // discrédite le reste du catalogue. On applique le seuil de l'employeur
+  // direct, puisque c'est bien sa fiche qu'on vient de lire.
+  const seuilApresDatation = Date.now() - MAX_AGE_JOURS_ATS_DIRECT * 86400000;
+  const seuilApresDatationCdi = Date.now() - MAX_AGE_JOURS_CDI_CDD * 86400000;
+  let perimees = 0;
+  const aJour = final.filter((o) => {
+    // Exactement le critère de datePubFiable, dans writeOutput : si la page
+    // affiche cette date comme une date de publication, le seuil d'âge doit
+    // pouvoir la juger. Les deux divergeaient.
+    const dateCredible =
+      (SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateDeLaSource === true) ||
+      o._dateRecuperee === true;
+    if (!dateCredible) return true;
+    const t = new Date(o._postedAt || 0).getTime();
+    const seuil = o.volet === 'cdi-cdd' ? seuilApresDatationCdi : seuilApresDatation;
+    if (!t || t >= seuil) return true;
+    perimees++;
+    return false;
+  });
+  if (perimees) {
+    console.log(
+      `[pipeline] ${perimees} offres écartées après datation : trop anciennes ` +
+        `(${MAX_AGE_JOURS_CDI_CDD} j pour un CDI/CDD, ${MAX_AGE_JOURS_ATS_DIRECT} j sinon), ` +
+        `ce que seule leur fiche a révélé.`
+    );
+  }
+  final = aJour;
+
   // Second passage du filtre junior. Les fiches qu'on vient de lire ont donné
   // à des centaines d'offres la description qui leur manquait : jusqu'ici leur
   // séniorité n'était jugée que sur l'intitulé, et un poste demandant cinq ans
   // d'expérience passait dès que son titre ne disait pas « senior ».
   const avantSeniorite = final.length;
-  const publiables = final.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr));
+  const publiables = final.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr, true));
+  // Deux motifs de rejet, comptés séparément : on veut voir lequel domine.
+  // « la description dit sept ans » est le but recherché ; « on n'a pas pu lire
+  // la description » est le prix de la rigueur, et s'il devenait majoritaire il
+  // faudrait revoir l'arbitrage.
+  const rejetSeniorite = new Set(final.filter((o) => !publiables.includes(o)));
+  const demasquees = [...rejetSeniorite].filter((o) => o._descr).length;
+  const invisibles = rejetSeniorite.size - demasquees;
+  if (invisibles) {
+    // Savoir QUELLES sources restent illisibles est le seul moyen de faire
+    // baisser ce chiffre : c'est leur connecteur qu'il faudra doter d'une
+    // description, plutôt que de continuer à gratter leurs pages.
+    const parSource = {};
+    for (const o of rejetSeniorite) {
+      if (o._descr) continue;
+      const src = String(o.source || '?').split(':')[0];
+      parSource[src] = (parSource[src] || 0) + 1;
+    }
+    const top = Object.entries(parSource)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([k, v]) => `${k} ${v}`)
+      .join(', ');
+    console.log(`[pipeline] Offres sans description lisible, par source : ${top}.`);
+  }
+  // Second passage sur le type de contrat, pour la même raison : la fiche
+  // qu'on vient de lire dit souvent « CDI » là où l'intitulé restait muet.
+  let contratsRattrapes = 0;
+  for (const o of publiables) {
+    if (o.volet !== 'cdi-cdd' || o.contrat || !o._descr) continue;
+    const c = classifyContrat({ typeContratRaw: '', title: o.title, descr: o._descr });
+    if (c) {
+      o.contrat = c;
+      contratsRattrapes++;
+    }
+  }
+  const cdiCdd = publiables.filter((o) => o.volet === 'cdi-cdd');
+  const nommes = cdiCdd.filter((o) => o.contrat).length;
+  console.log(
+    `[pipeline] Contrat précisé sur ${nommes}/${cdiCdd.length} offres CDI-CDD ` +
+      `(${contratsRattrapes} retrouvés dans les fiches).`
+  );
   console.log(
     `[pipeline] ${publiables.length} offres après second filtre 0-3 ans sur les fiches ` +
-      `(${avantSeniorite - publiables.length} postes confirmés démasqués par leur description).`
+      `(${demasquees} postes confirmés démasqués par leur description, ` +
+      `${invisibles} écartées faute de description lisible).`
   );
 
   // Rien n'est écrit tant que le résultat ne tient pas debout. Une collecte

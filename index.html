@@ -649,6 +649,9 @@
   .card .carte-date {
     display: inline-flex;
     align-items: center;
+    /* La mention des offres non datées est longue : sans ce retour à la ligne
+       elle débordait de la carte sur les petits écrans. */
+    flex-wrap: wrap;
     gap: 0.4rem;
     margin: 0.15rem 0 0.55rem;
     padding: 0.28rem 0.6rem 0.28rem 0.5rem;
@@ -941,15 +944,22 @@
   // Deux axes, deux vocabulaires : les familles nomment une ACTIVITÉ, les
   // structures une INSTITUTION. Aucune expression ne figure dans les deux
   // listes, sinon on ne sait plus lequel des deux filtres on manipule.
+  // Douze familles, ordonnées par proximité de métier plutôt que par volume :
+  // les métiers d'investissement d'abord, puis le chiffre, puis le contrôle,
+  // puis les fonctions techniques. Un étudiant qui cherche le M&A trouve
+  // juste à côté les marchés et le capital-investissement.
   var FAMILLES = [
     'Fusions & Acquisitions',
     'Marchés financiers',
-    'Investissement & Private equity',
-    'Audit',
-    'Conseil',
-    'Comptabilité',
+    'Capital-investissement',
+    "Gestion d'actifs",
+    'Banque privée & Patrimoine',
+    'Comptabilité & Consolidation',
     'Contrôle de gestion & Trésorerie',
+    'Audit & Contrôle interne',
     'Risques & Conformité',
+    'Conseil & Transformation',
+    'Opérations & Middle-office',
     'Data & Quant',
     'Autres métiers de la finance'
   ];
@@ -963,17 +973,23 @@
   // Société, Compagnie, Cabinet, Entreprise, Institution — pour qu'on voie d'un
   // coup d'œil qu'on est sur l'axe « qui emploie » et non « quel métier ».
   // Comme pour les familles, cette liste doit suivre ingestion/pipeline.js.
+  // Onze institutions. Chaque libellé commence par un mot de structure —
+  // Banque, Société, Fonds, Compagnie, Cabinet, Entreprise, Institution —
+  // pour qu'on voie d'un coup d'œil qu'on est sur l'axe « qui emploie » et
+  // non « quel métier ». Aucun ne reprend le nom d'une famille : le métier
+  // s'appelle « Gestion d'actifs », l'employeur « Société de gestion ».
   var STRUCTURES = [
-    "Banque d'affaires & d'investissement",
-    'Banque de réseau',
-    "Société de gestion d'actifs",
+    "Banque de financement & d'investissement",
+    "Banque d'affaires indépendante",
+    'Banque de détail',
+    'Société de gestion',
+    "Fonds d'investissement",
     "Compagnie d'assurance & mutuelle",
-    "Cabinet d'audit (Big 4)",
+    'Big Four & cabinets d’audit',
     'Cabinet de conseil & stratégie',
-    "Cabinet d'expertise comptable",
+    'Fintech & services financiers spécialisés',
     'Entreprise (direction financière)',
-    'Fintech & start-up',
-    'Institution publique'
+    'Institution publique & régulateur'
   ];
 
   var PAGE_SIZE = 50;
@@ -1218,12 +1234,17 @@
         return isNaN(d) ? -Infinity : Math.floor(new Date(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
       };
       arr.sort(function (a, b) {
-        var ja = jourDe(a.postedAt);
-        var jb = jourDe(b.postedAt);
-        if (ja !== jb) return jb - ja;
+        // La date de publication commande le tri, donc une offre qu'on ne sait
+        // pas dater ne peut pas y participer : elle passe après toutes les
+        // autres, quelle que soit son ancienneté apparente. Départager au jour
+        // ne suffisait pas — ces offres portent l'heure de collecte, c'est-à-dire
+        // la date du jour, et occupaient donc le haut de chaque onglet.
         var fa = a.datePubFiable === false ? 1 : 0;
         var fb = b.datePubFiable === false ? 1 : 0;
         if (fa !== fb) return fa - fb;
+        var ja = jourDe(a.postedAt);
+        var jb = jourDe(b.postedAt);
+        if (ja !== jb) return jb - ja;
         return new Date(b.postedAt || 0) - new Date(a.postedAt || 0);
       });
     }
@@ -1262,7 +1283,26 @@
     var counts = {};
     base.forEach(function (o) { counts[o.famille] = (counts[o.famille] || 0) + 1; });
     Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('.count'), function (span) {
-      span.textContent = counts[span.dataset.famille] || 0;
+      var f = span.dataset.famille;
+      var n = counts[f] || 0;
+      span.textContent = n;
+      var ligne = span.closest('.famille-option');
+      if (ligne) ligne.hidden = n === 0 && !state.familles.has(f);
+    });
+  }
+
+  // Même règle pour la liste déroulante des structures. L'option choisie est
+  // toujours conservée, y compris à zéro : la retirer réinitialiserait le
+  // filtre en silence pendant que le visiteur change simplement d'onglet.
+  function updateStructureOptions(base) {
+    var counts = {};
+    base.forEach(function (o) { counts[o.sector] = (counts[o.sector] || 0) + 1; });
+    Array.prototype.forEach.call(els.structureSelect.options, function (opt) {
+      if (!opt.value) return; // « Toutes les structures »
+      var n = counts[opt.value] || 0;
+      opt.textContent = n ? opt.value + ' (' + n + ')' : opt.value;
+      opt.hidden = n === 0 && state.structure !== opt.value;
+      opt.disabled = opt.hidden;
     });
   }
 
@@ -1281,7 +1321,11 @@
   function ligneDate(o) {
     var jours = o.datePubFiable === false ? null : daysAgo(o.postedAt);
     if (jours === null || jours < 0) {
-      return '<div class="carte-date inconnue">Date de publication non communiquée</div>';
+      // Ne pas connaître la date ne veut pas dire que l'offre est douteuse :
+      // certaines sources ne datent simplement pas leurs annonces. On dit donc
+      // les deux choses — l'annonce est bien toujours en ligne chez
+      // l'employeur, et sa date de parution nous est inconnue.
+      return '<div class="carte-date inconnue">Toujours en ligne chez l\'employeur · date de publication inconnue</div>';
     }
     var texte = jours === 0 ? "Publiée aujourd'hui"
       : jours === 1 ? 'Publiée hier'
@@ -1314,10 +1358,14 @@
     // préfixe, en suffixe, en majuscules, ce qui rendait la liste illisible) :
     // l'information est désormais toujours au même endroit et de la même forme.
     var LIBELLE_CONTRAT = { stage: 'Stage', alternance: 'Alternance', vie: 'VIE', 'cdi-cdd': 'CDI · CDD' };
+    // L'onglet s'appelle « CDI · CDD » parce qu'il réunit les deux, mais la
+    // carte dit lequel des deux elle propose quand on a pu le déterminer : on
+    // ne postule pas de la même façon à un CDD de six mois et à un CDI.
+    var libelleContrat = (o.volet === 'cdi-cdd' && o.contrat) || LIBELLE_CONTRAT[o.volet] || o.volet;
 
     return (
       '<a class="card" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
-        '<span class="contrat ' + esc(o.volet) + '">' + esc(LIBELLE_CONTRAT[o.volet] || o.volet) + '</span>' +
+        '<span class="contrat ' + esc(o.volet) + '">' + esc(libelleContrat) + '</span>' +
         '<h3>' + esc(o.title) + '</h3>' +
         '<div class="emp">' + esc(o.emp) + '</div>' +
         '<div class="meta">' + metaBits.join('') + '</div>' +
@@ -1410,6 +1458,7 @@
     var base = voletOffers(state.volet);
     construirePepites(base);
     updateFamilleCounts(base);
+    updateStructureOptions(base);
     etatNouveauteUtile = nouveauteSignifiante(base);
     // Le filtre "nouvelles offres" disparaît avec le badge : proposer de filtrer
     // sur un critère que tout le monde remplit ne mène qu'à une déception.
