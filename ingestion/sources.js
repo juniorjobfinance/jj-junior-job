@@ -105,7 +105,7 @@ const NON_FINANCE_RE =
 // industriel désignerait autre chose. PROJET.md §15 place explicitement le
 // conseil en stratégie (McKinsey, BCG, Bain, Roland Berger) dans le périmètre.
 const FINANCE_NATIVE_EMPLOYER_RE =
-  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor/i;
+  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|swiss ?life|ag2r|la mondiale|malakoff|humanis|matmut|\bmaif\b|macif|apicil|klesia|pro ?btp|verlingue|verspieren|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor/i;
 
 function looksLikeFinance(...fields) {
   const text = fields.filter(Boolean).join(' ');
@@ -1428,20 +1428,7 @@ async function fetchToutesListesHtml(recoltes = {}) {
   return (await enFile(taches, 2)).flat();
 }
 
-async function fetchEiCards({ host, emp }) {
-  let html;
-  try {
-    const res = await fetch(`https://${host}/fr/nos_offres.html`, {
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
-      signal: AbortSignal.timeout(20000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    html = await res.text();
-  } catch (err) {
-    console.warn(`[sources] e-i (${host}) indisponible:`, err.message);
-    return [];
-  }
-
+function parseCartesEiCards(html) {
   const offres = [];
   const vus = new Set();
   const re = /href="(\/fr\/offre\.html\?annonce=(\d+))"[^>]*>([^<]+)<\/a>([\s\S]{0,1200}?)<\/ul>/g;
@@ -1457,13 +1444,39 @@ async function fetchEiCards({ host, emp }) {
     const contrat = items.find((t) => /cdi|cdd|stage|alternance|apprentissage/i.test(t)) || '';
     offres.push({
       title: m[3].replace(/&#\d+;/g, (e) => String.fromCharCode(parseInt(e.slice(2, -1), 10))).replace(/\s+/g, ' ').trim(),
-      url: `https://${host}${m[1]}`,
+      url: `https://${'PLACEHOLDER'}${m[1]}`,
       ville,
       contrat,
     });
   }
+  return offres;
+}
 
-  return offres
+// Ce moteur (utilisé aussi par le CIC et la Banque Transatlantique) n'expose
+// qu'une seule page par URL : « ?p=2 » est silencieusement ignoré et renvoie
+// le même contenu que la page 1, tout comme « ?motscles=finance ». La page
+// affiche un bouton « Afficher plus d'offres », mais il soumet un formulaire
+// POST portant des dizaines de champs cachés liés à l'état de la session —
+// pas un paramètre qu'on puisse reconstruire de l'extérieur sans un vrai
+// navigateur. Le Crédit Mutuel compte plus de 500 offres au total ; on n'en
+// voit que la première page (15), très majoritairement des postes de réseau
+// qu'on écarte de toute façon. C'est une limite du site, pas du connecteur.
+async function fetchEiCards({ host, emp }) {
+  let html;
+  try {
+    const res = await fetch(`https://${host}/fr/nos_offres.html`, {
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    html = await res.text();
+  } catch (err) {
+    console.warn(`[sources] e-i (${host}) indisponible:`, err.message);
+    return [];
+  }
+
+  return parseCartesEiCards(html)
+    .map((o) => ({ ...o, url: o.url.replace('PLACEHOLDER', host) }))
     .filter((o) => isFinanceOfferFor(emp, o.title))
     .map((o) => ({ __src: `eicards:${host}`, emp, raw: o }));
 }
@@ -1655,6 +1668,7 @@ const TARGET_COMPANIES = {
     // Elles n'ont pas d'identifiant devinable : leur tenant Workday a dû être
     // sondé motif par motif.
     { tenant: 'ag2rlamondiale', dc: 'wd3', site: 'Candidats', emp: 'AG2R La Mondiale' },
+    { tenant: 'swisslife', dc: 'wd3', site: 'Swiss_Life_Division_France_Career_Site', emp: 'Swiss Life France' },
     { tenant: 'pjtpartners', dc: 'wd1', site: 'Careers', emp: 'PJT Partners' },
     // Un même tenant Workday héberge souvent DEUX sites : l'un pour les postes
     // expérimentés, l'autre pour les étudiants — et c'est le second qui nous
@@ -2001,8 +2015,18 @@ function findFacet(facets, testValue) {
   for (const facet of facets || []) {
     const match = (facet.values || []).find((v) => v.descriptor && testValue(v.descriptor));
     if (match && match.id) return { key: facet.facetParameter, id: match.id };
-    const nested = findFacet(facet.values, testValue);
-    if (nested) return nested;
+    // La récursion doit repartir du GROUPE imbriqué, pas de son parent. Chez
+    // Sanofi, « locationMainGroup » ne contient aucune valeur feuille : son
+    // unique élément est lui-même un groupe { facetParameter: "locationCountry",
+    // values: [...] }. Passer `facet.values` tel quel envoyait la France en
+    // profondeur, mais la clé remontée restait celle du parent — la France
+    // n'était donc jamais trouvée, faute d'objet-groupe à explorer.
+    for (const sousGroupe of facet.values || []) {
+      if (sousGroupe && Array.isArray(sousGroupe.values)) {
+        const nested = findFacet([sousGroupe], testValue);
+        if (nested) return nested;
+      }
+    }
   }
   return null;
 }
@@ -2015,8 +2039,14 @@ function findFacetValues(facets, testValue, max = 25) {
   for (const facet of facets || []) {
     const matches = (facet.values || []).filter((v) => v.id && v.descriptor && testValue(v.descriptor));
     if (matches.length) return { key: facet.facetParameter, ids: matches.slice(0, max).map((v) => v.id) };
-    const nested = findFacetValues(facet.values, testValue, max);
-    if (nested) return nested;
+    // Même correction que findFacet ci-dessus : redescendre par le groupe
+    // imbriqué et sa propre clé, pas par la liste brute du parent.
+    for (const sousGroupe of facet.values || []) {
+      if (sousGroupe && Array.isArray(sousGroupe.values)) {
+        const nested = findFacetValues([sousGroupe], testValue, max);
+        if (nested) return nested;
+      }
+    }
   }
   return null;
 }
@@ -2087,7 +2117,12 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
     // stages parisiens échappaient au connecteur.
     const petitCatalogue = (probe.total || 0) > 0 && (probe.total || 0) <= 600;
     if (petitCatalogue) {
-      await collecte(facetsPays, '', 30);
+      // Aucune facette de lieu ici, volontairement. Un petit catalogue se prend
+      // en entier et se filtre ensuite sur le libellé du lieu — restreindre en
+      // amont ne fait courir qu'un risque : chez Swiss Life, dont le site est
+      // déjà franco-français, l'arbre des lieux n'expose aucune valeur
+      // exploitable, et la restriction ramenait 1 offre sur 150.
+      await collecte({}, '', 30);
     } else if (finance) {
       // Voie normale : la catégorie finance du tenant, 200 offres max.
       await collecte({ ...facetsPays, [finance.key]: [finance.id] }, '', 10);
@@ -2264,6 +2299,37 @@ async function fetchLvmh({ emp = 'LVMH' } = {}) {
       }));
   } catch (err) {
     console.warn('[sources] LVMH indisponible:', err.message);
+    return [];
+  }
+}
+
+// TalentView (talentview.io) — l'ATS de Tikehau Capital, entre autres. La
+// campagne d'offres se lit directement, filtrée sur la France dès la requête
+// (le site le fait lui-même via lat/lon/iso_country) : pas de tri à refaire.
+// Chaque offre porte sa ville, son entité et sa date de dernière activation.
+async function fetchTalentView({ tenant, companyWebsiteId, emp }) {
+  try {
+    const url =
+      `https://api.talentview.io/funnel/v2/companies/${tenant}/campaigns` +
+      `?company_website_id=${companyWebsiteId}&display_mode=list` +
+      `&location[lat]=46.227638&location[lon]=2.213749&location[iso_country]=FR&offset_start=1`;
+    const lot = await getJSON(url, { headers: { 'user-agent': UA_HTML } });
+
+    return (Array.isArray(lot) ? lot : [])
+      .filter((o) => o.name && o.slug)
+      .filter((o) => isFinanceOfferFor(o.entity?.name || emp, o.name))
+      .map((o) => ({
+        __src: `talentview:${tenant}`,
+        emp: o.entity?.name || emp,
+        raw: {
+          titre: o.name,
+          ville: o.address?.city || '',
+          date: o.last_activation_at,
+          url: `https://${tenant}.talentview.io/jobs/${o.slug}`,
+        },
+      }));
+  } catch (err) {
+    console.warn(`[sources] TalentView (${tenant}) indisponible:`, err.message);
     return [];
   }
 }
@@ -3294,7 +3360,7 @@ async function fetchAllSources() {
 
   // Les grandes familles sont récoltées séparément : si l'une tombe, les
   // autres n'en savent rien et le magasin ne rend que celle-là périmée.
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, tikehau, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
     recolter('France Travail', recoltes, fetchFranceTravail),
     recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
     fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
@@ -3304,6 +3370,7 @@ async function fetchAllSources() {
     fetchToutesApisBpce(recoltes), //   idem
     recolter('AXA France', recoltes, fetchAxaFrance),
     recolter('LVMH', recoltes, fetchLvmh),
+    recolter('Tikehau Capital (TalentView)', recoltes, () => fetchTalentView({ tenant: 'tikehau-capital-career', companyWebsiteId: 2718, emp: 'Tikehau Capital' })),
     recolter('Perella Weinberg', recoltes, () =>
       Promise.all(
         [1, 2, 3].map((board) =>
@@ -3328,7 +3395,7 @@ async function fetchAllSources() {
   ]);
 
   ecrireRecoltes(recoltes);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...tikehau, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
@@ -3473,6 +3540,7 @@ module.exports = {
   fetchCornerstone,
   fetchAxaFrance,
   fetchLvmh,
+  fetchTalentView,
   fetchTalentLink,
   fetchListeHtml,
   LISTES_HTML,

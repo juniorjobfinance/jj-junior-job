@@ -86,7 +86,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -826,7 +826,16 @@ function classifyVolet({ src, typeContratRaw, title }) {
   if (/d[ée]butant/.test(ti) && !/alternan|apprenti|\bstage\b|stagiaire/.test(ti)) return 'cdi-cdd';
   // L'alternance d'abord : "Alternance - stage de 12 mois" est une alternance.
   if (/alternan|apprenti|apprentice|contrat pro/.test(ti)) return 'alternance';
+  // Les banques d'affaires anglo-saxonnes ne disent jamais « stage » : leurs
+  // programmes s'appellent « Summer Analyst » (stage d'été), « Off-Cycle
+  // Analyst » (stage hors période) ou « Spring Week ». Faute de les reconnaître,
+  // ces offres partaient en CDI — puis le filtre de séniorité les écartait
+  // comme des postes confirmés. Bank of America perdait ainsi la totalité de
+  // ses stages parisiens (GCIB Credit, Global Markets Sales & Trading...),
+  // c'est-à-dire exactement le cœur de cible de JJ.
   if (/\bstage\b|stagiaire|internship|\bintern\b|\btrainee\b/.test(ti)) return 'stage';
+  if (/summer analyst|off[\s-]?cycle|spring week|winter analyst|insight programme|placement year/.test(ti))
+    return 'stage';
 
   const t = (typeContratRaw || '').toLowerCase();
   if (/stage|\bmis\b|internship|\bintern\b/.test(t)) return 'stage';
@@ -1437,6 +1446,14 @@ function normalize(item) {
     romeLibelle = raw.category;
     descr = raw.description;
     postedAt = parseFrenchDateTime(raw.lastmodifieddate);
+  } else if (__src.startsWith('talentview:')) {
+    emp = item.emp;
+    title = raw.titre;
+    ville = raw.ville;
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.titre;
+    postedAt = raw.date ? new Date(raw.date).toISOString() : null;
   } else if (__src.startsWith('talentlink:')) {
     // Le lieu n'est donné que dans l'intitulé, sous forme de liste de bureaux :
     // « (Paris / London) ». Le connecteur n'a retenu que celles qui nomment

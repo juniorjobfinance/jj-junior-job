@@ -108,6 +108,7 @@ Allianz France           | allianz
 CNP Assurances           | ^cnp\b
 Scor                     | ^scor\b
 Covéa                    | covea|maaf|\bmma\b|\bgmf\b
+Swiss Life France        | swiss ?life
 Generali France          | generali
 AG2R La Mondiale         | ag2r|la mondiale
 Groupama                 | groupama|\bgan\b
