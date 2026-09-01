@@ -1644,6 +1644,10 @@ const TARGET_COMPANIES = {
   // Détectés avec ingestion/detect-workday.js (le tenant, le datacenter et le
   // nom du site sont propres à chaque entreprise, aucun n'est devinable).
   workday: [
+    // Euronext, opérateur de la Bourse de Paris : infrastructure de marché,
+    // compensation, données financières. Cinq postes français au moment du
+    // branchement.
+    { tenant: 'hrhub', dc: 'wd3', site: 'Euronext_Career_Page', emp: 'Euronext' },
     { tenant: 'sanofi', dc: 'wd3', site: 'SanofiCareers', emp: 'Sanofi' },
     { tenant: 'ag', dc: 'wd3', site: 'Airbus', emp: 'Airbus' },
     { tenant: 'airliquidehr', dc: 'wd3', site: 'AirLiquideExternalCareer', emp: 'Air Liquide' },
@@ -1714,6 +1718,10 @@ const TARGET_COMPANIES = {
   // Le "host" est le tenant Oracle de l'entreprise (visible dans l'URL de
   // candidature de leur site carrières), "site" est le siteNumber (CX_1, CX_2...).
   oraclecloud: [
+    // Schroders, gestion d'actifs britannique, bureau de Paris.
+    { host: 'ekbq.fa.em2.oraclecloud.com', site: 'CX_2', emp: 'Schroders' },
+    // Scor, quatrième réassureur mondial : actuariat, risques, modélisation.
+    { host: 'fa-errt-saasfaprod1.fa.ocs.oraclecloud.com', site: 'CX_2001', emp: 'Scor' },
     { host: 'ekez.fa.em2.oraclecloud.com', site: 'CX_1', emp: 'Groupe BPCE' },
     // Sans filtre de lieu, le portail « professionnels » noyait ses deux postes
     // français dans un catalogue mondial dominé par New York.
@@ -3391,7 +3399,7 @@ async function fetchAllSources() {
 
   // Les grandes familles sont récoltées séparément : si l'une tombe, les
   // autres n'en savent rien et le magasin ne rend que celle-là périmée.
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, tikehau, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, tikehau, jef, evr, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
     recolter('France Travail', recoltes, fetchFranceTravail),
     recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
     fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
@@ -3402,6 +3410,16 @@ async function fetchAllSources() {
     recolter('AXA France', recoltes, fetchAxaFrance),
     recolter('LVMH', recoltes, fetchLvmh),
     recolter('Tikehau Capital (TalentView)', recoltes, () => fetchTalentView({ tenant: 'tikehau-capital-career', companyWebsiteId: 2718, emp: 'Tikehau Capital' })),
+    // Deux banques d'affaires américaines qui recrutent des stagiaires en
+    // banque d'investissement à Paris. Leur API ne renseigne pas le champ
+    // « lieu » : c'est l'intitulé qui nomme le bureau (« Paris Off-Cycle
+    // Internship »), et le connecteur sait déjà l'y lire.
+    recolter('Jefferies', recoltes, () =>
+      fetchTalentLink({ host: 'jefferies.tal.net', emp: 'Jefferies' })
+    ),
+    recolter('Evercore', recoltes, () =>
+      fetchTalentLink({ host: 'evercore.tal.net', emp: 'Evercore' })
+    ),
     recolter('Perella Weinberg', recoltes, () =>
       Promise.all(
         [1, 2, 3].map((board) =>
@@ -3426,7 +3444,7 @@ async function fetchAllSources() {
   ]);
 
   ecrireRecoltes(recoltes);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...tikehau, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...tikehau, ...jef, ...evr, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
