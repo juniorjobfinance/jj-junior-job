@@ -9,6 +9,9 @@ Victor Heutte en est l'auteur. On échange **en français**.
 
 ## À lire avant de proposer quoi que ce soit
 
+**`ETAT.md`** — où en est le projet : chiffres du catalogue, ce qui tourne, ce
+qui reste à faire. C'est le point de départ de toute reprise.
+
 **`DECISIONS.md`** — les onze arbitrages de fond, avec la mesure ou l'incident
 qui a motivé chacun. Beaucoup de « bonnes idées » évidentes y ont déjà été
 écartées pour des raisons chiffrées : les reproposer fait perdre du temps et
@@ -16,8 +19,31 @@ défait du travail.
 
 `PROJET.md` — le brief fondateur (positionnement, périmètre, architecture).
 
-Puis, pour l'état du jour : le dernier journal dans `journaux/`, et
-`git log --oneline -10`.
+Puis, pour le détail du jour : `git log --oneline -10` et le dernier journal
+dans `journaux/`.
+
+---
+
+## À ÉCRIRE avant de s'arrêter — obligatoire
+
+La mémoire d'une conversation fond : le contexte se compacte régulièrement et
+les échanges anciens disparaissent. Ce qui n'est pas écrit dans le dépôt est
+perdu. **Cette tenue à jour n'est donc pas une politesse, c'est le seul support
+durable du projet.**
+
+À la fin de chaque séance de travail, sans qu'on ait à le demander :
+
+1. **Réécrire `ETAT.md`** — les chiffres du catalogue (les mesurer, ne pas les
+   recopier), ce qui a bougé, ce qui reste. Toujours daté.
+2. **Compléter `DECISIONS.md`** si un arbitrage de fond a été tranché : une
+   règle, un seuil, une source qu'on renonce à brancher. Y écrire la mesure ou
+   l'incident qui l'a motivé, jamais l'opinion seule.
+3. **Compléter la section « Pièges » de ce fichier** si une erreur a coûté un
+   passage — pour qu'elle ne soit pas refaite.
+4. **Committer et pousser.** Un fichier à jour sur le disque ne protège de rien.
+
+Les messages de commit portent le détail : ce qui était cassé, par quel
+mécanisme, ce qui le corrige. Ils sont faits pour être lus dans six mois.
 
 ---
 
