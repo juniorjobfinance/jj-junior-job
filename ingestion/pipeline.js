@@ -13,7 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { fetchAllSources } = require('./sources');
+const { fetchAllSources, sourcesReprises } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
 
 const CHECK_LINKS = process.argv.includes('--check-links');
@@ -27,13 +27,18 @@ const SITEMAP_PATH = path.join(__dirname, '..', 'sitemap.xml');
 // Vercel.
 const SITE_URL = 'https://juniorjobfinance.com';
 
-// Un canonique absent pendant ce nombre de passages consécutifs est retiré
-// (PROJET.md §8.6 : "2-3 passages consécutifs").
+// Une offre absente de la collecte pendant plus de ce délai est retirée.
 //
-// Ce compteur se mesure en PASSAGES, pas en jours : il doit suivre la fréquence
-// du cron. Avec un passage quotidien, 3 passages valent trois jours de
-// tolérance — de quoi encaisser une source indisponible sans vider le site.
-const MAX_MISSED_RUNS = 3;
+// La tolérance se compte en JOURS, plus en passages. Un compteur de passages
+// est indissociable de la fréquence du cron : à raison d'un passage par jour,
+// « 3 passages » valait trois jours ; en passant à un passage par heure, la
+// même règle aurait supprimé des offres bien vivantes au bout de trois heures.
+// Exprimée en jours, elle dit ce qu'elle veut dire et survit à tout changement
+// de rythme — y compris à un rythme différent selon les maisons.
+//
+// Trois jours : de quoi encaisser une source indisponible deux matins de suite
+// sans laisser traîner une offre pourvue plus d'une poignée de jours.
+const MAX_JOURS_ABSENCE = 3;
 
 // Âge maximum d'une offre. Deux seuils, parce que "vieille" ne veut pas dire
 // la même chose selon d'où vient l'annonce.
@@ -45,7 +50,7 @@ const MAX_MISSED_RUNS = 3;
 //
 // ATS DIRECT de la maison (Workday, Recruitee, SmartRecruiters, Greenhouse...) :
 // là, l'annonce est encore EN LIGNE chez l'employeur aujourd'hui. Si elle était
-// pourvue, elle aurait été dépubliée — et le compteur missedRuns la sortirait du
+// pourvue, elle aurait été dépubliée — et la règle d'absence la sortirait du
 // site en 3 passages. Sa présence vaut donc mieux qu'une date de publication.
 // Couper à 30 jours ici revenait à jeter des offres vivantes : 21 des 22 postes
 // finance de Thales, la totalité de PAI Partners et d'Accor. Le plafond haut ne
@@ -1812,6 +1817,12 @@ function normalize(item) {
     source: __src,
     _descr: descr,
     _postedAt: postedAt || new Date().toISOString(),
+    // La source a-t-elle VRAIMENT daté cette offre ? Le drapeau de fiabilité se
+    // calculait sur le seul nom de la source, si bien qu'une source réputée
+    // fiable mais muette sur une offre précise lui faisait afficher la date de
+    // collecte comme date de publication. Une offre McKinsey sans date se
+    // présentait ainsi « Publiée aujourd'hui » — une date inventée.
+    _dateDeLaSource: Boolean(postedAt),
   };
 }
 
@@ -2005,7 +2016,7 @@ async function applyFreshnessAndDeadRemoval(offers) {
     }
 
     const firstSeenAt = prev?.firstSeenAt || now;
-    nextState[offer._key] = { firstSeenAt, lastSeenAt: now, missedRuns: 0, linkStatus };
+    nextState[offer._key] = { firstSeenAt, lastSeenAt: now, linkStatus };
 
     result.push({
       ...offer,
@@ -2015,25 +2026,28 @@ async function applyFreshnessAndDeadRemoval(offers) {
     });
   }
 
-  // Offres connues mais absentes de ce passage : incrémente le compteur, retire
-  // au-delà du seuil (marge anti-faux-positif d'une source qui déconne un jour).
+  // Offres connues mais absentes de cette collecte : on regarde depuis QUAND on
+  // ne les a plus vues, et non combien de passages ont eu lieu entre-temps. La
+  // marge évite de retirer une offre bien vivante parce qu'une source a eu un
+  // matin difficile.
   let retirees = 0;
   let enSursis = 0;
+  const limite = Date.now() - MAX_JOURS_ABSENCE * 86400000;
   for (const [key, prev] of Object.entries(prevState)) {
     if (seenKeys.has(key)) continue;
-    const missedRuns = (prev.missedRuns || 0) + 1;
-    if (missedRuns >= MAX_MISSED_RUNS) { retirees++; continue; } // retirée définitivement
+    const vueLe = new Date(prev.lastSeenAt || prev.firstSeenAt || 0).getTime();
+    if (vueLe && vueLe < limite) { retirees++; continue; } // pourvue ou expirée
     enSursis++;
-    nextState[key] = { ...prev, missedRuns };
-    // Note : on ne réinjecte pas l'offre complète (le contenu n'est plus connu),
-    // seul le compteur est conservé pour ne pas ré-ingérer une offre expirée sans info.
+    // On garde la trace, pas l'offre : son contenu n'est plus connu, et la
+    // réinjecter reviendrait à publier une annonce qu'on ne voit plus.
+    nextState[key] = { ...prev };
   }
 
   saveState(nextState);
   const nouvelles = result.filter((o) => o._firstSeenAt === now).length;
   console.log(
     `[pipeline] ${nouvelles} nouvelles offres ce matin, ${retirees} retirées définitivement ` +
-      `(absentes depuis ${MAX_MISSED_RUNS} passages : pourvues ou expirées), ${enSursis} en sursis.`
+      `(plus revues depuis ${MAX_JOURS_ABSENCE} jours : pourvues ou expirées), ${enSursis} en sursis.`
   );
   return result;
 }
@@ -2286,6 +2300,9 @@ async function completerDatesManquantes(offers) {
 //     dizaines d'offres, pas en centaines) ;
 //   - un connecteur qui pesait sérieusement hier tombe à zéro — signe d'une
 //     panne ciblée, que le total seul peut masquer si d'autres compensent.
+// Doit rester aligné sur RECOLTE_MAX_JOURS de sources.js : sert uniquement au
+// message de fin de passage.
+const RECOLTE_MAX_JOURS_INFO = 4;
 const SEUIL_CHUTE = 0.15; // 15 % du catalogue
 const SEUIL_CONNECTEUR_MUET = 10; // offres la veille à partir desquelles un zéro est suspect
 
@@ -2338,7 +2355,7 @@ function writeOutput(offers) {
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
 
   const publicOffers = offers.map((o) => {
-    const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, _dateRecuperee, ...rest } = o;
+    const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, _dateRecuperee, _dateDeLaSource, ...rest } = o;
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
     // C'est ce qui alimente le filtre "nouvelles offres" de la page : plus
     // fiable que postedAt, que certaines sources ne fournissent pas ou mal.
@@ -2351,7 +2368,8 @@ function writeOutput(offers) {
       // collecte, la page ne doit donc pas l'afficher comme date de publication.
       // _dateRecuperee = la liste ne datait pas l'offre, mais sa fiche l'a fait
       // (JSON-LD `datePosted`) : la date est alors tout aussi réelle.
-      datePubFiable: SOURCES_DATE_FIABLE_RE.test(o.source) || o._dateRecuperee === true,
+      datePubFiable:
+        (SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateDeLaSource === true) || o._dateRecuperee === true,
       // true = « Pépite JJ », mise en avant dans le bandeau du haut.
       pepite: pepites.has(o._key),
     };
@@ -2548,6 +2566,24 @@ async function run() {
   // Rien n'est écrit tant que le résultat ne tient pas debout. Une collecte
   // partielle publiée en silence est pire qu'un catalogue d'un jour de retard :
   // le site paraît normal, et personne ne voit qu'un onglet entier est vide.
+  // Maisons servies depuis le magasin : le catalogue est complet, mais ces
+  // sources-là datent. Le dire évite qu'une panne s'installe en silence.
+  if (sourcesReprises.length) {
+    console.warn(
+      `\n[pipeline] ${sourcesReprises.length} source(s) muette(s) ce matin, servie(s) depuis le magasin :`
+    );
+    for (const s of sourcesReprises.sort((a, b) => b.offres - a.offres)) {
+      console.warn(
+        `  - ${s.nom} : récolte du ${s.le.slice(0, 10)} (${s.offres} offres, ${Math.round(s.jours)} j)`
+      );
+    }
+    console.warn(
+      `  Une récolte cesse d'être servie au-delà de ${RECOLTE_MAX_JOURS_INFO} jours : la source\n` +
+        '  tombe alors à zéro et le garde-fou bloque la publication. À surveiller si\n' +
+        '  cela se répète plusieurs matins de suite.\n'
+    );
+  }
+
   const anomalies = anomaliesDePublication(publiables);
   if (anomalies.length && !process.argv.includes('--forcer')) {
     console.error('\n[pipeline] PUBLICATION ANNULÉE — la collecte semble incomplète :');

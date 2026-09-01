@@ -1307,14 +1307,20 @@ async function fetchTousYello() {
   return lots.flat();
 }
 
-async function fetchToutesApisBpce() {
-  const lots = await Promise.all(BPCE_APIS.map((c) => fetchBpceApi(c).catch(() => [])));
-  return lots.flat();
+// Chaque enseigne a son entrée au magasin, plutôt qu'un lot commun : si
+// Rothschild tombe, BNP et le Crédit Agricole ne doivent pas être repris avec
+// lui. C'est aussi ce grain qui permettra de les récolter à des heures
+// différentes — BNP et Rothschild à 7h, le Crédit Agricole à 8h.
+async function fetchToutesApisBpce(recoltes = {}) {
+  const taches = BPCE_APIS.map((c) => () => recolter(`bpce:${c.emp || c.host}`, recoltes, () => fetchBpceApi(c)));
+  return (await enFile(taches, 3)).flat();
 }
 
-async function fetchToutesListesHtml() {
-  const lots = await Promise.all(LISTES_HTML.map((c) => fetchListeHtml(c).catch(() => [])));
-  return lots.flat();
+async function fetchToutesListesHtml(recoltes = {}) {
+  const taches = LISTES_HTML.map((c) => () => recolter(`liste:${c.emp}`, recoltes, () => fetchListeHtml(c)));
+  // Deux à la fois : ces listes se paginent, chaque page est une requête, et
+  // BNP nous avait déjà répondu 403 pour avoir trop insisté.
+  return (await enFile(taches, 2)).flat();
 }
 
 async function fetchEiCards({ host, emp }) {
@@ -2682,25 +2688,38 @@ async function enFile(taches, largeur) {
 // les sites interrogés, dont certains nous avaient déjà répondu 403.
 const CONCURRENCE_ATS = 8;
 
-async function fetchAllATS() {
-  const taches = [
-    ...TARGET_COMPANIES.greenhouse.map((c) => () => fetchGreenhouse(c)),
-    ...TARGET_COMPANIES.lever.map((c) => () => fetchLever(c)),
-    ...TARGET_COMPANIES.smartrecruiters.map((c) => () => fetchSmartRecruiters(c)),
-    ...TARGET_COMPANIES.workday.map((c) => () => fetchWorkday(c)),
-    ...TARGET_COMPANIES.opendatasoft.map((c) => () => fetchOpenDataSoft(c)),
-    ...TARGET_COMPANIES.recruitee.map((c) => () => fetchRecruitee(c)),
-    ...TARGET_COMPANIES.oraclecloud.map((c) => () => fetchOracleCloud(c)),
-    ...TARGET_COMPANIES.teamtailor.map((c) => () => fetchTeamtailor(c)),
-    ...TARGET_COMPANIES.ashby.map((c) => () => fetchAshby(c)),
-    ...TARGET_COMPANIES.phenom.map((c) => () => fetchPhenom(c)),
-    ...TARGET_COMPANIES.talentsoft.map((c) => () => fetchTalentSoft(c)),
-    ...TARGET_COMPANIES.successfactors.map((c) => () => fetchSuccessFactors(c)),
-    ...TARGET_COMPANIES.sitemapld.map((c) => () => fetchSitemapJsonLd(c)),
-    ...TARGET_COMPANIES.eicards.map((c) => () => fetchEiCards(c)),
-    ...TARGET_COMPANIES.avature.map((c) => () => fetchAvature(c)),
-    ...TARGET_COMPANIES.servicepublic.map((c) => () => fetchServicePublic(c)),
+async function fetchAllATS(recoltes = {}) {
+  // Chaque connecteur a sa propre entrée dans le magasin : quand un tenant
+  // Workday tombe, lui seul reprend sa récolte de la veille, les 150 autres
+  // sont rafraîchis normalement. C'est ce grain fin qui rendra possible la
+  // collecte étalée sur la journée.
+  const groupes = [
+    ['greenhouse', fetchGreenhouse],
+    ['lever', fetchLever],
+    ['smartrecruiters', fetchSmartRecruiters],
+    ['workday', fetchWorkday],
+    ['opendatasoft', fetchOpenDataSoft],
+    ['recruitee', fetchRecruitee],
+    ['oraclecloud', fetchOracleCloud],
+    ['teamtailor', fetchTeamtailor],
+    ['ashby', fetchAshby],
+    ['phenom', fetchPhenom],
+    ['talentsoft', fetchTalentSoft],
+    ['successfactors', fetchSuccessFactors],
+    ['sitemapld', fetchSitemapJsonLd],
+    ['eicards', fetchEiCards],
+    ['avature', fetchAvature],
+    ['servicepublic', fetchServicePublic],
   ];
+
+  const taches = [];
+  for (const [famille, fn] of groupes) {
+    for (const cfg of TARGET_COMPANIES[famille]) {
+      const nom = `${famille}:${cfg.id || cfg.emp || cfg.host || cfg.tenant || 'x'}`;
+      taches.push(() => recolter(nom, recoltes, () => fn(cfg)));
+    }
+  }
+
   if (taches.length === 0) return DEMO_DATA ? SAMPLE_ATS : [];
   const results = await enFile(taches, CONCURRENCE_ATS);
   return results.flat();
@@ -2797,21 +2816,112 @@ async function fetchVie() {
     .map((o) => ({ __src: 'vie', emp: o.organizationName, raw: o }));
 }
 
+// ---------------------------------------------------------------------------
+// Magasin des récoltes
+// ---------------------------------------------------------------------------
+// Chaque source y dépose sa dernière moisson réussie. Deux usages, l'un
+// immédiat, l'autre à venir.
+//
+// Aujourd'hui : quand une source échoue — panne réseau, API fermée — on
+// republie sa dernière récolte au lieu de rendre une liste vide. Sans ce
+// magasin, un seul connecteur capricieux fait chuter le catalogue et le
+// garde-fou bloque alors TOUTE la mise à jour : le site se fige entièrement à
+// cause d'une source sur cent cinquante.
+//
+// Demain : c'est ce qui permettra d'étaler la collecte dans la journée — BNP et
+// Rothschild à 7h, Crédit Agricole à 8h — chaque passage ne rafraîchissant que
+// ses sources tout en publiant le catalogue complet, lu ici.
+//
+// Une récolte trop vieille n'est plus servie : mieux vaut un catalogue amputé,
+// que le garde-fou verra, qu'un catalogue plein d'offres pourvues depuis une
+// semaine.
+const zlib = require('zlib');
+const RECOLTES_PATH = path.join(__dirname, 'cache-recoltes.json.gz');
+const RECOLTE_MAX_JOURS = 4;
+
+function lireRecoltes() {
+  try {
+    return JSON.parse(zlib.gunzipSync(fs.readFileSync(RECOLTES_PATH)).toString('utf8'));
+  } catch {
+    return {}; // premier passage, ou cache illisible : on repart de zéro
+  }
+}
+
+function ecrireRecoltes(recoltes) {
+  try {
+    fs.writeFileSync(RECOLTES_PATH, zlib.gzipSync(JSON.stringify(recoltes)));
+  } catch (err) {
+    console.warn('[sources] magasin des récoltes non écrit :', err.message);
+  }
+}
+
+// Exécute une source et range son résultat. En cas d'échec ou de moisson vide,
+// ressort la dernière récolte connue si elle est encore fraîche.
+async function recolter(nom, recoltes, fn) {
+  let obtenu = null;
+  try {
+    obtenu = await fn();
+  } catch (err) {
+    console.warn(`[sources] ${nom} a échoué :`, err.message);
+  }
+
+  if (obtenu && obtenu.length) {
+    recoltes[nom] = { le: new Date().toISOString(), offres: obtenu };
+    return obtenu;
+  }
+
+  const precedente = recoltes[nom];
+  if (!precedente) return [];
+  const jours = (Date.now() - new Date(precedente.le).getTime()) / 86400000;
+  if (jours > RECOLTE_MAX_JOURS) {
+    console.warn(`[sources] ${nom} muette et sa dernière récolte a ${Math.round(jours)} j : abandonnée.`);
+    return [];
+  }
+  sourcesReprises.push({ nom, le: precedente.le, offres: precedente.offres.length, jours });
+  console.warn(
+    `[sources] ${nom} muette : on reprend sa récolte du ${precedente.le.slice(0, 10)} ` +
+      `(${precedente.offres.length} offres).`
+  );
+  return precedente.offres;
+}
+
+// Sources servies depuis le magasin faute d'avoir répondu. Le catalogue reste
+// complet, mais ces maisons ne sont plus à jour : sans ce relevé, l'une d'elles
+// pourrait se dégrader quatre jours en silence avant que le garde-fou ne s'en
+// aperçoive. Le passage doit le dire.
+const sourcesReprises = [];
+
 async function fetchAllSources() {
+  const recoltes = lireRecoltes();
+  sourcesReprises.length = 0;
+
+  // Les grandes familles sont récoltées séparément : si l'une tombe, les
+  // autres n'en savent rien et le magasin ne rend que celle-là périmée.
   const [franceTravail, lba, ats, adzuna, vie, listes, bpce, mck, yello, gs, ef, bofa] = await Promise.all([
-    fetchFranceTravail(),
-    fetchLaBonneAlternance(),
-    fetchAllATS(),
-    fetchAdzuna(),
-    fetchVie(),
-    fetchToutesListesHtml(),
-    fetchToutesApisBpce(),
-    fetchMcKinsey(),
-    fetchTousYello(),
-    fetchGoldmanSachs(),
-    fetchTousEightfold(),
-    fetchBankOfAmerica(),
+    recolter('France Travail', recoltes, fetchFranceTravail),
+    recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
+    fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
+    recolter('Adzuna', recoltes, fetchAdzuna),
+    recolter('VIE (Business France)', recoltes, fetchVie),
+    fetchToutesListesHtml(recoltes), // découpé par enseigne
+    fetchToutesApisBpce(recoltes), //   idem
+    // McKinsey est coupé. Leur API de recherche continue de servir des postes
+    // que leur propre site déclare fermés : « This position is no longer
+    // available ». Deux offres différentes l'ont montré à deux jours d'écart,
+    // dont une qui passait tous nos filtres (moins de 5 villes, date valide).
+    // La page ne le dit qu'une fois le JavaScript exécuté : aucun contrôle
+    // possible côté serveur, donc aucun moyen de savoir si un lien est vivant.
+    //
+    // Un lien mort ruine la seule promesse de JJ. Trois offres ne valent pas ça.
+    // À rouvrir le jour où McKinsey expose un état de publication fiable.
+    Promise.resolve([]),
+    recolter('Yello', recoltes, fetchTousYello),
+    recolter('Goldman Sachs', recoltes, fetchGoldmanSachs),
+    recolter('Eightfold', recoltes, fetchTousEightfold),
+    recolter('Bank of America', recoltes, fetchBankOfAmerica),
   ]);
+
+  ecrireRecoltes(recoltes);
   return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
 }
 
@@ -2937,6 +3047,7 @@ const SAMPLE_ATS = [
 
 module.exports = {
   fetchAllSources,
+  sourcesReprises, // relevé des maisons servies depuis le magasin, pour le bilan
   fetchFranceTravail,
   fetchLaBonneAlternance,
   fetchAllATS,

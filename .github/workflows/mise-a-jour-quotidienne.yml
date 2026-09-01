@@ -33,6 +33,7 @@ jobs:
           path: |
             ingestion/state.json
             ingestion/cache-avature.json
+            ingestion/cache-recoltes.json.gz
           key: jj-state-${{ github.run_id }}
           restore-keys: jj-state-
 
@@ -52,6 +53,9 @@ jobs:
         # rien n'est publié.
         run: |
           set -o pipefail
+          # journaux/ est ignoré par git : il n'existe pas sur un dépôt fraîchement
+          # récupéré, et « tee » échouerait avant même de lancer l'ingestion.
+          mkdir -p journaux
           node ingestion/pipeline.js 2>&1 | tee "journaux/maj-$(date +%F).log"
 
       # Le journal est gardé même quand l'ingestion a échoué — c'est justement

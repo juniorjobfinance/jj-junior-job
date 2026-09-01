@@ -13,6 +13,9 @@ node_modules/
 # Journaux des passages quotidiens
 journaux/
 ingestion/cache-avature.json
+# Magasin des récoltes : reconstruit à chaque passage, gardé entre deux par
+# le cache GitHub Actions. Trop volumineux et trop mouvant pour le dépôt.
+ingestion/cache-recoltes.json.gz
 
 # Fichiers de travail du sourcing : jamais publiés, ils seraient servis
 # publiquement par l'hébergeur statique.
