@@ -641,6 +641,30 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //     de mise en page ne casse rien tant que les attributs restent.
 const LISTES_HTML = [
   {
+    // Oddo BHF passe par Altays, dont la liste est intégrée en iframe dans leur
+    // site. Les pages « stages » et « alternances » du site ne sont que des
+    // vues filtrées de cette même liste (type-contrat=4) : on prend la liste
+    // complète et on laisse notre propre classement trier les contrats, plutôt
+    // que de dépendre de leurs filtres.
+    //
+    // La maison est franco-allemande et publie surtout outre-Rhin : sur
+    // 220 offres, le filtre pays en retient une petite part.
+    emp: 'Oddo BHF',
+    base: 'https://recrutement.altays-progiciels.com',
+    page: (n) => `https://recrutement.altays-progiciels.com/oddo/fr/offres.html?page=${n}`,
+    blocRe: /<li[^>]+class="[^"]*jobs__detail[^"]*"[^>]*>/i,
+    blocFin: '</li>',
+    lienRe: /href="(\/oddo\/fr\/offres\/[^"]+\.html)/,
+    // Ordre de lecture des cartes : intitulé, contrat, lieu, catégorie.
+    // Le lieu change de niveau d'une offre à l'autre — « France », « PARIS
+    // (75) », « Provence-Alpes-Côte d'Azur », « Allemagne » —, d'où lieuLibre.
+    champs: { titre: 0, type: 1, lieu: 2 },
+    lieuLibre: true,
+    maxPages: 30,
+    concurrence: 2,
+    delaiMs: 500,
+  },
+  {
     emp: 'BNP Paribas',
     base: 'https://group.bnpparibas',
     page: (n) => `https://group.bnpparibas/emploi-carriere/toutes-offres-emploi?page=${n}`,
@@ -856,7 +880,16 @@ function parseListeHtml(html, cfg) {
     const lire = (i) => (i == null ? '' : champs[i] || '');
     const titre = lire(cfg.champs.titre);
     if (!titre) continue;
-    offres.push({ url, type: lire(cfg.champs.type), titre, lieu: lire(cfg.champs.lieu) });
+    // Le pays manquait à cette lecture : une maison qui l'affiche en clair sur
+    // sa carte — Oddo BHF, franco-allemande, écrit « France » ou « Allemagne » —
+    // ne pouvait pas être filtrée, et ses offres allemandes seraient entrées.
+    offres.push({
+      url,
+      type: lire(cfg.champs.type),
+      titre,
+      lieu: lire(cfg.champs.lieu),
+      pays: lire(cfg.champs.pays),
+    });
   }
   return offres;
 }
@@ -906,9 +939,17 @@ async function fetchListeHtml(cfg) {
       // libellé du lieu (« Ville, Région, Pays »).
       // Un site franco-français ne répète pas « France » dans chaque lieu : on
       // ne l'exige que là où le libellé porte le pays (BNP) ou un champ dédié.
-      const enFrance = o.pays
-        ? /^france$/i.test(o.pays)
-        : cfg.depuisLien || /\bfrance\b/i.test(o.lieu || '');
+      // Certaines listes n'ont qu'un champ de localisation, dont le niveau
+      // varie d'une offre à l'autre : Oddo BHF y écrit tantôt un pays
+      // (« France », « Allemagne »), tantôt une région (« Provence-Alpes-Côte
+      // d'Azur »), tantôt une ville (« PARIS (75) »). Le lire comme un pays
+      // faisait tomber toutes les offres parisiennes. `lieuLibre` dit qu'il
+      // faut reconnaître la France à n'importe lequel de ces niveaux.
+      const enFrance = cfg.lieuLibre
+        ? FRANCE_LOCATION_RE.test(o.lieu || '') || REGIONS_FR_RE.test(o.lieu || '')
+        : o.pays
+          ? /^france$/i.test(o.pays)
+          : cfg.depuisLien || /\bfrance\b/i.test(o.lieu || '');
       if (!enFrance) continue;
       // On juge la finance sur l'entité qui recrute quand elle est connue :
       // « Analyste » chez CACIB et « Analyste » chez une caisse régionale ne
@@ -1550,7 +1591,15 @@ const TARGET_COMPANIES = {
     // Elles n'ont pas d'identifiant devinable : leur tenant Workday a dû être
     // sondé motif par motif.
     { tenant: 'pjtpartners', dc: 'wd1', site: 'Careers', emp: 'PJT Partners' },
+    // Un même tenant Workday héberge souvent DEUX sites : l'un pour les postes
+    // expérimentés, l'autre pour les étudiants — et c'est le second qui nous
+    // intéresse le plus. Nous n'interrogions que le premier, si bien que les
+    // summer analyst et les off-cycle, cœur de cible de JJ, restaient
+    // invisibles. Un balayage des 22 tenants a montré que deux maisons sont
+    // dans ce cas ; à vérifier pour chaque maison ajoutée désormais.
+    { tenant: 'pjtpartners', dc: 'wd1', site: 'Students', emp: 'PJT Partners' },
     { tenant: 'hl', dc: 'wd1', site: 'External', emp: 'Houlihan Lokey' },
+    { tenant: 'hl', dc: 'wd1', site: 'Campus', emp: 'Houlihan Lokey' },
     { tenant: 'blackrock', dc: 'wd1', site: 'BlackRock_Professional', emp: 'BlackRock' },
     { tenant: 'santander', dc: 'wd3', site: 'santanderCareers', emp: 'Santander' },
     { tenant: 'statestreet', dc: 'wd1', site: 'Global', emp: 'State Street' },
@@ -1562,6 +1611,11 @@ const TARGET_COMPANIES = {
   ],
   // Recruitee : ATS très répandu chez les fonds/boutiques françaises.
   // Endpoint public testé : https://{company}.recruitee.com/api/offers/
+  // Cornerstone OnDemand : ATS de plusieurs sociétés de gestion et fonds.
+  // Le « tenant » est le sous-domaine csod.com, lisible dans l'URL du site
+  // carrières (https://eurazeo.csod.com -> tenant « eurazeo »).
+  cornerstone: [{ tenant: 'eurazeo', siteId: 1, emp: 'Eurazeo' }],
+
   recruitee: [
     { company: 'ikpartners', emp: 'IK Partners' },
     { company: 'meridiam', emp: 'Meridiam' },
@@ -1694,8 +1748,52 @@ const TARGET_COMPANIES = {
 
 // Villes/régions françaises courantes, pour filtrer les résultats Workday (les
 // grands groupes recrutent mondialement ; on ne garde que le site France).
-const FRANCE_LOCATION_RE =
-  /\bfrance\b|paris|lyon|marseille|toulouse|nantes|strasbourg|montpellier|bordeaux|lille|rennes|reims|grenoble|dijon|nancy|metz|nice|nanterre|courbevoie|suresnes|blagnac|colombes|gennevilliers|gentilly|guyancourt|rueil|clichy|puteaux|levallois|boulogne|issy|antony|versailles|le havre|le mans|rouen|orl[ée]ans|tours|clermont-ferrand|angers/i;
+// Régions françaises, pour les listes qui situent une offre à ce niveau plutôt
+// qu'à la ville. Sans elles, une alternance annoncée en « Provence-Alpes-Côte
+// d'Azur » n'était reconnue ni comme française ni comme étrangère.
+const REGIONS_FR_RE =
+  /[îi]le[- ]de[- ]france|auvergne|rh[ôo]ne[- ]alpes|provence|c[ôo]te d'azur|nouvelle[- ]aquitaine|occitanie|bretagne|normandie|hauts[- ]de[- ]france|grand[- ]est|pays de la loire|centre[- ]val de loire|bourgogne|franche[- ]comt[ée]|corse/i;
+
+// Reconnaître qu'une offre est en France. Cette liste décide de l'entrée au
+// catalogue sur une bonne partie des connecteurs : ce qu'elle ignore est jeté
+// en silence, sans erreur ni trace. Elle omettait 32 des 63 villes d'un
+// contrôle — dont LA DÉFENSE, premier quartier d'affaires d'Europe, où sont
+// BNP CIB, SG CIB, Deloitte et EY, ainsi que Neuilly, Saint-Ouen et Montrouge
+// où siègent plusieurs assureurs. Les offres y étaient perdues sans bruit.
+//
+// Deux familles y figurent : les grandes villes du pays, et les communes
+// d'affaires d'Île-de-France, qui n'ont rien de grandes villes mais
+// concentrent l'essentiel des sièges sociaux de la finance française.
+const FRANCE_LOCATION_RE = new RegExp(
+  [
+    '\\bfrance\\b',
+    // Formes d'adresse qui ne nomment pas la ville. « 16ème arrondissement »
+    // ne désigne que Paris, Lyon ou Marseille ; « cedex » et un code postal
+    // francilien n'existent qu'en France. Sans elles, une offre située par son
+    // seul arrondissement ou son seul code postal était rejetée d'emblée.
+    '\\d{1,2}\\s*(?:er|e|[èe]me)\\s+arrondissement|\\barrondissement\\b|\\bcedex\\b',
+    '\\b(?:75|77|78|91|92|93|94|95)\\d{3}\\b',
+    // Quartiers d'affaires et communes de sièges, Île-de-France
+    'la d[ée]fense|puteaux|courbevoie|nanterre|neuilly|levallois|clichy|colombes',
+    'bois-?colombes|asni[èe]res|gennevilliers|suresnes|rueil|saint-?cloud|s[èe]vres',
+    'boulogne|issy|vanves|malakoff|montrouge|ch[âa]tillon|antony|massy|palaiseau',
+    'saclay|guyancourt|v[ée]lizy|versailles|saint-?quentin|cergy|roissy|tremblay',
+    'saint-?denis|aubervilliers|pantin|montreuil|bagnolet|vincennes|charenton',
+    'ivry|villejuif|cr[ée]teil|gentilly|arcueil|le kremlin|saint-?ouen|noisy',
+    'marne-?la-?vall[ée]e|serris|bussy|torcy|[ée]vry|corbeil|melun|meaux|poissy',
+    // Grandes villes
+    'paris|lyon|villeurbanne|marseille|aix-en-provence|toulouse|blagnac|nice',
+    'sophia antipolis|nantes|montpellier|strasbourg|bordeaux|lille|roubaix',
+    'tourcoing|villeneuve-?d.ascq|rennes|reims|toulon|saint-?[ée]tienne|le havre',
+    'grenoble|dijon|angers|n[îi]mes|clermont-?ferrand|le mans|aix-?les-?bains',
+    'brest|tours|amiens|limoges|annecy|perpignan|besan[çc]on|metz|orl[ée]ans',
+    'mulhouse|rouen|caen|nancy|argenteuil|montreuil|saint-?paul|nanterre',
+    'avignon|poitiers|dunkerque|aubagne|pau|la rochelle|calais|b[ée]ziers',
+    'colmar|valence|qu[ii]mper|troyes|lorient|niort|chamb[ée]ry|beauvais',
+    'la roche-?sur-?yon|ch[âa]lons|bayonne|biarritz|arras|belfort|vannes',
+  ].join('|'),
+  'i'
+);
 
 // Beaucoup de boards Greenhouse/Lever sont MONDIAUX (Forvis Mazars publie
 // 185 offres tous pays confondus). Sans filtre géographique, on ferait entrer
@@ -1994,6 +2092,70 @@ async function fetchOpenDataSoft({ domain, dataset, emp }) {
 }
 
 // Recruitee — endpoint public, renvoie déjà le lien direct vers l'annonce.
+// Cornerstone OnDemand (csod.com) — l'ATS d'Eurazeo, et d'autres maisons.
+// Son API de recherche exige un jeton Bearer de courte durée (cinq heures),
+// mais ce jeton est servi dans le HTML de la page carrières : deux requêtes
+// suffisent, aucune session à entretenir.
+//
+// Attention au pays : leur donnée est parfois fausse — une mission au
+// Luxembourg y est étiquetée « US ». On accepte donc une offre dès qu'un de ses
+// lieux est en France OU porte un nom de ville française, plutôt que de se fier
+// au seul code pays.
+async function fetchCornerstone({ tenant, siteId = 1, emp, cultureId = 13 }) {
+  const base = `https://${tenant}.csod.com`;
+  const accueil = `${base}/ux/ats/careersite/${siteId}/home?c=${tenant}`;
+  try {
+    const html = await (
+      await fetchAvecReprise(accueil, { headers: { 'user-agent': UA_HTML } })
+    ).text();
+    const jeton = (html.match(/eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]+/) || [])[0];
+    if (!jeton) throw new Error('jeton introuvable dans la page carrières');
+
+    const offres = [];
+    for (let page = 1; page <= 10; page++) {
+      const res = await fetchAvecReprise(`https://eu-cdg.api.csod.com/rec-job-search/external/jobs`, {
+        method: 'POST',
+        headers: {
+          'user-agent': UA_HTML,
+          authorization: `Bearer ${jeton}`,
+          'content-type': 'application/json',
+          accept: 'application/json',
+          'CSOD-Accept-Language': 'fr-FR',
+        },
+        body: JSON.stringify({
+          careerSiteId: siteId, careerSitePageId: siteId, pageNumber: page, pageSize: 50,
+          cultureId, searchText: '', cultureName: 'fr-FR',
+          states: [], countryCodes: [], cities: [], placeID: '', radius: null,
+          postingsWithinDays: null, customFieldCheckboxKeys: [],
+          customFieldDropdowns: [], customFieldRadios: [],
+        }),
+      });
+      const lot = ((await res.json()).data || {}).requisitions || [];
+      offres.push(...lot);
+      if (lot.length < 50) break;
+    }
+
+    return offres
+      .filter((o) =>
+        (o.locations || []).some(
+          (l) => /^fr$/i.test(l.country || '') || FRANCE_LOCATION_RE.test(l.city || '')
+        )
+      )
+      .filter((o) => isFinanceOfferFor(emp, o.displayJobTitle))
+      .map((o) => ({
+        __src: `cornerstone:${tenant}`,
+        emp,
+        raw: {
+          ...o,
+          url: `${base}/ux/ats/careersite/${siteId}/home/requisition/${o.requisitionId}?c=${tenant}`,
+        },
+      }));
+  } catch (err) {
+    console.warn(`[sources] Cornerstone (${tenant}) indisponible:`, err.message);
+    return [];
+  }
+}
+
 async function fetchRecruitee({ company, emp }) {
   try {
     const json = await getJSON(`https://${company}.recruitee.com/api/offers/`);
@@ -2700,6 +2862,7 @@ async function fetchAllATS(recoltes = {}) {
     ['workday', fetchWorkday],
     ['opendatasoft', fetchOpenDataSoft],
     ['recruitee', fetchRecruitee],
+    ['cornerstone', fetchCornerstone],
     ['oraclecloud', fetchOracleCloud],
     ['teamtailor', fetchTeamtailor],
     ['ashby', fetchAshby],
@@ -3064,6 +3227,7 @@ module.exports = {
   fetchAshby,
   fetchTeamtailor,
   fetchRecruitee,
+  fetchCornerstone,
   fetchSmartRecruiters,
   fetchLever,
   fetchGreenhouse,

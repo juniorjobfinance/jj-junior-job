@@ -86,7 +86,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|mckinsey)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -1380,6 +1380,23 @@ function normalize(item) {
     romeLibelle = raw.category;
     descr = raw.description;
     postedAt = parseFrenchDateTime(raw.lastmodifieddate);
+  } else if (__src.startsWith('cornerstone:')) {
+    // Cornerstone date ses annonces au format français (« 01/09/2026 ») et
+    // porte le descriptif complet, qui alimente le filtre 0-3 ans.
+    emp = item.emp;
+    title = raw.displayJobTitle;
+    {
+      const lieuFr = (raw.locations || []).find((l) => /^fr$/i.test(l.country || ''));
+      ville = (lieuFr || (raw.locations || [])[0] || {}).city || '';
+    }
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.displayJobTitle;
+    descr = (raw.externalDescription || '').replace(/<[^>]*>/g, ' ').slice(0, 4000);
+    {
+      const m = String(raw.postingEffectiveDate || '').match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
+    }
   } else if (__src.startsWith('recruitee:')) {
     emp = item.emp;
     title = raw.title;
