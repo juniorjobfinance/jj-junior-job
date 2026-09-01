@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# LISTE D'EXCLUSION — maisons ayant demandé à ne plus figurer sur JJ
+#
+# Les mentions légales promettent qu'une entreprise peut demander le retrait
+# durable de ses offres, sous 48 heures ouvrées. Ce fichier est ce qui rend
+# cette promesse exécutable : sans lui, la demande serait honorée une fois puis
+# oubliée au passage suivant, et les offres reviendraient d'elles-mêmes.
+#
+# Une ligne par exclusion. Deux formes acceptées :
+#
+#   domaine: exemple.com        -> toute offre dont le lien pointe vers ce
+#                                  domaine (ou un sous-domaine) est écartée
+#   employeur: Nom de la boîte  -> toute offre de cet employeur est écartée,
+#                                  quelle que soit la source
+#
+# Le texte après « # » est un commentaire : y noter la date de la demande et
+# son auteur, pour pouvoir la retrouver si la maison revient sur sa décision.
+#
+# Exemple :
+#   domaine: exemple-sa.com     # demande du 12/09/2026, service RH
+#
+# Ce fichier est volontairement vide au départ. Toute ligne ajoutée prend effet
+# au passage suivant, sans toucher au code.
+# ---------------------------------------------------------------------------

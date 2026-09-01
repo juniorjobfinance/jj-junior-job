@@ -976,6 +976,61 @@ function titreNommeUnMetier(titre, emp) {
   return sansEmployeur.length >= 4;
 }
 
+// ---------------------------------------------------------------------------
+// Retrait à la demande
+// ---------------------------------------------------------------------------
+// Les mentions légales promettent qu'une entreprise peut obtenir le retrait
+// durable de ses offres. Honorer cette demande à la main ne tiendrait pas : les
+// offres reviendraient au passage suivant. La liste est donc lue à chaque
+// collecte, et une ligne y suffit — aucun code à toucher.
+const EXCLUSIONS_PATH = path.join(__dirname, 'exclusions.txt');
+
+function chargerExclusions() {
+  const domaines = [];
+  const employeurs = [];
+  let lignes;
+  try {
+    lignes = fs.readFileSync(EXCLUSIONS_PATH, 'utf8').split('\n');
+  } catch {
+    return { domaines, employeurs }; // fichier absent : rien à exclure
+  }
+  for (const brute of lignes) {
+    const ligne = brute.split('#')[0].trim();
+    if (!ligne) continue;
+    const m = ligne.match(/^(domaine|employeur)\s*:\s*(.+)$/i);
+    if (!m) {
+      console.warn(`[exclusions] ligne ignorée (forme attendue « domaine: » ou « employeur: ») : ${ligne}`);
+      continue;
+    }
+    const valeur = m[2].trim().toLowerCase();
+    if (/^domaine$/i.test(m[1])) domaines.push(valeur);
+    else employeurs.push(valeur);
+  }
+  if (domaines.length || employeurs.length) {
+    console.log(
+      `[exclusions] ${domaines.length} domaine(s) et ${employeurs.length} employeur(s) exclus à leur demande.`
+    );
+  }
+  return { domaines, employeurs };
+}
+
+const EXCLUSIONS = chargerExclusions();
+
+function estExclue(url, emp) {
+  const e = String(emp || '').toLowerCase();
+  if (EXCLUSIONS.employeurs.some((x) => e.includes(x))) return true;
+  if (!EXCLUSIONS.domaines.length) return false;
+  let hote;
+  try {
+    hote = new URL(url).host.toLowerCase();
+  } catch {
+    return false;
+  }
+  // Le sous-domaine compte : exclure « exemple.com » doit aussi écarter
+  // « carrieres.exemple.com », sinon la demande serait contournée par accident.
+  return EXCLUSIONS.domaines.some((d) => hote === d || hote.endsWith('.' + d));
+}
+
 const INDEPENDANT_RE =
   /profession\s+lib[ée]rale|agent\s+g[ée]n[ée]ral|\bmandataire\b|ind[ée]pendant|franchis[ée]|cr[ée]ateur\s+d.entreprise|auto-?entrepreneur|\bentrepreneur\s+en\b|votre\s+propre\s+(?:cabinet|agence|activit[ée])|\bVDI\b/i;
 
@@ -1798,6 +1853,10 @@ function normalize(item) {
   // écarte quelle que soit la source, y compris les ajouts manuels.
   if (INTERMEDIAIRE_RE.test(url)) return null;
 
+  // Retrait demandé par la maison : contrôlé ici, avant tout classement, pour
+  // qu'aucune offre ne puisse ressortir par un autre chemin.
+  if (estExclue(url, emp)) return null;
+
   const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
 
   // Le VIE ne vient que de Business France. C'est le registre officiel du
@@ -2428,7 +2487,21 @@ function writeOutput(offers) {
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
 
   const publicOffers = offers.map((o) => {
-    const { _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus, _dateRecuperee, _dateDeLaSource, ...rest } = o;
+    // `_descr` est le texte intégral de l'annonce. Il sert UNIQUEMENT à juger
+    // la séniorité, en interne, et ne doit jamais être publié : ce serait
+    // reproduire mot pour mot la prose de l'employeur — ce que JJ n'a aucun
+    // droit de faire et aucune raison de vouloir. Il figurait pourtant dans le
+    // fichier servi, faute d'avoir été retiré ici : quelques adresses de
+    // contact s'y trouvaient, et il pesait à lui seul l'essentiel des 1,9 Mo
+    // téléchargés par chaque visiteur.
+    //
+    // JJ ne publie que ce qui est factuel et non appropriable : l'intitulé du
+    // poste, l'employeur, le lieu, la date, et le lien vers l'annonce d'origine.
+    const {
+      _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
+      _dateRecuperee, _dateDeLaSource, _descr,
+      ...rest
+    } = o;
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
     // C'est ce qui alimente le filtre "nouvelles offres" de la page : plus
     // fiable que postedAt, que certaines sources ne fournissent pas ou mal.
