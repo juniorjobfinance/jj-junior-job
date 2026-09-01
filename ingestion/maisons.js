@@ -28,7 +28,13 @@ function aplatir(nom) {
     .trim()
     // "Groupe Crédit Coopératif", "Groupe BPCE" : le préfixe est du décor
     // administratif, et il empêchait les motifs ancrés au début de mordre.
-    .replace(/^(groupe|group)\s+/, '');
+    //
+    // L'article défini pose le même problème, et il est passé inaperçu plus
+    // longtemps : les motifs étant ancrés au début, « banque postale » ne
+    // mordait pas sur « La Banque Postale ». Ses 57 offres étaient écartées
+    // sans le moindre message. Deux maisons étaient dans ce cas, l'autre étant
+    // La Financière de l'Échiquier.
+    .replace(/^(groupe|group|la|le|les)\s+/, '');
 }
 
 function chargerMaisons() {
@@ -66,6 +72,25 @@ function chargerMaisons() {
 }
 
 const MAISONS = chargerMaisons();
+
+// Contrôle le plus élémentaire qui soit, et il manquait : chaque maison
+// doit reconnaître son propre nom. Un motif qui n'y parvient pas écarte
+// silencieusement toutes les offres de cette maison — La Banque Postale a
+// ainsi perdu 57 offres sans qu'aucun message ne le signale.
+//
+// Le contrôle tourne au chargement : avec des maisons ajoutées régulièrement,
+// il vaut mieux être averti au premier passage qu'après coup, en comptant les
+// offres manquantes.
+function verifierMotifs(maisons) {
+  const muettes = maisons.filter((m) => !m.re.test(aplatir(m.nom)));
+  if (!muettes.length) return;
+  console.warn(
+    `[maisons] ${muettes.length} maison(s) dont le motif ne reconnaît pas leur propre nom —\n` +
+      '  leurs offres seront écartées en silence. Corriger le motif dans maisons.txt :'
+  );
+  for (const m of muettes) console.warn(`  - ${m.nom} (motif : ${m.re.source})`);
+}
+verifierMotifs(MAISONS);
 
 // Renvoie le nom de la grande maison correspondant à cet employeur, ou null.
 // Le premier motif qui correspond gagne : l'ordre du fichier fait foi, ce qui
