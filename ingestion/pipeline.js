@@ -2287,9 +2287,26 @@ function ficheJsonLd(html) {
 }
 
 async function completerDatesManquantes(offers) {
-  // Le drapeau `datePubFiable` n'existe qu'à l'écriture : ici on applique la
-  // même règle sur la source, c'est elle qui fait foi.
-  const aCompleter = offers.filter((o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o.url);
+  // Deux raisons d'aller lire une fiche, et la seconde comptait autant que la
+  // première sans qu'on s'en aperçoive.
+  //
+  // La date, d'abord : le drapeau `datePubFiable` n'existe qu'à l'écriture, on
+  // applique donc ici la même règle sur la source.
+  //
+  // La SÉNIORITÉ ensuite. Le filtre 0-3 ans ne peut se prononcer que s'il a le
+  // texte de l'annonce ; sans lui, il ne juge que l'intitulé, et un poste à
+  // cinq ans d'expérience passe dès que son titre ne dit pas « senior ». Or on
+  // n'allait chercher les fiches que pour les offres SANS DATE : une offre
+  // datée mais sans description n'était jamais examinée. C'est ainsi que des
+  // CDI à plus de trois ans d'expérience se retrouvaient publiés.
+  //
+  // On ne le fait que pour les CDI/CDD : un stage ou une alternance est junior
+  // par nature, inutile d'aller vérifier.
+  const aCompleter = offers.filter(
+    (o) =>
+      o.url &&
+      (!SOURCES_DATE_FIABLE_RE.test(o.source) || (o.volet === 'cdi-cdd' && !o._descr))
+  );
   if (!aCompleter.length) return 0;
 
   // Une file par hôte : deux sites différents peuvent être interrogés en
