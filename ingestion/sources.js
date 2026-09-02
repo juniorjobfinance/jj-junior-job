@@ -2261,9 +2261,17 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       // déjà franco-français, l'arbre des lieux n'expose aucune valeur
       // exploitable, et la restriction ramenait 1 offre sur 150.
       await collecte({}, '', 30);
+    } else if (Object.keys(facetsPays).length) {
+      // On a de quoi borner géographiquement : on prend TOUT ce qui est en
+      // France, sans mot-clé. Un balayage par mots-clés rate par construction
+      // les intitulés qui n'en portent aucun — « Stage Auditeur Financier -
+      // Lyon » chez PwC, « Private Equity Buyout Stage » chez Ardian. Le
+      // périmètre suffit à tenir la lecture courte, et le tri fin sur
+      // l'intitulé est le métier du pipeline, pas celui du connecteur.
+      await collecte(facetsPays, '', 25);
     } else if (finance) {
-      // Voie normale : la catégorie finance du tenant, 200 offres max.
-      await collecte({ ...facetsPays, [finance.key]: [finance.id] }, '', 10);
+      // Sans aucune facette de lieu, on se rabat sur la catégorie finance.
+      await collecte({ [finance.key]: [finance.id] }, '', 10);
     }
 
     // Repli, y compris quand une catégorie "finance" existe mais ne donne rien :
