@@ -1710,6 +1710,13 @@ const TARGET_COMPANIES = {
     // dans ce cas ; à vérifier pour chaque maison ajoutée désormais.
     { tenant: 'pjtpartners', dc: 'wd1', site: 'Students', emp: 'PJT Partners' },
     { tenant: 'hl', dc: 'wd1', site: 'External', emp: 'Houlihan Lokey' },
+    // Houlihan Lokey expose un TROISIÈME site, « Lateral », que rien ne
+    // reliait aux deux autres.
+    { tenant: 'hl', dc: 'wd1', site: 'Lateral', emp: 'Houlihan Lokey' },
+    // MUFG, banque japonaise : financement de projets, leveraged finance,
+    // risque de crédit à Paris. Que des postes seniors au branchement — le
+    // connecteur se remplira quand ils publieront des juniors.
+    { tenant: 'mufgub', dc: 'wd3', site: 'MUFG-Careers', emp: 'MUFG' },
     { tenant: 'hl', dc: 'wd1', site: 'Campus', emp: 'Houlihan Lokey' },
     { tenant: 'blackrock', dc: 'wd1', site: 'BlackRock_Professional', emp: 'BlackRock' },
     { tenant: 'santander', dc: 'wd3', site: 'santanderCareers', emp: 'Santander' },
@@ -1855,6 +1862,10 @@ const TARGET_COMPANIES = {
     { host: 'carrieres.generali.fr', tenant: '', emp: 'Generali France' },
   ],
   talentsoft: [
+    // L'Autorité des marchés financiers : supervision, audit interne,
+    // inspection des activités de marché. Une institution que les étudiants en
+    // finance visent, et qui n'avait aucun connecteur.
+    { host: 'amf-career.talent-soft.com', emp: 'AMF' },
     // Stellantis : modélisation du risque de crédit, gestion des risques,
     // audit. Quinze offres finance dont trois alternances.
     { host: 'jobs.groupe-psa.com', emp: 'Stellantis' },

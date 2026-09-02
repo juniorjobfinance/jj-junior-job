@@ -86,11 +86,16 @@ JobPosting, analytics, poids de `offres.js` (474 Ko).
 
 ## Pistes ouvertes, à reprendre
 
-**Bain** — portail Avature, robots.txt permissif, JSON-LD complet sur chaque
-fiche : c'est faisable. Mais le sitemap ne liste aucune offre et la page de
-recherche est rendue en JavaScript. Il faut trouver leur API interne (Avature
-expose en général un point d'entrée AJAX). Une session dédiée, pas un bout de
-fin de journée.
+**Bain — hors de portée, et pas seulement difficile.** Toutes les voies ont été
+essayées : sitemap principal et sitemap campus (huit URL, aucune offre), pages
+de liste, POST du formulaire, flux RSS et XML, recherche d'iframe ou de
+domaine tiers. Leur liste n'existe qu'après exécution du JavaScript.
+
+Et même en la trouvant, le pipeline ne pourrait pas la lire : il tourne sur
+GitHub Actions en Node pur, sans navigateur. Y embarquer un navigateur headless
+pour une seule maison multiplierait la durée et la fragilité de chaque passage.
+Le portail est pourtant ouvert et bien balisé — c'est la seule maison rencontrée
+dont l'obstacle soit architectural et non juridique.
 
 **Euronext** — branché sur Workday (tenant hrhub), le connecteur voyait cinq
 offres françaises au moment du branchement, mais rien n'est publié. À
