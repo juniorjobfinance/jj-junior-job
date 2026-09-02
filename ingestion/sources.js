@@ -2254,22 +2254,6 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       : villesFr
         ? { [villesFr.key]: villesFr.ids }
         : {};
-
-    // Si l'arbre des lieux existe et ne contient NI la France NI aucune ville
-    // française, ce tenant n'a rien pour nous : Morningstar publie 224 offres,
-    // toutes hors de France, et Santander 79, toutes à São Paulo. Les lire
-    // chaque matin ne sert à rien, et fait passer pour une panne ce qui est
-    // simplement une absence.
-    //
-    // On ne conclut que si l'arbre existe : chez Swiss Life il est vide, et
-    // sa lecture littérale ramenait 1 offre sur 150.
-    const arbreDesLieux = (probe.facets || []).some(
-      (f) => /location/i.test(f.facetParameter || '') && (f.values || []).length > 0
-    );
-    if (arbreDesLieux && !country && !villesFr) {
-      console.log(`[sources] Workday ${emp} : aucune offre en France dans leur catalogue.`);
-      return [];
-    }
     const jobs = [];
     const vus = new Set();
 
