@@ -7,20 +7,31 @@ Victor Heutte en est l'auteur. On échange **en français**.
 
 ---
 
-## À lire avant de proposer quoi que ce soit
+## Les quatre documents, et ce que chacun sait
 
-**`ETAT.md`** — où en est le projet : chiffres du catalogue, ce qui tourne, ce
-qui reste à faire. C'est le point de départ de toute reprise.
+Un seul sujet par fichier : dupliquer une information, c'est se condamner à en
+maintenir deux versions et à en croire la mauvaise.
 
-**`DECISIONS.md`** — les onze arbitrages de fond, avec la mesure ou l'incident
-qui a motivé chacun. Beaucoup de « bonnes idées » évidentes y ont déjà été
-écartées pour des raisons chiffrées : les reproposer fait perdre du temps et
-défait du travail.
+| Fichier | Répond à | Change |
+|---|---|---|
+| **`CLAUDE.md`** (ce fichier) | que dois-je savoir avant d'agir ? | rarement |
+| **`ETAT.md`** | où en est-on aujourd'hui ? | à chaque séance |
+| **`DECISIONS.md`** | pourquoi a-t-on tranché ainsi ? | à chaque arbitrage |
+| **`PROJET.md`** | pourquoi ce site existe-t-il ? | jamais |
 
-`PROJET.md` — le brief fondateur (positionnement, périmètre, architecture).
+**Le code fait foi sur l'implémentation** — les listes de familles et de
+structures, les seuils, les maisons branchées. Aucun document ne les recopie :
+ils y renverraient une version périmée. `PROJET.md` en avait recopié, ce qui
+l'a rendu faux en trois jours.
 
-Puis, pour le détail du jour : `git log --oneline -10` et le dernier journal
-dans `journaux/`.
+Ordre de lecture pour reprendre : **`ETAT.md`**, puis `DECISIONS.md` si l'on
+veut changer une règle, puis `git log --oneline -10` et le dernier journal dans
+`journaux/` pour le détail du jour.
+
+**Beaucoup de « bonnes idées » évidentes ont déjà été écartées pour des raisons
+chiffrées** — rebrancher La Bonne Alternance, assouplir le filtre d'expérience,
+ajouter des portails Oracle « pour voir ». Elles sont dans `DECISIONS.md` avec
+leur mesure. Les reproposer fait perdre du temps et défait du travail.
 
 ---
 

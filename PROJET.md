@@ -1,5 +1,24 @@
 # JJ — Junior Job · Brief de projet pour Claude Code
 
+> **Ce document est le brief fondateur, écrit le 30 août 2026.** Il dit
+> pourquoi le site existe, pour qui, et ce qui le distingue — cela n'a pas
+> changé et fait toujours autorité.
+>
+> En revanche, il décrit aussi un état du monde qui a bougé. Ne pas s'y fier
+> pour :
+>
+> - **les sources** (§7.3, §7.4, §13) — France Travail et La Bonne Alternance
+>   y sont présentées comme des sources à câbler ; elles ont été branchées,
+>   puis **débranchées le 1er septembre 2026** parce que leurs annonces ne
+>   renvoient pas vers l'employeur. Mesure refaite le 2 septembre, même
+>   conclusion. Voir `DECISIONS.md` §2.
+> - **les listes de familles et de structures** (§4.2) — refondues le
+>   1er septembre. Le code fait foi.
+> - **la roadmap** (§13) — largement dépassée.
+>
+> Pour l'état réel : **`ETAT.md`** (chiffres du jour), **`DECISIONS.md`**
+> (les arbitrages et leur pourquoi), **`CLAUDE.md`** (les règles en vigueur).
+
 > À lire en premier. Ce document est le contexte complet du projet. Il a été
 > construit lors d'une longue réflexion en amont. Objectif : bâtir une **première
 > version solide et propre** du site. Le go-to-market, la publicité et la
@@ -45,28 +64,37 @@ Plus un onglet spécial :
 4. **VIE** — traité à part : **pas d'ingestion**, c'est un **bouton/lien de redirection**
    vers la page officielle Business France déjà filtrée finance (voir §6). Pas de familles dessus.
 
-### 4.2 Les 9 familles métier (sous-catégorie principale)
-Elles **remplacent** l'ancien front/middle/back (qui ne parlait qu'à la banque de marché).
-C'est l'axe de tri principal, valable dans tous les onglets Stage/Alternance/CDI-CDD :
+### 4.2 et 4.3 — Les deux axes de tri
 
-1. **Commercial & Relation client** (sales, chargé d'affaires/clientèle, coverage)
-2. **Analyse & Research** (économistes, analystes crédit, equity research, analystes financiers)
-3. **Risques & Conformité** (risk crédit/marché/opérationnel, compliance, contrôle interne)
-4. **M&A & Transactions** (M&A, conseil financier, ECM/DCM, due diligence)
-5. **Audit & Conseil** (audit financier, commissariat aux comptes)
-6. **Finance d'entreprise** (contrôle de gestion, comptabilité, trésorerie)
-7. **Gestion & Investissement** (asset management, private equity, gestion de portefeuille, marchés)
-8. **Assurance & Actuariat** (souscription/underwriting, actuariat)
-9. **Data & Quant** (data science, modélisation)
+> **Les listes qui figuraient ici sont périmées.** Le brief décrivait neuf
+> familles métier et huit types de structure ; l'un et l'autre ont été
+> refondus le 1er septembre 2026. Un brief qui contredit le code est pire
+> qu'un brief absent, puisqu'on le lit en confiance — cette section ne garde
+> donc que le principe, et renvoie au code pour le détail.
 
-> Note : les **opérations pures / back-office** (settlement, custody, admin de fonds) n'ont pas
-> de case dédiée. Pour l'instant on les range dans « Risques & Conformité ». Prévoir une 10e
-> famille **« Opérations »** si le volume alternance le justifie plus tard.
+Le site trie sur **deux axes**, et l'un ne doit jamais empiéter sur l'autre :
 
-### 4.3 Filtre secondaire : type de structure
-Banque · Gestion d'actifs · Private Equity/VC · Assurance · Audit & conseil · Entreprise
-(corporate/DAF) · Fintech · Finance publique. **Poste d'abord, structure en second.**
+- **la famille métier** répond à « quel travail ferai-je ? » ;
+- **le type de structure** répond à « chez qui ? ».
 
+Trois règles gouvernent ce découpage :
+
+1. Une famille nomme un **métier**, jamais un secteur. « Assurance » et
+   « Banque » ne sont pas des familles : ce sont des employeurs.
+2. **Aucun libellé n'est partagé entre les deux axes.** Le métier s'appelle
+   « Gestion d'actifs », l'employeur « Société de gestion ». Sans quoi on ne
+   sait plus lequel des deux filtres on manipule.
+3. Une catégorie fourre-tout doit rester **marginale** — sous 5 %. Au-delà,
+   elle cesse d'être une marge et redevient une catégorie, ce qui est le
+   défaut qu'elle était censée éviter.
+
+Les listes en vigueur vivent dans le code, à un seul endroit chacune :
+`FAMILLES` et `STRUCTURES` dans `ingestion/pipeline.js`, dupliquées en dur
+dans `index.html` pour l'affichage — **les deux doivent être comparées après
+toute modification**, elles ont déjà divergé une fois.
+
+Le raisonnement qui a mené au découpage actuel est dans `DECISIONS.md` §4.
+Les chiffres du jour sont dans `ETAT.md`.
 ### 4.4 Extensibilité (roadmap multi-secteurs)
 Plus tard : Finance → Marketing → Communication → Immobilier… La nav gagnera un niveau
 **Secteur** au-dessus : **Secteur → Onglet contrat → Familles**. Les 4 onglets contrat
@@ -267,7 +295,7 @@ Banque de France · AMF · ACPR · Caisse des Dépôts · Bpifrance · Agence Fr
 ---
 
 ## 16. Fichiers déjà présents dans le projet
-- `index.html` — la page (4 onglets, 9 familles à mettre en axe principal, filtres, cartes
+- `index.html` — la page (4 onglets, familles métier en axe principal, filtres, cartes
   cliquables vers l'annonce). *(à renommer JJ / à faire évoluer.)*
 - `offres.js` — données générées par le pipeline (`window.__OFFRES__`).
 - `ingestion/pipeline.js` — normalise, classe, filtre junior, déduplique, écrit `offres.js`.
