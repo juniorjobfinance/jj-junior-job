@@ -92,7 +92,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy|wordpress)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -243,6 +243,18 @@ const FAMILLE_RULES = [
   [/data scien|data analyst|analyste data|\bquant\b|quantitati[fv]|machine learning|mod[ée]lisation|\bdatavi|business intelligence|\bdata\b (?:engineer|manager|steward)|[ée]tudes statistiques|statisticien|donn[ée]es financi[èe]res|data (?:and|&) (?:process|reporting)|chief data officer|data project/i, 'Data & Quant'],
 
   // --- Assurance : sinistres, contrats, distribution -----------------------
+  // --- Services titres et clientèle institutionnelle -----------------------
+  // Ce vocabulaire est celui du métier titres et de la clientèle de gros ; un
+  // guichet d'agence ne parle jamais d'OST, de dépositaire ou d'investor
+  // services. La règle vient AVANT celles de l'assurance et du réseau, qui
+  // sont volontairement très larges et happaient ces postes : « Gestionnaire
+  // Opérations Garanties » partait en assurance (le mot « garantie »),
+  // « Chargé service clients institutionnels » aussi (« service clients »).
+  [
+    /transaction management|trade finance|op[ée]rations? garanties|asset servicing|investor services|funds? solutions|securities finance|conservation de titres|d[ée]positaire|op[ée]rations? sur titres|op[ée]rations? client[èe]le|\bost\b|client[es]? institutionnel|institutionnels et souverains|fund (?:administration|accounting|execution|distribution)/i,
+    'Middle & Back Office',
+  ],
+
   [/sinistre|indemnisation|souscript|\biard\b|pr[ée]voyance|assurance de personnes|courtage|gestionnaire.{0,20}(?:assurance|contrat|garantie)|conseill.{0,20}assurance|assurances? collectives?|assurance (?:emprunteur|construction|sant[ée])|assurance de personnes?|prestations? sant[ée]|gestionnaire (?:retraite|pr[ée]vention|technique)|satisfaction adh[ée]rent|r[ée]clamations?|op[ée]rations? d.assurance|relations? grands? clients?|production grands comptes|accompagnement clients?|assurances? professionnelles?|assistance clients?|service clients?|client service|relations? clients?|gestion international|gestion individuelle|comptes? multi[\s-]activit|charg[ée]e? d.affaires entrepreneurs|\bretraite\b|op[ée]rations assurance|assurance vie|gestion internationale|centre de services|gestionnaire op[ée]rationnel|\binsurance\b/i, 'Assurance — distribution & sinistres'],
 
   // --- Marchés, gestion, opérations ---------------------------------------
@@ -938,13 +950,43 @@ function inferZone(loc) {
 
 // Cherche un nom de ville comme un MOT, pas comme une sous-chaîne : sans ça,
 // "Lillebonne" (Seine-Maritime) passait pour Lille, et "Lorient" pour Orient.
+// Les tirets et apostrophes d'un nom composé sont écrits au petit bonheur :
+// « Saint-Quentin-en Yvelines » chez l'un, « Saint Quentin en Yvelines » chez
+// l'autre. On les ramène tous à des espaces avant de comparer.
+function sansLiaisons(t) {
+  return String(t || '')
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // « Île-de-France » = « Ile-de-France »
+    .replace(/[-–'’]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function contientVille(libelle, ville) {
+  libelle = sansLiaisons(libelle);
+  ville = sansLiaisons(ville);
   const i = libelle.indexOf(ville);
   if (i === -1) return false;
   const avant = libelle[i - 1];
   const apres = libelle[i + ville.length];
   const estLettre = (c) => c !== undefined && /[a-zà-öø-ÿ]/.test(c);
   return !estLettre(avant) && !estLettre(apres);
+}
+
+// Extrait la ville d'un libellé de liste. Les employeurs y écrivent de tout :
+// « Montrouge - France », « Saint-Quentin-en-Yvelines - France », « Amiens
+// (80), puis Montrouge (92) - France », « Saint-Quentin-en Yvelines (lignes N,
+// U, RER C,) voire navette CDG Etoile/SQY - France ». On retire le pays, les
+// précisions entre parenthèses, puis on coupe au premier vrai séparateur —
+// jamais sur le tiret d'un nom composé.
+function villeDeLaListe(brut) {
+  let v = String(brut || '').replace(/\s*[-–,]\s*france\s*$/i, '').trim();
+  v = v.replace(/\([^)]*\)?/g, ' '); // « Amiens (80) » -> « Amiens »
+  v = v.split(/\s[-–]\s/)[0]; // un tiret entouré d'espaces sépare vraiment
+  v = v.split(',')[0];
+  // « Amiens puis Montrouge », « SQY voire navette » : on garde le premier.
+  v = v.split(/\s+(?:puis|voire|ou)\s+/i)[0];
+  return v.replace(/\s+/g, ' ').trim();
 }
 
 function estGrandeVille(loc) {
@@ -954,10 +996,13 @@ function estGrandeVille(loc) {
   // et il empêchait de reconnaître ce qui le précède : le Crédit Agricole
   // écrit « Ile-de-France - France », libellé pourtant on ne peut plus clair,
   // qui était rejeté comme une petite commune.
-  v = v.replace(/\s*[-–,]\s*france\s*$/, '').trim() || v;
+  v = v.replace(/[\s,]+[-–]?\s*france\s*$/, '').trim() || v;
   // Le séparateur d'un libellé composé peut être une virgule ou un tiret.
-  const commencePar = (t) =>
-    v === t || v.startsWith(t + ',') || v.startsWith(t + ' -') || v.startsWith(t + '-');
+  const commencePar = (t) => {
+    const a = sansLiaisons(v);
+    const b = sansLiaisons(t);
+    return a === b || a.startsWith(b + ',') || a.startsWith(b + ' ');
+  };
   if (REGIONS_ET_INCONNU.some(commencePar)) return true;
   // Département seul : même statut qu'une région.
   if (DEPARTEMENTS.some(commencePar)) return true;
@@ -1521,13 +1566,17 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     "^[ée]cole$|centralesup|analyste transport",
     // Immobilier d'exploitation : gérer un parc locatif n'est pas un métier
     // de la finance, à la différence de l'investissement immobilier.
-    "gestionnaire locatif|property manag|projets? immobiliers?|op[ée]rations? immobili[èe]res?",
+    "gestionnaire locatif|n[ée]gociateur immobilier|assistant.{0,3} de copropri[ée]t|projets? immobiliers?|op[ée]rations? immobili[èe]res?",
     // Rémunération, personnel, instances : ressources humaines.
     "r[ée]mun[ée]rations?|avantages sociaux|administration du personnel|\\bcse\\b",
     // Informatique et web, sous toutes leurs graphies.
     "dev react|frontend|\\bweb analyst\\b|data ing[ée]nieur|ing[ée]nieur ia\\b|\\bcmdb\\b",
-    "data management office|quality analyst|data protection officer|\\bdpo\\b",
-    "product manag|inside sales|appels? d.offres",
+    // « quality analyst » a été retiré d'ici : dans une banque, la qualité
+    // porte sur les DONNÉES financières — « Data Quality Analyst » est un
+    // poste junior de gouvernance de la donnée. L'assurance qualité
+    // industrielle reste écartée par « assurance qualité » plus haut.
+    "data management office|data protection officer|\\bdpo\\b|\\brgpd\\b|gestionnaire.{0,6}flotte",
+    "product manag|appels? d.offres",
     // Formation, communication, relations sociales : ressources humaines.
     "^learning\\b|learning and development|affaires sociales|affaires publiques",
     "\\bcom\\b interne|communication interne",
@@ -1538,7 +1587,7 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     "professional services implementation",
     // Un intitulé qui ne nomme qu'une entreprise, ou qu'un mot, ne dit rien
     // au candidat : mieux vaut ne pas le publier que le publier illisible.
-    "^oliver wyman|^portzamparc|^data$|^gestionnaire administratif$",
+    "^oliver wyman|portzamparc.{0,45}(?:syst[èe]mes? d.informations?|informatique)|^data$|^gestionnaire administratif$",
   ].join("|"),
   "i"
 );
@@ -1548,7 +1597,7 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
 // inférieur — BTS, DUT, licence, bachelor, Bac+2/+3 — visent un autre public, et
 // noyaient l'alternance sous des annonces d'assistanat comptable.
 const NIVEAU_TROP_BAS_RE =
-  /\bbts\b|\bdut\b|\bcap\b|licence pro|\blicence\b|bachelor|bac\s*\+?\s*[23]\b|bac\s*obtenu|niveau bac\b/i;
+  /\bbts\b|\bdut\b|(?<!large )(?<!large-)(?<!mid )(?<!mid-)(?<!small )(?<!small-)(?<!market )(?<!market-)\bcap\b|licence pro|\blicence\b|bachelor|bac\s*\+?\s*[23]\b|bac\s*obtenu|niveau bac\b/i;
 
 // ... sauf quand l'annonce ouvre une FOURCHETTE. « Bac+3 à Bac+5 », « Licence
 // ou Master », « Bac+3/Bac+5 » : le niveau bas y élargit l'accès, il n'exclut
@@ -2089,7 +2138,10 @@ function normalize(item) {
     emp = raw.entite || item.emp;
     title = raw.titre;
     // « Reims - France » ou « Paris, Ile-de-France, France » -> la ville seule.
-    ville = (raw.lieu || '').split(/[,\-–]/)[0].trim();
+    // « Reims - France », « Paris, Ile-de-France, France » -> la ville seule.
+    // Attention au tiret : celui de « Saint-Quentin-en-Yvelines » n'en est
+    // pas un. Voir villeDeLaListe.
+    ville = villeDeLaListe(raw.lieu);
     pays = 'France'; // déjà filtré côté connecteur
     url = raw.url;
     typeContratRaw = raw.type;
@@ -2098,6 +2150,17 @@ function normalize(item) {
       const m = (raw.date || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
       postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
     }
+  } else if (__src.startsWith('wordpress:')) {
+    // WordPress REST : la réponse JSON porte tout, y compris le texte.
+    emp = raw.entite || item.emp;
+    title = raw.titre;
+    ville = villeDeLaListe(raw.lieu);
+    pays = 'France'; // déjà filtré côté connecteur
+    url = raw.url;
+    typeContratRaw = raw.type;
+    descr = String(raw.description || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 4000);
+    // « 2026-09-01 » ou « 2026-09-01T12:21:44 » : les deux sont acceptés.
+    postedAt = raw.date ? dateIso(raw.date) : null;
   } else if (__src.startsWith('successfactors:')) {
     emp = item.emp;
     title = raw.title;

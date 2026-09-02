@@ -86,7 +86,7 @@ async function getJSON(url, options = {}) {
 // gestion" — l'intitulé le plus répandu du métier — et "actuari" ratait
 // "actuaire". Ces deux trous écartaient de vraies offres depuis le début.
 const FINANCE_KEYWORDS_RE =
-  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|cost control|\bfp&a\b|audit|risqu|\brisk\b|conformit|complian|actua[ir]|underwrit|souscript|sinistre|recouvrement|consolid|commissaire aux comptes|assuranc|insuranc|banqu|bancaire|\bbanking\b|\bbanker\b|\bbank\b|courtage|courtier|patrimoine|fiscalist|(?:back|middle|front)[- ]office|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|\bfx\b|\bequities\b|delta one|fixed income|g[ée]ran\w* de portefeuille|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
+  /finan|comptab|accounti|accountant|tr[ée]sor|treasury|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|cost control|\bfp&a\b|audit|risqu|\brisk\b|conformit|complian|actua[ir]|underwrit|souscript|sinistre|trader|trading|sales|broker|dealer|securities|prime-services|product-control|market-data|custody|settlement|collateral|derivativ|wealth|fund|actuaire|sustainab|workout|officer|coverage|origination|syndicat|leasing|factoring|depositary|depositaire|recouvrement|consolid|commissaire aux comptes|assuranc|insuranc|banqu|bancaire|\bbanking\b|\bbanker\b|\bbank\b|courtage|courtier|patrimoine|fiscalist|(?:back|middle|front)[- ]office|\bm&a\b|merger|acquisition|private equity|venture capital|asset management|gestion d.?actifs|analyste|\banalyst\b|cr[ée]dit|\bcredit\b|equity research|[ée]conomiste|economist|\bdaf\b|\bcfo\b|trad(?:er|ing)|salle des march[ée]s|march[ée]s de capitaux|capital markets|corporate finance|investment banking|\bfx\b|\bequities\b|delta one|fixed income|g[ée]ran\w* de portefeuille|portfolio manag|hedge fund|brokerage|fiscalit|transfer pricing|investisse|investor|structuration financi|\bfund\b|\bfonds\b/i;
 
 // Contre-filtre : certains intitulés matchent un mot-clé finance par accident
 // ("IT Support **Analyst**", "**Legal** Assistant", "Product **Analyst**").
@@ -96,7 +96,7 @@ const FINANCE_KEYWORDS_RE =
 // "Ingénieur financier risques" et "Technicien comptable" sont de vrais postes
 // finance. On ne vise que les intitulés techniques explicites.
 const NON_FINANCE_RE =
-  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|data scien|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|\bm[ée]dia|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
+  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|\bm[ée]dia|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
 
 // Entreprises dont le MÉTIER est la finance (banque, gestion d'actifs, private
 // equity, audit, conseil financier/stratégie, assurance). Chez elles, des
@@ -512,7 +512,7 @@ async function fetchAdzuna() {
 const SLUG_FINANCE_RE =
   /financ|audit|risk|risque|complian|conformit|comptab|tresor|treasury|credit|analyst|m-?and-?a|\bm-a\b|inspecteur|actuar|asset|invest|banking|banquier|kyc|middle-office|back-office|controle|controller|patrimoine|clientele|conseiller|stage|alternan|apprenti|intern|graduate|junior|vie-|equity|research|\balm\b|quant|marche|trading|structur|portefeuille|fiscal|consolid|reporting|souscript|sinistre/i;
 
-async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4 }) {
+async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4, filtrerSlug = true }) {
   let urls;
   try {
     const res = await fetch(sitemap, {
@@ -532,7 +532,12 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
   //    par référence (le suffixe -XXXXXXX-fr/-en), préférence au français.
   const parRef = new Map();
   for (const u of urls) {
-    if (!jobPathRe.test(u) || !SLUG_FINANCE_RE.test(u)) continue;
+    if (!jobPathRe.test(u)) continue;
+    // Le vocabulaire de l'adresse ne décide que si on OUVRE la fiche. Chez une
+    // maison dont le sitemap tient en un millier d'entrées, mieux vaut tout
+    // ouvrir : chez Société Générale ce pré-filtre écartait 40 % des fiches,
+    // dont des postes de marché dont le slug est en anglais.
+    if (filtrerSlug && !SLUG_FINANCE_RE.test(u)) continue;
     const ref = (u.match(/-(\w{8})-(?:fr|en)$/) || [])[1] || u;
     const estFr = /-fr$/.test(u) || /offres-d-emploi/.test(u);
     if (!parRef.has(ref) || estFr) parRef.set(ref, u);
@@ -695,12 +700,16 @@ const LISTES_HTML = [
   {
     emp: 'BNP Paribas',
     base: 'https://group.bnpparibas',
-    page: (n) => `https://group.bnpparibas/emploi-carriere/toutes-offres-emploi?page=${n}`,
+    // « country=7 » = France chez eux. Sans ce filtre on lisait le catalogue
+    // mondial, 400 pages, pour en garder la France ; avec, 36 pages suffisent.
+    page: (n) =>
+      `https://group.bnpparibas/emploi-carriere/toutes-offres-emploi?country=7&page=${n}`,
     blocRe: /<article[^>]+class="[^"]*card-offer[^"]*"/i,
     blocFin: '</article>',
     lienRe: /href="(\/emploi-carriere\/offre-emploi\/[^"]+)"/,
     champs: { type: 0, titre: 1, lieu: 2 },
-    maxPages: 400,
+    // 36 pages distinctes mesurées ; au-delà leur site répète la dernière.
+    maxPages: 45,
     // Lire 400 pages six par six a fini par nous faire bloquer en 403 lors
     // d'une série de passages rapprochés. Un passage par jour ne déclenche pas
     // cette limite, mais deux pages à la fois et une seconde d'attente laissent
@@ -712,11 +721,22 @@ const LISTES_HTML = [
     emp: 'Crédit Agricole',
     base: 'https://groupecreditagricole.jobs',
     // Pagination par chemin, pas par paramètre.
-    // Leur taxonomie fait le tri à notre place : 438 offres de finance sur
-    // 14 pages, au lieu de 1 186 sur 37. Les identifiants de métiers viennent
-    // de leur moteur de recherche.
+    // Leur taxonomie fait le tri à notre place. Les onze rubriques demandées,
+    // relevées sur leur propre moteur (identifiant, libellé, volume) :
+    //   170463 Analyse financière et économique · 170462 Assurances
+    //   170464 Finances / Comptabilité / Contrôle de gestion
+    //   170465 Gestion d'Actifs · 170466 Financement et Investissement
+    //   170469 Conformité / Sécurité financière · 170470 Risques / Contrôles
+    //   170472 Immobilier · 170473 Inspection / Audit
+    //   170478 Commercial / Relations Clients · 170479 Gestion des opérations
+    //
+    // « Gestion des opérations » est celle qui manquait le plus : son nom ne dit
+    // pas « finance », mais elle contient tout le back et middle-office titres
+    // — Fund Accountant, custody, OST, collatéral, settlement.
+    // Restent volontairement dehors : IT/Digital/Data, Juridique, RH,
+    // Marketing, Achats, Direction générale.
     page: (n) =>
-      `https://groupecreditagricole.jobs/fr/nos-offres/metiers/170463-170462-170478-170469-170466-170464-170465-170472-170470/localisations/79/page/${n}/`,
+      `https://groupecreditagricole.jobs/fr/nos-offres/metiers/170463-170462-170478-170469-170466-170464-170465-170472-170470-170479-170473/localisations/79/page/${n}/`,
     blocRe: /<article[^>]+class="[^"]*card offer[^"]*"/i,
     blocFin: '</article>',
     lienRe: /href="([^"]*nos-offres-emploi\/[^"]+)"/,
@@ -730,14 +750,12 @@ const LISTES_HTML = [
       // car un stage M&A chez CACIB n'est pas un poste en caisse régionale.
       entite: 'data-gtm-jobEntity',
     },
-    // 1 186 offres à 33 par page : 40 pages suffisent, avec de la marge.
-    // 438 offres à 33 par page : 16 pages suffisent, avec de la marge.
-    maxPages: 18,
+    // Environ 540 offres à 33 par page : 17 pages, on en lit 22 par sécurité.
+    maxPages: 22,
     concurrence: 3,
     // Leur robots.txt demande 3 secondes aux agents Claude ; on s'aligne sur
     // cette courtoisie même si la règle générique ne nous l'impose pas.
     delaiMs: 3000,
-    concurrence: 3,
   },
   {
     emp: 'Covéa',
@@ -1739,6 +1757,12 @@ const TARGET_COMPANIES = {
   // carrières (https://eurazeo.csod.com -> tenant « eurazeo »).
   cornerstone: [{ tenant: 'eurazeo', siteId: 1, emp: 'Eurazeo' }],
 
+  // WordPress REST : le site carrières est un WordPress, les offres un type
+  // d'article. Le « host » suffit ; « type » vaut « offre » par défaut.
+  wordpress: [
+    { host: 'https://caissedesdepots-recrute.fr', emp: 'Caisse des Dépôts' },
+  ],
+
   recruitee: [
     { company: 'ikpartners', emp: 'IK Partners' },
     { company: 'meridiam', emp: 'Meridiam' },
@@ -1845,7 +1869,15 @@ const TARGET_COMPANIES = {
       sitemap: 'https://careers.societegenerale.com/sitemap.xml',
       emp: 'Société Générale',
       jobPathRe: /(job-offers|offres-d-emploi)\//,
-      maxFiches: 600,
+      // 1 043 offres distinctes dans leur sitemap (mesuré le 02/09/2026),
+      // dont 609 n'existent qu'en anglais. Un plafond de 600 en coupait la
+      // moitié — et chez eux, les postes de Paris sont souvent annoncés en
+      // anglais, donc rangés en fin de tri.
+      maxFiches: 1100,
+      // 341 de ces offres sont en France (mesuré fiche par fiche le
+      // 02/09/2026). Le pré-filtre sur l'adresse en écartait 40 % : on lit tout,
+      // et ce sont les filtres du pipeline qui trient.
+      filtrerSlug: false,
       delayMs: 200,
     },
   ],
@@ -3407,6 +3439,77 @@ async function enFile(taches, largeur) {
 // les sites interrogés, dont certains nous avaient déjà répondu 403.
 const CONCURRENCE_ATS = 8;
 
+// ---------------------------------------------------------------------------
+// WordPress REST — les sites carrières bâtis sur WordPress
+//
+// WordPress expose chaque type d'article en JSON, sans clé ni compte :
+//     https://{host}/wp-json/wp/v2/{type}?per_page=100&page=N
+//
+// L'en-tête « x-wp-totalpages » dit combien de pages lire, donc on ne devine
+// pas. Les champs métier sont dans « acf » (Advanced Custom Fields, l'extension
+// que tous ces sites emploient) ; on retombe sur le titre WordPress si elle
+// manque.
+//
+// Avantage sur la lecture du HTML : la réponse porte le TEXTE de l'annonce.
+// Un CDI peut donc être jugé sur son contenu par le filtre 0-3 ans, au lieu de
+// passer sur la foi de son seul intitulé.
+async function fetchWordpressOffres({ host, emp, type = 'offre', maxPages = 12 }) {
+  const retenues = [];
+  for (let page = 1; page <= maxPages; page++) {
+    let res;
+    try {
+      res = await fetchAvecReprise(`${host}/wp-json/wp/v2/${type}?per_page=100&page=${page}`, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)', accept: 'application/json' },
+        signal: AbortSignal.timeout(25000),
+      });
+    } catch (err) {
+      console.warn(`[sources] WordPress ${emp} indisponible :`, err.message);
+      break;
+    }
+    if (!res.ok) {
+      if (page === 1) console.warn(`[sources] WordPress ${emp} : HTTP ${res.status}.`);
+      break;
+    }
+    let items;
+    try {
+      items = await res.json();
+    } catch {
+      break;
+    }
+    if (!Array.isArray(items) || !items.length) break;
+
+    for (const it of items) {
+      const acf = it.acf || {};
+      const titre = decodeEntitesSimples(acf.job_label || (it.title && it.title.rendered) || '');
+      const url = it.link;
+      if (!titre || !url) continue;
+      const entite = decodeEntitesSimples(acf.employer_name || '');
+      if (!isFinanceOfferFor(entite || emp, titre)) continue;
+      retenues.push({
+        __src: `wordpress:${emp}`,
+        emp,
+        raw: {
+          titre,
+          url,
+          entite,
+          lieu: decodeEntitesSimples(acf.employer_ville || ''),
+          type: acf.contract_type || '',
+          date: acf.date_publication || it.date || '',
+          description: acf.job_description || '',
+        },
+      });
+    }
+
+    const pages = Number(res.headers.get('x-wp-totalpages') || 1);
+    if (page >= pages) break;
+  }
+
+  if (!retenues.length) {
+    console.warn(`[sources] WordPress ${emp} : aucune offre — type d'article peut-être renommé.`);
+  }
+  return retenues;
+}
+
 async function fetchAllATS(recoltes = {}) {
   // Chaque connecteur a sa propre entrée dans le magasin : quand un tenant
   // Workday tombe, lui seul reprend sa récolte de la veille, les 150 autres
@@ -3431,6 +3534,7 @@ async function fetchAllATS(recoltes = {}) {
     ['eicards', fetchEiCards],
     ['avature', fetchAvature],
     ['servicepublic', fetchServicePublic],
+    ['wordpress', fetchWordpressOffres],
   ];
 
   const taches = [];
@@ -3825,6 +3929,7 @@ module.exports = {
   fetchTalentView,
   fetchTalentLink,
   fetchListeHtml,
+  fetchWordpressOffres,
   LISTES_HTML,
   fetchSmartRecruiters,
   fetchLever,

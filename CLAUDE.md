@@ -91,6 +91,7 @@ node ingestion/pipeline.js              # passage complet (~18 min)
 node ingestion/pipeline.js --forcer     # publier malgré le garde-fou (baisse voulue)
 node ingestion/sonder-carrieres.js "Nom:domaine.com"   # trouver la plateforme d'une maison
 node ingestion/valider-maisons.js candidats.json       # vérifier AVANT de brancher
+node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre passe ou non
 ```
 
 ---
@@ -111,6 +112,21 @@ node ingestion/valider-maisons.js candidats.json       # vérifier AVANT de bran
 - **Vérifier avant de brancher.** Une configuration fausse ne casse rien : elle
   rend zéro offre en silence, et la maison paraît branchée.
 - Le `Promise.all` de `fetchAllSources` est **destructuré** : ajouter un appel
+- **Ne jamais recopier une fonction du pipeline pour la tester.** Extraire
+  `SENIOR_RE` ou `estGrandeVille` de son texte à coups d'expressions
+  régulières a donné trois diagnostics faux dans la même séance : la copie
+  accusait un filtre que le vrai pipeline laissait passer. Charger le vrai
+  fichier avec `ingestion/atelier.js`.
+- **Un tiret n'est pas un séparateur.** Le lieu était découpé sur le premier
+  tiret rencontré : « Saint-Quentin-en-Yvelines - France » devenait « Saint »,
+  et toutes les communes à nom composé disparaissaient — dont le second site
+  de Crédit Agricole CIB. Ne couper que sur une virgule ou un tiret ENTOURÉ
+  d'espaces. Même piège dans le retrait du suffixe « France », qui coupait
+  « ile-de-france » en « ile ».
+- **Une exclusion écrite pour une maison en pénalise une autre.** « quality
+  analyst » avait été posé contre un ingénieur qualité industriel : il a
+  écarté un « Data Quality Analyst » de banque. Toute exclusion se relit avec
+  la question « et chez un dépositaire, ce mot veut dire quoi ? ».
   sans sa variable décale toute la liste et fait disparaître une source.
 
 ---

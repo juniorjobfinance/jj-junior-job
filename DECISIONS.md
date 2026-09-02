@@ -218,3 +218,56 @@ site de l'employeur, et l'envoie. L'URL contient le tenant. Sept maisons ont ét
 branchées ainsi le 02/09/2026 — Deloitte, Banque de France, KPMG, le portail
 Lateral de Rothschild, Edmond de Rothschild, Scor, Ipsen — là où le sondage
 aveugle en avait trouvé deux en une heure.
+
+---
+
+## 12. Demander ce qu'on veut, plutôt que tout puis trier
+
+Trois maisons publiaient bien plus que ce qu'on en montrait, et chaque fois pour
+la même raison : on lisait leur catalogue **entier** et on triait ensuite, alors
+que leur moteur savait filtrer.
+
+| Maison | Avant | Après |
+|---|---|---|
+| Crédit Agricole | 37 pages, tous métiers | 22 pages, 11 rubriques finance |
+| BNP Paribas | 400 pages, monde entier | 45 pages, `country=7` |
+
+Le coût n'est pas seulement en requêtes. Lire le monde entier sur 400 pages ne
+garantit pas d'atteindre les 355 offres françaises : elles peuvent se trouver
+au-delà. **Le filtre du site est donc une garantie d'exhaustivité, pas une
+optimisation.**
+
+Corollaire : leur taxonomie doit être RELEVÉE, jamais devinée. Chez le Crédit
+Agricole, la rubrique la plus utile pour JJ s'appelle « Gestion des opérations »
+— 93 offres de back et middle-office titres. Aucun nom de rubrique ne dit
+« finance », et une liste inventée l'aurait manquée. Les identifiants se lisent
+dans le balisage de leurs propres cartes (`data-gtm-jobCategory`).
+
+---
+
+## 13. Une exclusion se relit toujours dans une maison de finance
+
+Le filtre écarte des métiers hors sujet par mot-clé. Quatre de ces mots ont été
+mesurés faux le 02/09/2026, chacun coûtant des offres de premier plan :
+
+- **`\bcap\b`** visait le diplôme CAP. Il écartait « Stage M&A **Large Cap** »
+  chez BNP Paribas — et avec lui tout le M&A Large/Mid/Small Cap, c'est-à-dire
+  le cœur de ce que le site existe pour montrer.
+- **`quality analyst`** visait un ingénieur qualité industriel. Il écartait
+  « Data Quality Analyst » chez Crédit Agricole CIB, métier junior courant de
+  gouvernance de la donnée.
+- **`data scien`** rangeait tout data scientist hors finance. Dans une banque
+  de financement, il travaille sur les modèles de risque.
+- **`^portzamparc`** visait les postes informatiques de la maison de bourse de
+  BNP. Il emportait ses alternances d'assistant gérant et d'analyste.
+
+La règle qui en sort : **avant d'ajouter un mot à une exclusion, se demander ce
+qu'il veut dire chez un dépositaire, un courtier et une banque de financement.**
+Si la réponse diffère, l'exclusion doit être qualifiée par son contexte, pas
+posée seule.
+
+Même logique pour le classement : « chargé d'affaires », « clientèle » et
+« service clients » désignent le guichet chez LCL et le métier titres chez
+CACEIS. Une règle de sauvetage, placée avant celles de l'assurance et du réseau,
+reconnaît le vocabulaire de gros — transaction management, trade finance, OST,
+investor services, clients institutionnels — que le guichet n'emploie jamais.
