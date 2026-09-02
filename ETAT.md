@@ -35,7 +35,16 @@ dernière à écrire avant de s'arrêter.
 
 Passage quotidien à **06h30 Paris** (GitHub Actions → `pipeline.js` → commit →
 Vercel). Une offre publiée par une maison branchée apparaît le lendemain ; une
-offre retirée sort après trois jours d'absence.
+offre retirée **disparaît le lendemain aussi** — le pipeline ne publie que ce
+qu'il vient de collecter, il ne réinjecte jamais une annonce qu'il ne voit plus.
+
+Les trois jours de `MAX_JOURS_ABSENCE` ne retardent pas ce retrait : c'est la
+durée pendant laquelle on se SOUVIENT de l'offre, pour ne pas la re-signaler
+comme nouvelle si elle réapparaît après un hoquet d'API.
+
+Ce qui protège d'une panne, ce sont les deux autres mécanismes : le magasin de
+récoltes ressert la dernière collecte d'une source muette pendant quatre jours,
+et le garde-fou refuse de publier si le catalogue s'effondre malgré tout.
 
 Domaines : `juniorjobfinance.com` sert le site ; `www.` et
 `juniorjobfinance.vercel.app` redirigent en 308 ; `http://` bascule en `https`.
