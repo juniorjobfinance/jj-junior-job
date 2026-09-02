@@ -1073,7 +1073,7 @@ function classifyContrat({ typeContratRaw, title, descr, url }) {
   return 'CDI';
 }
 
-function classifyVolet({ src, typeContratRaw, title }) {
+function classifyVolet({ src, typeContratRaw, title, url }) {
   if (src === 'labonnealternance') return 'alternance';
   if (src === 'vie') return 'vie';
 
@@ -1098,6 +1098,17 @@ function classifyVolet({ src, typeContratRaw, title }) {
   // ses stages parisiens (GCIB Credit, Global Markets Sales & Trading...),
   // c'est-à-dire exactement le cœur de cible de JJ.
   if (/\bstage\b|stagiaire|internship|\bintern\b|\btrainee\b/.test(ti)) return 'stage';
+
+  // L'ADRESSE, quand l'intitulé se tait. Chez Rothschild & Co, « Assistante
+  // banquier privé » ne dit rien de son contrat : seule son adresse porte
+  // « alternance-assistante-banquier-prive ». Elle partait donc en CDI, où le
+  // filtre 0-3 ans la jugeait comme un poste confirmé.
+  //
+  // On n'y cherche que des mots qui ne peuvent rien dire d'autre, et seulement
+  // après avoir interrogé l'intitulé.
+  const ui = (url || '').toLowerCase();
+  if (/alternance|apprentissage|contrat-pro/.test(ui)) return 'alternance';
+  if (/\bstage\b|stage-|-stage|stagiaire|internship/.test(ui)) return 'stage';
   if (/summer analyst|off[\s-]?cycle|spring week|winter analyst|insight programme|placement year/.test(ti))
     return 'stage';
 
@@ -2384,7 +2395,7 @@ function normalize(item) {
   // qu'aucune offre ne puisse ressortir par un autre chemin.
   if (estExclue(url, emp)) return null;
 
-  const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut });
+  const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut, url });
   const contrat =
     volet === 'cdi-cdd' ? classifyContrat({ typeContratRaw, title: titreBrut, descr, url }) : null;
 
