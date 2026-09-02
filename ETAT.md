@@ -92,7 +92,7 @@ recherche est rendue en JavaScript. Il faut trouver leur API interne (Avature
 expose en général un point d'entrée AJAX). Une session dédiée, pas un bout de
 fin de journée.
 
-**Euronext** — branché sur Workday (tenant ), le connecteur voyait cinq
+**Euronext** — branché sur Workday (tenant hrhub), le connecteur voyait cinq
 offres françaises au moment du branchement, mais rien n'est publié. À
 diagnostiquer.
 
