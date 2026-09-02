@@ -646,6 +646,39 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //     de mise en page ne casse rien tant que les attributs restent.
 const LISTES_HTML = [
   {
+    // EDF tourne sur TalentSoft mais avec son propre habillage : les fiches
+    // sont en /edf-recrute/offre/detail/…, pas en /offre-de-emploi/….aspx,
+    // si bien que notre connecteur TalentSoft ne les voit pas. Leur liste,
+    // elle, est rendue côté serveur et donne tout : titre, contrat, lieu,
+    // date.
+    //
+    // Les trois identifiants de « profil » ramènent leur catalogue France de
+    // 1 620 offres à 135 offres juniors — que des alternances au 02/09/2026.
+    // Demander ce qu'on veut plutôt que tout lire puis trier.
+    // La requête porte déjà le filtre pays ; leur libellé de lieu ne le
+    // répète pas (« CLERMONT-FERRAND (63000) »).
+    paysImplicite: true,
+    emp: 'EDF',
+    base: 'https://www.edf.fr',
+    page: (n) =>
+      'https://www.edf.fr/edf-recrute/rejoignez-nous/voir-les-offres/nos-offres' +
+      '?search%5Blocation%5D=_TS_CO_Country_France' +
+      `&page=${n}`,
+    blocRe: /<li class="offer">/,
+    blocFin: '</li>',
+    lienRe: /href="(\/edf-recrute\/offre\/detail\/[^"]+)"/,
+    motifs: {
+      titre: /<h3>\s*([^<]+?)\s*<\/h3>/,
+      date: /class="offer-date">\s*([^<]+?)\s*</,
+      type: /Contrat\s*:\s*<span[^>]*>\s*([^<]+?)\s*</,
+      lieu: /Lieu\s*:\s*<span[^>]*>\s*([^<]+?)\s*</,
+    },
+    // 1 620 offres françaises à dix par page. Leurs filtres de profil ne
+    maxPages: 170,
+    concurrence: 2,
+    delaiMs: 700,
+  },
+  {
     // La Banque Postale sert sa liste depuis son serveur, quatre offres par
     // page sur trente-sept pages. Le badge « Nouveau ! » n'apparaît que sur
     // certaines cartes : lire les champs par leur rang décalait alors tout d'un
@@ -1041,7 +1074,10 @@ async function fetchListeHtml(cfg) {
         : o.pays
           ? /^france$/i.test(o.pays)
           : cfg.depuisLien || /\bfrance\b/i.test(o.lieu || '');
-      if (!enFrance) continue;
+      // « paysImplicite » : la requête porte déjà le filtre pays, et le libellé
+      // de lieu ne répète pas la France (EDF écrit « CLERMONT-FERRAND (63000) »).
+      // Le filtre finance ci-dessous, lui, s'applique toujours.
+      if (!cfg.paysImplicite && !enFrance) continue;
       // On juge la finance sur l'entité qui recrute quand elle est connue :
       // « Analyste » chez CACIB et « Analyste » chez une caisse régionale ne
       // pèsent pas pareil.

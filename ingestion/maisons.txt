@@ -273,3 +273,4 @@ Veepee                   | ^veepee
 Cegid                    | ^cegid
 Akuo Energy              | ^akuo
 Reden Solar              | ^reden
+EDF                      | ^edf\b

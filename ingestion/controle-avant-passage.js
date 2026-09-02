@@ -190,6 +190,32 @@ try {
   ko('workflow', e.message);
 }
 
+console.log('\n--- Maisons branchées ---');
+try {
+  const sources = require('./sources');
+  const { trouverMaison } = require('./maisons');
+  const configurees = new Set();
+  for (const c of sources.LISTES_HTML || []) if (c.emp) configurees.add(c.emp);
+  for (const cfgs of Object.values(sources.TARGET_COMPANIES || {})) {
+    if (!Array.isArray(cfgs)) continue;
+    for (const c of cfgs) if (c.emp) configurees.add(c.emp);
+  }
+  // Une maison branchée mais absente de la liste de référence voit TOUTES ses
+  // offres jetées par normalize, sans le moindre message. C'est la panne la
+  // plus silencieuse du projet : le connecteur tourne, et rien ne sort.
+  const orphelines = [...configurees].filter((e) => !trouverMaison(e)).sort();
+  if (!orphelines.length) {
+    ok('maisons', `les ${configurees.size} maisons branchées sont toutes dans maisons.txt`);
+  } else {
+    alerte(
+      'maisons',
+      `${orphelines.length} branchée(s) mais absente(s) de maisons.txt — leurs offres sont ` +
+        `jetées en silence :\n          ${orphelines.join(', ')}`
+    );
+  }
+} catch (e) {
+  alerte('maisons', e.message);
+}
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();
