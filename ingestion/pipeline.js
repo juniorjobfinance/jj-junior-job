@@ -2864,6 +2864,26 @@ function texteDeLaPage(html) {
   return texte.length > 300 ? texte.slice(0, 12000) : null;
 }
 
+// Le type de contrat, lu dans le TEXTE de la fiche. Les API des plateformes ne
+// le donnent pas toutes, et quand elles le donnent elles se trompent : le
+// JSON-LD de Teamtailor annonce « CONTRACTOR » pour un CDI, celui de
+// Greenhouse « Vollzeit ». La page, elle, l'écrit en clair et en français.
+//
+// On n'accepte que les mentions EXPLICITES, introduites par « type de
+// contrat » ou « contrat », pour ne pas confondre avec une phrase du corps de
+// l'annonce (« votre contrat de professionnalisation vous permettra… »).
+const CONTRAT_FICHE_RE =
+  /(?:type de contrat|nature du contrat|contract type)\s*:?\s*([A-Za-zÀ-ÿ' -]{3,40})/i;
+
+function contratDeLaFiche(texte) {
+  const m = String(texte || '').match(CONTRAT_FICHE_RE);
+  if (!m) return null;
+  const dit = m[1].toLowerCase();
+  if (/alternan|apprenti|professionnalisation/.test(dit)) return 'alternance';
+  if (/stage|stagiaire|intern/.test(dit)) return 'stage';
+  return null; // CDI, CDD, intérim : rien à corriger
+}
+
 function ficheJsonLd(html) {
   const resultat = { date: null, description: null };
   for (const bloc of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -3005,6 +3025,19 @@ async function completerDatesManquantes(offers) {
             // conseil à « 6 - 10 ans » resté en ligne.
             const morceaux = [o._descr, fiche.description, texteDeLaPage(texteHtml)];
             o._descr = morceaux.filter(Boolean).join(' ').slice(0, 16000) || o._descr;
+
+            // Le contrat, tant qu'on tient la page. Sept familles de
+            // connecteurs le devinent sur l'intitulé, et rangent donc en CDI
+            // toute alternance dont le titre ne le dit pas — que le filtre
+            // 0-3 ans écarte ensuite comme un poste confirmé.
+            if (o.volet === 'cdi-cdd') {
+              const vrai = contratDeLaFiche(o._descr);
+              if (vrai) {
+                o.volet = vrai;
+                o.contrat = null; // la mention CDI/CDD ne veut plus rien dire
+                o._voletCorrige = true;
+              }
+            }
           }
         } catch {
           /* fiche injoignable : l'offre reste sans date, on n'invente pas */
