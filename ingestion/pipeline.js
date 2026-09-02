@@ -1557,6 +1557,11 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     // école ou une entreprise.
     "\\bwebmaster\\b|analyste soc\\b|\\bsoc\\b analyst|\\brag\\b|agents? ia\\b",
     "\\bauthor\\b|doctrine|publications?$|recherche et d.innovation",
+    // Assistanat, juridique, informatique et affaires réglementaires des
+    // grands cabinets : relevés dans le résidu le 02/09/2026.
+    "assistant.{0,4}administratif|executive assistant|assistant.{0,4}de direction",
+    "\\bdroit\\b|propri[ée]t[ée] intellectuelle|mobilit[ée] internationale",
+    "servicenow|support it\\b|affaires r[ée]glementaires|quality system|\\bfondation\\b",
     "\\bea\\b\\s*/|team assistant|assistance technique|assistant coordination",
     "coordinateur international|engineering business|industry group",
     "head of growth|gestionnaire digital",

@@ -2270,17 +2270,19 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       // déjà franco-français, l'arbre des lieux n'expose aucune valeur
       // exploitable, et la restriction ramenait 1 offre sur 150.
       await collecte({}, '', 30);
-    } else if (Object.keys(facetsPays).length) {
-      // On a de quoi borner géographiquement : on prend TOUT ce qui est en
-      // France, sans mot-clé. Un balayage par mots-clés rate par construction
-      // les intitulés qui n'en portent aucun — « Stage Auditeur Financier -
-      // Lyon » chez PwC, « Private Equity Buyout Stage » chez Ardian. Le
-      // périmètre suffit à tenir la lecture courte, et le tri fin sur
-      // l'intitulé est le métier du pipeline, pas celui du connecteur.
-      await collecte(facetsPays, '', 25);
     } else if (finance) {
-      // Sans aucune facette de lieu, on se rabat sur la catégorie finance.
-      await collecte({ [finance.key]: [finance.id] }, '', 10);
+      // La catégorie finance du tenant d'abord : c'est LUI qui sait ce qui
+      // relève de la finance chez lui, et cela évite de ramener l'assistanat
+      // administratif et le juridique des grands cabinets.
+      await collecte({ ...facetsPays, [finance.key]: [finance.id] }, '', 10);
+    }
+
+    // Repli géographique : quand le tenant n'a pas de catégorie finance, ou
+    // qu'elle ne rend rien — chez PwC, la seule famille contenant « financ »
+    // est archivée — on prend tout ce que le périmètre France contient. Un
+    // balayage par mots-clés raterait « Stage Auditeur Financier - Lyon ».
+    if (jobs.length === 0 && Object.keys(facetsPays).length) {
+      await collecte(facetsPays, '', 25);
     }
 
     // Repli, y compris quand une catégorie "finance" existe mais ne donne rien :
