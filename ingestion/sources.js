@@ -105,7 +105,7 @@ const NON_FINANCE_RE =
 // industriel désignerait autre chose. PROJET.md §15 place explicitement le
 // conseil en stratégie (McKinsey, BCG, Bain, Roland Berger) dans le périmètre.
 const FINANCE_NATIVE_EMPLOYER_RE =
-  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|swiss ?life|ag2r|la mondiale|malakoff|humanis|matmut|\bmaif\b|macif|apicil|klesia|pro ?btp|verlingue|verspieren|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor/i;
+  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|swiss ?life|ag2r|la mondiale|malakoff|humanis|matmut|\bmaif\b|macif|apicil|klesia|pro ?btp|verlingue|verspieren|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor|caceis|\blcl\b|indosuez|sofinco|uptevia|euroclear|clearstream|euronext|northern trust|state street|\bbny\b|schroders|carmignac|comgest|sycomore|ostrum|candriam|mirova|\bdnca\b|tikehau|meridiam|infravia|antin|astorg|sagard|andera|lbo france|\bik\b partners|naxicap|omnes|capza|activa capital/i;
 
 function looksLikeFinance(...fields) {
   const text = fields.filter(Boolean).join(' ');
@@ -113,7 +113,7 @@ function looksLikeFinance(...fields) {
   // Un signal finance FORT (comptabilité, contrôle de gestion, M&A, actuariat...)
   // l'emporte sur le contre-filtre : "Contrôleur de gestion IT" reste de la finance.
   const strongFinance =
-    /comptab|accounti|accountant|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets|\bfx\b|\bequities\b|delta one|\bstirt\b/i;
+    /comptab|accounti|accountant|contr[ôo]l\w* de gestion|controlling|\bcontroller\b|tr[ée]sor|treasury|\bm&a\b|actuari|audit financier|commissariat aux comptes|risque de cr[ée]dit|equity research|private equity|asset management|\bdaf\b|\bcfo\b|trad(?:er|ing)|investment banking|corporate finance|salle des march[ée]s|capital markets|\bfx\b|\bequities\b|delta one|\bstirt\b|d[ée]positaire|depositary|custody|conservation de titres|fund (?:execution|administration|accounting)|fixed income|collateral|collat[ée]ral|settlement|corporate actions|securities financing/i;
   // Ce signal fort doit venir de l'INTITULÉ du poste (toujours le premier champ),
   // jamais d'un libellé de rubrique passé ensuite (catégorie Adzuna, département,
   // équipe). Ces libellés sont des paniers grossiers : Adzuna range sous
@@ -136,7 +136,7 @@ function looksLikeFinance(...fields) {
 // Intitulés génériques qui, CHEZ UNE MAISON DE FINANCE, désignent un poste
 // finance (chez un industriel, ils désigneraient autre chose).
 const GENERIC_FINANCE_ROLE_RE =
-  /consultant|consulting|analyst|analyste|charg[ée] d'affaires|charg[ée] de client[èe]le|conseiller|associate|\bstage\b|\bstagiaire\b|alternan|apprenti|graduate|\bintern\b|internship|gestionnaire|\bg[ée]rant\b|souscript|actuar|banque privée|middle office|back office|front office/i;
+  /consultant|consulting|analyst|analyste|charg[ée] d'affaires|charg[ée] de client[èe]le|conseiller|associate|\bstage\b|\bstagiaire\b|alternan|apprenti|graduate|\bintern\b|internship|gestionnaire|\bg[ée]rant\b|souscript|actuar|banque privée|middle office|back office|front office|\bofficer\b|\bassistant\b|d[ée]positaire|depositary|custody|conservation de titres|securities|\btitres\b|fund (?:execution|administration|accounting|services)|onboarding|settlement|r[èe]glement[\s-]livraison|collateral|collat[ée]ral|fixed income|corporate actions|op[ée]rations? (?:titres|de march[ée])/i;
 
 // Filtre finance à appliquer aux offres d'une entreprise donnée. Si l'employeur
 // est une maison de finance, on élargit aux intitulés génériques du secteur ;
@@ -712,7 +712,11 @@ const LISTES_HTML = [
     emp: 'Crédit Agricole',
     base: 'https://groupecreditagricole.jobs',
     // Pagination par chemin, pas par paramètre.
-    page: (n) => `https://groupecreditagricole.jobs/fr/nos-offres/page/${n}/`,
+    // Leur taxonomie fait le tri à notre place : 438 offres de finance sur
+    // 14 pages, au lieu de 1 186 sur 37. Les identifiants de métiers viennent
+    // de leur moteur de recherche.
+    page: (n) =>
+      `https://groupecreditagricole.jobs/fr/nos-offres/metiers/170463-170462-170478-170469-170466-170464-170465-170472-170470/localisations/79/page/${n}/`,
     blocRe: /<article[^>]+class="[^"]*card offer[^"]*"/i,
     blocFin: '</article>',
     lienRe: /href="([^"]*nos-offres-emploi\/[^"]+)"/,
@@ -727,7 +731,8 @@ const LISTES_HTML = [
       entite: 'data-gtm-jobEntity',
     },
     // 1 186 offres à 33 par page : 40 pages suffisent, avec de la marge.
-    maxPages: 45,
+    // 438 offres à 33 par page : 16 pages suffisent, avec de la marge.
+    maxPages: 18,
     concurrence: 3,
     // Leur robots.txt demande 3 secondes aux agents Claude ; on s'aligne sur
     // cette courtoisie même si la règle générique ne nous l'impose pas.
