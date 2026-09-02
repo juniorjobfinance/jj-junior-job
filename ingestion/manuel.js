@@ -199,30 +199,12 @@ const MANUAL_OFFERS = [
 
   // --- Private Equity / VC / Infrastructure ---
   {
-    emp: 'Meridiam',
-    title: 'Internship – Junior Analyst - Meridiam GIGF – Paris - September 2026',
-    url: 'https://careers.meridiam.com/o/internship-junior-analyst-meridiam-gigf-paris-september-2026',
-    loc: 'Paris',
-    typeContrat: 'Stage',
-    category: 'Infrastructure',
-    addedOn: '2026-08-29',
-  },
-  {
     emp: 'Astorg',
     title: 'Private Equity Internship (Paris) - September 2026 / January 2027 (6 months)',
     url: 'https://www.jobteaser.com/en/job-offers/7ca3e351-07e5-407a-aef6-6d65bbbbda4f-astorg-partners-private-equity-internship-paris-september-2026-january-2027-6-months',
     loc: 'Paris',
     typeContrat: 'Stage',
     category: 'Private Equity',
-    addedOn: '2026-08-29',
-  },
-  {
-    emp: 'Andera Partners',
-    title: 'Offre Stage - Andera Infra - Septembre 2026',
-    url: 'https://www.anderapartners.com/fr/offre-stage-andera-infra-septembre-2026/',
-    loc: 'Paris',
-    typeContrat: 'Stage',
-    category: 'Private Equity / Infrastructure',
     addedOn: '2026-08-29',
   },
   {

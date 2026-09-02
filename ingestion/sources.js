@@ -1785,9 +1785,11 @@ const TARGET_COMPANIES = {
     { sitemap: 'https://careers.loreal.com/fr_FR/jobs/sitemap.xml', emp: "L'Oréal" },
   ],
   // Sitemap + JSON-LD (fiches lues sur le site officiel de la maison)
-  // Radancy — les adresses en `/job/{VILLE}-{Titre}-{CodePostal}/{id}/`.
-  // Directions financières de grands groupes ; peu de postes chacun, mais
-  // beaucoup d'alternances, ce qui manque au catalogue.
+  // Radancy — adresses en `/job/{VILLE}-{Titre}-{CodePostal}/{id}/`.
+  // Des directions financières de grands groupes : peu de postes chacune, mais
+  // des alternances, et c'est la catégorie où le catalogue manque de volume.
+  // Atos et Alstom sont écartés : le premier ne publie aucun poste de finance
+  // en France, le second a un sitemap vide.
   radancy: [
     { host: 'jobs.mcdonalds.com', emp: "McDonald's" },
     { host: 'jobdetails.nestle.com', emp: 'Nestlé' },
