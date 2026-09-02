@@ -1536,6 +1536,19 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
 const NIVEAU_TROP_BAS_RE =
   /\bbts\b|\bdut\b|\bcap\b|licence pro|\blicence\b|bachelor|bac\s*\+?\s*[23]\b|bac\s*obtenu|niveau bac\b/i;
 
+// ... sauf quand l'annonce ouvre une FOURCHETTE. « Bac+3 à Bac+5 », « Licence
+// ou Master », « Bac+3/Bac+5 » : le niveau bas y élargit l'accès, il n'exclut
+// personne. C'est la formulation la plus répandue en alternance, où une
+// entreprise ouvre volontiers le même poste à plusieurs niveaux — et la
+// prendre pour un refus faisait perdre des offres qui visaient aussi le Bac+5.
+const NIVEAU_ELEVE_RE =
+  /bac\s*\+?\s*[45]\b|\bmaster\b|\bm[12]\b|\bdscg\b|ing[ée]nieur|grande[\s-][ée]cole|\bmsc\b|\bmba\b|derni[èe]re ann[ée]e|fin d.[ée]tudes/i;
+
+// Vrai seulement si le niveau annoncé exclut réellement notre public.
+function niveauHorsCible(titre) {
+  return NIVEAU_TROP_BAS_RE.test(titre) && !NIVEAU_ELEVE_RE.test(titre);
+}
+
 // Écoles, CFA et organismes de formation qui publient l'annonce À LA PLACE de
 // l'entreprise. Le candidat ne travaillerait pas pour eux : on lui vend une
 // formation, et le « lien direct entreprise » promis par JJ n'existe pas. Ces
@@ -1548,7 +1561,7 @@ function estUneOffreFinance(titre) {
   return (
     !PAS_UNE_OFFRE_RE.test(titre) &&
     !METIER_HORS_PERIMETRE_RE.test(titre) &&
-    !NIVEAU_TROP_BAS_RE.test(titre) &&
+    !niveauHorsCible(titre) &&
     !dateDePosteDepassee(titre)
   );
 }
