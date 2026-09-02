@@ -296,3 +296,63 @@ Santé Publique — étaient bien écartées.
 vocabulaire de collecte. Sans quoi le pipeline sait classer une offre qu’il ne
 verra jamais. Le garde-fou reste entier : ce second régime ne s’applique qu’aux
 maisons de finance, un « Originateur » chez un industriel reste dehors.
+
+---
+
+## 15. Le fourre-tout n’est pas une famille, c’est une porte
+
+« Autres métiers de la finance » recevait toute offre qu’aucune règle de
+famille ne savait ranger — et la PUBLIAIT. Rien ne vérifiait qu’elle parlait
+de finance. Tant qu’on ne lisait que la catégorie finance des ATS, le défaut
+restait invisible ; dès qu’on a pris toute la France chez Airbus, Thales et
+Safran, il a débordé : le résidu est passé de 3 % à 26,7 % du catalogue, et
+publiait des ajusteurs composite, des chaudronniers aéronautiques et des
+ergothérapeutes.
+
+**Règle** : une offre qu’aucune règle ne sait ranger n’entre que si elle passe
+`isFinanceOfferFor` — c’est-à-dire si son intitulé parle finance de lui-même,
+OU si l’employeur est une maison de finance et l’intitulé nomme un métier
+plausible chez elle. Chez un dépositaire, « Business Coordinateur » est un
+poste ; chez un avionneur, « Ajusteur Composite » n’en est pas un.
+
+Le test reçoit aussi l’intitulé BRUT, car le nettoyage retire « Stage » et
+« Stagiaire » — souvent le seul mot qui situe le poste.
+
+Mesure : 349 offres au fourre-tout → 41, soit 26,7 % → 4,1 %.
+
+---
+
+## 16. Une maison branchée doit être inscrite, sinon elle ne publie rien
+
+Une offre dont l’employeur n’est pas reconnu par `maisons.txt` est écartée par
+`normalize` avant même d’être classée. Le connecteur tourne donc chaque matin,
+et rien ne sort. Aucun message.
+
+Le 2 septembre, soixante-cinq maisons étaient dans ce cas — Euronext y perdait
+ses 24 offres parisiennes, dont un stage M&A. Le même soir, EDF a été branché
+et l’erreur immédiatement répétée : 1 620 offres lues, aucune publiable.
+
+`controle-avant-passage.js` compare désormais les maisons configurées à la
+liste de référence et nomme les orphelines. **Brancher un connecteur et
+inscrire la maison sont un seul geste, pas deux.**
+
+---
+
+## 17. Mesurer le rendement avant de garder une source
+
+Seize start-ups technologiques étaient branchées de longue date. Avant de les
+inscrire, on a mesuré : 34 offres collectées, 9 franchissant les filtres de
+titre, et ces neuf étant « Head of International Accounting », « Chief
+Operations Officer », « Senior Payment Operation Analyst », « Confirmed
+Product Analyst » — du senior ou du non-finance, que le filtre 0-3 ans écarte
+ensuite. Seize requêtes chaque matin pour zéro ou une offre publiable.
+
+Débranchées. `ingestion/rendement.js` existe pour poser cette question à
+toutes les sources en une collecte : combien elle collecte, combien elle
+publie, et lesquelles ne publient rien.
+
+**Le critère n’est pas « est-ce une belle maison ? » mais « qu’est-ce qu’elle
+rend ? »** — mesuré, pas supposé. EDF est resté malgré un rendement faible
+(16 offres pour 162 pages) parce que le passage tourne la nuit, où le temps
+n’est pas rare ; les seize start-ups sont parties parce qu’elles ne rendaient
+rien du tout.
