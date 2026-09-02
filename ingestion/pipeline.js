@@ -1599,7 +1599,7 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     "ing[ée]nieur m[ée]canique|ing[ée]nieur junior analyste",
     // Intitulé réduit à un seul mot : illisible sur une carte.
     "^finance$|^[ée]conomie$",
-    "data integration|\\bsi\\b finance|servicenow|support it\\b|affaires r[ée]glementaires|quality system|\\bfondation\\b",
+    "assistant.{0,4}graphique|[ée]coute utilisateurs|data integration|\\bsi\\b finance|servicenow|support it\\b|affaires r[ée]glementaires|quality system|\\bfondation\\b",
     "\\bea\\b\\s*/|team assistant|assistance technique|assistant coordination",
     "coordinateur international|engineering business|industry group",
     "head of growth|gestionnaire digital",
