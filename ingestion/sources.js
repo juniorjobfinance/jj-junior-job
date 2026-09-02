@@ -1650,11 +1650,7 @@ const TARGET_COMPANIES = {
     { token: 'creditagricolecib', emp: 'Crédit Agricole CIB' },
     { token: 'forvismazars', emp: 'Forvis Mazars' },
     { token: 'alixpartners', emp: 'AlixPartners' },
-    { token: 'dataiku', emp: 'Dataiku' },
     { token: 'shifttechnology', emp: 'Shift Technology' },
-    { token: 'doctolib', emp: 'Doctolib' },
-    { token: 'algolia', emp: 'Algolia' },
-    { token: 'mirakl', emp: 'Mirakl' },
     { token: 'sesamm', emp: 'Sesamm' },
     { token: 'silvr', emp: 'Silvr' },
     { token: 'capco', emp: 'Capco' },
@@ -1665,12 +1661,8 @@ const TARGET_COMPANIES = {
     { company: 'younited', emp: 'Younited' },
     { company: 'swile', emp: 'Swile' },
     { company: 'ledger', emp: 'Ledger' },
-    { company: 'pigment', emp: 'Pigment' },
     { company: 'agicap', emp: 'Agicap' },
     { company: 'veepee', emp: 'Veepee' },
-    { company: 'contentsquare', emp: 'Contentsquare' },
-    { company: 'brevo', emp: 'Brevo' },
-    { company: 'blablacar', emp: 'BlaBlaCar' },
   ],
   smartrecruiters: [
     // Rexel : distribution professionnelle, direction financière et SI finance.
@@ -1687,9 +1679,7 @@ const TARGET_COMPANIES = {
     { id: 'julhietsterwen', emp: 'Julhiet Sterwen' },
     { id: 'sycomoreassetmanagement', emp: 'Sycomore Asset Management' },
     { id: 'saintgobain', emp: 'Saint-Gobain' },
-    { id: 'believe', emp: 'Believe' },
     { id: 'boulanger', emp: 'Boulanger' },
-    { id: 'dailymotion', emp: 'Dailymotion' },
     { id: 'revaia', emp: 'Revaia' },
     { id: 'intermarche', emp: 'Intermarché' },
     { id: 'coface', emp: 'Coface' },
@@ -1809,8 +1799,6 @@ const TARGET_COMPANIES = {
     { company: '8advisory', emp: 'Eight Advisory' },
     { company: 'akur8', emp: 'Akur8' },
     { company: 'geodis', emp: 'Geodis' },
-    { company: 'sellsy', emp: 'Sellsy' },
-    { company: 'qare', emp: 'Qare' },
     { company: 'grantthornton', emp: 'Grant Thornton' },
     { company: 'getlink', emp: 'Getlink' },
     { company: 'paipartners', emp: 'PAI Partners' },
@@ -1981,7 +1969,6 @@ const TARGET_COMPANIES = {
   // Teamtailor : endpoint JSON Feed public https://{company}.teamtailor.com/jobs.json
   teamtailor: [
     // Modjo, éditeur français : deux alternances finance sur trois offres.
-    { company: 'modjo', emp: 'Modjo' },
     // Antin Infrastructure Partners. Leur flux est vide aujourd'hui — le fonds
     // n'ouvre des postes qu'épisodiquement —, mais le connecteur est en place :
     // la prochaine offre entrera d'elle-même au passage du matin.
@@ -1994,16 +1981,13 @@ const TARGET_COMPANIES = {
     { company: 'alptis', emp: 'Alptis' },
     { company: 'powens', emp: 'Powens' },
     { company: 'wakam', emp: 'Wakam' },
-    { company: 'papernest', emp: 'Papernest' },
     { company: 'thales', emp: 'Thales' },
     { company: 'yousign', emp: 'Yousign' },
     { company: 'indy', emp: 'Indy' },
-    { company: 'deezer', emp: 'Deezer' },
     { company: 'bridge', emp: 'Bridge' },
     { company: 'mangopay', emp: 'MangoPay' },
     { company: 'leocare', emp: 'Leocare' },
     { company: 'descartesunderwriting', emp: 'Descartes Underwriting' },
-    { company: 'kilitechnology', emp: 'Kili Technology' },
     { company: 'adeo', emp: 'Adeo' },
     { company: 'verspieren', emp: 'Verspieren' },
     { company: 'linedata', emp: 'Linedata' },
