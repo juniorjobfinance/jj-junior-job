@@ -92,7 +92,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -1808,6 +1808,16 @@ function normalize(item) {
     romeLibelle = raw.category;
     descr = raw.description;
     postedAt = parseFrenchDateTime(raw.lastmodifieddate);
+  } else if (__src.startsWith('radancy:')) {
+    // Le connecteur a déjà tiré le titre de og:title, la ville de l'adresse
+    // et la date du corps de la fiche : il n'y a plus qu'à les reprendre.
+    emp = item.emp;
+    title = raw.title;
+    ville = raw.ville;
+    pays = 'France';
+    url = raw.url;
+    typeContratRaw = raw.title;
+    postedAt = dateIso(raw.datePublication);
   } else if (__src.startsWith('talentview:')) {
     emp = item.emp;
     title = raw.titre;

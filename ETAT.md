@@ -65,10 +65,19 @@ branchées ou s'il n'y en a réellement pas. C'est la première chose à regarde
 une offre sur LinkedIn, ouvre le lien vers le site de l'employeur, et l'envoie —
 l'URL contient l'identifiant de la plateforme.
 
-**3. Une offre morte dans `manuel.js`.** Le passage la signale à chaque fois ;
+**3. Le connecteur Radancy ne remonte rien dans un passage complet.** Appelé
+seul il rend six offres McDonald's, cinq Nestlé et trois Bouygues Telecom ; en
+passage complet, la famille n'apparaît pas dans « Origine des offres », sans la
+moindre erreur. La configuration est chargée, la fonction est au niveau module
+et figure dans la table de répartition — toutes les vérifications statiques
+passent. Un relevé « Familles mises en file » a été ajouté à fetchAllATS : le
+journal du prochain passage dira si la famille est seulement sautée. Modjo,
+Rexel et Stellantis, branchés en même temps, sont dans le même cas.
+
+**4. Une offre morte dans `manuel.js`.** Le passage la signale à chaque fois ;
 sa ligne est à retirer du fichier.
 
-**4. Visibilité — reporté à la demande de Victor** (il est en phase de
+**5. Visibilité — reporté à la demande de Victor** (il est en phase de
 conception). Aucun de ces chantiers n'est lancé : Google Search Console,
 vérification que le pare-feu Vercel ne bloque pas Googlebot, données structurées
 JobPosting, analytics, poids de `offres.js` (474 Ko).

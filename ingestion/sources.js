@@ -1610,6 +1610,8 @@ const TARGET_COMPANIES = {
     { company: 'blablacar', emp: 'BlaBlaCar' },
   ],
   smartrecruiters: [
+    // Rexel : distribution professionnelle, direction financière et SI finance.
+    { id: 'REXEL1', emp: 'Rexel' },
     { id: 'lvmh', emp: 'LVMH' },
     { id: 'Accor', emp: 'Accor' },
     { id: 'sia', emp: 'Sia Partners' },
@@ -1783,6 +1785,15 @@ const TARGET_COMPANIES = {
     { sitemap: 'https://careers.loreal.com/fr_FR/jobs/sitemap.xml', emp: "L'Oréal" },
   ],
   // Sitemap + JSON-LD (fiches lues sur le site officiel de la maison)
+  // Radancy — les adresses en `/job/{VILLE}-{Titre}-{CodePostal}/{id}/`.
+  // Directions financières de grands groupes ; peu de postes chacun, mais
+  // beaucoup d'alternances, ce qui manque au catalogue.
+  radancy: [
+    { host: 'jobs.mcdonalds.com', emp: "McDonald's" },
+    { host: 'jobdetails.nestle.com', emp: 'Nestlé' },
+    { host: 'careers.bouyguestelecom.fr', emp: 'Bouygues Telecom' },
+  ],
+
   sitemapld: [
     // KPMG interdit sa page de RECHERCHE dans son robots.txt, mais y publie
     // son sitemap : on lit donc ce qu'ils offrent et on laisse ce qu'ils
@@ -1820,6 +1831,9 @@ const TARGET_COMPANIES = {
     { host: 'carrieres.generali.fr', tenant: '', emp: 'Generali France' },
   ],
   talentsoft: [
+    // Stellantis : modélisation du risque de crédit, gestion des risques,
+    // audit. Quinze offres finance dont trois alternances.
+    { host: 'jobs.groupe-psa.com', emp: 'Stellantis' },
     { host: 'jobs.amundi.com', emp: 'Amundi' },
     { host: 'cnp-recrute.talent-soft.com', emp: 'CNP Assurances' },
     { host: 'matmut-recrute.talent-soft.com', emp: 'Matmut' },
@@ -1849,6 +1863,8 @@ const TARGET_COMPANIES = {
   ],
   // Teamtailor : endpoint JSON Feed public https://{company}.teamtailor.com/jobs.json
   teamtailor: [
+    // Modjo, éditeur français : deux alternances finance sur trois offres.
+    { company: 'modjo', emp: 'Modjo' },
     // Antin Infrastructure Partners. Leur flux est vide aujourd'hui — le fonds
     // n'ouvre des postes qu'épisodiquement —, mais le connecteur est en place :
     // la prochaine offre entrera d'elle-même au passage du matin.
@@ -2833,6 +2849,126 @@ async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000,
     .map((j) => ({ __src: `phenom:${host}`, emp, raw: j }));
 }
 
+// ---------------------------------------------------------------------------
+// Radancy — la plateforme carrières de plusieurs grands groupes (McDonald's,
+// Nestlé, Atos, Bouygues Telecom, Alstom). Adresses de la forme
+// `/job/{VILLE}-{Titre}-{CodePostal}/{identifiant}/`.
+//
+// Ni API ni JSON-LD — c'est pourquoi le connecteur « sitemap + JSON-LD » ne
+// rendait rien chez Atos. En revanche le sitemap est complet, et chaque fiche
+// porte son titre en `og:title` et sa date de publication en clair.
+// ---------------------------------------------------------------------------
+
+// Le titre figure dans l'adresse ET dans og:title. En retirant le second du
+// premier, il reste la ville devant et le code postal derrière — plus sûr que
+// de découper au tiret, que « Issy-les-Moulineaux » contient deux fois.
+function lieuDepuisAdresseRadancy(segment, titre) {
+  const plat = (x) =>
+    String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const segmentPlat = plat(segment);
+  const titrePlat = plat(titre);
+  let ville = segment;
+  const i = titrePlat ? segmentPlat.indexOf(titrePlat) : -1;
+  if (i > 0) {
+    // On recoupe le segment d'origine à la même proportion de caractères.
+    let vus = 0;
+    let coupe = segment.length;
+    for (let k = 0; k < segment.length; k++) {
+      if (/[a-z0-9]/i.test(segment[k].normalize('NFD').replace(/[\u0300-\u036f]/g, ''))) vus++;
+      if (vus > i) { coupe = k; break; }
+    }
+    ville = segment.slice(0, coupe);
+  }
+  const propre = ville.replace(/[-_]+/g, ' ').replace(/\s*\d{5}\s*$/, '').replace(/\s+/g, ' ').trim();
+  // Une voie n'est pas une commune : « 13 AVENUE DU MARECHAL JUIN » ne se
+  // range dans aucune zone et n'apprend rien au candidat. Le code postal du
+  // segment, lui, suffit au pipeline pour situer l'offre.
+  const estUneVoie = /^\d|\b(?:avenue|rue|boulevard|bd|place|chemin|route|quai|impasse|allee|all[ée]e)\b/i.test(propre);
+  if (estUneVoie) {
+    const cp = (segment.match(/\b((?:0[1-9]|[1-8]\d|9[0-5])\d{3})\b/) || [])[1];
+    if (cp) return cp;
+  }
+  return propre;
+}
+
+async function fetchRadancy({ host, emp, maxFiches = 80, delayMs = 250 }) {
+  let sitemap;
+  try {
+    const r = await fetchAvecReprise(`https://${host}/sitemap.xml`, {
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+      signal: AbortSignal.timeout(25000),
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    sitemap = await r.text();
+  } catch (err) {
+    console.warn(`[sources] Radancy (${host}) indisponible:`, err.message);
+    return [];
+  }
+
+  const adresses = [...sitemap.matchAll(/<loc>([^<]*\/job\/[^<]+)<\/loc>/g)].map((m) =>
+    m[1].replace(/&amp;/g, '&')
+  );
+
+  // Premier tri sur l'adresse seule : le slug porte le métier et le code
+  // postal. Sans lui on irait chercher neuf cent soixante-deux fiches chez
+  // Atos pour en retenir une poignée.
+  const candidates = [];
+  for (const adresse of adresses) {
+    const segment = decodeURIComponent((adresse.match(/\/job\/([^/]+)\//) || [])[1] || '');
+    if (!segment) continue;
+    const texte = segment.replace(/[-_]+/g, ' ');
+    // Deux repères plutôt qu'un : le code postal métropolitain seul laissait
+    // passer l'Espagne et la Malaisie, qui en ont d'identiques. La liste de
+    // villes françaises est celle qui sert déjà aux autres connecteurs.
+    if (!/\b(?:0[1-9]|[1-8]\d|9[0-5])\d{3}\b/.test(segment)) continue;
+    if (!FRANCE_LOCATION_RE.test(texte)) continue;
+    if (!isFinanceOfferFor(emp, texte, '')) continue;
+    candidates.push({ adresse, segment });
+  }
+
+  const offres = [];
+  for (const { adresse, segment } of candidates.slice(0, maxFiches)) {
+    try {
+      const r = await fetchAvecReprise(adresse, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+        signal: AbortSignal.timeout(20000),
+      });
+      if (!r.ok) continue;
+      const html = await r.text();
+      const titre =
+        (html.match(/property="og:title"\s+content="([^"]+)"/) || [])[1] ||
+        ((html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || '').split('Détails du poste')[0];
+      if (!titre) continue;
+      const brutDate = (html.match(/\b[A-Z][a-z]{2} [A-Z][a-z]{2} \d{2} \d{2}:\d{2}:\d{2} [A-Z]{3} \d{4}\b/) || [])[0];
+      offres.push({
+        __src: `radancy:${host}`,
+        emp,
+        raw: {
+          title: decodeEntitesSimples(titre.trim()),
+          ville: lieuDepuisAdresseRadancy(segment, titre),
+          url: adresse,
+          datePublication: brutDate || null,
+        },
+      });
+    } catch {
+      /* fiche injoignable : on passe, sans faire échouer la source */
+    }
+    await new Promise((res) => setTimeout(res, delayMs));
+  }
+  return offres;
+}
+
+// Les fiches Radancy encodent quelques entités dans leur og:title.
+function decodeEntitesSimples(x) {
+  return String(x)
+    .replace(/&amp;/g, '&')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&eacute;/g, 'é')
+    .replace(/&egrave;/g, 'è');
+}
+
 // Ashby — ATS moderne, très utilisé par les scale-ups. Endpoint public
 // documenté, renvoie directement l'URL de l'annonce et la localisation.
 // Fiable pour la détection : répond 404 sur un identifiant inexistant.
@@ -3245,6 +3381,7 @@ async function fetchAllATS(recoltes = {}) {
     ['phenom', fetchPhenom],
     ['talentsoft', fetchTalentSoft],
     ['successfactors', fetchSuccessFactors],
+    ['radancy', fetchRadancy],
     ['sitemapld', fetchSitemapJsonLd],
     ['eicards', fetchEiCards],
     ['avature', fetchAvature],
@@ -3257,6 +3394,19 @@ async function fetchAllATS(recoltes = {}) {
       const nom = `${famille}:${cfg.id || cfg.emp || cfg.host || cfg.tenant || 'x'}`;
       taches.push(() => recolter(nom, recoltes, () => fn(cfg)));
     }
+  }
+
+  // Relevé des familles réellement mises en file. Une famille configurée mais
+  // absente d'ici ne sera jamais interrogée, et rien ne le signalerait : le
+  // connecteur Radancy est resté muet un après-midi entier pour une raison
+  // que ce compte aurait donnée tout de suite.
+  {
+    const parFamille = {};
+    for (const [famille] of groupes) parFamille[famille] = (TARGET_COMPANIES[famille] || []).length;
+    console.log(
+      '[sources] Familles mises en file : ' +
+        Object.entries(parFamille).map(([k, v]) => k + ' ' + v).join(', ')
+    );
   }
 
   if (taches.length === 0) return DEMO_DATA ? SAMPLE_ATS : [];
@@ -3605,6 +3755,7 @@ const SAMPLE_ATS = [
 ];
 
 module.exports = {
+  fetchRadancy,
   fetchAllSources,
   sourcesReprises, // relevé des maisons servies depuis le magasin, pour le bilan
   fetchFranceTravail,
