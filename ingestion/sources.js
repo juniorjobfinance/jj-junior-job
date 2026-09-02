@@ -145,7 +145,11 @@ function isFinanceOfferFor(emp, ...fields) {
   if (looksLikeFinance(...fields)) return true;
   if (!emp || !FINANCE_NATIVE_EMPLOYER_RE.test(emp)) return false;
   const text = fields.filter(Boolean).join(' ');
-  if (NON_FINANCE_RE.test(text)) return false; // un dev ou un juriste reste hors périmètre
+  // Le contre-filtre ne juge que l'INTITULÉ, jamais un libellé de rubrique :
+  // ceux-ci sont des paniers grossiers. Le département « Policy Analysis and
+  // Legal » de l'OCDE faisait écarter leurs vingt-neuf offres parisiennes,
+  // dont « Analyste des politiques » et « Junior Power Sector Analyst ».
+  if (NON_FINANCE_RE.test(fields[0] || '')) return false; // un dev ou un juriste reste hors périmètre
   return GENERIC_FINANCE_ROLE_RE.test(text);
 }
 
@@ -1668,8 +1672,6 @@ const TARGET_COMPANIES = {
     // Rexel : distribution professionnelle, direction financière et SI finance.
     { id: 'REXEL1', emp: 'Rexel' },
     { id: 'lvmh', emp: 'LVMH' },
-    // 29 offres à Paris : économistes, statisticiens, analystes.
-    { id: 'OECD', emp: 'OCDE' },
     { id: 'Accor', emp: 'Accor' },
     { id: 'sia', emp: 'Sia Partners' },
     { id: 'rolandberger', emp: 'Roland Berger' },

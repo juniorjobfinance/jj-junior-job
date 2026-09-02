@@ -279,5 +279,4 @@ EDF                      | ^edf\b
 Valeo                    | ^valeo\b
 Supernova Invest         | ^supernova
 
-OCDE                     | ^ocde\b|^oecd\b
 Compass Lexecon          | ^compass lexecon
