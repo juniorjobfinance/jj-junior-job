@@ -205,3 +205,71 @@ Photosol                 | ^photosol
 Teora                    | ^teora\b
 Meilleurtaux             | ^meilleurtaux
 Accenture                | ^accenture
+
+# --- Infrastructures de marché, courtage, données financières ---------------
+Euronext                 | ^euronext
+TP ICAP                  | ^tp ?icap|^tullett
+Tradition                | ^(compagnie financiere de )?tradition\b
+Morningstar              | ^morningstar
+Linedata                 | ^linedata
+
+# --- Gestion, banque, investissement ---------------------------------------
+Schroders                | ^schroders
+MUFG                     | ^mufg
+CDPQ                     | ^cdpq|caisse de depot et placement
+Revaia                   | ^revaia
+
+# --- Négoce de matières premières ------------------------------------------
+Vitol                    | ^vitol
+Louis Dreyfus Company    | ^louis dreyfus
+
+# --- Conseil spécialisé finance ---------------------------------------------
+Capco                    | ^capco\b
+
+# --- Assurance et insurtech -------------------------------------------------
+Descartes Underwriting   | ^descartes underwriting
+Shift Technology         | ^shift technology
+Leocare                  | ^leocare
+Alptis                   | ^alptis
+
+# --- Fintech : paiement, crédit, gestion financière -------------------------
+FLOA                     | ^floa\b
+MangoPay                 | ^mangopay
+Powens                   | ^powens
+Swan                     | ^swan\b
+Trustpair                | ^trustpair
+Shine                    | ^shine\b
+Silvr                    | ^silvr
+PayFit                   | ^payfit
+Agicap                   | ^agicap
+Indy                     | ^indy\b
+Bridge                   | ^bridge\b
+Wise                     | ^wise\b
+
+# --- Immobilier d'investissement --------------------------------------------
+Nexity                   | ^nexity
+Colliers France          | ^colliers
+
+# --- Grands groupes : leurs directions financières recrutent des juniors ----
+# Même logique que TotalEnergies, LVMH, Vinci et Sanofi, déjà dans la liste :
+# ce sont les postes de comptabilité, contrôle, trésorerie et audit qui nous
+# intéressent, et le filtre finance du pipeline écarte le reste.
+Stellantis               | ^stellantis
+Nestlé                   | ^nestle
+McDonald's               | ^mcdonald
+Bouygues Telecom         | ^bouygues telecom
+Saint-Gobain             | ^saint-?gobain
+Rexel                    | ^rexel
+Sodexo                   | ^sodexo
+Geodis                   | ^geodis
+Servier                  | ^servier
+Ipsen                    | ^ipsen
+Vattenfall               | ^vattenfall
+Getlink                  | ^getlink
+Intermarché              | ^intermarche|^les mousquetaires
+Adeo                     | ^adeo\b
+Boulanger                | ^boulanger
+Veepee                   | ^veepee
+Cegid                    | ^cegid
+Akuo Energy              | ^akuo
+Reden Solar              | ^reden

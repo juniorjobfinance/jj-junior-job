@@ -2229,6 +2229,9 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
 
     const collecte = async (appliedFacets, searchText, maxPages) => {
       const pageSize = 20;
+      // Workday ne renvoie le total QUE sur la première réponse ; les
+      // suivantes portent « total: 0 ». On le retient donc au passage.
+      let total = 0;
       for (let page = 0; page < maxPages; page++) {
         const data = await workdayPost(tenant, dc, site, {
           appliedFacets,
@@ -2243,7 +2246,12 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
             jobs.push(j);
           }
         }
-        if (lot.length < pageSize || vus.size >= (data.total || 0)) break;
+        if (data.total) total = data.total;
+        // Une page incomplète marque la fin. Un total absent, non : c'est le
+        // cas normal dès la deuxième page, et le lire comme « zéro offre au
+        // total » arrêtait la lecture au bout de vingt.
+        if (lot.length < pageSize) break;
+        if (total && vus.size >= total) break;
       }
     };
 
