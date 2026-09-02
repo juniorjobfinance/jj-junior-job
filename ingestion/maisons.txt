@@ -278,3 +278,6 @@ EDF                      | ^edf\b
 # --- Ajouts du 02/09/2026 au soir ------------------------------------------
 Valeo                    | ^valeo\b
 Supernova Invest         | ^supernova
+
+OCDE                     | ^ocde\b|^oecd\b
+Compass Lexecon          | ^compass lexecon

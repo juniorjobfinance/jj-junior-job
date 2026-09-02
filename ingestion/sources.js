@@ -105,7 +105,7 @@ const NON_FINANCE_RE =
 // industriel désignerait autre chose. PROJET.md §15 place explicitement le
 // conseil en stratégie (McKinsey, BCG, Bain, Roland Berger) dans le périmètre.
 const FINANCE_NATIVE_EMPLOYER_RE =
-  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|swiss ?life|ag2r|la mondiale|malakoff|humanis|matmut|\bmaif\b|macif|apicil|klesia|pro ?btp|verlingue|verspieren|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor|caceis|\blcl\b|indosuez|sofinco|uptevia|euroclear|clearstream|euronext|northern trust|state street|\bbny\b|schroders|carmignac|comgest|sycomore|ostrum|candriam|mirova|\bdnca\b|tikehau|meridiam|infravia|antin|astorg|sagard|andera|lbo france|\bik\b partners|naxicap|omnes|capza|activa capital/i;
+  /banque|bank|paribas|natixis|amundi|rothschild|lazard|ardian|eurazeo|tikehau|astorg|meridiam|partech|siparex|apax|ik partners|capital|asset management|investment|gestion|patrimoine|assurance|assurances|axa|allianz|generali|covéa|covea|groupama|\bcnp\b|\bscor\b|mutuelle|swiss ?life|ag2r|la mondiale|malakoff|humanis|matmut|\bmaif\b|macif|apicil|klesia|pro ?btp|verlingue|verspieren|deloitte|\bey\b|kpmg|\bpwc\b|mazars|grant thornton|\bbdo\b|\brsm\b|advisory|accuracy|oliver wyman|mckinsey|\bbcg\b|boston consulting|bain|roland berger|kearney|alixpartners|alvarez|sia partners|wavestone|julhiet|eight advisory|audit|conseil|consulting|partners|finance|fintech|qonto|younited|pennylane|spendesk|payfit|swile|floa|oney|cofidis|meilleurtaux|trustpair|mangopay|powens|akur8|descartes underwriting|wakam|leocare|shine|bpce|caisse d'epargne|caisse d'épargne|populaire|crédit|credit|bourso|fortuneo|palatine|coopératif|casden|\bbred\b|\bcic\b|transatlantique|march[ée]s financiers|\bamf\b|\bacpr\b|prudentiel|caisse des d[ée]p[ôo]ts|tr[ée]sor|\bocde\b|\boecd\b|compass lexecon|caceis|\blcl\b|indosuez|sofinco|uptevia|euroclear|clearstream|euronext|northern trust|state street|\bbny\b|schroders|carmignac|comgest|sycomore|ostrum|candriam|mirova|\bdnca\b|tikehau|meridiam|infravia|antin|astorg|sagard|andera|lbo france|\bik\b partners|naxicap|omnes|capza|activa capital/i;
 
 function looksLikeFinance(...fields) {
   const text = fields.filter(Boolean).join(' ');
@@ -1668,6 +1668,8 @@ const TARGET_COMPANIES = {
     // Rexel : distribution professionnelle, direction financière et SI finance.
     { id: 'REXEL1', emp: 'Rexel' },
     { id: 'lvmh', emp: 'LVMH' },
+    // 29 offres à Paris : économistes, statisticiens, analystes.
+    { id: 'OECD', emp: 'OCDE' },
     { id: 'Accor', emp: 'Accor' },
     { id: 'sia', emp: 'Sia Partners' },
     { id: 'rolandberger', emp: 'Roland Berger' },
@@ -1735,6 +1737,9 @@ const TARGET_COMPANIES = {
     { tenant: 'airliquidehr', dc: 'wd3', site: 'AirLiquideExternalCareer', emp: 'Air Liquide' },
     { tenant: 'thales', dc: 'wd3', site: 'Careers', emp: 'Thales' },
     { tenant: 'michelinhr', dc: 'wd3', site: 'Michelin', emp: 'Michelin' },
+    // Conseil en économie de la concurrence, bureau parisien : analystes sur
+    // des dossiers de fusion et d'abus de position dominante.
+    { tenant: 'fticonsulting', dc: 'wd108', site: 'CompassLexeconCareers', emp: 'Compass Lexecon' },
     { tenant: 'ardian', dc: 'wd103', site: 'ArdianCareers', emp: 'Ardian' },
     { tenant: 'rothschildandco', dc: 'wd3', site: 'Rothschildandco_Lateral', emp: 'Rothschild & Co' },
     // MMC = Marsh McLennan : porte Oliver Wyman, Mercer, Marsh et Guy Carpenter.

@@ -2545,8 +2545,20 @@ function slugEmp(emp) {
   return slug(emp).replace(/\s+(?:fr|france)$/, '').trim();
 }
 
+// Une offre en télétravail COMPLET n'a pas de lieu de travail : la ville n'est
+// qu'une étiquette de diffusion. Pennylane publiait ainsi le même « Spécialiste
+// Support Pilotage et Comptabilité (Télétravail complet possible) » à Metz,
+// Nancy, Mulhouse, Strasbourg, Reims et Troyes — six cartes identiques.
+//
+// Le télétravail PARTIEL ne compte pas : « 2 jours de télétravail » suppose un
+// bureau, donc une ville, donc un poste distinct.
+const TELETRAVAIL_COMPLET_RE =
+  /t[ée]l[ée]travail (?:complet|total|int[ée]gral|100\s*%)|100\s*% (?:t[ée]l[ée]travail|remote)|full[\s-]?remote|fully remote|remote only/i;
+
 function canonicalKey(offer) {
-  return `${slugEmp(offer.emp)}|${slugTitleFuzzy(offer.title)}|${slugLieu(offer.loc)}`;
+  const aDistance = TELETRAVAIL_COMPLET_RE.test(offer.title || '');
+  const lieu = aDistance ? 'a-distance' : slugLieu(offer.loc);
+  return `${slugEmp(offer.emp)}|${slugTitleFuzzy(offer.title)}|${lieu}`;
 }
 
 // Clé sans le lieu : sert au rattrapage des offres dont une source donne la ville
