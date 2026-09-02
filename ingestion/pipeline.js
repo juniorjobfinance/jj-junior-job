@@ -785,6 +785,12 @@ const GRAND_PARIS = [
   'bourg-la-reine', 'sceaux', 'fresnes', 'chevilly', 'thiais', 'choisy',
   'saint-germain-en-laye', 'poissy', 'sartrouville', 'houilles', 'bezons', 'argenteuil',
   'la defense', 'la défense', 'saint-quentin-en-yvelines', 'evry', 'évry', 'noisiel',
+
+  // Saint-Quentin-en-Yvelines : ville nouvelle de 150 000 habitants, siège de
+  // plusieurs directions financières. Son absence coûtait quatre offres du
+  // seul Crédit Agricole — cash management, financements structurés,
+  // back-office paiements.
+  'saint-quentin-en-yvelines', 'saint-quentin en yvelines', 'montigny-le-bretonneux',
 ];
 
 // Métropoles régionales (>100 000 hab. ou pôle économique majeur).
@@ -942,11 +948,19 @@ function contientVille(libelle, ville) {
 }
 
 function estGrandeVille(loc) {
-  const v = (loc || '').toLowerCase().trim();
+  let v = (loc || '').toLowerCase().trim();
   if (!v) return true; // pas d'info -> on ne jette pas
-  if (REGIONS_ET_INCONNU.some((r) => v === r || v.startsWith(r + ','))) return true;
+  // Le pays en suffixe n'apprend rien à un site qui ne publie que la France,
+  // et il empêchait de reconnaître ce qui le précède : le Crédit Agricole
+  // écrit « Ile-de-France - France », libellé pourtant on ne peut plus clair,
+  // qui était rejeté comme une petite commune.
+  v = v.replace(/\s*[-–,]\s*france\s*$/, '').trim() || v;
+  // Le séparateur d'un libellé composé peut être une virgule ou un tiret.
+  const commencePar = (t) =>
+    v === t || v.startsWith(t + ',') || v.startsWith(t + ' -') || v.startsWith(t + '-');
+  if (REGIONS_ET_INCONNU.some(commencePar)) return true;
   // Département seul : même statut qu'une région.
-  if (DEPARTEMENTS.some((d) => v === d || v.startsWith(d + ','))) return true;
+  if (DEPARTEMENTS.some(commencePar)) return true;
   // "1er Arrondissement", "13ème Arrondissement" sans le nom de la ville : ces
   // libellés ne désignent que Paris, Lyon ou Marseille — jamais un village.
   if (/^\d{1,2}\s*(er|e|ème|eme)\s+arrondissement/i.test(v)) return true;
