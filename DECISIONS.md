@@ -277,8 +277,8 @@ investor services, clients institutionnels — que le guichet n'emploie jamais.
 ## 14. La porte d’entrée ne doit pas connaître moins de mots que le classement
 
 Chez une maison de finance, une offre n’est collectée que si son intitulé porte
-un mot de métier reconnu (, dans ). Cette
-liste ignorait des mots que les règles de familles, dans , savent
+un mot de métier reconnu (`GENERIC_FINANCE_ROLE_RE`, dans `sources.js`). Cette
+liste ignorait des mots que les règles de familles, dans `pipeline.js`, savent
 pourtant ranger :
 
 | Intitulé | Le classement le range | Le connecteur le jetait |
