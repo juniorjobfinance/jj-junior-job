@@ -2045,7 +2045,7 @@ const FRANCE_LOCATION_RE = new RegExp(
     'grenoble|dijon|angers|n[îi]mes|clermont-?ferrand|le mans|aix-?les-?bains',
     'brest|tours|amiens|limoges|annecy|perpignan|besan[çc]on|metz|orl[ée]ans',
     'mulhouse|rouen|caen|nancy|argenteuil|montreuil|saint-?paul|nanterre',
-    'avignon|poitiers|dunkerque|aubagne|pau|la rochelle|calais|b[ée]ziers',
+    'avignon|poitiers|dunkerque|aubagne|\\bpau\\b|la rochelle|calais|b[ée]ziers',
     'colmar|valence|qu[ii]mper|troyes|lorient|niort|chamb[ée]ry|beauvais',
     'la roche-?sur-?yon|ch[âa]lons|bayonne|biarritz|arras|belfort|vannes',
   ].join('|'),
@@ -2254,6 +2254,22 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       : villesFr
         ? { [villesFr.key]: villesFr.ids }
         : {};
+
+    // Si l'arbre des lieux existe et ne contient NI la France NI aucune ville
+    // française, ce tenant n'a rien pour nous : Morningstar publie 224 offres,
+    // toutes hors de France, et Santander 79, toutes à São Paulo. Les lire
+    // chaque matin ne sert à rien, et fait passer pour une panne ce qui est
+    // simplement une absence.
+    //
+    // On ne conclut que si l'arbre existe : chez Swiss Life il est vide, et
+    // sa lecture littérale ramenait 1 offre sur 150.
+    const arbreDesLieux = (probe.facets || []).some(
+      (f) => /location/i.test(f.facetParameter || '') && (f.values || []).length > 0
+    );
+    if (arbreDesLieux && !country && !villesFr) {
+      console.log(`[sources] Workday ${emp} : aucune offre en France dans leur catalogue.`);
+      return [];
+    }
     const jobs = [];
     const vus = new Set();
 
@@ -2298,7 +2314,11 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
       // amont ne fait courir qu'un risque : chez Swiss Life, dont le site est
       // déjà franco-français, l'arbre des lieux n'expose aucune valeur
       // exploitable, et la restriction ramenait 1 offre sur 150.
-      await collecte({}, '', 30);
+      // La facette pays est appliquée SI elle existe : sans cela on lisait les
+      // 224 offres mondiales de Morningstar pour en publier zéro. Quand elle
+      // n'existe pas, on prend tout et on filtre ensuite sur le libellé —
+      // c'est le cas de Swiss Life, dont l'arbre des lieux est vide.
+      await collecte(country ? facetsPays : {}, '', 30);
     } else if (finance) {
       // La catégorie finance du tenant d'abord : c'est LUI qui sait ce qui
       // relève de la finance chez lui, et cela évite de ramener l'assistanat
