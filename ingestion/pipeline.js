@@ -1561,6 +1561,19 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     // grands cabinets : relevés dans le résidu le 02/09/2026.
     "assistant.{0,4}administratif|executive assistant|assistant.{0,4}de direction",
     "\\bdroit\\b|propri[ée]t[ée] intellectuelle|mobilit[ée] internationale",
+    // Informatique déguisée en analyse : « Analyste Fonctionnel SIRH » chez
+    // VINCI, « Analyste SAP », « Analyste Business Solutions ».
+    "analyste fonctionnel|\\bsirh\\b|\\bsap\\b|business solutions|solutions d.entreprises",
+    // Qualité industrielle, sécurité, logistique.
+    "\\bcq\\b|assurance produit|vuln[ée]rabilit|supply officer|cargo|standard parts",
+    // Renseignement, affaires publiques, innovation : ni finance ni conseil.
+    "intelligence analyst|government relations|policy officer|emerging tech",
+    // Rémunération et recrutement, en anglais cette fois.
+    "compensation (?:&|and) benefits|recruitment day|assistant polyvalent",
+    // Ingénierie mécanique, même sous un intitulé de financement.
+    "ing[ée]nieur m[ée]canique|ing[ée]nieur junior analyste",
+    // Intitulé réduit à un seul mot : illisible sur une carte.
+    "^finance$|^[ée]conomie$",
     "data integration|\\bsi\\b finance|servicenow|support it\\b|affaires r[ée]glementaires|quality system|\\bfondation\\b",
     "\\bea\\b\\s*/|team assistant|assistance technique|assistant coordination",
     "coordinateur international|engineering business|industry group",
