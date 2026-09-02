@@ -84,6 +84,23 @@ JobPosting, analytics, poids de `offres.js` (474 Ko).
 
 ---
 
+## Pistes ouvertes, à reprendre
+
+**Bain** — portail Avature, robots.txt permissif, JSON-LD complet sur chaque
+fiche : c'est faisable. Mais le sitemap ne liste aucune offre et la page de
+recherche est rendue en JavaScript. Il faut trouver leur API interne (Avature
+expose en général un point d'entrée AJAX). Une session dédiée, pas un bout de
+fin de journée.
+
+**Euronext** — branché sur Workday (tenant ), le connecteur voyait cinq
+offres françaises au moment du branchement, mais rien n'est publié. À
+diagnostiquer.
+
+**Le groupe A** — trente-cinq maisons ont un connecteur qui ne rend rien. Le
+diagnostic se fait sans rien demander à Victor : appeler chaque connecteur et
+regarder ce qui sort. Pour beaucoup la réponse sera « elles ne publient rien de
+junior en France » — c'est le cas de Deutsche Bank, deux postes parisiens.
+
 ## Hors d'atteinte, et pourquoi
 
 **Pare-feu** — Bpifrance (CloudFront), Morgan Stanley (tal.net), Alvarez &
