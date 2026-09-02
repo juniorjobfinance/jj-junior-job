@@ -1563,6 +1563,9 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     "\\bdroit\\b|propri[ée]t[ée] intellectuelle|mobilit[ée] internationale",
     // Informatique déguisée en analyse : « Analyste Fonctionnel SIRH » chez
     // VINCI, « Analyste SAP », « Analyste Business Solutions ».
+    // Consultants en financement de l'innovation : des ingénieurs. Et un
+    // intitulé qui commence par « Ou » est une phrase coupée, pas un poste.
+    "consultant.{0,4} scientifique|micro-?[ée]lectronique|consultant informatique|^ou\\b",
     "analyste fonctionnel|\\bsirh\\b|\\bsap\\b|business solutions|solutions d.entreprises",
     // Qualité industrielle, sécurité, logistique.
     "\\bcq\\b|assurance produit|vuln[ée]rabilit|supply officer|cargo|standard parts",
