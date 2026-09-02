@@ -67,7 +67,12 @@ const MAX_AGE_JOURS_CDI_CDD = 60;
 
 // Les sources qui republient les annonces d'autrui, par opposition à celles qui
 // lisent l'ATS de la maison elle-même.
-const SOURCES_AGREGATEUR_RE = /^(francetravail|adzuna|opendatasoft|labonnealternance)/;
+// « opendatasoft » a été retiré de cette liste : le portail de données
+// ouvertes du groupe BPCE est SA propre publication, pas un agrégateur. Le
+// seuil de 30 jours lui appliquait une sévérité quatre fois supérieure à
+// celle des autres maisons, et écartait 28 de leurs 51 stages et
+// alternances.
+const SOURCES_AGREGATEUR_RE = /^(francetravail|adzuna|labonnealternance)/;
 
 // Les employeurs absents de la liste de référence ne sont plus écartés : ils
 // sont REGROUPÉS. Chaque offre garde le nom exact de son employeur sur la carte
