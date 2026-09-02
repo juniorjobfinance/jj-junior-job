@@ -653,6 +653,10 @@ const LISTES_HTML = [
     // par motif, qui désigne chaque champ par sa place dans le balisage.
     emp: 'La Banque Postale',
     base: 'https://www.labanquepostale.com',
+    // Le numéro de page est dans le NOM DU FICHIER, pas en paramètre :
+    // « .p-2.html ». Aucun des paramètres habituels ne marche chez eux —
+    // ?page=2, ?p=2, ?start=20, ?offset=20 renvoient tous la première page.
+    // 37 pages de 4 offres au 02/09/2026.
     page: (n) =>
       n === 1
         ? 'https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.html'
