@@ -1405,14 +1405,31 @@ function passesJuniorFilter(volet, title, descr, strict) {
 // Workday ne renvoie qu'un texte relatif ("Posted Today", "Posted Yesterday",
 // "Posted 5 Days Ago", "Posted 30+ Days Ago") au lieu d'une date absolue.
 function parseWorkdayRelativeDate(postedOn) {
-  const now = new Date();
   const text = (postedOn || '').toLowerCase();
-  let daysAgo = 0;
-  if (/yesterday/.test(text)) daysAgo = 1;
+  let daysAgo = null;
+
+  if (/today|aujourd/.test(text)) daysAgo = 0;
+  else if (/yesterday|hier/.test(text)) daysAgo = 1;
   else {
-    const match = text.match(/(\d+)\+?\s*days?\s*ago/);
-    if (match) daysAgo = parseInt(match[1], 10);
+    // « Posted 5 Days Ago », « Posted 30+ Days Ago »
+    let m = text.match(/(\d+)\+?\s*days?\s*ago/);
+    // « Offre publiée il y a 27 jours », « il y a 30 jours ou plus »
+    if (!m) m = text.match(/il y a\s+(\d+)\s*jours?/);
+    if (m) daysAgo = parseInt(m[1], 10);
+    else {
+      // « il y a 2 mois » : on compte trente jours par mois, ce qui suffit
+      // puisque le seuil d'âge se mesure en mois entiers.
+      const mois = text.match(/il y a\s+(\d+)\s*mois|(\d+)\+?\s*months?\s*ago/);
+      if (mois) daysAgo = 30 * parseInt(mois[1] || mois[2], 10);
+    }
   }
+
+  // Ne pas comprendre la date ne doit PAS la rendre fraîche : l'ancien repli à
+  // zéro jour datait du jour même toutes les annonces françaises de Workday.
+  // On rend null, et le pipeline ira lire la vraie date sur la fiche.
+  if (daysAgo === null) return null;
+
+  const now = new Date();
   now.setDate(now.getDate() - daysAgo);
   return now.toISOString();
 }
@@ -1878,7 +1895,9 @@ function normalize(item) {
     ville = (raw.locationsText || '').split(',')[0].replace(/\s+area$/i, '').trim();
     pays = 'France'; // déjà filtré par FRANCE_LOCATION_RE côté connecteur
     url = raw.url;
-    typeContratRaw = raw.title; // pas de sous-type dans la liste -> fallback mots-clés du titre
+    // Le contrat vient de bulletFields quand Workday le donne ; l'intitulé
+    // reste en second rideau, car tous les tenants ne remplissent pas ce champ.
+    typeContratRaw = [].concat(raw.bulletFields || []).join(' ') + ' ' + (raw.title || '');
     postedAt = parseWorkdayRelativeDate(raw.postedOn);
   } else if (__src.startsWith('opendatasoft:')) {
     emp = item.emp;

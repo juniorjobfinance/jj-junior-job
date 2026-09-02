@@ -2309,6 +2309,11 @@ async function fetchWorkday({ tenant, dc, site, emp, locale = 'en-US' }) {
           title: j.title,
           locationsText: j.locationsText,
           postedOn: j.postedOn,
+          // La dernière valeur de bulletFields est le type de contrat :
+          // « Stage », « Alternance », « CDD », « CDI ». Sans elle, le
+          // pipeline devait le deviner sur le seul intitulé, et rangeait
+          // toutes les alternances de la Banque de France en CDI.
+          bulletFields: j.bulletFields || [],
           url: `https://${tenant}.${dc}.myworkdayjobs.com/${locale}/${site}${j.externalPath}`,
         },
       }));
