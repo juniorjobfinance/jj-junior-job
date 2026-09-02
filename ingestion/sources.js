@@ -2105,7 +2105,8 @@ async function fetchSmartRecruiters({ id, emp }) {
       const json = await getJSON(url);
       const page = json.content || [];
       all.push(...page);
-      if (page.length < pageSize || all.length >= (json.totalFound || 0)) break;
+      if (page.length < pageSize) break;
+      if (json.totalFound > 0 && all.length >= json.totalFound) break;
     }
     const retenues = all
       .filter((o) => (o.location?.country || '').toLowerCase() === 'fr')
@@ -2342,7 +2343,8 @@ async function fetchOpenDataSoft({ domain, dataset, emp }) {
       const json = await getJSON(`https://${domain}/api/records/1.0/search/?${params}`);
       const records = json.records || [];
       jobs.push(...records);
-      if (records.length < pageSize || jobs.length >= (json.nhits || 0)) break;
+      if (records.length < pageSize) break;
+      if (json.nhits > 0 && jobs.length >= json.nhits) break;
     }
   } catch (err) {
     console.warn(`[sources] OpenDataSoft (${domain}) indisponible:`, err.message);
@@ -2444,7 +2446,8 @@ async function fetchLvmh({ emp = 'LVMH' } = {}) {
       const res = (j.results || [])[0] || {};
       const lot = res.hits || [];
       hits.push(...lot);
-      if (lot.length < 50 || hits.length >= (res.nbHits || 0)) break;
+      if (lot.length < 50) break;
+      if (res.nbHits > 0 && hits.length >= res.nbHits) break;
       await new Promise((r) => setTimeout(r, 250));
     }
 
@@ -2510,7 +2513,8 @@ async function fetchAxaFrance({ emp = 'AXA France' } = {}) {
       const lot = j.data || [];
       if (!lot.length) break;
       offres.push(...lot);
-      if (offres.length >= (j.total || 0)) break;
+      // Sans total exploitable, seule la page vide ci-dessus marque la fin.
+      if (j.total > 0 && offres.length >= j.total) break;
       await new Promise((r) => setTimeout(r, 250));
     }
 
@@ -2642,7 +2646,8 @@ async function fetchOracleCloud({ host, site, emp, keywords, location }) {
         const bloc = (json.items || [])[0] || {};
         const list = bloc.requisitionList || [];
         jobs.push(...list);
-        if (list.length < pageSize || jobs.length >= (bloc.TotalJobsCount || 0)) break;
+        if (list.length < pageSize) break;
+        if (bloc.TotalJobsCount > 0 && jobs.length >= bloc.TotalJobsCount) break;
       }
     }
   } catch (err) {
@@ -2928,7 +2933,8 @@ async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000,
       const json = await getJSON(url);
       const page = (json.jobs || []).map((j) => j.data || j);
       all.push(...page);
-      if (page.length < pageSize || all.length >= (json.totalCount || 0)) break;
+      if (page.length < pageSize) break;
+      if (json.totalCount > 0 && all.length >= json.totalCount) break;
       await new Promise((r) => setTimeout(r, crawlDelayMs));
     }
   } catch (err) {
