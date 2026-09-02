@@ -3954,6 +3954,8 @@ module.exports = {
   fetchTalentLink,
   fetchListeHtml,
   fetchWordpressOffres,
+  looksLikeFinance,
+  isFinanceOfferFor,
   LISTES_HTML,
   fetchSmartRecruiters,
   fetchLever,

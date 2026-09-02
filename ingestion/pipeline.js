@@ -13,7 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { fetchAllSources, sourcesReprises } = require('./sources');
+const { fetchAllSources, sourcesReprises, isFinanceOfferFor } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
 
 const CHECK_LINKS = process.argv.includes('--check-links');
@@ -251,7 +251,7 @@ const FAMILLE_RULES = [
   // Opérations Garanties » partait en assurance (le mot « garantie »),
   // « Chargé service clients institutionnels » aussi (« service clients »).
   [
-    /transaction management|trade finance|op[ée]rations? garanties|asset servicing|investor services|funds? solutions|securities finance|conservation de titres|d[ée]positaire|op[ée]rations? sur titres|op[ée]rations? client[èe]le|\bost\b|client[es]? institutionnel|institutionnels et souverains|fund (?:administration|accounting|execution|distribution)/i,
+    /transaction management|trade finance|op[ée]rations? garanties|asset servicing|investor services|funds? solutions|securities finance|conservation de titres|d[ée]positaire|op[ée]rations? sur titres|op[ée]rations? client[èe]le|op[ée]rations? [ée]metteurs?|service[s]? [ée]metteurs?|\bost\b|client[es]? institutionnel|institutionnels et souverains|fund (?:administration|accounting|execution|distribution)/i,
     'Middle & Back Office',
   ],
 
@@ -1546,7 +1546,7 @@ const METIER_HORS_PERIMETRE_RE = new RegExp(
     "community manager|\\bdesign\\b|\\bdesigner\\b|communication|[ée]ditorial|\\bmarketing\\b",
     "[ée]v[ée]nementiel|\\bevents?\\b|\\bbrand\\b|chef(?:fe)? de produits?",
     // Achats, logistique, industrie, sécurité
-    "\\bacheteur\\b|\\bachats\\b|approvisionn|supply chain|manufacturing|\\bdouane\\b",
+    "\\bacheteur\\b|\\bachats\\b|\\bbuyer\\b|procurement|aftersales|approvisionn|supply chain|manufacturing|\\bdouane\\b",
     "services g[ée]n[ée]raux|business continuity",
     "risques professionnels|pr[ée]vention des risques|sant[ée] au travail|\\bhse\\b|\\bqhse\\b|s[ûu]ret[ée]",
     // Divers sans rapport avec la finance
@@ -2357,6 +2357,15 @@ function normalize(item) {
   if (volet === 'vie' && __src !== 'vie') return null;
   const famille = inferFamille(title, romeLibelle, emp);
   if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
+  // Le résidu n'est pas un fourre-tout. Une offre qu'aucune règle de famille
+  // ne sait ranger n'entre que si son intitulé dit explicitement la finance.
+  // Sans ce contrôle, tout ce qui n'était pas nommément exclu se retrouvait
+  // publié : le résidu avait atteint 26,7 % du catalogue, peuplé d'ajusteurs
+  // composite, de chaudronniers aéronautiques et d'ergothérapeutes.
+  // On donne aussi l'intitulé BRUT : le nettoyage retire « Stage » et
+  // « Stagiaire », or c'est souvent le seul mot qui situe le poste chez une
+  // maison de finance.
+  if (famille === 'Autres métiers de la finance' && !isFinanceOfferFor(emp, title, titreBrut)) return null;
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
   const maisonRef = trouverMaison(emp);
