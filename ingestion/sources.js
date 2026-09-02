@@ -136,7 +136,7 @@ function looksLikeFinance(...fields) {
 // Intitulés génériques qui, CHEZ UNE MAISON DE FINANCE, désignent un poste
 // finance (chez un industriel, ils désigneraient autre chose).
 const GENERIC_FINANCE_ROLE_RE =
-  /consultant|consulting|analyst|analyste|charg[ée] d'affaires|charg[ée] de client[èe]le|conseiller|associate|\bstage\b|\bstagiaire\b|alternan|apprenti|graduate|\bintern\b|internship|gestionnaire|\bg[ée]rant\b|souscript|actuar|banque privée|middle office|back office|front office|\bofficer\b|\bassistant\b|d[ée]positaire|depositary|custody|conservation de titres|securities|\btitres\b|fund (?:execution|administration|accounting|services)|onboarding|settlement|r[èe]glement[\s-]livraison|collateral|collat[ée]ral|fixed income|corporate actions|op[ée]rations? (?:titres|de march[ée])/i;
+  /consultant|consulting|analyst|analyste|charg[ée] d'affaires|charg[ée] de client[èe]le|conseiller|associate|\bstage\b|\bstagiaire\b|alternan|apprenti|graduate|\bintern\b|internship|gestionnaire|\bg[ée]rant\b|souscript|actuar|banque privée|middle office|back office|front office|\bofficer\b|\bassistant\b|d[ée]positaire|depositary|custody|conservation de titres|securities|\btitres\b|fund (?:execution|administration|accounting|services)|onboarding|settlement|r[èe]glement[\s-]livraison|collateral|collat[ée]ral|fixed income|corporate actions|op[ée]rations? (?:titres|de march[ée])|originat|\\bquant|\\bost\\b|[ée]metteurs?|inspecteur|inspection|equity|structurat|titrisation|syndicat|coverage|trader|trading|derivativ|leveraged|prime services/i;
 
 // Filtre finance à appliquer aux offres d'une entreprise donnée. Si l'employeur
 // est une maison de finance, on élargit aux intitulés génériques du secteur ;

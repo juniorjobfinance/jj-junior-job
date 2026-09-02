@@ -271,3 +271,28 @@ Même logique pour le classement : « chargé d'affaires », « clientèle » et
 CACEIS. Une règle de sauvetage, placée avant celles de l'assurance et du réseau,
 reconnaît le vocabulaire de gros — transaction management, trade finance, OST,
 investor services, clients institutionnels — que le guichet n'emploie jamais.
+
+---
+
+## 14. La porte d’entrée ne doit pas connaître moins de mots que le classement
+
+Chez une maison de finance, une offre n’est collectée que si son intitulé porte
+un mot de métier reconnu (, dans ). Cette
+liste ignorait des mots que les règles de familles, dans , savent
+pourtant ranger :
+
+| Intitulé | Le classement le range | Le connecteur le jetait |
+|---|---|---|
+| Originateur Small Cap | Marchés financiers | oui |
+| Chargé d’Opérations Émetteurs — OST | Opérations & Middle-office | oui |
+| Equity Quant | Data & Quant | oui |
+
+Mesuré le 02/09/2026 sur les rubriques finance du Crédit Agricole : 93 offres
+écartées faute de vocabulaire, dont quinze de vrais métiers de marché. Les 78
+autres — Directeur d’Agence, Négociateur Immobilier, Office Manager, Expert
+Santé Publique — étaient bien écartées.
+
+**Règle** : tout mot ajouté aux règles de familles doit exister aussi dans le
+vocabulaire de collecte. Sans quoi le pipeline sait classer une offre qu’il ne
+verra jamais. Le garde-fou reste entier : ce second régime ne s’applique qu’aux
+maisons de finance, un « Originateur » chez un industriel reste dehors.
