@@ -48,7 +48,11 @@ async function mesurer() {
     const offre = P.normalize(item);
     if (!offre) continue;
     c.normalisees++;
-    if (!P.estGrandeVille(offre.loc)) continue;
+    // Le VIE échappe au filtre des grandes villes — il est à l'étranger par
+    // nature. Le pipeline fait cette exception ; sans elle, cet outil
+    // annonçait « 117 collectées, 1 publiable » pour une source qui en publie
+    // quatre-vingt-dix.
+    if (offre.volet !== 'vie' && !P.estGrandeVille(offre.loc)) continue;
     c.publiables++;
     c.emp.add(offre.emp);
     c.volets[offre.volet] = (c.volets[offre.volet] || 0) + 1;
