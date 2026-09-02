@@ -2986,11 +2986,19 @@ async function completerDatesManquantes(offers) {
   //
   // On ne le fait que pour les CDI/CDD : un stage ou une alternance est junior
   // par nature, inutile d'aller vérifier.
+  // Trois connecteurs n'ont aucun champ de contrat et se rabattent sur
+  // l'intitulé : Teamtailor, SuccessFactors et Phenom. Tout ce qui ne dit pas
+  // « stage » dans son titre part en CDI, puis meurt au filtre 0-3 ans. Leurs
+  // fiches doivent donc être lues même quand la date et la description sont là,
+  // pour que contratDeLaFiche puisse les reclasser.
+  const SOURCE_SANS_CONTRAT_RE = /^(teamtailor|successfactors|phenom)/;
+
   const aCompleter = offers.filter(
     (o) =>
       o.url &&
       (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
-        (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)))
+        (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)) ||
+        (o.volet === 'cdi-cdd' && SOURCE_SANS_CONTRAT_RE.test(o.source)))
   );
   if (!aCompleter.length) return 0;
 
