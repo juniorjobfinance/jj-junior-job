@@ -302,6 +302,7 @@ Banque de France · AMF · ACPR · Caisse des Dépôts · Bpifrance · Agence Fr
 - `ingestion/sources.js` — connecteurs (stubs à câbler) + données d'exemple.
 - `ingestion/README.md` — architecture + étapes.
 
-**Première tâche suggérée à Claude Code** : lire tous ces fichiers, expliquer l'état actuel,
-lancer `node ingestion/pipeline.js`, puis proposer un plan pour la v1 (câblage France Travail +
-La Bonne Alternance, passage des 9 familles en axe principal dans la page, pagination, déploiement).
+**Première tâche suggérée à Claude Code** — *périmée, conservée pour mémoire.* Elle proposait
+de câbler France Travail et La Bonne Alternance : les deux ont été branchées, puis débranchées
+le 1er septembre 2026 parce que leurs annonces ne renvoient pas vers l'employeur. Pour reprendre
+le projet aujourd'hui : lire `ETAT.md`, puis `DECISIONS.md`.
