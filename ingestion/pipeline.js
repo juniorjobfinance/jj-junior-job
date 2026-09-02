@@ -2257,7 +2257,10 @@ function normalize(item) {
       raw.apply_url ||
       raw.applyUrl ||
       (raw.id ? `https://portal.careers.hsbc.com/job/${raw.id}` : null);
-    typeContratRaw = title;
+    // « tags2 » porte le contrat — « Stage / Alternance / Étudiant en
+    // entreprise », « Apprenticeship », « Internship / Placement ». Sans lui,
+    // vingt et une offres juniors d'AXA partaient en CDI.
+    typeContratRaw = [].concat(raw.tags2 || [], raw.tags1 || []).join(' ') + ' ' + (title || '');
     // Les trois générations de l'API ne s'accordent pas sur la forme : tableau
     // chez la première, chaîne chez la troisième. On aplatit sans supposer.
     romeLibelle = []
