@@ -1729,6 +1729,7 @@ const TARGET_COMPANIES = {
     // compensation, données financières. Cinq postes français au moment du
     // branchement.
     { tenant: 'hrhub', dc: 'wd3', site: 'Euronext_Career_Page', emp: 'Euronext' },
+    { tenant: 'valeo', dc: 'wd3', site: 'valeo_jobs', emp: 'Valeo' },
     { tenant: 'sanofi', dc: 'wd3', site: 'SanofiCareers', emp: 'Sanofi' },
     { tenant: 'ag', dc: 'wd3', site: 'Airbus', emp: 'Airbus' },
     { tenant: 'airliquidehr', dc: 'wd3', site: 'AirLiquideExternalCareer', emp: 'Air Liquide' },
@@ -1934,6 +1935,9 @@ const TARGET_COMPANIES = {
     // Stellantis : modélisation du risque de crédit, gestion des risques,
     // audit. Quinze offres finance dont trois alternances.
     { host: 'jobs.groupe-psa.com', emp: 'Stellantis' },
+    // Leur propre instance TalentSoft, bien plus fournie que la liste du
+    // groupe : 92 offres publiables contre 31, avec ville et contrat.
+    { host: 'jobs.ca-cib.com', emp: 'Crédit Agricole CIB' },
     { host: 'jobs.amundi.com', emp: 'Amundi' },
     { host: 'cnp-recrute.talent-soft.com', emp: 'CNP Assurances' },
     { host: 'matmut-recrute.talent-soft.com', emp: 'Matmut' },
@@ -1994,6 +1998,7 @@ const TARGET_COMPANIES = {
     { company: 'redensolar', emp: 'Reden Solar' },
     { company: 'photosol', emp: 'Photosol' },
     { company: 'bdofrance', emp: 'BDO France' },
+    { company: 'supernovainvest-1745932484', emp: 'Supernova Invest' },
     { company: 'keplercheuvreux', emp: 'Kepler Cheuvreux' },
   ],
 };
@@ -2799,14 +2804,17 @@ async function fetchTalentSoft({ host, emp, maxPages = 20, delayMs = 1500 }) {
       // (CNP). Le point commun stable est le lien vers la fiche
       // (/offre-de-emploi/emploi-...aspx) suivi du bloc <ul> des métadonnées.
       const cardRe =
-        /href="(\/offre-de-emploi\/emploi[^"]+\.aspx)"[^>]*>\s*([^<]+?)\s*<\/a>([\s\S]{0,2500}?)<\/li>/g;
+        /href="(\/offre-de-emploi\/emploi[^"]+\.aspx)"[^>]*>\s*([^<]+?)\s*<\/a>([\s\S]{0,2500}?)<\/ul>/g;
       let m;
       let found = 0;
       const seenOnPage = new Set();
       while ((m = cardRe.exec(html))) {
         if (seenOnPage.has(m[1])) continue;
         seenOnPage.add(m[1]);
-        const ulMatch = m[3].match(/<ul[^>]*>([\s\S]*?)<\/ul>/);
+        // Le bloc s'arrête maintenant à la fin de la liste : ses éléments sont
+        // tout ce qui suit la dernière balise <ul> ouvrante.
+        const depuisUl = m[3].lastIndexOf('<ul');
+        const ulMatch = depuisUl === -1 ? null : [null, m[3].slice(depuisUl)];
         const items = ulMatch
           ? [...ulMatch[1].matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map((x) =>
               x[1].replace(/<[^>]*>/g, '').replace(/&#\d+;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim()
@@ -2815,10 +2823,14 @@ async function fetchTalentSoft({ host, emp, maxPages = 20, delayMs = 1500 }) {
         offers.push({
           title: m[2].replace(/\s+/g, ' ').trim(),
           url: new URL(m[1], `https://${host}`).href,
+          // La liste compte trois ou quatre éléments selon l'instance : Amundi
+          // écrit « Stage · Amundi · France · Paris », Crédit Agricole CIB
+          // « CDI · France · Montrouge ». On lit donc depuis la fin, où
+          // l'ordre ne varie pas — la ville en dernier, le pays juste avant.
           contrat: items[0] || '',
-          entite: items[1] || '',
-          pays: items[2] || '',
-          ville: items[3] || '',
+          entite: items.length >= 4 ? items[1] || '' : '',
+          pays: items.length >= 2 ? items[items.length - 2] || '' : '',
+          ville: items.length >= 1 ? items[items.length - 1] || '' : '',
           // Quand le bloc de métadonnées est absent, on ne connaît pas le pays :
           // ces instances sont des sites carrières FRANÇAIS, on l'assume.
           metaAbsente: items.length === 0,
