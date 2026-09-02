@@ -2480,13 +2480,24 @@ function dedupe(offers) {
 // ---------------------------------------------------------------------------
 // Vérification de lien (optionnelle, --check-links) — PROJET.md §8.6
 // ---------------------------------------------------------------------------
+// Le délai maximum n'est pas un détail : cette fonction tourne désormais dans
+// le passage automatique, pour les offres saisies à la main. Sans lui, un
+// serveur muet suspendrait le pipeline jusqu'à ce que GitHub le tue.
 async function checkLink(url) {
   try {
-    const res = await fetch(url, { method: 'HEAD', redirect: 'follow' });
+    const res = await fetch(url, {
+      method: 'HEAD',
+      redirect: 'follow',
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; JJ job board)' },
+      signal: AbortSignal.timeout(10000),
+    });
     if (res.status === 404 || res.status === 410) return 'dead';
     return 'ok';
   } catch {
-    return 'unknown'; // erreur réseau transitoire -> pas de retrait (anti-faux-positif)
+    // Délai dépassé ou erreur réseau : on ne conclut pas. Le silence d'un
+    // serveur ne prouve pas que l'offre est pourvue, et « unknown » est la
+    // seule valeur qui n'entraîne aucun retrait.
+    return 'unknown';
   }
 }
 
