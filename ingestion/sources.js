@@ -1646,6 +1646,11 @@ const TARGET_COMPANIES = {
   // Détectés avec ingestion/detect-workday.js (le tenant, le datacenter et le
   // nom du site sont propres à chaque entreprise, aucun n'est devinable).
   workday: [
+    // Deutsche Bank : son site carrières est rendu en JavaScript, mais son API
+    // de recherche révèle que les candidatures partent vers Workday, tenant
+    // « db », site « DBWebsite ». Deux postes parisiens seulement — c'est leur
+    // réalité, pas un défaut du connecteur.
+    { tenant: 'db', dc: 'wd3', site: 'DBWebsite', emp: 'Deutsche Bank' },
     // Ipsen : laboratoire pharmaceutique, mais sa direction financière recrute
     // des stagiaires en relations investisseurs et en M&A. Le filtre finance
     // écarte de lui-même le médical et le marketing, majoritaires chez eux.
@@ -1797,6 +1802,23 @@ const TARGET_COMPANIES = {
   ],
 
   sitemapld: [
+    // Barclays et Vinci exposent un sitemap complet et du JSON-LD sur chaque
+    // fiche : titre, date et lieu y sont structurés. Rien à écrire, le
+    // connecteur générique suffit.
+    {
+      sitemap: 'https://search.jobs.barclays/sitemap.xml',
+      emp: 'Barclays',
+      jobPathRe: /\/job\//,
+      maxFiches: 120,
+      delayMs: 200,
+    },
+    {
+      sitemap: 'https://jobs.vinci.com/sitemap.xml',
+      emp: 'Vinci',
+      jobPathRe: /\/job\//,
+      maxFiches: 150,
+      delayMs: 200,
+    },
     // KPMG interdit sa page de RECHERCHE dans son robots.txt, mais y publie
     // son sitemap : on lit donc ce qu'ils offrent et on laisse ce qu'ils
     // ferment. Soixante-six offres finance, invisibles jusqu'ici.
@@ -1848,6 +1870,11 @@ const TARGET_COMPANIES = {
     { host: 'carrieres.malakoffhumanis.com', emp: 'Malakoff Humanis' },
   ],
   phenom: [
+    // Marsh McLennan porte plusieurs marques sur le même portail, dont Oliver
+    // Wyman. L'API v1 refuse (HTTP 500), la génération « widgets » répond.
+    // Dix-huit offres, dont seize de courtage que le filtre réseau écarte : ce
+    // qu'on vient chercher ici, c'est Oliver Wyman.
+    { host: 'careers.marsh.com', widgets: true, emp: 'Marsh McLennan' },
     { host: 'careers.axa.com', emp: 'AXA' },
     { host: 'portal.careers.hsbc.com', pid: '563774609123718', domain: 'hsbc.com', emp: 'HSBC France' },
     { host: 'careers.bcg.com', widgets: true, emp: 'BCG' },
