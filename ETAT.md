@@ -65,14 +65,14 @@ branchées ou s'il n'y en a réellement pas. C'est la première chose à regarde
 une offre sur LinkedIn, ouvre le lien vers le site de l'employeur, et l'envoie —
 l'URL contient l'identifiant de la plateforme.
 
-**3. Le connecteur Radancy ne remonte rien dans un passage complet.** Appelé
-seul il rend six offres McDonald's, cinq Nestlé et trois Bouygues Telecom ; en
-passage complet, la famille n'apparaît pas dans « Origine des offres », sans la
-moindre erreur. La configuration est chargée, la fonction est au niveau module
-et figure dans la table de répartition — toutes les vérifications statiques
-passent. Un relevé « Familles mises en file » a été ajouté à fetchAllATS : le
-journal du prochain passage dira si la famille est seulement sautée. Modjo,
-Rexel et Stellantis, branchés en même temps, sont dans le même cas.
+**3. Radancy collecte mais rien n'est publié — mis en veille.** Le connecteur
+rend six offres McDonald's, cinq Nestlé et trois Bouygues Telecom en appel
+direct ; la famille est bien mise en file (« radancy 3 » dans le journal), la
+page rend six mille caractères de texte, et pourtant aucune de ces offres
+n'atteint le catalogue. Modjo, Rexel et Stellantis sont dans le même cas.
+Diagnostic interrompu à la demande de Victor : ces maisons sont des directions
+financières de groupes hors périmètre, trois à six offres chacune — le jeu n'en
+vaut pas la chandelle. Le connecteur reste en place, écrit et testé.
 
 **4. Une offre morte dans `manuel.js`.** Le passage la signale à chaque fois ;
 sa ligne est à retirer du fichier.
