@@ -37,8 +37,10 @@ const NOMS = [
   // Le chemin complet d'une offre brute vers le catalogue.
   'normalize',
   // La lecture des dates, qu'on veut pouvoir éprouver seule : une date fausse
-  // place une annonce périmée en tête du site.
+  // place une annonce périmée en tête du site. `ficheJsonLd` est la lecture de
+  // la fiche elle-même — le dernier recours quand la source ne date pas.
   'dateFrancaiseSansAnnee',
+  'ficheJsonLd',
   // Les portes, prises une par une.
   'estUneOffreFinance',
   'classifyVolet',

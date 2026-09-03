@@ -737,6 +737,10 @@ const LISTES_HTML = [
       // La ville suit l'icône : elle est le texte qui vient juste après la
       // fermeture du premier <svg> de la ligne d'informations.
       lieu: /o-jobOffer__push__infos[\s\S]*?<\/svg>\s*([^<]+?)\s*<\/span>/,
+      // La carte donne la date en clair et au format ISO :
+      // « <time datetime="2026-09-01">Il y a 2 jours</time> ». Elle n'était
+      // pas demandée, donc vingt offres partaient sans date.
+      date: /<time datetime="(\d{4}-\d{2}-\d{2})"/,
     },
     // Un site franco-français : le lieu ne répète pas « France ».
     lieuLibre: true,
@@ -3344,6 +3348,12 @@ async function fetchAvature({ sitemap, emp, maxFiches = 150, concurrence = 1, de
     // On lit d'abord les fiches dont le titre est en français : c'est le meilleur
     // indice disponible avant téléchargement, et ça évite de dépenser le budget
     // de requêtes sur des postes à Copenhague ou Taipei.
+    // Le sitemap date chaque entrée. C'est la SEULE date qu'expose Avature :
+    // la fiche elle-même n'en porte aucune, sous aucune forme.
+    const datesSitemap = new Map(
+      [...xml.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]])
+    );
+
     const fiches = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
       .map((m) => m[1])
       .filter((u) => /JobDetail\//.test(u))
@@ -3421,6 +3431,10 @@ async function fetchAvature({ sitemap, emp, maxFiches = 150, concurrence = 1, de
           contract: f.contrat,
           experience: f.experience,
           url,
+          // Prise dans le sitemap relu ce matin, jamais dans le cache des
+          // fiches : celui-ci survit d'un passage à l'autre et ses entrées
+          // anciennes ignorent ce champ.
+          date: datesSitemap.get(url) || null,
         },
       });
     }

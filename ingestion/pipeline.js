@@ -97,7 +97,7 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy|wordpress)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy|wordpress|goldman)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
@@ -2121,7 +2121,12 @@ function normalize(item) {
     // ("Moins de 3 ans") : les deux servent au classement et au filtre junior.
     typeContratRaw = [raw.contract, raw.title].filter(Boolean).join(' ');
     descr = raw.experience;
-    postedAt = new Date().toISOString(); // Avature ne date pas ses fiches
+    // La fiche Avature ne porte aucune date — mais le sitemap dont elle est
+    // issue en donne une par entrée, que le connecteur transmet désormais.
+    // C'est une date de modification et non de publication : on ne prétend
+    // pas l'inverse. Elle est propre à chaque annonce et vérifiable, là où
+    // l'heure de collecte datait du jour même des annonces de 2023.
+    postedAt = raw.date || null;
   } else if (__src.startsWith('eicards:')) {
     emp = item.emp;
     title = raw.title;
@@ -2247,8 +2252,17 @@ function normalize(item) {
     typeContratRaw = raw.type;
     // « Mis à jour le 31/08/2026 » -> date réelle quand la source la donne.
     {
-      const m = (raw.date || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
-      postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
+      // Deux formats selon la maison : « 31/08/2026 » chez EDF, et l'ISO
+      // « 2026-09-01 » que La Banque Postale écrit dans l'attribut datetime de
+      // ses cartes. Ne connaître que le premier faisait tomber le second dans
+      // le vide, sans erreur.
+      const iso = (raw.date || '').match(/(\d{4})-(\d{2})-(\d{2})/);
+      const m = iso || (raw.date || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
+      postedAt = !m
+        ? null
+        : iso
+          ? new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`).toISOString()
+          : new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString();
     }
   } else if (__src.startsWith('wordpress:')) {
     // WordPress REST : la réponse JSON porte tout, y compris le texte.
@@ -3022,8 +3036,18 @@ function ficheJsonLd(html) {
     // 01/11/2026 », qui est la date de PRISE DE POSTE. Attraper une date au
     // hasard reviendrait à en inventer une.
     if (!d || isNaN(d)) {
-      const texte = html
-        .replace(/<[^>]*>/g, ' ')
+      // Le contenu des balises <meta> est ajouté au texte, et pas seulement le
+      // corps de la page : chez TalentSoft, la date de dix offres sur onze
+      // n'existe QUE dans la description — « Lieu : Poissy. Date : 01/08/2026 ».
+      // Retirer les balises avant de chercher emportait l'attribut avec elles,
+      // et la date disparaissait sans que rien ne le signale.
+      //
+      // Elles sont ajoutées à la FIN : les libellés explicites du corps de page
+      // restent trouvés en premier, la description ne servant que de recours.
+      const metas = [...html.matchAll(/<meta[^>]+content="([^"]*)"/gi)]
+        .map((m) => m[1])
+        .join(' ');
+      const texte = (html.replace(/<[^>]*>/g, ' ') + ' ' + metas)
         .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
         .replace(/\s+/g, ' ');
       // « Date de parution » est la formulation des pages TalentSoft en
@@ -3031,10 +3055,29 @@ function ficheJsonLd(html) {
       const LIBELLE =
         `(?:date\\s+de\\s+(?:publication|parution)|publication\\s+date|publi[ée]e?\\s+le|` +
         `mise?\\s+en\\s+ligne\\s+le|posted\\s+on)`;
-      const fr = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})`, 'i'));
-      const iso = texte.match(new RegExp(`${LIBELLE}\\s*:?\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})`, 'i'));
-      if (fr) d = new Date(`${fr[3]}-${fr[2].padStart(2, '0')}-${fr[1].padStart(2, '0')}T00:00:00Z`);
-      else if (iso) d = new Date(`${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}T00:00:00Z`);
+      // TalentSoft n'écrit ni « parution » ni « publication » : sa fiche dit
+      // « Date de mise à jour 20/08/2026 », et sa description « Lieu :
+      // Montrouge. Date : 20/08/2026. » Les deux donnent le même jour.
+      //
+      // « Mise à jour » n'est pas « publication », et on ne le prétend pas :
+      // c'est la date que TalentSoft affiche lui-même comme celle de l'offre,
+      // elle est vérifiable sur la fiche, et elle vaut mieux qu'aucune date.
+      const REPLIS = [
+        LIBELLE,
+        `date\\s+de\\s+mise\\s+[àa]\\s+jour`,
+        // Ancrée sur « Lieu : … . Date : », jamais sur « Date » seul : la même
+        // page porte « Date prévue de prise de fonction 01/01/2027 », qui est
+        // la prise de poste. Une date non étiquetée aurait daté l'annonce de
+        // l'an prochain.
+        `Lieu\\s*:[^.]{0,90}\\.\\s*Date`,
+      ];
+      for (const libelle of REPLIS) {
+        const fr = texte.match(new RegExp(`${libelle}\\s*:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})`, 'i'));
+        const iso = texte.match(new RegExp(`${libelle}\\s*:?\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})`, 'i'));
+        if (fr) d = new Date(`${fr[3]}-${fr[2].padStart(2, '0')}-${fr[1].padStart(2, '0')}T00:00:00Z`);
+        else if (iso) d = new Date(`${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}T00:00:00Z`);
+        if (d && !isNaN(d)) break;
+      }
     }
 
     if (d && !isNaN(d) && d.getTime() <= Date.now() + 86400000 && d.getUTCFullYear() >= 2015) {
@@ -3068,10 +3111,18 @@ async function completerDatesManquantes(offers) {
   // pour que contratDeLaFiche puisse les reclasser.
   const SOURCE_SANS_CONTRAT_RE = /^(teamtailor|successfactors|phenom)/;
 
+  // Une source RÉPUTÉE datée peut très bien ne pas dater telle offre : le
+  // catalogue Workday de Swiss Life ne porte « postedOn » sur aucune de ses
+  // 96 annonces, et l'API v2 de Phenom n'expose aucun champ de date pour HSBC.
+  // Ces offres n'étaient jamais envoyées ici — la condition jugeait la
+  // réputation de la source, pas ce que l'offre porte réellement — alors que
+  // leur fiche donne la date en clair : « datePosted: 2026-08-31 » chez Swiss
+  // Life. Onze offres restaient sans date à côté de la réponse.
   const aCompleter = offers.filter(
     (o) =>
       o.url &&
       (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
+        o._dateDeLaSource !== true ||
         (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)) ||
         (o.volet === 'cdi-cdd' && SOURCE_SANS_CONTRAT_RE.test(o.source)))
   );
