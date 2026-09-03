@@ -513,3 +513,50 @@ parce qu'un connecteur sert souvent des employeurs sous un autre nom que le
 sien : `opendatasoft:bpce` rend « BPCE Vie » et « BPCE IG », jamais « Groupe
 BPCE ». Un second contrôle, **observé**, lit désormais le relevé de la dernière
 collecte.
+
+---
+
+## 23. La séniorité se lit aussi sur les stages, avec une liste étroite
+
+**Le 03/09/2026**, découvert en dépouillant l'échantillon des 880 offres sans
+famille. `passesJuniorFilter` sortait à sa deuxième ligne pour les stages, les
+alternances et les VIE :
+
+```js
+if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
+```
+
+C'est vrai en droit, mais **ça suppose que le type de contrat a été lu**. Il est
+*deviné* dans sept familles de connecteurs. Un « Comptable Général Senior »
+deviné en VIE passait donc sans que son intitulé soit jamais regardé — et il
+l'était : 14 offres publiées portaient un marqueur de séniorité, **toutes dans
+ces trois onglets, zéro en CDI·CDD**, où le filtre s'applique et fonctionne.
+
+**La liste appliquée à ces trois onglets est ÉTROITE, et c'est mesuré.** Sur les
+847 offres de la collecte de contrôle :
+
+| Liste | Écartées | Dont à tort |
+|---|---|---|
+| Large (15 mots, dont manager / responsable / expert / lead) | 14 | **11** |
+| Étroite (grades seuls) | 3 | **0** |
+
+La raison est linguistique : en finance française, **« manager », « responsable »,
+« expert » et « lead » nomment une ÉQUIPE ou un OUTIL** dans un intitulé junior,
+pas un grade. « Data Manager Reporting » est un stage chez Rothschild, « Expert
+en Finance Durable » un stage chez Natixis, « Portfolio Manager » un VIE chez
+ENGIE. Ne restent donc que les mots qui ne peuvent nommer qu'un grade : senior,
+sénior, VP, vice president, director, directeur, head of, confirmé, expérimenté,
+partner, principal.
+
+Neutralisateurs : `summer`, `graduate`, `junior`, `apprenti`, `alternant`, et
+`assistant` — « Assistant Responsable Comptable » est bien un assistant.
+
+**Une exception a été proposée puis écartée** : « senior analyst reste junior en
+banque d'affaires ». En France c'est plus souvent un profil expérimenté qu'un
+grade d'entrée, et l'enjeu total étant de trois offres, l'exception ajoutait du
+risque pour rien.
+
+**Conséquence à connaître :** le VIE est l'onglet le moins protégé du site — il
+échappe aussi à la règle `maisonRef` (§16), et 15 % de ses offres portaient un
+marqueur de séniorité contre 2 % pour les stages. Un durcissement le touche donc
+plus fort que les autres, et c'est normal.

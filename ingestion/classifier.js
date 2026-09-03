@@ -48,9 +48,32 @@ function normalize(raw) {
 // 1. Pre-filtre — rejet avant toute autre regle
 // ---------------------------------------------------------------------------
 
+/**
+ * Metiers qui contiennent un mot du pre-filtre mais qui restent dans le
+ * perimetre. Verifie AVANT le pre-filtre : "Conseiller en Gestion de
+ * Patrimoine" n'est pas de la vente en agence.
+ */
+const PREFILTER_EXCEPTIONS = [
+  /\bgestion de patrimoine\b/,
+  /\bpatrimonial(?:e)?\b/,
+  /\bingenierie patrimoniale\b/,
+  /\bbanquier(?:e)? prive(?:e)?\b/,
+  /\bprivate bank/,
+  /\bwealth\b/,
+  /\bfamily office\b/,
+  /\binvestissement financier\b/,
+  /\bcharge(?:e)? d affaires (?:entreprises?|corporate|grands comptes|institutionnels?)\b/,
+  /\bcharge(?:e)? d affaires (?:leverage|leveraged|structur|transaction|agency|infra)/,
+  /\bbanquier(?:e)? prive/,
+];
+
 const PREFILTER = [
-  // Banque de detail commerciale (exclusion assumee par Victor)
-  [/\bconseill(?:er|ere|ers)\b.*\b(?:client|clientele|bancaire|agence|accueil|credit|monetique|vente)\b/, 'retail'],
+  // Banque de detail commerciale (exclusion assumee par Victor).
+  // "Conseiller" seul suffit : sur le marche francais c'est un intitule de
+  // vente en agence dans l'immense majorite des cas. Les metiers de conseil
+  // au sens cabinet s'ecrivent "conseil", "consultant" ou "advisory", jamais
+  // "conseiller". Les exceptions patrimoniales sont traitees juste au-dessus.
+  [/\bconseill(?:er|ere|ers|eres)\b/, 'retail'],
   [/\bcharg(?:e|ee|es)\b (?:de )?clientele\b/, 'retail'],
   [/\bgestionnaire (?:de )?clientele\b/, 'retail'],
   [/\bconseiller (?:specialise|commercial|financier)\b/, 'retail'],
@@ -60,6 +83,29 @@ const PREFILTER = [
   [/\bcharg(?:e|ee) d accueil\b/, 'retail'],
   [/\brecouvrement (?:amiable|commercial)\b/, 'retail'],
   [/\bsurendettement\b/, 'retail'],
+
+  // Distribution d'assurance : agents, mandataires, technico-commerciaux.
+  // C'est le premier gisement du fourre-tout (AXA, Swiss Life, Matmut, AG2R).
+  [/\bmandataire d assurance/, 'retail'],
+  [/\bagent (?:independant )?specialise/, 'retail'],
+  [/\bexpert en assurances collectives\b/, 'retail'],
+  [/\btechnico ?-? ?commercial/, 'retail'],
+  [/\bagent expert en patrimoine\b/, 'retail'],
+  [/\bcourtier (?:mandataire|en credits?)\b/, 'retail'],
+
+  // Marche des particuliers et des professionnels en agence.
+  // "Charge d'affaires ENTREPRISES / corporate / grands comptes" reste dans
+  // le perimetre : il est protege par PREFILTER_EXCEPTIONS.
+  [/\bcharge(?:e)? d affaires professionnels?\b/, 'retail'],
+  [/\bcharge(?:e)? d affaires (?:agricole|viticulture|agriculture)/, 'retail'],
+  [/\bcharge(?:e)? d assurances professionnelles\b/, 'retail'],
+  [/\bresponsable (?:de )?clientele\b/, 'retail'],
+  [/\bassistant(?:e)? de clientele\b/, 'retail'],
+  [/\battach(?:e|ee) (?:de clientele|relation commerciale)\b/, 'retail'],
+  [/\bresponsable commercial\b/, 'retail'],
+  [/\bassistant(?:e)? commercial/, 'retail'],
+  [/\bcandidatures? spontanee/, 'retail'],
+  [/\brejoignez la\b/, 'retail'],
 
   // Fonctions support / hors finance
   [/\b(?:ressources humaines|charge de formation|talent|career management|recrutement)\b/, 'support'],
@@ -168,7 +214,9 @@ const FAMILIES = [
       [/\bglobal markets\b/, 7],
       [/\bopérateur de marche\b/, 8],
       [/\boperateur de marche\b/, 8],
-      [/\btitrisation\b/, 8],
+      [/\btitrisations?\b/, 8],
+      [/\bipv\b/, 8],
+      [/\bmarket data\b/, 7],
       [/\bsecuritised\b/, 8],
       [/\bhigh yield\b/, 7],
       [/\btaux et change\b/, 8],
@@ -189,7 +237,11 @@ const FAMILIES = [
       [/\bfinancements? structur/, 9],
       [/\bfinancements? syndiqu/, 9],
       [/\bsyndicated loan\b/, 9],
-      [/\bleveraged finance\b/, 8],
+      [/\bleverage[d]? finance\b/, 8],
+      [/\btransaction management\b/, 8],
+      [/\bsenior loans?\b/, 8],
+      [/\bbanker\b/, 7],
+      [/\bsmall cap\b/, 6],
       [/\bfinancement de projet\b/, 8],
       [/\bproject finance\b/, 8],
       [/\bfinancement immobilier\b/, 8],
@@ -200,6 +252,9 @@ const FAMILIES = [
       [/\bdcm\b/, 8],
       [/\becm\b/, 8],
       [/\borigination\b/, 6],
+      [/\boriginat(?:eur|rice)\b/, 7],
+      [/\bcommodities finance\b/, 9],
+      [/\btrade (?:&|et|and) commodities\b/, 9],
       [/\bsyndication\b/, 6],
       [/\bbanquier conseil\b/, 7],
       [/\bcharg(?:e|ee) d affaires? (?:entreprises?|corporate|grands comptes)\b/, 7],
@@ -228,6 +283,7 @@ const FAMILIES = [
       [/\bportfolio monitoring\b/, 8],
       [/\bfive arrows\b/, 9],
       [/\binfrastructures?\b/, 6],
+      [/\bfonds d investissement\b/, 8],
       [/\binvestissements? en\b/, 6],
       [/\bventure\b/, 6],
     ],
@@ -239,7 +295,14 @@ const FAMILIES = [
       [/\basset management\b/, 8],
       [/\bgestion d actifs\b/, 8],
       [/\bgerant(?:e)? (?:de )?portefeuille\b/, 9],
-      [/\bportfolio manager\b/, 9],
+      [/\bgestionnaire de portefeuille\b/, 9],
+      [/\bportfolio (?:manager|management|analyst)\b/, 8],
+      [/\bfund manager\b/, 9],
+      [/\bassistant(?:e)? gerant\b/, 8],
+      [/\bgestion (?:individuelle|conseillee)\b/, 8],
+      [/\binvestment guidelines\b/, 8],
+      [/\binvestissements? durables?\b/, 7],
+      [/\bsustainable investment\b/, 7],
       [/\bgestion (?:institutionnelle|collective|obligataire)\b/, 8],
       [/\bassistant(?:e)? (?:de )?gestion (?:de )?fonds?\b/, 8],
       [/\bselection de fonds\b/, 9],
@@ -275,14 +338,14 @@ const FAMILIES = [
       [/\bingenieur patrimonial\b/, 9],
       [/\bpatrimonial(?:e)?\b/, 6],
       [/\bwealth\b/, 8],
-      [/\bfamily office\b/, 9],
+      [/\bfamily office(?:r)?\b/, 9],
     ],
   },
   {
     id: 'actuariat-assurance',
     label: 'Actuariat & Assurance technique',
     patterns: [
-      [/\bactuar/, 9],
+      [/\bactuai?r/, 9],  // 'actuaire' (FR) ET 'actuarial' (EN) : \bactuar seul rate actuaire
       [/\bprovisionnement\b/, 9],
       [/\btarification\b/, 7],
       [/\bpricing actuary\b/, 10],
@@ -304,6 +367,13 @@ const FAMILIES = [
       [/\bgestionnaire de contrats?\b/, 7],
       [/\bgestionnaire redacteur\b/, 7],
       [/\bassurance (?:des )?emprunteur/, 8],
+      [/\bprestations? (?:sante|retraite|beneficiaires?)\b/, 8],
+      [/\bgestionnaire (?:retraite|prevoyance|assurance)\b/, 8],
+      [/\bretraite complementaire\b/, 8],
+      [/\boperations? (?:d )?assurance\b/, 8],
+      [/\bassurances? collectives?\b/, 7],
+      [/\bassurance de personnes\b/, 7],
+      [/\bcourtage\b/, 6],
     ],
   },
   {
@@ -352,6 +422,11 @@ const FAMILIES = [
       [/\basset (?:&|and) liability\b/, 8],
       [/\bactif passif\b/, 8],
       [/\bcredit management\b/, 8],
+      [/\brecouvrement\b/, 6],
+      [/\bfinance corporate\b/, 8],
+      [/\btransfer pricing\b/, 9],
+      [/\bgestion(?:naire)? financier(?:e)? (?:des contrats)?\b/, 7],
+      [/\badministratif et financier\b/, 7],
       [/\bgestion du bilan\b/, 9],
       [/\bliquidite\b/, 8],
     ],
@@ -414,6 +489,15 @@ const FAMILIES = [
       [/\bdonnees reglementaires\b/, 7],
       // Cotation des entreprises a la Banque de France = analyse credit
       [/\banalyste (?:entreprises?|groupes?)\b/, 7],
+      [/\bretablissement\b/, 8],
+      [/\bresolution\b/, 7],
+      [/\bsupervision de la notation\b/, 8],
+      [/\bagrements?\b/, 8],
+      [/\bcrises? bancaires?\b/, 9],
+      [/\bcredit\b/, 4],
+      [/\bcontroleur des (?:assurances|organismes)/, 9],
+      [/\bbcbs\b/, 9],
+      [/\bsolvency\b/, 8],
     ],
   },
   {
@@ -447,6 +531,15 @@ const FAMILIES = [
       [/\breferentiels?\b/, 7],
       [/\bcontrat(?:s)? financement\b/, 7],
       [/\brelationship manager\b/, 5],
+      [/\bmiddle officer\b/, 9],
+      [/\bclient operations? officer\b/, 9],
+      [/\bdata officer\b/, 7],
+      [/\bpositions keeping\b/, 9],
+      [/\btrade management\b/, 8],
+      [/\bfund (?:execution|distribution services)\b/, 9],
+      [/\bclearing\b/, 8],
+      [/\bcoupons?\b/, 7],
+      [/\bgestion documentaire\b/, 6],
     ],
   },
   {
@@ -474,6 +567,10 @@ const FAMILIES = [
       [/\bdonnees monetaires\b/, 7],
       [/\bqualite des donnees\b/, 7],
       [/\b(?:ia|ai) (?:&|et|and) data\b/, 6],
+      [/\banalyse de(?:s)? modeles?\b/, 8],
+      [/\bmodele interne\b/, 8],
+      [/\bmodeles? quantitatifs?\b/, 9],
+      [/\bdata modeler\b/, 8],
     ],
   },
   {
@@ -550,10 +647,13 @@ function classify(offer) {
   const structure = resolveStructure(offer.employer);
   const tags = TAGS.filter(([, res]) => res.some((re) => re.test(title))).map(([id]) => id);
 
-  // Etape 1 — pre-filtre
-  for (const [re, reason] of PREFILTER) {
-    if (re.test(title)) {
-      return { status: 'rejected', reason: `prefilter:${reason}`, structure, tags };
+  // Etape 1 — pre-filtre, sauf si l'intitule porte une exception explicite
+  const exempte = PREFILTER_EXCEPTIONS.some((re) => re.test(title));
+  if (!exempte) {
+    for (const [re, reason] of PREFILTER) {
+      if (re.test(title)) {
+        return { status: 'rejected', reason: `prefilter:${reason}`, structure, tags };
+      }
     }
   }
 
@@ -562,11 +662,7 @@ function classify(offer) {
   if (gated && !hasFinanceMarker(title)) {
     return {
       status: 'rejected',
-      // « absent-de-structures » et non « inconnu » : dans le pipeline de JJ, ces
-      // employeurs sont bien connus — ils sont dans maisons.txt — c'est la table
-      // des structures qui ne les porte pas encore. Le motif doit nommer ce qu'il
-      // mesure vraiment, sinon il oriente vers la mauvaise correction.
-      reason: structure ? `gate:${structure}-sans-marqueur` : 'gate:employeur-absent-de-structures',
+      reason: structure ? `gate:${structure}-sans-marqueur` : 'gate:employeur-inconnu',
       structure,
       tags,
     };

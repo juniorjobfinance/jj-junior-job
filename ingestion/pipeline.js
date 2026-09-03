@@ -1453,10 +1453,61 @@ function dureesExperienceCitees(texte) {
 // cinq ans ; « 0 à 3 ans » en demande trois. On lit donc le maximum.
 const EXPERIENCE_MAX_ANNEES = 3;
 
+// Séniorité pour les onglets stage / alternance / VIE. Liste ÉTROITE, et ce
+// n'est pas de la prudence mal placée : mesuré sur les 847 offres du
+// 03/09/2026, la liste large en écarte 14 dont 11 À TORT. « Manager »,
+// « responsable », « expert » et « lead » nomment une équipe ou un outil dans
+// un intitulé junior français — « Data Manager Reporting » est un stage chez
+// Rothschild, « Expert en Finance Durable » un stage chez Natixis. Ne figurent
+// ici que les mots qui ne peuvent nommer QU'UN GRADE.
+const SENIOR_TITRE_STRICT_RE = new RegExp(
+  [
+    `${AV}s[ée]niors?${AP}`,
+    `${AV}vp${AP}`,
+    `${AV}vice[\\s-]?presidents?${AP}`,
+    `${AV}direct(?:eur|rice|or)s?${AP}`,
+    `${AV}head of${AP}`,
+    `${AV}confirm(?:[ée]e?s?|ed)${AP}`,
+    `${AV}exp[ée]riment[ée]e?s?${AP}`,
+    `${AV}partners?${AP}`,
+    `${AV}principal${AP}`,
+  ].join('|'),
+  'i'
+);
+
+// Ce qui annule le marqueur. Un « Summer Analyst » ou un « Graduate » est un
+// poste d'entrée quoi qu'il porte ; « assistant » neutralise à lui seul
+// (« Assistant Responsable Comptable » est bien un assistant).
+//
+// L'exception « senior analyst en banque d'affaires » a été ÉCARTÉE : en
+// France c'est plus souvent un profil expérimenté qu'un grade d'entrée, et
+// l'enjeu total étant de trois offres, l'exception ajoutait du risque pour
+// rien.
+const JUNIOR_MALGRE_TOUT_RE = new RegExp(
+  [
+    `${AV}summer${AP}`,
+    `${AV}graduate${AP}`,
+    `${AV}juniors?${AP}`,
+    `${AV}apprenti(?:e|s|es)?${AP}`,
+    `${AV}alternants?${AP}`,
+    `${AV}assistant(?:e|s|es)?${AP}`,
+  ].join('|'),
+  'i'
+);
+
 function passesJuniorFilter(volet, title, descr, strict) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
   if (INDEPENDANT_RE.test(title || '')) return false;
-  if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
+  // Stage, alternance et VIE sont juniors PAR CONTRAT — mais seulement si le
+  // contrat a été lu. Il est deviné dans sept familles de connecteurs, et un
+  // « Comptable Général Senior » deviné en VIE passait ici sans que son
+  // intitulé soit jamais regardé. On le regarde désormais, avec la liste
+  // étroite : un grade explicite dans l'intitulé l'emporte sur un type de
+  // contrat qui, lui, peut être faux.
+  if (volet !== 'cdi-cdd') {
+    if (JUNIOR_MALGRE_TOUT_RE.test(title || '')) return true;
+    return !SENIOR_TITRE_STRICT_RE.test(title || '');
+  }
   if (SENIOR_RE.test(title)) return false;
 
   // Les durées citées passent AVANT tout le reste, y compris avant le mot

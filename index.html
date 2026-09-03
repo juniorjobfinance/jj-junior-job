@@ -1147,6 +1147,9 @@
     <h2>Famille métier</h2>
     <fieldset id="familles-fieldset"></fieldset>
 
+    <h2>Thématique</h2>
+    <fieldset id="tags-fieldset"></fieldset>
+
     <h2>Type de structure</h2>
     <select id="structure-filter" aria-label="Filtrer par type de structure">
       <option value="">Toutes structures</option>
@@ -1218,20 +1221,42 @@
   // les métiers d'investissement d'abord, puis le chiffre, puis le contrôle,
   // puis les fonctions techniques. Un étudiant qui cherche le M&A trouve
   // juste à côté les marchés et le capital-investissement.
+  // Quinze familles. Cette liste doit rester identique à celle de
+  // ingestion/classifier.js — controle-avant-passage.js échoue si les deux
+  // divergent, parce que la page a déjà affiché des familles vides le jour où
+  // elles ont dérivé.
+  //
+  // Deux ajouts de la refonte du 03/09 : « Financements & Coverage » (coverage,
+  // trade finance, financements structurés, DCM/ECM) et « Actuariat & Assurance
+  // technique » (actuariat, provisionnement, souscription, Solvabilité 2).
   var FAMILLES = [
     'Fusions & Acquisitions',
     'Marchés financiers',
+    'Financements & Coverage',
     'Capital-investissement',
     "Gestion d'actifs",
     'Banque privée & Patrimoine',
+    'Actuariat & Assurance technique',
     'Comptabilité & Consolidation',
     'Contrôle de gestion & Trésorerie',
     'Audit & Contrôle interne',
     'Risques & Conformité',
-    'Conseil & Transformation',
     'Opérations & Middle-office',
     'Data & Quant',
+    'Conseil & Transformation',
     'Autres métiers de la finance'
+  ];
+
+  // Les trois tags transversaux. Ils ne sont PAS des familles et ne doivent
+  // pas le devenir : les offres durables sont dans la gestion d'actifs
+  // (Mirova), le DCM (Natixis Green & Sustainable Debt), l'audit (Deloitte
+  // Auditeur ESG) et le capital-investissement (Ardian Sustainability). En
+  // faire une famille viderait les autres. Ils se cochent donc à part, et se
+  // cumulent entre eux comme avec les familles.
+  var TAGS = [
+    { id: 'esg', label: 'ESG & finance durable' },
+    { id: 'real-assets', label: 'Immobilier & infrastructure' },
+    { id: 'international', label: 'International' }
   ];
 
   // « Ce qu'il y a dedans » : la ligne grise sous chaque famille. Un étudiant
@@ -1269,6 +1294,8 @@
   var state = {
     volet: 'stage',
     familles: new Set(),
+    // Tags cochés. Un Set comme les familles : cumulables, et sans ordre.
+    tags: new Set(),
     structure: '',
     q: '',
     newOnly: false,
@@ -1290,6 +1317,7 @@
     var p = new URLSearchParams();
     if (state.volet !== 'stage') p.set('contrat', state.volet);
     if (state.familles.size) p.set('familles', [].concat(Array.from(state.familles)).join('|'));
+    if (state.tags.size) p.set('tags', [].concat(Array.from(state.tags)).join('|'));
     if (state.structure) p.set('structure', state.structure);
     if (state.lieu) p.set('lieu', state.lieu);
     if (state.emp) p.set('entreprise', state.emp);
@@ -1306,6 +1334,10 @@
     if (volet === 'stage' || volet === 'alternance' || volet === 'cdi-cdd' || volet === 'vie') state.volet = volet;
     var fam = p.get('familles');
     if (fam) fam.split('|').forEach(function (f) { if (FAMILLES.indexOf(f) !== -1) state.familles.add(f); });
+    var tg = p.get('tags');
+    if (tg) tg.split('|').forEach(function (t) {
+      if (TAGS.some(function (x) { return x.id === t; })) state.tags.add(t);
+    });
     var s = p.get('structure');
     if (s && STRUCTURES.indexOf(s) !== -1) state.structure = s;
     state.lieu = p.get('lieu') || '';
@@ -1350,6 +1382,7 @@
     tabs: Array.prototype.slice.call(document.querySelectorAll('nav.tabs button[role="tab"]')),
     filtersPanel: document.getElementById('filters-panel'),
     familleFieldset: document.getElementById('familles-fieldset'),
+    tagsFieldset: document.getElementById('tags-fieldset'),
     structureSelect: document.getElementById('structure-filter'),
     lieuSelect: document.getElementById('lieu-filter'),
     empSelect: document.getElementById('emp-filter'),
@@ -1386,6 +1419,26 @@
     });
   }
 
+  // Mêmes cases que les familles, mais sur un autre axe : une offre peut être
+  // « Gestion d'actifs » ET porter le tag esg, et le visiteur peut cumuler les
+  // deux filtres.
+  function buildTagsFieldset() {
+    els.tagsFieldset.innerHTML = TAGS.map(function (t, i) {
+      var id = 'tag-' + i;
+      return '<label class="famille-option" for="' + id + '">' +
+        '<span class="famille-nom"><input type="checkbox" id="' + id + '" value="' + t.id + '"> ' + t.label + '</span>' +
+        '<span class="count" data-tag="' + t.id + '"></span>' +
+        '</label>';
+    }).join('');
+    Array.prototype.forEach.call(els.tagsFieldset.querySelectorAll('input'), function (cb) {
+      cb.addEventListener('change', function () {
+        if (cb.checked) state.tags.add(cb.value); else state.tags.delete(cb.value);
+        state.page = 1;
+        render();
+      });
+    });
+  }
+
   function buildStructureSelect() {
     STRUCTURES.forEach(function (s) {
       var opt = document.createElement('option');
@@ -1407,6 +1460,12 @@
   }
 
   function zoneDe(offer) {
+    // Une trentaine de pays à une ou deux offres fragmentaient le filtre lieu
+    // en cinquante valeurs. Les VIE sont hors de France par nature : ils se
+    // regroupent sous une seule maille. Le pays reste sur la carte, où il
+    // compte vraiment pour le candidat. On lit `place`, déjà calculé à
+    // l'ingestion — aucune liste de pays n'est dupliquée ici.
+    if (offer.place && offer.place !== 'France') return 'À l\'étranger';
     return offer.zone || 'Lieu non précisé';
   }
 
@@ -1528,6 +1587,13 @@
   function matchesFilters(o) {
     if (state.newOnly && !isNew(o)) return false;
     if (state.familles.size && !state.familles.has(o.famille)) return false;
+    // Tags cumulables : cocher ESG et Immobilier demande les deux à la fois.
+    if (state.tags.size) {
+      var porte = o.tags || [];
+      var tous = true;
+      state.tags.forEach(function (t) { if (porte.indexOf(t) === -1) tous = false; });
+      if (!tous) return false;
+    }
     if (state.structure && o.sector !== state.structure) return false;
     if (state.lieu && zoneDe(o) !== state.lieu) return false;
     if (state.emp && maisonDe(o) !== state.emp) return false;
@@ -1923,6 +1989,7 @@
 
   els.resetBtn.addEventListener('click', function () {
     state.familles.clear();
+    state.tags.clear();
     state.structure = '';
     state.lieu = '';
     state.emp = '';
@@ -1997,6 +2064,7 @@
   window.addEventListener('resize', ecrireCompteurs);
 
   buildFamilleFieldset();
+  buildTagsFieldset();
   buildStructureSelect();
   buildTabCounts();
 
