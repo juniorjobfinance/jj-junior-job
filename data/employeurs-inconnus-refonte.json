@@ -1,54 +1,14 @@
 {
-  "genere": "2026-09-03T21:29:25.900Z",
-  "total": 66,
+  "genere": "2026-09-03T22:32:08.955Z",
+  "total": 42,
   "employeurs": [
-    {
-      "emp": "BPCE Solutions Informatiques",
-      "offres": 29
-    },
-    {
-      "emp": "Bank of America",
-      "offres": 14
-    },
-    {
-      "emp": "Eight Advisory",
-      "offres": 12
-    },
-    {
-      "emp": "Generali France",
-      "offres": 11
-    },
-    {
-      "emp": "Direct Assurance",
-      "offres": 10
-    },
-    {
-      "emp": "Mutuelle Saint-Christophe",
-      "offres": 10
-    },
     {
       "emp": "Sephora",
       "offres": 8
     },
     {
-      "emp": "Coface",
-      "offres": 7
-    },
-    {
-      "emp": "MUFG",
-      "offres": 6
-    },
-    {
-      "emp": "Parfums Christian Dior",
-      "offres": 6
-    },
-    {
       "emp": "Teora",
       "offres": 5
-    },
-    {
-      "emp": "Capco",
-      "offres": 4
     },
     {
       "emp": "Air Liquide",
@@ -59,32 +19,8 @@
       "offres": 4
     },
     {
-      "emp": "Santander",
-      "offres": 4
-    },
-    {
-      "emp": "Matmut",
-      "offres": 4
-    },
-    {
       "emp": "Indosuez Wealth Management",
       "offres": 4
-    },
-    {
-      "emp": "Maison Francis Kurkdjian",
-      "offres": 4
-    },
-    {
-      "emp": "BBVA",
-      "offres": 3
-    },
-    {
-      "emp": "ONEY",
-      "offres": 3
-    },
-    {
-      "emp": "Socfim",
-      "offres": 3
     },
     {
       "emp": "Adeo",
@@ -95,23 +31,11 @@
       "offres": 3
     },
     {
-      "emp": "Saint-Gobain",
-      "offres": 2
-    },
-    {
       "emp": "Accenture",
       "offres": 2
     },
     {
       "emp": "BPCE Solutions Immobilieres",
-      "offres": 2
-    },
-    {
-      "emp": "AEW",
-      "offres": 2
-    },
-    {
-      "emp": "Getlink",
       "offres": 2
     },
     {
@@ -131,31 +55,11 @@
       "offres": 2
     },
     {
-      "emp": "GIE AXA",
-      "offres": 2
-    },
-    {
-      "emp": "Groupe Bon Marché",
-      "offres": 2
-    },
-    {
-      "emp": "Officine Universelle Buly",
-      "offres": 2
-    },
-    {
-      "emp": "Jefferies",
-      "offres": 2
-    },
-    {
       "emp": "Swile",
       "offres": 1
     },
     {
       "emp": "Agicap",
-      "offres": 1
-    },
-    {
-      "emp": "LSEG",
       "offres": 1
     },
     {

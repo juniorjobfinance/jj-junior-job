@@ -1326,45 +1326,11 @@ const AP_ = `['’]`;
 // choix de portée délibéré, pas un oubli.
 const NOMBRE_SENIOR_FR = '(?:[4-9]|[1-9]\\d|quatre|cinq|six|sept|huit|neuf|dix)';
 
-const DESCR_SENIOR_RE = new RegExp(
-  [
-    // FR — "4 ans d'expérience", "3 à 5 ans d'expérience" (on lit la borne
-    // haute : un poste "3 à 5 ans" recrute un profil confirmé).
-    // « et » compte autant que « à » : « entre 3 et 5 ans » est la tournure
-    // la plus courante des annonces françaises, et elle passait entière.
-    `\\b\\d+\\s*(?:à|a|-|/|et|ou)\\s*${NOMBRE_SENIOR_FR}\\s*ans?`,
-    // Même fourchette en anglais : « between 3 and 5 years ».
-    `\\b\\d+\\s*(?:to|and|-|/)\\s*([4-9]|[1-9]\\d)\\s*years?`,
-    `\\b${NOMBRE_SENIOR_FR}\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
-    // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
-    `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+${NOMBRE_SENIOR_FR}\\s*ans?`,
-    // Le seuil est à QUATRE ans, pas trois : la cible annoncée est « 0-3 ans »,
-    // donc une offre qui demande « minimum 3 ans » reste dans le périmètre —
-    // c'est sa borne haute. À partir de quatre, le poste n'est plus junior.
-    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?${NOMBRE_SENIOR_FR}\\s*ans?`,
-    `\\b${NOMBRE_SENIOR_FR}\\s*\\+\\s*ans?`,
-    `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative`,
-    `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste`,
-    `justifiez\\s+d${AP_}?\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
-    // EN — "5 years of experience", "5+ years", "10 years in Sales Operations".
-    // On exige un mot d'expérience derrière le nombre : sans cette contrainte,
-    // "Master's degree (5 years of study)" ferait sortir un vrai junior.
-    `\\b([4-9]|[1-9]\\d)\\s*(?:\\+|to\\s*\\d+|-\\s*\\d+)?\\s*years?` +
-      `(?:\\s+of)?\\s+(?:relevant\\s+|professional\\s+|proven\\s+|solid\\s+|hands-?on\\s+|work\\s+|prior\\s+)*` +
-      `(?:experience|expertise|in\\b|as\\s+a)`,
-    `\\b([4-9]|[1-9]\\d)\\s*\\+\\s*years?\\s+(?:of\\s+)?(?:relevant\\s+|professional\\s+)*experience`,
-    `(?:minimum|at\\s+least|min\\.?)\\s+(?:of\\s+)?([4-9]|[1-9]\\d)\\s*years?\\s+(?:of\\s+)?(?:\\w+\\s+){0,2}experience`,
-    `proven\\s+(?:track\\s+record|experience)|extensive\\s+experience|senior\\s+level`,
-  ].join('|'),
-  'i'
-);
 
 // À l'inverse, une mention explicite d'ouverture aux débutants l'emporte.
 // Tous les synonymes de « on prend un jeune ». C'est la porte de sortie du
 // mode strict : une annonce qui se déclare ouverte aux débutants est publiée
 // même si rien d'autre ne permet de vérifier le niveau.
-const DESCR_JUNIOR_RE =
-  /d[ée]butant[e]?s?\s+(?:accept|bienvenu|welcome)|jeune\s+dipl[ôo]m|premi[èe]re\s+exp[ée]rience|sans\s+exp[ée]rience|profil\s+junior|ouvert\s+aux\s+d[ée]butants|sortie?\s+d['’]?[ée]cole|\bjunior\b|\bd[ée]butant|entry[\s-]?level|graduate\s+program|no\s+experience\s+required/i;
 
 // Les "candidatures spontanées" ne sont pas des offres : ce sont des
 // formulaires de dépôt de CV, sans poste réel derrière. Les afficher
@@ -1476,42 +1442,6 @@ const VENTE_HORS_FINANCE_RE =
 // d'en publier une seule qui demande sept ans d'expérience. Un candidat qui
 // tombe sur un poste hors de sa portée, sur un site qui promet du 0-3 ans, ne
 // revient pas.
-// Toutes les durées d'expérience citées par une annonce, en années.
-//
-// On ne cherche plus des tournures : on cherche des NOMBRES suivis d'« ans »
-// ou d'« années », puis on regarde autour d'eux si l'on parle bien
-// d'expérience professionnelle. Cette inversion est tout l'objet de la
-// refonte — une annonce peut écrire son exigence de mille façons, elle finit
-// toujours par un nombre et le mot « ans ».
-//
-// Trois garde-fous, chacun payé par un faux positif observé :
-//   - au-delà de vingt ans, ce n'est plus une exigence mais l'âge de la
-//     maison (« façonné par plus de 145 ans d'expérience », Indosuez) ;
-//   - « 5 années d'études » ou « Bac+5 » décrivent un diplôme, pas un poste ;
-//   - le mot « expérience » doit être proche, sinon « 3 000 consultants
-//     depuis 48 bureaux » ferait sortir un stage.
-const ANNEES_RE = /(\d{1,2})\s*(?:\+\s*)?(?:ans?|ann[ée]es?|years?)\b/gi;
-const CONTEXTE_EXPERIENCE_RE = /exp[ée]rience|experience|exp\./i;
-const CONTEXTE_A_IGNORER_RE =
-  /[ée]tudes?|study|studies|dipl[ôo]m|bac\s*\+|scolarit|cursus|formation|anciennet[ée]|fond[ée]e?\s+en|depuis\s+plus|histoire|history|savoir[\s-]faire|contrat de|dur[ée]e (?:du|de la|d[eu]) (?:contrat|mission|stage)|\bcdd\b de/i;
-
-function dureesExperienceCitees(texte) {
-  const trouvees = [];
-  if (!texte) return trouvees;
-  for (const m of String(texte).matchAll(ANNEES_RE)) {
-    const n = parseInt(m[1], 10);
-    if (!Number.isFinite(n) || n < 1 || n > 20) continue;
-    // La fenêtre est large devant (« une expérience réussie de 5 ans ») et
-    // plus courte derrière (« 5 ans d'expérience »).
-    const avant = texte.slice(Math.max(0, m.index - 90), m.index);
-    const apres = texte.slice(m.index, m.index + 60);
-    const fenetre = avant + apres;
-    if (!CONTEXTE_EXPERIENCE_RE.test(fenetre)) continue;
-    if (CONTEXTE_A_IGNORER_RE.test(fenetre)) continue;
-    trouvees.push(n);
-  }
-  return trouvees;
-}
 
 // La borne haute de ce qu'une annonce réclame. « Entre 3 et 5 ans » demande
 // cinq ans ; « 0 à 3 ans » en demande trois. On lit donc le maximum.
@@ -1652,14 +1582,24 @@ function dureeExperienceMax(texte) {
  */
 function verdictSenioriteDescr(texte) {
   const t = String(texte || '');
-  if (!t) return { _expMax: null, _formuleSeniorite: null, _vetoJunior: false };
+  if (!t) return { _expMax: null, _formuleSeniorite: null, _vetoJunior: false, _verdictSur: 0 };
   const formule = (FORMULES_SENIORITE.find(([re]) => re.test(t)) || [])[1] || null;
   // Prefixe `_` : ce sont des champs de travail, jamais publies. Ils doivent
   // AUSSI figurer dans la liste de writeOutput, qui ne retire que ce qu elle
   // nomme — le prefixe seul ne protege de rien.
-  return { _expMax: dureeExperienceMax(t), _formuleSeniorite: formule, _vetoJunior: VETO_JUNIOR_DESCR.test(t) };
+  return {
+    _expMax: dureeExperienceMax(t),
+    _formuleSeniorite: formule,
+    _vetoJunior: VETO_JUNIOR_DESCR.test(t),
+    // Sur quelle longueur ce verdict a ete rendu. C'est ce chiffre qui permet
+    // de verifier, avant publication, quil couvre bien la description finale.
+    _verdictSur: t.length,
+  };
 }
-function passesJuniorFilter(volet, title, descr, strict) {
+// L'offre entière, et non ses champs un par un : le verdict de séniorité est
+// calculé à l'ingestion, sur le texte ENTIER, et voyage avec elle.
+function passesJuniorFilter(offre, strict) {
+  const { volet, title } = offre;
   if (SPONTANEOUS_RE.test(title || '')) return false;
   if (INDEPENDANT_RE.test(title || '')) return false;
   // Stage, alternance et VIE sont juniors PAR CONTRAT — mais seulement si le
@@ -1674,22 +1614,24 @@ function passesJuniorFilter(volet, title, descr, strict) {
   }
   if (SENIOR_RE.test(title)) return false;
 
-  // Les durées citées passent AVANT tout le reste, y compris avant le mot
-  // « junior ». Une annonce intitulée « Junior Consultant » qui réclame cinq
-  // ans n'est pas une offre junior : le chiffre est la donnée dure, le
-  // qualificatif est du vocabulaire de marque.
-  const durees = dureesExperienceCitees(descr);
-  if (durees.some((n) => n > EXPERIENCE_MAX_ANNEES)) return false;
+  // Le CHIFFRE passe avant tout, y compris avant le veto : une annonce qui
+  // s'intitule « Junior Consultant » et réclame cinq ans n'est pas junior.
+  // Le nombre est la donnée dure, le reste est du vocabulaire de marque.
+  if (offre._expMax != null && offre._expMax > EXPERIENCE_MAX_ANNEES) return false;
 
-  if (descr) {
-    if (DESCR_SENIOR_RE.test(descr)) return false; // « confirmé », « expertise »
-    if (DESCR_JUNIOR_RE.test(descr)) return true; // ouverture explicite
-    // Une durée citée et compatible vaut acceptation : « 2 ans » est un
-    // niveau annoncé, pas un silence — c'est même le cas le plus fréquent
-    // des offres qui conviennent.
-    if (durees.length) return true;
-    return true; // description lue, aucun signal contraire
-  }
+  // Le veto n'annule qu'un rejet fondé sur la DESCRIPTION. L'intitulé, lui,
+  // a déjà tranché plus haut : un « Senior Manager » reste écarté quoi que
+  // dise sa prose. La description est longue et finit toujours par mentionner
+  // un junior ; l'intitulé est court et il engage l'employeur.
+  if (offre._vetoJunior) return true;
+
+  // « expérience confirmée », « significative », « solide expérience » : les
+  // trois seules formules qui ne peuvent rien vouloir dire d'autre.
+  if (offre._formuleSeniorite) return false;
+
+  // Une description lue sans signal contraire vaut acceptation.
+  if (offre._descr) return true;
+
   if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
   return !strict;
 }
@@ -3656,6 +3598,17 @@ async function completerDatesManquantes(offers) {
         continue;
       }
       if (f.descr) o._descr = f.descr;
+      // Le verdict vient du cache, calcule a l epoque sur le texte ENTIER.
+      // Le recalculer sur f.descr, qui est deja tronque, reintroduirait le
+      // defaut qu on vient de corriger.
+      if ('_expMax' in f) {
+        o._expMax = f._expMax;
+        o._formuleSeniorite = f._formuleSeniorite;
+        o._vetoJunior = f._vetoJunior;
+        // La longueur suit le verdict : sans elle, le controle d invariant
+        // comparerait la fiche restauree a une mesure faite sur le connecteur.
+        o._verdictSur = f._verdictSur;
+      }
       if (f.postedAt) {
         o._postedAt = f.postedAt;
         o._dateRecuperee = true;
@@ -3733,10 +3686,21 @@ async function completerDatesManquantes(offers) {
             // un encadré — le cas du Crédit Agricole, et de son banquier
             // conseil à « 6 - 10 ans » resté en ligne.
             const morceaux = [o._descr, fiche.description, texteDeLaPage(texteHtml)];
-            o._descr = morceaux.filter(Boolean).join(' ').slice(0, 16000) || o._descr;
+            // Le texte complet sert a l ANALYSE ; seul le stockage est borne.
+            const complet = morceaux.filter(Boolean).join(' ');
+            if (complet) {
+              Object.assign(o, verdictSenioriteDescr(complet));
+              o._descr = complet.slice(0, LIMITE_DESCR);
+            }
 
             // Retenu pour le cache : c'est ce qui coute cher a aller chercher.
             fichesRattrapees.set(o.url, {
+              // Le verdict est mis en cache AVEC le texte : au rejeu, il ne sera
+              // pas recalcule sur une version tronquee de la fiche.
+              _expMax: o._expMax,
+              _formuleSeniorite: o._formuleSeniorite,
+              _vetoJunior: o._vetoJunior,
+              _verdictSur: o._verdictSur,
               descr: o._descr,
               postedAt: fiche.date || null,
               dateEstMiseAJour: fiche.dateEstMiseAJour === true,
@@ -4050,7 +4014,7 @@ function writeOutput(offers) {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
       _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
       // Analyse de séniorité : champs de travail, jamais publiés.
-      _expMax, _formuleSeniorite, _vetoJunior,
+      _expMax, _formuleSeniorite, _vetoJunior, _verdictSur,
       // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
       _voletCorrige,
       ...rest
@@ -4319,7 +4283,7 @@ async function run() {
       `${coupeesZombies} écartées : plus de ${MAX_AGE_JOURS_ATS_DIRECT} j même chez l'employeur).`
   );
 
-  const junior = fraiches.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr));
+  const junior = fraiches.filter((o) => passesJuniorFilter(o));
   console.log(
     `[pipeline] ${junior.length} offres après filtre junior 0-3 ans (${fraiches.length - junior.length} écartées : senior/confirmé).`
   );
@@ -4393,7 +4357,7 @@ async function run() {
   // séniorité n'était jugée que sur l'intitulé, et un poste demandant cinq ans
   // d'expérience passait dès que son titre ne disait pas « senior ».
   const avantSeniorite = final.length;
-  const publiables = final.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr, true));
+  const publiables = final.filter((o) => passesJuniorFilter(o, true));
   // Deux motifs de rejet, comptés séparément : on veut voir lequel domine.
   // « la description dit sept ans » est le but recherché ; « on n'a pas pu lire
   // la description » est le prix de la rigueur, et s'il devenait majoritaire il
@@ -4461,6 +4425,34 @@ async function run() {
         '  tombe alors à zéro et le garde-fou bloque la publication. À surveiller si\n' +
         '  cela se répète plusieurs matins de suite.\n'
     );
+  }
+
+  // INVARIANT : un verdict de seniorite rendu sur moins que la description
+  // finale est un verdict rendu a l'aveugle. Trois defauts differents ont
+  // produit ce cas ce soir ; on controle le point commun, pas les causes.
+  {
+    const aveugles = publiables.filter(
+      (o) =>
+        o.volet === 'cdi-cdd' &&
+        o._descr &&
+        (o._verdictSur == null || o._verdictSur < String(o._descr).length)
+    );
+    if (aveugles.length) {
+      const ex = aveugles[0];
+      console.error('\n[pipeline] PUBLICATION ANNULEE — verdict de seniorite incomplet :');
+      console.error(
+        `  ${aveugles.length} offre(s) CDI-CDD portent un verdict rendu sur MOINS de texte\n` +
+          `  que leur description finale. Le filtre 0-3 ans les a donc jugees sur une\n` +
+          `  entree incomplete, sans le signaler.\n\n` +
+          `  Exemple : ${ex.emp} — ${String(ex.title).slice(0, 50)}\n` +
+          `            verdict rendu sur ${ex._verdictSur} caracteres, description finale ${String(ex._descr).length}.\n\n` +
+          `  Cause probable : la description a change apres le calcul du verdict.\n` +
+          `  Tout endroit qui ecrit _descr doit recalculer verdictSenioriteDescr\n` +
+          `  sur le texte ENTIER, avant toute troncature.`
+      );
+      process.exitCode = 1;
+      return;
+    }
   }
 
   const anomalies = anomaliesDePublication(publiables);

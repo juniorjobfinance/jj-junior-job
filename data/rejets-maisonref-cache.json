@@ -1,0 +1,268 @@
+{
+  "genere": "2026-09-03T22:32:39.877Z",
+  "total": 29,
+  "dont_classees": 29,
+  "offres": [
+    {
+      "intitule": "Consolideur Comptabilite Bancaire",
+      "entreprise": "Crédit Foncier",
+      "volet": "cdi-cdd",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Chargé(e) des Risques Opérationnels, Conformité et Contrôles Permanents JUNIOR",
+      "entreprise": "Ensemble Protection Sociale",
+      "volet": "cdi-cdd",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Risques & Conformité",
+      "motif": null
+    },
+    {
+      "intitule": "Analyste Fonds d’Investissement Immobiliers",
+      "entreprise": "AEW",
+      "volet": "stage",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Capital-investissement",
+      "motif": null
+    },
+    {
+      "intitule": "Conseiller Patrimonial",
+      "entreprise": "Banque de Savoie",
+      "volet": "cdi-cdd",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Banque privée & Patrimoine",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable",
+      "entreprise": "Axians Fibre IDF",
+      "volet": "alternance",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable",
+      "entreprise": "SAR",
+      "volet": "alternance",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable général / fournisseur / client",
+      "entreprise": "Citeos Grenoble",
+      "volet": "cdi-cdd",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable",
+      "entreprise": "VF HAUTE Provence",
+      "volet": "alternance",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Responsable administratif et comptable",
+      "entreprise": "Hestia",
+      "volet": "alternance",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable général / fournisseur / client",
+      "entreprise": "Division des Grands Projets",
+      "volet": "cdi-cdd",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Responsable Administratif et Comptable",
+      "entreprise": "Sunmind",
+      "volet": "cdi-cdd",
+      "source": "sitemapld:Vinci",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Analyste Fonds d’Investissement Immobiliers",
+      "entreprise": "AEW",
+      "volet": "stage",
+      "source": "bpce:Natixis",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Capital-investissement",
+      "motif": null
+    },
+    {
+      "intitule": "Contrôleur de Gestion Senior",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Régleur de Sinistres Corporel Auto",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Contrôleur de Gestion",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Responsable d'Equipe Sinistres Auto",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Régleur de Sinistres DAB/MRH/RC MAT",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Chargé de Souscription/ Gestionnaire Polyvalent Flottes Automobiles",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Responsable d'équipes sinistres DAB et RC",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Gestionnaire de recours sinistres",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Chargé(e) d’Etudes actuarielles - Tarification produit IARD",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Référent(e) Souscripteur Conseil Flotte automobile",
+      "entreprise": "Mutuelle Saint-Christophe",
+      "volet": "cdi-cdd",
+      "source": "axafr",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Actuariat & Assurance technique",
+      "motif": null
+    },
+    {
+      "intitule": "Assistant(e) Contrôle de Gestion Europe",
+      "entreprise": "Chaumet",
+      "volet": "stage",
+      "source": "lvmh",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Assistant Controlling",
+      "entreprise": "Rimowa",
+      "volet": "stage",
+      "source": "lvmh",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Apprentice - Junior Cost Controller - Store Planning Europe",
+      "entreprise": "Tiffany & Co.",
+      "volet": "alternance",
+      "source": "lvmh",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Comptable Mainland Europe",
+      "entreprise": "BeneFit Cosmetics",
+      "volet": "cdi-cdd",
+      "source": "lvmh",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Contrôle de Gestion Krug",
+      "entreprise": "Krug",
+      "volet": "alternance",
+      "source": "lvmh",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
+      "motif": null
+    },
+    {
+      "intitule": "Investment Banking Off-Cycle Programme Paris - Generalist Team (January start)",
+      "entreprise": "Jefferies",
+      "volet": "stage",
+      "source": "talentlink:jefferies.tal.net",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Fusions & Acquisitions",
+      "motif": null
+    },
+    {
+      "intitule": "Investment Banking Off Cycle Programme Paris – Consumer Team (January start)",
+      "entreprise": "Jefferies",
+      "volet": "stage",
+      "source": "talentlink:jefferies.tal.net",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Fusions & Acquisitions",
+      "motif": null
+    }
+  ]
+}

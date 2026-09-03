@@ -1,13 +1,13 @@
 {
-  "genere": "2026-09-03T21:29:25.897Z",
-  "total": 362,
+  "genere": "2026-09-03T22:32:08.951Z",
+  "total": 454,
   "offres": [
     {
       "title": "Manager - Finance",
       "emp": "Capco",
       "source": "greenhouse:capco",
       "url": null,
-      "structure": null
+      "structure": "conseil"
     },
     {
       "title": "Finance Business Partner (Portugal & Upmarket)",
@@ -45,11 +45,32 @@
       "structure": "fintech"
     },
     {
+      "title": "Head of Performance Management WEAR",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Sales Development Representative",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Arbitre Groupe Caution",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
       "title": "Account officer",
       "emp": "Coface",
       "source": "smartrecruiters:coface",
       "url": null,
-      "structure": null
+      "structure": "assurance"
     },
     {
       "title": "Senior - Responsable d'un portefeuille BIC",
@@ -451,32 +472,60 @@
       "structure": "assurance"
     },
     {
+      "title": "Proposition Sales Specialist - LSEG Workspace",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Senior-Proposition-Sales-Specialist---LSEG-Workspace_R0122609",
+      "structure": "fintech"
+    },
+    {
       "title": "Account Manager Apprentice (24-Month Apprenticeship)",
       "emp": "LSEG",
       "source": "workday:lseg",
       "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Manager-Apprentice--24-Month-Apprenticeship-_R0122875",
-      "structure": null
+      "structure": "fintech"
+    },
+    {
+      "title": "Application Support Engineer",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/CDSClear-IT-Site-Reliability-Engineer_R0118519-1",
+      "structure": "fintech"
     },
     {
       "title": "Account Manager, Regionally Managed Accounts",
       "emp": "LSEG",
       "source": "workday:lseg",
       "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Manager--Customer-Connect_R0121985",
-      "structure": null
+      "structure": "fintech"
+    },
+    {
+      "title": "Lead Cloud DBA (Database Engineer)",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Lead-Cloud-DBA--Database-Engineer-_R0121111-1",
+      "structure": "fintech"
+    },
+    {
+      "title": "Intern",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Intern_R0121261",
+      "structure": "fintech"
     },
     {
       "title": "Account Manager",
       "emp": "LSEG",
       "source": "workday:lseg",
       "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Account-Manager_R0121015",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Account Director",
       "emp": "LSEG",
       "source": "workday:lseg",
       "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Director_R0119184",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Manager/Senior Manager - Reporting de durabilité - Banque",
@@ -577,25 +626,571 @@
       "structure": "assurance"
     },
     {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1610456",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Product Analyst II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Product-Analyst-II_Req1608862",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1601746",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Advogado III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Advogado-III_Req1605011",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst II (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-II--Java-_Req1600260",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1608915",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/PAULINIA/Espec-Clientes-B1-High_Req1599551",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes Select High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-Select-High_Req1610224",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Transaction Bkg Manager II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Transaction-Bkg-Manager-II_Req1600775",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1608090",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Product Associate I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Product-Associate-I_Req1599026",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1607356",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Specialist",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Specialist_Req1608060",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Santander II 8h",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Santander-II-8h_Req1608916",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Lider Sr Investimentos",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Lider-Sr-Investimentos_Req1554392",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Produtos II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Produtos-II_Req1607961",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1562401",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1576016",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1598541",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-II_Req1589735",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589340",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589337",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589725",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Customer-Interaction-III_Req1607983",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes Select High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-Select-High_Req1578736",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1601144",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SSD Brasil - Cyber Analyst II (Gestão de Identidades e Acessos)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SSD-Brasil---Cyber-Analyst-II--Gesto-de-Identidades-e-Acessos-_Req1600654",
+      "structure": "banque-detail"
+    },
+    {
       "title": "Expert Gestao Capital",
       "emp": "Santander",
       "source": "workday:santander",
       "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Expert-Gestao-Capital_Req1607089",
-      "structure": null
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Pag Rec NT II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Pag-Rec-NT-II_Req1601939",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Engineer Spec IV (Engenheiro de Dados)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Engineer-Spec-IV--Engenheiro-de-Dados-_Req1607513",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SANB Consultor (a) de Vendas Externas | Santana - SP",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Coml-Prod-Financ-SANB_Req1601281",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Lider Neg Imob",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Lider-Neg-Imob_Req1607501",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Expert Customer Interaction",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Expert-Customer-Interaction_Req1589730",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Especialista (S3)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Especialista--S3-_Req1565267-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1594187",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1601317",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1_Req1606915",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SANB Consultor (a) de Vendas Externas | Jaraguá - SP",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SANB-Consultor--a--de-Vendas-Externas---Jaragu---SP_Req1601280",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Operacoes III (TLS)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Operacoes-III--TLS-_Req1594596",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Estagiario-J6_Req1599269",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Coml Neg Imob PJ IV",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Coml-Neg-Imob-PJ-IV_Req1601661",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec IV (AppSec)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Cyber-Security-Spec-IV_Req1538485",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1598844",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1599218",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Team Lider Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Team-Lider-Consorcio_Req1601291",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst II (Engenheiro de Dados)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-II--Engenheiro-de-Dados-_Req1600930",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1601677",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Gestao Governanca II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Gestao-Governanca-II_Req1600487",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1580385",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1578735",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Patri Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Patri-Consorcio_Req1601065",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SSD Brasil - IT Engineer Spec IV (Monitoramento)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SSD-Brasil---IT-Engineer-Spec-IV--Monitoramento-_Req1600505",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Especialista de Planejamento Comercial Estratégico",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Especialista-Snior-de-Planejamento-Comercial-Estratgico_Req1600718",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec II (BISO)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Cyber-Security-Spec-II_Req1601028",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec IV (Purple Team)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Cyber-Security-Spec-IV_Req1588994",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-High_Req1600507",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-High_Req1599925",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Pag Rec NT II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Pag-Rec-NT-II_Req1593016",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1595383",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1598733",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst I (Engenheiro de Dados) - Pessoa com Deficiência",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-I--Engenheiro-de-Dados----Pessoa-com-Deficincia_Req1579730",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Data Management Spec III - Pessoa com Deficiência",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Data-Management-Spec-III---Pessoa-com-Deficincia_Req1600124",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1563605",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Estagiario-J6_Req1595870",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Exp Cliente II (Data Analytics)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Exp-Cliente-II_Req1563362-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B2 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B2-I_Req1595961",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Patri Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Patri-Consorcio_Req1582647",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Lapa, Pinheiros, Vila Leopoldina/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB---Lapa--Pinheiros--Vila-Leopoldina-SP--Clientes-Pessoa-Jurdica-_Req1575852",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Itaquera e Tiradentes/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB----Itaquera-e-Tiradentes-SP--Clientes-Pessoa-Jurdica-_Req1575840",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Bom Retiro/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB----Bom-Retiro-SP---Clientes-Pessoa-Jurdica-_Req1550639",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo/a de Recuperacion (Playa del Carmen, Quintana Roo)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Quintana-Roo-Solidaridad-77710/Diferida---Asesor-a-Financiero-Cobranza--Playa-del-Carmen--Quintana-Roo-_JR00091647",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Evergreen Asesoría Digital (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Evergreen-Asesora-Digital--San-Luis-Potos--SLP-_JR00103498",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Especialista de Recuperaciones II (Tlaxcala,Tlax)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Quintana-Roo-Solidaridad-77710/Especialista-de-Recuperaciones-II--Tlaxcala-Tlax-_JR00112978",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo/a Hipotecario II Mx 3 (Veracruz, Ver.)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Veracruz-91700/EJECUTIVO-HIPOTECARIO-REAL-ESTATE-II-MX-3_JR00110378",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo PyME Jr. (Xalapa, Veracruz)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Xalapa-91190/Ejecutivo-PyME-Jr--Xalapa--Veracruz-_JR00112908-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Dirección de Oficina H&C BP&P (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78390/Direccin-de-Oficina-H-C-BP-P--San-Luis-Potos--SLP-_JR00113493",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Banquero/a JR (Zona Córdoba, Veracruz)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Tierra-Blanca-95100/Banquero-a-JR--Tierra-Blanca--Veracruz-_JR00088634",
+      "structure": "banque-detail"
     },
     {
       "title": "Especialista en Financiamiento o Promoción de Negocio en Banca de Empresas (Veracruz)",
       "emp": "BBVA",
       "source": "workday:bbva",
       "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Veracruz-91700/Especialista-en-Financiamiento-o-Promocin-de-Negocio-en-Banca-de-Empresas--Veracruz-_JR00107356",
-      "structure": null
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Asociado/a de Seguridad Física (San Luis Potosí, SLP.)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Asociado-a-de-Seguridad-Fsica--San-Luis-Potos--SLP-_JR00112231",
+      "structure": "banque-detail"
     },
     {
       "title": "Auditor/a de Taller Multiasistencia (San Luis Potosí, SLP)",
       "emp": "BBVA",
       "source": "workday:bbva",
       "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Auditor-a-de-Taller-Multiasistencia--San-Luis-Potos--SLP-_JR00111842",
-      "structure": null
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Evergreen Personal de Cajas (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Evergreen-Personal-de-Cajas--San-Luis-Potos--SLP-_JR00103508",
+      "structure": "banque-detail"
     },
     {
       "title": "Chargé d'études Formation (F-H)",
@@ -619,6 +1214,13 @@
       "structure": "fintech"
     },
     {
+      "title": "Chargé de Projets ISR",
+      "emp": "AEW",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-projets-isr-f-h",
+      "structure": "societe-gestion"
+    },
+    {
       "title": "Chargé d'affaires financements de projets",
       "emp": "Banque Populaire Rives de Paris",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -630,7 +1232,7 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Gestionnaire Clients Grands Comptes",
@@ -787,6 +1389,13 @@
       "structure": "banque-detail"
     },
     {
+      "title": "CRM Manager",
+      "emp": "ONEY",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/crm-manager-f-h",
+      "structure": "fintech"
+    },
+    {
       "title": "Chargé-e de gestion Professionnels de l'Immobilier",
       "emp": "Banque Populaire du Nord",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -861,14 +1470,14 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Business Analyste technique – Assurance non vie",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Chargé d'affaires",
@@ -987,7 +1596,7 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "VP / Director - Healthcare",
@@ -1204,7 +1813,7 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Chargé d'Affaires Marchés Pros",
@@ -1232,14 +1841,14 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Responsable de Domaine Banque à Distance",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Responsable technique MRH Matériel",
@@ -1365,14 +1974,14 @@
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Business Analyste technique – Assurance non vie",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
-      "structure": null
+      "structure": "fintech"
     },
     {
       "title": "Senior Research Analyst",
@@ -1435,13 +2044,6 @@
       "emp": "Scor",
       "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
       "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4841",
-      "structure": "assurance"
-    },
-    {
-      "title": "Sustainable Insurance",
-      "emp": "Scor",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4899",
       "structure": "assurance"
     },
     {
@@ -1592,20 +2194,6 @@
       "structure": "fintech"
     },
     {
-      "title": "Insurance Graduate Program",
-      "emp": "Alan",
-      "source": "ashby:alan",
-      "url": null,
-      "structure": "fintech"
-    },
-    {
-      "title": "Analytics and pricing expert - Insurance",
-      "emp": "Alan",
-      "source": "ashby:alan",
-      "url": null,
-      "structure": "fintech"
-    },
-    {
       "title": "Senior Customer Success Manager - France 🇫🇷",
       "emp": "Alan",
       "source": "ashby:alan",
@@ -1739,6 +2327,20 @@
       "structure": "assurance"
     },
     {
+      "title": "Responsable d'Inspecteurs Entreprises Nord-Est",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Private Markets Investment Specialists",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
       "title": "Chargé d'Affaires Caution & Garanties Confirmé",
       "emp": "Allianz France",
       "source": "phenom:careers.allianz.com",
@@ -1823,6 +2425,34 @@
       "structure": "assurance"
     },
     {
+      "title": "Gestionnaire Contrats Santé",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-contrats-sante-rouen-f-h_10804.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire technique Satisfaction Adhérent",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-satisfaction-adherent-f-h-f-h_10792.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire Contrat Santé BAYONNE",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-gestionnaire-contrat-sante-bayonne-f-h_10568.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire Contrat Santé ROUEN",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-gestionnaire-contrat-sante-rouen-f-h_10567.aspx",
+      "structure": "assurance"
+    },
+    {
       "title": "Gestionnaire CONTRATS FLOTTE AUTOMOBILE",
       "emp": "MAIF",
       "source": "talentsoft:recrutement.maif.fr",
@@ -1865,17 +2495,17 @@
       "structure": "entreprise"
     },
     {
-      "title": "Group Finance Control Expert - Others Activities Scope",
-      "emp": "CMA CGM",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Expert-%28MF%29-Others-Activities-Scope/1404257733/",
-      "structure": "entreprise"
-    },
-    {
       "title": "Group Finance Control Senior - Short term contract",
       "emp": "CMA CGM",
       "source": "successfactors:jobs.cmacgm-group.com",
       "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Senior-Short-term-contract/1421509233/",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Group Finance Control Expert - Others Activities Scope",
+      "emp": "CMA CGM",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Expert-%28MF%29-Others-Activities-Scope/1404257733/",
       "structure": "entreprise"
     },
     {
@@ -1900,17 +2530,17 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé de Mission Gestion de Crise",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-gestion-de-crise-26000HRD-fr",
-      "structure": "bfi"
-    },
-    {
       "title": "Assistant Chargé d'Opérations Garanties",
       "emp": "Société Générale",
       "source": "sitemapld:Société Générale",
       "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-charge-doperations-garanties-26000I8Z-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de Mission Gestion de Crise",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-gestion-de-crise-26000HRD-fr",
       "structure": "bfi"
     },
     {
@@ -2481,6 +3111,13 @@
       "structure": "assurance"
     },
     {
+      "title": "Assistant(e) Chef(fe) de projet Sécurité SI",
+      "emp": "Direct Assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-19688-alternance-assistant-e-chef-fe-de-projet-securite-si-f-h",
+      "structure": "assurance"
+    },
+    {
       "title": "AXA Health - Alternant Chargé de Gestion International",
       "emp": "AXA",
       "source": "axafr",
@@ -2492,6 +3129,13 @@
       "emp": "AXA",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-18568-analyste-fiscal-h-f-stage",
+      "structure": "assurance"
+    },
+    {
+      "title": "Reporting Analyst/ Developper",
+      "emp": "GIE AXA",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-16403-alternance-reporting-analyst-developper",
       "structure": "assurance"
     },
     {
@@ -2513,14 +3157,14 @@
       "emp": "Groupe Bon Marché",
       "source": "lvmh",
       "url": null,
-      "structure": null
+      "structure": "entreprise"
     },
     {
       "title": "Contrôleur(se) de Gestion",
       "emp": "Repossi",
       "source": "lvmh",
       "url": null,
-      "structure": null
+      "structure": "entreprise"
     },
     {
       "title": "Responsable Financier France & Monaco",

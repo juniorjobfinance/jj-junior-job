@@ -1,7 +1,7 @@
 {
-  "genere": "2026-09-03T21:29:25.901Z",
-  "total": 61,
-  "dont_classees": 61,
+  "genere": "2026-09-03T22:32:08.956Z",
+  "total": 29,
+  "dont_classees": 29,
   "offres": [
     {
       "intitule": "Consolideur Comptabilite Bancaire",
@@ -10,24 +10,6 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Comptabilité & Consolidation",
-      "motif": null
-    },
-    {
-      "intitule": "Manager d'équipe recouvrement",
-      "entreprise": "ONEY",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôleur de gestion/ Data Analyst Senior",
-      "entreprise": "Socfim",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
       "motif": null
     },
     {
@@ -49,48 +31,12 @@
       "motif": null
     },
     {
-      "intitule": "Auditeur Interne",
-      "entreprise": "ONEY",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Audit & Contrôle interne",
-      "motif": null
-    },
-    {
-      "intitule": "Manager Back Office crédits",
-      "entreprise": "Socfim",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Opérations & Middle-office",
-      "motif": null
-    },
-    {
-      "intitule": "Gestionnaire KYC",
-      "entreprise": "Socfim",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Risques & Conformité",
-      "motif": null
-    },
-    {
       "intitule": "Conseiller Patrimonial",
       "entreprise": "Banque de Savoie",
       "volet": "cdi-cdd",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Banque privée & Patrimoine",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôleur de Gestion",
-      "entreprise": "ONEY",
-      "volet": "cdi-cdd",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
       "motif": null
     },
     {
@@ -166,15 +112,6 @@
       "motif": null
     },
     {
-      "intitule": "Responsable pôle Stratégie Indemnisation Sinistres",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
       "intitule": "Contrôleur de Gestion Senior",
       "entreprise": "Mutuelle Saint-Christophe",
       "volet": "cdi-cdd",
@@ -193,48 +130,12 @@
       "motif": null
     },
     {
-      "intitule": "Performance et Transformation des sinistres vie & santé",
-      "entreprise": "GIE AXA",
-      "volet": "stage",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
       "intitule": "Contrôleur de Gestion",
       "entreprise": "Mutuelle Saint-Christophe",
       "volet": "cdi-cdd",
       "source": "axafr",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôleur financier & Data Analyst / STA)",
-      "entreprise": "GIE AXA",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Responsable d'Unité Managériale Sinistres",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôleur Interne - Cartographie des processus",
-      "entreprise": "Direct Assurance",
-      "volet": "stage",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Audit & Contrôle interne",
       "motif": null
     },
     {
@@ -292,102 +193,12 @@
       "motif": null
     },
     {
-      "intitule": "Manager d’équipe sinistres corporels",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Référent Technique Sinistres Polyvalents",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Manager Equipe Sinistres Polyvalents",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
       "intitule": "Référent(e) Souscripteur Conseil Flotte automobile",
       "entreprise": "Mutuelle Saint-Christophe",
       "volet": "cdi-cdd",
       "source": "axafr",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Gestionnaire de sinistres Polyvalent",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Gestionnaire de sinistres Corporel Auto",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Gestionnaire de sinistres Corporels MRH",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Gestionnaire de sinistres Auto Corporels",
-      "entreprise": "Direct Assurance",
-      "volet": "cdi-cdd",
-      "source": "axafr",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Actuariat & Assurance technique",
-      "motif": null
-    },
-    {
-      "intitule": "Finance – ASSISTANT(E) CONTROLE DE GESTION MARCHES & CAPEX",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Finance – ASSISTANT(E) CONTROLE DE GESTION CORPORATE & PILOTAGE DE PERFORMANCE EXTRAFINANCIERE",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôle de Gestion Europe",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
       "motif": null
     },
     {
@@ -402,87 +213,6 @@
     {
       "intitule": "Assistant Controlling",
       "entreprise": "Rimowa",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Comptable Général - Samaritaine",
-      "entreprise": "Groupe Bon Marché",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Comptabilité & Consolidation",
-      "motif": null
-    },
-    {
-      "intitule": "Assistant Contrôle Interne /NB",
-      "entreprise": "Maison Francis Kurkdjian",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Audit & Contrôle interne",
-      "motif": null
-    },
-    {
-      "intitule": "Assistant Contrôleur de Gestion /NB",
-      "entreprise": "Maison Francis Kurkdjian",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Consolideur - Saint Jean de Braye (45)",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Comptabilité & Consolidation",
-      "motif": null
-    },
-    {
-      "intitule": "Contrôleur interne et risques /NB",
-      "entreprise": "Maison Francis Kurkdjian",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Audit & Contrôle interne",
-      "motif": null
-    },
-    {
-      "intitule": "Comptable - Samaritaine",
-      "entreprise": "Groupe Bon Marché",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Comptabilité & Consolidation",
-      "motif": null
-    },
-    {
-      "intitule": "Controleur de Gestion Marches et Capex",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Assistant(e) Contrôle de Gestion - Opérations",
-      "entreprise": "Officine Universelle Buly",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Assistant(e) Contrôle de Gestion",
-      "entreprise": "Officine Universelle Buly",
       "volet": "stage",
       "source": "lvmh",
       "resultat_hypothetique": "classified",
@@ -508,30 +238,12 @@
       "motif": null
     },
     {
-      "intitule": "Pricing Analyst",
-      "entreprise": "Parfums Christian Dior",
-      "volet": "cdi-cdd",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Marchés financiers",
-      "motif": null
-    },
-    {
       "intitule": "Contrôle de Gestion Krug",
       "entreprise": "Krug",
       "volet": "alternance",
       "source": "lvmh",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Contrôle de gestion & Trésorerie",
-      "motif": null
-    },
-    {
-      "intitule": "Assistant Business & Pricing Analyst /NB",
-      "entreprise": "Maison Francis Kurkdjian",
-      "volet": "stage",
-      "source": "lvmh",
-      "resultat_hypothetique": "classified",
-      "famille_hypothetique": "Marchés financiers",
       "motif": null
     },
     {

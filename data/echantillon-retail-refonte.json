@@ -1,137 +1,105 @@
 {
-  "genere": "2026-09-03T21:29:25.903Z",
+  "genere": "2026-09-03T22:32:08.957Z",
   "motif": "prefilter:retail",
-  "total_rejete": 1590,
+  "total_rejete": 1575,
   "taille_echantillon": 40,
   "methode": "tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents",
   "offres": [
     {
-      "intitule": "Conseiller Financier - Mantes Castor 78",
-      "employeur": "Caisse d'Epargne Ile de France",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-mantes-castor-78"
-    },
-    {
-      "intitule": "Conseiller à distance",
+      "intitule": "Conseiller(e) Clientèle Particuliers - Guyane",
       "employeur": "BRED Banque Populaire",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-a-distance-f-h"
-    },
-    {
-      "intitule": "Conseiller Clientèle Particuliers",
-      "employeur": "Banque Populaire Aquitaine Centre Atlantique",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-f-h-4"
-    },
-    {
-      "intitule": "Agent Général d'Assurance - Indépendant - Dpt 62 Pas de Calais",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36382-agent-general-d-assurance-f-h-independant-dpt-62-pas-de-calais"
+      "url": "https://recrutement.bpce.fr/job/conseillere-clientele-particuliers-f-h-guyane"
     },
     {
       "intitule": "Chargé de Clientèle Particuliers",
-      "employeur": "Caisse d'Epargne Normandie",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f"
-    },
-    {
-      "intitule": "Chargé de clientèle professionnels",
-      "employeur": "Banque Populaire Méditerranée",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-professionnels-f-h-le-lavandou"
-    },
-    {
-      "intitule": "Conseiller Clientèle Particuliers Banque à distance Lille",
-      "employeur": "Groupe Crédit Coopératif",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-banque-a-distance-f-h-lille-cdi"
-    },
-    {
-      "intitule": "Conseiller.ère en Indemnisation Service Client Vol total",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026080006-conseiller-ere-en-indemnisation-service-client-vol-total-f-h-cdd-lyon"
-    },
-    {
-      "intitule": "Chargé de Clientèle Particuliers - MAINVILLIERS (28)",
       "employeur": "Caisse d'Epargne Loire Centre",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-f-h-mainvilliers-28"
+      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-briare"
     },
     {
-      "intitule": "Conseiller·ère Clientèle Particuliers",
-      "employeur": "LCL",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-conseillerere-clientele-particuliers-hf-reference--2026-114910--/"
+      "intitule": "Chargé d’Affaires Professionnels Ile de France Ouest",
+      "employeur": "BNP Paribas",
+      "structure": "Banque de financement et d'investissement",
+      "structureId": "bfi",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-ile-de-france-ouest-f-h"
     },
     {
-      "intitule": "Mandataire d’Assurance - Indépendant - Dpt 59 CAMBRAI",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36372-mandataire-d-assurance-f-h-independant-dpt-59-cambrai"
-    },
-    {
-      "intitule": "Conseiller Specialise en Credit",
-      "employeur": "Casden - Banque Populaire",
+      "intitule": "Gestionnaire Clientèle - Saône (25)",
+      "employeur": "Caisse d'Epargne Bourgogne Franche Comté",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-specialise-en-credit-f-h-paris"
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-clientele-f-h-saone-25-2"
     },
     {
-      "intitule": "Conseiller Relation Clients Assurance Vie",
+      "intitule": "Conseiller de Clientèle Particuliers",
+      "employeur": "Caisse d'Epargne CEPAC",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-particuliers-h-f-4"
+    },
+    {
+      "intitule": "Conseiller Bancaire Renfort",
+      "employeur": "BNP Paribas",
+      "structure": "Banque de financement et d'investissement",
+      "structureId": "bfi",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-renfort-h-f-25"
+    },
+    {
+      "intitule": "Conseiller Commercial en Protection Sociale Expérimenté - Carcassonne (11)",
       "employeur": "Allianz France",
-      "structure": "Compagnie d'assurance & mutuelle",
+      "structure": "Compagnies d'assurances et mutuelles",
       "structureId": "assurance",
       "source": "phenom:careers.allianz.com",
       "url": null
     },
     {
-      "intitule": "Agent Général d'Assurance - Indépendant - Dpt 80 ABBEVILLE",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36387-agent-general-d-assurance-f-h-independant-dpt-80-abbeville"
-    },
-    {
-      "intitule": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "phenom:careers.axa.com",
+      "intitule": "Courtier Mandataire - Paris Intramuros - 100% télétravail",
+      "employeur": "Meilleurtaux",
+      "structure": "Fintech et services financiers spécialisés",
+      "structureId": "fintech",
+      "source": "smartrecruiters:meilleurtaux",
       "url": null
     },
     {
-      "intitule": "Conseiller-ère Commercial",
+      "intitule": "Chargé d’Affaires Professionnels - Saint Quentin (78)",
+      "employeur": "BNP Paribas",
+      "structure": "Banque de financement et d'investissement",
+      "structureId": "bfi",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-territoire-de-saint-quentin-f-h"
+    },
+    {
+      "intitule": "Conseiller-ère Commercial-e",
       "employeur": "Banque Populaire du Nord",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-commercial-f-h"
+      "url": "https://recrutement.bpce.fr/job/cdd-conseiller-ere-commercial-e-f-h-2"
+    },
+    {
+      "intitule": "Conseiller Particulier",
+      "employeur": "Banque Populaire Grand Ouest",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-2"
+    },
+    {
+      "intitule": "Chargé d'Affaires Professionnels",
+      "employeur": "LCL",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-charge-d-affaires-professionnels-hf-reference--2026-110991--/"
     },
     {
       "intitule": "Conseiller Banque et Assurances",
@@ -142,84 +110,212 @@
       "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-13"
     },
     {
-      "intitule": "Conseiller Bancaire Renfort",
+      "intitule": "Conseiller Clientèle Particuliers",
       "employeur": "BNP Paribas",
-      "structure": "Banque de financement & d'investissement",
+      "structure": "Banque de financement et d'investissement",
       "structureId": "bfi",
       "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-bancaire-renfort-h-f-71"
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-clientele-particuliers-h-f-100"
     },
     {
-      "intitule": "Conseiller Commercial",
+      "intitule": "Expert en Assurances Collectives - Dpt 25 Doubs",
       "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/250006GT-expert-en-assurances-collectives-f-h-dpt-25-doubs"
+    },
+    {
+      "intitule": "Agent spécialisé en assurance de personnes - 86",
+      "employeur": "Swiss Life France",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H----86_R09173"
+    },
+    {
+      "intitule": "Conseiller Commercial itinérant - Dpt 81",
+      "employeur": "AXA",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_35534-conseiller-commercial-itinerant-f-h-cdi-dpt-81-tarn-et-garonne"
+    },
+    {
+      "intitule": "Conseiller Commercial - Arras",
+      "employeur": "AXA",
+      "structure": "Compagnies d'assurances et mutuelles",
       "structureId": "assurance",
       "source": "phenom:careers.axa.com",
       "url": null
     },
     {
-      "intitule": "Conseiller Clientèle Particuliers Renfort",
-      "employeur": "BNP Paribas",
-      "structure": "Banque de financement & d'investissement",
-      "structureId": "bfi",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-renfort-territoire-de-terres-de-l-yonne-f-h"
-    },
-    {
-      "intitule": "Agent Général d'Assurance - Indépendant",
+      "intitule": "Conseiller Commercial - Laon",
       "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
+      "structure": "Compagnies d'assurances et mutuelles",
       "structureId": "assurance",
-      "source": "phenom:careers.axa.com",
-      "url": null
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36530-conseiller-commercial-f-h-cdi-laon"
     },
     {
-      "intitule": "Conseiller d'Accueil AJACCIO / PROPRIANO",
+      "intitule": "Conseiller Financier - Secteur Enghien-les-bains 95",
+      "employeur": "Caisse d'Epargne Ile de France",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-secteur-enghien-les-bains-95-2"
+    },
+    {
+      "intitule": "Conseiller Clientèle Privée",
       "employeur": "LCL",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170478-3-conseiller-d-accueil-ajaccio--propriano-hf-reference--2025-96101--/"
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-conseiller-clientele-privee-hf-reference--2026-110006--/"
     },
     {
-      "intitule": "Gestionnaire Clientèle",
-      "employeur": "Caisse d'Epargne Midi-Pyrénées",
+      "intitule": "Conseiller Commercial Banque Digitale",
+      "employeur": "Caisse d'Epargne Ile de France",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/gestionnaire-clientele-h-f-pamiers"
+      "url": "https://recrutement.bpce.fr/job/conseiller-commercial-banque-digitale-h-f-evry-91"
     },
     {
-      "intitule": "Conseiller Commercial en Protection Sociale Expérimenté - Tarbes (65)",
+      "intitule": "Conseiller Specialise en Credit a Distance",
+      "employeur": "Casden - Banque Populaire",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-specialise-en-credit-a-distance-f-h"
+    },
+    {
+      "intitule": "Conseiller Commercial en Protection Sociale Expérimenté - Tarn (81)",
       "employeur": "Allianz France",
-      "structure": "Compagnie d'assurance & mutuelle",
+      "structure": "Compagnies d'assurances et mutuelles",
       "structureId": "assurance",
       "source": "phenom:careers.allianz.com",
       "url": null
     },
     {
-      "intitule": "Agent général AXA Prévoyance & Patrimoine",
+      "intitule": "Agent général AXA Prévoyance & Patrimoine - Profession Libérale- Dpt 82",
       "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
+      "structure": "Compagnies d'assurances et mutuelles",
       "structureId": "assurance",
       "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36494-agent-general-axa-prevoyance-patrimoine-f-h-caen"
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36101-agent-general-axa-prevoyance-patrimoine-f-h-profession-liberale-dpt-82"
     },
     {
-      "intitule": "Conseiller Financier - ile de France",
-      "employeur": "Caisse d'Epargne Ile de France",
+      "intitule": "Conseiller Commercial itinérant terrain - Dpt 95",
+      "employeur": "AXA",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36426-conseiller-commercial-itinerant-terrain-f-h-cdi-dpt-95"
+    },
+    {
+      "intitule": "Conseiller Commercial - Dpt 88",
+      "employeur": "AXA",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "phenom:careers.axa.com",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller Clientèle Particuliers Banque à distance Lille",
+      "employeur": "Groupe Crédit Coopératif",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-financier-h-f-ile-de-france"
+      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-banque-a-distance-f-h-lille-cdi"
     },
     {
-      "intitule": "Conseiller clientèle personnes protégées",
-      "employeur": "Caisse d'Epargne Bretagne Pays de Loire",
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-personnes-protegees-f-h"
+      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f"
+    },
+    {
+      "intitule": "Conseiller clientèle des particuliers",
+      "employeur": "BNP Paribas",
+      "structure": "Banque de financement et d'investissement",
+      "structureId": "bfi",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-clientele-des-particuliers-h-f-1"
+    },
+    {
+      "intitule": "Courtier en crédits immobiliers MANDATAIRE INDEPENDANT",
+      "employeur": "Meilleurtaux",
+      "structure": "Fintech et services financiers spécialisés",
+      "structureId": "fintech",
+      "source": "smartrecruiters:meilleurtaux",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller Relation Client",
+      "employeur": "CNP Assurances",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "talentsoft:cnp-recrute.talent-soft.com",
+      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-relation-client-h-f_7528.aspx"
+    },
+    {
+      "intitule": "Chargé de Clientèle Particuliers",
+      "employeur": "Caisse d'Epargne Normandie",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-19"
+    },
+    {
+      "intitule": "Conseiller de Clientèle",
+      "employeur": "Caisse d'Epargne Hauts de France",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-h-f"
+    },
+    {
+      "intitule": "Conseiller Commercial",
+      "employeur": "AXA",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36462-conseiller-commercial-f-h-quimper"
+    },
+    {
+      "intitule": "Conseiller clientèle professionnels",
+      "employeur": "BRED Banque Populaire",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-professionnels-f-h-5"
+    },
+    {
+      "intitule": "Chargé de Clientèle",
+      "employeur": "Caisse d'Epargne Aquitaine Poitou Charentes",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-h-f-2"
+    },
+    {
+      "intitule": "Conseiller Spécialisé Construction et Risques Techniques",
+      "employeur": "Marsh McLennan",
+      "structure": "Compagnies d'assurances et mutuelles",
+      "structureId": "assurance",
+      "source": "phenom:careers.marsh.com",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller Privé",
+      "employeur": "Banque Populaire Grand Ouest",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-prive-f-h"
     },
     {
       "intitule": "Gestionnaire de Clientèle",
@@ -227,103 +323,7 @@
       "structure": "Banque de détail",
       "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-h-f-9"
-    },
-    {
-      "intitule": "Conseiller Clientèle",
-      "employeur": "Caisse d'Epargne Rhône Alpes",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-44"
-    },
-    {
-      "intitule": "Conseiller Commercial - LAVAL",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36474-conseiller-commercial-f-h-laval"
-    },
-    {
-      "intitule": "Mandataire d’Assurance - Indépendant - Dpt 62 LENS",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36374-mandataire-d-assurance-f-h-independant-dpt-62-lens"
-    },
-    {
-      "intitule": "Chargé de Clientèle Particuliers - Secteur Tours (37)",
-      "employeur": "Caisse d'Epargne Loire Centre",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-h-f-secteur-tours-37"
-    },
-    {
-      "intitule": "Conseiller-ère de Clientèle Particuliers",
-      "employeur": "Banque Populaire du Nord",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-de-clientele-particuliers-f-h-5"
-    },
-    {
-      "intitule": "Conseiller(ère) en Assurance",
-      "employeur": "Matmut",
-      "structure": null,
-      "structureId": null,
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-nancy_10806.aspx"
-    },
-    {
-      "intitule": "Conseiller de clientèle",
-      "employeur": "Banque Populaire Alsace Lorraine Champagne",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-de-clientele-f-h-6"
-    },
-    {
-      "intitule": "Conseiller d'Études Actuarielles & Pilotage de Projets Transverses",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026070207-conseiller-d-etudes-actuarielles-pilotage-de-projets-transverses-h-f"
-    },
-    {
-      "intitule": "Agent Général d'Assurance - Indépendant - Dpt 59/62 Côte d'Opale",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "phenom:careers.axa.com",
-      "url": null
-    },
-    {
-      "intitule": "Conseiller·ère Clientèle Particuliers",
-      "employeur": "LCL",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-conseillerere-clientele-particuliers-hf-reference--2026-113674--/"
-    },
-    {
-      "intitule": "Conseillere / Conseiller Commercial",
-      "employeur": "AG2R La Mondiale",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/NIMES/CONSEILLERE---CONSEILLER-COMMERCIAL-F-H_DP001927-1"
-    },
-    {
-      "intitule": "Conseiller Régleur Technicien Sin Auto",
-      "employeur": "AXA",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026070111-conseiller-regleur-technicien-sin-auto"
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-de-clientele-h-f-2"
     }
   ]
 }

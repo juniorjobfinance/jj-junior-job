@@ -637,3 +637,55 @@ crée aussi des collisions silencieuses. « Natixis Investment Managers » tomba
 sur `natixis` et devenait BFI au lieu de société de gestion ; « Crédit Agricole
 Assurances » tombait sur `credit agricole` et devenait banque de détail.
 `verif-structures.js` couvre ces cas — 28/28.
+
+---
+
+## 25. Le filtre juge sur le texte entier, et on le vérifie
+
+**Le 03/09/2026.** Trois défauts de la même famille sont apparus en une soirée,
+tous invisibles :
+
+1. La description était **tronquée à 3 000 caractères** avant analyse. Or
+   l'exigence d'expérience vit dans le « profil recherché », donc à la fin :
+   les mentions relevées tombaient aux positions 3437, 3509, 4495 et 6217.
+   Aucune visible avant la coupe — zéro sur quatre.
+2. La coupe corrigée, une **nouvelle limite à 4 000** reproduisait le défaut un
+   cran plus loin : « Superviseur Contrôle Financier » porte son exigence à
+   4302.
+3. Le verdict était calculé dans `normalize()`, donc **avant le rattrapage des
+   fiches**. Pour 673 offres enrichies, il portait sur le texte du connecteur —
+   souvent vide.
+
+**À chaque fois, le filtre a jugé sur une entrée incomplète sans se plaindre.**
+
+### Ce qui remplace
+
+`verdictSenioriteDescr` lit le texte **entier** et rend `_expMax`,
+`_formuleSeniorite`, `_vetoJunior`. Il est recalculé **partout où la
+description change** — à la normalisation, après le rattrapage des fiches, et
+restauré tel quel depuis le cache. **La troncature ne sert qu'au stockage de
+`_descr`, jamais à l'analyse.**
+
+Mesure avant bascule, sur 305 CDI·CDD : **7 offres écartées en plus, 0 dans
+l'autre sens**, toutes avec une description de plus de 4 000 caractères — dont
+le « Banquier Conseil Real Estate Advisory » à « 6 - 10 ans » que les
+commentaires du code citaient déjà comme resté en ligne.
+
+L'ancien chemin — `dureesExperienceCitees`, `DESCR_SENIOR_RE`,
+`DESCR_JUNIOR_RE` et leurs auxiliaires — a été supprimé **dans le même
+commit**. Deux chemins qui coexistent, personne ne sait lequel décide, et on se
+croit protégé par une mesure inerte.
+
+### Le contrôle porte sur l'invariant, pas sur les trois causes
+
+Contrôler les trois causes une par une garantit seulement qu'on attrapera la
+quatrième après coup. Le point commun est ailleurs : **le verdict a-t-il été
+rendu sur la description finale ?**
+
+Chaque verdict porte donc `_verdictSur`, la longueur du texte analysé. Avant
+publication, toute offre CDI·CDD dont `_verdictSur` est inférieur à la longueur
+de `_descr` **annule la publication**, avec le compte et un exemple.
+
+Éprouvé le soir même : sur un cache antérieur à ces champs, le contrôle a
+bloqué 368 offres dont le verdict portait sur 0 caractère pour une description
+de 8 630. C'est précisément le cas qu'on ne voyait pas.

@@ -1,0 +1,329 @@
+{
+  "genere": "2026-09-03T22:32:39.880Z",
+  "motif": "gate:big4-sans-marqueur",
+  "total_rejete": 191,
+  "taille_echantillon": 40,
+  "methode": "tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents",
+  "offres": [
+    {
+      "intitule": "Consultant Junior en transformation",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Marseille/Consultant-Junior-en-transformation-F-H_R-7476"
+    },
+    {
+      "intitule": "Manager / Senior Manager en Transformation Digitale (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Manager-Senior-Manager-en-Transformation-Digitale-HF-%28Paris%29-92037/1391064733/"
+    },
+    {
+      "intitule": "Chargé(e) de projets ESG / Environnement",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage---Charg-e--de-projets-ESG---Environnement--H-F-_R-8997"
+    },
+    {
+      "intitule": "Consultant senior en Transformation CRM (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-senior-en-Transformation-CRM-FH-%28Paris%29-92037/1395474133/"
+    },
+    {
+      "intitule": "Consultant expérimenté GBS-CSP",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Consultant-expriment-GBS-CSP-F-H_R-5254-1"
+    },
+    {
+      "intitule": "Consultant Senior en Customer & Business Transformation (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Senior-en-Customer-&amp;-Business-Transformation-FH-%28Paris%29-92037/1387449333/"
+    },
+    {
+      "intitule": "Manager Data Gouvernance",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Neuilly-sur-Seine/Manager-Data-Gouvernance_731139WD"
+    },
+    {
+      "intitule": "Senior Consultant - Special Situations Advisory",
+      "employeur": "Forvis Mazars",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "smartrecruiters:mazars",
+      "url": null
+    },
+    {
+      "intitule": "Manager / Senior Manager - Rewards & Talent",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Manager---Rewards---Talent--F-H_R-8954"
+    },
+    {
+      "intitule": "Consultant(e) Senior / Manager en IA de confiance - GRC",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant%28e%29-Senior-Manager-en-IA-de-confiance-GRC-Paris-HF-92037/1383284033/"
+    },
+    {
+      "intitule": "Consultant Junior Stratégie IT - Organisation et Performance de la DSI",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Alternant-Consultant-Junior-Stratgie-IT---Organisation-et-Performance-de-la-DSI-F-H_R-7658"
+    },
+    {
+      "intitule": "Monitor Deloitte - Conseil en Stratégie",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Monitor-Deloitte---Stage-de-fin-d-tudes---Conseil-en-Stratgie--H-F-_R-5222"
+    },
+    {
+      "intitule": "Consultant(e) Expérimenté(e) en Transformation Digitale et Innovation en Santé (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant%28e%29-Exp%C3%A9riment%C3%A9%28e%29-en-Transformation-Digitale-et-Innovation-en-Sant%C3%A9-FH-%28Paris%29-92037/1407630933/"
+    },
+    {
+      "intitule": "Consultant Senior en Transformation Digitale (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Senior-en-Transformation-Digitale-%28Paris%29-FH-92037/1387833633/"
+    },
+    {
+      "intitule": "Consultant Cloud Business Transformation – Paris / Sophia‑Antipolis / Toulouse",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Neuilly-sur-Seine/Consultant-Cloud-Business-Transformation---CDI---H-F_669601WD"
+    },
+    {
+      "intitule": "Consultant junior Santé– Industries, Etablissements et Politiques de Santé",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Consultant-Sant--Industries--Etablissements-et-Politiques-de-Sant-F-H_748792WD"
+    },
+    {
+      "intitule": "Consultant Senior en Innovation et Transformation (Paris)",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Senior-en-Innovation-et-Transformation-FH-%28Paris%29-92037/1417838533/"
+    },
+    {
+      "intitule": "Assistant(e) / Secrétaire de Direction",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Assistant-e----Secrtaire-de-Direction--F-H----Audit-Lyon_R-7511"
+    },
+    {
+      "intitule": "Consultant AMOA Transformation & Technologie",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Bordeaux/Consultant-AMOA-Transformation---Technologie-F-H_R-6459"
+    },
+    {
+      "intitule": "Consultant Senior et Manager Data Science & Process Mining",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-Senior-et-Manager-Data-Science-&amp;-Process-Mining-HF-92037/1420800433/"
+    },
+    {
+      "intitule": "Project Manager",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Project-Manager_R-8554"
+    },
+    {
+      "intitule": "Consultant senior en Change Management",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultant-senior-en-Change-Management-FH-Paris-92037/1410849933/"
+    },
+    {
+      "intitule": "Consultant Sécurité Offensive – Reconnaissance / OSINT",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Consultant-Scurit-Offensive---Reconnaissance---OSINT--H-F-_R-4205"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Rennes/Stage-Conseil-en-Transformation-F-H_R-6450"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Lille/Stage-Conseil-en-Transformation-F-H_R-7130"
+    },
+    {
+      "intitule": "Consultant strategy customer and operations",
+      "employeur": "KPMG",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "liste:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/marseille/consultant-stagiaire-strategy-customer-and-operations-f-h/2913/35616198848"
+    },
+    {
+      "intitule": "Manager Data Governance",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Manager-Data-Governance--F-H-_R-9197-1"
+    },
+    {
+      "intitule": "Consultant junior en transformation et accompagnement du changement",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Consultant-junior-en-Transformation-et-Accompagnement-du-changement---Workforce---CDI---H-F_670434WD"
+    },
+    {
+      "intitule": "Manager",
+      "employeur": "Forvis Mazars",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "smartrecruiters:mazars",
+      "url": null
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Toulouse/Stage-Conseil-en-Transformation-F-H_R-8405"
+    },
+    {
+      "intitule": "Manager Transformation Cloud",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Manager-Transformation-Cloud--H-F-_R-9071-2"
+    },
+    {
+      "intitule": "Consultant en conseil Immobilier",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Lyon/Consultant-en-conseil-Immobilier-F-H_R-8630"
+    },
+    {
+      "intitule": "Consultant expérimenté - Transformation digitale & SI - Retail & Luxe",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Neuilly-sur-Seine/Senior-Consultant---Transformation-digitale---SI---Retail---Luxe---CDI---H-F_672336WD"
+    },
+    {
+      "intitule": "Manager - Pilotage de la Performance",
+      "employeur": "Grant Thornton",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "recruitee:grantthornton",
+      "url": null
+    },
+    {
+      "intitule": "Consultant expérimenté en Stratégie EY-Parthenon",
+      "employeur": "EY",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-Consultant-exp%C3%A9riment%C3%A9-en-Strat%C3%A9gie-EY-Parthenon-FH-75009/1400241733/"
+    },
+    {
+      "intitule": "Consultant Senior Performance des opérations",
+      "employeur": "Forvis Mazars",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "smartrecruiters:mazars",
+      "url": null
+    },
+    {
+      "intitule": "Resources Manager",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Resources-Manager-F-H_R-9185"
+    },
+    {
+      "intitule": "Building Technical Manager– Deloitte University EMEA",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Technical-Manager---Deloitte-University-EMEA-F-H_R-8847"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Strasbourg/Stage-Conseil-en-Transformation-F-H_R-7548"
+    },
+    {
+      "intitule": "Manager en HR Transformation",
+      "employeur": "PwC",
+      "structure": "Big 4 et cabinets d'audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Neuilly-sur-Seine/Manager-Senior-HR-Transformation---CDI---H-F_680181WD"
+    }
+  ]
+}

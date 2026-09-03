@@ -1,0 +1,3184 @@
+{
+  "genere": "2026-09-03T22:32:39.874Z",
+  "total": 454,
+  "offres": [
+    {
+      "title": "Manager - Finance",
+      "emp": "Capco",
+      "source": "greenhouse:capco",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Finance Business Partner (Portugal & Upmarket)",
+      "emp": "Qonto",
+      "source": "lever:qonto",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "People Data & Analytics Officer",
+      "emp": "Qonto",
+      "source": "lever:qonto",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Engineering Manager - Digital Acquisition",
+      "emp": "Meilleurtaux",
+      "source": "smartrecruiters:meilleurtaux",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Gestionnaire Adhésions",
+      "emp": "Meilleurtaux",
+      "source": "smartrecruiters:meilleurtaux",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Directeur des Activités Regroupement de Crédits (RAC)",
+      "emp": "Meilleurtaux",
+      "source": "smartrecruiters:meilleurtaux",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Head of Performance Management WEAR",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Sales Development Representative",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Arbitre Groupe Caution",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Account officer",
+      "emp": "Coface",
+      "source": "smartrecruiters:coface",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Senior - Responsable d'un portefeuille BIC",
+      "emp": "Forvis Mazars",
+      "source": "smartrecruiters:mazars",
+      "url": null,
+      "structure": "big4"
+    },
+    {
+      "title": "Consulting - Manager / Manager Senior - Assurance Santé",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Account Manager Senior Banque",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Account Manager",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Business Development - Secteurs Industrie & Finance",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Account Manager Transport",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Senior Partner Global Banking & Finance Sector",
+      "emp": "Talan",
+      "source": "smartrecruiters:talan",
+      "url": null,
+      "structure": "conseil"
+    },
+    {
+      "title": "Permanent control France / Testing & QA Manager",
+      "emp": "Deutsche Bank",
+      "source": "workday:db",
+      "url": "https://db.wd3.myworkdayjobs.com/en-US/DBWebsite/job/Paris/Permanent-control-France---Testing---QA-Manager--f-m-x-_R0447032",
+      "structure": "bfi"
+    },
+    {
+      "title": "Administrative Assistant",
+      "emp": "Deutsche Bank",
+      "source": "workday:db",
+      "url": "https://db.wd3.myworkdayjobs.com/en-US/DBWebsite/job/Paris/Administrative-Assistant---France_R0421700",
+      "structure": "bfi"
+    },
+    {
+      "title": "Finance Commercial & Global Alliances /Commercial & Global Alliances Finance",
+      "emp": "Ipsen",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Stagiaire-Finance-Commercial---Global-Alliances--6-mois---Commercial---Global-Alliances-Finance-Intern--6-months-_R-21275-2",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Key Account Executive & Entrepreneur – Manager / Senior Manager",
+      "emp": "Deloitte",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Key-Account-Executive---Entrepreneur---Manager---Senior-Manager-F-H_R-7857",
+      "structure": "big4"
+    },
+    {
+      "title": "DGSI - AI/ML Engineer",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/DGSI---AI-ML-Engineer--H-F-_JR101116",
+      "structure": "institution"
+    },
+    {
+      "title": "Conducteur immobilier PACA",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/MARSEILLE/Conducteur-immobilier-PACA-H-F---CDD_JR100871",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de mission RSE",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-de-mission-RSE-H-F_JR100888",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de support opérationnel MAPS",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-de-support-oprationnel-MAPS--H-F-_JR100404",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé(e) de relation avec les publics",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/EVRY/Charg-e--de-relation-avec-les-publics-H-F_JR100725",
+      "structure": "institution"
+    },
+    {
+      "title": "Opérateur sur monnaie fiduciaire",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/STRASBOURG/Oprateur-sur-monnaie-fiduciaire-H-F_JR100088",
+      "structure": "institution"
+    },
+    {
+      "title": "Correspondant Régional Immobilier CENTRE VAL DE LOIRE",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/ORLEANS/Correspondant-Rgional-Immobilier-CENTRE-VAL-DE-LOIRE---H-F-_JR100863",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de relations avec les publics",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/MARSEILLE/Charg-de-relations-avec-les-publics-H-F_JR100939",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de relations avec les publics à NIMES",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/NIMES/Charg-de-relations-avec-les-publics--NIMES-H-F_JR100773",
+      "structure": "institution"
+    },
+    {
+      "title": "Spécialiste Ecoconception IT [ ]",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Spcialiste-Ecoconception-IT--H-F-_JR100837",
+      "structure": "institution"
+    },
+    {
+      "title": "Concepteur applicatif FIBRE-ANACOT",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Concepteur-applicatif-FIBRE-ANACOT--H-F-_JR100780",
+      "structure": "institution"
+    },
+    {
+      "title": "Responsable Equipe Engineering",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Responsable-Equipe-Engineering--H-F-_JR100712",
+      "structure": "institution"
+    },
+    {
+      "title": "Adjoint du Directeur de l'antenne économique de Quimper",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/QUIMPER/Adjoint-du-Directeur-de-l-antenne-conomique-de-Quimper--H-F-_JR100771",
+      "structure": "institution"
+    },
+    {
+      "title": "Référent Technique Applications Accueil SI Particuliers",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Rfrent-Technique-Applications-Accueil-SI-Particuliers--H-F-_JR100681",
+      "structure": "institution"
+    },
+    {
+      "title": "Occitanie - Chargé d'économie et de statistique à Toulouse",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/TOULOUSE/Occitanie---Charg-d-conomie-et-de-statistique--Toulouse--H-F-_JR100788",
+      "structure": "institution"
+    },
+    {
+      "title": "Expert négociation internationale banque climat et nature",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Expert-ngociation-internationale-banque-climat-et-nature--H-F-_JR100382",
+      "structure": "institution"
+    },
+    {
+      "title": "Responsable Équipe RED Team",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/RESPONSABLE-QUIPE-RED-TEAM-H-F_JR100433",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de projet data et automatisation",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-de-projet-data-et-automatisation-H-F-_JR100550",
+      "structure": "institution"
+    },
+    {
+      "title": "Assistant au service des affaires internationales assurance",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Assistant-au-service-des-affaires-internationales-assurance-H-F_JR100246",
+      "structure": "institution"
+    },
+    {
+      "title": "Correspondant informatique - Équipe Support",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/ROUEN/Correspondant-informatique---quipe-Support-H-F_JR100481",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de mission Tech Lead R/Python",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-de-mission-Tech-Lead-R-Python---H-F_JR100463",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé d'opérations financières - poste non cadre",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-d-oprations-financires---poste-non-cadre--H-F-_JR100333",
+      "structure": "institution"
+    },
+    {
+      "title": "Assistant spécialiste en Informatique et Cybersécurité",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Assistant-spcialiste-en-Informatique-et-Cyberscurit-H-F_JR100480",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé d’affaires européennes",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Charg-d-affaires-europennes-H-F_JR100369",
+      "structure": "institution"
+    },
+    {
+      "title": "Opérateur de traitement de valeurs",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/MARSEILLE/Oprateur-de-traitement-de-valeurs--H-F-_JR100457",
+      "structure": "institution"
+    },
+    {
+      "title": "Assistance à la Certification dans le cadre du projet Euro Numérique de Détail",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Assistance--la-Certification-dans-le-cadre-du-projet-Euro-Numrique-de-Dtail--H-F-_JR100396",
+      "structure": "institution"
+    },
+    {
+      "title": "Opérateur sur monnaie fiduciaire",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/BORDEAUX/Oprateur-sur-monnaie-fiduciaire-H-F_JR100228",
+      "structure": "institution"
+    },
+    {
+      "title": "Responsable SSI",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Responsable-SSI-H-F_JR100084",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de relations avec les publics",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/LILLE/Charg-de-relations-avec-les-publics-H-F_JR100053",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé de relations avec les publics",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/TOULON/Charg-de-relations-avec-les-publics-H-F_JR100042",
+      "structure": "institution"
+    },
+    {
+      "title": "Adjoint directeur départemental",
+      "emp": "Banque de France",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/BEAUVAIS/Adjoint-directeur-dpartemental-H-F_JR100006",
+      "structure": "institution"
+    },
+    {
+      "title": "Operational Excellency Apprentice",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Operational-Excellency-Apprentice_R28327",
+      "structure": "fintech"
+    },
+    {
+      "title": "Sales Development Representative",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Sales-Development-Representative_R28237-1",
+      "structure": "fintech"
+    },
+    {
+      "title": "Listing Admission Manager",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Listing-Admission-Manager_R27956-1",
+      "structure": "fintech"
+    },
+    {
+      "title": "GRSS Account Manager",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Prague/GRSS-Account-Manager_R27929",
+      "structure": "fintech"
+    },
+    {
+      "title": "Java Engineering Team Lead",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Team-Lead_R25758",
+      "structure": "fintech"
+    },
+    {
+      "title": "Internal and External Testing Manager",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Porto/Internal-and-External-Testing-Manager_R27338",
+      "structure": "fintech"
+    },
+    {
+      "title": "ETF Liquidity Manager",
+      "emp": "Euronext",
+      "source": "workday:hrhub",
+      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/ETF-Liquidity-Manager_R26675",
+      "structure": "fintech"
+    },
+    {
+      "title": "Administratif dans le domaine de la finance",
+      "emp": "Valeo",
+      "source": "workday:valeo",
+      "url": "https://valeo.wd3.myworkdayjobs.com/en-US/valeo_jobs/job/Chtellerault/Stage-Administratif-dans-le-domaine-de-la-finance-H-F_REQ2025066289",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Technicien Contrôle Qualité IPC",
+      "emp": "Sanofi",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/Technicien-Contrle-Qualit-IPC_R2849455-1",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Responsable Finance Processus et Outils",
+      "emp": "Thales",
+      "source": "workday:thales",
+      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Responsable-Finance-Processus-et-Outils-H-F_R0319067-1",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Chargé(e) de mission Intégration et Accompagnement Clients",
+      "emp": "Marsh McLennan",
+      "source": "workday:mmc",
+      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Alternance---Charg-e--de-mission-Intgration-et-Accompagnement-Clients_R_344097",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé(e) de clientèle Transition Emploi-retraite",
+      "emp": "Marsh McLennan",
+      "source": "workday:mmc",
+      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Charg-e--de-clientle-Transition-Emploi-retraite-H-F_R_353912-1",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable d’équipe Service Clients — Business Affinitaire",
+      "emp": "Marsh McLennan",
+      "source": "workday:mmc",
+      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Responsable-d-quipe-Service-Clients---Business-Affinitaire_R_348224-2",
+      "structure": "assurance"
+    },
+    {
+      "title": "Global Client Director",
+      "emp": "Marsh McLennan",
+      "source": "workday:mmc",
+      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Global-Client-Director--m-f-d-_R_347837",
+      "structure": "assurance"
+    },
+    {
+      "title": "Business Impact Manager (Practice Manager), 6 month FTC",
+      "emp": "Marsh McLennan",
+      "source": "workday:mmc",
+      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Euler/Business-Impact-Manager--Practice-Manager----Paris_R_355168-2",
+      "structure": "assurance"
+    },
+    {
+      "title": "Proposition Sales Specialist - LSEG Workspace",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Senior-Proposition-Sales-Specialist---LSEG-Workspace_R0122609",
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Manager Apprentice (24-Month Apprenticeship)",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Manager-Apprentice--24-Month-Apprenticeship-_R0122875",
+      "structure": "fintech"
+    },
+    {
+      "title": "Application Support Engineer",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/CDSClear-IT-Site-Reliability-Engineer_R0118519-1",
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Manager, Regionally Managed Accounts",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Manager--Customer-Connect_R0121985",
+      "structure": "fintech"
+    },
+    {
+      "title": "Lead Cloud DBA (Database Engineer)",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Lead-Cloud-DBA--Database-Engineer-_R0121111-1",
+      "structure": "fintech"
+    },
+    {
+      "title": "Intern",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Intern_R0121261",
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Manager",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/Paris-France/Account-Manager_R0121015",
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Director",
+      "emp": "LSEG",
+      "source": "workday:lseg",
+      "url": "https://lseg.wd3.myworkdayjobs.com/en-US/Careers/job/FRA--Paris-18-Rue-du-4-septembre/Account-Director_R0119184",
+      "structure": "fintech"
+    },
+    {
+      "title": "Manager/Senior Manager - Reporting de durabilité - Banque",
+      "emp": "PwC",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers/job/Neuilly-sur-Seine/Manager-Senior-Manager---Reporting-de-durabilit---Banque---F-H_694466WD",
+      "structure": "big4"
+    },
+    {
+      "title": "Assistant Techniques Financieres",
+      "emp": "AG2R La Mondiale",
+      "source": "workday:ag2rlamondiale",
+      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/ALTERNANCE---ASSISTANT-TECHNIQUES-FINANCIERES-F-H_DP004016",
+      "structure": "assurance"
+    },
+    {
+      "title": "Charge de Mission Performance et Animation Transverse",
+      "emp": "AG2R La Mondiale",
+      "source": "workday:ag2rlamondiale",
+      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/MARSEILLE/ALTERNANCE---CHARGE-DE-MISSION-PERFORMANCE-ET-ANIMATION-TRANSVERSE-F-H_DP002948",
+      "structure": "assurance"
+    },
+    {
+      "title": "Charge D'etudes",
+      "emp": "AG2R La Mondiale",
+      "source": "workday:ag2rlamondiale",
+      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/CHARGE-D-ETUDES-F-H_DP003246",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable Bilan",
+      "emp": "AG2R La Mondiale",
+      "source": "workday:ag2rlamondiale",
+      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/RESPONSABLE-BILAN-F-H_DP004054",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé de mécénat",
+      "emp": "AG2R La Mondiale",
+      "source": "workday:ag2rlamondiale",
+      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/Charg-e--de-mcnat-en-alternance_DP003711",
+      "structure": "assurance"
+    },
+    {
+      "title": "DBA Expert On-Premise & AWS",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix/DBA-Expert-On-Premise---AWS-F-H_R12771",
+      "structure": "assurance"
+    },
+    {
+      "title": "Ingénieur Socle AWS expérimenté",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix/Ingnieur-Socle-AWS-expriment-F-H_R12772-1",
+      "structure": "assurance"
+    },
+    {
+      "title": "Manager département architecture d'entreprise",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Manager-dpartement-architecture-d-entreprise-F-H_R13094",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable Data Snowflake",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix/Responsable-Applicatif-Data-F-H_R12639",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable de projets Process et Outils de la Distribution",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Responsable-de-projets-Process-et-Outils-de-la-Distribution--F-H-_R12188",
+      "structure": "assurance"
+    },
+    {
+      "title": "Assistant(e) gestion",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lille/Assistant-e--gestion_R12294-1",
+      "structure": "assurance"
+    },
+    {
+      "title": "Formateur",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix-Tassigny/Formateur_R12313",
+      "structure": "assurance"
+    },
+    {
+      "title": "Architecture & développement",
+      "emp": "Swiss Life France",
+      "source": "workday:swisslife",
+      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Architecture---dveloppement--F-H----Alternance_R10121",
+      "structure": "assurance"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1610456",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Product Analyst II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Product-Analyst-II_Req1608862",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1601746",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Advogado III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Advogado-III_Req1605011",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst II (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-II--Java-_Req1600260",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1608915",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/PAULINIA/Espec-Clientes-B1-High_Req1599551",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes Select High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-Select-High_Req1610224",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Transaction Bkg Manager II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Transaction-Bkg-Manager-II_Req1600775",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1608090",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Product Associate I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Product-Associate-I_Req1599026",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1607356",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Specialist",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Specialist_Req1608060",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Santander II 8h",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Santander-II-8h_Req1608916",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Lider Sr Investimentos",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Lider-Sr-Investimentos_Req1554392",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Produtos II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Produtos-II_Req1607961",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1562401",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1576016",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1598541",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-II_Req1589735",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589340",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589337",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Customer-Interaction-III_Req1589725",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Customer Interaction III",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Customer-Interaction-III_Req1607983",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes Select High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-Select-High_Req1578736",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1601144",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SSD Brasil - Cyber Analyst II (Gestão de Identidades e Acessos)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SSD-Brasil---Cyber-Analyst-II--Gesto-de-Identidades-e-Acessos-_Req1600654",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Expert Gestao Capital",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Expert-Gestao-Capital_Req1607089",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Pag Rec NT II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Pag-Rec-NT-II_Req1601939",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Engineer Spec IV (Engenheiro de Dados)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Engineer-Spec-IV--Engenheiro-de-Dados-_Req1607513",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SANB Consultor (a) de Vendas Externas | Santana - SP",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Coml-Prod-Financ-SANB_Req1601281",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Lider Neg Imob",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Lider-Neg-Imob_Req1607501",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Expert Customer Interaction",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Expert-Customer-Interaction_Req1589730",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Especialista (S3)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Especialista--S3-_Req1565267-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1594187",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1601317",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1_Req1606915",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SANB Consultor (a) de Vendas Externas | Jaraguá - SP",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SANB-Consultor--a--de-Vendas-Externas---Jaragu---SP_Req1601280",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Operacoes III (TLS)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Operacoes-III--TLS-_Req1594596",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Estagiario-J6_Req1599269",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Espec Coml Neg Imob PJ IV",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Espec-Coml-Neg-Imob-PJ-IV_Req1601661",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec IV (AppSec)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Cyber-Security-Spec-IV_Req1538485",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1598844",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1599218",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Team Lider Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Team-Lider-Consorcio_Req1601291",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst II (Engenheiro de Dados)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-II--Engenheiro-de-Dados-_Req1600930",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1601677",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Gestao Governanca II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Gestao-Governanca-II_Req1600487",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Estagiario-J6_Req1580385",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Select One",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Select-One_Req1578735",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Patri Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Patri-Consorcio_Req1601065",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "SSD Brasil - IT Engineer Spec IV (Monitoramento)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/SSD-Brasil---IT-Engineer-Spec-IV--Monitoramento-_Req1600505",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "BRA Especialista de Planejamento Comercial Estratégico",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/BRA-Especialista-Snior-de-Planejamento-Comercial-Estratgico_Req1600718",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec II (BISO)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Cyber-Security-Spec-II_Req1601028",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cyber Security Spec IV (Purple Team)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Cyber-Security-Spec-IV_Req1588994",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-High_Req1600507",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 High",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-High_Req1599925",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Pag Rec NT II",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Pag-Rec-NT-II_Req1593016",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1595383",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst III (Java)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-III--Java-_Req1598733",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "IT Analyst I (Engenheiro de Dados) - Pessoa com Deficiência",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/IT-Analyst-I--Engenheiro-de-Dados----Pessoa-com-Deficincia_Req1579730",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Data Management Spec III - Pessoa com Deficiência",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Data-Management-Spec-III---Pessoa-com-Deficincia_Req1600124",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B1 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B1-I_Req1563605",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Estagiario J6",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Estagiario-J6_Req1595870",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Exp Cliente II (Data Analytics)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Exp-Cliente-II_Req1563362-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Clientes B2 I",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Clientes-B2-I_Req1595961",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Espec Patri Consorcio",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Espec-Patri-Consorcio_Req1582647",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Lapa, Pinheiros, Vila Leopoldina/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB---Lapa--Pinheiros--Vila-Leopoldina-SP--Clientes-Pessoa-Jurdica-_Req1575852",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Itaquera e Tiradentes/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB----Itaquera-e-Tiradentes-SP--Clientes-Pessoa-Jurdica-_Req1575840",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Consultor(a) de Vendas Externas – SANB | Bom Retiro/SP (Clientes Pessoa Jurídica)",
+      "emp": "Santander",
+      "source": "workday:santander",
+      "url": "https://santander.wd3.myworkdayjobs.com/en-US/santanderCareers/job/SAO-PAULO/Consultor-a--de-Vendas-Externas---SANB----Bom-Retiro-SP---Clientes-Pessoa-Jurdica-_Req1550639",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo/a de Recuperacion (Playa del Carmen, Quintana Roo)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Quintana-Roo-Solidaridad-77710/Diferida---Asesor-a-Financiero-Cobranza--Playa-del-Carmen--Quintana-Roo-_JR00091647",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Evergreen Asesoría Digital (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Evergreen-Asesora-Digital--San-Luis-Potos--SLP-_JR00103498",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Especialista de Recuperaciones II (Tlaxcala,Tlax)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Quintana-Roo-Solidaridad-77710/Especialista-de-Recuperaciones-II--Tlaxcala-Tlax-_JR00112978",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo/a Hipotecario II Mx 3 (Veracruz, Ver.)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Veracruz-91700/EJECUTIVO-HIPOTECARIO-REAL-ESTATE-II-MX-3_JR00110378",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ejecutivo PyME Jr. (Xalapa, Veracruz)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Xalapa-91190/Ejecutivo-PyME-Jr--Xalapa--Veracruz-_JR00112908-1",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Dirección de Oficina H&C BP&P (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78390/Direccin-de-Oficina-H-C-BP-P--San-Luis-Potos--SLP-_JR00113493",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Banquero/a JR (Zona Córdoba, Veracruz)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Tierra-Blanca-95100/Banquero-a-JR--Tierra-Blanca--Veracruz-_JR00088634",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Especialista en Financiamiento o Promoción de Negocio en Banca de Empresas (Veracruz)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/Veracruz-Veracruz-91700/Especialista-en-Financiamiento-o-Promocin-de-Negocio-en-Banca-de-Empresas--Veracruz-_JR00107356",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Asociado/a de Seguridad Física (San Luis Potosí, SLP.)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Asociado-a-de-Seguridad-Fsica--San-Luis-Potos--SLP-_JR00112231",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Auditor/a de Taller Multiasistencia (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Auditor-a-de-Taller-Multiasistencia--San-Luis-Potos--SLP-_JR00111842",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Evergreen Personal de Cajas (San Luis Potosí, SLP)",
+      "emp": "BBVA",
+      "source": "workday:bbva",
+      "url": "https://bbva.wd3.myworkdayjobs.com/en-US/bbva/job/San-Luis-Potos-San-Luis-Potos-78000/Evergreen-Personal-de-Cajas--San-Luis-Potos--SLP-_JR00103508",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'études Formation (F-H)",
+      "emp": "Banque Populaire Grand Ouest",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/cdd-charge-detudes-formation-f-h-rennes",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Formateur Interne",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/formateur-interne-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé de projets outils Finance",
+      "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-projets-outils-finance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé de Projets ISR",
+      "emp": "AEW",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-projets-isr-f-h",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Chargé d'affaires financements de projets",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-financements-de-projets-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable de Domaine Banque à Distance",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Gestionnaire Clients Grands Comptes",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-clients-grands-comptes-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "4 à - Assistant exploitation bancaire",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-4-a-6-mois-assistant-exploitation-bancaire-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires PME",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-pme-f-h-seine-saint-denis",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires (Secteur Public et Projets du Territoire)",
+      "emp": "Caisse d'Epargne Ile de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-secteur-public-et-projets-du-territoire-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires sénior - pôle gestion immobilière",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-senior-f-h-pole-gestion-immobiliere-3",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Charge D'affaires Grandes Entreprises Nice",
+      "emp": "Banque Populaire Méditerranée",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-grandes-entreprises-h-f-nice",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d’Ingénierie Flux",
+      "emp": "Caisse d'Epargne Grand Est Europe",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-dingenierie-flux-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé.e d'Affaires Entreprises - Saône et Loire (71)",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-e-daffaires-entreprises-f-h-saone-et-loire-71",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Economie Sociale et Solidaire - Tours (37) Orléans (45) Bourges (18)",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-f-h-tours-37-orleans-45-bourges-18",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Economie Sociale et Solidaire - Tours (37) Orléans (45) Bourges (18)",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-f-h-tours-37-orleans-45-bourges-18",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé de relations partenaires",
+      "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-relations-partenaires-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Gestionnaire Exploitation - Service Exploitation",
+      "emp": "Caisse d'Epargne CEPAC",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-exploitation-f-h-service-exploitation",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire middle contentieux",
+      "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-gestionnaire-middle-contentieux-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé de relations clients",
+      "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-relations-clients-f-h-cdd",
+      "structure": "fintech"
+    },
+    {
+      "title": "Investissements",
+      "emp": "Banque Populaire Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-investissements",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires sénior - pôle gestion immobilière",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-senior-f-h-pole-gestion-immobiliere-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Manager Relation Client",
+      "emp": "BPCE Assurances IARD",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/manager-relation-client-f-h-dijon",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-6",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Réclamations",
+      "emp": "Casden - Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/cdd-gestionnaire-reclamations-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Expert Flux Banque de Détail",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/expert-flux-banque-de-detail-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Assistant pôle retournement",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/assistant-pole-retournement-f-h-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Banquier Sénior - Pôle financement des professionnels de l'immobilier - BFI",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/banquier-senior-pole-financement-des-professionnels-de-limmobilier-bfi-f-h-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "CRM Manager",
+      "emp": "ONEY",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/crm-manager-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé-e de gestion Professionnels de l'Immobilier",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-e-de-gestion-professionnels-de-limmobilier-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Cash manager",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/cash-manager-f-h-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires Personnes morales",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-personnes-morales-f-h-lyon-mace-cdi",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires Personnes Morales",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-personnes-morales-f-h-paris-idf-cdi",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé de Gestion Assistance Clients EDI TURBO",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-gestion-assistance-clients-edi-turbo-f-h-nanterre-cdi",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé(e) de Clientèle Particulier",
+      "emp": "Banque Populaire Alsace Lorraine Champagne",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/chargee-de-clientele-particulier-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Head of Food, Agri & Natural Ressources",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/head-of-food-agri-natural-ressources-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de projets ADE",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-projets-ade-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable technique MRH Matériel",
+      "emp": "BPCE Assurances IARD",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-technique-mrh-materiel-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Campagne",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/campagne-alternance-2026-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Business Analyste technique – Assurance non vie",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Business Analyste technique – Assurance non vie",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-3",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé de mission décarbonation",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-mission-decarbonation-f-h-paris",
+      "structure": "bfi"
+    },
+    {
+      "title": "(1 an) - Chargé de mission décarbonation",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/alternance-1-an-charge-de-mission-decarbonation-f-h-paris",
+      "structure": "bfi"
+    },
+    {
+      "title": "Intégrateur API Management",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/alternance-integrateur-api-management-f-h-charenton-le-pont",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé d'études stratégie",
+      "emp": "BPCE Assurances IARD",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-detudes-strategie-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Candidature",
+      "emp": "Caisse d'Epargne Loire Drôme Ardèche",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/candidature-stage-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Infra & Energy finance",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-daffaires-infra-energy-finance-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Client Strategy And Management Officer",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/client-strategy-and-management-officer-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de projets outils Finance",
+      "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-projets-outils-finance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Assistant Directeur de Clientèle Grandes Entreprises",
+      "emp": "Banque Populaire Auvergne Rhône Alpes",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-assistant-directeur-de-clientele-grandes-entreprises-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé(e) d’Affaires Economie Sociale",
+      "emp": "Caisse d'Epargne Grand Est Europe",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/chargee-daffaires-economie-sociale-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé(e) de Prestations client",
+      "emp": "Caisse d'Epargne Normandie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/chargee-de-prestations-client-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d’Investissements Actions",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-dinvestissements-actions-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Analyste - Healthcare Sector",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-analyste-healthcare-sector-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Responsable Investissement Immobilier",
+      "emp": "Caisse d'Epargne Hauts de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-investissement-immobilier-h-f-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire SI / Habilitations",
+      "emp": "Caisse d'Epargne Hauts de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-si-habilitations-f-h-2",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable de Domaine Banque à Distance",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "VP / Director - Healthcare",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/vp-director-healthcare-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Responsable financements des copropriétés",
+      "emp": "Banque Populaire de Val de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-financements-des-coproprietes-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'exploitation St Quentin en Yvelines",
+      "emp": "Caisse d'Epargne Ile de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/alternance-charge-dexploitation-st-quentin-en-yvelines-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d’affaires marché des Entreprises & Economie sociale – force d’appui régionale - Tours (37) ou Orléans (45)",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-marche-des-entreprises-economie-sociale-force-dappui-regionale-tours-37-ou-orleans-45",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d’affaires marché des Entreprises & Economie sociale – force d’appui régionale - Tours (37) ou Orléans (45)",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-marche-des-entreprises-economie-sociale-force-dappui-regionale-tours-37-ou-orleans-45",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Charge D'affaires Grandes Entreprises Avignon",
+      "emp": "Banque Populaire Méditerranée",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-grandes-entreprises-h-f-avignon",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé(e) d'Affaires Internationales - Dijon (21)",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/chargee-daffaires-internationales-h-f-dijon-21",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Banquier Sénior - Pôle financement des professionnels de l'immobilier - BFI",
+      "emp": "BRED Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/banquier-senior-pole-financement-des-professionnels-de-limmobilier-bfi-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable Département Comptes Clients et Banques",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-departement-comptes-clients-et-banques-f-h-lezennes",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé de mission pilotage",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-mission-pilotage-f-h-lezennes",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé de Gestion Service Client (cautions) - BTP Banque",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-gestion-service-client-cautions-f-h-cdi-btp-banque",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Clientèle Institutionnelle",
+      "emp": "Caisse d'Epargne Bretagne Pays de Loire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-clientele-institutionnelle-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Immobilier Professionnel",
+      "emp": "Caisse d'Epargne Bretagne Pays de Loire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-immobilier-professionnel-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Technique Immobilier",
+      "emp": "Casden - Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-technique-immobilier-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-5",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-7",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires Personnes morales",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-personnes-morales-f-h-bordeaux-garonne-cdi",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires Personnes morales",
+      "emp": "Groupe Crédit Coopératif",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-personnes-morales-f-h-grenoble-cdi",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Client sustainable investing manager - NIMI",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/client-sustainable-investing-manager-f-h-nimi",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé d'affaires Economie Sociale et Solidaire ET Institutionnels (ESSI) adjoint",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-et-institutionnels-essi-adjoint-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Référent données et outils finance",
+      "emp": "BPCE Payment Services",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/referent-donnees-et-outils-finance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Officier de sécurité et cryptographie des paiements",
+      "emp": "BPCE Payment Services",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/officier-de-securite-et-cryptographie-des-paiements-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé d'affaires BDR",
+      "emp": "Caisse d'Epargne Ile de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-bdr-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable du service Pilotage arrêté Contrôle",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-du-service-pilotage-arrete-controle-pac",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé d'études et animation ADE",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-detudes-et-animation-ade-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable d’Equipe Assistance EDI & Flux Metz)",
+      "emp": "Banque Populaire Alsace Lorraine Champagne",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-dequipe-assistance-edi-flux-h-f-metz",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Securities Primary Distribution Fees",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-gestionnaire-securities-primary-distribution-fees-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Data Governance Manager",
+      "emp": "Natixis",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/data-governance-manager-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de l'Animation Pro",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-lanimation-pro-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Ingénieur Data",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-ingenieur-data-f-h-charenton-le-pont",
+      "structure": "bfi"
+    },
+    {
+      "title": "Business Analyste technique – Assurance non vie",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé d'Affaires Marchés Pros",
+      "emp": "Caisse d'Epargne Ile de France",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-marches-pros-nord-77",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Recherche Vote Engagement ESG",
+      "emp": "Mirova",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-recherche-vote-engagement-esg-f-h",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Gestionniare de clientèle - Pontarlier Europe (25)",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionniare-de-clientele-pontarlier-europe-25",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable de Domaine Banque à Distance",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Responsable de Domaine Banque à Distance",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Responsable technique MRH Matériel",
+      "emp": "BPCE Assurances IARD",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-technique-mrh-materiel-f-h-2",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable Financements Spécialisés - Dijon (21)",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-financements-specialises-f-h-dijon-21",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Economie Sociale et Solidaire - Tours (37) Orléans (45) Bourges (18)",
+      "emp": "Caisse d'Epargne Loire Centre",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-f-h-tours-37-orleans-45-bourges-18",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires Innovation",
+      "emp": "Caisse d'Epargne Languedoc Roussillon",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-innovation-cdi-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'Affaires ETI",
+      "emp": "Banque Populaire Auvergne Rhône Alpes",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-eti-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire relation client H-F",
+      "emp": "Caisse d'Epargne Midi-Pyrénées",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-relation-client-cdd-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d’offre financière",
+      "emp": "BPCE Vie",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-doffre-financiere-f-h-saint-gregoire",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé(e) d'Affaires Entreprises - Tulle (19)",
+      "emp": "Banque Populaire Auvergne Rhône Alpes",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/chargee-daffaires-entreprises-h-f-tulle-19",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Successions",
+      "emp": "Casden - Banque Populaire",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-successions-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-4",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gérant-e sous mandat",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gerant-e-sous-mandat-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé.e d'Affaires Entreprises - Yonne (89)",
+      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-e-daffaires-entreprises-f-h-yonne-89",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Manager Finance Data et Automatisation",
+      "emp": "Groupe BPCE",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/manager-finance-data-et-automatisation-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Expert Santé",
+      "emp": "Banque Populaire Rives de Paris",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/expert-sante-h-f",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Responsable LCLF Analytics",
+      "emp": "BPCE Payment Services",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/responsable-lclf-analytics-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Data Project Analyst - NIM",
+      "emp": "Natixis Investment Managers",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/data-project-analyst-f-h-nim",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Business Analyste technique – Assurance non vie",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Business Analyste technique – Assurance non vie",
+      "emp": "BPCE Solutions Informatiques",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
+      "structure": "fintech"
+    },
+    {
+      "title": "Senior Research Analyst",
+      "emp": "Natixis Investment Managers, L",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/senior-research-analyst-f-h-nim-paris",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Gestionnaire Investissements",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/gestionnaire-investissements-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Banquier-ère Privé-e JPM",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/banquier-ere-prive-e-jpm-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé-e d'affaires professionnels de clientèle agricole",
+      "emp": "Banque Populaire du Nord",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-e-daffaires-professionnels-de-clientele-agricole-f-h",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Real Estate Investment - 6 months",
+      "emp": "Schroders",
+      "source": "oraclecloud:ekbq.fa.em2.oraclecloud.com",
+      "url": "https://ekbq.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2/job/1971",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Real Estate Investment Hotels - 6 months",
+      "emp": "Schroders",
+      "source": "oraclecloud:ekbq.fa.em2.oraclecloud.com",
+      "url": "https://ekbq.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2/job/1972",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Head of Enterprise Sales / Business Development Management",
+      "emp": "Scor",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5328",
+      "structure": "assurance"
+    },
+    {
+      "title": "Process & Documentation",
+      "emp": "Scor",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4821",
+      "structure": "assurance"
+    },
+    {
+      "title": "Center of Excellence (COE)",
+      "emp": "Scor",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4841",
+      "structure": "assurance"
+    },
+    {
+      "title": "Senior P&C Performance & Planning Analyst",
+      "emp": "Scor",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5018",
+      "structure": "assurance"
+    },
+    {
+      "title": "Investment Reporting Officer confirmed",
+      "emp": "Scor",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5184",
+      "structure": "assurance"
+    },
+    {
+      "title": "6 months - Assistant Chargé d'Affaires",
+      "emp": "Groupe BPCE",
+      "source": "oraclecloud:ekez.fa.em2.oraclecloud.com",
+      "url": "https://ekez.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1/job/9055",
+      "structure": "bfi"
+    },
+    {
+      "title": "Financement de projets",
+      "emp": "Photosol",
+      "source": "teamtailor:photosol",
+      "url": "https://photosol.teamtailor.com/jobs/8088754-stage-6-mois-financement-de-projets-f-h",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Auditeurs sénior",
+      "emp": "BDO France",
+      "source": "teamtailor:bdofrance",
+      "url": "https://bdofrance.teamtailor.com/jobs/7622027-auditeurs-senior-f-h",
+      "structure": "big4"
+    },
+    {
+      "title": "Finance Business Partner (Portugal & Upmarket)",
+      "emp": "Qonto",
+      "source": "ashby:qonto",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Full-Stack Engineer - People Products (Freelance)",
+      "emp": "Qonto",
+      "source": "ashby:qonto",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "People Data & Analytics Officer",
+      "emp": "Qonto",
+      "source": "ashby:qonto",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Manager Strategy & Operations - Success Department",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Training Manager / Responsable de Formation - région PACA",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Customer Success Manager - Medium Accounts",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Product Domain Specialist DAF/PME",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Strategy & Operations Analyst",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Go to Market Manager",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Customer Success Manager - SAAS",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Senior Product Analyst",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Présales & Enablement Specialist",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Lead PayOps",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Lead KYB",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Executive SME's - Large Accounts",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Workplace & Onboarding Specialist",
+      "emp": "Pennylane",
+      "source": "ashby:pennylane",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Senior Customer Success Manager - France 🇫🇷",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Pre-Sales",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Key Account Manager",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Executive 🇫🇷 (Small Businesses)",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Account Executive 🇫🇷 (Mid-market)",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Union Relations Lead / Directeur(rice) du Paritarisme",
+      "emp": "Alan",
+      "source": "ashby:alan",
+      "url": null,
+      "structure": "fintech"
+    },
+    {
+      "title": "Global Client Director",
+      "emp": "Marsh McLennan",
+      "source": "phenom:careers.marsh.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Analyste fiscal",
+      "emp": "AXA",
+      "source": "phenom:careers.axa.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Assistant(e) Chef(fe) de projet Sécurité SI",
+      "emp": "AXA",
+      "source": "phenom:careers.axa.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Assistant manager de la relation client",
+      "emp": "AXA",
+      "source": "phenom:careers.axa.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "AXA Health - Alternant Chargé de Gestion International",
+      "emp": "AXA",
+      "source": "phenom:careers.axa.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Operation Manager International Office Casualty & Financial Lines",
+      "emp": "AXA",
+      "source": "phenom:careers.axa.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Senior Vice President",
+      "emp": "HSBC France",
+      "source": "phenom:portal.careers.hsbc.com",
+      "url": null,
+      "structure": "bfi"
+    },
+    {
+      "title": "Head of ESG Reporting - HSBC Continental Europe",
+      "emp": "HSBC France",
+      "source": "phenom:portal.careers.hsbc.com",
+      "url": null,
+      "structure": "bfi"
+    },
+    {
+      "title": "12 ou - Chargé(e)de projets",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Analyst Investment",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Retraite",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé de réclamations centrales",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Business Development Manager",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable d'Inspecteurs Entreprises Nord-Est",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Private Markets Investment Specialists",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé d'Affaires Caution & Garanties Confirmé",
+      "emp": "Allianz France",
+      "source": "phenom:careers.allianz.com",
+      "url": null,
+      "structure": "assurance"
+    },
+    {
+      "title": "Controls Assurance Lead Auditor",
+      "emp": "Stellantis",
+      "source": "talentsoft:jobs.groupe-psa.com",
+      "url": "https://jobs.groupe-psa.com/offre-de-emploi/emploi-controls-assurance-lead-auditor_17010.aspx",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Gestionnaire des processus",
+      "emp": "Crédit Agricole CIB",
+      "source": "talentsoft:jobs.ca-cib.com",
+      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-gestionnaire-des-processus-h-f_105651.aspx",
+      "structure": "bfi"
+    },
+    {
+      "title": "Analyste - Monitoring Portefeuille ESG",
+      "emp": "Crédit Agricole CIB",
+      "source": "talentsoft:jobs.ca-cib.com",
+      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-analyste-monitoring-portefeuille-esg-h-f_115179.aspx",
+      "structure": "bfi"
+    },
+    {
+      "title": "Data & Reporting Analyst",
+      "emp": "Crédit Agricole CIB",
+      "source": "talentsoft:jobs.ca-cib.com",
+      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-data-reporting-analyst-h-f_115082.aspx",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chief Licensing Officer",
+      "emp": "Crédit Agricole CIB",
+      "source": "talentsoft:jobs.ca-cib.com",
+      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-chief-licensing-officer-h-f_104830.aspx",
+      "structure": "bfi"
+    },
+    {
+      "title": "Quality Analyst – Orchestrade Core Team",
+      "emp": "Crédit Agricole CIB",
+      "source": "talentsoft:jobs.ca-cib.com",
+      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-quality-analyst-orchestrade-core-team-h-f_107138.aspx",
+      "structure": "bfi"
+    },
+    {
+      "title": "Inside Sales - Data-as-a-Service",
+      "emp": "Amundi",
+      "source": "talentsoft:jobs.amundi.com",
+      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-inside-sales-data-as-a-service-h-f_112310.aspx",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Chargé(e) de projets ESG/Immobilier Durable",
+      "emp": "Amundi",
+      "source": "talentsoft:jobs.amundi.com",
+      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-e-de-projets-esg-immobilier-durable-h-f_113646.aspx",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Chargé service clients institutionnels et souverains - pôle International",
+      "emp": "Amundi",
+      "source": "talentsoft:jobs.amundi.com",
+      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-charge-service-clients-institutionnels-et-souverains-pole-international-h-f_109473.aspx",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Expert Investissement Responsable et Indicateurs ESG",
+      "emp": "CNP Assurances",
+      "source": "talentsoft:cnp-recrute.talent-soft.com",
+      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-expert-investissement-responsable-et-indicateurs-esg-h-f_7491.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Charge D Etudes Financieres",
+      "emp": "CNP Assurances",
+      "source": "talentsoft:cnp-recrute.talent-soft.com",
+      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-charge-d-etudes-financieres-h-f_7580.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire Contrats Santé",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-contrats-sante-rouen-f-h_10804.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire technique Satisfaction Adhérent",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-technique-satisfaction-adherent-f-h-f-h_10792.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire Contrat Santé BAYONNE",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-gestionnaire-contrat-sante-bayonne-f-h_10568.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire Contrat Santé ROUEN",
+      "emp": "Matmut",
+      "source": "talentsoft:matmut-recrute.talent-soft.com",
+      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-gestionnaire-contrat-sante-rouen-f-h_10567.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire CONTRATS FLOTTE AUTOMOBILE",
+      "emp": "MAIF",
+      "source": "talentsoft:recrutement.maif.fr",
+      "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-gestionnaire-contrats-flotte-automobile-f-h_10803.aspx",
+      "structure": "assurance"
+    },
+    {
+      "title": "Collaborateur expérimenté - Service Financier",
+      "emp": "EY",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Collaborateur-exp%C3%A9riment%C3%A9-Service-Financier-Paris-HF-92037/1408398833/",
+      "structure": "big4"
+    },
+    {
+      "title": "Collaborateur Manager - Service Financier",
+      "emp": "EY",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Collaborateur-Manager-Service-Financier-Paris-HF-92037/1407365133/",
+      "structure": "big4"
+    },
+    {
+      "title": "Consultants seniors et Managers en Reporting transactionnel - secteur financier",
+      "emp": "EY",
+      "source": "successfactors:careers.ey.com",
+      "url": "https://careers.ey.com/ey/job/Paris-La-D%C3%A9fense-Consultants-seniors-et-Managers-en-Reporting-transactionnel-secteur-financier-FH-92037/1381736733/",
+      "structure": "big4"
+    },
+    {
+      "title": "Analyste Garanties Internationales",
+      "emp": "HSBC France",
+      "source": "successfactors:apply.careers.hsbc.com",
+      "url": "https://apply.careers.hsbc.com/job/PARIS-Analyste-Garanties-Internationales-%28fmd%29-75-75116/1370826557/",
+      "structure": "bfi"
+    },
+    {
+      "title": "Group Finance Control Senior Specialist",
+      "emp": "CMA CGM",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Senior-Specialist-%28HF%29-CDD/1421509333/",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Group Finance Control Senior - Short term contract",
+      "emp": "CMA CGM",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Senior-Short-term-contract/1421509233/",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Group Finance Control Expert - Others Activities Scope",
+      "emp": "CMA CGM",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Expert-%28MF%29-Others-Activities-Scope/1404257733/",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Pricing Senior Analyst",
+      "emp": "KPMG",
+      "source": "sitemapld:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/la-defense/pricing-senior-analyst-f-h/2913/42366969792",
+      "structure": "big4"
+    },
+    {
+      "title": "Chargé de financements auprès de la clientèle Professionnelle",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-financements-aupres-de-la-clientele-professionnelle-26000G8A-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé des Opérations Clients",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-des-operations-clients-26000FGJ-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Assistant Chargé d'Opérations Garanties",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-charge-doperations-garanties-26000I8Z-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de Mission Gestion de Crise",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-mission-gestion-de-crise-26000HRD-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé d’analyses immobilières et valorisation",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-danalyses-immobilieres-et-valorisation-26000HH9-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de Financement Particuliers",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-financement-particuliers-26000HVP-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Analyste et Promoteur RSE",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/stage-analyste-et-promoteur-rse-26000FI0-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Assistant(e) contrôleur de niveau 2 - Boursorama",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/stage-assistante-controleur-de-niveau-2-boursorama-240000OI-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Assistant service client",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/assistant-service-client-26000I09-fr",
+      "structure": "bfi"
+    },
+    {
+      "title": "Crypto Asset Business Development",
+      "emp": "Société Générale",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/en/job-offers/crypto-asset-business-development-25000N0E-en",
+      "structure": "bfi"
+    },
+    {
+      "title": "Analyste Pricing B2B",
+      "emp": "TotalEnergies",
+      "source": "avature",
+      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/Alternance-Analyste-Pricing-B2B/79253",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Analyst Market Intelligence",
+      "emp": "TotalEnergies",
+      "source": "avature",
+      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/CDD-ANALYST-MARKET-INTELLIGENCE-H-F/77859",
+      "structure": "entreprise"
+    },
+    {
+      "title": "24M Chargé / Chargée de relation clientèle prêteur ORLEANS",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/apprentissage-24m-charge-chargee-de-relation-clientele-preteur-orleans-orleans/",
+      "structure": "institution"
+    },
+    {
+      "title": "Ingénieur Financier Territorial / Ingénieure Financière Territoriale - DR Nvelle-aquitaine",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/ingenieur-financier-territorial-ingenieure-financiere-territoriale-dr-nvelle-aquitaine-fh-bordeaux-2/",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé / Chargée de Développement Territorial Bancaire - DR Bretagne",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/charge-chargee-de-developpement-territorial-bancaire-fh-dr-bretagne-brest/",
+      "structure": "institution"
+    },
+    {
+      "title": "CDP court 2 ans - Analyste données ESG",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/cdp-court-2-ans-analyste-donnees-esg-fh-paris/",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé, chargée d'études et statistiques sur la protection sociale à la Caisse des dépôts - localisation PARIS",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/charge-chargee-detudes-et-statistiques-sur-la-protection-sociale-a-la-caisse-des-depots-fh-localisation-paris/",
+      "structure": "institution"
+    },
+    {
+      "title": "CDP court - Analyste environnement ESG",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/cdp-court-8-mois-analyste-environnement-esg-fh-paris/",
+      "structure": "institution"
+    },
+    {
+      "title": "Chargé(e) de Projet Innovation ouverte",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/apprentie-24-mois-chargee-de-projet-innovation-ouverte-fh-paris/",
+      "structure": "institution"
+    },
+    {
+      "title": "Pilote des comités financeurs",
+      "emp": "Caisse des Dépôts",
+      "source": "wordpress:Caisse des Dépôts",
+      "url": "https://caissedesdepots-recrute.fr/offre/apprentie-pilote-des-comites-financeurs-fh-paris/",
+      "structure": "institution"
+    },
+    {
+      "title": "Market & Business Insights Analyst",
+      "emp": "Laboratoires Arkopharma",
+      "source": "vie",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Responsable des projets d'investissement",
+      "emp": "EDF",
+      "source": "liste:EDF",
+      "url": "https://www.edf.fr/edf-recrute/offre/detail/FRA-REC-2026-24770",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Ingénieur Conception BE / Outillages / Investissement",
+      "emp": "EDF",
+      "source": "liste:EDF",
+      "url": "https://www.edf.fr/edf-recrute/offre/detail/FRA-REC-2026-26762",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Financial Project Partner IBM",
+      "emp": "EDF",
+      "source": "liste:EDF",
+      "url": "https://www.edf.fr/edf-recrute/offre/detail/FRA-REC-2026-24565",
+      "structure": "entreprise"
+    },
+    {
+      "title": "Contrôleur/euse de gestion",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18289.html/controleur-euse-degestionfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Service Relations Grands Clients",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18288.html/cdd---gestionnaireservicerelationsgrandsclientsfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé/e d'affaires Entreprise",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18280.html/charge-e-d-affairesentreprise-reimsfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé/e d'affaires entreprises",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18240.html/charge-e-d-affairesentreprises-avignonfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Assistant(e) commercial(e) Clientèles Locales",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18235.html/assistant-e-commercialeclienteleslocalesfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé/e d'affaires entreprise - Île de France",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18045.html/charge-e-d-affairesentreprise-iledefrancefh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé/e d'affaires entreprise",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18043.html/charge-e-d-affairesentreprise-lillefh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé/e d'affaires entreprises - MONTIGNY",
+      "emp": "La Banque Postale",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18038.html/charge-e-d-affairesentreprises-montignyfh.html",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire Technique – BU RIE",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-bu-rie",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de mission Opérations & Finance",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-de-mission-operations-finance-h-f-2",
+      "structure": "bfi"
+    },
+    {
+      "title": "Gestionnaire Technique",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-1",
+      "structure": "bfi"
+    },
+    {
+      "title": "Gestionnaire Commercial PME",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-commercial-pme-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Gestionnaire Technique",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-3",
+      "structure": "bfi"
+    },
+    {
+      "title": "Charge de Mission Engagement D'entreprise (RSE / ESG)",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-charge-de-mission-engagement-d-entreprise-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Assistant Technique",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/assistant-technique-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Assistant(e) de Centre de Profit",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/assistant-e-de-centre-de-profit-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Product Pricing",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-product-pricing",
+      "structure": "bfi"
+    },
+    {
+      "title": "Business & Strategy Analyst",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/business-strategy-analyst-h-f-1",
+      "structure": "bfi"
+    },
+    {
+      "title": "Gestionnaire Technique",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-6",
+      "structure": "bfi"
+    },
+    {
+      "title": "Charge D’affaires Entrepreneurs",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-charge-d-affaires-entrepreneurs-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Portzamparc",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/portzamparc-alternance-assistant-gerant-analyste-h-f-a-nantes",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé de Comptes Multi-Activités",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-charge-de-comptes-multi-activites-h-f-6-mois",
+      "structure": "bfi"
+    },
+    {
+      "title": "Client Service",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-client-service-intern-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Rédacteur - Garanties Internationales",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-redacteur-garanties-internationales-f-h-6-mois",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé d’appui gestion commerciale",
+      "emp": "BNP Paribas",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-charge-d-appui-gestion-commerciale-6-mois-h-f",
+      "structure": "bfi"
+    },
+    {
+      "title": "Inside Sales - Data-as-a-Service",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Chargé(e) d'Opérations Emetteurs - Bourse",
+      "emp": "Uptevia",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-198-chargee-d-operations-emetteurs---bourse---alternance-hf-reference--2026-110988--/",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé(e) d'Opérations Emetteurs - Mutations",
+      "emp": "Uptevia",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-198-chargee-d-operations-emetteurs---mutations---alternance-hf-reference--2026-110755--/",
+      "structure": "fintech"
+    },
+    {
+      "title": "Gestionnaire des processus",
+      "emp": "Crédit Agricole CIB",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-gestionnaire-des-processus-hf-reference--2025-105651--/",
+      "structure": "bfi"
+    },
+    {
+      "title": "Analyste - Monitoring Portefeuille ESG",
+      "emp": "Crédit Agricole CIB",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-analyste---monitoring-portefeuille-esg-hf-reference--2026-115179--/",
+      "structure": "bfi"
+    },
+    {
+      "title": "Coordinateur Service Client - Banque Au Quotidien",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-3-coordinateur-service-client---banque-au-quotidien-hf-reference--2026-114406--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Business Coordinator",
+      "emp": "Caceis",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-136-alternance---business-coordinator-hf-reference--2026-109008--/",
+      "structure": "fintech"
+    },
+    {
+      "title": "Chargé d'études et projet",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-3-charge-d-etudes-et-projet-hf-reference--2026-112240--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Assistant",
+      "emp": "Crédit Agricole Assurances",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170462-137-alternance---assistant-hf-reference--2026-111477--/",
+      "structure": "assurance"
+    },
+    {
+      "title": "Data & Reporting Analyst",
+      "emp": "Crédit Agricole CIB",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-data-et-reporting-analyst-hf-reference--2026-115082--/",
+      "structure": "bfi"
+    },
+    {
+      "title": "Chargé·e d'Affaires Entreprises",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-chargee-d-affaires-entreprises-hf-reference--2026-113191--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Gestionnaire assistance client",
+      "emp": "Crédit Agricole Assurances",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-137-gestionnaire-assistance-client-hf-reference--2026-107411--/",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé d'Affaires Institutionnels",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-3-charge-d-affaires-institutionnels-hf-reference--2026-114790--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé(e) de projets ESG/Immobilier Durable",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170472-124-stage---chargee-de-projets-esgimmobilier-durable-hf-reference--2026-113646--/",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Gestionnaire Relation Client",
+      "emp": "Crédit Agricole Assurances",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-137-gestionnaire-relation-client-hf-reference--2026-112752--/",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé d'Affaires Grandes Entreprises Adjoint",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-charge-d-affaires-grandes-entreprises-adjoint-hf-reference--2026-114754--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Chargé d'affaires Grandes Entreprises",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170463-3-charge-d-affaires-grandes-entreprises-hf-reference--2026-114832--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Coach Assurance - DR Cœur de Paris",
+      "emp": "LCL",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170462-3-coach-assurance-hf--dr-coeur-de-paris-reference--2026-112454--/",
+      "structure": "banque-detail"
+    },
+    {
+      "title": "Project Lead Confirmé - Exécution et Activités de Marché",
+      "emp": "Caceis",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-project-lead-confirme---execution-et-activites-de-marche-hf-reference--2026-113152--/",
+      "structure": "fintech"
+    },
+    {
+      "title": "Gestionnaire opérationnel - platinum",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-124-gestionnaire-operationnel---platinum-hf-reference--2026-111306--/",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Assistant Chargé(e) de commissions",
+      "emp": "Crédit Agricole Assurances",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-137-alternant-assistant-chargee-de-commissions-hf-reference--2026-109887--/",
+      "structure": "assurance"
+    },
+    {
+      "title": "Chargé service clients institutionnels et souverains - pôle International",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170478-124-alternance---charge-service-clients-institutionnels-et-souverains---pole-international---hf-reference--2026-109473--/",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Gestionnaire opérationnel - Centre de services Premium",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-124-gestionnaire-operationnel---centre-de-services-premium---hf-reference--2026-107384--/",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Charge de projets rse f h",
+      "emp": "Covéa",
+      "source": "liste:Covéa",
+      "url": "https://recrutement.covea.com/job/charge-e-de-projets-rse-f-h-alternance-in-le-mans-fr-jid-730",
+      "structure": "assurance"
+    },
+    {
+      "title": "Responsable offre assurances affinitaires specialiste pannes mecaniques",
+      "emp": "Covéa",
+      "source": "liste:Covéa",
+      "url": "https://recrutement.covea.com/job/responsable-offre-assurances-affinitaires-specialiste-pannes-mecaniques-f-h-in-paris-fr-jid-1025",
+      "structure": "assurance"
+    },
+    {
+      "title": "Gestionnaire panne mecanique",
+      "emp": "Covéa",
+      "source": "liste:Covéa",
+      "url": "https://recrutement.covea.com/job/gestionnaire-panne-mecanique-h-f-in-paris-fr-jid-1079",
+      "structure": "assurance"
+    },
+    {
+      "title": "Pricing senior analyst",
+      "emp": "KPMG",
+      "source": "liste:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/la-defense/pricing-senior-analyst-f-h/2913/42366969792",
+      "structure": "big4"
+    },
+    {
+      "title": "Chargé d'Affaires Infra & Energy finance",
+      "emp": "Natixis",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/stage-6-mois-charge-daffaires-infra-energy-finance-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Client Strategy And Management Officer",
+      "emp": "Natixis",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/client-strategy-and-management-officer-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Recherche Vote Engagement ESG",
+      "emp": "Mirova",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/stage-6-mois-recherche-vote-engagement-esg-f-h",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Analyste - Healthcare Sector",
+      "emp": "Natixis",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/stage-6-mois-analyste-healthcare-sector-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Client sustainable investing manager - NIMI",
+      "emp": "Natixis",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/client-sustainable-investing-manager-f-h-nimi",
+      "structure": "bfi"
+    },
+    {
+      "title": "Gestionnaire Securities Primary Distribution Fees",
+      "emp": "Natixis",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/stage-6-mois-gestionnaire-securities-primary-distribution-fees-f-h",
+      "structure": "bfi"
+    },
+    {
+      "title": "Data Project Analyst - NIM",
+      "emp": "Natixis Investment Managers",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/data-project-analyst-f-h-nim",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Senior Research Analyst",
+      "emp": "Natixis Investment Managers, L",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/senior-research-analyst-f-h-nim-paris",
+      "structure": "societe-gestion"
+    },
+    {
+      "title": "Operation Manager International Office Casualty & Financial Lines",
+      "emp": "AXA",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-25474-operation-manager-international-office-casualty-financial-lines",
+      "structure": "assurance"
+    },
+    {
+      "title": "Assistant(e) Chef(fe) de projet Sécurité SI",
+      "emp": "Direct Assurance",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-19688-alternance-assistant-e-chef-fe-de-projet-securite-si-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "AXA Health - Alternant Chargé de Gestion International",
+      "emp": "AXA",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34485-axa-health-alternant-charge-de-gestion-international-f-h",
+      "structure": "assurance"
+    },
+    {
+      "title": "Analyste fiscal",
+      "emp": "AXA",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-18568-analyste-fiscal-h-f-stage",
+      "structure": "assurance"
+    },
+    {
+      "title": "Reporting Analyst/ Developper",
+      "emp": "GIE AXA",
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-16403-alternance-reporting-analyst-developper",
+      "structure": "assurance"
+    },
+    {
+      "title": "Contrôleur(se) de gestion Retail",
+      "emp": "Louis Vuitton",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Contrôleur.se de gestion industriel",
+      "emp": "Louis Vuitton",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Contrôleur.se de Gestion",
+      "emp": "Groupe Bon Marché",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Contrôleur(se) de Gestion",
+      "emp": "Repossi",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Responsable Financier France & Monaco",
+      "emp": "Louis Vuitton",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    },
+    {
+      "title": "Chef.fe de projets financiers",
+      "emp": "Louis Vuitton",
+      "source": "lvmh",
+      "url": null,
+      "structure": "entreprise"
+    }
+  ]
+}
