@@ -1,17 +1,21 @@
 {
-  "genere": "2026-09-03T20:47:46.116Z",
-  "total": 65,
+  "genere": "2026-09-03T21:13:24.247Z",
+  "total": 66,
   "employeurs": [
     {
       "emp": "BPCE Solutions Informatiques",
-      "offres": 19
+      "offres": 29
     },
     {
       "emp": "Bank of America",
-      "offres": 13
+      "offres": 14
     },
     {
       "emp": "Eight Advisory",
+      "offres": 12
+    },
+    {
+      "emp": "Generali France",
       "offres": 11
     },
     {
@@ -27,20 +31,16 @@
       "offres": 8
     },
     {
-      "emp": "Generali France",
+      "emp": "Coface",
       "offres": 7
+    },
+    {
+      "emp": "MUFG",
+      "offres": 6
     },
     {
       "emp": "Parfums Christian Dior",
       "offres": 6
-    },
-    {
-      "emp": "Coface",
-      "offres": 5
-    },
-    {
-      "emp": "MUFG",
-      "offres": 5
     },
     {
       "emp": "Teora",
@@ -79,6 +79,10 @@
       "offres": 3
     },
     {
+      "emp": "ONEY",
+      "offres": 3
+    },
+    {
       "emp": "Socfim",
       "offres": 3
     },
@@ -91,6 +95,10 @@
       "offres": 3
     },
     {
+      "emp": "Saint-Gobain",
+      "offres": 2
+    },
+    {
       "emp": "Accenture",
       "offres": 2
     },
@@ -99,7 +107,11 @@
       "offres": 2
     },
     {
-      "emp": "ONEY",
+      "emp": "AEW",
+      "offres": 2
+    },
+    {
+      "emp": "Getlink",
       "offres": 2
     },
     {
@@ -143,10 +155,6 @@
       "offres": 1
     },
     {
-      "emp": "Saint-Gobain",
-      "offres": 1
-    },
-    {
       "emp": "LSEG",
       "offres": 1
     },
@@ -168,10 +176,6 @@
     },
     {
       "emp": "BPCE Lease",
-      "offres": 1
-    },
-    {
-      "emp": "Getlink",
       "offres": 1
     },
     {

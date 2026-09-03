@@ -1,7 +1,7 @@
 {
-  "genere": "2026-09-03T20:47:46.117Z",
-  "total": 58,
-  "dont_classees": 58,
+  "genere": "2026-09-03T21:13:24.247Z",
+  "total": 61,
+  "dont_classees": 61,
   "offres": [
     {
       "intitule": "Consolideur Comptabilite Bancaire",
@@ -10,6 +10,15 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Manager d'équipe recouvrement",
+      "entreprise": "ONEY",
+      "volet": "cdi-cdd",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Contrôle de gestion & Trésorerie",
       "motif": null
     },
     {
@@ -28,6 +37,15 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Risques & Conformité",
+      "motif": null
+    },
+    {
+      "intitule": "Analyste Fonds d’Investissement Immobiliers",
+      "entreprise": "AEW",
+      "volet": "stage",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Capital-investissement",
       "motif": null
     },
     {
@@ -136,6 +154,15 @@
       "source": "sitemapld:Vinci",
       "resultat_hypothetique": "classified",
       "famille_hypothetique": "Comptabilité & Consolidation",
+      "motif": null
+    },
+    {
+      "intitule": "Analyste Fonds d’Investissement Immobiliers",
+      "entreprise": "AEW",
+      "volet": "stage",
+      "source": "bpce:Natixis",
+      "resultat_hypothetique": "classified",
+      "famille_hypothetique": "Capital-investissement",
       "motif": null
     },
     {

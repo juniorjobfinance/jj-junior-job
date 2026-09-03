@@ -1,6 +1,6 @@
 {
-  "genere": "2026-09-03T20:47:46.114Z",
-  "total": 880,
+  "genere": "2026-09-03T21:13:24.245Z",
+  "total": 381,
   "offres": [
     {
       "title": "Manager - Finance",
@@ -24,28 +24,7 @@
       "structure": "fintech"
     },
     {
-      "title": "Gestionnaire de Recouvrement",
-      "emp": "Rexel",
-      "source": "smartrecruiters:REXEL1",
-      "url": null,
-      "structure": "entreprise"
-    },
-    {
-      "title": "Analyste Finance Corporate",
-      "emp": "Altarea",
-      "source": "smartrecruiters:altarea",
-      "url": null,
-      "structure": "entreprise"
-    },
-    {
       "title": "Engineering Manager - Digital Acquisition",
-      "emp": "Meilleurtaux",
-      "source": "smartrecruiters:meilleurtaux",
-      "url": null,
-      "structure": "fintech"
-    },
-    {
-      "title": "Manager d'équipe - Crédit Immobilier",
       "emp": "Meilleurtaux",
       "source": "smartrecruiters:meilleurtaux",
       "url": null,
@@ -64,41 +43,6 @@
       "source": "smartrecruiters:meilleurtaux",
       "url": null,
       "structure": "fintech"
-    },
-    {
-      "title": "Courtier Mandataire - Paris Intramuros - 100% télétravail",
-      "emp": "Meilleurtaux",
-      "source": "smartrecruiters:meilleurtaux",
-      "url": null,
-      "structure": "fintech"
-    },
-    {
-      "title": "Courtier en crédits immobiliers MANDATAIRE INDEPENDANT",
-      "emp": "Meilleurtaux",
-      "source": "smartrecruiters:meilleurtaux",
-      "url": null,
-      "structure": "fintech"
-    },
-    {
-      "title": "Analyste Crédit",
-      "emp": "Saint-Gobain",
-      "source": "smartrecruiters:saintgobain",
-      "url": null,
-      "structure": null
-    },
-    {
-      "title": "Arbitre / Analyste Credit",
-      "emp": "Coface",
-      "source": "smartrecruiters:coface",
-      "url": null,
-      "structure": null
-    },
-    {
-      "title": "Account Manager courtage",
-      "emp": "Coface",
-      "source": "smartrecruiters:coface",
-      "url": null,
-      "structure": null
     },
     {
       "title": "Account officer",
@@ -176,13 +120,6 @@
       "source": "workday:ipsen",
       "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Stagiaire-Finance-Commercial---Global-Alliances--6-mois---Commercial---Global-Alliances-Finance-Intern--6-months-_R-21275-2",
       "structure": "entreprise"
-    },
-    {
-      "title": "Senior Analyst Credit Operate",
-      "emp": "Deloitte",
-      "source": "workday:fina",
-      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Senior-Analyst-Credit--Operate--H-F-_R-7912",
-      "structure": "big4"
     },
     {
       "title": "Key Account Executive & Entrepreneur – Manager / Senior Manager",
@@ -402,13 +339,6 @@
       "structure": "institution"
     },
     {
-      "title": "Contrôleur des assurances \"Data Quality",
-      "emp": "Banque de France",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Contrleur-des-assurances--Data-Quality----H-F_JR100118",
-      "structure": "institution"
-    },
-    {
       "title": "Opérateur de traitement de valeurs",
       "emp": "Banque de France",
       "source": "workday:bdf",
@@ -416,31 +346,10 @@
       "structure": "institution"
     },
     {
-      "title": "Analyste dossiers d'agréments",
-      "emp": "Banque de France",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Analyste-dossiers-d-agrments--H-F-_JR100294",
-      "structure": "institution"
-    },
-    {
       "title": "Assistance à la Certification dans le cadre du projet Euro Numérique de Détail",
       "emp": "Banque de France",
       "source": "workday:bdf",
       "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Assistance--la-Certification-dans-le-cadre-du-projet-Euro-Numrique-de-Dtail--H-F-_JR100396",
-      "structure": "institution"
-    },
-    {
-      "title": "Analyste agréments et autorisations",
-      "emp": "Banque de France",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Analyste-agrments-et-autorisations--H-F-_JR100291",
-      "structure": "institution"
-    },
-    {
-      "title": "Charge en Resolution de Crises Bancaires",
-      "emp": "Banque de France",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/CHARGE-EN-RESOLUTION-DE-CRISES-BANCAIRES--H-F-_JR100243",
       "structure": "institution"
     },
     {
@@ -479,13 +388,6 @@
       "structure": "institution"
     },
     {
-      "title": "Contrôleur des organismes d'assurances",
-      "emp": "Banque de France",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Contrleur-des-organismes-d-assurances-H-F_JR100025",
-      "structure": "institution"
-    },
-    {
       "title": "Adjoint directeur départemental",
       "emp": "Banque de France",
       "source": "workday:bdf",
@@ -504,13 +406,6 @@
       "emp": "Euronext",
       "source": "workday:hrhub",
       "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Sales-Development-Representative_R28237-1",
-      "structure": "fintech"
-    },
-    {
-      "title": "Euronext Clearing - Client Support Analyst",
-      "emp": "Euronext",
-      "source": "workday:hrhub",
-      "url": "https://hrhub.wd3.myworkdayjobs.com/en-US/Euronext_Career_Page/job/Paris/Euronext-Clearing---Client-Support-Analyst_R22742",
       "structure": "fintech"
     },
     {
@@ -563,88 +458,11 @@
       "structure": "entreprise"
     },
     {
-      "title": "Spécialiste Recouvrement Cash & Contrats",
-      "emp": "Airbus",
-      "source": "workday:ag",
-      "url": "https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Marseille-Area/Spcialiste-Recouvrement-Cash---Contrats--F-H-_JR10429829",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Responsable Gestion Financière des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Responsable-Gestion-Financire-des-Contrats-F-H_R0333774-2",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-Contrats-F-H_R0332317-2",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Responsable Gestion Financière des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Responsable-Gestion-Financire-des-Contrats-F-H_R0333355-2",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-Contrats-F-H_R0333182-2",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Manager Gestion Financière des Contrats AVS/TGS",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Manager-Gestion-Financire-des-Contrats-AVS-TGS-F-H_R0330954-2",
-      "structure": "entreprise"
-    },
-    {
       "title": "Responsable Finance Processus et Outils",
       "emp": "Thales",
       "source": "workday:thales",
       "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Responsable-Finance-Processus-et-Outils-H-F_R0319067-1",
       "structure": "entreprise"
-    },
-    {
-      "title": "Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-Contrats_R0326725-2",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-Contrats-H-F_R0303878-1",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Manager Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Manager-Gestionnaire-Financier-des-Contrats-H-F_R0303881-1",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Gestionnaire Financier des Contrats",
-      "emp": "Thales",
-      "source": "workday:thales",
-      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Vlizy-Villacoublay/Gestionnaire-Financier-des-Contrats-F-H_R0281978-1",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Conseiller Service Clients",
-      "emp": "Marsh McLennan",
-      "source": "workday:mmc",
-      "url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Conseiller-Service-Clients-H-F---CDD---9-mois_R_354082-1",
-      "structure": "assurance"
     },
     {
       "title": "Chargé(e) de mission Intégration et Accompagnement Clients",
@@ -717,24 +535,10 @@
       "structure": "big4"
     },
     {
-      "title": "Gestionnaire Assurance",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/REIMS/GESTIONNAIRE-ASSURANCE-F-H_DP004156",
-      "structure": "assurance"
-    },
-    {
       "title": "Assistant Techniques Financieres",
       "emp": "AG2R La Mondiale",
       "source": "workday:ag2rlamondiale",
       "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/ALTERNANCE---ASSISTANT-TECHNIQUES-FINANCIERES-F-H_DP004016",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Gestionnaire Particuliers Retraite",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/GRENOBLE/CONSEILLER-GESTIONNAIRE-PARTICULIERS-RETRAITE-F-H_DP002983-1",
       "structure": "assurance"
     },
     {
@@ -752,41 +556,6 @@
       "structure": "assurance"
     },
     {
-      "title": "Responsable D'equipe Retraite Complementaire",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/RENNES/RESPONSABLE-D-EQUIPE-RETRAITE-COMPLEMENTAIRE-F-H_DP003805-1",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-commercial",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/TECHNICO-COMMERCIAL-F-H_DP003542",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-commercial",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/TECHNICO-COMMERCIAL-F-H_DP003370",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-commercial",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/AG2R---LYON-SERVIENT/TECHNICO-COMMERCIAL-F-H_DP003893-1",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Gestionnaire Entreprises Retraite Complementaire",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/BORDEAUX/CONSEILLER-GESTIONNAIRE-ENTREPRISES-RETRAITE-COMPLEMENTAIRE-F-H_DP002416-1",
-      "structure": "assurance"
-    },
-    {
       "title": "Responsable Bilan",
       "emp": "AG2R La Mondiale",
       "source": "workday:ag2rlamondiale",
@@ -794,59 +563,10 @@
       "structure": "assurance"
     },
     {
-      "title": "Conseiller Gestionnaire Particuliers Retraite",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/CONSEILLERS-CONSEILLERE-PARTICULIERS-RETRAITE-COMPLEMENTAIRE--F-H_DP001487-1",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Gestionnaire Entreprises Retraite",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/GESTIONNAIRE-CONSEILLER-ENTREPRISES-RETRAITE-COMPLEMENTAIRE-F-H_DP000566",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico Commercial Accords de Branches",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/TECHNICO-COMMERCIAL-ACCORDS-DE-BRANCHES-F-H_DP003005",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Gestionnaire Particuliers Retraite",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/STRASBOURG/CONSEILLER-GESTIONNAIRE-PARTICULIERS-RETRAITE-F-H_DP002654-1",
-      "structure": "assurance"
-    },
-    {
       "title": "Chargé de mécénat",
       "emp": "AG2R La Mondiale",
       "source": "workday:ag2rlamondiale",
       "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/Charg-e--de-mcnat-en-alternance_DP003711",
-      "structure": "assurance"
-    },
-    {
-      "title": "Actuaire Etudes et Modeles",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/Actuaire-tudes-et-modles_DP002170-1",
-      "structure": "assurance"
-    },
-    {
-      "title": "Charge D Affaires Courtage II",
-      "emp": "AG2R La Mondiale",
-      "source": "workday:ag2rlamondiale",
-      "url": "https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/MARSEILLE/CHARGE-D-AFFAIRES-F-H_DP000769",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-Commercial",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix/Technico-Commercial_R13020",
       "structure": "assurance"
     },
     {
@@ -871,13 +591,6 @@
       "structure": "assurance"
     },
     {
-      "title": "Conseiller(ère) commercial(e) - 77",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux-Bellini/Conseiller-re--commercial-e----77--F-H-_R13101",
-      "structure": "assurance"
-    },
-    {
       "title": "Responsable Data Snowflake",
       "emp": "Swiss Life France",
       "source": "workday:swisslife",
@@ -889,20 +602,6 @@
       "emp": "Swiss Life France",
       "source": "workday:swisslife",
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Responsable-de-projets-Process-et-Outils-de-la-Distribution--F-H-_R12188",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire Prestations Santé",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix/Gestionnaire-Prestations-Sant_R12925",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire recouvrement",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Roubaix-Tassigny/Gestionnaire-recouvrement-H-F_R12934",
       "structure": "assurance"
     },
     {
@@ -920,228 +619,11 @@
       "structure": "assurance"
     },
     {
-      "title": "Assistante technico-commerciale",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Assistante-technico-commerciale--F-H-_R12433",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-Commercial",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Bordeaux/Technico-Commercial-F-H_R12230",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire retraite collective",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Gestionnaire-retraite-collective-F-H_R09892",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico Commercial",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Paris/Assistant-technico-commercial-F-H_R10372",
-      "structure": "assurance"
-    },
-    {
       "title": "Architecture & développement",
       "emp": "Swiss Life France",
       "source": "workday:swisslife",
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Architecture---dveloppement--F-H----Alternance_R10121",
       "structure": "assurance"
-    },
-    {
-      "title": "Conseiller(e) relation clients",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Conseiller-e--relation-clients_R11945",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire Prestations Retraite",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Gestionnaire-Prestations-Retraite---CDD-H-F_R11906",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire expert prestations retraite",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Gestionnaire-expert-prestations-retraite-F-H_R10307-1",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Agent-Spcialis-en-Assurance-de-personnes_R11635",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes Cantal",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Agent-Spcialis-en-Assurance-de-personnes-Cantal_R11286",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Agent-Spcialis-en-Assurance-de-personnes_R11261",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 51",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Strasbourg/Agent-indpendant-spcialis-en-assurance-de-personnes-51--F-H-_R10740",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de Personnes - 78",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux-Bellini/Agent-Spcialis-en-Assurance-de-Personnes--F-H----78_R07164",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurances de personnes 29",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurances-de-personnes--F-H--29_R09157",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 56",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-indpendant-spcialis-en-assurance-de-personnes--F-H--56_R09158",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurance de personnes - 72",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H----72_R09171",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurance de personnes - 85",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H----85_R09170",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurance de personnes 35",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H--35_R09159",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 18",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-indpendant-spcialis-en-assurance-de-personnes-18--F-H-_R09177",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 49",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-indpendant-spcialis-en-assurance-de-personnes-49--F-H-_R09174",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurance de personnes - 79",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H----79_R09172",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en assurance de personnes - 86",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-spcialis-en-assurance-de-personnes--F-H----86_R09173",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 28",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-indpendant-spcialis-en-assurance-de-personnes-28--F-H-_R09175",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent indépendant spécialisé en assurance de personnes 45",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Angers/Agent-indpendant-spcialis-en-assurance-de-personnes-45--F-H-_R09176",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en assurance de personnes - 60",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Hauts-de-France/Agent-Spcialis-en-assurance-de-personnes--F-H----60_R07520",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en assurance de personnes - 80",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Hauts-de-France/Agent-Spcialis-en-assurance-de-personnes--F-H----80_R07512",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en assurance de personnes - 62",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Hauts-de-France/Agent-Spcialis-en-assurance-de-personnes--F-H----62_R07511",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en assurance de personnes - 02",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Hauts-de-France/Agent-Spcialis-en-assurance-de-personnes--F-H----02_R07513",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Agent-Spcialis-en-Assurance-de-personnes--F-H----Vienne-38_R07148",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes - 74",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Agent-Spcialis-en-Assurance-de-personnes--F-H----74_R07138",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent Spécialisé en Assurance de personnes",
-      "emp": "Swiss Life France",
-      "source": "workday:swisslife",
-      "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Lyon/Agent-Spcialis-en-Assurance-de-personnes--F-H----Rhne-Est-69_R07134",
-      "structure": "assurance"
-    },
-    {
-      "title": "VP - NBFI Credit",
-      "emp": "MUFG",
-      "source": "workday:mufgub",
-      "url": "https://mufgub.wd3.myworkdayjobs.com/en-US/MUFG-Careers/job/London/VP---NBFI-Credit_10079189-WD-1",
-      "structure": null
     },
     {
       "title": "Expert Gestao Capital",
@@ -1165,27 +647,6 @@
       "structure": null
     },
     {
-      "title": "Conseiller.ère Financier - Pontault Combault 77",
-      "emp": "Caisse d'Epargne Ile de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-financier-pontault-combault-77",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable Clientèle",
-      "emp": "Caisse d'Epargne Normandie",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-clientele-h-f",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'études Formation (F-H)",
       "emp": "Banque Populaire Grand Ouest",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1200,13 +661,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-3",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé de projets outils Finance",
       "emp": "BPCE Compagnie Europeenne de Garanties et Cautions",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1214,59 +668,10 @@
       "structure": "fintech"
     },
     {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Manager d'équipe recouvrement",
-      "emp": "ONEY",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/manager-dequipe-recouvrement-f-h",
-      "structure": null
-    },
-    {
-      "title": "Chargé d'affaires Viticulture",
-      "emp": "Caisse d'Epargne Bretagne Pays de Loire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-viticulture-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "Caisse d'Epargne Rhône Alpes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-f-h-3",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'affaires financements de projets",
       "emp": "Banque Populaire Rives de Paris",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-financements-de-projets-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque Assurances Tomblaine",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-tomblaine",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-sezanne",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d’Affaires Professionnels",
-      "emp": "Caisse d'Epargne CEPAC",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-5",
       "structure": "banque-detail"
     },
     {
@@ -1281,20 +686,6 @@
       "emp": "Banque Populaire du Nord",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/gestionnaire-clients-grands-comptes-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller-ère Commercial",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-commercial-f-h-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels - Sens (89)",
-      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-f-h-sens-89",
       "structure": "banque-detail"
     },
     {
@@ -1326,24 +717,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-4",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Charge D'affaires Grandes Entreprises Nice",
       "emp": "Banque Populaire Méditerranée",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-grandes-entreprises-h-f-nice",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-6",
       "structure": "banque-detail"
     },
     {
@@ -1358,34 +735,6 @@
       "emp": "Caisse d'Epargne Bourgogne Franche Comté",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-e-daffaires-entreprises-f-h-saone-et-loire-71",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-4",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller banque et assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-st-dizier-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Privé",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-prive-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier - Nantes (44)",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-nantes-44",
       "structure": "banque-detail"
     },
     {
@@ -1410,13 +759,6 @@
       "structure": "fintech"
     },
     {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "Caisse d'Epargne Bretagne Pays de Loire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-f-h",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Gestionnaire Exploitation - Service Exploitation",
       "emp": "Caisse d'Epargne CEPAC",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1438,13 +780,6 @@
       "structure": "fintech"
     },
     {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "Caisse d'Epargne Auvergne Limousin",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-3",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Investissements",
       "emp": "Banque Populaire Bourgogne Franche Comté",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1456,90 +791,6 @@
       "emp": "BRED Banque Populaire",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-senior-f-h-pole-gestion-immobiliere-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-11",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Assistant de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-de-clientele-h-f-cdd-4",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Head of Solvency Metrics Analytics and Controls",
-      "emp": "Natixis",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/head-of-solvency-metrics-analytics-and-controls-f-h",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'Expertise Crédit - Direction Ingénierie Financière (44)",
-      "emp": "Caisse d'Epargne Bretagne Pays de Loire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-charge-dexpertise-credit-f-h-direction-ingenierie-financiere-44",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d’Affaires Professionnels de l'Immobilier",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-de-limmobilier-h-f-cdd",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel - Challans (85)",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-challans-85-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-thionville",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-10",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-9",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Assistant de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-de-clientele-h-f-cdd-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-6",
       "structure": "banque-detail"
     },
     {
@@ -1557,24 +808,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Responsable commercial PME",
-      "emp": "BRED Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-commercial-pme-f-h-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Gestionnaire Réclamations",
       "emp": "Casden - Banque Populaire",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/cdd-gestionnaire-reclamations-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Gestionnaire Crédit",
-      "emp": "Casden - Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/gestionnaire-credit-h-f",
       "structure": "banque-detail"
     },
     {
@@ -1596,20 +833,6 @@
       "emp": "BRED Banque Populaire",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/banquier-senior-pole-financement-des-professionnels-de-limmobilier-bfi-f-h-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller-ère Commercial-e",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/cdd-conseiller-ere-commercial-e-f-h-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable de Clientèle Grands Comptes",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-clientele-grands-comptes-f-h",
       "structure": "banque-detail"
     },
     {
@@ -1683,34 +906,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f-2",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f-2",
-      "structure": null
-    },
-    {
       "title": "Business Analyste technique – Assurance non vie",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1729,27 +924,6 @@
       "emp": "Banque Populaire Rives de Paris",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Rejoignez la Caisse D'epargne de Midi-pyrénées !",
-      "emp": "Caisse d'Epargne Midi-Pyrénées",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/rejoignez-la-caisse-depargne-de-midi-pyrenees-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Candidatures spontanées stages, alternances",
-      "emp": "BRED Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/candidatures-spontanees-stages-alternances-cdd-cdi-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Agricole/Viticole",
-      "emp": "Banque Populaire Alsace Lorraine Champagne",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-agricole-viticole-f-h",
       "structure": "banque-detail"
     },
     {
@@ -1774,20 +948,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Candidatures Spontanees",
-      "emp": "Caisse d'Epargne Bourgogne Franche Comté",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/candidatures-spontanees-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "Caisse d'Epargne CEPAC",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-4",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'études stratégie",
       "emp": "BPCE Assurances IARD",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1802,27 +962,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Responsable de Clientèle Particuliers",
-      "emp": "BRED Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-clientele-particuliers-f-h-les-andelys-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-5",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable Clientèle",
-      "emp": "Caisse d'Epargne Normandie",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-clientele-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'Affaires Infra & Energy finance",
       "emp": "Natixis",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1830,39 +969,11 @@
       "structure": "bfi"
     },
     {
-      "title": "Conseiller Professionnel Junior",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-junior-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable de clientèle particuliers",
-      "emp": "BRED Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-clientele-particuliers-f-h",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Client Strategy And Management Officer",
       "emp": "Natixis",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/client-strategy-and-management-officer-f-h",
       "structure": "bfi"
-    },
-    {
-      "title": "Conseiller Particulier junior",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-junior-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h",
-      "structure": "banque-detail"
     },
     {
       "title": "Chargé de projets outils Finance",
@@ -1886,45 +997,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Analyste Fonds d’Investissement Immobiliers",
-      "emp": "AEW",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-6-mois-analyste-fonds-dinvestissement-immobiliers-f-h",
-      "structure": null
-    },
-    {
       "title": "Chargé(e) de Prestations client",
       "emp": "Caisse d'Epargne Normandie",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/chargee-de-prestations-client-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-essey-les-nancy",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-luneville",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-3",
       "structure": "banque-detail"
     },
     {
@@ -1963,27 +1039,6 @@
       "structure": null
     },
     {
-      "title": "Conseiller-ère Commercial",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-commercial-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-7",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller banque et assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-st-dizier-h-f",
-      "structure": "banque-detail"
-    },
-    {
       "title": "VP / Director - Healthcare",
       "emp": "Natixis",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1991,38 +1046,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé d'affaires Professionnels - Secteur Longjumeau 91",
-      "emp": "Caisse d'Epargne Ile de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-secteur-longjumeau-91",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Responsable financements des copropriétés",
       "emp": "Banque Populaire de Val de France",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-financements-des-coproprietes-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Appui Commercial",
-      "emp": "Banque Populaire de Val de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-appui-commercial-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Expert Pilotage du Recouvrement Contentieux",
-      "emp": "BPCE Financement",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/expert-pilotage-du-recouvrement-contentieux-f-h",
-      "structure": "fintech"
-    },
-    {
-      "title": "Conseiller Professionnel",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-5",
       "structure": "banque-detail"
     },
     {
@@ -2033,27 +1060,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Responsable de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-clientele-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel Junior - Brest (29)",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-junior-f-h-brest-29",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d’affaires marché des Entreprises & Economie sociale – force d’appui régionale - Tours (37) ou Orléans (45)",
       "emp": "Caisse d'Epargne Loire Centre",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2065,13 +1071,6 @@
       "emp": "Caisse d'Epargne Loire Centre",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-marche-des-entreprises-economie-sociale-force-dappui-regionale-tours-37-ou-orleans-45",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Fund Manager Immobilier - Otoktone 3I",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/fund-manager-immobilier-f-h-otoktone-3i",
       "structure": "banque-detail"
     },
     {
@@ -2093,13 +1092,6 @@
       "emp": "BRED Banque Populaire",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/banquier-senior-pole-financement-des-professionnels-de-limmobilier-bfi-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-18",
       "structure": "banque-detail"
     },
     {
@@ -2131,24 +1123,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Chargé d'affaires Professionnels",
-      "emp": "Banque Populaire Rives de Paris",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'Affaires Immobilier Professionnel",
       "emp": "Caisse d'Epargne Bretagne Pays de Loire",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-immobilier-professionnel-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-terville",
       "structure": "banque-detail"
     },
     {
@@ -2159,59 +1137,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-14",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-12",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances - Sarrebourg",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-sarrebourg",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-maizieres-les-metz",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances Multimédia",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-multimedia-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'affaires",
       "emp": "Banque Populaire Rives de Paris",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-h-f-5",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller à distance",
-      "emp": "BRED Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-a-distance-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Assistant Commercial Particuliers",
-      "emp": "Caisse d'Epargne Hauts de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-commercial-particuliers-h-f",
       "structure": "banque-detail"
     },
     {
@@ -2313,13 +1242,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f",
-      "structure": null
-    },
-    {
       "title": "Ingénieur Data",
       "emp": "Groupe BPCE",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2327,81 +1249,11 @@
       "structure": "bfi"
     },
     {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f-2",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f-2",
-      "structure": null
-    },
-    {
       "title": "Business Analyste technique – Assurance non vie",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/business-analyste-technique-assurance-non-vie-f-h",
       "structure": null
-    },
-    {
-      "title": "Assistant de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-de-clientele-h-f-cdd-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Candidatures Spontanées",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/candidatures-spontanees",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier à distance",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-a-distance-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-3",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels - Seine-Saint-Denis (DR 93)",
-      "emp": "Caisse d'Epargne Ile de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-seine-saint-denis-dr-93",
-      "structure": "banque-detail"
     },
     {
       "title": "Chargé d'Affaires Marchés Pros",
@@ -2418,55 +1270,6 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Conseiller Banque Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-xertigny-2",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-xertigny",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-nancy",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque Assurances - JARVILLE",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-jarville",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-6",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-st-max",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque Assurances Cornimont",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-cornimont",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Gestionniare de clientèle - Pontarlier Europe (25)",
       "emp": "Caisse d'Epargne Bourgogne Franche Comté",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2474,27 +1277,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Banque Assurances Neufchâteau",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-assurances-h-f-neufchateau",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Analyste Suivi et Pilotage Recouvrement",
-      "emp": "Caisse d'Epargne Midi-Pyrénées",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/analyste-suivi-et-pilotage-recouvrement-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-8",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Responsable de Domaine Banque à Distance",
       "emp": "BPCE Solutions Informatiques",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2507,20 +1289,6 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/responsable-de-domaine-banque-a-distance-f-h",
       "structure": null
-    },
-    {
-      "title": "Conseiller Particulier",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-particulier-f-h-4",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller-ère Commercial",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-ere-commercial-f-h-2",
-      "structure": "banque-detail"
     },
     {
       "title": "Responsable technique MRH Matériel",
@@ -2537,38 +1305,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Conseiller Relation Commerciale",
-      "emp": "Banque Populaire Rives de Paris",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-relation-commerciale-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-epernay-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Professionnel",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-professionnel-f-h-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'Affaires Economie Sociale et Solidaire - Tours (37) Orléans (45) Bourges (18)",
       "emp": "Caisse d'Epargne Loire Centre",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-economie-sociale-et-solidaire-f-h-tours-37-orleans-45-bourges-18",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Fund Manager Immobilier - Otoktone 3I",
-      "emp": "Banque Populaire Grand Ouest",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/fund-manager-immobilier-f-h-otoktone-3i",
       "structure": "banque-detail"
     },
     {
@@ -2577,13 +1317,6 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-daffaires-innovation-cdi-h-f",
       "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable de projet BCBS 239",
-      "emp": "Groupe BPCE",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-projet-bcbs-239",
-      "structure": "bfi"
     },
     {
       "title": "Chargé d'Affaires ETI",
@@ -2597,62 +1330,6 @@
       "emp": "Caisse d'Epargne Midi-Pyrénées",
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/gestionnaire-relation-client-cdd-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Assistant de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-de-clientele-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "Banque Populaire Rives de Paris",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Actuaire",
-      "emp": "Casden - Banque Populaire",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/actuaire-f-h",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-joeuf",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-5",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels - Secteur Pertuis",
-      "emp": "Caisse d'Epargne CEPAC",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-professionnels-h-f-secteur-pertuis",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-clouange",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque et Assurances",
-      "emp": "Caisse d'Epargne Grand Est Europe",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-et-assurances-h-f-13",
       "structure": "banque-detail"
     },
     {
@@ -2698,13 +1375,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Chargé d'Affaires Agricole",
-      "emp": "Caisse d'Epargne Hauts de France",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-daffaires-agricole-h-f",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé.e d'Affaires Entreprises - Yonne (89)",
       "emp": "Caisse d'Epargne Bourgogne Franche Comté",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2726,20 +1396,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Assistant Commercial Expertises",
-      "emp": "Caisse d'Epargne Normandie",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-assistant-commercial-expertises-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller-ère Commercial-e",
-      "emp": "Banque Populaire du Nord",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/cdd-conseiller-ere-commercial-e-f-h-2",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Responsable LCLF Analytics",
       "emp": "BPCE Payment Services",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2752,34 +1408,6 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/data-project-analyst-f-h-nim",
       "structure": "societe-gestion"
-    },
-    {
-      "title": "Analyste Crédit - BPCE ES - Contrat Durée Indéterminée",
-      "emp": "BPCE Equipment Solutions",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/analyste-credit-f-h-bpce-es-contrat-duree-indeterminee-puteaux",
-      "structure": "fintech"
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f",
-      "structure": null
-    },
-    {
-      "title": "Tech Lead Java Fullstack - Assurance de personnes",
-      "emp": "BPCE Solutions Informatiques",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/tech-lead-java-fullstack-assurance-de-personnes-h-f-2",
-      "structure": null
     },
     {
       "title": "Business Analyste technique – Assurance non vie",
@@ -2803,20 +1431,6 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Responsable de Clientèle",
-      "emp": "Caisse d'Epargne Aquitaine Poitou Charentes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/responsable-de-clientele-h-f",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller Banque à Distance",
-      "emp": "Caisse d'Epargne Rhône Alpes",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-banque-a-distance-f-h",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Gestionnaire Investissements",
       "emp": "Banque Populaire du Nord",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2836,20 +1450,6 @@
       "source": "opendatasoft:bpce.opendatasoft.com",
       "url": "https://recrutement.bpce.fr/job/charge-e-daffaires-professionnels-de-clientele-agricole-f-h",
       "structure": "banque-detail"
-    },
-    {
-      "title": "Financial Expertise & Dispute Resolution - Manager",
-      "emp": "Eight Advisory",
-      "source": "recruitee:8advisory",
-      "url": null,
-      "structure": null
-    },
-    {
-      "title": "Responsable administratif et financier",
-      "emp": "Getlink",
-      "source": "recruitee:getlink",
-      "url": null,
-      "structure": null
     },
     {
       "title": "Real Estate Investment - 6 months",
@@ -2887,13 +1487,6 @@
       "structure": "assurance"
     },
     {
-      "title": "Analyse des Données Modèle Interne (Vie)",
-      "emp": "Scor",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4833",
-      "structure": "assurance"
-    },
-    {
       "title": "Center of Excellence (COE)",
       "emp": "Scor",
       "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
@@ -2901,24 +1494,10 @@
       "structure": "assurance"
     },
     {
-      "title": "Sustainable Investment",
-      "emp": "Scor",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4864",
-      "structure": "assurance"
-    },
-    {
       "title": "Sustainable Insurance",
       "emp": "Scor",
       "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
       "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4899",
-      "structure": "assurance"
-    },
-    {
-      "title": "Analyse de Modèles",
-      "emp": "Scor",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4934",
       "structure": "assurance"
     },
     {
@@ -2933,13 +1512,6 @@
       "emp": "Scor",
       "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
       "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5184",
-      "structure": "assurance"
-    },
-    {
-      "title": "Data Modeler – Finance",
-      "emp": "Scor",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5208",
       "structure": "assurance"
     },
     {
@@ -2962,20 +1534,6 @@
       "source": "teamtailor:photosol",
       "url": "https://photosol.teamtailor.com/jobs/7967246-stage-strategic-finance-analyst-f-h",
       "structure": "entreprise"
-    },
-    {
-      "title": "Responsable Administratif et Financier",
-      "emp": "BDO France",
-      "source": "teamtailor:bdofrance",
-      "url": "https://bdofrance.teamtailor.com/jobs/8199584-responsable-administratif-et-financier-f-h",
-      "structure": "big4"
-    },
-    {
-      "title": "Directeur administratif et financier de transition",
-      "emp": "BDO France",
-      "source": "teamtailor:bdofrance",
-      "url": "https://bdofrance.teamtailor.com/jobs/8172910-directeur-administratif-et-financier-de-transition-f-h",
-      "structure": "big4"
     },
     {
       "title": "Auditeurs sénior",
@@ -3160,161 +1718,7 @@
       "structure": "assurance"
     },
     {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 19",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Service Clients - Corporel NA",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt Gironde",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 16",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 72",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 83",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 05",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Bourges",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - Dpt 21 Côte d'Or",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 13",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 87",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 07",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 37",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 16",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 50",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
       "title": "Analyste fiscal",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Noirmoutier",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - Dpt 68",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 43",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 91",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
       "emp": "AXA",
       "source": "phenom:careers.axa.com",
       "url": null,
@@ -3328,119 +1732,7 @@
       "structure": "assurance"
     },
     {
-      "title": "Mandataire d’Assurance - Dpt 18",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 04",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 19",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 19",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 ST QUENTIN",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Charge de Relation Grands Comptes et Courtage",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 66",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 LILLE",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
       "title": "Assistant manager de la relation client",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 26",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 ARRAS",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 77",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance (temps plein ou temps partagé) - Indépendant - Dpt 75",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 17",
       "emp": "AXA",
       "source": "phenom:careers.axa.com",
       "url": null,
@@ -3454,336 +1746,7 @@
       "structure": "assurance"
     },
     {
-      "title": "Expert en Assurances Collectives - Dpt 54",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 94",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
       "title": "Operation Manager International Office Casualty & Financial Lines",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - Dpt 25 Doubs",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 76",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 29",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - 84",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 27",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 07",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 36",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 17",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - dpt 62 Nord Pas de Calais",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Relation Clients des Professionnels",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 41",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 95",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 42",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 64 Bayonne",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 73",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 84",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 63",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 34",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 69",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 41",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Régleur Technicien Sin Auto",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 03",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 45",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 DOUAI",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 BETHUNE",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt37",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 17",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 SOISSONS",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 18",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 CAMBRAI",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 28",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 LENS",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 LAON",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 VALENCIENNES",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "phenom:careers.axa.com",
-      "url": null,
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
       "emp": "AXA",
       "source": "phenom:careers.axa.com",
       "url": null,
@@ -3809,13 +1772,6 @@
       "source": "phenom:careers.bcg.com",
       "url": null,
       "structure": "conseil"
-    },
-    {
-      "title": "Agent Expert en Patrimoine et Protection Sociale - NANTES (44)",
-      "emp": "Allianz France",
-      "source": "phenom:careers.allianz.com",
-      "url": null,
-      "structure": "assurance"
     },
     {
       "title": "12 ou - Chargé(e)de projets",
@@ -3895,101 +1851,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Analyste IPV Equity",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-analyste-ipv-equity-h-f_112825.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Analyste Crédit Early Detection",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-analyste-credit-early-detection-h-f_113297.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Small Cap STRASBOURG",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-originateur-small-cap-strasbourg-h-f_110802.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Small Cap LILLE",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-originateur-small-cap-lille-h-f_110804.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Small Cap MONTPELLIER",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-originateur-small-cap-montpellier-h-f_110800.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'affaires Leverage Finance Confirmé (VP)",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-charge-d-affaires-leverage-finance-confirme-vp-h-f_112413.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Global Trade & Commodities Finance",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-originateur-global-trade-commodities-finance-h-f_113192.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'affaires Agency & Transaction Management Funds Solutions Group",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-charge-d-affaires-agency-transaction-management-funds-solutions-group-cdd-h-f_114709.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'affaires Agency & Transaction Management Funds Solutions Group",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-charge-d-affaires-agency-transaction-management-funds-solutions-group-h-f_114692.aspx",
-      "structure": "bfi"
-    },
-    {
       "title": "Data & Reporting Analyst",
       "emp": "Crédit Agricole CIB",
       "source": "talentsoft:jobs.ca-cib.com",
       "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-data-reporting-analyst-h-f_115082.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Responsable Market Data Administration",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-responsable-market-data-administration-h-f_109437.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Gestionnaire Titrisations Synthétiques",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-gestionnaire-titrisations-synthetiques-h-f_113612.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Responsable d'applications – Credit Approval Applications",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-responsable-d-applications-credit-approval-applications-h-f_114303.aspx",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Global Trade & Commodities Finance",
-      "emp": "Crédit Agricole CIB",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-originateur-global-trade-commodities-finance-h-f_113173.aspx",
       "structure": "bfi"
     },
     {
@@ -4021,39 +1886,11 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Fund Manager",
-      "emp": "Amundi",
-      "source": "talentsoft:jobs.amundi.com",
-      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-fund-manager-h-f_114625.aspx",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Chargé service clients institutionnels et souverains - pôle International",
       "emp": "Amundi",
       "source": "talentsoft:jobs.amundi.com",
       "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-charge-service-clients-institutionnels-et-souverains-pole-international-h-f_109473.aspx",
       "structure": "societe-gestion"
-    },
-    {
-      "title": "Responsable Animation Courtage Europe",
-      "emp": "CNP Assurances",
-      "source": "talentsoft:cnp-recrute.talent-soft.com",
-      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-responsable-animation-courtage-europe-h-f_7688.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Prestations Beneficiaires Emprunteur",
-      "emp": "CNP Assurances",
-      "source": "talentsoft:cnp-recrute.talent-soft.com",
-      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-prestations-beneficiaires-emprunteur-h-f_7415.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Actuaire Confirme",
-      "emp": "CNP Assurances",
-      "source": "talentsoft:cnp-recrute.talent-soft.com",
-      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-actuaire-confirme-cdd-12-mois-h-f_7002.aspx",
-      "structure": "assurance"
     },
     {
       "title": "Expert Investissement Responsable et Indicateurs ESG",
@@ -4070,304 +1907,10 @@
       "structure": "assurance"
     },
     {
-      "title": "Conseiller Prestations Beneficiaires",
-      "emp": "CNP Assurances",
-      "source": "talentsoft:cnp-recrute.talent-soft.com",
-      "url": "https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-conseiller-prestations-beneficiaires-7-mois-h-f_7795.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-grenoble-f-h_10843.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-annecy-f-h_10842.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-conseiller-ere-en-assurance-lillebonne-f-h_10819.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) Téléphonique en Assurance de Professionnels",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-de-professionnels_10697.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-vandoeuvre-les-nancy_10293.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-nancy_10806.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-colmar-_10805.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-toulon-_10110.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-12-f-h_10287.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance - Béziers Clémenceau",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-beziers-clemenceau-_9326.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller Assurance Renfort",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-assurance-renfort-f-h_10777.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-lyon-saxe-f-h_10772.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance - Marseille 1er arrondissement",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-marseille-1er-arrondissement_7745.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-troyes-_9696.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-torcy_10529.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance CONFIRME",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-confirme-paris-11-f-h_10711.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-argenteuil-f-h_10693.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance confirmé(e)",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-confirme-e-nantes-f-h_10179.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance - LE HAVRE Hôtel de Ville",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-le-havre-hotel-de-ville-f-h_10646.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance NOISY LE SEC",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-noisy-le-sec-f-h_10086.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-montpellier-lodeve-f-h_10490.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance Confirmé",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-confirme-ivry-sur-seine-f-h_10050.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-lyon-merieux_10629.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-villeurbanne-f-h_10627.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance - PARIS 15 CONVENTION",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-15-convention_7636.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en assurance Paris 20",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-20-f-h_7904.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance COLOMBES",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-colombes-f-h_9621.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) en assurance Nanterre",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-nanterre-_8167.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance Confirmé",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-confirme-suresnes-f-h_10283.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller (ère) en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-en-assurance-toulouse-minimes-_9195.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-pantin-f-h_9717.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller(ère) Téléphonique en Assurance / LYON",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-ere-telephonique-en-assurance-lyon-_10288.aspx",
-      "structure": null
-    },
-    {
-      "title": "Conseiller en Assurance - PARIS 15 THEATRE",
-      "emp": "Matmut",
-      "source": "talentsoft:matmut-recrute.talent-soft.com",
-      "url": "https://matmut-recrute.talent-soft.com/offre-de-emploi/emploi-conseiller-en-assurance-paris-15-theatre-f-h_9782.aspx",
-      "structure": null
-    },
-    {
-      "title": "Assistant commercial",
-      "emp": "Verlingue",
-      "source": "talentsoft:verlingue-recrute.talent-soft.com",
-      "url": "https://verlingue-recrute.talent-soft.com/offre-de-emploi/emploi-assistant-commercial-h-f_3680.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-commercial en assurance de personnes",
-      "emp": "Verlingue",
-      "source": "talentsoft:verlingue-recrute.talent-soft.com",
-      "url": "https://verlingue-recrute.talent-soft.com/offre-de-emploi/emploi-technico-commercial-en-assurance-de-personnes-h-f_3614.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Gestionnaire assurance locative",
-      "emp": "Verlingue",
-      "source": "talentsoft:verlingue-recrute.talent-soft.com",
-      "url": "https://verlingue-recrute.talent-soft.com/offre-de-emploi/emploi-gestionnaire-assurance-locative-h-f_3692.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Association Collectivites et Entreprises",
-      "emp": "MAIF",
-      "source": "talentsoft:recrutement.maif.fr",
-      "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-association-collectivites-et-entreprises-f-h_10856.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller (E) Societaires en Face a Face - DC Villers les Nancy",
-      "emp": "MAIF",
-      "source": "talentsoft:recrutement.maif.fr",
-      "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-e-societaires-en-face-a-face-dc-villers-les-nancy-f-h_10815.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller ACE",
-      "emp": "MAIF",
-      "source": "talentsoft:recrutement.maif.fr",
-      "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-conseiller-ace-pole-de-metz-f-h_10792.aspx",
-      "structure": "assurance"
-    },
-    {
       "title": "Gestionnaire CONTRATS FLOTTE AUTOMOBILE",
       "emp": "MAIF",
       "source": "talentsoft:recrutement.maif.fr",
       "url": "https://recrutement.maif.fr/offre-de-emploi/emploi-gestionnaire-contrats-flotte-automobile-f-h_10803.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Courtage Epargne",
-      "emp": "Malakoff Humanis",
-      "source": "talentsoft:carrieres.malakoffhumanis.com",
-      "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-alternance-courtage-epargne-f-h_27087.aspx",
-      "structure": "assurance"
-    },
-    {
-      "title": "Technico-Commercial Assurances",
-      "emp": "Malakoff Humanis",
-      "source": "talentsoft:carrieres.malakoffhumanis.com",
-      "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-alternance-technico-commercial-assurances-f-h_27167.aspx",
       "structure": "assurance"
     },
     {
@@ -4413,67 +1956,11 @@
       "structure": "entreprise"
     },
     {
-      "title": "Group Transfer Pricing Expert",
-      "emp": "CMA CGM",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Transfer-Pricing-Expert/1424578133/",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Responsable Administratif et Financier - CCIS France",
-      "emp": "CMA CGM",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Marseille-Responsable-Administratif-et-Financier-HF-CCIS-France-Marseille/1406408933/",
-      "structure": "entreprise"
-    },
-    {
       "title": "Group Finance Control Senior - Short term contract",
       "emp": "CMA CGM",
       "source": "successfactors:jobs.cmacgm-group.com",
       "url": "https://jobs.cmacgm-group.com/job/Marseille-Group-Finance-Control-Senior-Short-term-contract/1421509233/",
       "structure": "entreprise"
-    },
-    {
-      "title": "Responsable Administratif et Financier - CCIS France",
-      "emp": "CMA CGM",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Marseille-Responsable-Administratif-et-Financier-HF-CCIS-France-Marseille/1406409033/",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Global Credit Manager Expert",
-      "emp": "CMA CGM",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/CEVALogistics/job/Marseille-Global-Credit-Manager-Expert/1412126533/",
-      "structure": "entreprise"
-    },
-    {
-      "title": "Technicien Operations Assurance",
-      "emp": "Generali France",
-      "source": "successfactors:carrieres.generali.fr",
-      "url": "https://carrieres.generali.fr/job/LYON-CDD-TECHNICIEN-OPERATIONS-ASSURANCE-HF-69006/1368916057/",
-      "structure": null
-    },
-    {
-      "title": "Technicien Operations Assurance",
-      "emp": "Generali France",
-      "source": "successfactors:carrieres.generali.fr",
-      "url": "https://carrieres.generali.fr/job/TOURS-CDI-TECHNICIEN-OPERATIONS-ASSURANCE-HF-37200/1370824257/",
-      "structure": null
-    },
-    {
-      "title": "Technicien Operations Assurance",
-      "emp": "Generali France",
-      "source": "successfactors:carrieres.generali.fr",
-      "url": "https://carrieres.generali.fr/job/LYON-CDD-TECHNICIEN-OPERATIONS-ASSURANCE-HF-69006/1367215257/",
-      "structure": null
-    },
-    {
-      "title": "Charge D'operations D'assurance",
-      "emp": "Generali France",
-      "source": "successfactors:carrieres.generali.fr",
-      "url": "https://carrieres.generali.fr/job/NANTES-CDI-CHARGE-D&amp;apos;OPERATIONS-D&amp;apos;ASSURANCE-HF-44300/1370823757/",
-      "structure": null
     },
     {
       "title": "Analyste Financier",
@@ -4511,13 +1998,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé de Recouvrement",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-recouvrement-25000PJQ-fr",
-      "structure": "bfi"
-    },
-    {
       "title": "Chargé de Mission Gestion de Crise",
       "emp": "Société Générale",
       "source": "sitemapld:Société Générale",
@@ -4546,45 +2026,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé/e de Gestion et de Recouvrement - Saint Denis de La Réunion",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-e-de-gestion-et-de-recouvrement-saint-denis-de-la-reunion-26000IET-fr",
-      "structure": "bfi"
-    },
-    {
       "title": "Assistant(e) contrôleur de niveau 2 - Boursorama",
       "emp": "Société Générale",
       "source": "sitemapld:Société Générale",
       "url": "https://careers.societegenerale.com/offres-d-emploi/stage-assistante-controleur-de-niveau-2-boursorama-240000OI-fr",
-      "structure": "bfi"
-    },
-    {
-      "title": "Gestionnaire Recouvrement Contentieux",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/gestionnaire-recouvrement-contentieux-26000IE0-fr",
-      "structure": "bfi"
-    },
-    {
-      "title": "Gestionnaire de Recouvrement Pre-contentieux",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/gestionnaire-de-recouvrement-pre-contentieux-26000IBZ-fr",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé de Recouvrement",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/charge-de-recouvrement-26000GZE-fr",
-      "structure": "bfi"
-    },
-    {
-      "title": "Attache Relation Commerciale",
-      "emp": "Société Générale",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/attache-relation-commerciale-26000CZT-fr",
       "structure": "bfi"
     },
     {
@@ -4600,83 +2045,6 @@
       "source": "sitemapld:Société Générale",
       "url": "https://careers.societegenerale.com/en/job-offers/crypto-asset-business-development-25000N0E-en",
       "structure": "bfi"
-    },
-    {
-      "title": "Conseillère/Conseiller en ligne",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=115928",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires professionnels",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=115937",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires agriculture-viticulture",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=115956",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires professionnels",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=115962",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Attaché / Attachée de Clientèle Marché Entreprises",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=107871",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Charge / Chargee D Affaires Professionnels",
-      "emp": "CIC",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=109292",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseillère/Conseiller en ligne",
-      "emp": "Crédit Mutuel",
-      "source": "eicards:recrutement.creditmutuel.fr",
-      "url": "https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115928",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires professionnels",
-      "emp": "Crédit Mutuel",
-      "source": "eicards:recrutement.creditmutuel.fr",
-      "url": "https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115937",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires agriculture-viticulture",
-      "emp": "Crédit Mutuel",
-      "source": "eicards:recrutement.creditmutuel.fr",
-      "url": "https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115956",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargée/Chargé d'affaires professionnels",
-      "emp": "Crédit Mutuel",
-      "source": "eicards:recrutement.creditmutuel.fr",
-      "url": "https://recrutement.creditmutuel.fr/fr/offre.html?annonce=115962",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Chargé(e) de Recouvrement",
-      "emp": "TotalEnergies",
-      "source": "avature",
-      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/ALTERNANCE-Charg-e-de-Recouvrement-F-H/83478",
-      "structure": "entreprise"
     },
     {
       "title": "Analyste Pricing B2B",
@@ -4697,13 +2065,6 @@
       "emp": "Caisse des Dépôts",
       "source": "wordpress:Caisse des Dépôts",
       "url": "https://caissedesdepots-recrute.fr/offre/apprentissage-24m-charge-chargee-de-relation-clientele-preteur-orleans-orleans/",
-      "structure": "institution"
-    },
-    {
-      "title": "Gerant(e) de Portefeuille- Obligations Credit Hight Yield",
-      "emp": "Caisse des Dépôts",
-      "source": "wordpress:Caisse des Dépôts",
-      "url": "https://caissedesdepots-recrute.fr/offre/gerante-de-portefeuille-obligations-credit-hight-yield-fh/",
       "structure": "institution"
     },
     {
@@ -4819,34 +2180,6 @@
       "structure": "entreprise"
     },
     {
-      "title": "Analyste rétablissement",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18440.html/analyste-retablissementfh.html",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Analyste résolution",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18437.html/analyste-resolutionfh.html",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Gestionnaire de portefeuille",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18339.html/gestionnaire-de-portefeuille.html",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Gestionnaire de portefeuille",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18335.html/gestionnaire-de-portefeuille.html",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Contrôleur/euse de gestion",
       "emp": "La Banque Postale",
       "source": "liste:La Banque Postale",
@@ -4882,13 +2215,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Business Analyste Capacités Gestion Documentaire",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18174.html/business-analystecapacitesgestiondocumentairefh.html",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé/e d'affaires entreprise - Île de France",
       "emp": "La Banque Postale",
       "source": "liste:La Banque Postale",
@@ -4910,38 +2236,10 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Senior Banker - Institutions Financières",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-17877.html/senior-banker---institutionsfinancieresfh.html",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Conseiller/ère à Distance",
-      "emp": "La Banque Postale",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-17534.html/alternance---conseillerereadistancefh.html",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Family Officer Junior",
-      "emp": "Oddo BHF",
-      "source": "liste:Oddo BHF",
-      "url": "https://recrutement.altays-progiciels.com/oddo/fr/offres/family-officer-junior-hf-2806296.html",
-      "structure": "bfi"
-    },
-    {
       "title": "Gestionnaire Technique – BU RIE",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-bu-rie",
-      "structure": "bfi"
-    },
-    {
-      "title": "Gestionnaire de portefeuille immobilier",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-de-portefeuille-immobilier-h-f-1",
       "structure": "bfi"
     },
     {
@@ -4952,31 +2250,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Conseiller Banque et Assurance",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-banque-et-assurance-h-f-8",
-      "structure": "bfi"
-    },
-    {
       "title": "Gestionnaire Technique",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-1",
-      "structure": "bfi"
-    },
-    {
-      "title": "Conseiller Immobilier Résidentiel Neuf",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-immobilier-residentiel-neuf-h-f-3",
-      "structure": "bfi"
-    },
-    {
-      "title": "Conseiller Banque et Assurance",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-banque-et-assurance-h-f-7",
       "structure": "bfi"
     },
     {
@@ -4987,24 +2264,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé.e d’affaires Senior - Artemid Senior Loans",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-e-d-affaires-senior-artemid-senior-loans-h-f",
-      "structure": "bfi"
-    },
-    {
       "title": "Gestionnaire Technique",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/gestionnaire-technique-h-f-3",
-      "structure": "bfi"
-    },
-    {
-      "title": "Conseiller Banque et Assurance Paris 14",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/conseiller-banque-et-assurance-paris-14-cdd-6-mois-h-f",
       "structure": "bfi"
     },
     {
@@ -5036,27 +2299,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Assistant Gestion Individuelle",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-assistant-gestion-individuelle-h-f",
-      "structure": "bfi"
-    },
-    {
-      "title": "Investment Guidelines Officer",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-investment-guidelines-officer-h-f",
-      "structure": "bfi"
-    },
-    {
-      "title": "Spécialiste en investissements durables",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-specialiste-en-investissements-durables-h-f",
-      "structure": "bfi"
-    },
-    {
       "title": "Business & Strategy Analyst",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
@@ -5078,13 +2320,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Portfolio Analyst - FMCG",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/portfolio-analyst-intern-fmcg",
-      "structure": "bfi"
-    },
-    {
       "title": "Analyste Financier",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
@@ -5099,24 +2334,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Portzamparc Equipe Gestion Conseillée à Paris",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/portzamparc-alternance-equipe-gestion-conseillee-h-f-a-paris",
-      "structure": "bfi"
-    },
-    {
       "title": "Chargé de Comptes Multi-Activités",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-charge-de-comptes-multi-activites-h-f-6-mois",
-      "structure": "bfi"
-    },
-    {
-      "title": "Assistant Gérant Solution Portfolio Management",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-assistant-gerant-solution-portfolio-management-h-f",
       "structure": "bfi"
     },
     {
@@ -5127,38 +2348,10 @@
       "structure": "bfi"
     },
     {
-      "title": "Chargé d’Affaires Professionnels - Ile de France Est",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-ile-de-france-est-f-h",
-      "structure": "bfi"
-    },
-    {
       "title": "Rédacteur - Garanties Internationales",
       "emp": "BNP Paribas",
       "source": "liste:BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/stage-redacteur-garanties-internationales-f-h-6-mois",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d’Affaires Professionnels - Saint Quentin (78)",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-territoire-de-saint-quentin-f-h",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d’Affaires Professionnels",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-paris-h-f",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d’Affaires Professionnels Ile de France Ouest",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/charge-d-affaires-professionnels-ile-de-france-ouest-f-h",
       "structure": "bfi"
     },
     {
@@ -5169,32 +2362,11 @@
       "structure": "bfi"
     },
     {
-      "title": "Auxiliaire Net Crédit",
-      "emp": "BNP Paribas",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/auxiliaire-net-credit",
-      "structure": "bfi"
-    },
-    {
       "title": "Inside Sales - Data-as-a-Service",
       "emp": "Amundi",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/",
       "structure": "societe-gestion"
-    },
-    {
-      "title": "Data Officer (DM Funds)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-data-officer-dm-funds-hf-reference--2026-108327--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Chargé d'Assurances Professionnelles Centre Val de Loire",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170462-3-charge-d-assurances-professionnelles-centre-val-de-loire-fh-reference--2025-97119--/",
-      "structure": "banque-detail"
     },
     {
       "title": "Chargé(e) d'Opérations Emetteurs - Bourse",
@@ -5208,20 +2380,6 @@
       "emp": "Uptevia",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-198-chargee-d-operations-emetteurs---mutations---alternance-hf-reference--2026-110755--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Chargé d'Affaires Professionnels",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-charge-d-affaires-professionnels-hf-reference--2026-110991--/",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Middle Officer (Trade Management)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-middle-officer-trade-management-hf-reference--2026-115106--/",
       "structure": "fintech"
     },
     {
@@ -5239,69 +2397,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Conseiller Travaux",
-      "emp": "Crédit Agricole Assurances",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170462-137-conseiller-travaux-hf-reference--2026-109204--/",
-      "structure": "assurance"
-    },
-    {
-      "title": "Analyste IPV Equity",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-4-analyste-ipv-equity-hf-reference--2026-112825--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Client Operations Officer – Investor Services (peres)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170479-136-stage---client-operations-officer--investor-services-peres-hf-reference--2026-112320--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Client Operations Officer PERES - Investor Services",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-client-operations-officer-peres---investor-services-hf-reference--2026-114726--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Business Coordinator - Fund Distribution Services",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-business-coordinator---fund-distribution-services-hf-reference--2026-114664--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Client Operations Officer - Coupons/Remboursements",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-client-operations-officer----couponsremboursements-hf-reference--2026-114384--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Chargé d'Assurances Professionnelles - Reims/F",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170462-3-charge-d-assurances-professionnelles---reimsf-reference--2026-108273--/",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Analyste Crédit Early Detection",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-analyste-credit-early-detection-hf-reference--2026-113297--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Small Cap STRASBOURG",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-originateur-small-cap-strasbourg-hf-reference--2026-110802--/",
-      "structure": "bfi"
-    },
-    {
       "title": "Coordinateur Service Client - Banque Au Quotidien",
       "emp": "LCL",
       "source": "liste:Crédit Agricole",
@@ -5309,46 +2404,11 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Data Officer (Static Data)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-cdd---data-officer-static-data-hf-reference--2026-109914--/",
-      "structure": "fintech"
-    },
-    {
       "title": "Business Coordinator",
       "emp": "Caceis",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-136-alternance---business-coordinator-hf-reference--2026-109008--/",
       "structure": "fintech"
-    },
-    {
-      "title": "Originateur Small Cap LILLE",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-originateur-small-cap-lille-hf-reference--2026-110804--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Small Cap MONTPELLIER",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-originateur-small-cap-montpellier-hf-reference--2026-110800--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Client Operations Officer - FUND EXECUTION",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-client-operations-officer---fund-execution-hf-reference--2026-114622--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Actuaire - Responsable Gestion Financière",
-      "emp": "Crédit Agricole Assurances",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170462-137-actuaire---responsable-gestion-financiere-hf-reference--2026-110365--/",
-      "structure": "assurance"
     },
     {
       "title": "Chargé d'études et projet",
@@ -5363,76 +2423,6 @@
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170462-137-alternance---assistant-hf-reference--2026-111477--/",
       "structure": "assurance"
-    },
-    {
-      "title": "Client Operations Officer PERES - Investor Services",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-client-operations-officer-peres---investor-services-hf-reference--2026-114256--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Chargé d'Affaires Transaction Management",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170466-4-charge-d-affaires-transaction-management-hf-reference--2026-112803--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'affaires Leverage Finance Confirmé (VP)",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-charge-d-affaires-leverage-finance-confirme-vp-hf-reference--2026-112413--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Originateur Global Trade & Commodities Finance",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-originateur-global-trade-et-commodities-finance-hf-reference--2026-113192--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Chargé d'affaires Agency & Transaction Management Funds Solutions Group",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170466-4-charge-d-affaires-agency-et-transaction-management-funds-solutions-group-cdd-hf-reference--2026-114709--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Conseiller Expert Assurances en ligne",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-conseiller-expert-assurances-en-ligne-hf-reference--2026-107213--/",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Middle Officer (Positions Keeping)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-middle-officer-positions-keeping-hf-reference--2026-111058--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Client Operation Officer - Clearing Services",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-client-operation-officer---clearing-services-hf-reference--2026-115104--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Chargé d'affaires Agency & Transaction Management Funds Solutions Group",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-charge-d-affaires-agency-et-transaction-management-funds-solutions-group-hf-reference--2026-114692--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Data Officer (Static Data)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-136-data-officer-static-data-hf-reference--2026-108326--/",
-      "structure": "fintech"
     },
     {
       "title": "Data & Reporting Analyst",
@@ -5456,25 +2446,11 @@
       "structure": "assurance"
     },
     {
-      "title": "Responsable Market Data Administration",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-4-responsable-market-data-administration-hf-reference--2026-109437--/",
-      "structure": "bfi"
-    },
-    {
       "title": "Chargé d'Affaires Institutionnels",
       "emp": "LCL",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-3-charge-d-affaires-institutionnels-hf-reference--2026-114790--/",
       "structure": "banque-detail"
-    },
-    {
-      "title": "Manager du portfolio Management et de l'AM Immobilier Direct & indirect",
-      "emp": "Crédit Agricole Assurances",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-137-manager-du-portfolio-management-et-de-l-am-immobilier-direct-et-indirect-hf-reference--2026-114073--/",
-      "structure": "assurance"
     },
     {
       "title": "Chargé(e) de projets ESG/Immobilier Durable",
@@ -5491,25 +2467,11 @@
       "structure": "assurance"
     },
     {
-      "title": "Conseiller en investissement immobilier",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170472-3-conseiller-en-investissement-immobilier-hf-reference--2026-109896--/",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Chargé d'Affaires Grandes Entreprises Adjoint",
       "emp": "LCL",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-3-charge-d-affaires-grandes-entreprises-adjoint-hf-reference--2026-114754--/",
       "structure": "banque-detail"
-    },
-    {
-      "title": "Gestionnaire Titrisations Synthétiques",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-gestionnaire-titrisations-synthetiques-hf-reference--2026-113612--/",
-      "structure": "bfi"
     },
     {
       "title": "Chargé d'affaires Grandes Entreprises",
@@ -5526,27 +2488,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Middle Officer (Positions Keeping)",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-136-cdd---middle-officer-positions-keeping-hf-reference--2026-113728--/",
-      "structure": "fintech"
-    },
-    {
-      "title": "Fund Manager",
-      "emp": "Amundi",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170465-124-fund-manager-hf-reference--2026-114625--/",
-      "structure": "societe-gestion"
-    },
-    {
-      "title": "Responsable Validation des Modèles Quantitatifs",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-3-responsable-validation-des-modeles-quantitatifs-hf-reference--2026-114520--/",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Project Lead Confirmé - Exécution et Activités de Marché",
       "emp": "Caceis",
       "source": "liste:Crédit Agricole",
@@ -5554,46 +2495,11 @@
       "structure": "fintech"
     },
     {
-      "title": "Assistant Commercial",
-      "emp": "Crédit Agricole Transitions et Energies",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170478-525-assistant-commercial-hf-reference--2026-113164--/",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Gestionnaire opérationnel - platinum",
       "emp": "Amundi",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-124-gestionnaire-operationnel---platinum-hf-reference--2026-111306--/",
       "structure": "societe-gestion"
-    },
-    {
-      "title": "Originateur Global Trade & Commodities Finance",
-      "emp": "Crédit Agricole CIB",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170466-4-originateur-global-trade-et-commodities-finance-hf-reference--2026-113173--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Gestionnaire de portefeuille sénior- actions américaines – gestion de fortune",
-      "emp": "LCL",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170465-3-gestionnaire-de-portefeuille-senior--actions-americaines--gestion-de-fortune-hf-reference--2026-112050--/",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Responsable Supervision de la Notation",
-      "emp": "Crédit Agricole Personal Finance & Mobility",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-138-responsable-supervision-de-la-notation-hf-hf-reference--2026-112196--/",
-      "structure": "banque-detail"
-    },
-    {
-      "title": "Leader Expert Engagement Credit Corporate",
-      "emp": "Crédit Agricole Personal Finance & Mobility",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-138--leader-expert-engagement-credit-corporate-hf-hf-reference--2026-111914--/",
-      "structure": "banque-detail"
     },
     {
       "title": "Assistant Chargé(e) de commissions",
@@ -5617,24 +2523,10 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Superviseur des processus Crédit Automobile et Dealer/Wholesale Finance au sein de la Division Ri",
-      "emp": "Crédit Agricole Personal Finance & Mobility",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-138-superviseur-des-processus-credit-automobile-et-dealerwholesale-finance-au-sein-de-la-division-ri-hf-reference--2025-106046--/",
-      "structure": "banque-detail"
-    },
-    {
       "title": "Charge de projets rse f h",
       "emp": "Covéa",
       "source": "liste:Covéa",
       "url": "https://recrutement.covea.com/job/charge-e-de-projets-rse-f-h-alternance-in-le-mans-fr-jid-730",
-      "structure": "assurance"
-    },
-    {
-      "title": "Charge d affaires en assurances collectives",
-      "emp": "Covéa",
-      "source": "liste:Covéa",
-      "url": "https://recrutement.covea.com/job/charge-e-d-affaires-en-assurances-collectives-f-h-in-montpellier-fr-jid-1110",
       "structure": "assurance"
     },
     {
@@ -5650,13 +2542,6 @@
       "source": "liste:Covéa",
       "url": "https://recrutement.covea.com/job/gestionnaire-panne-mecanique-h-f-in-paris-fr-jid-1079",
       "structure": "assurance"
-    },
-    {
-      "title": "Chargee de recouvrement",
-      "emp": "KPMG",
-      "source": "liste:KPMG",
-      "url": "https://emplois.kpmg.fr/emploi/courbevoie/chargee-de-recouvrement-f-h/2913/42315195840",
-      "structure": "big4"
     },
     {
       "title": "Pricing senior analyst",
@@ -5678,13 +2563,6 @@
       "source": "bpce:Natixis",
       "url": "https://recrutement.natixis.com/job/client-strategy-and-management-officer-f-h",
       "structure": "bfi"
-    },
-    {
-      "title": "Analyste Fonds d’Investissement Immobiliers",
-      "emp": "AEW",
-      "source": "bpce:Natixis",
-      "url": "https://recrutement.natixis.com/job/stage-6-mois-analyste-fonds-dinvestissement-immobiliers-f-h",
-      "structure": null
     },
     {
       "title": "Recherche Vote Engagement ESG",
@@ -5722,13 +2600,6 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Analyste Crédit - BPCE ES - Contrat Durée Indéterminée",
-      "emp": "BPCE Equipment Solutions",
-      "source": "bpce:Natixis",
-      "url": "https://recrutement.natixis.com/job/analyste-credit-f-h-bpce-es-contrat-duree-indeterminee-puteaux",
-      "structure": "fintech"
-    },
-    {
       "title": "Senior Research Analyst",
       "emp": "Natixis Investment Managers, L",
       "source": "bpce:Natixis",
@@ -5736,325 +2607,10 @@
       "structure": "societe-gestion"
     },
     {
-      "title": "Mandataire d’Assurance - Indépendant - Noirmoutier",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36538-mandataire-d-assurance-f-h-independant-noirmoutier",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 05",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36498-mandataire-d-assurance-f-h-independant-dpt-05",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 73",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36495-mandataire-d-assurance-f-h-independant-dpt-73",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 04",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36497-mandataire-d-assurance-f-h-independant-dpt-04",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 84",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36480-agent-specialise-en-assurances-collectives-f-h-dpt-84",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 26",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36396-agent-specialise-en-assurances-collectives-f-h-dpt-26",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Relation Clients des Professionnels",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026070136-conseiller-relation-clients-des-professionnels-f-h",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Indépendant - Dpt 64 Bayonne",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36454-agent-specialise-en-assurances-collectives-f-h-independant-dpt-64-bayonne",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance (temps plein ou temps partagé) - Indépendant - Dpt 75",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36433-mandataire-d-assurance-temps-plein-ou-temps-partage-independant-f-h-dpt-75",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 94",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36424-mandataire-d-assurance-f-h-independant-dpt-94",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 SOISSONS",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36368-mandataire-d-assurance-f-h-independant-dpt-02-soissons",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 DOUAI",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36371-mandataire-d-assurance-f-h-independant-dpt-59-douai",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 BETHUNE",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36375-mandataire-d-assurance-f-h-independant-dpt-62-bethune",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 LILLE",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36370-mandataire-d-assurance-f-h-independant-dpt-59-lille",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 ARRAS",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36373-mandataire-d-assurance-f-h-independant-dpt-62-arras",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 LAON",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36366-mandataire-d-assurance-f-h-independant-dpt-02-laon",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 02 ST QUENTIN",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36367-mandataire-d-assurance-f-h-independant-dpt-02-st-quentin",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 VALENCIENNES",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36369-mandataire-d-assurance-f-h-independant-dpt-59-valenciennes",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 59 CAMBRAI",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36372-mandataire-d-assurance-f-h-independant-dpt-59-cambrai",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 62 LENS",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36374-mandataire-d-assurance-f-h-independant-dpt-62-lens",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 92",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36315-mandataire-d-assurance-f-h-independant-dpt-92",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 29",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34832-agent-specialise-en-assurances-collectives-f-h-dpt-29",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 45",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34834-agent-specialise-en-assurances-collectives-f-h-dpt-45",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 76",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34843-agent-specialise-en-assurances-collectives-f-h-dpt-76",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 27",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34844-agent-specialise-en-assurances-collectives-f-h-dpt-27",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 28",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34845-agent-specialise-en-assurances-collectives-f-h-dpt-28",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 50",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34841-agent-specialise-en-assurances-collectives-f-h-dpt-50",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 41",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34842-agent-specialise-en-assurances-collectives-f-h-dpt-41",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt37",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34829-agent-specialise-en-assurances-collectives-f-h-dpt37",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 72",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34830-agent-specialise-en-assurances-collectives-f-h-dpt-72",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 36",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34837-agent-specialise-en-assurances-collectives-f-h-dpt-36",
-      "structure": "assurance"
-    },
-    {
-      "title": "Agent spécialisé en Assurances Collectives - Dpt 18",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34838-agent-specialise-en-assurances-collectives-f-h-dpt-18",
-      "structure": "assurance"
-    },
-    {
       "title": "Operation Manager International Office Casualty & Financial Lines",
       "emp": "AXA",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-25474-operation-manager-international-office-casualty-financial-lines",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 69",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36247-mandataire-d-assurance-f-h-independant-dpt-69",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36207-mandataire-d-assurance-f-h-independant-correze-dpt-19",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Charente maritime - Dpt 17",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36206-mandataire-d-assurance-f-h-independant-charente-maritime-dpt-17",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt 16",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36205-mandataire-d-assurance-f-h-independant-dpt-16",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Indépendant - Dpt Gironde",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_36208-mandataire-d-assurance-f-h-independant-dpt-gironde",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Régleur Technicien Sin Auto",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026070111-conseiller-regleur-technicien-sin-auto",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 13",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_35799-mandataire-d-assurance-f-h-dpt-13",
-      "structure": "assurance"
-    },
-    {
-      "title": "Charge de Relation Grands Comptes et Courtage",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026060072-charge-de-relation-grands-comptes-et-courtage-h-f",
-      "structure": "assurance"
-    },
-    {
-      "title": "Conseiller Service Clients - Corporel NA",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026060059-conseiller-service-clients-corporel-na-f-h",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 07",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34719-mandataire-d-assurance-f-h-dpt-07",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 43",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34726-mandataire-d-assurance-f-h-dpt-43",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 34",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34720-mandataire-d-assurance-f-h-dpt-34",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 63",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34727-mandataire-d-assurance-f-h-dpt-63",
       "structure": "assurance"
     },
     {
@@ -6065,52 +2621,10 @@
       "structure": "assurance"
     },
     {
-      "title": "Mandataire d’Assurance - Dpt 83",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_34460-mandataire-d-assurance-f-h-dpt-83",
-      "structure": "assurance"
-    },
-    {
       "title": "Analyste fiscal",
       "emp": "AXA",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-18568-analyste-fiscal-h-f-stage",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 42",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_33573-mandataire-d-assurance-f-h-dpt-42",
-      "structure": "assurance"
-    },
-    {
-      "title": "Mandataire d’Assurance - Dpt 03",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_33575-mandataire-d-assurance-f-h-dpt-03",
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - Dpt 68",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/250006GQ-expert-en-assurances-collectives-f-h-dpt-68",
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives - Dpt 25 Doubs",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/250006GT-expert-en-assurances-collectives-f-h-dpt-25-doubs",
-      "structure": "assurance"
-    },
-    {
-      "title": "Expert en Assurances Collectives",
-      "emp": "AXA",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/250006GV-expert-en-assurances-collectives-f-h-dunkerque-59",
       "structure": "assurance"
     },
     {
@@ -6154,13 +2668,6 @@
       "source": "lvmh",
       "url": null,
       "structure": "entreprise"
-    },
-    {
-      "title": "GCIB Credit Summer Analyst",
-      "emp": "Bank of America",
-      "source": "bofa",
-      "url": "https://careers.bankofamerica.com/en-us/students/job-detail/14677/gcib-credit-2027-summer-analyst-paris-paris-france",
-      "structure": null
     }
   ]
 }

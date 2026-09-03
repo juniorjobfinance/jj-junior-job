@@ -950,6 +950,57 @@ const DEPTS_IDF = ['hauts-de-seine', 'seine-saint-denis', 'val-de-marne',
 // l'adresse postale complète ("21 AVENUE DU BEL AIR 75012 PARIS"), le code
 // postal collé ("75015 Paris 15e Arrondissement"), un suffixe de plateforme
 // ("Courbevoie(pld)"). On veut juste la ville, lisible.
+
+// Les pays que Business France envoie en capitales et sans accents. La table
+// ne porte que ce qu'aucune regle ne peut deviner : les accents, et la casse
+// des noms composes. Tout le reste passe par nettoyerPays() ci-dessous.
+const PAYS_CANONIQUE = {
+  'etats-unis': 'États-Unis',
+  'royaume-uni': 'Royaume-Uni',
+  'coree du sud': 'Corée du Sud',
+  'tchequie / republique tcheque': 'Tchéquie',
+  'republique tcheque': 'Tchéquie',
+  bresil: 'Brésil',
+  perou: 'Pérou',
+  senegal: 'Sénégal',
+  suede: 'Suède',
+  benin: 'Bénin',
+  hongrie: 'Hongrie',
+  'emirats arabes unis': 'Émirats arabes unis',
+  egypte: 'Égypte',
+  equateur: 'Équateur',
+  ethiopie: 'Éthiopie',
+  'afrique du sud': 'Afrique du Sud',
+  'cote d ivoire': "Côte d'Ivoire",
+  'coree du nord': 'Corée du Nord',
+  finlande: 'Finlande',
+  norvege: 'Norvège',
+  danemark: 'Danemark',
+  grece: 'Grèce',
+  israel: 'Israël',
+  nigeria: 'Nigéria',
+  panama: 'Panamá',
+};
+
+// Particules qui restent en bas de casse au milieu d’un nom : « Corée du Sud »,
+// « Trinité-et-Tobago ». En tête, elles reprennent leur majuscule.
+const PARTICULE_PAYS = new Set(['du', 'de', 'des', 'da', 'la', 'le', 'et', 'aux', 'au', 'd']);
+
+function nettoyerPays(brut) {
+  const nu = String(brut || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  if (!nu) return null;
+  if (PAYS_CANONIQUE[nu]) return PAYS_CANONIQUE[nu];
+  // Repli : majuscule apres chaque espace ET chaque trait d’union — c’est ce
+  // trait d’union que l’ancien code ignorait, d’ou « Etats-unis ».
+  return nu
+    .split(' ')
+    .map((mot, i) =>
+      i > 0 && PARTICULE_PAYS.has(mot)
+        ? mot
+        : mot.replace(/(^|-)([a-zà-öø-ÿ])/g, (_, sep, c) => sep + c.toUpperCase())
+    )
+    .join(' ');
+}
 function nettoyerLieu(loc) {
   let v = (loc || '').trim();
   if (!v) return v;
@@ -2131,9 +2182,7 @@ function normalize(item) {
       .replace(/^[A-ZÀ-Ö][A-ZÀ-Ö\s'-]+$/, (v) =>
         v.toLowerCase().replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase())
       );
-    pays = raw.countryName
-      ? raw.countryName.charAt(0) + raw.countryName.slice(1).toLowerCase()
-      : 'International';
+    pays = nettoyerPays(raw.countryName) || 'International';
     url = `https://mon-vie-via.businessfrance.fr/offres/${raw.id}`;
     typeContratRaw = 'VIE';
     // Le classement famille se fait sur le seul intitulé (pas de description).

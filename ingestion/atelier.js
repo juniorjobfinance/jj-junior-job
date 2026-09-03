@@ -42,6 +42,7 @@ const NOMS = [
   'dateFrancaiseSansAnnee',
   'cleanTitle',
   'nettoyerLieu',
+  'nettoyerPays',
   'ficheJsonLd',
   // Les portes, prises une par une.
   'estUneOffreFinance',
