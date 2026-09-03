@@ -96,8 +96,20 @@ const MAISONS_DE_REFERENCE_SEULEMENT = false;
 // serait mensonger : ces offres apparaîtraient toutes comme "publiées
 // aujourd'hui" et trusteraient le haut du tri. On marque donc la fiabilité,
 // et l'affichage comme le tri en tiennent compte.
+//
+// Figurer ici ne dit pas que TOUTES les offres de la source sont datées : c'est
+// `_dateDeLaSource`, calculé offre par offre, qui tranche. Une source listée
+// dont telle annonce n'a pas de date la voit rester « incertaine », et part
+// quand même lire sa fiche.
+//
+// `yello`, `liste` et `avature` ont rejoint la liste le 03/09/2026, quand on a
+// découvert où ils cachaient leur date : sur la carte pour EY (« 25 août ») et
+// La Banque Postale (<time datetime>), dans le sitemap pour TotalEnergies.
+// Leur date était lue depuis ce matin-là, mais restait affichée « incertaine »
+// faute d'être ici — et leurs offres échappaient au filtre d'âge, ce qui
+// laissait vivre une annonce TotalEnergies de 498 jours.
 const SOURCES_DATE_FIABLE_RE =
-  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy|wordpress|goldman)/;
+  /^(francetravail|labonnealternance|adzuna|opendatasoft|lever|greenhouse|workday|ashby|recruitee|teamtailor|smartrecruiters|oraclecloud|phenom|sitemapld|servicepublic|vie|manuel|bpce|cornerstone|axafr|lvmh|talentlink|talentview|radancy|wordpress|goldman|yello|liste|avature)/;
 
 // ---------------------------------------------------------------------------
 // Référentiels de classification
