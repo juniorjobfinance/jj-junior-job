@@ -288,14 +288,15 @@
       -webkit-overflow-scrolling: touch;
     }
     nav.tabs::-webkit-scrollbar { display: none; }
-    /* La barre se fait défiler du doigt ; ce dégradé est le seul indice qu'il
-       reste un onglet au-delà du bord. Sans lui, « CDI · CDD » se coupait net
-       et rien ne disait qu'on pouvait aller le chercher. */
-    nav.tabs {
-      -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
-      mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+    nav.tabs { padding: 0 0.5rem; }
+    nav.tabs button[role="tab"] {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      padding: 0.75rem 0.35rem;
+      font-size: 0.78rem;
     }
-    nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; padding: 0.9rem 0.75rem; }
+    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.2rem; }
+    nav.tabs .tab-count { font-size: 0.66rem; margin-left: 0.15rem; }
     nav.tabs .total { display: none; }
   }
 

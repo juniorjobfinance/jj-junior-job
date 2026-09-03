@@ -1225,23 +1225,29 @@ const AP_ = `['’]`;
 // anglais "5+ years of experience" ou "minimum of 5 years". Les deux langues
 // cohabitent dans le même catalogue — Coface, Talan et Sia Partners publient
 // indifféremment dans l'une ou l'autre — donc les deux doivent être couvertes.
+// Quatre à dix, la plage qu'on écrit couramment en toutes lettres dans une
+// offre d'emploi française : « au moins cinq ans », « minimum six ans ».
+// Au-delà, la rédaction bascule systématiquement sur les chiffres — c'est un
+// choix de portée délibéré, pas un oubli.
+const NOMBRE_SENIOR_FR = '(?:[4-9]|[1-9]\\d|quatre|cinq|six|sept|huit|neuf|dix)';
+
 const DESCR_SENIOR_RE = new RegExp(
   [
     // FR — "4 ans d'expérience", "3 à 5 ans d'expérience" (on lit la borne
     // haute : un poste "3 à 5 ans" recrute un profil confirmé).
     // « et » compte autant que « à » : « entre 3 et 5 ans » est la tournure
     // la plus courante des annonces françaises, et elle passait entière.
-    `\\b\\d+\\s*(?:à|a|-|/|et|ou)\\s*([4-9]|[1-9]\\d)\\s*ans?`,
+    `\\b\\d+\\s*(?:à|a|-|/|et|ou)\\s*${NOMBRE_SENIOR_FR}\\s*ans?`,
     // Même fourchette en anglais : « between 3 and 5 years ».
     `\\b\\d+\\s*(?:to|and|-|/)\\s*([4-9]|[1-9]\\d)\\s*years?`,
-    `\\b([4-9]|[1-9]\\d)\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
+    `\\b${NOMBRE_SENIOR_FR}\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
     // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
-    `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+([4-9]|[1-9]\\d)\\s*ans?`,
+    `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+${NOMBRE_SENIOR_FR}\\s*ans?`,
     // Le seuil est à QUATRE ans, pas trois : la cible annoncée est « 0-3 ans »,
     // donc une offre qui demande « minimum 3 ans » reste dans le périmètre —
     // c'est sa borne haute. À partir de quatre, le poste n'est plus junior.
-    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?([4-9]|[1-9]\\d)\\s*ans?`,
-    `\\b([4-9]|[1-9]\\d)\\s*\\+\\s*ans?`,
+    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?${NOMBRE_SENIOR_FR}\\s*ans?`,
+    `\\b${NOMBRE_SENIOR_FR}\\s*\\+\\s*ans?`,
     `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative`,
     `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste`,
     `justifiez\\s+d${AP_}?\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
@@ -1750,8 +1756,21 @@ function cleanTitle(title) {
 
   // 1) Préfixes de contrat répétés en tête, éventuellement plusieurs fois :
   //    "Stage : Stage - Finance" -> "Finance"
-  const prefixe = /^(?:stage|stagiaire|alternance|alternant|apprentissage|apprenti|internship|intern|cdi|cdd|vie|job d['’]?[ée]t[ée])\s*(?:de fin d['’]?[ée]tudes?\s*)?(?:\d+\s*mois\s*)?[:\-–—]\s*/i;
+  const prefixe = /^(?:stage|stagiaire|alternance|alternant|apprentissage|apprenti|internship|intern|apprenticeship|cdi|cdd|vie|job d['’]?[ée]t[ée])\s*(?:de fin d['’]?[ée]tudes?\s*)?(?:\d+\s*mois\s*)?[:\-–—]\s*/i;
   for (let i = 0; i < 3 && prefixe.test(t); i++) t = t.replace(prefixe, '');
+
+  // 1 bis) « Alternant(e) Chargé(e) X », « Apprenti(e) contrôle interne » :
+  //    le préfixe n'est suivi d'aucun « : » ni tiret, juste un espace — la
+  //    règle 1) exige ce séparateur et ne peut donc pas s'appliquer. Le « (e) »
+  //    suffit pourtant à lui seul à marquer la fin du préfixe : aucun métier ne
+  //    commence par « alternant(e) » ou « apprenti(e) ». Pas de boucle ici,
+  //    contrairement à la règle 1) : aucun cas mesuré n'empile deux préfixes.
+  t = t.replace(/^(?:stagiaire|alternant|apprenti)\s*\(e\)\s*/i, '');
+
+  // 1 ter) La durée AVANT le mot de contrat, en anglais : « 12 months
+  //    Apprenticeship – » chez L'Oréal. La règle 1) ne sait lire la durée
+  //    qu'APRÈS le mot de contrat (« Alternant - 6 mois - »).
+  t = t.replace(/^\d+\s*(?:mois|months?)\s+(?:apprenticeship|internship)\s*[:\-–—]\s*/i, '');
 
   // 2) Durées et dates résiduelles en tête : "6 mois - ", "- Janvier 2027 - "
   t = t.replace(/^\d+\s*mois\s*[:\-–—]\s*/i, '');
@@ -1774,18 +1793,40 @@ function cleanTitle(title) {
   );
   t = t.replace(/[\s\-–—(,]+(?:en\s*)?pr[ée][\s-]?embauche\s*[)\s]*$/i, '');
 
+  // 1 quater) Code de programme interne en tête : « AGGP2027 - Graduate
+  //    Financial Controller » chez Airbus. Motif restrictif à dessein : lettres
+  //    puis année à quatre chiffres COLLÉES, jamais vues dans un sigle
+  //    financier réel — « M&A », « FP&A », « ESG » n'ont pas de chiffres, et
+  //    « H2 2026 » porte un espace avant l'année.
+  t = t.replace(/^[A-Z]{2,8}\d{4}\s*[:\-–—]\s*/, '');
+
   // 2 quater) Miettes de gabarit d'adresse. Oracle Cloud nomme ses fiches
   //    « /offer/... » et le mot se retrouvait en tête : « offer - Sovereign
   //    Advisory Group » chez Lazard. Le séparateur qui suit est exigé, sans
   //    quoi un vrai titre commençant par « Offre de stage… » serait amputé.
   t = t.replace(/^(?:offer|offre|job|poste|emploi|vacancy|position)\s*[:\-–—]\s*/i, '');
 
+  // 2 quater bis) « R&Co4Generations » : le nom réel du véhicule
+  //    philanthropique de Rothschild & Co, créé en 2021 — pas un résidu, un
+  //    vrai nom d'entité. Mais illisible pour qui ne le connaît pas. Retrait
+  //    ciblé sur ce nom précis : une règle générale sur les segments courts en
+  //    lettres et chiffres mangerait de vrais noms de fonds ailleurs.
+  t = t.replace(/[\s\-–—]*r\s*&\s*co\s*4\s*generations/i, '');
+
   // 2 quinquies) Nom de l'événement de recrutement, que la Société Générale
   //    place en tête : « 1 EN 1 JOUR – Assistant Trader ». « 1 en 1 jour » est
   //    leur journée de recrutement — postuler le matin, réponse le soir. Ce
   //    n'est pas le métier, et en tête c'est pourtant ce qu'on lit d'abord.
+  // « 1 en 1 jour » n'est jamais écrit seul dans les vraies données : c'est
+  // toujours « 1 STAGE en 1 jour » ou « 1 ALTERNANCE en 1 jour », vérifié sur
+  // les quatre offres réelles de Société Générale. Le mot de contrat entre
+  // les deux « 1 » doit donc être toléré, pas seulement espéré absent.
   t = t.replace(
-    /^(?:1\s*en\s*1\s*jour|job\s*dating|forum\s+(?:de\s+)?recrutement|journ[ée]e\s+(?:de\s+)?recrutement)\s*[:\-–—]\s*/i,
+    /^1\s*(?:stage|stagiaire|alternance|alternant)?\s*en\s*1\s*jour\s*[:\-–—]\s*/i,
+    ''
+  );
+  t = t.replace(
+    /^(?:job\s*dating|forum\s+(?:de\s+)?recrutement|journ[ée]e\s+(?:de\s+)?recrutement)\s*[:\-–—]\s*/i,
     ''
   );
 
@@ -1805,6 +1846,18 @@ function cleanTitle(title) {
     /\s*\((?:fusions?[\s\-–—&/]*acquisitions?|m\s*&\s*a|corporate finance|private equity|capital[\s\-]investissement|asset management|gestion d['’]actifs|audit|contr[ôo]le de gestion|comptabilit[ée])\)\s*$/i,
     ' '
   );
+
+  // 3 ter) Le titre répète son propre sigle entre parenthèses : « Eurazeo
+  //    Planetary Boundaries Fund (epbf) », où « epbf » n'est que l'initiale de
+  //    chacun des quatre mots qui précèdent. On ne retire que si les initiales
+  //    calculées correspondent réellement au sigle trouvé : un intitulé qui
+  //    porterait une vraie précision entre parenthèses (un nom de produit, une
+  //    ville) n'y correspond pas et reste intact.
+  t = t.replace(/\s*\(([A-Za-zÀ-ÿ]{2,6})\)\s*$/, (mot, sigle) => {
+    const avant = t.slice(0, t.length - mot.length).trim().split(/\s+/).filter(Boolean);
+    const initiales = avant.map((m) => m[0]).join('').toLowerCase();
+    return initiales.endsWith(sigle.toLowerCase()) ? ' ' : mot;
+  });
 
   // 4) Codes internes et hashtags : "#TDFE2026", "(réf. 12345)", "(10266)"
   t = t.replace(/#\S+/g, ' ').replace(/\(\s*r[ée]f\.?[^)]*\)/gi, ' ');
@@ -1827,7 +1880,7 @@ function cleanTitle(title) {
   //    inclut les lettres accentuées.
   const FIN_MOT = '(?![A-Za-zÀ-ÿ])';
   t = t.replace(
-    new RegExp(`[\\s\\-–—(,|]*\\b(?:rentr[ée]e\\s+(?:de\\s+)?)?(?:${MOIS})${FIN_MOT}\\s+20\\d\\d\\b[)\\s]*`, 'gi'),
+    new RegExp(`[\\s\\-–—(,|]*(?<![A-Za-zÀ-ÿ])(?:rentr[ée]e\\s+(?:de\\s+)?|[àa]\\s*partir\\s+de\\s+)?(?:${MOIS})${FIN_MOT}\\s+20\\d\\d\\b[)\\s]*`, 'gi'),
     ' '
   );
   t = t.replace(new RegExp(`[\\s\\-–—(,|]*\\b(?:${MOIS})${FIN_MOT}\\s*[)]?\\s*$`, 'i'), ' ');
@@ -1844,6 +1897,10 @@ function cleanTitle(title) {
     /[\s\-–—(,|]*\b(?:master\s*(?:½|[12]\s*\/\s*2|[12])|bac\s*\+\s*\d|m[12])(?![A-Za-zÀ-ÿ0-9])[)\s]*/gi,
     ' '
   );
+
+  // 5 ter) Temps de travail : « Temps Partiel 32h/semaine ». Ce n'est pas le
+  //    nom du poste, au même titre que la rémunération retirée juste après.
+  t = t.replace(/[\s\-–—(,|]*\btemps\s+(?:partiel|plein)\b\s*,?\s*\d{1,2}\s*h(?:\s*\/\s*semaine)?[)\s]*/gi, ' ');
 
   // 6) Rémunérations : « - 1700€/mois », « 1 700 € brut », « 2000 euros ».
   //    Le champ salaire existe déjà ; dans l'intitulé, c'est du bruit.
@@ -2433,6 +2490,13 @@ function normalize(item) {
   // Rothschild, dont le mot ne figure que dans l'adresse, se retrouvaient
   // rangées en CDI.
   const titreBrut = title;
+
+  // « 1 STAGE EN 1 JOUR » / « 1 ALTERNANCE EN 1 JOUR » : une journée de
+  //    recrutement, pas un poste. Le signal ne survit pas au nettoyage du
+  //    titre (cleanTitle le retire), d'où le test sur titreBrut, avant coup.
+  if (/^1\s*(?:stage|stagiaire|alternance|alternant)?\s*en\s*1\s*jour\b/i.test(titreBrut || '')) {
+    return null;
+  }
   title = adoucirMajuscules(cleanTitle(title));
 
   // --- Le lieu et le contrat n'ont rien à faire dans l'intitulé ------------
@@ -3389,6 +3453,27 @@ function writeOutput(offers) {
       _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
       ...rest
     } = o;
+    // La mention de télétravail complet a déjà servi à la déduplication
+    // (canonicalKey, avant dedupe()) : la retirer plus tôt, dans cleanTitle,
+    // aurait vidé ce signal avant qu'il ne serve et ressuscité les cartes
+    // Pennylane en double. Une fois les doublons fusionnés, elle n'apporte
+    // plus rien à l'affichage.
+    //
+    // TELETRAVAIL_COMPLET_RE ne capture que la mention, pas la parenthèse qui
+    // l'entoure : la retirer seule laisserait « (  possible) » pendu. On
+    // retire donc toute parenthèse qui la contient, avec un repli si la
+    // mention n'est pas parenthésée.
+    if (rest.title) {
+      const AVEC_PARENTHESES = new RegExp(
+        '\\s*\\([^)]*(?:' + TELETRAVAIL_COMPLET_RE.source + ')[^)]*\\)',
+        'gi'
+      );
+      rest.title = rest.title
+        .replace(AVEC_PARENTHESES, '')
+        .replace(TELETRAVAIL_COMPLET_RE, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+    }
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
     // C'est ce qui alimente le filtre "nouvelles offres" de la page : plus
     // fiable que postedAt, que certaines sources ne fournissent pas ou mal.
