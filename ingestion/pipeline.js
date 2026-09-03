@@ -2585,6 +2585,11 @@ function normalize(item) {
     // sinon l’offre serait publiée avec l’heure de collecte présentée comme sa
     // date de parution, ce qui est précisément le mensonge qu’on évite.
     _dateDeLaSource: Boolean(dateIso(postedAt)),
+    // Avature ne donne que le « lastmod » de son sitemap : une date de
+    // MODIFICATION, la seule que ces portails exposent. Elle est réelle et
+    // propre à l'annonce, mais la carte écrira « Mise à jour », pas « Publiée ».
+    // La récupération sur fiche peut lever ce drapeau si elle trouve mieux.
+    _dateEstMiseAJour: __src === 'avature',
   };
 }
 
@@ -3083,12 +3088,17 @@ function ficheJsonLd(html) {
         // l'an prochain.
         `Lieu\\s*:[^.]{0,90}\\.\\s*Date`,
       ];
-      for (const libelle of REPLIS) {
+      for (const [rang, libelle] of REPLIS.entries()) {
         const fr = texte.match(new RegExp(`${libelle}\\s*:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})`, 'i'));
         const iso = texte.match(new RegExp(`${libelle}\\s*:?\\s*(\\d{4})-(\\d{1,2})-(\\d{1,2})`, 'i'));
         if (fr) d = new Date(`${fr[3]}-${fr[2].padStart(2, '0')}-${fr[1].padStart(2, '0')}T00:00:00Z`);
         else if (iso) d = new Date(`${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}T00:00:00Z`);
-        if (d && !isNaN(d)) break;
+        if (d && !isNaN(d)) {
+          // Le rang 1 est « date de mise à jour » : la fiche ne donne alors pas
+          // la première publication, et la carte doit écrire « Mise à jour ».
+          if (rang === 1) resultat.dateEstMiseAJour = true;
+          break;
+        }
       }
     }
 
@@ -3173,6 +3183,10 @@ async function completerDatesManquantes(offers) {
             if (fiche.date) {
               o._postedAt = fiche.date;
               o._dateRecuperee = true;
+              // Une date lue sous le libellé « mise à jour » n'est pas une date
+              // de publication : la carte le dira. On n'écrase le drapeau que
+              // lorsqu'une date est effectivement trouvée.
+              o._dateEstMiseAJour = fiche.dateEstMiseAJour === true;
               trouvees++;
             }
             // La description structurée ET le corps de la page, concaténés.
@@ -3312,7 +3326,7 @@ function writeOutput(offers) {
     // poste, l'employeur, le lieu, la date, et le lien vers l'annonce d'origine.
     const {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
-      _dateRecuperee, _dateDeLaSource, _descr,
+      _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
       ...rest
     } = o;
     // firstSeenAt = date à laquelle JJ a vu cette offre pour la première fois.
@@ -3327,6 +3341,11 @@ function writeOutput(offers) {
       verifiedAt: _lastSeenAt,
       postedAt: datePubliee || _firstSeenAt,
       firstSeenAt: _firstSeenAt,
+      // true = la date affichée est une date de MISE À JOUR de l'annonce, pas
+      // de première publication. La carte écrit alors « Mise à jour il y a X »
+      // plutôt que « Publiée il y a X ». Absent le reste du temps, pour ne pas
+      // alourdir offres.js d'un champ faux sur 95 % des lignes.
+      ...(_dateEstMiseAJour && datePubliee ? { dateMaj: true } : {}),
       // false = la source ne date pas ses offres : _postedAt vaut la date de
       // collecte, la page ne doit donc pas l'afficher comme date de publication.
       // _dateRecuperee = la liste ne datait pas l'offre, mais sa fiche l'a fait

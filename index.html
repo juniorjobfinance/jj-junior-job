@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%230a1424'/><text x='32' y='45' font-family='Georgia,serif' font-size='33' font-weight='700' fill='%23c79a5c' text-anchor='middle' letter-spacing='-1'>JJ</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23ea580c'/><text x='32' y='44' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='bold' letter-spacing='-2.4' fill='white'>JJ</text></svg>">
 <title>Junior Job Finance — toutes les opportunités en finance pour démarrer votre carrière</title>
 <link rel="alternate" type="application/rss+xml" title="Junior Job Finance — dernières offres" href="offres.xml">
 <meta name="description" content="Stages, alternances et CDI/CDD 0-3 ans en finance, en France. Lien direct vers l'annonce de l'entreprise, offres vérifiées chaque jour, sans compte et sans pub.">
+<link rel="preload" href="polices/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://juniorjobfinance.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Junior Job Finance">
@@ -16,23 +17,83 @@
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary">
 <style>
+  /* Manrope, servie depuis le dépôt (voir polices/). Fonte variable :
+     un seul fichier pour les graisses 400 à 800.
+
+     « font-display: swap » affiche le texte tout de suite dans la police
+     système, puis le remplace : jamais de page blanche pendant le
+     chargement.
+
+     Deux sous-ensembles : le latin que tout le monde charge, et le latin
+     étendu que le navigateur ne va chercher que s'il croise un caractère
+     qui le demande. La plage Unicode ci-dessous est ce qui le lui dit.
+
+     Licence SIL Open Font, texte intégral dans polices/OFL.txt. Aucune
+     requête à un tiers : la promesse « aucune ressource extérieure » de la
+     page confidentialité tient, ce que Google Fonts aurait cassé. */
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('polices/manrope-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('polices/manrope-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
   :root {
-    --navy-950: #0a1424;
-    --navy-900: #0f1f33;
-    --navy-800: #17304d;
-    --navy-700: #22456b;
-    --paper: #f6f4ef;
+    /* Encre & orange brûlé.
+       Un seul accent, et il ne sert qu'à une chose : désigner ce sur quoi on
+       clique. Tout le reste est de l'encre sur du blanc. C'est ce qui empêche
+       une page d'offres de virer au sapin de Noël quand chaque carte porte un
+       contrat, une famille, un lieu et une date. */
+    --encre-950: #14110f;
+    --encre-900: #241d19;
+    --encre-800: #3d332c;
+    --encre-700: #5c4f45;
+    /* Le fond n'est pas un blanc pur : à blanc sur blanc, la carte ne se
+       détache d'aucune ombre raisonnable. Trois pour cent d'écart suffisent —
+       la page se lit encore comme blanche. */
+    --paper: #fbfaf8;
     --paper-raised: #ffffff;
-    --ink: #101826;
-    --ink-soft: #4a5568;
-    --line: #dcd6c9;
-    --brass: #a8763f;
-    --brass-dark: #8a5f30;
-    --brass-soft: #f1e4d0;
-    --ok: #2f6b4f;
+    --ink: #14110f;
+    --ink-soft: #57534e;
+    --line: #e2ddd5;
+    --line-fort: #cfc7ba;
+    /* L'accent. Le foncé sert au texte sur blanc, où l'orange vif descend sous
+       le rapport de contraste 4,5:1 exigé pour du petit texte. */
+    --accent: #ea580c;
+    --accent-fort: #c2410c;
+    --accent-doux: #fff1e8;
+    /* Vert = fraîcheur de l'annonce, et rien d'autre. Ambre = il faut se
+       dépêcher. Ni l'un ni l'autre n'est jamais employé pour décorer. */
+    --ok: #15803d;
+    --alerte: #b45309;
+    /* Une teinte par type de contrat. Froides à dessein : elles répondent à
+       l'orange de l'accent au lieu de le concurrencer, et l'orange reste
+       réservé à ce qui se clique. */
+    --stage: #0f766e;
+    --stage-doux: #d4efea;
+    --alternance: #6b46c1;
+    --alternance-doux: #e8e2f7;
+    --vie: #2456b8;
+    --vie-doux: #dce6f9;
+    --cdi: #be185d;
+    --cdi-doux: #fce7f0;
     --focus: #1b6fd6;
-    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --ombre: 0 1px 2px rgba(20, 17, 15, 0.06), 0 3px 10px rgba(20, 17, 15, 0.05);
+    --ombre-levee: 0 2px 4px rgba(20, 17, 15, 0.09), 0 8px 20px rgba(20, 17, 15, 0.1);
+    --font-ui: "Manrope", -apple-system, BlinkMacSystemFont,
+      "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Chiffres de largeur fixe, dans la police du site : l'alignement du
+       monospace sans son allure de terminal. */
+    --font-chiffres: var(--font-ui);
   }
 
   * { box-sizing: border-box; }
@@ -44,7 +105,7 @@
     line-height: 1.4;
   }
 
-  a { color: var(--navy-800); }
+  a { color: var(--encre-800); }
 
   :focus-visible {
     outline: 2px solid var(--focus);
@@ -60,13 +121,17 @@
      or (SVG en ligne) — le même dessin que la favicon, pour qu'onglet et page
      racontent la même chose — et le nom "Junior Job Finance" en romain à
      empattements. Tout est local : le monogramme est un SVG inline et la police
-     une pile système (Georgia), aucune fonte ni image téléchargée, la promesse
+     Manrope, servie depuis polices/ — aucune requête à un tiers, la promesse
      "aucune ressource extérieure" de la confidentialité reste vraie. */
+  /* En-tête clair. Le bandeau nuit écrasait le haut de la page et donnait à
+     l'ensemble un poids dont Victor ne voulait pas. La marque tient très bien
+     sur du blanc : c'est le monogramme, sombre et carré, qui l'ancre, et le
+     filet orange qui la signe. */
   header.site {
-    background: linear-gradient(180deg, var(--navy-900) 0%, var(--navy-950) 100%);
-    color: var(--paper);
+    background: var(--paper-raised);
+    color: var(--ink);
     padding: 1.35rem 1.5rem 1.15rem;
-    border-bottom: 3px solid var(--brass);
+    border-bottom: 3px solid var(--accent);
   }
   header.site .brand {
     display: flex;
@@ -82,7 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 1px 4px rgba(20, 17, 15, 0.18));
     user-select: none;
   }
   header.site .logo svg { width: 100%; height: 100%; display: block; }
@@ -93,38 +158,40 @@
     min-width: 0;
   }
   header.site .wordmark {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.65rem;
+    font-family: var(--font-ui);
+    font-size: 1.6rem;
+    font-weight: 800;
     line-height: 1.1;
-    letter-spacing: 0.015em;
-    color: var(--paper);
+    letter-spacing: -0.025em;
+    color: var(--encre-950);
   }
   header.site .wordmark b {
     font-weight: 700;
-    color: var(--paper);
+    color: var(--encre-950);
   }
   header.site .wordmark em {
-    font-style: italic;
-    color: var(--brass);
+    font-style: normal;
+    font-weight: 400;
+    color: var(--accent);
   }
   header.site .brand .tagline {
     font-size: 0.85rem;
-    color: #c7cede;
+    color: var(--ink-soft);
     letter-spacing: 0.01em;
   }
   /* Lien de contact discret, poussé tout à droite de l'en-tête. */
   header.site .contact-lien {
     margin-left: auto;
     align-self: center;
-    color: var(--brass);
+    color: var(--accent);
     text-decoration: none;
     font-size: 0.85rem;
-    border: 1px solid rgba(168, 118, 63, 0.5);
+    border: 1px solid rgba(234, 88, 12, 0.5);
     border-radius: 6px;
     padding: 0.35rem 0.8rem;
     white-space: nowrap;
   }
-  header.site .contact-lien:hover { background: rgba(168, 118, 63, 0.14); }
+  header.site .contact-lien:hover { background: rgba(234, 88, 12, 0.14); }
   @media (max-width: 640px) { header.site .contact-lien { display: none; } }
   @media (max-width: 640px) {
     header.site { padding: 1.1rem 1.1rem 1rem; }
@@ -148,20 +215,45 @@
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
-    padding: 0.9rem 1rem;
+    padding: 0.9rem 0.8rem;
     font: inherit;
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--ink-soft);
     cursor: pointer;
+    white-space: nowrap;
   }
   nav.tabs button[role="tab"]:hover { color: var(--ink); }
-  nav.tabs button[role="tab"][aria-selected="true"] {
-    color: var(--navy-950);
-    border-bottom-color: var(--brass);
+  /* Une puce de la couleur du contrat devant chaque onglet. Elle est là même
+     quand l'onglet n'est pas actif : c'est ce qui rend les quatre volets
+     lisibles au premier regard, et ce qui relie visuellement un onglet aux
+     pastilles des cartes qu'il ouvre. */
+  nav.tabs button[role="tab"]::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    vertical-align: 0.08em;
+    background: var(--puce, var(--ink-soft));
   }
+  /* La puce garde sa teinte en permanence ; le libellé ne la prend qu'une
+     fois l'onglet ouvert. */
+  nav.tabs button[data-volet="stage"] { --puce: var(--stage); }
+  nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); }
+  nav.tabs button[data-volet="vie"] { --puce: var(--vie); }
+  nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); }
+  /* Actif : le trait sous l'onglet prend sa couleur, et le libellé passe en
+     encre pleine pour que la sélection se lise sans dépendre de la teinte. */
+  nav.tabs button[data-volet="stage"][aria-selected="true"] { color: var(--stage); border-bottom-color: var(--stage); }
+  nav.tabs button[data-volet="alternance"][aria-selected="true"] { color: var(--alternance); border-bottom-color: var(--alternance); }
+  nav.tabs button[data-volet="vie"][aria-selected="true"] { color: var(--vie); border-bottom-color: var(--vie); }
+  nav.tabs button[data-volet="cdi-cdd"][aria-selected="true"] { color: var(--cdi); border-bottom-color: var(--cdi); }
+  nav.tabs button[role="tab"][aria-selected="true"] { font-weight: 700; }
   nav.tabs .tab-count {
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--ink-soft);
@@ -170,7 +262,8 @@
   nav.tabs .total {
     margin-left: auto;
     align-self: center;
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     font-size: 0.78rem;
     color: var(--ink-soft);
     padding-right: 0.2rem;
@@ -252,7 +345,7 @@
       padding: 0.85rem 1rem;
       font: inherit;
       font-weight: 600;
-      color: var(--navy-950);
+      color: var(--encre-950);
       background: var(--paper-raised);
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -260,13 +353,14 @@
     }
     .filtres-bascule::after {
       content: "▾";
-      color: var(--brass);
+      color: var(--accent);
       transition: transform 0.15s;
     }
     .filtres-bascule[aria-expanded="true"]::after { transform: rotate(180deg); }
     .filtres-bascule-etat {
       margin-left: auto;
-      font-family: var(--font-mono);
+      font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
       font-size: 0.78rem;
       font-weight: 400;
       color: var(--ink-soft);
@@ -287,7 +381,7 @@
       overscroll-behavior: contain;
       background: var(--paper-raised);
       border-right: 1px solid var(--line);
-      box-shadow: 8px 0 32px rgba(10, 20, 36, 0.22);
+      box-shadow: 8px 0 32px rgba(20, 17, 15, 0.22);
       padding: 1rem 1rem 5.5rem;
       transform: translateX(-100%);
       visibility: hidden;
@@ -299,7 +393,7 @@
       position: fixed;
       inset: 0;
       z-index: 55;
-      background: rgba(10, 20, 36, 0.45);
+      background: rgba(20, 17, 15, 0.45);
       border: 0;
       padding: 0;
     }
@@ -317,7 +411,7 @@
       background: var(--paper-raised);
       border-bottom: 1px solid var(--line);
       font-weight: 700;
-      color: var(--navy-950);
+      color: var(--encre-950);
     }
     .tiroir-fermer {
       appearance: none;
@@ -351,7 +445,7 @@
       font: inherit;
       font-weight: 600;
       color: var(--paper);
-      background: var(--navy-800);
+      background: var(--encre-800);
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -401,7 +495,8 @@
   .famille-option .famille-nom { display: flex; align-items: center; gap: 0.4rem; }
   .famille-option input { margin: 0; }
   .famille-option .count {
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     font-size: 0.78rem;
     color: var(--ink-soft);
     min-width: 1.6em;
@@ -422,14 +517,14 @@
     width: 100%;
     padding: 0.5rem;
     background: none;
-    border: 1px solid var(--navy-800);
-    color: var(--navy-800);
+    border: 1px solid var(--encre-800);
+    color: var(--encre-800);
     border-radius: 6px;
     font: inherit;
     font-weight: 600;
     cursor: pointer;
   }
-  button#reset-filters:hover { background: var(--navy-800); color: white; }
+  button#reset-filters:hover { background: var(--encre-800); color: white; }
 
   /* ---------- Pépites JJ (bandeau carrousel) ----------
      Bande pleine largeur placée juste sous les onglets : la zone centre le
@@ -437,13 +532,18 @@
      de pépite, le bandeau est en display:none et la zone ne prend aucune
      hauteur (pas de padding vertical). */
   .pepites-zone { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  /* Le bloc était en nuit profonde (900 -> 950) cerné d'un laiton plein : une
+     masse noire posée en haut d'une page claire, qui écrasait les cartes
+     qu'elle est censée mettre en avant. La nuit reste — c'est ce qui distingue
+     les pépites du reste — mais deux crans plus haute, et le filet laiton
+     s'adoucit. Le contenu ne change pas, seulement son poids à l'écran. */
   .pepites {
-    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%);
-    border: 1px solid var(--brass);
+    background: var(--accent-doux);
+    border: 1px solid rgba(234, 88, 12, 0.55);
     border-radius: 10px;
-    padding: 0.9rem 1.1rem 1rem;
+    padding: 0.85rem 1.1rem 0.95rem;
     margin-top: 1.5rem;
-    box-shadow: 0 3px 14px rgba(10, 20, 36, 0.18);
+    box-shadow: 0 2px 10px rgba(20, 17, 15, 0.12);
   }
   @media (max-width: 820px) {
     .pepites-zone { padding: 0 1rem; }
@@ -459,26 +559,34 @@
     flex-wrap: wrap;
     margin-bottom: 0.7rem;
   }
+  .pepites-gemme {
+    width: 1.05em;
+    height: 1.05em;
+    color: var(--accent);
+    vertical-align: -0.15em;
+    margin-right: 0.15em;
+  }
   .pepites-titre {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.05rem;
-    color: var(--brass);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--accent);
     font-weight: 700;
     letter-spacing: 0.01em;
   }
-  .pepites-sous { font-size: 0.78rem; color: #aeb6c6; }
+  .pepites-sous { font-size: 0.78rem; color: var(--ink-soft); }
   .pepites-nav { margin-left: auto; display: flex; gap: 0.35rem; }
   .pepites-nav button {
     appearance: none;
     width: 26px; height: 26px;
     border-radius: 50%;
-    border: 1px solid rgba(168, 118, 63, 0.55);
+    border: 1px solid rgba(234, 88, 12, 0.55);
     background: transparent;
-    color: var(--brass);
+    color: var(--accent);
     font-size: 1.1rem; line-height: 1;
     cursor: pointer;
   }
-  .pepites-nav button:hover { background: rgba(168, 118, 63, 0.18); }
+  .pepites-nav button:hover { background: rgba(234, 88, 12, 0.18); }
   /* La piste glisse horizontalement ; chaque pépite occupe toute la largeur. */
   .pepites-piste { display: flex; transition: transform 0.45s ease; }
   @media (prefers-reduced-motion: reduce) { .pepites-piste { transition: none; } }
@@ -486,29 +594,29 @@
     flex: 0 0 100%;
     min-width: 0;
     text-decoration: none;
-    color: var(--paper);
+    color: var(--ink);
     display: block;
   }
   .pepite .pepite-mention {
     font-size: 0.74rem;
-    color: var(--brass);
+    color: var(--ink-soft);
     margin-bottom: 0.25rem;
   }
   .pepite .pepite-titre {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #fff;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--encre-950);
     line-height: 1.3;
     margin-bottom: 0.15rem;
   }
-  .pepite .pepite-emp { font-weight: 600; color: #dfe4ee; font-size: 0.92rem; }
+  .pepite .pepite-emp { font-weight: 700; color: var(--accent-fort); font-size: 1rem; }
   .pepite .pepite-meta {
     margin-top: 0.35rem;
     font-size: 0.8rem;
-    color: #aeb6c6;
+    color: var(--ink-soft);
     display: flex; gap: 0.5rem 0.9rem; flex-wrap: wrap;
   }
-  .pepite .pepite-cta { color: var(--brass); }
+  .pepite .pepite-cta { color: var(--accent); }
   .pepites-points { display: flex; justify-content: center; gap: 0.35rem; margin-top: 0.7rem; }
   .pepites-points button {
     appearance: none;
@@ -517,7 +625,7 @@
     background: rgba(174, 182, 198, 0.4);
     cursor: pointer;
   }
-  .pepites-points button[aria-current="true"] { background: var(--brass); }
+  .pepites-points button[aria-current="true"] { background: var(--accent); }
   @media (max-width: 640px) { .pepites-sous { display: none; } }
 
   /* ---------- Résultats ---------- */
@@ -528,7 +636,8 @@
     margin-bottom: 0.85rem;
   }
   .results-count {
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     color: var(--ink-soft);
     font-size: 0.9rem;
   }
@@ -553,83 +662,74 @@
   }
   .cards {
     display: grid;
-    gap: 0.85rem;
+    gap: 1.1rem;
   }
   .card {
     background: var(--paper-raised);
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 1rem 1.15rem;
+    padding: 1.3rem 1.5rem 1.15rem;
     display: block;
     text-decoration: none;
     color: inherit;
+    box-shadow: var(--ombre);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
-  .card:hover { border-color: var(--brass); }
+  /* Au survol, la carte se lève : c'est ce qui dit qu'elle est cliquable en
+     entier, plus sûrement qu'un changement de filet qu'on ne remarque pas. */
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--ombre-levee);
+    transform: translateY(-1px);
+  }
   /* Pastille de contrat : toujours au même endroit, toujours de la même forme.
      C'est elle qui porte "Stage / Alternance / VIE / CDI", pour que l'intitulé
      n'ait plus à le faire — les sources l'écrivaient chacune à leur manière. */
   .card .contrat {
     display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    padding: 0.18rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.26rem 0.62rem;
+    border-radius: 5px;
     margin-bottom: 0.5rem;
   }
-  /* Une couleur par type de contrat, et AUCUNE en laiton : le laiton est déjà
-     celui de l'étiquette de famille métier juste en dessous. Sans quoi Stage,
-     Alternance et la famille portaient tous les trois la même teinte, et la
-     pastille n'apprenait plus rien d'un coup d'œil. */
-  .card .contrat.stage {
-    background: #e5eaf3;
-    color: #2f4d80;
-    border: 1px solid rgba(47, 77, 128, 0.28);
-  }
-  .card .contrat.alternance {
-    background: #efe6f2;
-    color: #6b3d7a;
-    border: 1px solid rgba(107, 61, 122, 0.28);
-  }
-  /* VIE et CDI se ressemblaient trop (deux verts) : le VIE passe en terracotta,
-     qui n'entre en conflit ni avec le laiton de la famille ni avec les autres
-     pastilles. Le CDI garde le vert, seul de sa teinte. */
-  .card .contrat.vie {
-    background: #f6e3dc;
-    color: #9c4a2f;
-    border: 1px solid rgba(156, 74, 47, 0.32);
-  }
-  /* Le vert est réservé à la ligne de date (« Publiée aujourd'hui ») : il y
-     porte une information de fraîcheur, et l'employer aussi pour un type de
-     contrat faisait lire deux choses différentes dans la même couleur.
-     L'onglet garde son nom « CDI · CDD », mais la pastille dit lequel des
-     deux — et le gris quand on ne le sait pas, plutôt que de trancher. */
-  .card .contrat.cdi-cdd {
-    background: #e7e9ee;
-    color: #4c5565;
-    border: 1px solid rgba(76, 85, 101, 0.3);
-  }
-  .card .contrat.cdi-cdd.cdi {
-    background: #d8ebe9;
-    color: #0f5f5c;
-    border-color: rgba(15, 95, 92, 0.34);
-  }
-  .card .contrat.cdi-cdd.cdd {
-    background: #f8e4ea;
-    color: #8d3a55;
-    border-color: rgba(141, 58, 85, 0.34);
-  }
+  /* Chaque contrat sa teinte, la même que la puce de son onglet. Le fond
+     clair et le texte soutenu se lisent d'un mètre, sans crier. */
+  .card .contrat.stage { background: var(--stage-doux); color: var(--stage); border: 1px solid var(--stage); }
+  .card .contrat.alternance { background: var(--alternance-doux); color: var(--alternance); border: 1px solid var(--alternance); }
+  .card .contrat.vie { background: var(--vie-doux); color: var(--vie); border: 1px solid var(--vie); }
+  .card .contrat.cdi-cdd { background: var(--cdi-doux); color: var(--cdi); border: 1px solid var(--cdi); }
+  /* Dans le seul onglet qui mélange deux contrats, le CDI prend le plein :
+     c'est ce que la plupart cherchent en sortie d'école, et il se repère en
+     balayant la liste. */
+  .card .contrat.cdi-cdd.cdi { background: var(--cdi); color: #ffffff; }
+  .card .contrat.cdi-cdd.cdd { background: transparent; color: var(--cdi); }
+  /* L'intitulé est ce qu'on vient lire : il doit gagner la carte au premier
+     regard. Il était à 1,05 rem dans la graisse par défaut du h3, à peine
+     au-dessus du nom de l'employeur juste en dessous. */
   .card h3 {
-    margin: 0 0 0.15rem;
-    font-size: 1.05rem;
-    color: var(--navy-950);
+    margin: 0 0 0.2rem;
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.018em;
+    color: var(--encre-950);
   }
+  /* Le nom de la maison est ce qu'on cherche presque autant que le poste : un
+     étudiant balaie la liste en cherchant « Lazard », « BNP », « Deloitte ».
+     Il était en gris-brun, plus discret que le lieu. Il passe à l'orange, en
+     gras, juste sous l'intitulé — c'est la seule couleur pleine de la carte
+     avec le bouton, et les deux marquent les deux gestes : reconnaître, puis
+     cliquer. */
   .card .emp {
-    font-weight: 600;
-    color: var(--navy-700);
-    margin-bottom: 0.45rem;
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--accent-fort);
+    margin-bottom: 0.55rem;
   }
   .card .meta {
     display: flex;
@@ -639,12 +739,18 @@
     color: var(--ink-soft);
     margin-bottom: 0.5rem;
   }
-  .card .meta .mono { font-family: var(--font-mono); }
+  .card .meta .mono { font-variant-numeric: tabular-nums; }
+  /* La famille métier portait exactement les deux mêmes couleurs que la ligne
+     de date « moyenne » — fond laiton clair, texte laiton foncé. Deux
+     informations sans rapport se lisaient dans la même teinte, à deux lignes
+     d'écart. Elle devient une étiquette au trait : présente, secondaire, et
+     elle ne dispute plus rien à la date, qui est le critère de décision. */
   .card .meta .tag-famille {
-    background: var(--brass-soft);
-    color: var(--brass-dark);
+    background: transparent;
+    color: var(--ink);
     font-weight: 600;
     padding: 0.1rem 0.5rem;
+    border: 1px solid var(--line);
     border-radius: 4px;
   }
   .card .meta .tag-struct {
@@ -654,7 +760,7 @@
   }
   .card .meta .tag-loc::before {
     content: "◍ ";
-    color: var(--brass);
+    color: var(--accent);
   }
   /* Ancienneté de l'annonce, sur sa propre ligne. Noyée parmi les autres
      pastilles, elle se lisait comme un détail de plus ; c'est pourtant le
@@ -672,19 +778,25 @@
     padding: 0.28rem 0.6rem 0.28rem 0.5rem;
     border-left: 3px solid currentColor;
     border-radius: 0 4px 4px 0;
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.01em;
   }
   .card .carte-date::before { content: "●"; font-size: 0.7em; }
 
+  /* AUCUN fond de couleur ici, et c'est le principe qui tient toute la carte :
+     une seule pastille pleine, celle du contrat. Le reste est du texte, coloré
+     quand la couleur dit quelque chose. Trois blocs teintés empilés — contrat,
+     famille, date — faisaient une carte bariolée où plus rien ne ressortait.
+     Le liseré à gauche et la couleur du texte suffisent à porter l'urgence. */
   /* Moins d'une semaine : l'offre est vivante, on y va. */
-  .card .carte-date.recente { color: var(--ok); background: #e8f2ec; }
+  .card .carte-date.recente { color: var(--ok); }
   /* Jusqu'à un mois : encore jouable, mais il faut se dépêcher. */
-  .card .carte-date.moyenne { color: var(--brass-dark); background: var(--brass-soft); }
+  .card .carte-date.moyenne { color: #8a6a1f; }
   /* Au-delà : souvent déjà pourvue. On ne la cache pas — on prévient. */
-  .card .carte-date.ancienne { color: #7a5c52; background: #f0e7e3; }
+  .card .carte-date.ancienne { color: #7a5c52; }
   /* Sans date, on le dit franchement plutôt que de laisser un trou : le
      candidat sait alors que le silence vient de l'employeur, pas de nous. */
   .card .carte-date.inconnue {
@@ -708,11 +820,12 @@
     align-items: center;
     gap: 0.35rem;
     font-size: 0.75rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     padding: 0.15rem 0.5rem;
     border-radius: 999px;
-    background: var(--brass-soft);
-    color: var(--brass-dark);
+    background: var(--accent-doux);
+    color: var(--accent-fort);
   }
   .badge.fresh::before { content: "●"; color: var(--ok); }
   .badge.posted {
@@ -750,18 +863,32 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .new-only:hover { border-color: var(--brass); }
+  .new-only:hover { border-color: var(--accent); }
   .new-only input { margin: 0 0.35rem 0 0; }
   .new-only .count {
-    font-family: var(--font-mono);
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
     font-size: 0.78rem;
     color: var(--ink-soft);
   }
+  /* « Voir l'annonce » était un texte bleu marine parmi d'autres textes : rien
+     ne disait que c'était l'action. Il passe au laiton, souligné au survol, et
+     sa flèche avance — trois signaux d'affordance pour le geste qui compte. */
   .link-out {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--navy-800);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--accent-fort);
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.15s ease, gap 0.15s ease;
+  }
+  .card:hover .link-out,
+  .pepite-lien:hover {
+    border-bottom-color: var(--accent);
+    gap: 0.45rem;
   }
   .also-on {
     font-size: 0.72rem;
@@ -772,7 +899,7 @@
     display: block;
     margin: 1.25rem auto 0;
     padding: 0.55rem 1.4rem;
-    background: var(--navy-950);
+    background: var(--encre-950);
     color: white;
     border: none;
     border-radius: 6px;
@@ -780,7 +907,7 @@
     font-weight: 600;
     cursor: pointer;
   }
-  button#load-more:hover { background: var(--navy-800); }
+  button#load-more:hover { background: var(--encre-800); }
   button#load-more[hidden] { display: none; }
 
   .empty-state {
@@ -815,18 +942,11 @@
 <header class="site">
   <div class="brand">
     <span class="logo" aria-hidden="true">
-      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="jjOr" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#e6cd97"/><stop offset="0.55" stop-color="#c79a5c"/><stop offset="1" stop-color="#a8763f"/>
-          </linearGradient>
-          <linearGradient id="jjNv" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#1a3252"/><stop offset="1" stop-color="#0a1424"/>
-          </linearGradient>
-        </defs>
-        <rect x="2.5" y="2.5" width="59" height="59" rx="15" fill="url(#jjNv)" stroke="url(#jjOr)" stroke-width="1.6"/>
-        <rect x="7" y="7" width="50" height="50" rx="11" fill="none" stroke="#a8763f" stroke-width="0.7" opacity="0.45"/>
-        <text x="32" y="43.5" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" fill="url(#jjOr)" text-anchor="middle" letter-spacing="-1">JJ</text>
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#ea580c"/>
+        <text x="32" y="44" text-anchor="middle"
+              font-family="Manrope, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif"
+              font-size="34" font-weight="800" letter-spacing="-2.4" fill="#ffffff">JJ</text>
       </svg>
     </span>
     <div class="brand-text">
@@ -851,7 +971,7 @@
 <div class="pepites-zone">
   <div id="pepites" class="pepites" hidden>
     <div class="pepites-tete">
-      <span class="pepites-titre">💎 Les Pépites JJ</span>
+      <span class="pepites-titre"><svg class="pepites-gemme" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l5 6-10 12L2 9z" fill="currentColor"/><path d="M7 3 2 9h20l-5-6z" fill="currentColor" opacity="0.5"/></svg> Les Pépites JJ</span>
       <span class="pepites-sous">Des offres qui sortent du lot, repérées pour vous</span>
       <div class="pepites-nav" aria-hidden="true">
         <button type="button" class="pepite-prec" aria-label="Pépite précédente">‹</button>
@@ -1342,13 +1462,20 @@
       // l'employeur, et sa date de parution nous est inconnue.
       return '<div class="carte-date inconnue">Toujours en ligne chez l\'employeur · date de publication inconnue</div>';
     }
-    var texte = jours === 0 ? "Publiée aujourd'hui"
-      : jours === 1 ? 'Publiée hier'
-      : jours < 7 ? 'Publiée il y a ' + jours + ' jours'
-      : jours < 14 ? 'Publiée il y a 1 semaine'
-      : jours < 31 ? 'Publiée il y a ' + Math.round(jours / 7) + ' semaines'
-      : jours < 61 ? 'Publiée il y a 1 mois'
-      : 'Publiée il y a ' + Math.round(jours / 30) + ' mois';
+    // Deux sources ne donnent que la date de MISE À JOUR de l'annonce :
+    // Avature, dont le sitemap porte un « lastmod » et dont la fiche n'a aucune
+    // date, et TalentSoft quand sa fiche ne dit que « Date de mise à jour ».
+    // Écrire « Publiée » dans ces cas ferait paraître l'annonce plus fraîche
+    // qu'elle n'est. Le mot change, la place dans le tri ne change pas : la
+    // date reste réelle et comparable aux autres.
+    var verbe = o.dateMaj ? 'Mise à jour' : 'Publiée';
+    var texte = jours === 0 ? verbe + " aujourd'hui"
+      : jours === 1 ? verbe + ' hier'
+      : jours < 7 ? verbe + ' il y a ' + jours + ' jours'
+      : jours < 14 ? verbe + ' il y a 1 semaine'
+      : jours < 31 ? verbe + ' il y a ' + Math.round(jours / 7) + ' semaines'
+      : jours < 61 ? verbe + ' il y a 1 mois'
+      : verbe + ' il y a ' + Math.round(jours / 30) + ' mois';
     var age = jours <= 7 ? 'recente' : jours <= 30 ? 'moyenne' : 'ancienne';
     return '<div class="carte-date ' + age + '">' + texte + '</div>';
   }
@@ -1426,7 +1553,7 @@
       bits.push(esc(o.famille));
       return (
         '<a class="pepite" href="' + esc(o.url) + '" target="_blank" rel="noopener">' +
-          '<div class="pepite-mention">✨ JJ estime que cette offre mérite votre attention</div>' +
+          '<div class="pepite-mention">Repérée par JJ</div>' +
           '<div class="pepite-titre">' + esc(o.title) + '</div>' +
           '<div class="pepite-emp">' + esc(o.emp) + '</div>' +
           '<div class="pepite-meta">' + bits.map(function (b) { return '<span>' + b + '</span>'; }).join('') +
