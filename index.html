@@ -73,7 +73,13 @@
     --accent-doux: #fff1e8;
     /* Vert = fraîcheur de l'annonce, et rien d'autre. Ambre = il faut se
        dépêcher. Ni l'un ni l'autre n'est jamais employé pour décorer. */
+    /* L'échelle d'ancienneté d'une annonce : vert on y va, ocre il faut se
+       dépêcher, brun c'est probablement pourvu. Aucune des trois n'approche
+       l'orange de l'accent — sans quoi on lirait « ancien » comme « à
+       cliquer ». */
     --ok: #15803d;
+    --age-moyen: #8a6a1f;
+    --age-ancien: #7a5c52;
     --alerte: #b45309;
     /* Une teinte par type de contrat. Froides à dessein : elles répondent à
        l'orange de l'accent au lieu de le concurrencer, et l'orange reste
@@ -299,7 +305,7 @@
     margin: 0 auto;
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 295px 1fr;
     gap: 1.75rem;
     align-items: start;
   }
@@ -494,8 +500,9 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     column-gap: 0.5rem;
-    padding: 0.35rem 0 0.4rem;
-    font-size: 0.88rem;
+    padding: 0.28rem 0 0.3rem;
+    font-size: 0.85rem;
+    line-height: 1.25;
     cursor: pointer;
   }
   .famille-option + .famille-option { border-top: 1px solid rgba(220, 214, 201, 0.45); }
@@ -558,7 +565,10 @@
   }
   /* Fenêtre de découpe : c'est ELLE qui masque, pile à sa largeur, sans la
      marge intérieure — sinon la pépite suivante déborde sur le côté droit. */
-  .pepites-fenetre { overflow: hidden; }
+  .pepites-fenetre {
+    overflow: hidden;
+    touch-action: pan-y;
+  }
   .pepites-tete {
     display: flex;
     align-items: baseline;
@@ -675,11 +685,14 @@
     background: var(--paper-raised);
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 1.3rem 1.5rem 1.15rem;
+    padding: 1rem 1.25rem 0.9rem;
     display: block;
     text-decoration: none;
     color: inherit;
     box-shadow: var(--ombre);
+    /* Sans cela, la carte refuse d'être plus étroite que son contenu le plus
+       large et déforme la colonne de la grille. */
+    min-width: 0;
     transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
   /* Au survol, la carte se lève : c'est ce qui dit qu'elle est cliquable en
@@ -700,9 +713,9 @@
     font-weight: 700;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    padding: 0.26rem 0.62rem;
+    padding: 0.22rem 0.58rem;
     border-radius: 5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
   /* Chaque contrat sa teinte, la même que la puce de son onglet. Le fond
      clair et le texte soutenu se lisent d'un mètre, sans crier. */
@@ -718,11 +731,20 @@
   /* L'intitulé est ce qu'on vient lire : il doit gagner la carte au premier
      regard. Il était à 1,05 rem dans la graisse par défaut du h3, à peine
      au-dessus du nom de l'employeur juste en dessous. */
+  /* Deux lignes réservées en toutes circonstances, et coupé au-delà : c'est ce
+     qui donne à toutes les cartes exactement la même hauteur, et empêche un
+     intitulé à rallonge de déformer la sienne. La hauteur est calculée sur
+     l'interligne pour ne pas dépendre du corps. */
   .card h3 {
-    margin: 0 0 0.2rem;
+    margin: 0 0 0.15rem;
     font-size: 1.18rem;
     font-weight: 700;
     line-height: 1.3;
+    min-height: calc(2 * 1.3em);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     letter-spacing: -0.018em;
     color: var(--encre-950);
   }
@@ -734,17 +756,17 @@
      cliquer. */
   .card .emp {
     font-weight: 700;
-    font-size: 1.02rem;
+    font-size: 1rem;
     color: var(--accent-fort);
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.4rem;
   }
   .card .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 0.9rem;
-    font-size: 0.82rem;
+    gap: 0.4rem 0.6rem;
+    font-size: 0.77rem;
     color: var(--ink-soft);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
   }
   .card .meta .mono { font-variant-numeric: tabular-nums; }
   /* La famille métier portait exactement les deux mêmes couleurs que la ligne
@@ -756,14 +778,39 @@
     background: transparent;
     color: var(--ink);
     font-weight: 600;
-    padding: 0.1rem 0.5rem;
+    padding: 0.08rem 0.42rem;
     border: 1px solid var(--line);
     border-radius: 4px;
   }
   .card .meta .tag-struct {
-    padding: 0.1rem 0.5rem;
+    padding: 0.08rem 0.42rem;
     border: 1px solid var(--line);
     border-radius: 4px;
+  }
+  /* Sur les écrans où l'on voit plusieurs cartes à la fois, la rangée reste sur
+     UNE ligne : c'est ce qui donne à toutes les cartes exactement la même
+     hauteur. Quand la place manque — deux cartes sur cinquante — c'est le type
+     de structure qui se raccourcit, jamais la famille métier ni le lieu, qui
+     sont ce qu'on lit pour décider. Il garde son intitulé complet en
+     infobulle.
+     Sous 640 px la rangée se replie normalement : on n'y voit qu'une carte à
+     la fois, la régularité de la trame n'y veut plus rien dire. */
+  @media (min-width: 641px) {
+    .card .meta { flex-wrap: nowrap; min-width: 0; overflow: hidden; }
+    .card .meta > * { flex: none; }
+    .card .meta .tag-struct {
+      flex: 0 1 auto;
+      min-width: 3rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .card .meta .tag-loc {
+    max-width: 16rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .card .meta .tag-loc::before {
     content: "◍ ";
@@ -781,7 +828,7 @@
        elle débordait de la carte sur les petits écrans. */
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin: 0.15rem 0 0.55rem;
+    margin: 0;
     padding: 0.28rem 0.6rem 0.28rem 0.5rem;
     border-left: 3px solid currentColor;
     border-radius: 0 4px 4px 0;
@@ -801,9 +848,9 @@
   /* Moins d'une semaine : l'offre est vivante, on y va. */
   .card .carte-date.recente { color: var(--ok); }
   /* Jusqu'à un mois : encore jouable, mais il faut se dépêcher. */
-  .card .carte-date.moyenne { color: #8a6a1f; }
+  .card .carte-date.moyenne { color: var(--age-moyen); }
   /* Au-delà : souvent déjà pourvue. On ne la cache pas — on prévient. */
-  .card .carte-date.ancienne { color: #7a5c52; }
+  .card .carte-date.ancienne { color: var(--age-ancien); }
   /* Sans date, on le dit franchement plutôt que de laisser un trou : le
      candidat sait alors que le silence vient de l'employeur, pas de nous. */
   .card .carte-date.inconnue {
@@ -815,12 +862,23 @@
   }
   .card .carte-date.inconnue::before { content: "○"; }
   .card .badges { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
-  .card .foot {
+  /* La date et le lien tiennent sur une seule rangée : la ligne de date est en
+     inline-flex, elle ne prend que la largeur de son texte et laissait tout le
+     côté droit vide. Le lien est poussé à droite par la marge automatique.
+     Sur écran étroit la rangée se replie, et le lien passe dessous. */
+  .card .bas {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.35rem 0.8rem;
     flex-wrap: wrap;
+  }
+  .card .bas .link-out { margin-left: auto; }
+  @media (max-width: 640px) {
+    .card .badges { display: none; }
+    /* Trois pixels manquaient pour que la date et le lien tiennent côte à
+       côte : le remplissage latéral, réglé pour un écran large, les prend. */
+    .card { padding: 0.9rem 1rem 0.85rem; }
+    .card .bas { gap: 0.3rem 0.5rem; }
   }
   .badge {
     display: inline-flex;
@@ -1498,7 +1556,7 @@
 
     var metaBits = [
       '<span class="tag-famille">' + esc(o.famille) + '</span>',
-      '<span class="tag-struct">' + esc(o.sector) + '</span>'
+      '<span class="tag-struct" title="' + esc(o.sector) + '">' + esc(o.sector) + '</span>'
     ];
     if (lieuTexte) metaBits.push('<span class="tag-loc">' + esc(lieuTexte) + '</span>');
 
@@ -1523,8 +1581,8 @@
         '<h3>' + esc(o.title) + '</h3>' +
         '<div class="emp">' + esc(o.emp) + '</div>' +
         '<div class="meta">' + metaBits.join('') + '</div>' +
-        ligneDate(o) +
-        '<div class="foot">' +
+        '<div class="bas">' +
+          ligneDate(o) +
           '<div class="badges">' + freshnessBadge(o) + '</div>' +
           '<span class="link-out">Voir l\'annonce →</span>' +
         '</div>' +
@@ -1604,6 +1662,40 @@
     var b = e.target.closest('button'); if (!b) return;
     montrerPepite(+b.dataset.i); relancerPepiteAuto();
   });
+  // Balayage au doigt. Les événements Pointer couvrent doigt, stylet et
+  // souris avec un seul jeu de gestionnaires.
+  (function () {
+    var fenetre = document.querySelector('.pepites-fenetre');
+    if (!fenetre) return;
+    var x0 = 0, y0 = 0, actif = false, balaye = false;
+    var SEUIL = 40; // en deçà, c'est un appui tremblé, pas un balayage
+
+    fenetre.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      x0 = e.clientX; y0 = e.clientY; actif = true; balaye = false;
+    });
+
+    fenetre.addEventListener('pointermove', function (e) {
+      if (!actif || balaye) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      // Geste vertical : c'est la page qu'on fait défiler, on ne s'en mêle pas.
+      if (Math.abs(dy) > Math.abs(dx)) { actif = false; return; }
+      if (Math.abs(dx) < SEUIL) return;
+      montrerPepite(pepiteIndex + (dx < 0 ? 1 : -1));
+      relancerPepiteAuto();
+      balaye = true; actif = false;
+    });
+
+    fenetre.addEventListener('pointercancel', function () { actif = false; });
+    fenetre.addEventListener('pointerup', function () { actif = false; });
+
+    // La pépite est un lien qui couvre tout le bandeau : sans cela, le
+    // balayage ouvrirait l'annonce en même temps qu'il fait défiler.
+    fenetre.addEventListener('click', function (e) {
+      if (balaye) { e.preventDefault(); e.stopPropagation(); balaye = false; }
+    }, true);
+  })();
+
   // On met en pause le défilement quand le curseur survole le bandeau.
   document.getElementById('pepites').addEventListener('mouseenter', function () { if (pepiteTimer) clearInterval(pepiteTimer); });
   document.getElementById('pepites').addEventListener('mouseleave', relancerPepiteAuto);

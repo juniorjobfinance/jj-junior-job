@@ -3096,9 +3096,19 @@ function lieuDepuisAdresseRadancy(segment, titre) {
   // range dans aucune zone et n'apprend rien au candidat. Le code postal du
   // segment, lui, suffit au pipeline pour situer l'offre.
   const estUneVoie = /^\d|\b(?:avenue|rue|boulevard|bd|place|chemin|route|quai|impasse|allee|all[ée]e)\b/i.test(propre);
-  if (estUneVoie) {
+  // Le titre n'a pas pu être retiré du segment : les deux écritures diffèrent
+  // (« (F/H) » contre « FH », un accent, un mot en plus), la recherche a échoué
+  // en silence, et tout le segment est resté. On le reconnaît à sa longueur —
+  // une commune française ne fait pas plus de quatre mots, tirets rendus. Sans
+  // cette garde, « Issy les Moulineaux Stage Promotion manager & Business
+  // Analyst FH » était publié comme lieu, et son étiquette large de 400 pixels
+  // faisait défiler la page sur le côté.
+  const tropDeMots = propre.split(/\s+/).filter(Boolean).length > 4;
+  if (estUneVoie || tropDeMots) {
     const cp = (segment.match(/\b((?:0[1-9]|[1-8]\d|9[0-5])\d{3})\b/) || [])[1];
     if (cp) return cp;
+    // Pas de code postal non plus : mieux vaut ne rien dire que dire faux.
+    if (tropDeMots) return '';
   }
   return propre;
 }
