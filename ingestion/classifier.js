@@ -668,13 +668,9 @@ function classify(offer) {
   if (gated && !hasFinanceMarker(title)) {
     return {
       status: 'rejected',
-      // « absent-de-structures » et non « inconnu » : dans le pipeline de JJ, ces
-      // employeurs sont bien connus — ils sont dans maisons.txt — c'est la table
-      // des structures qui ne les porte pas encore. Le motif doit nommer ce qu'il
+      // Nom du motif : ces employeurs SONT dans maisons.txt, c'est la table des
+      // structures qui ne les porte pas encore. Le motif doit nommer ce qu'il
       // mesure, sinon il oriente vers la mauvaise correction.
-      //
-      // ATTENTION : ce renommage a déjà été perdu DEUX fois par une recopie de
-      // classifier.js depuis Downloads. Le reporter dans le fichier source.
       reason: structure ? `gate:${structure}-sans-marqueur` : 'gate:employeur-absent-de-structures',
       structure,
       tags,
