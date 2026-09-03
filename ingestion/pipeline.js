@@ -1646,14 +1646,18 @@ function dureeExperienceMax(texte) {
 }
 
 /**
- * Verdict de séniorité sur une description : { expMax, formule, veto }.
+ * Verdict de séniorité sur une description :
+ * { _expMax, _formuleSeniorite, _vetoJunior }.
  * Calculé sur le texte ENTIER, avant toute troncature.
  */
 function verdictSenioriteDescr(texte) {
   const t = String(texte || '');
-  if (!t) return { expMax: null, formule: null, veto: false };
+  if (!t) return { _expMax: null, _formuleSeniorite: null, _vetoJunior: false };
   const formule = (FORMULES_SENIORITE.find(([re]) => re.test(t)) || [])[1] || null;
-  return { expMax: dureeExperienceMax(t), formule, veto: VETO_JUNIOR_DESCR.test(t) };
+  // Prefixe `_` : ce sont des champs de travail, jamais publies. Ils doivent
+  // AUSSI figurer dans la liste de writeOutput, qui ne retire que ce qu elle
+  // nomme — le prefixe seul ne protege de rien.
+  return { _expMax: dureeExperienceMax(t), _formuleSeniorite: formule, _vetoJunior: VETO_JUNIOR_DESCR.test(t) };
 }
 function passesJuniorFilter(volet, title, descr, strict) {
   if (SPONTANEOUS_RE.test(title || '')) return false;
@@ -4045,6 +4049,8 @@ function writeOutput(offers) {
     const {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
       _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
+      // Analyse de séniorité : champs de travail, jamais publiés.
+      _expMax, _formuleSeniorite, _vetoJunior,
       ...rest
     } = o;
     // La mention de télétravail complet a déjà servi à la déduplication
