@@ -545,8 +545,8 @@
      les pépites du reste — mais deux crans plus haute, et le filet laiton
      s'adoucit. Le contenu ne change pas, seulement son poids à l'écran. */
   .pepites {
-    background: var(--accent-doux);
-    border: 1px solid rgba(234, 88, 12, 0.55);
+    background: #fffaf6;
+    border: 1px solid rgba(234, 88, 12, 0.35);
     border-radius: 10px;
     padding: 0.85rem 1.1rem 0.95rem;
     margin-top: 1.5rem;
@@ -767,7 +767,7 @@
   }
   .card .meta .tag-loc::before {
     content: "◍ ";
-    color: var(--accent);
+    color: var(--ink-soft);
   }
   /* Ancienneté de l'annonce, sur sa propre ligne. Noyée parmi les autres
      pastilles, elle se lisait comme un détail de plus ; c'est pourtant le
@@ -906,15 +906,17 @@
     display: block;
     margin: 1.25rem auto 0;
     padding: 0.55rem 1.4rem;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 6px;
+    background: transparent;
+    color: var(--accent-fort);
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
     font: inherit;
     font-weight: 700;
     cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
   }
-  button#load-more:hover { background: var(--accent-fort); }
+  button#load-more:hover { background: var(--accent); color: #ffffff; }
   button#load-more[hidden] { display: none; }
 
   .empty-state {
