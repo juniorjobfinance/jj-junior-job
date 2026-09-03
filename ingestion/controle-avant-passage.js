@@ -273,10 +273,14 @@ try {
 console.log('\n--- Les deux tables : maisons.txt et structures.js ---');
 try {
   const { trouverMaison } = require('./maisons');
-  const { resolveStructure } = require('./structures');
+  const { resolveStructure, normalizeEmployer, STRUCTURES } = require('./structures');
 
   // Les employeurs REELLEMENT rencontres : ceux du catalogue publie, plus
   // ceux que maisonRef a ecartes. C'est sur eux que le piege mord.
+  // On compte leurs offres au passage : un employeur qui en perd trente ne se
+  // traite pas comme un employeur qui en perd une.
+  const offresPar = new Map();
+  const compter = (e) => offresPar.set(e, (offresPar.get(e) || 0) + 1);
   const vus = new Set();
   for (const f of ['offres.js', 'offres-refonte.js']) {
     const p = path.join(RACINE, f);
@@ -284,7 +288,7 @@ try {
     try {
       const g = {};
       new Function('window', fs.readFileSync(p, 'utf8'))(g);
-      for (const o of g.__OFFRES__ || []) if (o.emp) vus.add(o.emp);
+      for (const o of g.__OFFRES__ || []) if (o.emp) { vus.add(o.emp); compter(o.emp); }
     } catch (e) {
       /* un catalogue illisible est signale ailleurs */
     }
@@ -294,7 +298,7 @@ try {
     if (!fs.existsSync(p)) continue;
     try {
       for (const o of JSON.parse(fs.readFileSync(p, 'utf8')).offres || []) {
-        if (o.entreprise) vus.add(o.entreprise);
+        if (o.entreprise) { vus.add(o.entreprise); compter(o.entreprise); }
       }
     } catch (e) {
       /* idem */
@@ -310,10 +314,24 @@ try {
     if (!boiteuses.length) {
       ok('deux tables', `les ${vus.size} employeurs vus resolvent maison ET structure`);
     } else {
+      // Le message donne la ligne A COLLER, pas le constat. Un controle qui
+      // nomme la correction se repare en trente secondes ; un controle qui
+      // constate un ecart se contourne.
+      const lignes = boiteuses
+        .sort((a, b) => (offresPar.get(b) || 0) - (offresPar.get(a) || 0))
+        .map((e) => {
+          const n = offresPar.get(e) || 0;
+          return `            '${normalizeEmployer(e)}': '???',` +
+            `${' '.repeat(Math.max(1, 34 - normalizeEmployer(e).length))}// ${e} (${n} offre${n > 1 ? 's' : ''})`;
+        });
       ko(
         'deux tables',
-        `${boiteuses.length} employeur(s) dans maisons.txt mais absent(s) de structures.js — ` +
-          `la porte finance les rejette en silence :\n          ${boiteuses.join(', ')}`
+        `${boiteuses.length} employeur(s) publient mais n'ont pas de structure : la porte\n` +
+          `          finance rejette TOUTES leurs offres, en silence.\n\n` +
+          `          A corriger dans ingestion/structures.js, table EMPLOYER_STRUCTURE :\n\n` +
+          lignes.join('\n') +
+          `\n\n          Remplacer ??? par un de ces identifiants :\n` +
+          `            ${Object.keys(STRUCTURES).join(', ')}`
       );
     }
 
