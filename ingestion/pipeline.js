@@ -441,6 +441,17 @@ const EMPLOYEUR_CANONIQUE = [
   [/^l\s*'?\s*or[ée]al\b/i, "L'Oréal"],
   [/^total\s*energies\b|^total\b/i, 'TotalEnergies'],
   [/^cr[ée]dit\s*mutuel\b(?!.*ark[ée]a)/i, 'Crédit Mutuel'],
+  // Un sigle que personne ne déchiffre n'est pas un nom d'employeur : « CDPQ »
+  // ne dit rien à un étudiant français, alors que la Caisse de dépôt et
+  // placement du Québec est un des grands investisseurs institutionnels
+  // mondiaux. Les sigles QUE L'ON CONNAÎT — EY, KPMG, PwC, LVMH, AXA, MAIF —
+  // restent tels quels : c'est leur orthographe, et les développer les
+  // rendrait moins lisibles, pas plus.
+  [/^cdpq\b/i, 'Caisse de dépôt et placement du Québec'],
+  // « BPCE VIE » n'est pas un contrat VIE : c'est BPCE Vie, l'assureur-vie du
+  // groupe. Écrit en capitales sur un site dont un onglet s'appelle VIE, le
+  // nom se lisait comme un type de contrat. Seule la casse change.
+  [/^bpce\s*vie\b/i, 'BPCE Vie'],
 ];
 
 // Suffixes purement administratifs : ils n'apportent rien au candidat et
@@ -1970,6 +1981,14 @@ function cleanTitle(title) {
   //    promotion, « May Day Analyst » est un intitulé où le mot appartient au
   //    titre. Sans cette exigence, on amputait le second.
   t = t.replace(new RegExp(`^\\s*(?:${MOIS})${FIN_MOT}\\s*[:\\-–—,]+\\s*`, 'i'), '');
+
+  // 9 bis) « Stage au sein du service Projections et Stress-tests » : le mot de
+  //    contrat retiré, il restait « sein du service… », qui ne veut rien dire
+  //    en tête d'un intitulé. On enlève la locution entière — les deux formes,
+  //    avec ou sans le « au » déjà mangé en amont — et ce qui reste nomme au
+  //    moins le service : « Service Projections et Stress-tests ». L'intitulé
+  //    d'origine ne dit pas mieux ; au moins il se lit.
+  t = t.replace(/^\s*(?:au\s+)?sein\s+d[eu]\s+(?:la\s+|l['’]\s*|les\s+)?/i, '');
 
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
