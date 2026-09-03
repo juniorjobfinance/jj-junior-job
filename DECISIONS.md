@@ -408,3 +408,36 @@ ajoutés nomment donc toujours la sécurité INFORMATIQUE (« security analyst �
 tort**, et « Chargé de Sécurité Financière », « Analyste Sécurité Financière
 KYC » et « Securities Services » restent tous retenus. C'est l'application
 directe de la §13 — une exclusion se relit toujours dans une maison de finance.
+
+---
+
+## 20. Une pépite, ce sont trois conditions obligatoires, pas un score
+
+**Décidé le 03/09/2026.** Le bandeau « Pépites JJ » sélectionnait jusqu'à huit
+offres par onglet (32 au total), sur un score cumulatif où dépasser un seuil de
+4 points suffisait — un poste rare (M&A, PE, trading…) chez une maison
+inconnue, ou un poste banal chez une maison prestigieuse, franchissait le
+seuil sans être une vraie pépite.
+
+> « les pepites j en mettrais que 5 a chaques fois sur vraiment ce que s arrache
+> les plus gros etudiant » — puis, en précisant : « des trucs recents, enorme
+> maison » et « egalement enorme poste que les gens s arrachent ».
+
+Trois critères sont devenus **obligatoires** dans `choisirPepites()`
+(`ingestion/pipeline.js`), plus aucun n'est un simple bonus de score :
+
+1. **Une énorme maison** — dans `MAISONS_PRESTIGE`, ou (pour le VIE
+   spécifiquement) un grand groupe reconnaissable via `GRANDE_STRUCTURE_RE`.
+2. **Un poste que tout le monde se dispute** — le titre doit matcher
+   `POSTE_RARE_RE` (M&A, private equity, trading, capital markets…).
+3. **Une offre récente** — publiée il y a 21 jours maximum
+   (`PEPITE_FRAICHEUR_JOURS`), sur `_postedAt` ou, à défaut, `_firstSeenAt`.
+
+Cinq pépites au total, **tous onglets confondus** — pas une vitrine équilibrée
+par onglet comme avant. Une seule par maison. Le score ne sert plus qu'à
+classer les candidats qui remplissent déjà les trois conditions.
+
+**Conséquence à connaître :** un jour sans offre récente chez une maison de
+prestige sur un poste rare, le bandeau peut afficher moins de 5 pépites, voire
+se masquer. C'est voulu — la règle §1 (moins d'offres, mais toutes justes)
+s'applique aussi ici : mieux vaut 2 vraies trouvailles que 8 remplissages.

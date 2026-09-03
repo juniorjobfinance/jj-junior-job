@@ -47,6 +47,38 @@ Thales (69) — le fourre-tout « Autres métiers de la finance » avait enflé 
 
 ---
 
+## Le 3 septembre, plus tard : interface et Pépites JJ
+
+Un passage manuel supplémentaire (hors cron du 4 à 06h30) a été poussé le soir
+même pour appliquer ces changements, ce qui explique un catalogue légèrement
+différent du tableau ci-dessus au moment d'écrire ces lignes : **994 offres**
+(stage 499, cdi-cdd 302, alternance 102, vie 91) — l'écart avec les chiffres du
+matin est de la variation normale de sources, pas un effet des changements
+décrits ici, qui ne touchent ni au filtrage ni à la classification.
+
+**Barre d'onglets** : le total (« 994 offres au total ») est revenu SUR la
+même ligne que Stage/Alternance/VIE/CDI-CDD (un essai en ligne séparée en
+dessous a été rejeté — « c'est moche »). Les onglets débordaient déjà de
+375 px avec leurs compteurs intégrés (« Alternance103 »), ce qui rendait la
+barre défilable au toucher ; les compteurs par onglet disparaissent donc sous
+900 px (pas seulement au format téléphone — le même débordement apparaît dès
+qu'on repasse sous ~750 px, en fenêtre de bureau réduite ou en tablette), et le
+total raccourcit à « 994 offres » sur cette largeur. Vérifié sans débordement
+à 360, 375, 700 et 901 px.
+
+**Filet orange sous l'en-tête** : il dépassait le contenu de chaque côté sur
+grand écran, parce que `header.site` est en pleine largeur alors que son
+contenu (`.brand`) est centré sur 1200 px. La bordure est devenue transparente
+et un pseudo-élément dessine le vrai filet, centré sur les mêmes 1200 px.
+
+**Pépites JJ, de 32 vitrines à 5 vraies trouvailles** — voir `DECISIONS.md`
+§20 pour le détail des trois critères devenus obligatoires (énorme maison,
+poste disputé, offre récente ≤ 21 jours). Le jour du changement : Ardian,
+Natixis, Eurazeo, Lazard, Barclays, toutes publiées entre 0 et 14 jours plus
+tôt.
+
+---
+
 ## Le 3 septembre : la pagination qui tourne à vide
 
 Trois corrections, poussées en fin de journée. Elles ne sont **pas** encore
