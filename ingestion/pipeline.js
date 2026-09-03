@@ -2267,7 +2267,23 @@ function normalize(item) {
       .concat(raw.categories || [], raw.category || [], raw.business_unit || [], raw.department || [])
       .filter(Boolean)
       .join(' ');
-    postedAt = raw.posted_date || (raw.t_create ? new Date(raw.t_create).toISOString() : null) || new Date().toISOString();
+    // Les trois générations ne nomment pas la date pareil : « posted_date »
+    // chez la première (AXA), « postedDate » et « dateCreated » chez la
+    // génération widgets (Allianz, BCG). Ne chercher que les premiers noms
+    // faisait tomber Allianz sur le repli à l'heure courante — et comme
+    // phenom est une source réputée datée, cette date inventée passait pour
+    // fiable et plaçait neuf offres de 2025 en tête de trois onglets.
+    //
+    // Aucun repli sur l'heure du passage : une date qu'on n'a pas reste
+    // nulle. completerDatesManquantes ira la lire sur la fiche, et à défaut
+    // l'offre passe en fin de liste, sans prétendre à une fraîcheur qu'elle
+    // n'a pas.
+    postedAt =
+      raw.posted_date ||
+      raw.postedDate ||
+      (raw.t_create ? new Date(raw.t_create).toISOString() : null) ||
+      raw.dateCreated ||
+      null;
   } else if (__src === 'manuel') {
     emp = item.emp;
     title = raw.title;
