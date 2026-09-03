@@ -265,6 +265,29 @@
   nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); --puce-doux: var(--alternance-doux); }
   nav.tabs button[data-volet="vie"] { --puce: var(--vie); --puce-doux: var(--vie-doux); }
   nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); --puce-doux: var(--cdi-doux); }
+  /* Cet onglet-là couvre DEUX contrats, et les cartes les distinguent déjà :
+     le CDI est plein, le CDD n'a que sa bordure. L'onglet montre donc les deux
+     pastilles plutôt qu'un « CDI · CDD » qui n'existe nulle part ailleurs sur
+     le site. Le bouton n'est alors plus lui-même une pastille — il ne serait
+     qu'un cadre de plus autour de deux cadres — mais un simple support. */
+  nav.tabs button[data-volet="cdi-cdd"] {
+    border-color: transparent;
+    background: transparent;
+    /* Le rembourrage vertical passe aux DEUX pastilles internes, sinon il
+       s'ajouterait au leur et cet onglet serait plus haut que les autres. */
+    padding: 0 0.3rem;
+  }
+  nav.tabs .duo-cdi,
+  nav.tabs .duo-cdd {
+    display: inline-block;
+    border: 1px solid var(--cdi);
+    border-radius: 5px;
+    padding: 0.5rem 0.6rem;
+  }
+  nav.tabs .duo-cdi { background: var(--cdi); color: #ffffff; }
+  nav.tabs .duo-cdd { background: transparent; color: var(--cdi); margin-left: 0.25rem; }
+  /* Le compteur retrouve l'air que le rembourrage du bouton lui donnait. */
+  nav.tabs button[data-volet="cdi-cdd"] .tab-count { margin-left: 0.4rem; }
   /* Ouvert : RIEN sur la pastille elle-même. Un premier essai doublait sa
      bordure par une ombre portée ; à côté des cartes, le trait paraissait
      aussitôt deux fois trop épais — ce qui est exactement ce qu'on cherche à
@@ -355,6 +378,12 @@
       margin-left: 0;
       font-size: 0.72rem;
     }
+    /* Même gabarit que les trois autres onglets, sur le couple de pastilles. */
+    nav.tabs button[data-volet="cdi-cdd"] { padding: 0 0.15rem; }
+    nav.tabs .duo-cdi,
+    nav.tabs .duo-cdd { padding: 0.38rem 0.28rem; }
+    nav.tabs .duo-cdd { margin-left: 0.15rem; }
+    nav.tabs button[data-volet="cdi-cdd"] .tab-count { margin-left: 0; }
     nav.tabs .total { font-size: 0.76rem; padding-left: 0.3rem; }
   }
 
@@ -1097,7 +1126,7 @@
   <button role="tab" data-volet="stage" aria-selected="true" aria-controls="panel-offres" id="tab-stage">Stage</button>
   <button role="tab" data-volet="alternance" aria-selected="false" aria-controls="panel-offres" id="tab-alternance">Alternance</button>
   <button role="tab" data-volet="vie" aria-selected="false" aria-controls="panel-offres" id="tab-vie">VIE</button>
-  <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
+  <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd"><span class="duo-cdi">CDI</span><span class="duo-cdd">CDD</span></button>
   <span class="total" id="total-count" aria-hidden="true"></span>
 </nav>
 
