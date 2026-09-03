@@ -248,6 +248,26 @@ const EMPLOYER_STRUCTURE = {
   'societe air france': 'entreprise',
   planisware: 'entreprise',
   numberly: 'entreprise',
+
+  // --- Filiales des maisons de reference -----------------------------------
+  // Ajoutees le 03/09/2026 en meme temps que leurs alias dans maisons.txt.
+  // Les DEUX sont necessaires et ne font pas le meme travail : maisons.txt
+  // decide si l offre entre au catalogue, structures.js decide de quelle
+  // structure elle releve. Une filiale inscrite dans le seul maisons.txt
+  // franchit la premiere porte pour tomber sur la seconde — resolveStructure
+  // rend null, et la porte finance la rejette.
+  'parfums christian dior': 'entreprise',
+  'maison francis kurkdjian': 'entreprise',
+  'bon marche': 'entreprise',
+  'groupe bon marche': 'entreprise',
+  'officine universelle buly': 'entreprise',
+  'direct assurance': 'assurance',
+  'gie axa': 'assurance',
+  // Socfim finance la promotion immobiliere pour le groupe BPCE, Oney Bank
+  // fait du credit a la consommation : l une releve du financement, l autre
+  // de la banque de detail.
+  socfim: 'bfi',
+  oney: 'banque-detail',
 };
 
 /** Normalise un nom d'employeur pour la resolution. */
@@ -258,6 +278,12 @@ function normalizeEmployer(raw) {
     .replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9&]+/g, ' ')
     .trim();
+  // NE PAS retirer ici « groupe », « la », « le » comme le fait maisons.js :
+  // plusieurs CLÉS de la table portent elles-mêmes ce préfixe (« groupe bpce »,
+  // « la banque postale », « groupe credit cooperatif »). Les retirer de
+  // l'entrée les rendait introuvables — essayé le 03/09, trois maisons
+  // majeures tombaient à NULL d'un coup. Une filiale dont le nom commence par
+  // « Groupe » s'inscrit donc avec son préfixe, comme ci-dessous.
 }
 
 /**
