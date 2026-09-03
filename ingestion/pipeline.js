@@ -941,6 +941,22 @@ function nettoyerLieu(loc) {
       .toLowerCase()
       .replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase());
   }
+  // Une même ville écrite de quatre façons devient quatre entrées dans le
+  // filtre par lieu, et un candidat qui coche l'une perd les autres. La table
+  // est volontairement une table : chaque ligne est une décision vérifiable,
+  // là où une normalisation automatique des accents fusionnerait des communes
+  // réellement distinctes.
+  const CANONIQUE = { 'paris la défense': 'La Défense', 'paris la defense': 'La Défense', 'la defense': 'La Défense', 'la défense': 'La Défense' };
+  const canon = CANONIQUE[v.toLowerCase().trim()];
+  if (canon) return canon;
+
+  // Cas symétrique du précédent : « nice », « nanterre », « amiens » arrivaient
+  // tout en minuscules et s'affichaient tels quels, à côté de « Nanterre »
+  // écrit correctement par une autre source. Deux graphies de la même ville sur
+  // deux cartes voisines donnent l'impression d'un site mal tenu.
+  if (v && v === v.toLowerCase() && /[a-zà-öø-ÿ]/.test(v)) {
+    v = v.replace(/(^|[\s'’-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase());
+  }
   return v || loc;
 }
 
@@ -1740,11 +1756,55 @@ function cleanTitle(title) {
   // 2) Durées et dates résiduelles en tête : "6 mois - ", "- Janvier 2027 - "
   t = t.replace(/^\d+\s*mois\s*[:\-–—]\s*/i, '');
 
+  // 2 bis) La même chose en QUEUE, et en anglais : « Real Estate Investment -
+  //    6 months » chez Schroders. Le coût dépasse l'esthétique — quatre offres
+  //    Schroders partageaient cette queue et se lisaient comme des doublons
+  //    alors que ce sont quatre postes distincts. Le séparateur devant est
+  //    exigé : sans lui, on amputerait un titre dont la durée fait le sens.
+  t = t.replace(/[\s\-–—(,]+\d+\s*(?:mois|months?)\s*[)\s]*$/i, '');
+
+  // 2 ter) Nombre de postes et nature du recrutement, que VINCI place en queue :
+  //    « Analyste PMO - 1 en pré-embauche », « - 2 stages de fin d'études en
+  //    pré-embauche ». Ce n'est pas le nom du métier. Les deux intitulés
+  //    deviennent identiques et fusionnent à la déduplication, ce qui est
+  //    juste : c'est le même poste, annoncé deux fois avec un compte différent.
+  t = t.replace(
+    /[\s\-–—(,]+\d+\s*(?:stages?|alternances?|postes?|contrats?)?\s*(?:de fin d['’]?[ée]tudes?\s*)?(?:en\s*)?pr[ée][\s-]?embauche\s*[)\s]*$/i,
+    ''
+  );
+  t = t.replace(/[\s\-–—(,]+(?:en\s*)?pr[ée][\s-]?embauche\s*[)\s]*$/i, '');
+
+  // 2 quater) Miettes de gabarit d'adresse. Oracle Cloud nomme ses fiches
+  //    « /offer/... » et le mot se retrouvait en tête : « offer - Sovereign
+  //    Advisory Group » chez Lazard. Le séparateur qui suit est exigé, sans
+  //    quoi un vrai titre commençant par « Offre de stage… » serait amputé.
+  t = t.replace(/^(?:offer|offre|job|poste|emploi|vacancy|position)\s*[:\-–—]\s*/i, '');
+
+  // 2 quinquies) Nom de l'événement de recrutement, que la Société Générale
+  //    place en tête : « 1 EN 1 JOUR – Assistant Trader ». « 1 en 1 jour » est
+  //    leur journée de recrutement — postuler le matin, réponse le soir. Ce
+  //    n'est pas le métier, et en tête c'est pourtant ce qu'on lit d'abord.
+  t = t.replace(
+    /^(?:1\s*en\s*1\s*jour|job\s*dating|forum\s+(?:de\s+)?recrutement|journ[ée]e\s+(?:de\s+)?recrutement)\s*[:\-–—]\s*/i,
+    ''
+  );
+
   // 3) Mentions de genre : on n'en garde aucune (redondant, alourdit la lecture).
   //    Les sources écrivent aussi bien "H/F" que "M/F", "F/M" ou "M/W" — la
   //    règle ne couvrait que la forme française et laissait passer les autres.
   t = t.replace(/[\s\-–—(]*\b[hfmw]\s*\/\s*[hfmwx](?:\s*\/\s*[dx])?\b[)\s]*/gi, ' ');
   t = t.replace(/\((?:h|f|m)\s*\/\s*(?:f|h|w|d)\)/gi, ' ');
+
+  // 3 bis) Parenthèse finale qui ne fait que répéter la famille métier déjà
+  //    affichée sur la carte : « M&A Large Cap – M&A Analyst
+  //    (Fusions-Acquisitions) ». La liste est courte et fermée à dessein —
+  //    « (Stratégie - M&A) » chez Ardian précise le périmètre du poste et n'y
+  //    correspond pas. Une règle qui aurait supprimé toute parenthèse finale
+  //    aurait mangé de l'information utile.
+  t = t.replace(
+    /\s*\((?:fusions?[\s\-–—&/]*acquisitions?|m\s*&\s*a|corporate finance|private equity|capital[\s\-]investissement|asset management|gestion d['’]actifs|audit|contr[ôo]le de gestion|comptabilit[ée])\)\s*$/i,
+    ' '
+  );
 
   // 4) Codes internes et hashtags : "#TDFE2026", "(réf. 12345)", "(10266)"
   t = t.replace(/#\S+/g, ' ').replace(/\(\s*r[ée]f\.?[^)]*\)/gi, ' ');

@@ -40,6 +40,8 @@ const NOMS = [
   // place une annonce périmée en tête du site. `ficheJsonLd` est la lecture de
   // la fiche elle-même — le dernier recours quand la source ne date pas.
   'dateFrancaiseSansAnnee',
+  'cleanTitle',
+  'nettoyerLieu',
   'ficheJsonLd',
   // Les portes, prises une par une.
   'estUneOffreFinance',
