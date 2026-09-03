@@ -4051,6 +4051,8 @@ function writeOutput(offers) {
       _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
       // Analyse de séniorité : champs de travail, jamais publiés.
       _expMax, _formuleSeniorite, _vetoJunior,
+      // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
+      _voletCorrige,
       ...rest
     } = o;
     // La mention de télétravail complet a déjà servi à la déduplication

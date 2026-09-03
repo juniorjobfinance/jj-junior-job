@@ -270,6 +270,78 @@ try {
   alerte('maisons vues', e.message);
 }
 
+console.log('\n--- Champs publiés ---');
+try {
+  // LISTE BLANCHE. Tout champ absent d'ici fait echouer le controle.
+  //
+  // Ajouter un champ au catalogue est une decision : il part chez chaque
+  // visiteur, il gonfle le fichier telecharge, et il devient une promesse
+  // qu on ne peut plus retirer sans casser la page. Il doit donc apparaitre
+  // ici EXPLICITEMENT, jamais par accident.
+  const CHAMPS_PUBLICS = new Set([
+    // Ce que la carte affiche
+    'emp', 'title', 'sector', 'famille', 'volet', 'contrat', 'loc', 'zone',
+    'place', 'url', 'sal', 'dl',
+    // Les identifiants stables sur lesquels la page filtre
+    'familleId', 'structureId', 'tags',
+    // Provenance et fraicheur
+    'maison', 'maisonReference', 'source', 'verifiedAt', 'postedAt',
+    'firstSeenAt', 'datePubFiable', 'dateMaj', 'alsoOn',
+    // Mise en avant
+    'pepite',
+  ]);
+
+  const fichiers = ['offres.js', 'offres-refonte.js'].filter((f) => fs.existsSync(path.join(RACINE, f)));
+  if (!fichiers.length) {
+    alerte('champs publiés', 'aucun catalogue a verifier');
+  } else {
+    let fautifs = 0;
+    for (const f of fichiers) {
+      const g = {};
+      try {
+        new Function('window', fs.readFileSync(path.join(RACINE, f), 'utf8'))(g);
+      } catch (e) {
+        ko(f, `catalogue illisible : ${e.message}`);
+        continue;
+      }
+      const offres = g.__OFFRES__ || [];
+      const intrus = new Map();
+      for (const o of offres) {
+        for (const k of Object.keys(o)) {
+          if (CHAMPS_PUBLICS.has(k)) continue;
+          if (!intrus.has(k)) intrus.set(k, { n: 0, exemple: o });
+          intrus.get(k).n++;
+        }
+      }
+      if (!intrus.size) {
+        ok(f, `${offres.length} offres, aucun champ hors liste blanche`);
+      } else {
+        fautifs++;
+        const detail = [...intrus.entries()]
+          .sort((a, b) => b[1].n - a[1].n)
+          .map(([k, v]) =>
+            `            « ${k} » sur ${v.n} offre(s) — ex. ${String(v.exemple.emp).slice(0, 22)} : ` +
+            `${String(v.exemple.title).slice(0, 40)}`
+          )
+          .join('\n');
+        ko(
+          f,
+          `${intrus.size} champ(s) publie(s) hors liste blanche — ils partent chez chaque\n` +
+            `          visiteur sans avoir ete decides :\n\n${detail}\n\n` +
+            `          Soit le champ est voulu et s'ajoute a CHAMPS_PUBLICS dans ce fichier,\n` +
+            `          soit il est interne et se retire dans la destructuration de\n` +
+            `          writeOutput (ingestion/pipeline.js).`
+        );
+      }
+    }
+    if (!fautifs && fichiers.length > 1) {
+      console.log('        les ' + fichiers.length + ' catalogues respectent la meme liste.');
+    }
+  }
+} catch (e) {
+  alerte('champs publiés', e.message);
+}
+
 console.log('\n--- Les deux tables : maisons.txt et structures.js ---');
 try {
   const { trouverMaison } = require('./maisons');
