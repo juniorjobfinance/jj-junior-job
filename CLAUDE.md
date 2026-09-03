@@ -167,6 +167,13 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   venaient du magasin de récoltes, qui ressert la dernière collecte pendant
   quatre jours. Toujours confirmer une source suspecte à l'entonnoir, en
   direct, avant de conclure.
+- **Un zéro n'accuse pas le connecteur.** Deux fois dans la même heure le
+  réflexe a été faux : Air Liquide ne servait rien parce qu'elle n'a que
+  4 offres finance en France, et Santander parce qu'elle n'en publie
+  simplement aucune — Victor l'a vu sur leur portail. Le seul diagnostic qui
+  vaut est celui qui a REGARDÉ le site ou l'API de la maison ; écrire « le
+  connecteur pointe dans le vide » sans l'avoir fait, c'est se condamner à
+  réparer ce qui marche.
 
 ---
 

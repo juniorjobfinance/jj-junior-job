@@ -66,8 +66,11 @@ soi le prochain chantier** — sans elle, on optimiserait à l'aveugle.
 premières ont été vérifiées à la main le soir même :
 
 - `workday:santander` — 79 dans le rapport, mais **0 en direct** : le chiffre
-  venait du magasin de récoltes (repli à 4 jours). Le connecteur pointe dans le
-  vide, comme Accenture sur wd3 en son temps.
+  venait du magasin de récoltes (repli à 4 jours). **Ce n'est PAS une panne** :
+  Victor a vérifié leur portail, il n'y a effectivement pas d'offre. Le
+  connecteur qui rend zéro a raison. Le premier diagnostic écrit ici — « pointe
+  dans le vide » — était faux, et sa correction tient en une leçon : un zéro
+  n'accuse pas le connecteur tant qu'on n'a pas regardé le site.
 - `phenom:careers.capgemini.com` — collecte **zéro**, si silencieusement qu'il
   n'apparaît même pas dans la liste des muettes. La seule offre Capgemini
   publiée vient du flux VIE. Leur vraie liste est sur `www.capgemini.com`,
