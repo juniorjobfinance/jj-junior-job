@@ -226,60 +226,75 @@
   nav.tabs {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0.6rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
     border-bottom: 1px solid var(--line);
     background: var(--paper-raised);
   }
+  /* Les onglets reprennent EXACTEMENT la pastille de contrat des cartes :
+     même famille de chiffres, mêmes majuscules espacées, même rayon, même
+     trio fond clair / bordure / texte à la teinte du contrat. Un onglet et
+     les cartes qu'il ouvre portent ainsi le même objet, pas deux dialectes
+     du même code couleur.
+
+     L'onglet ouvert NE CHANGE NI DE FOND NI DE COULEUR : le remplir en plein
+     donnait une pastille qui ne ressemblait plus à celle des cartes, ce qui
+     est précisément ce qu'on cherche à éviter ici. La sélection se marque
+     donc à côté de la pastille — bordure doublée et trait plein dessous —
+     pour que les quatre onglets restent, eux, strictement identiques aux
+     pastilles des cartes. */
   nav.tabs button[role="tab"] {
     appearance: none;
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    padding: 0.9rem 0.9rem;
-    font: inherit;
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--ink-soft);
+    position: relative;
+    border: 1px solid var(--puce, var(--ink-soft));
+    background: var(--puce-doux, transparent);
+    color: var(--puce, var(--ink-soft));
+    border-radius: 5px;
+    padding: 0.5rem 0.8rem;
+    font-family: var(--font-chiffres);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
   }
-  nav.tabs button[role="tab"]:hover { color: var(--ink); }
-  /* Une puce de la couleur du contrat devant chaque onglet. Elle est là même
-     quand l'onglet n'est pas actif : c'est ce qui rend les quatre volets
-     lisibles au premier regard, et ce qui relie visuellement un onglet aux
-     pastilles des cartes qu'il ouvre. */
-  nav.tabs button[role="tab"]::before {
+  nav.tabs button[data-volet="stage"] { --puce: var(--stage); --puce-doux: var(--stage-doux); }
+  nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); --puce-doux: var(--alternance-doux); }
+  nav.tabs button[data-volet="vie"] { --puce: var(--vie); --puce-doux: var(--vie-doux); }
+  nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); --puce-doux: var(--cdi-doux); }
+  /* Ouvert : RIEN sur la pastille elle-même. Un premier essai doublait sa
+     bordure par une ombre portée ; à côté des cartes, le trait paraissait
+     aussitôt deux fois trop épais — ce qui est exactement ce qu'on cherche à
+     éviter. Les quatre pastilles gardent donc leur bordure d'un pixel, comme
+     sur les cartes, et la sélection se lit au seul trait posé dessous. Il se
+     loge dans le rembourrage bas de la barre. */
+  nav.tabs button[role="tab"][aria-selected="true"]::after {
     content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 0.4rem;
-    vertical-align: 0.08em;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    bottom: -5px;
+    height: 3px;
+    border-radius: 2px;
     background: var(--puce, var(--ink-soft));
   }
-  /* La puce garde sa teinte en permanence ; le libellé ne la prend qu'une
-     fois l'onglet ouvert. */
-  nav.tabs button[data-volet="stage"] { --puce: var(--stage); }
-  nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); }
-  nav.tabs button[data-volet="vie"] { --puce: var(--vie); }
-  nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); }
-  /* Actif : le trait sous l'onglet prend sa couleur, et le libellé passe en
-     encre pleine pour que la sélection se lise sans dépendre de la teinte. */
-  nav.tabs button[data-volet="stage"][aria-selected="true"] { color: var(--stage); border-bottom-color: var(--stage); }
-  nav.tabs button[data-volet="alternance"][aria-selected="true"] { color: var(--alternance); border-bottom-color: var(--alternance); }
-  nav.tabs button[data-volet="vie"][aria-selected="true"] { color: var(--vie); border-bottom-color: var(--vie); }
-  nav.tabs button[data-volet="cdi-cdd"][aria-selected="true"] { color: var(--cdi); border-bottom-color: var(--cdi); }
-  nav.tabs button[role="tab"][aria-selected="true"] { font-weight: 700; }
+  /* Le survol ne touche ni au texte ni au fond de la pastille — les deux
+     portent déjà une information. Il creuse juste très légèrement la teinte. */
+  nav.tabs button[role="tab"]:not([aria-selected="true"]):hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  /* Le compteur prend la couleur de sa pastille. L'interlettrage des
+     majuscules ne le concerne pas : ce sont des chiffres. */
   nav.tabs .tab-count {
     font-family: var(--font-chiffres);
     font-variant-numeric: tabular-nums;
     font-size: 0.82rem;
-    font-weight: 400;
-    color: var(--ink-soft);
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--puce, var(--ink-soft));
     margin-left: 0.35rem;
   }
   nav.tabs .total {
@@ -312,8 +327,8 @@
      recalcul du libellé à la rotation, plus bas dans le script. */
   @media (max-width: 900px) {
     nav.tabs {
-      padding: 0 0.5rem;
-      gap: 0.15rem;
+      padding: 0.5rem;
+      gap: 0.3rem;
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: none;
@@ -323,16 +338,23 @@
     nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; }
   }
   @media (max-width: 640px) {
-    nav.tabs { padding: 0 0.3rem; gap: 0.15rem; }
+    nav.tabs { padding: 0.45rem 0.3rem; gap: 0.25rem; }
+    /* Le corps des pastilles des cartes, à l'identique. Les majuscules et leur
+       interlettrage élargissent beaucoup : c'est ce qui fixe la taille ici, et
+       il reste ~25 px de jeu à 375 px avec un total à quatre chiffres. */
     nav.tabs button[role="tab"] {
-      padding: 0.5rem 0.35rem;
-      font-size: 0.82rem;
-      line-height: 1.2;
+      padding: 0.4rem 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      line-height: 1.25;
     }
-    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.22rem; }
-    /* Sa propre ligne, sous le libellé : c'est ce qui le rend gratuit en
-       largeur. Le margin-left de la version bureau n'a plus lieu d'être. */
-    nav.tabs .tab-count { display: block; margin-left: 0; font-size: 0.7rem; }
+    /* Le compteur passe sous le libellé : il ne coûte alors plus un pixel de
+       largeur, et la pastille garde sa taille. */
+    nav.tabs .tab-count {
+      display: block;
+      margin-left: 0;
+      font-size: 0.72rem;
+    }
     nav.tabs .total { font-size: 0.76rem; padding-left: 0.3rem; }
   }
 
