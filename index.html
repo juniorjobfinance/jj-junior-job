@@ -256,6 +256,11 @@
     font-family: var(--font-chiffres);
     font-size: 0.8rem;
     font-weight: 700;
+    /* Hauteur de ligne fixée, et non laissée à « normal » : c'est elle qui
+       sert de gabarit aux deux petites pastilles de l'onglet CDI·CDD, qui
+       doivent occuper exactement la même hauteur qu'un libellé ordinaire pour
+       que les quatre onglets restent de la même taille. 0,8 × 1,25 = 1rem. */
+    line-height: 1.25;
     letter-spacing: 0.07em;
     text-transform: uppercase;
     cursor: pointer;
@@ -270,24 +275,41 @@
      pastilles plutôt qu'un « CDI · CDD » qui n'existe nulle part ailleurs sur
      le site. Le bouton n'est alors plus lui-même une pastille — il ne serait
      qu'un cadre de plus autour de deux cadres — mais un simple support. */
-  nav.tabs button[data-volet="cdi-cdd"] {
-    border-color: transparent;
-    background: transparent;
-    /* Le rembourrage vertical passe aux DEUX pastilles internes, sinon il
-       s'ajouterait au leur et cet onglet serait plus haut que les autres. */
-    padding: 0 0.3rem;
-  }
+  /* L'onglet reste UNE grande pastille, comme les trois autres — c'est ce qui
+     garde la barre régulière — et porte les deux petites À L'INTÉRIEUR. Un
+     premier essai avait rendu le bouton transparent pour ne garder que le
+     couple : l'onglet perdait alors le cadre que les trois autres ont, et la
+     barre devenait bancale. */
+  nav.tabs button[data-volet="cdi-cdd"] { padding-left: 0.5rem; padding-right: 0.5rem; }
   nav.tabs .duo-cdi,
   nav.tabs .duo-cdd {
-    display: inline-block;
+    /* Hauteur imposée, bordure et rembourrage compris (box-sizing), et
+       exactement égale à la ligne de libellé des autres onglets — 0,8rem de
+       corps × 1,25 = 1rem. Sans ça, la bordure et le rembourrage des deux
+       petites pastilles s'ajoutaient à la ligne et cet onglet mesurait 3 px de
+       plus que les trois autres : Victor l'a vu à l'œil nu. */
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    /* Aligné sur le HAUT de la ligne, pas sur la ligne de base : cette
+       dernière ajoutait encore 1,1 px de descendante sous la pastille et
+       laissait l'onglet plus haut que les trois autres. En « top », la
+       pastille remplit exactement la ligne et les quatre onglets mesurent
+       43,59 px tous les quatre. */
+    vertical-align: top;
+    height: 1rem;
     border: 1px solid var(--cdi);
-    border-radius: 5px;
-    padding: 0.5rem 0.6rem;
+    border-radius: 4px;
+    padding: 0 0.3rem;
+    font-size: 0.66rem;
+    line-height: 1;
   }
   nav.tabs .duo-cdi { background: var(--cdi); color: #ffffff; }
-  nav.tabs .duo-cdd { background: transparent; color: var(--cdi); margin-left: 0.25rem; }
-  /* Le compteur retrouve l'air que le rembourrage du bouton lui donnait. */
-  nav.tabs button[data-volet="cdi-cdd"] .tab-count { margin-left: 0.4rem; }
+  /* Blanc franc, et non « transparent ». Transparent, le CDD laissait voir le
+     rose très pâle de la grande pastille : presque blanc, mais pas blanc,
+     alors que sur les cartes il est posé sur du blanc. Le fond du bandeau
+     donne exactement cette valeur-là et suit le thème. */
+  nav.tabs .duo-cdd { background: var(--paper-raised); color: var(--cdi); margin-left: 0.2rem; }
   /* Ouvert : RIEN sur la pastille elle-même. Un premier essai doublait sa
      bordure par une ombre portée ; à côté des cartes, le trait paraissait
      aussitôt deux fois trop épais — ce qui est exactement ce qu'on cherche à
@@ -378,12 +400,11 @@
       margin-left: 0;
       font-size: 0.72rem;
     }
-    /* Même gabarit que les trois autres onglets, sur le couple de pastilles. */
-    nav.tabs button[data-volet="cdi-cdd"] { padding: 0 0.15rem; }
+    /* Même règle qu'en grand, au corps d'ici : 0,72rem × 1,25 = 0,9rem. */
+    nav.tabs button[data-volet="cdi-cdd"] { padding-left: 0.3rem; padding-right: 0.3rem; }
     nav.tabs .duo-cdi,
-    nav.tabs .duo-cdd { padding: 0.38rem 0.28rem; }
+    nav.tabs .duo-cdd { height: 0.9rem; padding: 0 0.22rem; font-size: 0.6rem; }
     nav.tabs .duo-cdd { margin-left: 0.15rem; }
-    nav.tabs button[data-volet="cdi-cdd"] .tab-count { margin-left: 0; }
     nav.tabs .total { font-size: 0.76rem; padding-left: 0.3rem; }
   }
 
