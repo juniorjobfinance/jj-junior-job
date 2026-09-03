@@ -514,6 +514,31 @@ sien : `opendatasoft:bpce` rend « BPCE Vie » et « BPCE IG », jamais « Group
 BPCE ». Un second contrôle, **observé**, lit désormais le relevé de la dernière
 collecte.
 
+### Un contrôle ne se vérifie qu'en le faisant échouer
+
+**Le 03/09/2026**, en éprouvant le contrôle des deux tables (§24). Premier
+essai : retirer Mutuelle Saint-Christophe et Bank of America de
+`structures.js` pour voir le contrôle rougir. **Il est resté vert** — et il
+avait raison : ces deux employeurs ne sont pas dans `maisons.txt`, donc la
+condition « accepté par l'une, absent de l'autre » ne se déclenchait pas. Le
+test passait pour la mauvaise raison, et ne prouvait rien.
+
+Il a fallu chercher un sujet remplissant les trois conditions à la fois —
+présent dans `maisons.txt`, présent dans `structures.js`, et servant des
+offres — pour que l'échec soit réel. Deloitte et Eurazeo ont fait l'affaire.
+
+**Choisir le sujet d'un test fait partie du test.** Un garde-fou qu'on n'a
+jamais vu échouer n'est pas un garde-fou vérifié : c'est du code qu'on espère
+juste. Lire le code ne suffit pas, il faut provoquer la panne, lire le
+message, puis restaurer et vérifier le retour au vert.
+
+Corollaire pratique, appliqué le même soir : **le message d'échec doit nommer
+la correction**, pas constater l'écart. « 2 employeurs absents de
+`structures.js` » oblige à ouvrir le fichier, comprendre le format de la clé et
+deviner l'identifiant. La ligne prête à coller, avec le nombre d'offres en jeu
+et la liste des valeurs admises, se répare en trente secondes. Un contrôle qui
+constate se contourne ; un contrôle qui prescrit se répare.
+
 ---
 
 ## 23. La séniorité se lit aussi sur les stages, avec une liste étroite
