@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 2 septembre 2026, au soir.**
+**Dernière mise à jour : 3 septembre 2026, au soir.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -10,36 +10,74 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**996 offres** · **200 employeurs** · **99 maisons** servies sur 202 référencées.
+**1006 offres** · **204 employeurs** · **102 maisons** servies sur 204
+référencées.
 
-| Onglet | Offres | Le matin même |
+| Onglet | Offres | Le 2 au matin |
 |---|---|---|
-| Stage | 483 | 389 |
-| CDI · CDD | 313 | 266 |
-| Alternance | **110** | 60 |
+| Stage | 489 | 389 |
+| CDI · CDD | 311 | 266 |
+| Alternance | **116** | 60 |
 | VIE | 90 | 83 |
 
-La séance du 2 septembre a fait passer le catalogue de **798 à 996 offres**, et
-l'alternance de **60 à 110** — elle était le point faible depuis le début.
+Les deux séances des 2 et 3 septembre ont fait passer le catalogue de **798 à
+1006 offres**, et l'alternance de **60 à 116** — elle était le point faible
+depuis le début.
 
-**Qualité mesurée le 02/09/2026 :**
+**Qualité mesurée le 03/09/2026 :**
 
-- 886/996 datées (89 %) ; les autres affichent « toujours en ligne chez
+- 900/1006 datées (89 %) ; les autres affichent « toujours en ligne chez
   l'employeur, date inconnue » et passent en fin de liste ;
-- plus ancienne offre datée : 119 jours, pour un seuil à 120 ;
-- résidu « Autres métiers de la finance » : 6,2 % ;
-- les 13 familles métier tiennent entre 3,7 % et 15,8 % ;
-- les 11 types de structure entre 3,4 % et 19,7 %.
+- plus ancienne offre datée : 120 jours, pour un seuil à 120 ;
+- résidu « Autres métiers de la finance » : 5,9 % ;
+- les 13 familles métier tiennent entre 3,9 % et 15,8 % ;
+- les 11 types de structure entre 3,5 % et 20,6 % ;
+- 0 poste senior sur les 311 offres de l'onglet CDI · CDD ;
+- 2 offres sur 1006 mal rangées d'onglet (`audit-catalogue.js`).
 
-**Douze premières maisons** : PME et start-ups (74, uniquement du VIE),
-Deloitte 67, BPCE 64, Banque de France 42, LVMH 39, Société Générale 36,
-Natixis 34, Oddo BHF 32, Lazard 31, Crédit Agricole CIB 31, Eurazeo 30,
+**Douze premières maisons** : PME et start-ups (72, uniquement du VIE),
+BPCE 68, Deloitte 67, Banque de France 41, LVMH 39, Société Générale 36,
+Natixis 34, Crédit Agricole CIB 32, Oddo BHF 32, Lazard 31, Eurazeo 30,
 BNP Paribas 30.
 
 Le matin même, ce classement était dominé par Airbus (97), Air Liquide (71) et
 Thales (69) — le fourre-tout « Autres métiers de la finance » avait enflé à
 26,7 % du catalogue et publiait des ajusteurs composite. Voir `DECISIONS.md`
 §15.
+
+---
+
+## Le 3 septembre : la pagination qui tourne à vide
+
+Trois corrections, poussées en fin de journée. Elles ne sont **pas** encore
+visibles en ligne : le catalogue ci-dessus date du 2 au soir, et c'est le
+passage automatique du 4 à 06h30 qui les appliquera.
+
+1. **Phenom ignorait « offset ».** L'API de `careers.axa.com` n'accepte que
+   `page` ; `offset`, `from`, `start` et `skip` sont acceptés **sans effet** et
+   renvoient tous la première page. La boucle relisait donc six fois les cent
+   premières offres, atteignait 600 ≥ `totalCount` (560) et se croyait au bout.
+   Quatre cent soixante offres n'avaient jamais été vues. AXA passe de
+   12 offres retenues, toutes en CDI, à 24 dont 6 stages et 3 alternances.
+
+   Le garde-fou ajouté vaut pour toutes les sources à venir : **on s'arrête dès
+   qu'une page n'apporte aucune offre nouvelle.** Un paramètre de pagination
+   ignoré ne peut plus se déguiser en catalogue complet.
+
+   Les deux autres branches Phenom ont été vérifiées et sont saines : Allianz
+   pagine correctement par `from` (253 offres distinctes), HSBC lit ses neuf
+   offres en une requête.
+
+2. **La cybersécurité anglophone passait sous le contre-filtre.**
+   `NON_FINANCE_RE` connaissait « cyber » et « sécurité informatique », mais
+   pas « Red Team Analyst », « Security Assurance Officer » ni « Backup
+   Engineer Analyst ». Le plus gênant : « Security Risk Assessment Analyst » se
+   rangeait dans **Risques & Conformité**, où le candidat ne peut pas
+   distinguer le risque informatique du risque financier.
+
+3. **Comgest branchée** — la première des sociétés de gestion qui manquaient.
+   Elle ne publie sur aucune plateforme : ses offres vivent dans un accordéon
+   de son propre site, sur deux pages (stages, emplois).
 
 ---
 

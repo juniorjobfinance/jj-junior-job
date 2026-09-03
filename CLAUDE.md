@@ -112,6 +112,7 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
 - **Vérifier avant de brancher.** Une configuration fausse ne casse rien : elle
   rend zéro offre en silence, et la maison paraît branchée.
 - Le `Promise.all` de `fetchAllSources` est **destructuré** : ajouter un appel
+  sans sa variable décale toute la liste et fait disparaître une source.
 - **Ne jamais recopier une fonction du pipeline pour la tester.** Extraire
   `SENIOR_RE` ou `estGrandeVille` de son texte à coups d'expressions
   régulières a donné trois diagnostics faux dans la même séance : la copie
@@ -127,7 +128,25 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   analyst » avait été posé contre un ingénieur qualité industriel : il a
   écarté un « Data Quality Analyst » de banque. Toute exclusion se relit avec
   la question « et chez un dépositaire, ce mot veut dire quoi ? ».
-  sans sa variable décale toute la liste et fait disparaître une source.
+- **Un paramètre de pagination peut être accepté sans effet.** `offset`, `from`,
+  `start` et `skip` renvoyaient tous la PREMIÈRE page chez Phenom, sans la
+  moindre erreur ; la boucle atteignait `totalCount` en relisant six fois les
+  mêmes cent offres, et AXA ne servait que 100 de ses 560 offres. Toute boucle
+  de pagination doit **s'arrêter quand une page n'apporte aucune offre
+  nouvelle** : c'est le seul garde-fou qui démasque le cas.
+- **`sources.js` a des fins de ligne mixtes.** Une ancre cherchée par égalité de
+  chaîne (`src.includes(...)`) échoue sur les lignes en `\r\n`, et le script de
+  modification s'arrête sur « pas dans l'état attendu » alors que le texte est
+  bien là. Construire l'ancre en expression régulière, chaque saut de ligne
+  écrit `\r?\n`.
+- **Ne pas juger un doublon sur une clé tronquée.** Un contrôle bâti sur
+  `JSON.stringify(raw).slice(0, 180)` a fait conclure à tort qu'Allianz
+  paginait mal, et failli faire « corriger » un connecteur sain. Comparer sur
+  un identifiant : `req_id`, `jobSeqNo`.
+- **`sed` mange les antislashs comme le heredoc.** Corriger un script de
+  modification avec `sed -i` a transformé `\\[` en `[` et produit un fichier
+  illisible. La règle du premier point vaut aussi pour RÉPARER un script :
+  outil Write, toujours.
 
 ---
 

@@ -356,3 +356,55 @@ rend ? »** — mesuré, pas supposé. EDF est resté malgré un rendement faibl
 (16 offres pour 162 pages) parce que le passage tourne la nuit, où le temps
 n’est pas rare ; les seize start-ups sont parties parce qu’elles ne rendaient
 rien du tout.
+
+---
+
+## 18. La règle des 120 jours ne se desserre pas, même pour une belle offre
+
+**Le 3 septembre 2026.** Victor a envoyé une offre précise — « Internship |
+Risk Analyst », GIE AXA, Paris, RISK MANAGEMENT, req 19942 — en demandant si le
+site l'avait. Il ne l'avait pas, pour deux raisons distinctes.
+
+La première était une panne, corrigée : la pagination Phenom tournait à vide et
+AXA ne servait que 100 de ses 560 offres.
+
+La seconde n'en est pas une. Cette offre a été publiée le **23 avril 2026**,
+soit **132 jours** avant, et `MAX_AGE_JOURS_ATS_DIRECT` coupe à 120 jours même
+chez l'employeur. Elle est donc collectée, puis écartée.
+
+La tentation était de desserrer le seuil pour les stages, puisque l'annonce est
+toujours en ligne chez AXA. On ne l'a pas fait. Une annonce de quatre mois et
+demi est presque toujours pourvue ou abandonnée — le recruteur ne l'a
+simplement pas dépubliée. Publier ces annonces-là, c'est exactement le défaut
+qui rend les grands agrégateurs inutilisables, et c'est ce que la règle
+« moins d'offres, mais toutes justes » interdit.
+
+Réponse de Victor, qui tranche : « parfait les filtres marchent bien. je nai
+pas check la date ».
+
+**Le seuil reste à 120 jours (60 pour les CDI/CDD).** Une offre absente parce
+qu'elle est vieille n'est pas un défaut du site, c'est son intérêt.
+
+---
+
+## 19. La sécurité informatique n'est pas la sécurité financière
+
+**Le 3 septembre 2026.** En rendant visible tout le catalogue d'AXA, quatre
+postes de cybersécurité sont remontés : « Red Team Analyst », « Security
+Assurance Officer », « Backup Engineer Analyst », « Security Risk Assessment
+Analyst ». Le dernier se rangeait dans **Risques & Conformité** — la famille du
+risque financier — où un candidat ne peut pas voir qu'il s'agit d'informatique.
+
+Ils passaient parce que `NON_FINANCE_RE` connaissait « cyber » et « sécurité
+informatique », mais aucun intitulé anglais.
+
+Le piège, en écrivant ces exclusions : **« sécurité financière » est un vrai
+métier de la finance** — LCB-FT, KYC, lutte anti-blanchiment. Un motif large
+sur « sécurité » aurait emporté tout un pan du catalogue conformité. Les termes
+ajoutés nomment donc toujours la sécurité INFORMATIQUE (« security analyst »,
+« security assurance », « red team », « pentest »), jamais la sécurité seule.
+
+Éprouvé avant d'être écrit, sur les 1006 offres publiées : **zéro écartée à
+tort**, et « Chargé de Sécurité Financière », « Analyste Sécurité Financière
+KYC » et « Securities Services » restent tous retenus. C'est l'application
+directe de la §13 — une exclusion se relit toujours dans une maison de finance.
