@@ -11,20 +11,41 @@
  */
 
 const STRUCTURES = {
-  bfi: 'Banque de financement et d\'investissement',
+  bfi: "Banque de financement & d'investissement",
   'banque-affaires': 'Banque d\'affaires indépendante',
   'banque-detail': 'Banque de détail',
   'societe-gestion': 'Société de gestion',
   fonds: 'Fonds d\'investissement',
-  assurance: 'Compagnies d\'assurances et mutuelles',
-  big4: 'Big 4 et cabinets d\'audit',
-  conseil: 'Cabinet de conseil et stratégie',
-  fintech: 'Fintech et services financiers spécialisés',
-  entreprise: 'Entreprises (direction financière)',
-  institution: 'Institution publique et régulateur',
+  assurance: "Compagnie d'assurance & mutuelle",
+  big4: 'Big Four & cabinets d’audit',
+  conseil: 'Cabinet de conseil & stratégie',
+  fintech: 'Fintech & services financiers spécialisés',
+  entreprise: 'Entreprise (direction financière)',
+  institution: 'Institution publique & régulateur',
 };
 
 const EMPLOYER_STRUCTURE = {
+  // --- Vues a la collecte du 03/09/2026, sans structure -------------------
+  'sar': 'entreprise',
+  'vf haute provence': 'entreprise',
+  'hestia': 'entreprise',
+  'sunmind': 'entreprise',
+  'division des grands projets': 'entreprise',
+  // Les marques LVMH et VINCI passent par leur maison mere dans maisons.txt,
+  // mais la carte affiche l'entite qui recrute : il leur faut donc AUSSI une
+  // structure ici, sinon elles resolvent la maison sans resoudre le type.
+  'credit foncier': 'banque-detail',
+  'banque de savoie': 'banque-detail',
+  'ensemble protection sociale': 'assurance',
+  'vinci': 'entreprise',
+  'axians': 'entreprise',
+  'citeos': 'entreprise',
+  'sephora': 'entreprise',
+  'chaumet': 'entreprise',
+  'rimowa': 'entreprise',
+  'tiffany': 'entreprise',
+  'krug': 'entreprise',
+  'benefit cosmetics': 'entreprise',
   // --- Banques de financement et d'investissement -------------------------
   'bnp paribas': 'bfi',
   'societe generale': 'bfi',
