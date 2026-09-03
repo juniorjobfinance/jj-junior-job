@@ -292,47 +292,48 @@
     color: var(--ink-soft);
     white-space: nowrap;
   }
-  /* Sur mobile, les 4 onglets + le total ne tiennent pas sur 375px à taille
-     confortable : sans compression, la barre déborde et devient défilable au
-     toucher — Victor la veut fixe, jamais à faire glisser. Le même calcul
-     déborde dès qu'on repasse sous ~750px (tablette, fenêtre de bureau
-     réduite) : le seuil couvre donc toute cette zone, pas seulement le
-     téléphone.
+  /* La puce de couleur ne disparaît JAMAIS : elle avait été sacrifiée ici pour
+     gagner 44 px, et le résultat s'est vu tout de suite — les quatre onglets
+     perdaient leur code couleur dès qu'on réduisait la fenêtre du navigateur,
+     pas seulement sur téléphone. C'est ce qui relie un onglet aux pastilles
+     des cartes qu'il ouvre : ça reste.
 
-     Deux choses sont sacrifiées pour tenir, dans cet ordre :
+     Le compteur par onglet ne disparaît plus non plus. Il ne tenait pas à
+     côté du libellé sur 375 px, mais il tient TRÈS bien EN DESSOUS : passé en
+     display:block, il prend sa propre ligne dans le bouton et ne coûte alors
+     plus un seul pixel de largeur — la barre gagne juste trois pixels de
+     hauteur. C'est ce qui permet d'avoir en même temps, sur téléphone, la
+     puce, le compteur, et le total.
 
-     1. Le compteur par onglet — le panneau actif affiche déjà son propre
-        "N offres" juste au-dessus de la liste, l'information n'est pas perdue.
-     2. La puce de couleur devant chaque onglet. Elle coûte 11 px par onglet,
-        44 px en tout — c'est elle qui payait l'essentiel de l'effet « trop
-        collé » dont Victor se plaignait, et sans elle les onglets peuvent
-        grossir ET s'aérer. Le code couleur reste lisible : l'onglet actif
-        garde son libellé et son trait à sa teinte, et les cartes gardent
-        leur pastille.
-
-     Ce qui reste est calibré pour laisser ~12 px de jeu avec un total à
-     QUATRE chiffres ("1004 offres") : le catalogue est à 994 et passera 1000
-     sous peu — sans cette marge, la barre se remettrait à défiler ce jour-là.
-     Voir aussi le recalcul du libellé à la rotation, plus bas dans le script. */
+     Sans compression la barre déborde quand même sur 375 px et devient
+     défilable au toucher, ce que Victor ne veut pas. Les valeurs ci-dessous
+     laissent ~16 px de jeu avec un total à QUATRE chiffres ("1004 offres"),
+     parce que le catalogue est à 994 et passera 1000 sous peu. Voir aussi le
+     recalcul du libellé à la rotation, plus bas dans le script. */
   @media (max-width: 900px) {
     nav.tabs {
-      padding: 0 0.35rem;
-      gap: 0.2rem;
+      padding: 0 0.5rem;
+      gap: 0.15rem;
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
     nav.tabs::-webkit-scrollbar { display: none; }
+    nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; }
+  }
+  @media (max-width: 640px) {
+    nav.tabs { padding: 0 0.3rem; gap: 0.15rem; }
     nav.tabs button[role="tab"] {
-      flex: 0 0 auto;
-      white-space: nowrap;
-      padding: 0.75rem 0.5rem;
-      font-size: 0.88rem;
+      padding: 0.5rem 0.35rem;
+      font-size: 0.82rem;
+      line-height: 1.2;
     }
-    nav.tabs button[role="tab"]::before { display: none; }
-    nav.tabs .tab-count { display: none; }
-    nav.tabs .total { font-size: 0.8rem; padding-left: 0.35rem; }
+    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.22rem; }
+    /* Sa propre ligne, sous le libellé : c'est ce qui le rend gratuit en
+       largeur. Le margin-left de la version bureau n'a plus lieu d'être. */
+    nav.tabs .tab-count { display: block; margin-left: 0; font-size: 0.7rem; }
+    nav.tabs .total { font-size: 0.76rem; padding-left: 0.3rem; }
   }
 
   /* ---------- Layout ---------- */

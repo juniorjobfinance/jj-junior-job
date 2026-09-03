@@ -3050,28 +3050,50 @@ function estAssezRecente(o) {
   return (Date.now() - new Date(brut).getTime()) / 86400000 <= PEPITE_FRAICHEUR_JOURS;
 }
 
-// Cinq pépites au total, tous onglets confondus. Victor : « vraiment ce que
-// s'arrache les plus gros étudiants » — une énorme maison ET un poste que
-// tout le monde se dispute (M&A, private equity, trading...) ET une offre
-// récente sont trois conditions OBLIGATOIRES, pas un score à additionner :
-// un poste banal chez une maison prestigieuse, ou un poste rare chez un
-// inconnu, n'est pas une pépite. Le score ne sert plus qu'à départager les
-// candidats qui remplissent déjà les trois. Une seule pépite par maison —
-// deux fois la même signature donnerait l'impression d'un catalogue étroit,
-// alors que la promesse est de faire découvrir.
+// Cinq pépites PAR ONGLET. Victor les veut sur « vraiment ce que s'arrache
+// les plus gros étudiants » : une énorme maison, un poste que tout le monde
+// se dispute, une offre récente.
+//
+// Ces trois critères posés ensemble comme conditions obligatoires, et sur
+// l'ensemble du catalogue, ont vidé trois onglets sur quatre : mesuré sur les
+// 994 offres du jour, le « poste rare » ne laissait passer AUCUNE alternance
+// (0 sur 24 offres en grande maison) et deux offres seulement en VIE comme en
+// CDI·CDD. Les cinq places partaient donc toutes en stage, et les trois autres
+// carrousels disparaissaient.
+//
+// D'où trois cercles concentriques, servis dans l'ordre : on ne desserre que
+// ce qu'il faut pour remplir l'onglet, jamais plus. « Énorme maison » n'est
+// jamais lâché — c'est le cœur de la demande ; ce sont le poste rare puis la
+// fraîcheur qui cèdent, dans cet ordre. Une seule pépite par maison et par
+// onglet : deux fois la même signature donnerait l'impression d'un catalogue
+// étroit, alors que la promesse est de faire découvrir.
+const PEPITES_PAR_VOLET = 5;
 function choisirPepites(offers) {
-  const notes = offers
-    .filter((o) => estEnormeMaison(o) && POSTE_RARE_RE.test(o.title) && estAssezRecente(o))
-    .map((o) => ({ o, s: scorePepite(o) }))
-    .sort((a, b) => b.s - a.s);
   const retenus = new Set();
-  const maisonsVues = new Set();
-  for (const { o } of notes) {
-    const cle = o.maison || o.emp;
-    if (maisonsVues.has(cle)) continue;
-    maisonsVues.add(cle);
-    retenus.add(o._key);
-    if (retenus.size >= 5) break;
+  for (const volet of ['stage', 'alternance', 'vie', 'cdi-cdd']) {
+    const candidats = offers.filter((o) => o.volet === volet && estEnormeMaison(o));
+    const cercles = [
+      (o) => POSTE_RARE_RE.test(o.title) && estAssezRecente(o),
+      (o) => estAssezRecente(o),
+      () => true,
+    ];
+    const maisonsVues = new Set();
+    let n = 0;
+    for (const cercle of cercles) {
+      if (n >= PEPITES_PAR_VOLET) break;
+      const notes = candidats
+        .filter((o) => !retenus.has(o._key) && cercle(o))
+        .map((o) => ({ o, s: scorePepite(o) }))
+        .sort((a, b) => b.s - a.s);
+      for (const { o } of notes) {
+        if (n >= PEPITES_PAR_VOLET) break;
+        const cle = o.maison || o.emp;
+        if (maisonsVues.has(cle)) continue;
+        maisonsVues.add(cle);
+        retenus.add(o._key);
+        n++;
+      }
+    }
   }
   return retenus;
 }
