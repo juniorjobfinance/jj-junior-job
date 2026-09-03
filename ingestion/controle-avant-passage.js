@@ -270,6 +270,74 @@ try {
   alerte('maisons vues', e.message);
 }
 
+console.log('\n--- Les deux tables : maisons.txt et structures.js ---');
+try {
+  const { trouverMaison } = require('./maisons');
+  const { resolveStructure } = require('./structures');
+
+  // Les employeurs REELLEMENT rencontres : ceux du catalogue publie, plus
+  // ceux que maisonRef a ecartes. C'est sur eux que le piege mord.
+  const vus = new Set();
+  for (const f of ['offres.js', 'offres-refonte.js']) {
+    const p = path.join(RACINE, f);
+    if (!fs.existsSync(p)) continue;
+    try {
+      const g = {};
+      new Function('window', fs.readFileSync(p, 'utf8'))(g);
+      for (const o of g.__OFFRES__ || []) if (o.emp) vus.add(o.emp);
+    } catch (e) {
+      /* un catalogue illisible est signale ailleurs */
+    }
+  }
+  for (const f of ['data/rejets-maisonref.json', 'data/rejets-maisonref-refonte.json']) {
+    const p = path.join(RACINE, f);
+    if (!fs.existsSync(p)) continue;
+    try {
+      for (const o of JSON.parse(fs.readFileSync(p, 'utf8')).offres || []) {
+        if (o.entreprise) vus.add(o.entreprise);
+      }
+    } catch (e) {
+      /* idem */
+    }
+  }
+
+  if (!vus.size) {
+    alerte('deux tables', 'aucun catalogue lisible — controle impossible');
+  } else {
+    // Accepte par maisons.txt, mais sans structure : ses offres franchissent
+    // la premiere porte pour se faire rejeter par la seconde.
+    const boiteuses = [...vus].filter((e) => trouverMaison(e) && !resolveStructure(e)).sort();
+    if (!boiteuses.length) {
+      ok('deux tables', `les ${vus.size} employeurs vus resolvent maison ET structure`);
+    } else {
+      ko(
+        'deux tables',
+        `${boiteuses.length} employeur(s) dans maisons.txt mais absent(s) de structures.js — ` +
+          `la porte finance les rejette en silence :\n          ${boiteuses.join(', ')}`
+      );
+    }
+
+    // Pour information seulement : les maisons de reference qui n'ont pas
+    // encore de structure mais ne servent rien. Ce sont surtout des maisons
+    // hors d'atteinte (pare-feu, JavaScript) ; en faire un echec rendrait ce
+    // controle rouge en permanence, donc inutile. C'est une liste de travail.
+    const noms = fs
+      .readFileSync(path.join(RACINE, 'ingestion/maisons.txt'), 'utf8')
+      .split(/\r?\n/)
+      .map((l) => l.split('|')[0].trim())
+      .filter((l) => l && !l.startsWith('#'));
+    const dormantes = noms.filter((n) => !resolveStructure(n) && !vus.has(n));
+    if (dormantes.length) {
+      console.log(
+        `        ${dormantes.length} maison(s) de reference sans structure, mais qui ne servent rien —` +
+          ' a completer le jour ou elles publient.'
+      );
+    }
+  }
+} catch (e) {
+  alerte('deux tables', e.message);
+}
+
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();

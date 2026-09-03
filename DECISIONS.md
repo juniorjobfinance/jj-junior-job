@@ -560,3 +560,55 @@ risque pour rien.
 échappe aussi à la règle `maisonRef` (§16), et 15 % de ses offres portaient un
 marqueur de séniorité contre 2 % pour les stages. Un durcissement le touche donc
 plus fort que les autres, et c'est normal.
+
+---
+
+## 24. Deux tables, deux portes : inscrire dans l'une ne sert à rien sans l'autre
+
+**Découvert le 03/09/2026** en ajoutant les alias de filiales.
+
+`maisons.txt` et `structures.js` ne font pas le même travail, et la nuance a
+coûté une correction incomplète :
+
+- **`maisons.txt` décide si l'offre ENTRE au catalogue.** Un employeur qu'il ne
+  reconnaît pas est écarté par `normalize` (§16).
+- **`structures.js` décide de quelle STRUCTURE elle relève.** Un employeur
+  absent de cette table renvoie `null`, ce qui déclenche la **porte finance**
+  du classifieur — et l'offre est rejetée en
+  `gate:employeur-absent-de-structures`.
+
+**Conséquence :** une filiale inscrite dans le seul `maisons.txt` franchit la
+première porte pour tomber sur la seconde. Les huit premières filiales ajoutées
+ce soir — les quatre LVMH, Direct Assurance, GIE AXA, Socfim, ONEY — étaient
+dans ce cas. **Ajouter un employeur, c'est l'ajouter aux DEUX.**
+
+### Le contrôle est étroit, et c'est délibéré
+
+`controle-avant-passage.js` échoue désormais si un employeur **vu à la
+collecte** est accepté par `maisons.txt` sans avoir de structure.
+
+Il aurait été tentant de contrôler toutes les maisons de référence. Mesuré :
+**93 des 206 (45 %) n'ont pas de structure.** Un échec là-dessus rendrait le
+contrôle rouge dès le premier jour, et on apprendrait à l'ignorer — exactement
+le mécanisme du §22. Or ces 93 sont pour l'essentiel des maisons qui ne servent
+rien : Morgan Stanley derrière son pare-feu, UBS sur Taleo, Bain en JavaScript.
+Le piège ne mord que sur une maison qui publie vraiment.
+
+Le contrôle vaut donc zéro aujourd'hui, et rougira le jour où quelqu'un ajoutera
+une maison sans sa structure. Les 93 dormantes sont affichées en information,
+comme liste de travail.
+
+### Une fausse bonne idée, essayée et annulée
+
+Faire retirer « groupe », « la », « le » en tête par `normalizeEmployer`, comme
+le fait déjà `maisons.js`. Essayé : **« Groupe BPCE », « La Banque Postale » et
+« Groupe Crédit Coopératif » sont tombés à `null` d'un coup**, parce que leurs
+CLÉS portent elles-mêmes le préfixe et que la résolution se fait par préfixe le
+plus long. Les filiales s'inscrivent donc une par une, avec leur préfixe s'il y
+en a un. Plus verbeux, plus sûr.
+
+**Corollaire vérifié le même soir :** la résolution par préfixe le plus long
+crée aussi des collisions silencieuses. « Natixis Investment Managers » tombait
+sur `natixis` et devenait BFI au lieu de société de gestion ; « Crédit Agricole
+Assurances » tombait sur `credit agricole` et devenait banque de détail.
+`verif-structures.js` couvre ces cas — 28/28.
