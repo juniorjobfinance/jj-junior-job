@@ -173,7 +173,15 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   simplement aucune — Victor l'a vu sur leur portail. Le seul diagnostic qui
   vaut est celui qui a REGARDÉ le site ou l'API de la maison ; écrire « le
   connecteur pointe dans le vide » sans l'avoir fait, c'est se condamner à
-  réparer ce qui marche.
+  réparer ce qui marche. Corollaire : **une maison sans poste ouvert est dans
+  son état normal**, pas en panne. Le compte des « maisons muettes » n'est pas
+  un compte de défauts.
+- **L'alternance est SAISONNIÈRE.** Le contrat démarre en septembre, donc les
+  annonces se publient de février à juillet. Un catalogue d'alternance maigre
+  relevé en septembre ou en octobre ne prouve rien — c'est le creux du cycle.
+  Ne jamais durcir, assouplir ni « réparer » quoi que ce soit sur la foi d'un
+  compteur d'alternance lu à l'automne : la mesure qui compte est celle du
+  printemps.
 
 ---
 

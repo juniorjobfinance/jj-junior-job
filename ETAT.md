@@ -10,8 +10,15 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**998 offres** · **104 maisons** servies sur **206** référencées — autrement
-dit **la moitié des maisons de référence ne sert rien** (103 sur 206).
+**998 offres** · **104 maisons** servies sur **206** référencées.
+
+> Les 103 maisons qui ne servent rien **ne sont pas 103 pannes**. Une maison
+> sans poste junior ouvert en ce moment est dans son état normal, et c'est le
+> cas de la plupart : vérifié le 03/09 sur Air Liquide (4 offres finance en
+> France, pas une de plus à prendre) et sur Santander (portail vide). Le
+> sous-ensemble réellement actionnable est bien plus étroit — les maisons dont
+> le site AFFICHE des offres et dont on collecte zéro. Un seul cas prouvé à ce
+> jour : Capgemini.
 
 | Onglet | Offres |
 |---|---|
@@ -244,13 +251,21 @@ Domaines : `juniorjobfinance.com` sert le site ; `www.` et
 
 ## Ce qui reste à faire
 
-**1. L'alternance, toujours.** 110 offres, contre 60 le matin. Le gisement
-suivant est chez les très gros employeurs, et il est bloqué par une seule
-chose : leur type de contrat n'est pas lu. Sept familles de connecteurs le
-devinent encore sur l'intitulé — Greenhouse, Oracle Cloud, Teamtailor,
-SuccessFactors, Phenom, Cornerstone, Radancy — et rangent donc en CDI toute
-alternance dont le titre ne dit pas « alternance ». C'est exactement le défaut
-corrigé chez Workday, qui a rendu 24 offres à la seule Banque de France.
+**1. L'alternance — mais en lisant le compteur au bon moment.** 102 offres.
+
+> **Ce n'est pas forcément un point faible : c'est la saison.** Un contrat
+> d'alternance démarre en septembre, donc les annonces se publient de février à
+> juillet. Mesurer le volume d'alternance EN SEPTEMBRE, c'est le relever au
+> creux du cycle. Ne pas conclure à une panne, ni durcir ou assouplir quoi que
+> ce soit sur cette base : la bonne mesure est le printemps.
+
+Reste un défaut réel, lui, et indépendant de la saison : **le type de contrat
+n'est pas lu** chez sept familles de connecteurs — Greenhouse, Oracle Cloud,
+Teamtailor, SuccessFactors, Phenom, Cornerstone, Radancy. Elles le devinent sur
+l'intitulé et rangent donc en CDI toute alternance dont le titre ne dit pas
+« alternance ». C'est exactement le défaut corrigé chez Workday, qui avait
+rendu 24 offres à la seule Banque de France. À corriger avant la saison
+prochaine, pour qu'elle profite pleinement.
 
 **2. Quatre gros groupes identifiés, pas encore branchés.** Leur plateforme est
 connue, il manque leur identifiant, qui se lit dans l'adresse d'une offre :
