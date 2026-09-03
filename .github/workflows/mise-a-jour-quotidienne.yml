@@ -56,6 +56,11 @@ jobs:
           # journaux/ est ignoré par git : il n'existe pas sur un dépôt fraîchement
           # récupéré, et « tee » échouerait avant même de lancer l'ingestion.
           mkdir -p journaux
+          # Le passage quotidien fait TOUJOURS une vraie collecte : jamais
+          # --depuis-cache, qui servirait indéfiniment la photo d'un matin sans
+          # que rien ne le signale. Le pipeline refuse déjà ce drapeau quand
+          # GITHUB_ACTIONS est posé ; la ligne ci-dessous est la seconde
+          # serrure, celle qu'on voit en lisant le workflow.
           node ingestion/pipeline.js 2>&1 | tee "journaux/maj-$(date +%F).log"
 
       # Le journal est gardé même quand l'ingestion a échoué — c'est justement

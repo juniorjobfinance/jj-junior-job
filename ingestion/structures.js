@@ -10,22 +10,18 @@
  * ce qui fait que "caisse d epargne" couvre toutes les caisses regionales.
  */
 
-// Les libellés sont EXACTEMENT ceux que le site affiche déjà dans le filtre
-// « Type de structure ». Ne pas les reformuler : un visiteur qui connaît le
-// site n'a aucune raison de voir ses repères changer, et le libellé n'est
-// jamais utilisé comme clé — les identifiants ci-dessous le sont.
 const STRUCTURES = {
-  bfi: "Banque de financement & d'investissement",
-  'banque-affaires': "Banque d'affaires indépendante",
+  bfi: 'Banque de financement et d\'investissement',
+  'banque-affaires': 'Banque d\'affaires indépendante',
   'banque-detail': 'Banque de détail',
   'societe-gestion': 'Société de gestion',
-  fonds: "Fonds d'investissement",
-  assurance: "Compagnie d'assurance & mutuelle",
-  big4: 'Big Four & cabinets d’audit',
-  conseil: 'Cabinet de conseil & stratégie',
-  fintech: 'Fintech & services financiers spécialisés',
-  entreprise: 'Entreprise (direction financière)',
-  institution: 'Institution publique & régulateur',
+  fonds: 'Fonds d\'investissement',
+  assurance: 'Compagnies d\'assurances et mutuelles',
+  big4: 'Big 4 et cabinets d\'audit',
+  conseil: 'Cabinet de conseil et stratégie',
+  fintech: 'Fintech et services financiers spécialisés',
+  entreprise: 'Entreprises (direction financière)',
+  institution: 'Institution publique et régulateur',
 };
 
 const EMPLOYER_STRUCTURE = {
@@ -176,6 +172,45 @@ const EMPLOYER_STRUCTURE = {
   'banque de france': 'institution',
   'caisse des depots': 'institution',
 
+  // --- Filiales et cas que la resolution par prefixe traiterait mal -------
+  // La resolution prend le prefixe le PLUS LONG. Sans ces entrees explicites,
+  // "Natixis Investment Managers" tomberait sur "natixis" (BFI) et
+  // "Credit Agricole Assurances" sur "credit agricole" (banque de detail).
+  'natixis investment managers': 'societe-gestion',
+  'natixis investment managers, l': 'societe-gestion',
+  'credit agricole assurances': 'assurance',
+  'credit agricole personal finance & mobility': 'fintech',
+  'credit agricole transitions et energies': 'banque-detail',
+  aew: 'societe-gestion',
+
+  // Filiales servies sous un nom different de leur maison de reference
+  'parfums christian dior': 'entreprise',
+  'maison francis kurkdjian': 'entreprise',
+  'groupe bon marche': 'entreprise',
+  'officine universelle buly': 'entreprise',
+  repossi: 'entreprise',
+  'direct assurance': 'assurance',
+  'gie axa': 'assurance',
+  'mutuelle saint christophe': 'assurance',
+  socfim: 'fintech',
+  oney: 'fintech',
+  'bpce solutions informatiques': 'fintech',
+
+  // Employeurs vus dans les rejets et absents de la table
+  matmut: 'assurance',
+  'generali france': 'assurance',
+  coface: 'assurance',
+  jefferies: 'banque-affaires',
+  'eight advisory': 'conseil',
+  capco: 'conseil',
+  lseg: 'fintech',
+  mufg: 'bfi',
+  'bank of america': 'bfi',
+  bbva: 'banque-detail',
+  santander: 'banque-detail',
+  'saint gobain': 'entreprise',
+  getlink: 'entreprise',
+
   // --- Entreprises (direction financiere) ---------------------------------
   lvmh: 'entreprise',
   'lvmh fragrance brands': 'entreprise',
@@ -248,26 +283,6 @@ const EMPLOYER_STRUCTURE = {
   'societe air france': 'entreprise',
   planisware: 'entreprise',
   numberly: 'entreprise',
-
-  // --- Filiales des maisons de reference -----------------------------------
-  // Ajoutees le 03/09/2026 en meme temps que leurs alias dans maisons.txt.
-  // Les DEUX sont necessaires et ne font pas le meme travail : maisons.txt
-  // decide si l offre entre au catalogue, structures.js decide de quelle
-  // structure elle releve. Une filiale inscrite dans le seul maisons.txt
-  // franchit la premiere porte pour tomber sur la seconde — resolveStructure
-  // rend null, et la porte finance la rejette.
-  'parfums christian dior': 'entreprise',
-  'maison francis kurkdjian': 'entreprise',
-  'bon marche': 'entreprise',
-  'groupe bon marche': 'entreprise',
-  'officine universelle buly': 'entreprise',
-  'direct assurance': 'assurance',
-  'gie axa': 'assurance',
-  // Socfim finance la promotion immobiliere pour le groupe BPCE, Oney Bank
-  // fait du credit a la consommation : l une releve du financement, l autre
-  // de la banque de detail.
-  socfim: 'bfi',
-  oney: 'banque-detail',
 };
 
 /** Normalise un nom d'employeur pour la resolution. */
@@ -278,12 +293,6 @@ function normalizeEmployer(raw) {
     .replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9&]+/g, ' ')
     .trim();
-  // NE PAS retirer ici « groupe », « la », « le » comme le fait maisons.js :
-  // plusieurs CLÉS de la table portent elles-mêmes ce préfixe (« groupe bpce »,
-  // « la banque postale », « groupe credit cooperatif »). Les retirer de
-  // l'entrée les rendait introuvables — essayé le 03/09, trois maisons
-  // majeures tombaient à NULL d'un coup. Une filiale dont le nom commence par
-  // « Groupe » s'inscrit donc avec son préfixe, comme ci-dessous.
 }
 
 /**

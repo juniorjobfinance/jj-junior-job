@@ -23,7 +23,12 @@ const CHECK_LINKS = process.argv.includes('--check-links');
 // classement n'est pas valide, le catalogue servi en production ne doit pas
 // etre ecrase par un passage de mise au point.
 const REFONTE = process.argv.includes('--refonte');
-const SUFFIXE = REFONTE ? '-refonte' : '';
+
+// `--depuis-cache` rejoue la derniere collecte brute au lieu d'interroger les
+// sources. Reserve a la mise au point du traitement : il ne peut PAS ecrire
+// le catalogue de production, et son suffixe le dit.
+const DEPUIS_CACHE = process.argv.includes('--depuis-cache');
+const SUFFIXE = DEPUIS_CACHE ? '-cache' : REFONTE ? '-refonte' : '';
 const STATE_PATH = path.join(__dirname, 'state.json');
 const OUTPUT_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.js`);
 const RSS_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.xml`);
@@ -3803,6 +3808,45 @@ function rapportDeClassement(offres) {
 
   console.log('\n[pipeline] Listes de travail ecrites dans data/.');
 }
+// ---------------------------------------------------------------------------
+// Cache de collecte brute
+// ---------------------------------------------------------------------------
+//
+// Les offres TELLES QUE RECUES, avant normalisation : c'est tout l'interet.
+// Rejouer depuis une etape posterieure ne permettrait pas de mettre au point
+// ce qui se passe AVANT elle, et c'est justement la que vivent le nettoyage
+// des intitules, la classification et les filtres.
+function ecrireRecolteBrute(raw) {
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    const jour = new Date().toISOString().slice(0, 10);
+    fs.writeFileSync(
+      path.join(DATA_DIR, `brut-${jour}.json`),
+      JSON.stringify({ genere: new Date().toISOString(), total: raw.length, offres: raw })
+    );
+    console.log(`[pipeline] Collecte brute mise en cache : data/brut-${jour}.json`);
+  } catch (err) {
+    // Un cache qui echoue ne doit pas faire echouer le passage : il ne sert
+    // qu'a la mise au point.
+    console.warn('[pipeline] cache brut non ecrit :', err.message);
+  }
+}
+
+// La photo la plus recente, quel que soit son jour.
+function derniereRecolteBrute() {
+  try {
+    const fichiers = fs
+      .readdirSync(DATA_DIR)
+      .filter((f) => /^brut-\d{4}-\d{2}-\d{2}\.json$/.test(f))
+      .sort()
+      .reverse();
+    if (!fichiers.length) return null;
+    return JSON.parse(fs.readFileSync(path.join(DATA_DIR, fichiers[0]), 'utf8'));
+  } catch (err) {
+    return null;
+  }
+}
+
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
@@ -3971,9 +4015,41 @@ function writeRss(offers) {
 // Exécution
 // ---------------------------------------------------------------------------
 async function run() {
-  console.log('[pipeline] Récupération des sources...');
-  const raw = await fetchAllSources();
-  console.log(`[pipeline] ${raw.length} offres brutes récupérées.`);
+  // Le passage automatique ne lit jamais le cache : il servirait la photo
+  // d'un matin indefiniment, sans que rien ne le signale. La variable est
+  // posee par GitHub Actions sur tous ses runs.
+  if (DEPUIS_CACHE && process.env.GITHUB_ACTIONS) {
+    console.error('\n[pipeline] --depuis-cache est INTERDIT dans GitHub Actions.');
+    console.error('  Le passage quotidien doit faire une vraie collecte.\n');
+    process.exitCode = 1;
+    return;
+  }
+
+  let raw;
+  if (DEPUIS_CACHE) {
+    const photo = derniereRecolteBrute();
+    if (!photo) {
+      console.error('\n[pipeline] Aucune collecte en cache dans data/.');
+      console.error('  Lancer une fois sans --depuis-cache pour en constituer une.\n');
+      process.exitCode = 1;
+      return;
+    }
+    raw = photo.offres;
+    const age = Math.round((Date.now() - new Date(photo.genere).getTime()) / 60000);
+    const quand = new Date(photo.genere).toLocaleString('fr-FR');
+    console.log('\n' + '='.repeat(66));
+    console.log('  LECTURE DU CACHE — AUCUNE SOURCE INTERROGEE');
+    console.log('  Photo du ' + quand + '  (il y a ' + age + ' min)');
+    console.log('  ' + raw.length + ' offres brutes rejouees.');
+    console.log('  Sortie vers offres-cache.js — le catalogue de production');
+    console.log('  N EST PAS touche.');
+    console.log('='.repeat(66) + '\n');
+  } else {
+    console.log('[pipeline] Récupération des sources...');
+    raw = await fetchAllSources();
+    console.log(`[pipeline] ${raw.length} offres brutes récupérées.`);
+    ecrireRecolteBrute(raw);
+  }
 
   const normalized = raw.map(normalize).filter(Boolean);
   console.log(`[pipeline] ${normalized.length} offres normalisées (${raw.length - normalized.length} rejetées : champs manquants).`);

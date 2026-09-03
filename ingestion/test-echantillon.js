@@ -108,3 +108,28 @@ for (const [e, t, exp] of VIE) {
   else console.log(`  VIE ECART ${e} — ${t} : attendu ${exp}, obtenu ${g}`);
 }
 console.log(`${ok2}/${VIE.length} cas VIE conformes`);
+
+// --- faux positifs releves sur les 120 tirages du 2026-09-03 ---
+const FP = [
+  ['AXA', "Conseiller d'Études Actuarielles & Pilotage de Provisionnement", 'actuariat-assurance'],
+  ['Grant Thornton', 'Expertise Conseil', 'comptabilite-consolidation'],
+  ['Grant Thornton', 'Assistant Débutant - Expertise Conseil', 'comptabilite-consolidation'],
+  ['Grant Thornton', 'Senior - Expertise Conseil', 'comptabilite-consolidation'],
+  ['CMA CGM', 'Insurance Officer', 'actuariat-assurance'],
+  ['CMA CGM', 'Group Insurance Officer', 'actuariat-assurance'],
+  // ...sans rouvrir la porte au retail
+  ["Caisse d'Epargne Grand Est Europe", 'Conseiller Banque et Assurances', 'REJET'],
+  ['Banque Populaire du Nord', 'Conseiller-ère Monétique', 'REJET'],
+  ['Matmut', 'Conseiller(ère) en Assurance', 'REJET'],
+  ['AXA', 'Mandataire d’Assurance - Dpt 13', 'REJET'],
+  ['AXA', 'Agent spécialisé en Assurances Collectives', 'REJET'],
+  ['Schneider Electric Industries', 'Quality Assurance Engineer - Horgen (Switzerland)', 'REJET'],
+];
+let ok3 = 0;
+for (const [e, t, exp] of FP) {
+  const r = classify({ employer: e, title: t });
+  const g = r.status === 'classified' ? r.famille : 'REJET';
+  if (g === exp) ok3 += 1;
+  else console.log(`  FP ECART ${e} — ${t} : attendu ${exp}, obtenu ${g} ${r.reason || ''}`);
+}
+console.log(`${ok3}/${FP.length} faux positifs corriges`);

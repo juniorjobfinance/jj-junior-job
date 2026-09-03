@@ -156,6 +156,9 @@ const FINANCE_MARKERS = [
   /\bbudget/, /\breporting reglementaire\b/, /\bp&l\b/, /\balm\b/,
   /\bpricing\b/, /\bfacturation\b/, /\brecouvrement\b/, /\bcapital\b/,
   /\bbusiness modeling\b/, /\bbuy ?-? ?side\b/, /\bfraud\b/, /\bcoverage\b/,
+  // 'insurance' (EN) manquait : aucun intitule anglais d'assurance ne passait.
+  // 'expertise conseil' designe l'expertise comptable chez les cabinets francais.
+  /\binsurance\b/, /\bexpertise conseil\b/, /\bexpertise comptable\b/,
 ];
 
 function hasFinanceMarker(title) {
@@ -368,6 +371,7 @@ const FAMILIES = [
       [/\betudes? statistiques? (?:et )?(?:actuarielles|techniques)\b/, 9],
       [/\bcomptab.{0,15}(?:technique )?assurance\b/, 8],
       [/\breinsurance\b/, 9],
+      [/\binsurance\b/, 7],
       [/\binspecteur assurance\b/, 8],
       [/\bgestionnaire de contrats?\b/, 7],
       [/\bgestionnaire redacteur\b/, 7],
@@ -390,6 +394,9 @@ const FAMILIES = [
       [/\baccounting\b/, 7],
       [/\bconsolid/, 8],
       [/\bexpertise comptable\b/, 9],
+      // Chez un cabinet francais, 'Expertise Conseil' = expertise comptable,
+      // pas conseil en transformation.
+      [/\bexpertise conseil\b/, 9],
       [/\bcommissariat aux comptes\b/, 9],
       [/\bcloture comptable\b/, 9],
       [/\brevision comptable\b/, 9],
@@ -653,13 +660,33 @@ function classify(offer) {
   const structure = resolveStructure(offer.employer);
   const tags = TAGS.filter(([, res]) => res.some((re) => re.test(title))).map(([id]) => id);
 
-  // Etape 1 — pre-filtre, sauf si l'intitule porte une exception explicite
+  // Score de famille, calcule avant le pre-filtre : il sert de garde-fou.
+  let winner = null;
+  let winnerScore = 0;
+  for (const family of FAMILIES) {
+    const score = scoreFamily(family, title);
+    if (score > winnerScore) {
+      winner = family;
+      winnerScore = score;
+    }
+  }
+
+  // Etape 1 — pre-filtre, sauf si l'intitule porte une exception explicite.
+  //
+  // Garde-fou sur le motif 'retail' uniquement : un intitule qui porte un
+  // metier SANS AMBIGUITE (score >= 9) n'est pas de la vente en agence, meme
+  // s'il commence par "Conseiller". C'est ce qui sauve "Conseiller d'Etudes
+  // Actuarielles & Pilotage de Provisionnement" sans rouvrir la porte a
+  // "Conseiller Banque et Assurances" ni a "Conseiller-ere Monetique",
+  // qui plafonnent a 8.
+  // Les motifs 'support' et 'hors-domaine' ne beneficient pas du garde-fou :
+  // une offre de pharmacovigilance reste hors perimetre quoi qu'elle porte.
   const exempte = PREFILTER_EXCEPTIONS.some((re) => re.test(title));
   if (!exempte) {
     for (const [re, reason] of PREFILTER) {
-      if (re.test(title)) {
-        return { status: 'rejected', reason: `prefilter:${reason}`, structure, tags };
-      }
+      if (!re.test(title)) continue;
+      if (reason === 'retail' && winnerScore >= 9) break;
+      return { status: 'rejected', reason: `prefilter:${reason}`, structure, tags };
     }
   }
 
@@ -677,16 +704,7 @@ function classify(offer) {
     };
   }
 
-  // Etape 3 — famille par score de specificite
-  let winner = null;
-  let winnerScore = 0;
-  for (const family of FAMILIES) {
-    const score = scoreFamily(family, title);
-    if (score > winnerScore) {
-      winner = family;
-      winnerScore = score;
-    }
-  }
+  // Etape 3 — famille : le score a deja ete calcule plus haut.
 
   // Coups de pouce structure : quand l'intitule est generique, l'employeur tranche.
   const byId = (id) => FAMILIES.find((f) => f.id === id);
