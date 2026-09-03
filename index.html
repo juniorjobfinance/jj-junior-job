@@ -134,10 +134,26 @@
      sur du blanc : c'est le monogramme, sombre et carré, qui l'ancre, et le
      filet orange qui la signe. */
   header.site {
+    position: relative;
     background: var(--paper-raised);
     color: var(--ink);
     padding: 1.35rem 1.5rem 1.15rem;
-    border-bottom: 3px solid var(--accent);
+    /* Transparente : elle ne sert plus qu'à réserver la même hauteur.
+       Le vrai filet est le pseudo-élément ci-dessous, centré sur 1200 px
+       comme .brand — sans lui, la bordure pleine largeur dépassait le
+       contenu de chaque côté sur un écran large. */
+    border-bottom: 3px solid transparent;
+  }
+  header.site::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    height: 3px;
+    background: var(--accent);
   }
   header.site .brand {
     display: flex;
@@ -221,10 +237,10 @@
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
-    padding: 0.9rem 0.8rem;
+    padding: 0.9rem 0.9rem;
     font: inherit;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--ink-soft);
     cursor: pointer;
     white-space: nowrap;
@@ -237,8 +253,8 @@
   nav.tabs button[role="tab"]::before {
     content: "";
     display: inline-block;
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     margin-right: 0.4rem;
     vertical-align: 0.08em;
@@ -260,10 +276,25 @@
   nav.tabs .tab-count {
     font-family: var(--font-chiffres);
     font-variant-numeric: tabular-nums;
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 400;
     color: var(--ink-soft);
     margin-left: 0.35rem;
+  }
+  .total-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.4rem 1.5rem;
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+  .total-bar .total {
+    font-family: var(--font-chiffres);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink-soft);
   }
   /* Sur mobile, les 4 onglets + le total ne tiennent pas sur 375px et « CDI · CDD »
      se faisait couper. On rend la barre défilable horizontalement (sans barre
@@ -282,18 +313,13 @@
     nav.tabs button[role="tab"] {
       flex: 0 0 auto;
       white-space: nowrap;
-      padding: 0.75rem 0.35rem;
-      font-size: 0.78rem;
+      padding: 0.75rem 0.4rem;
+      font-size: 0.85rem;
     }
-    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.2rem; }
-    nav.tabs .tab-count { font-size: 0.66rem; margin-left: 0.15rem; }
-    /* Le compte du volet et le total se sont allongés (« 498 offres · 993 au
-       total ») : à côté de « Trier », plus rien ne tenait sur une ligne. Le
-       bloc outils passe sur sa propre ligne pleine largeur ; Trier et le
-       compte restent côte à côte tant qu'ils y tiennent, l'un sous l'autre
-       sinon. */
-    .results-head { flex-wrap: wrap; row-gap: 0.4rem; }
-    .results-tools { flex-basis: 100%; justify-content: space-between; }
+    nav.tabs button[role="tab"]::before { width: 7px; height: 7px; margin-right: 0.25rem; }
+    nav.tabs .tab-count { font-size: 0.72rem; margin-left: 0.2rem; }
+    .total-bar { padding: 0.35rem 1rem; }
+    .total-bar .total { font-size: 0.78rem; }
   }
 
   /* ---------- Layout ---------- */
@@ -652,15 +678,8 @@
   .results-count {
     font-family: var(--font-chiffres);
     font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    font-size: 1rem;
-    font-weight: 600;
-  }
-  /* Le total est un rappel, pas l'information principale de la ligne : il
-     reste net mais plus discret que le compte du volet actif. */
-  .results-count .total-global {
-    font-weight: 400;
     color: var(--ink-soft);
+    font-size: 0.9rem;
   }
   .results-tools {
     display: flex;
@@ -1044,6 +1063,7 @@
   <button role="tab" data-volet="vie" aria-selected="false" aria-controls="panel-offres" id="tab-vie">VIE</button>
   <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
 </nav>
+<div class="total-bar"><span class="total" id="total-count"></span></div>
 
 <!-- Bandeau « Pépites JJ » en pleine largeur, juste sous les onglets (et non
      dans la colonne des offres, où il tombait sous les filtres sur mobile).
@@ -1753,16 +1773,7 @@
     var visible = filtered.slice(0, state.page * PAGE_SIZE);
     stateToUrl();
 
-    els.resultsCount.textContent = '';
-    els.resultsCount.appendChild(
-      document.createTextNode(filtered.length + ' offre' + (filtered.length > 1 ? 's' : ''))
-    );
-    if (window.__totalGeneral) {
-      var totalSpan = document.createElement('span');
-      totalSpan.className = 'total-global';
-      totalSpan.textContent = ' \u00b7 ' + window.__totalGeneral + ' au total';
-      els.resultsCount.appendChild(totalSpan);
-    }
+    els.resultsCount.textContent = filtered.length + ' offre' + (filtered.length > 1 ? 's' : '');
     // Le bouton du tiroir dit le résultat avant qu'on le voie : on referme en
     // sachant sur combien d'offres on retombe.
     els.tiroirValider.textContent = filtered.length
@@ -1909,8 +1920,8 @@
       }
       tab.querySelector('.tab-count').textContent = n;
     });
-    // Retenu pour être réutilisé juste après, dans le compte du volet actif.
-    window.__totalGeneral = OFFRES.length;
+    var total = document.getElementById('total-count');
+    if (total) total.textContent = OFFRES.length + ' offres au total';
   }
 
   buildFamilleFieldset();
