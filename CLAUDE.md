@@ -176,6 +176,19 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   réparer ce qui marche. Corollaire : **une maison sans poste ouvert est dans
   son état normal**, pas en panne. Le compte des « maisons muettes » n'est pas
   un compte de défauts.
+- **Un mot ajouté au FILTRE D'ENTRÉE et un mot ajouté aux FAMILLES n'ont pas
+  le même pouvoir de nuire.** « Stress test » manquait aux deux. Mis dans le
+  filtre d'entrée, il a aussitôt fait passer « Ingénieur essais et stress test
+  matériaux » (Safran), « Stress test engineer – structures » (Airbus) et
+  « Stress Test Engineer mécanique » (Valeo) — le mécanisme exact qui avait
+  gonflé le fourre-tout à 26,7 % le 2 septembre. Mis dans les FAMILLES seules,
+  il est sans danger : il ne fait entrer personne, il range mieux ceux qui
+  entrent déjà par une autre porte. **Enrichir les familles est peu risqué ;
+  enrichir le filtre d'entrée demande de mesurer chez un industriel.**
+- **`atelier.js` ne teste pas le filtre finance.** Ses portes (métier hors
+  périmètre, niveau, famille, maison, séniorité) peuvent toutes dire « ok »
+  sur une offre que `isFinanceOfferFor` écarte ensuite. Pour juger de
+  l'entrée, appeler `isFinanceOfferFor(emp, titre)` directement.
 - **L'alternance est SAISONNIÈRE.** Le contrat démarre en septembre, donc les
   annonces se publient de février à juillet. Un catalogue d'alternance maigre
   relevé en septembre ou en octobre ne prouve rien — c'est le creux du cycle.

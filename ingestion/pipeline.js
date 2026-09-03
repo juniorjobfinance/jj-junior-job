@@ -319,7 +319,7 @@ const FAMILLE_RULES = [
 
   // --- Audit, conseil, risques ---------------------------------------------
   [/audit|commissariat aux comptes|commissaire aux comptes|contr[ôo]leurs? (?:interne|permanent)|contr[ôo]le (?:interne|permanent)|internal control|inspection g[ée]n[ée]rale/i, 'Audit & Contrôle interne'],
-  [/risque|\brisk\b|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|\baml\b|\bcsrd\b|\bsfdr\b|reporting extra[\s-]?financier|r[ée]tablissement|r[ée]solution|solvabilit[ée]|tarification|gestion de crise|financial crime|gouvernance|surveillance|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux|reporting r[ée]glementaire|regulatory reporting|d[ée]claratif/i, 'Risques & Conformité'],
+  [/risque|\brisk\b|stress[\s-]?test|conformit[ée]|compliance|\bkyc\b|\blcb.?ft\b|\baml\b|\bcsrd\b|\bsfdr\b|reporting extra[\s-]?financier|r[ée]tablissement|r[ée]solution|solvabilit[ée]|tarification|gestion de crise|financial crime|gouvernance|surveillance|blanchiment|d[ée]ontolog|s[ée]curit[ée] financi[èe]re|sanctions|fraude|contentieux|reporting r[ée]glementaire|regulatory reporting|d[ée]claratif/i, 'Risques & Conformité'],
   [/consult|conseil\b|advisory|transformation|pilotage de programme|analyste? strat[ée]g|operational project|project (?:officer|manag)|\bpmo\b|market intelligence|business insights|performance et animation|growth strategy|strategy (?:and|&) partnerships|syst[èe]mes? d.informations? finance/i, 'Conseil'],
 
   // --- Analyse et recherche -------------------------------------------------
