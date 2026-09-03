@@ -96,7 +96,7 @@ const FINANCE_KEYWORDS_RE =
 // "Ingénieur financier risques" et "Technicien comptable" sont de vrais postes
 // finance. On ne vise que les intitulés techniques explicites.
 const NON_FINANCE_RE =
-  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|test analyst|functional analyst|\bmoa\b|scrum|product owner|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|\bm[ée]dia|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
+  /\bit\b|support|helpdesk|software|developer|d[ée]veloppeur|devops|sysadmin|syst[èe]me|r[ée]seau|cyber|s[ée]curit[ée] informatique|\bqa\b|testeur|\bred team\b|\bblue team\b|pentest|security (?:analyst|officer|assurance|assessment|risk|operations|architect|expert|specialist)|risk assessment expert|backup engineer|audiovisuel|t[ée]l[ée]phonie|test analyst|functional analyst|\bmoa\b|scrum|product owner|\bhr\b|human resources|\blegal\b|juridique|juriste|avocat|marketing|communication|\bm[ée]dia|graphiste|designer|\bux\b|\bui\b|ressources humaines|\brh\b|recrutement|talent acquisition|paie\b|payroll|logistique|maintenance|technicien de|salesforce|(?:data|analytics|systems?|platform|release train|site reliability|machine learning|cloud|security)\s+engineer|architecte logiciel/i;
 
 // Entreprises dont le MÉTIER est la finance (banque, gestion d'actifs, private
 // equity, audit, conseil financier/stratégie, assurance). Chez elles, des
@@ -649,6 +649,36 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
 //     (Crédit Agricole et ses data-gtm-*), ce qui est plus sûr — un changement
 //     de mise en page ne casse rien tant que les attributs restent.
 const LISTES_HTML = [
+  {
+    // Comgest ne publie sur aucune plateforme : ses offres sont dans un
+    // accordéon de son propre site, réparties sur DEUX pages — les stages et
+    // les emplois. Le « numéro de page » désigne ici l'une des deux listes.
+    //
+    // Elles sont lues dans le même lot (concurrence: 2) à dessein : la boucle
+    // de fetchListeHtml s'arrête à la première page vide, et un jour sans
+    // stage aurait donc empêché de lire la page des emplois.
+    emp: 'Comgest',
+    base: 'https://www.comgest.com',
+    page: (n) =>
+      'https://www.comgest.com/fr/about-us/nos-collaborateurs/carrieres/' +
+      (n === 1 ? 'stages' : 'offres-emploi'),
+    maxPages: 2,
+    concurrence: 2,
+    // Comgest a des bureaux à Dublin, Hong Kong et Tokyo, et son libellé de
+    // lieu ne porte pas le pays : on reconnaît la France au nom de la ville.
+    lieuLibre: true,
+    blocRe: /<dt role="heading"[^>]*class="accordion__header">/,
+    blocFin: '</dd>',
+    // La candidature spontanée n'a pas d'identifiant de poste : faute de
+    // lien, parseListeMotifs l'écarte de lui-même.
+    lienRe: /href="(https:\/\/www\.comgest\.com\/[^"]*application-form\?jobID=[^"]+)"/,
+    motifs: {
+      titre: /accordion__header__button__text">\s*([^<]+?)\s*</,
+      lieu: /Lieu de travail:[^<]*<\/strong>\s*([^<]+?)\s*</,
+      type: /Type de poste:[^<]*<\/strong>\s*([^<]+?)\s*</,
+    },
+    delaiMs: 500,
+  },
   {
     // EDF tourne sur TalentSoft mais avec son propre habillage : les fiches
     // sont en /edf-recrute/offre/detail/…, pas en /offre-de-emploi/….aspx,
@@ -2979,16 +3009,27 @@ async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000,
   if (widgets) return fetchPhenomWidgets({ host, emp, country });
   if (pid) return fetchPhenomV2({ host, pid, domain: domain || host, emp, country });
 
-  const all = [];
+  // Phenom ne connaît que « page ». « offset », « from », « start » et « skip »
+  // sont acceptés sans effet : chacun renvoie la PREMIÈRE page. La boucle
+  // relisait donc six fois les cent premières offres d'AXA, atteignait
+  // 600 >= totalCount (560) et s'arrêtait, convaincue d'avoir tout lu — alors
+  // que 460 offres n'avaient jamais été vues, dont vingt-deux des vingt-quatre
+  // offres juniors de la maison.
+  const vus = new Map();
   const pageSize = 100;
   try {
-    for (let offset = 0; offset < 2000; offset += pageSize) {
-      const url = `https://${host}/api/jobs?country=${encodeURIComponent(country)}&limit=${pageSize}&offset=${offset}`;
+    for (let page = 1; page <= 20; page++) {
+      const url = `https://${host}/api/jobs?country=${encodeURIComponent(country)}&limit=${pageSize}&page=${page}`;
       const json = await getJSON(url);
-      const page = (json.jobs || []).map((j) => j.data || j);
-      all.push(...page);
-      if (page.length < pageSize) break;
-      if (json.totalCount > 0 && all.length >= json.totalCount) break;
+      const lot = (json.jobs || []).map((j) => j.data || j);
+      const avant = vus.size;
+      for (const o of lot) vus.set(`${o.req_id}|${o.language || ''}`, o);
+      // Garde-fou : une page qui n'apporte aucune offre nouvelle signifie que
+      // le serveur ignore notre pagination. Sans lui, une source peut tourner
+      // chaque matin en ne servant que son premier centième, sans erreur.
+      if (vus.size === avant) break;
+      if (lot.length < pageSize) break;
+      if (json.totalCount > 0 && vus.size >= json.totalCount) break;
       await new Promise((r) => setTimeout(r, crawlDelayMs));
     }
   } catch (err) {
@@ -2996,7 +3037,7 @@ async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000,
     return [];
   }
 
-  return all
+  return [...vus.values()]
     .filter((j) => (j.country || '').toLowerCase() === country.toLowerCase())
     .filter((j) => isFinanceOfferFor(emp, j.title, (j.categories || j.category || []).join(' ')))
     .map((j) => ({ __src: `phenom:${host}`, emp, raw: j }));
