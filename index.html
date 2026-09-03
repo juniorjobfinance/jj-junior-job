@@ -226,119 +226,63 @@
   nav.tabs {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.6rem 1.5rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.25rem;
     border-bottom: 1px solid var(--line);
     background: var(--paper-raised);
   }
-  /* Les onglets reprennent EXACTEMENT la pastille de contrat des cartes :
-     même famille de chiffres, mêmes majuscules espacées, même rayon, même
-     trio fond clair / bordure / texte à la teinte du contrat. Un onglet et
-     les cartes qu'il ouvre portent ainsi le même objet, pas deux dialectes
-     du même code couleur.
-
-     L'onglet ouvert NE CHANGE NI DE FOND NI DE COULEUR : le remplir en plein
-     donnait une pastille qui ne ressemblait plus à celle des cartes, ce qui
-     est précisément ce qu'on cherche à éviter ici. La sélection se marque
-     donc à côté de la pastille — bordure doublée et trait plein dessous —
-     pour que les quatre onglets restent, eux, strictement identiques aux
-     pastilles des cartes. */
   nav.tabs button[role="tab"] {
     appearance: none;
-    position: relative;
-    border: 1px solid var(--puce, var(--ink-soft));
-    background: var(--puce-doux, transparent);
-    color: var(--puce, var(--ink-soft));
-    border-radius: 5px;
-    padding: 0.5rem 0.8rem;
-    font-family: var(--font-chiffres);
-    font-size: 0.8rem;
-    font-weight: 700;
-    /* Hauteur de ligne fixée, et non laissée à « normal » : c'est elle qui
-       sert de gabarit aux deux petites pastilles de l'onglet CDI·CDD, qui
-       doivent occuper exactement la même hauteur qu'un libellé ordinaire pour
-       que les quatre onglets restent de la même taille. 0,8 × 1,25 = 1rem. */
-    line-height: 1.25;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 0.9rem 0.9rem;
+    font: inherit;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
     cursor: pointer;
     white-space: nowrap;
   }
-  nav.tabs button[data-volet="stage"] { --puce: var(--stage); --puce-doux: var(--stage-doux); }
-  nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); --puce-doux: var(--alternance-doux); }
-  nav.tabs button[data-volet="vie"] { --puce: var(--vie); --puce-doux: var(--vie-doux); }
-  nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); --puce-doux: var(--cdi-doux); }
-  /* Cet onglet-là couvre DEUX contrats, et les cartes les distinguent déjà :
-     le CDI est plein, le CDD n'a que sa bordure. L'onglet montre donc les deux
-     pastilles plutôt qu'un « CDI · CDD » qui n'existe nulle part ailleurs sur
-     le site. Le bouton n'est alors plus lui-même une pastille — il ne serait
-     qu'un cadre de plus autour de deux cadres — mais un simple support. */
-  /* L'onglet reste UNE grande pastille, comme les trois autres — c'est ce qui
-     garde la barre régulière — et porte les deux petites À L'INTÉRIEUR. Un
-     premier essai avait rendu le bouton transparent pour ne garder que le
-     couple : l'onglet perdait alors le cadre que les trois autres ont, et la
-     barre devenait bancale. */
-  nav.tabs button[data-volet="cdi-cdd"] { padding-left: 0.5rem; padding-right: 0.5rem; }
-  nav.tabs .duo-cdi,
-  nav.tabs .duo-cdd {
-    /* Hauteur imposée, bordure et rembourrage compris (box-sizing), et
-       exactement égale à la ligne de libellé des autres onglets — 0,8rem de
-       corps × 1,25 = 1rem. Sans ça, la bordure et le rembourrage des deux
-       petites pastilles s'ajoutaient à la ligne et cet onglet mesurait 3 px de
-       plus que les trois autres : Victor l'a vu à l'œil nu. */
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    /* Aligné sur le HAUT de la ligne, pas sur la ligne de base : cette
-       dernière ajoutait encore 1,1 px de descendante sous la pastille et
-       laissait l'onglet plus haut que les trois autres. En « top », la
-       pastille remplit exactement la ligne et les quatre onglets mesurent
-       43,59 px tous les quatre. */
-    vertical-align: top;
-    height: 1rem;
-    border: 1px solid var(--cdi);
-    border-radius: 4px;
-    padding: 0 0.3rem;
-    font-size: 0.66rem;
-    line-height: 1;
-  }
-  nav.tabs .duo-cdi { background: var(--cdi); color: #ffffff; }
-  /* Blanc franc, et non « transparent ». Transparent, le CDD laissait voir le
-     rose très pâle de la grande pastille : presque blanc, mais pas blanc,
-     alors que sur les cartes il est posé sur du blanc. Le fond du bandeau
-     donne exactement cette valeur-là et suit le thème. */
-  nav.tabs .duo-cdd { background: var(--paper-raised); color: var(--cdi); margin-left: 0.2rem; }
-  /* Ouvert : RIEN sur la pastille elle-même. Un premier essai doublait sa
-     bordure par une ombre portée ; à côté des cartes, le trait paraissait
-     aussitôt deux fois trop épais — ce qui est exactement ce qu'on cherche à
-     éviter. Les quatre pastilles gardent donc leur bordure d'un pixel, comme
-     sur les cartes, et la sélection se lit au seul trait posé dessous. Il se
-     loge dans le rembourrage bas de la barre. */
-  nav.tabs button[role="tab"][aria-selected="true"]::after {
+  nav.tabs button[role="tab"]:hover { color: var(--ink); }
+  /* Une puce de la couleur du contrat devant chaque onglet. Elle est là même
+     quand l'onglet n'est pas actif : c'est ce qui rend les quatre volets
+     lisibles au premier regard, et ce qui relie visuellement un onglet aux
+     pastilles des cartes qu'il ouvre. */
+  nav.tabs button[role="tab"]::before {
     content: "";
-    position: absolute;
-    left: 15%;
-    right: 15%;
-    bottom: -5px;
-    height: 3px;
-    border-radius: 2px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    vertical-align: 0.08em;
     background: var(--puce, var(--ink-soft));
   }
-  /* Le survol ne touche ni au texte ni au fond de la pastille — les deux
-     portent déjà une information. Il creuse juste très légèrement la teinte. */
-  nav.tabs button[role="tab"]:not([aria-selected="true"]):hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-  /* Le compteur prend la couleur de sa pastille. L'interlettrage des
-     majuscules ne le concerne pas : ce sont des chiffres. */
+  /* La puce garde sa teinte en permanence ; le libellé ne la prend qu'une
+     fois l'onglet ouvert. */
+  nav.tabs button[data-volet="stage"] { --puce: var(--stage); }
+  nav.tabs button[data-volet="alternance"] { --puce: var(--alternance); }
+  nav.tabs button[data-volet="vie"] { --puce: var(--vie); }
+  nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); }
+  /* Actif : le trait sous l'onglet prend sa couleur, et le libellé passe en
+     encre pleine pour que la sélection se lise sans dépendre de la teinte. */
+  nav.tabs button[data-volet="stage"][aria-selected="true"] { color: var(--stage); border-bottom-color: var(--stage); }
+  nav.tabs button[data-volet="alternance"][aria-selected="true"] { color: var(--alternance); border-bottom-color: var(--alternance); }
+  nav.tabs button[data-volet="vie"][aria-selected="true"] { color: var(--vie); border-bottom-color: var(--vie); }
+  nav.tabs button[data-volet="cdi-cdd"][aria-selected="true"] { color: var(--cdi); border-bottom-color: var(--cdi); }
+  nav.tabs button[role="tab"][aria-selected="true"] { font-weight: 700; }
+  /* Le compteur prend la couleur de son contrat, comme la puce, et passe en
+     gras : gris et maigre, il se lisait comme une note de bas de page alors
+     que c'est l'information que le visiteur cherche en balayant la barre.
+     Repli en gris si --puce n'est pas défini. */
   nav.tabs .tab-count {
     font-family: var(--font-chiffres);
     font-variant-numeric: tabular-nums;
     font-size: 0.82rem;
     font-weight: 700;
-    letter-spacing: 0;
     color: var(--puce, var(--ink-soft));
     margin-left: 0.35rem;
   }
@@ -372,8 +316,8 @@
      recalcul du libellé à la rotation, plus bas dans le script. */
   @media (max-width: 900px) {
     nav.tabs {
-      padding: 0.5rem;
-      gap: 0.3rem;
+      padding: 0 0.5rem;
+      gap: 0.15rem;
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: none;
@@ -383,29 +327,34 @@
     nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; }
   }
   @media (max-width: 640px) {
-    nav.tabs { padding: 0.45rem 0.3rem; gap: 0.25rem; }
-    /* Le corps des pastilles des cartes, à l'identique. Les majuscules et leur
-       interlettrage élargissent beaucoup : c'est ce qui fixe la taille ici, et
-       il reste ~25 px de jeu à 375 px avec un total à quatre chiffres. */
+    /* Pourquoi le compteur reste SOUS le libellé, et non à côté comme sur
+       bureau. Mesuré à 375 px : mis à côté, il coûte environ 95 px de largeur
+       à quatre onglets, et il ne reste alors de la place qu'en resserrant les
+       onglets à 0,68 rem avec 0,22 rem de rembourrage — soit exactement l'effet
+       « trop collé » qu'on cherche à éviter. Sous le libellé, il ne coûte rien
+       en largeur (la barre gagne trois pixels de hauteur) et tout le jeu
+       disponible passe en aération. Les puces restent, elles ne se négocient
+       pas.
+
+       Reste ~11 px de jeu avec « 998 offres », et ~19 dès que le total
+       s'abrège (voir chiffreCompact dans le script). */
+    nav.tabs { padding: 0.5rem 0.25rem; gap: 0.22rem; }
     nav.tabs button[role="tab"] {
-      padding: 0.4rem 0.4rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-      line-height: 1.25;
+      padding: 0.5rem 0.42rem;
+      font-size: 0.82rem;
+      line-height: 1.2;
     }
-    /* Le compteur passe sous le libellé : il ne coûte alors plus un pixel de
-       largeur, et la pastille garde sa taille. */
+    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.25rem; }
+    /* La marge gauche ne tombe pas à zéro : le bouton est centré, mais sa
+       première ligne commence par la puce, qui pousse le LIBELLÉ vers la
+       droite. On rend ce décalage au compteur pour qu'il s'aligne sur le mot
+       et non sur le bouton. */
     nav.tabs .tab-count {
       display: block;
-      margin-left: 0;
+      margin-left: calc(6px + 0.25rem);
       font-size: 0.72rem;
     }
-    /* Même règle qu'en grand, au corps d'ici : 0,72rem × 1,25 = 0,9rem. */
-    nav.tabs button[data-volet="cdi-cdd"] { padding-left: 0.3rem; padding-right: 0.3rem; }
-    nav.tabs .duo-cdi,
-    nav.tabs .duo-cdd { height: 0.9rem; padding: 0 0.22rem; font-size: 0.6rem; }
-    nav.tabs .duo-cdd { margin-left: 0.15rem; }
-    nav.tabs .total { font-size: 0.76rem; padding-left: 0.3rem; }
+    nav.tabs .total { font-size: 0.76rem; padding-left: 0.25rem; }
   }
 
   /* ---------- Layout ---------- */
@@ -1147,7 +1096,7 @@
   <button role="tab" data-volet="stage" aria-selected="true" aria-controls="panel-offres" id="tab-stage">Stage</button>
   <button role="tab" data-volet="alternance" aria-selected="false" aria-controls="panel-offres" id="tab-alternance">Alternance</button>
   <button role="tab" data-volet="vie" aria-selected="false" aria-controls="panel-offres" id="tab-vie">VIE</button>
-  <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd"><span class="duo-cdi">CDI</span><span class="duo-cdd">CDD</span></button>
+  <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
   <span class="total" id="total-count" aria-hidden="true"></span>
 </nav>
 
@@ -1996,31 +1945,56 @@
 
   // Compteur par onglet + total : sans ça, un visiteur qui arrive sur "Stage"
   // croit que le site ne contient que les offres de cet onglet.
+  // Sur téléphone, la barre d'onglets tient au pixel près. Mesuré à 375 px, le
+  // total écrit en entier laisse ~11 px de jeu à 998 offres — mais il n'en
+  // resterait plus à 10 000, et la barre se remettrait à défiler, ce qu'on ne
+  // veut pas. Plutôt que de calibrer sur le catalogue du jour, les nombres à
+  // quatre chiffres et plus s'abrègent : 1 200 devient « 1,2k », 50 000 devient
+  // « 50k ». En dessous de mille, et sur les écrans larges, le nombre reste
+  // écrit en entier.
+  function chiffreCompact(n) {
+    if (window.innerWidth > 640 || n < 1000) return String(n);
+    if (n < 10000) return String(Math.round(n / 100) / 10).replace('.', ',') + 'k';
+    return Math.round(n / 1000) + 'k';
+  }
+
+  var comptesParVolet = null;
+
   function buildTabCounts() {
+    comptesParVolet = {};
     els.tabs.forEach(function (tab) {
-      var n = voletOffers(tab.dataset.volet).length;
+      comptesParVolet[tab.dataset.volet] = voletOffers(tab.dataset.volet).length;
       if (!tab.querySelector('.tab-count')) {
         var span = document.createElement('span');
         span.className = 'tab-count';
         tab.appendChild(span);
       }
-      tab.querySelector('.tab-count').textContent = n;
     });
-    ecrireTotal();
+    ecrireCompteurs();
   }
 
-  // Le libellé du total dépend de la largeur : "994 offres" là où la barre
-  // d'onglets se joue au millimètre, "994 offres au total" quand la place le
-  // permet. Il doit donc être recalculé quand la fenêtre change de taille :
-  // une page chargée en paysage puis basculée en portrait gardait sinon le
-  // libellé long, et la barre se remettait à défiler — exactement ce que
-  // Victor ne veut plus voir.
-  function ecrireTotal() {
+  // Le libellé du total dépend de la largeur : "998 offres" là où la barre
+  // d'onglets se joue au millimètre, "998 offres au total" quand la place le
+  // permet ; même chose pour la forme abrégée des compteurs. Tout cela doit
+  // donc être recalculé quand la fenêtre change de taille : une page chargée en
+  // paysage puis basculée en portrait gardait sinon le libellé long, et la
+  // barre se remettait à défiler — exactement ce que Victor ne veut plus voir.
+  //
+  // On ne recompte pas les offres au passage : les totaux sont mémorisés par
+  // buildTabCounts, et seul leur affichage est réécrit ici.
+  function ecrireCompteurs() {
+    els.tabs.forEach(function (tab) {
+      var span = tab.querySelector('.tab-count');
+      if (span && comptesParVolet) span.textContent = chiffreCompact(comptesParVolet[tab.dataset.volet]);
+    });
     var total = document.getElementById('total-count');
-    if (!total) return;
-    total.textContent = OFFRES.length + (window.innerWidth <= 640 ? ' offres' : ' offres au total');
+    if (total) {
+      total.textContent = window.innerWidth <= 640
+        ? chiffreCompact(OFFRES.length) + ' offres'
+        : OFFRES.length + ' offres au total';
+    }
   }
-  window.addEventListener('resize', ecrireTotal);
+  window.addEventListener('resize', ecrireCompteurs);
 
   buildFamilleFieldset();
   buildStructureSelect();
