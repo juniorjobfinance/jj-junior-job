@@ -1450,6 +1450,40 @@ function parseWorkdayRelativeDate(postedOn) {
   return now.toISOString();
 }
 
+// « 25 août » — un jour et un mois, sans année : le format des cartes Yello
+// (EY). L'année n'y figure pas, on prend l'année courante ; si la date ainsi
+// obtenue tombe plus de sept jours dans le futur, elle appartient à l'année
+// précédente — une annonce n'est jamais publiée demain.
+//
+// « NOUVEAU », que Yello affiche pour les annonces toutes fraîches, ne nomme
+// aucun jour. On rend null : une date qu'on n'a pas reste nulle, sans quoi
+// l'offre prétendrait à une fraîcheur qu'on ne peut pas vérifier.
+// Indexé à partir de ZÉRO, pour Date.UTC, et accentué comme l'écrivent les
+// annonces. Un second MOIS_FR existe plus bas, indexé à partir de UN et sans
+// accents : les deux servent des formats différents, d'où les deux noms.
+const MOIS_FR_INDEX = {
+  janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5,
+  juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10,
+  décembre: 11, decembre: 11,
+};
+
+function dateFrancaiseSansAnnee(texte) {
+  const m = String(texte || '')
+    .toLowerCase()
+    .match(/(\d{1,2})\s+([a-zà-ÿ]+)/);
+  if (!m) return null;
+  const mois = MOIS_FR_INDEX[m[2]];
+  if (mois === undefined) return null;
+  const maintenant = new Date();
+  let d = new Date(Date.UTC(maintenant.getUTCFullYear(), mois, Number(m[1])));
+  if (isNaN(d)) return null;
+  // Plus de sept jours dans le futur : c'était l'an dernier.
+  if (d.getTime() - maintenant.getTime() > 7 * 86400000) {
+    d = new Date(Date.UTC(maintenant.getUTCFullYear() - 1, mois, Number(m[1])));
+  }
+  return d.toISOString();
+}
+
 // Format BPCE OpenData : "28/08/2026 4:24:59 PM" (DD/MM/YYYY H:MM:SS AM/PM).
 function parseFrenchDateTime(text) {
   const match = (text || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
@@ -1990,7 +2024,14 @@ function normalize(item) {
       .replace(/<[^>]*>/g, ' ')
       .slice(0, 4000);
     {
-      const d = new Date(String(raw.JobOpeningDate || '').replace(' ', 'T'));
+      // « 2026-09-07 02:50 PM ». La substitution du premier espace par un « T »
+      // visait à rendre la chaîne ISO ; elle produisait « 2026-09-07T02:50 PM »,
+      // que Date refuse — « PM » ne peut pas suivre une heure ISO. Sept offres
+      // perdaient leur date par excès de zèle. On tente la chaîne telle quelle
+      // d'abord, la substitution ensuite seulement.
+      const brut = String(raw.JobOpeningDate || '');
+      let d = new Date(brut);
+      if (isNaN(d)) d = new Date(brut.replace(' ', 'T'));
       postedAt = isNaN(d) ? null : d.toISOString();
     }
   } else if (__src.startsWith('cornerstone:')) {
@@ -2150,7 +2191,10 @@ function normalize(item) {
     pays = 'France'; // filtré par l'identifiant pays du tableau
     url = raw.url;
     typeContratRaw = raw.titre;
-    postedAt = null;
+    // La carte porte « 25 août », ou « NOUVEAU » quand l'annonce vient de
+    // paraître. Le second ne nomme aucun jour : on ne l'invente pas, l'offre
+    // reste sans date et le site l'annonce comme telle.
+    postedAt = dateFrancaiseSansAnnee(raw.date);
   } else if (__src === 'mckinsey') {
     // Une annonce ouverte dans des dizaines de villes n'est pas une offre
     // parisienne : c'est un entonnoir de candidature permanent, que McKinsey

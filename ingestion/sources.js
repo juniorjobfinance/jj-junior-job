@@ -1307,13 +1307,27 @@ async function fetchYelloBoard(cfg) {
       });
       const html = (await res.json()).html || '';
 
-      const cartes = [...html.matchAll(
-        /<a class="search-results__req_title"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g
-      )];
+      // Chaque carte porte sa date de publication dans un coin qu'on ne
+      // lisait pas : « <div class="search-results__post-time">25 août</div> ».
+      // On découpe donc par CARTE plutôt que par lien, pour garder les deux
+      // ensemble. « NOUVEAU » y remplace parfois le jour : on le transmet tel
+      // quel, c'est au pipeline de décider qu'il ne vaut pas une date.
+      const cartes = html
+        .split('<li class="search-results__item"')
+        .slice(1)
+        .map((bloc) => {
+          const lien = bloc.match(
+            /<a class="search-results__req_title"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/
+          );
+          if (!lien) return null;
+          const quand = bloc.match(/search-results__post-time[^>]*>([^<]*)</);
+          return [null, lien[1], lien[2], quand ? quand[1].trim() : ''];
+        })
+        .filter(Boolean);
       if (!cartes.length) break;
 
       let nouveaux = 0;
-      for (const [, href, titreBrut] of cartes) {
+      for (const [, href, titreBrut, quand] of cartes) {
         const chemin = href.replace(/&amp;/g, '&');
         if (vus.has(chemin)) continue;
         vus.add(chemin);
@@ -1323,7 +1337,7 @@ async function fetchYelloBoard(cfg) {
         offres.push({
           __src: `yello:${cfg.emp}`,
           emp: cfg.emp,
-          raw: { titre, url: chemin.startsWith('http') ? chemin : cfg.host + chemin },
+          raw: { titre, url: chemin.startsWith('http') ? chemin : cfg.host + chemin, date: quand },
         });
       }
       // Une page qui ne renvoie que du déjà-vu signale la fin de la liste.
@@ -4044,6 +4058,9 @@ module.exports = {
   fetchAxaFrance,
   fetchLvmh,
   fetchTalentView,
+  // Exporté pour pouvoir être éprouvé seul : c'est lui qui lit la date des
+  // cartes EY, et une date se vérifie source par source.
+  fetchYelloBoard,
   fetchTalentLink,
   fetchListeHtml,
   fetchWordpressOffres,

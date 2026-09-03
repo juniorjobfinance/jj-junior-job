@@ -36,6 +36,9 @@ const path = require('path');
 const NOMS = [
   // Le chemin complet d'une offre brute vers le catalogue.
   'normalize',
+  // La lecture des dates, qu'on veut pouvoir éprouver seule : une date fausse
+  // place une annonce périmée en tête du site.
+  'dateFrancaiseSansAnnee',
   // Les portes, prises une par une.
   'estUneOffreFinance',
   'classifyVolet',
