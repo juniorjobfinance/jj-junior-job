@@ -441,3 +441,75 @@ classer les candidats qui remplissent déjà les trois conditions.
 prestige sur un poste rare, le bandeau peut afficher moins de 5 pépites, voire
 se masquer. C'est voulu — la règle §1 (moins d'offres, mais toutes justes)
 s'applique aussi ici : mieux vaut 2 vraies trouvailles que 8 remplissages.
+
+---
+
+## 21. Le classement se fait au score de spécificité, plus au premier motif
+
+**Décidé le 03/09/2026**, refonte menée avec Claude chat, branchée sur la
+branche `refonte-classification`. Quatre défauts de l'ancien `FAMILLE_RULES`
+l'ont motivée, tous mesurés sur les 998 offres publiées :
+
+1. « La première règle qui matche gagne » créait des vols d'ordre : Marchés
+   volait le middle/back office, Trésorerie volait le risque de crédit.
+2. L'exclusion de la banque de détail était la DERNIÈRE règle, donc presque
+   jamais appliquée.
+3. Aucune règle n'exigeait un contexte finance : `business analyst`, `pmo`,
+   `audit`, `data scientist` matchaient seuls, faisant entrer Dior
+   Merchandising, Veolia PANGEO, SNCF Data Analyst — environ 14 % du catalogue.
+4. « Autres » servait de repli silencieux.
+
+Ce qui remplace, dans cet ordre strict : **pré-filtre** (retail, support, hors
+domaine) → **porte finance** (pour les employeurs non financiers, l'intitulé
+doit porter un marqueur) → **famille au score de spécificité** (`risque de
+crédit` à 9 bat `crédit` à 2) → **résidu audité**, qui sort en `unclassified`
+et va dans un fichier, jamais dans « Autres ».
+
+**Trois choix de fond à ne pas défaire :**
+
+- **L'ESG est un tag, pas une famille.** Les offres durables sont dans l'asset
+  management, le DCM, l'audit et le private equity ; en faire une famille
+  viderait les autres. Deux autres tags cumulables : `real-assets`,
+  `international`.
+- **Deux familles ajoutées** — « Actuariat & Assurance technique » et
+  « Financements & Coverage ». Vingt offres d'actuariat étaient dispersées
+  entre quatre familles ; une trentaine d'offres de coverage et de financements
+  structurés étaient éclatées entre Marchés, M&A et Contrôle de gestion.
+- **La structure vient de l'EMPLOYEUR seul**, jamais de l'intitulé.
+  `structures.js` fait autorité ; l'ancien `inferSector` déduisait des deux et
+  rangeait des offres BNP en « Banque de détail » alors qu'elles sont en BFI.
+
+**Les libellés affichés n'ont pas changé.** Six des onze libellés de structure
+étaient reformulés par la refonte ; ils ont été ramenés à l'identique de ce que
+le site affiche déjà. Un visiteur n'a aucune raison de voir ses repères bouger
+pour une réécriture interne.
+
+Mesure : **998 → 847 offres**, dont 151 écartées à raison. Le garde-fou des
+15 % se déclenche : c'est attendu, on force à la main.
+
+---
+
+## 22. Un contrôle qui échoue à tort est pire qu'un contrôle absent
+
+**Le 03/09/2026.** `controle-avant-passage.js` extrayait le script de la page
+avec un motif exigeant `<script>\n`. Sur une copie de travail Windows, où les
+fichiers sont en CRLF, le motif ne correspond plus : le contrôle échouait sur
+une page parfaitement saine, à chaque passage.
+
+Un contrôle qui crie au loup sur une machine entière est un contrôle qu'on
+apprend à ignorer — et le jour où il a raison, personne ne l'écoute.
+
+C'est exactement le mécanisme qui a laissé passer la deuxième violation de
+§16 : la maison branchée mais non inscrite était signalée en **alerte**, pas en
+échec. Une alerte se lit et s'oublie. Les deux contrôles de maisons sont donc
+passés en ÉCHEC, et le motif du script tolère désormais `\r?\n`.
+
+**Corollaire, appris le même soir :** un contrôle doit porter sur ce qui S'EST
+PASSÉ, pas seulement sur ce qu'on croit avoir configuré. Le contrôle des
+maisons orphelines était statique — il comparait les `emp` déclarés dans
+`sources.js` à `maisons.txt` — et il affichait « les 162 maisons branchées sont
+toutes inscrites », ce qui était vrai. Il ne pouvait pas voir la récidive,
+parce qu'un connecteur sert souvent des employeurs sous un autre nom que le
+sien : `opendatasoft:bpce` rend « BPCE Vie » et « BPCE IG », jamais « Groupe
+BPCE ». Un second contrôle, **observé**, lit désormais le relevé de la dernière
+collecte.
