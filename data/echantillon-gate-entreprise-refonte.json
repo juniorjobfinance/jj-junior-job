@@ -1,158 +1,182 @@
 {
-  "genere": "2026-09-03T22:32:08.959Z",
+  "genere": "2026-09-03T23:35:03.635Z",
   "motif": "gate:entreprise-sans-marqueur",
   "total_rejete": 176,
   "taille_echantillon": 40,
   "methode": "tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents",
   "offres": [
     {
-      "intitule": "Retail Sales Supervisor, NorthPark Center",
+      "intitule": "District Sales Executive (Sarawak)",
       "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "radancy:jobdetails.nestle.com",
-      "url": "https://jobdetails.nestle.com/job/Dallas-Retail-Sales-Supervisor%2C-NorthPark-Center-TX-75225/1424751233/"
+      "url": "https://jobdetails.nestle.com/job/DAMAK-LAUT-District-Sales-Executive-%28Sarawak%29-93457/1381078833/"
     },
     {
-      "intitule": "Lead Data Engineer",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Distinguished Scientist – Transgenic Model & Technology",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Lead-Data-Engineer_R-21232-1"
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Montpellier/Distinguished-Scientist---Transgenic-Model---Technology_R2861112-1"
     },
     {
-      "intitule": "Growth Strategy Analyst - New Business (VIE) - Barcelona",
-      "employeur": "FLASH Contract",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Real-Time Analyst",
+      "employeur": "HELLO WATT",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "vie",
       "url": null
     },
     {
-      "intitule": "Global Patient Safety Transformation Project Manager",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "CRM & Business Intelligence Officer",
+      "employeur": "EDF",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Global-Patient-Safety-Transformation-Project-Manager_R-21962"
-    },
-    {
-      "intitule": "Head of Evidence Generation - International Region",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Head-of-Evidence-Generation---International-Region_R-20992-1"
-    },
-    {
-      "intitule": "Adjoint encadrement Laverie / Préparation Matériel - Rythme 2X8/SD",
-      "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Val-de-Reuil/CDD-Adjoint-encadrement-Laverie---Prparation-Matriel---Rythme-2X8-SD_R2866948"
-    },
-    {
-      "intitule": "Filler Program Director",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Filler-Program-Director_R-21615"
-    },
-    {
-      "intitule": "Team Leader rythme 3X8",
-      "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Team-Leader-rythme-3X8_R2869760"
-    },
-    {
-      "intitule": "Cost Control Sweden",
-      "employeur": "Bouygues Travaux Publics",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "vie",
-      "url": null
+      "source": "liste:EDF",
+      "url": "https://www.edf.fr/edf-recrute/offre/detail/FRA-REC-2026-26780"
     },
     {
       "intitule": "Gestionnaire Technique",
       "employeur": "Crédit Agricole Immobilier",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170472-128-gestionnaire-technique-hf-reference--2026-114464--/"
     },
     {
-      "intitule": "Business Development Analyst to Group CEO Office",
-      "employeur": "TELCO OI",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Magasinier.e",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "vie",
-      "url": null
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Sisteron/alternance-24-mois---magasiniere_R2854215"
     },
     {
-      "intitule": "Analyste/commercial ligne maritime",
-      "employeur": "CMA CGM",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Accelerator - Product Owner Platform Engineering (Paris)",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Amiens-Stagiaire-analystecommercial-ligne-maritime/1433515733/"
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Paris/Accelerator---Product-Owner-Platform-Engineering--Paris-_R2847741"
     },
     {
-      "intitule": "Project Management Officer Sydney",
-      "employeur": "Bouygues Travaux Publics",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "vie",
-      "url": null
-    },
-    {
-      "intitule": "Strategic Planning Project Manager",
-      "employeur": "Parfums Christian Dior",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "lvmh",
-      "url": null
-    },
-    {
-      "intitule": "La-Roche-Posay Sustainability Apprentice",
-      "employeur": "L'Oréal",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "avature",
-      "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/12-months-Apprenticeship-La-Roche-Posay-Sustainability-Apprentice-January-2027/254614"
-    },
-    {
-      "intitule": "Senior Scientist, Analytical Development /Chargé(e) d'Etude Senior en Développement Analytique",
+      "intitule": "Senior Director, Biostatistics Rare Disease",
       "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Dreux/Senior-Scientist---Charg-d-Etude-Senior-Analytique_R-21329"
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Sr-Director--Biostats-Rare-Disease_R-21901"
     },
     {
-      "intitule": "Perfume Business Analyst - Americas",
-      "employeur": "Bulgari France",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Seasonal Sales Associate - Stanford",
+      "employeur": "Nestlé",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "radancy:jobdetails.nestle.com",
+      "url": "https://jobdetails.nestle.com/job/Palo-Alto-Seasonal-Sales-Associate-Stanford-CA-94304/1422403433/"
+    },
+    {
+      "intitule": "Engineering Project Management",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Engineering-Project-Management_R2863951"
+    },
+    {
+      "intitule": "Head of Bioanalysis, Immunoanalysis and OneLab",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Dreux/Head-of-Bioanalysis--Immunoanalysis-and-OneLab_R-20658"
+    },
+    {
+      "intitule": "Scientific Data Analyst",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Marcy-lEtoile/Scientific-Data-Analyst_R2849634-1"
+    },
+    {
+      "intitule": "Délégué hospitalier - Oncologie - Nord de la France",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Dlgu-hospitalier---Oncologie---Nord-de-la-France-H-F_R-21129"
+    },
+    {
+      "intitule": "Operational Excellence Area Head",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Operational-Excellence-Area-Head_R2865019"
+    },
+    {
+      "intitule": "Vice President, Head of Global Regulatory Operations",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Head-of-Global-Regulatory-Operations_R-22017"
+    },
+    {
+      "intitule": "Chargé de gestion projets et opérations",
+      "employeur": "Thales",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:thales",
+      "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Elancourt/ALTERNANCE---Charg-d-oprations---F-H_R0331716-1"
+    },
+    {
+      "intitule": "Patch Velocity & Software Lifecycle Lead",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Lyon/Patch-Velocity---Software-Lifecycle-Lead_R2860674-1"
+    },
+    {
+      "intitule": "Site Facility Management Head",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/Site-Facility-Management-Head_R2839026-1"
+    },
+    {
+      "intitule": "Data and Process Analyst",
+      "employeur": "SNCF Voyages Developpement",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "vie",
       "url": null
     },
     {
-      "intitule": "Regional Business Manager - Coffee Sales (Austin)",
+      "intitule": "Seasonal Sales Associate - NorthPark Ctr.",
       "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "radancy:jobdetails.nestle.com",
-      "url": "https://jobdetails.nestle.com/job/Austin-Regional-Business-Manager-Coffee-Sales-%28Austin%29-TX-78757/1423016033/"
+      "url": "https://jobdetails.nestle.com/job/Dallas-Seasonal-Sales-Associate-NorthPark-Ctr_-TX-75225/1423617033/"
     },
     {
-      "intitule": "Business Performance Analyst",
-      "employeur": "Criteo Technology",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Responsable Maintenance Préparatoire et Remplissage",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Responsable-Maintenance-Prparatoire-et-Remplissage_R2848837"
+    },
+    {
+      "intitule": "Project Management Officer",
+      "employeur": "Verescence France",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "vie",
       "url": null
@@ -160,170 +184,146 @@
     {
       "intitule": "Project Management Officer",
       "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "radancy:jobdetails.nestle.com",
       "url": "https://jobdetails.nestle.com/job/Issy-les-Moulineaux-Project-Management-Officer-FM-92130/1427832833/"
     },
     {
-      "intitule": "Seasonal Sales Associate - La Jolla",
-      "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "QA Specialist Shift",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "radancy:jobdetails.nestle.com",
-      "url": "https://jobdetails.nestle.com/job/San-Diego-Seasonal-Sales-Associate-La-Jolla-CA-92122/1422502333/"
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/QA-Specialist-Shift_R2869162"
+    },
+    {
+      "intitule": "Responsable Grands Comptes Neurosciences",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Responsable-Grands-Comptes-Neurosciences--IDF-EST-H-F_R-21892"
+    },
+    {
+      "intitule": "Quality Technician",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Dreux/Quality-Technician_R-22116-1"
+    },
+    {
+      "intitule": "Analyste/commercial ligne maritime",
+      "employeur": "CMA CGM",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Amiens-Stagiaire-analystecommercial-ligne-maritime/1433515733/"
+    },
+    {
+      "intitule": "Cash Manager",
+      "employeur": "Celine",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "lvmh",
+      "url": null
+    },
+    {
+      "intitule": "Data Scientist & Data Analyst",
+      "employeur": "TotalEnergies",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "vie",
+      "url": null
+    },
+    {
+      "intitule": "Alternance en SAS",
+      "employeur": "Valeo",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:valeo",
+      "url": "https://valeo.wd3.myworkdayjobs.com/en-US/valeo_jobs/job/Saint-Denis/Alternance-en-SAS_REQ2025061891"
+    },
+    {
+      "intitule": "Senior Scientist, Biomarker Operations",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Senior-Scientist--Biomarker-Operations_R-21955"
     },
     {
       "intitule": "Automation Engineer",
       "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "workday:sanofi",
       "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Automation-Engineer_R2863959-1"
     },
     {
-      "intitule": "Data Scientist & Data Analyst",
-      "employeur": "TotalEnergies",
-      "structure": "Entreprises (direction financière)",
+      "intitule": "Transformation digitale et IA",
+      "employeur": "Sanofi",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
-      "source": "vie",
-      "url": null
-    },
-    {
-      "intitule": "Promotion manager & Business Analyst",
-      "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "radancy:jobdetails.nestle.com",
-      "url": "https://jobdetails.nestle.com/job/Issy-les-Moulineaux-Stage-Promotion-manager-&-Business-Analyst-FH-92130/1418672633/"
-    },
-    {
-      "intitule": "Area Manager (Analyst & Commercial)",
-      "employeur": "CMA CGM",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "successfactors:jobs.cmacgm-group.com",
-      "url": "https://jobs.cmacgm-group.com/job/Marseille-Internship-Area-Manager-%28Analyst-&amp;-Commercial%29/1433510933/"
-    },
-    {
-      "intitule": "Business analyst",
-      "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "radancy:jobdetails.nestle.com",
-      "url": "https://jobdetails.nestle.com/job/Issy-les-Moulineaux-Stage-Business-analyst-FH-92130/1422286633/"
-    },
-    {
-      "intitule": "Data and Process Analyst",
-      "employeur": "SNCF Voyages Developpement",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "vie",
-      "url": null
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/Alternance-12-mois---Transformation-digitale-et-IA_R2849518"
     },
     {
       "intitule": "Gestionnaire Technique",
       "employeur": "Crédit Agricole Immobilier",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170472-128-gestionnaire-technique-hf-reference--2026-113644--/"
     },
     {
-      "intitule": "Sr. CMC, Global Project Manager",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Sr-CMC--Global-Project-Manager_R-21950"
-    },
-    {
-      "intitule": "Data Analyst",
-      "employeur": "SNCF Voyages Developpement",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "vie",
-      "url": null
-    },
-    {
-      "intitule": "Magasinier.e",
-      "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Sisteron/alternance-24-mois---magasiniere_R2854215"
-    },
-    {
-      "intitule": "Retail Operations Assitant Project Manager",
-      "employeur": "Christian Dior Couture",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "lvmh",
-      "url": null
-    },
-    {
-      "intitule": "Assistant Business Analyst",
-      "employeur": "Moët Hennessy",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "lvmh",
-      "url": null
-    },
-    {
-      "intitule": "Data Analyst",
-      "employeur": "CNH Industrial France",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "vie",
-      "url": null
-    },
-    {
-      "intitule": "Gestionnaire technique",
+      "intitule": "Gestionnaire Technique Retail",
       "employeur": "Crédit Agricole Immobilier",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170472-128-alternance---gestionnaire-technique---montpellier-hf-reference--2026-111889--/"
-    },
-    {
-      "intitule": "Indirect Purchasing Savings Analyst",
-      "employeur": "Stellantis",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "talentsoft:jobs.groupe-psa.com",
-      "url": "https://jobs.groupe-psa.com/offre-de-emploi/emploi-indirect-purchasing-savings-analyst_19326.aspx"
-    },
-    {
-      "intitule": "Business Process Owner - Remplissage",
-      "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Le-Trait/Business-Process-Owner---Remplissage_R2856876"
-    },
-    {
-      "intitule": "Responsable technique",
-      "employeur": "Sanofi",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Gentilly/Responsable-technique_R2856609-1"
-    },
-    {
-      "intitule": "Manager, Asset Operations- Sub team Planner",
-      "employeur": "Ipsen",
-      "structure": "Entreprises (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Manager--Asset-Operations--Sub-team-Planner_R-21903"
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170472-128-gestionnaire-technique-retail-hf-reference--2026-111831--/"
     },
     {
       "intitule": "Seasonal Sales Associate",
       "employeur": "Nestlé",
-      "structure": "Entreprises (direction financière)",
+      "structure": "Entreprise (direction financière)",
       "structureId": "entreprise",
       "source": "radancy:jobdetails.nestle.com",
       "url": "https://jobdetails.nestle.com/job/Glendale-Seasonal-Sales-Associate-Glendale-CA-91210/1423618133/"
+    },
+    {
+      "intitule": "Business Analyst / assistant coordinateur Plan Long Terme",
+      "employeur": "TotalEnergies",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "avature",
+      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Business-Analyst-assistant-coordinateur-Plan-Long-Terme-H-F/82830"
+    },
+    {
+      "intitule": "Business Operations Expert - Commercial & Ethics",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/Business-Operations-Expert---Commercial---Ethics_R-21855"
+    },
+    {
+      "intitule": "Director, Centralized Monitoring",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/London-UK/Director--Centralized-Monitoring_R-22014"
+    },
+    {
+      "intitule": "IT Delivery Manager R&D and Medical",
+      "employeur": "Ipsen",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Paris/IT-Delivery-Manager-R-D-and-Medical_R-21133"
     }
   ]
 }

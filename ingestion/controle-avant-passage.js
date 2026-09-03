@@ -15,8 +15,16 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { chargerPipeline } = require('./atelier');
 
 const RACINE = path.join(__dirname, '..');
+
+// Les seuils viennent du pipeline, jamais d'une copie. Ce controle a
+// longtemps porte « ? 60 : 120 » en dur : le jour ou le pipeline aurait
+// change le sien, il aurait certifie « aucune offre perimee » en mesurant
+// un seuil abandonne. Un garde-fou qui se trompe est pire que pas de
+// garde-fou.
+const P = chargerPipeline(RACINE);
 let echecs = 0;
 let alertes = 0;
 
@@ -175,11 +183,18 @@ try {
     else ok('dates', 'toutes en ISO');
 
     const jours = (o) => Math.floor((Date.now() - new Date(o.postedAt)) / 86400000);
-    const trop = O.filter((o) => o.datePubFiable && jours(o) > (o.volet === 'cdi-cdd' ? 60 : 120)).length;
+    const seuil = (o) =>
+      o.volet === 'cdi-cdd' ? P.MAX_AGE_JOURS_CDI_CDD : P.MAX_AGE_JOURS_ATS_DIRECT;
+    const trop = O.filter((o) => o.datePubFiable && jours(o) > seuil(o)).length;
     if (trop) ko('âge', `${trop} offres au-dessus de leur seuil`);
-    else ok('âge', 'aucune offre périmée');
+    else
+      ok(
+        'âge',
+        `aucune offre périmée (${P.MAX_AGE_JOURS_CDI_CDD} j pour un CDI·CDD, ` +
+          `${P.MAX_AGE_JOURS_ATS_DIRECT} j sinon)`
+      );
 
-    const descr = O.filter((o) => o._descr).length;
+    const descr = O.filter((o) => o._descrExtrait).length;
     if (descr) ko('fuite', `${descr} offres publient le texte de l'annonce`);
     else ok('fuite', "le texte des annonces n'est pas publié");
   }

@@ -100,6 +100,10 @@ for (const [employer, title, expected] of CASES) {
 }
 
 console.log(`\n${ok}/${CASES.length} cas conformes\n`);
+// Un test qui ne peut pas echouer n'est pas un test : sans cette ligne, le
+// workflow publiait par-dessus n'importe quelle regression, en l'ayant
+// affichee.
+if (ok !== CASES.length) process.exitCode = 1;
 if (fails.length) {
   console.log('Ecarts :');
   for (const f of fails) {

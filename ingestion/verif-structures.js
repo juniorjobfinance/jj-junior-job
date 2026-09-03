@@ -20,3 +20,4 @@ for (const [e, exp] of cas) {
   else console.log(`  ECART ${e} : attendu ${exp}, obtenu ${g}`);
 }
 console.log(`${ok}/${cas.length} resolutions de structure conformes`);
+if (ok !== cas.length) process.exitCode = 1;

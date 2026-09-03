@@ -37,6 +37,26 @@ jobs:
           key: jj-state-${{ github.run_id }}
           restore-keys: jj-state-
 
+      # --- CONTRÔLE 1 : le code, AVANT de collecter --------------------------
+      # Dix-huit minutes de collecte n'ont aucun intérêt si le classement est
+      # cassé. Ces suites sont pures : ni réseau, ni catalogue. Chacune sort en
+      # erreur au premier écart — ce qui n'était pas le cas jusqu'au 04/09/2026,
+      # où elles affichaient leurs écarts puis sortaient 0 quoi qu'il arrive.
+      - name: Contrôle 1 — les suites de tests
+        run: |
+          set -e
+          node ingestion/test-classification.js
+          node ingestion/test-echantillon.js
+          node ingestion/test-seniorite.js
+          node ingestion/verif-structures.js
+          # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
+          # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
+          # On le lance pour son journal, pas pour son verdict.
+          node ingestion/test-fourre-tout.js
+          # test-vie.js n'est pas ici : il appelle Business France et demande une
+          # vérification à l'œil. Le lancer chaque matin ajouterait une
+          # dépendance réseau à un contrôle qu'aucune machine ne peut trancher.
+
       - name: Ingestion
         env:
           FRANCE_TRAVAIL_CLIENT_ID: ${{ secrets.FRANCE_TRAVAIL_CLIENT_ID }}
@@ -72,6 +92,22 @@ jobs:
           name: journal-ingestion-${{ github.run_id }}
           path: journaux/*.log
           retention-days: 30
+
+      # --- CONTRÔLES 2 à 4 : le catalogue, AVANT de le publier ---------------
+      # controle-avant-passage.js porte trois des cinq garde-fous : la cohérence
+      # des deux axes, LES DEUX TABLES (maisons.txt et structures.js) et LA
+      # LISTE BLANCHE des champs publiés. Il n'existe pas de
+      # controle-deux-tables.js séparé : ces vérifications vivent toutes ici.
+      #
+      # Il sort en 1 au premier ÉCHEC. Le job s'arrête donc avant l'étape de
+      # publication, et le catalogue de la veille reste en ligne — mieux vaut un
+      # catalogue d'hier qu'un catalogue faux.
+      #
+      # Le cinquième garde-fou, l'invariant de séniorité, n'est pas ici : il vit
+      # DANS le pipeline, annule l'écriture de offres.js et sort en 1. L'étape
+      # « Ingestion » ci-dessus échoue alors d'elle-même.
+      - name: Contrôles 2 à 4 — deux axes, deux tables, liste blanche
+        run: node ingestion/controle-avant-passage.js
 
       - name: Publier offres.js
         id: publication

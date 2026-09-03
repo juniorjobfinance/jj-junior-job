@@ -1,5 +1,5 @@
 {
-  "genere": "2026-09-03T22:32:08.951Z",
+  "genere": "2026-09-03T23:35:03.632Z",
   "total": 454,
   "offres": [
     {
@@ -2859,11 +2859,11 @@
       "structure": "bfi"
     },
     {
-      "title": "Inside Sales - Data-as-a-Service",
-      "emp": "Amundi",
+      "title": "Business Coordinator",
+      "emp": "Caceis",
       "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/",
-      "structure": "societe-gestion"
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-136-alternance---business-coordinator-hf-reference--2026-109008--/",
+      "structure": "fintech"
     },
     {
       "title": "Chargé(e) d'Opérations Emetteurs - Bourse",
@@ -2878,6 +2878,13 @@
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-198-chargee-d-operations-emetteurs---mutations---alternance-hf-reference--2026-110755--/",
       "structure": "fintech"
+    },
+    {
+      "title": "Inside Sales - Data-as-a-Service",
+      "emp": "Amundi",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/",
+      "structure": "societe-gestion"
     },
     {
       "title": "Gestionnaire des processus",
@@ -2899,13 +2906,6 @@
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170479-3-coordinateur-service-client---banque-au-quotidien-hf-reference--2026-114406--/",
       "structure": "banque-detail"
-    },
-    {
-      "title": "Business Coordinator",
-      "emp": "Caceis",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170479-136-alternance---business-coordinator-hf-reference--2026-109008--/",
-      "structure": "fintech"
     },
     {
       "title": "Chargé d'études et projet",

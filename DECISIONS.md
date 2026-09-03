@@ -689,3 +689,72 @@ de `_descr` **annule la publication**, avec le compte et un exemple.
 Éprouvé le soir même : sur un cache antérieur à ces champs, le contrôle a
 bloqué 368 offres dont le verdict portait sur 0 caractère pour une description
 de 8 630. C'est précisément le cas qu'on ne voyait pas.
+
+### Ce que cet invariant ne peut PAS voir
+
+Il compare la longueur ANALYSÉE à la longueur STOCKÉE. Il attrape donc toute
+amputation survenue **entre les deux** — une troncature avant analyse, une
+fiche arrivée après le verdict, un recalcul rendu trop tôt.
+
+**Il est aveugle à une amputation survenue AVANT les deux.** Quand un
+connecteur coupe la description à 3 000 caractères, le verdict et la
+description finale font tous deux 3 000 : aucun écart, donc rien à signaler.
+C'est exactement le cas trouvé le 04/09/2026 dans `sitemapld` et
+`smartrecruiters` — 87 offres, découvertes en lisant une annonce à la main,
+pas par un contrôle.
+
+La parade n'est pas un invariant de plus, c'est la règle du §26 : aucun
+connecteur ne borne ce qu'il envoie à l'analyse ; seul le stockage est borné.
+
+---
+
+## 26. Ne jamais stocker une valeur dérivée quand on peut stocker son entrée
+
+**Tranché le 04/09/2026, après sept occurrences du même défaut en une nuit.**
+
+Une valeur dérivée figée ne suit ni les corrections du code, ni les
+changements de sa source. Elle continue d'affirmer ce qui était vrai au moment
+où on l'a écrite, sans que rien ne le signale — c'est ce qui la rend si
+coûteuse : elle n'échoue jamais, elle se trompe.
+
+**Le cache garde le TEXTE ; le verdict se recalcule.**
+
+Les sept occurrences sont la même erreur sous sept déguisements :
+
+1. la description tronquée à 3 000 caractères avant analyse ;
+2. la même à 4 000, une fois la première corrigée ;
+3. le verdict calculé dans `normalize()`, donc avant le rattrapage des fiches ;
+4. le cache rangeant l'extrait borné au lieu du texte entier — 72 rejets de
+   séniorité au rejeu contre 181 en direct ;
+5. le recalcul post-rattrapage repartant de l'extrait, donc capable
+   d'*affaiblir* un verdict déjà rendu ;
+6. le cache rangeant le VERDICT à côté du texte : après correction du garde-fou
+   du diplôme, le rejeu rendait encore les `null` de la veille — cache
+   `expMax=null`, recalcul `expMax=10`, sur le même texte de 6 213 caractères.
+   Un rejeu sert à éprouver le code d'aujourd'hui ; celui-là certifiait la
+   version de la veille ;
+7. mes propres scripts de mesure, qui recopiaient un seuil (120 au lieu de 60)
+   ou bridaient l'entrée de l'ancien code à 4 000 caractères.
+
+**Trois conséquences pratiques, toutes appliquées :**
+
+- Le cache de collecte ne stocke plus que le texte. Le verdict de séniorité est
+  recalculé au rejeu, ce qui n'était pas possible tant que le cache ne gardait
+  qu'un extrait : c'est la correction 4 qui a rendu la 6 possible.
+- Quand une dérivée doit malgré tout voyager avec l'offre, elle se **fusionne**
+  au lieu d'être remplacée : `fusionnerVerdictSeniorite` prend la plus forte
+  exigence, jamais la dernière calculée. Un texte supplémentaire ne peut
+  qu'ajouter des indices.
+- **Aucun script d'analyse ne contient de limite chiffrée en dur.** Il importe
+  la constante du pipeline — l'atelier les expose — ou il n'en met aucune. Un
+  nombre recopié ne suit jamais le pipeline : `controle-avant-passage.js`
+  portait `? 60 : 120` et aurait certifié « aucune offre périmée » en mesurant
+  un seuil abandonné. Un garde-fou qui se trompe est pire que pas de garde-fou.
+
+**Le corollaire de nommage** (même date) : `_descr` contenait un extrait
+tronqué et son nom laissait croire qu'il contenait la description. Chaque fois
+que quelqu'un l'a pris pour source d'une analyse, le défaut est réapparu. Il
+s'appelle désormais `_descrExtrait`, et le texte entier `descrComplet`. Un
+nom juste rend l'erreur impossible à commettre là où un commentaire ou un
+contrôle ne fait que la rattraper après coup — même leçon que la règle
+« tout script passe par Write ».

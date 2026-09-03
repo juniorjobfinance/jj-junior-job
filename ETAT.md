@@ -35,7 +35,9 @@ depuis le début.
 
 - 900/1006 datées (89 %) ; les autres affichent « toujours en ligne chez
   l'employeur, date inconnue » et passent en fin de liste ;
-- plus ancienne offre datée : 120 jours, pour un seuil à 120 ;
+- plus ancienne offre datée : 120 jours. Il y a **deux** seuils, et le récap
+  n'en citait qu'un : **60 jours pour un CDI·CDD** (`MAX_AGE_JOURS_CDI_CDD`),
+  120 pour les autres volets chez un employeur direct, 30 sur un agrégateur ;
 - résidu « Autres métiers de la finance » : 5,9 % ;
 - les 13 familles métier tiennent entre 3,9 % et 15,8 % ;
 - les 11 types de structure entre 3,5 % et 20,6 % ;
@@ -62,7 +64,8 @@ Passage complet de `ingestion/rendement.js` (147 sources, un quart d'heure) :
 
 **Attention au mot « publiable ».** Dans cet outil il signifie seulement
 « passe `normalize()` et le filtre des grandes villes ». Il **n'inclut pas** le
-contrôle de séniorité sur la description, le seuil des 120 jours, ni la
+contrôle de séniorité sur la description, les seuils d'âge (60 j pour un
+CDI·CDD, 120 sinon), ni la
 déduplication. L'écart de 2 365 n'est donc PAS un stock d'offres récupérables :
 une part inconnue est légitime. **Mesurer la composition de cet écart est en
 soi le prochain chantier** — sans elle, on optimiserait à l'aveugle.
@@ -105,7 +108,12 @@ rapporteraient UNE offre.
 1. **Réparer les connecteurs muets** — Capgemini, Santander, puis les onze
    autres. Borné, vérifiable, et sans toucher à un seul filtre.
 2. **Mesurer la composition de l'écart 3 363 → 998** (séniorité sur
-   description, 120 jours, doublons). C'est la mesure qui manque.
+   description, seuils d'âge 60/120 j, doublons). C'est la mesure qui manque.
+   **Candidat n° 1 de ce chantier : le seuil de 60 jours sur les CDI·CDD.**
+   Mesuré le 04/09/2026 : sur 179 offres écartées par le verdict de séniorité
+   et absentes du catalogue, **59 sont mortes de ce seul seuil** — un tiers.
+   Une annonce de CDI de deux mois et demi n'est pas forcément pourvue. Rien
+   n'a été changé : c'est une mesure, pas une décision.
 3. **Le type de contrat deviné au lieu d'être lu** dans sept familles de
    connecteurs — c'est ce qui étouffe l'alternance (voir plus bas).
 

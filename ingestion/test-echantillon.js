@@ -133,3 +133,5 @@ for (const [e, t, exp] of FP) {
   else console.log(`  FP ECART ${e} — ${t} : attendu ${exp}, obtenu ${g} ${r.reason || ''}`);
 }
 console.log(`${ok3}/${FP.length} faux positifs corriges`);
+// Les trois compteurs decident ensemble : un seul ecart suffit a echouer.
+if (ok !== CAS.length || ok2 !== VIE.length || ok3 !== FP.length) process.exitCode = 1;

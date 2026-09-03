@@ -13,6 +13,8 @@
 
 const fs = require('fs');
 const path = require('path');
+// Le cache de collecte est gzippe : il porte les descriptions ENTIERES.
+const zlib = require('zlib');
 const { fetchAllSources, sourcesReprises, isFinanceOfferFor } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
 const { classify } = require('./classifier');
@@ -1519,12 +1521,27 @@ const NOMBRES_ECRITS = {
 const ANCRE_EXPERIENCE = /exp[ée]rien/i;
 
 // Ce qui ressemble à une durée d'expérience sans en être une. Vérifié AVANT
-// le comptage, sur le voisinage immédiat du nombre.
+// le comptage, sur le voisinage immédiat du nombre — AMONT seulement, d'où
+// la règle DUREE_ETUDES qui suit, pour ce qui ne se voit qu'en aval.
 const FAUX_AMIS = [
-  /bac\s*\+\s*\d/i, // bac+5, master bac+5
+  // Le nombre du DIPLÔME, et lui seul : il doit être collé au « bac+ ».
+  // « bac+5 », « bac + 5 », « BAC +5 », « master bac+5 ».
+  //
+  // La règle disqualifiait auparavant TOUT nombre situé à moins de 45
+  // caractères d'un « Bac+N ». Dans « Bac+5, vous possédez 5 à 10 ans
+  // d'expérience », le diplôme avalait l'exigence : treize offres publiées
+  // à tort, dont six CNP Assurances et un Talan à 5-10 ans.
+  /bac\s*\+\s*$/i,
   /\b(?:alternance|apprentissage|contrat|cdd|stage|vie|mission|bail)\b[^.;]{0,30}$/i,
   /\b(?:cr[ée][ée]e?|fond[ée]e?|existe|existence|anniversaire|depuis)\b[^.;]{0,40}$/i,
 ];
+
+// « 5 années d'études » décrit un diplôme, pas un poste — et rien en AMONT
+// du nombre ne permet de le voir : devant lui on lit « Bac+5, », qui ne colle
+// pas au nombre. C'est le mot qui SUIT qui tranche. Cette règle est la
+// contrepartie du resserrement de FAUX_AMIS : sans elle, on rouvrirait le
+// faux positif que le garde-fou d'origine avait été écrit pour fermer.
+const DUREE_ETUDES = /^\s*d[’']\s*[ée]tudes?|^\s*of\s+stud/i;
 
 // Trois formules qui disent la séniorité sans donner de chiffre. Elles ne
 // peuvent rien vouloir dire d'autre — à la différence de « une première
@@ -1563,6 +1580,9 @@ function dureeExperienceMax(texte) {
     while ((m = re.exec(phrase)) !== null) {
       const avant = phrase.slice(Math.max(0, m.index - 45), m.index);
       if (FAUX_AMIS.some((f) => f.test(avant))) continue;
+      // Puis l'aval : « 5 années d'études » est un diplôme, pas un poste.
+      const apres = phrase.slice(m.index + m[0].length, m.index + m[0].length + 24);
+      if (DUREE_ETUDES.test(apres)) continue;
 
       const brut = m[1].toLowerCase();
       const n = /^\d+$/.test(brut) ? parseInt(brut, 10) : NOMBRES_ECRITS[brut];
@@ -1595,6 +1615,35 @@ function verdictSenioriteDescr(texte) {
     // de verifier, avant publication, quil couvre bien la description finale.
     _verdictSur: t.length,
   };
+}
+
+/**
+ * Applique un verdict de seniorite a une offre en le FUSIONNANT avec celui
+ * qu'elle porte deja, jamais en le remplacant.
+ *
+ * Un texte supplementaire ne peut qu'ajouter des indices : la plus longue
+ * duree l'emporte, une formule trouvee ne se perd pas, un veto trouve non
+ * plus. Remplacer etait un piege arme — le texte du rattrapage commence par
+ * `_descrExtrait`, deja borne, donc un recalcul pouvait rendre un verdict PLUS
+ * FAIBLE que celui lu a l'ingestion, sans que rien ne le signale.
+ *
+ * C'est la parade generale au defaut rencontre cinq fois : ici, aucune entree
+ * incomplete ne peut plus affaiblir une decision deja prise.
+ */
+function fusionnerVerdictSeniorite(offre, texte) {
+  const v = verdictSenioriteDescr(texte);
+  offre._expMax =
+    offre._expMax == null
+      ? v._expMax
+      : v._expMax == null
+        ? offre._expMax
+        : Math.max(offre._expMax, v._expMax);
+  offre._formuleSeniorite = offre._formuleSeniorite || v._formuleSeniorite;
+  offre._vetoJunior = Boolean(offre._vetoJunior || v._vetoJunior);
+  // La plus grande longueur analysee : c'est elle que le controle d'invariant
+  // compare a la description finale avant publication.
+  offre._verdictSur = Math.max(offre._verdictSur || 0, v._verdictSur);
+  return offre;
 }
 // L'offre entière, et non ses champs un par un : le verdict de séniorité est
 // calculé à l'ingestion, sur le texte ENTIER, et voyage avec elle.
@@ -1630,7 +1679,7 @@ function passesJuniorFilter(offre, strict) {
   if (offre._formuleSeniorite) return false;
 
   // Une description lue sans signal contraire vaut acceptation.
-  if (offre._descr) return true;
+  if (offre._descrExtrait) return true;
 
   if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
   return !strict;
@@ -2964,7 +3013,7 @@ function normalize(item) {
     sal: sal || undefined,
     url,
     source: __src,
-    _descr: descr ? String(descr).slice(0, LIMITE_DESCR) : descr,
+    _descrExtrait: descr ? String(descr).slice(0, LIMITE_DESCR) : descr,
     ...verdictSenioriteDescr(descr),
     // Normalisée dès ici, et non à la seule écriture : les filtres d’âge lisent
     // ce champ, et « 09/01/2026 » leur paraissait tout frais — JavaScript le lit
@@ -3580,7 +3629,7 @@ async function completerDatesManquantes(offers) {
       o.url &&
       (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
         o._dateDeLaSource !== true ||
-        (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)) ||
+        (o.volet === 'cdi-cdd' && (!o._descrExtrait || o._descrExtrait.length < 1500)) ||
         (o.volet === 'cdi-cdd' && SOURCE_SANS_CONTRAT_RE.test(o.source)))
   );
 
@@ -3597,17 +3646,17 @@ async function completerDatesManquantes(offers) {
         if (aCompleter.includes(o)) manquantes.push(o);
         continue;
       }
-      if (f.descr) o._descr = f.descr;
-      // Le verdict vient du cache, calcule a l epoque sur le texte ENTIER.
-      // Le recalculer sur f.descr, qui est deja tronque, reintroduirait le
-      // defaut qu on vient de corriger.
-      if ('_expMax' in f) {
-        o._expMax = f._expMax;
-        o._formuleSeniorite = f._formuleSeniorite;
-        o._vetoJunior = f._vetoJunior;
-        // La longueur suit le verdict : sans elle, le controle d invariant
-        // comparerait la fiche restauree a une mesure faite sur le connecteur.
-        o._verdictSur = f._verdictSur;
+      // Le verdict est RECALCULE sur le texte entier de la photo, jamais
+      // restitue. Un verdict stocke fige le comportement du code qui l'a
+      // ecrit : apres correction du garde-fou du diplome, le rejeu rendait
+      // encore les `null` de la veille — cache expMax=null, recalcul
+      // expMax=10, sur le meme texte. Un rejeu sert a eprouver le code
+      // d'aujourd'hui ; il doit donc le faire tourner.
+      if (f.descrComplet) {
+        fusionnerVerdictSeniorite(o, String(f.descrComplet));
+        // L'extrait se reborne comme dans une vraie collecte, sinon le rejeu
+        // publierait un champ plus long.
+        o._descrExtrait = String(f.descrComplet).slice(0, LIMITE_DESCR);
       }
       if (f.postedAt) {
         o._postedAt = f.postedAt;
@@ -3685,23 +3734,27 @@ async function completerDatesManquantes(offers) {
             // décrivent la mission en JSON-LD et posent leurs exigences dans
             // un encadré — le cas du Crédit Agricole, et de son banquier
             // conseil à « 6 - 10 ans » resté en ligne.
-            const morceaux = [o._descr, fiche.description, texteDeLaPage(texteHtml)];
-            // Le texte complet sert a l ANALYSE ; seul le stockage est borne.
-            const complet = morceaux.filter(Boolean).join(' ');
-            if (complet) {
-              Object.assign(o, verdictSenioriteDescr(complet));
-              o._descr = complet.slice(0, LIMITE_DESCR);
+            const morceaux = [o._descrExtrait, fiche.description, texteDeLaPage(texteHtml)];
+            // `descrComplet` est la SEULE source d'analyse ; `_descrExtrait` est
+            // borne pour le stockage et ne doit jamais servir a juger.
+            const descrComplet = morceaux.filter(Boolean).join(' ');
+            if (descrComplet) {
+              fusionnerVerdictSeniorite(o, descrComplet);
+              o._descrExtrait = descrComplet.slice(0, LIMITE_DESCR);
             }
 
             // Retenu pour le cache : c'est ce qui coute cher a aller chercher.
             fichesRattrapees.set(o.url, {
-              // Le verdict est mis en cache AVEC le texte : au rejeu, il ne sera
-              // pas recalcule sur une version tronquee de la fiche.
-              _expMax: o._expMax,
-              _formuleSeniorite: o._formuleSeniorite,
-              _vetoJunior: o._vetoJunior,
-              _verdictSur: o._verdictSur,
-              descr: o._descr,
+              // LE TEXTE, ET RIEN QUE LE TEXTE. Le verdict de seniorite y
+              // figurait aussi ; il figeait le comportement du code qui l'avait
+              // ecrit, et le rejeu certifiait alors la version de la veille. Ce
+              // qui se recalcule ne se stocke pas.
+              //
+              // Le texte est ENTIER. Le champ s'appelait `descr` et rangeait
+              // l'extrait : un rejeu ne voyait alors que 4 000 caracteres la ou
+              // une vraie collecte en lit 14 000 — 72 rejets de seniorite au
+              // rejeu contre 181. Le nom dit desormais ce qu'il contient.
+              descrComplet: descrComplet || o._descrExtrait,
               postedAt: fiche.date || null,
               dateEstMiseAJour: fiche.dateEstMiseAJour === true,
               volet: o.volet,
@@ -3715,7 +3768,7 @@ async function completerDatesManquantes(offers) {
             // toute alternance dont le titre ne le dit pas — que le filtre
             // 0-3 ans écarte ensuite comme un poste confirmé.
             if (o.volet === 'cdi-cdd') {
-              const vrai = contratDeLaFiche(o._descr);
+              const vrai = contratDeLaFiche(o._descrExtrait);
               if (vrai) {
                 o.volet = vrai;
                 o.contrat = null; // la mention CDI/CDD ne veut plus rien dire
@@ -3957,22 +4010,50 @@ function rapportDeClassement(offres) {
 // Rejouer depuis une etape posterieure ne permettrait pas de mettre au point
 // ce qui se passe AVANT elle, et c'est justement la que vivent le nettoyage
 // des intitules, la classification et les filtres.
+// Combien de photos on garde. Trois suffisent pour comparer un passage a
+// celui d'avant sans laisser le dossier enfler.
+const PHOTOS_GARDEES = 3;
+
+// « brut-2026-09-03T2346.json.gz ». L'HEURE, pas seulement le jour : deux
+// passages du meme jour UTC — 22 h 32 et 00 h 55 heure de Paris — s'ecrasaient
+// l'un l'autre, et il a fallu aller rechercher le premier dans git.
+const NOM_RECOLTE = /^brut-\d{4}-\d{2}-\d{2}(?:T\d{4})?\.json(?:\.gz)?$/;
+
 function ecrireRecolteBrute(raw, fiches) {
   try {
     fs.mkdirSync(DATA_DIR, { recursive: true });
-    const jour = new Date().toISOString().slice(0, 10);
+    const t = new Date().toISOString();
+    const horodate = t.slice(0, 10) + 'T' + t.slice(11, 13) + t.slice(14, 16);
+    const nom = `brut-${horodate}.json.gz`;
     fs.writeFileSync(
-      path.join(DATA_DIR, `brut-${jour}.json`),
-      JSON.stringify({
+      path.join(DATA_DIR, nom),
+      zlib.gzipSync(JSON.stringify({
         genere: new Date().toISOString(),
         total: raw.length,
         offres: raw,
         // Les fiches allees chercher sur le web : sans elles, le rejeu les
         // redemanderait une par une et durerait onze minutes.
         fiches: [...(fiches || new Map()).entries()].map(([url, f]) => ({ url, ...f })),
-      })
+      }))
     );
-    console.log(`[pipeline] Cache ecrit : data/brut-${jour}.json (${raw.length} offres, ${(fiches || new Map()).size} fiches).`);
+    const poids = (fs.statSync(path.join(DATA_DIR, nom)).size / 1048576).toFixed(1);
+    console.log(
+      `[pipeline] Cache ecrit : data/${nom} (${raw.length} offres, ` +
+        `${(fiches || new Map()).size} fiches, ${poids} Mo compresses).`
+    );
+    // On ne garde que les trois dernieres photos, et l'on ne supprime QUE des
+    // fichiers dont le nom correspond au motif : le dossier data/ contient
+    // aussi les listes de travail.
+    const anciennes = fs
+      .readdirSync(DATA_DIR)
+      .filter((f) => NOM_RECOLTE.test(f))
+      .sort()
+      .reverse()
+      .slice(PHOTOS_GARDEES);
+    for (const f of anciennes) {
+      fs.unlinkSync(path.join(DATA_DIR, f));
+      console.log(`[pipeline] Ancienne photo retiree : data/${f}`);
+    }
   } catch (err) {
     // Un cache qui echoue ne doit pas faire echouer le passage : il ne sert
     // qu'a la mise au point.
@@ -3985,11 +4066,27 @@ function derniereRecolteBrute() {
   try {
     const fichiers = fs
       .readdirSync(DATA_DIR)
-      .filter((f) => /^brut-\d{4}-\d{2}-\d{2}\.json$/.test(f))
+      .filter((f) => NOM_RECOLTE.test(f))
       .sort()
       .reverse();
     if (!fichiers.length) return null;
-    return JSON.parse(fs.readFileSync(path.join(DATA_DIR, fichiers[0]), 'utf8'));
+    // Les photos d'avant la compression restent lisibles : le suffixe decide.
+    const chemin = path.join(DATA_DIR, fichiers[0]);
+    const octets = fs.readFileSync(chemin);
+    const photo = JSON.parse(
+      (fichiers[0].endsWith('.gz') ? zlib.gunzipSync(octets) : octets).toString('utf8')
+    );
+    // Une photo anterieure a la correction range l'EXTRAIT sous `descr`. La
+    // rejouer donnerait des chiffres faux sans rien signaler : on la refuse.
+    const fiches = photo.fiches || [];
+    if (fiches.length && !fiches.some((f) => f.descrComplet)) {
+      console.error('\n[pipeline] Photo ' + fichiers[0] + ' anterieure a la correction du cache.');
+      console.error("  Elle ne contient qu'un extrait de 4 000 caracteres par fiche, pas le");
+      console.error('  texte entier : le filtre de seniorite y verrait 72 rejets au lieu de 181.');
+      console.error('  Relancer une vraie collecte pour constituer une photo utilisable.\n');
+      return null;
+    }
+    return photo;
   } catch (err) {
     return null;
   }
@@ -4000,7 +4097,7 @@ function writeOutput(offers) {
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
 
   const publicOffers = offers.map((o) => {
-    // `_descr` est le texte intégral de l'annonce. Il sert UNIQUEMENT à juger
+    // `_descrExtrait` est le texte intégral de l'annonce. Il sert UNIQUEMENT à juger
     // la séniorité, en interne, et ne doit jamais être publié : ce serait
     // reproduire mot pour mot la prose de l'employeur — ce que JJ n'a aucun
     // droit de faire et aucune raison de vouloir. Il figurait pourtant dans le
@@ -4012,7 +4109,7 @@ function writeOutput(offers) {
     // poste, l'employeur, le lieu, la date, et le lien vers l'annonce d'origine.
     const {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
-      _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
+      _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descrExtrait,
       // Analyse de séniorité : champs de travail, jamais publiés.
       _expMax, _formuleSeniorite, _vetoJunior, _verdictSur,
       // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
@@ -4363,7 +4460,7 @@ async function run() {
   // la description » est le prix de la rigueur, et s'il devenait majoritaire il
   // faudrait revoir l'arbitrage.
   const rejetSeniorite = new Set(final.filter((o) => !publiables.includes(o)));
-  const demasquees = [...rejetSeniorite].filter((o) => o._descr).length;
+  const demasquees = [...rejetSeniorite].filter((o) => o._descrExtrait).length;
   const invisibles = rejetSeniorite.size - demasquees;
   if (invisibles) {
     // Savoir QUELLES sources restent illisibles est le seul moyen de faire
@@ -4371,7 +4468,7 @@ async function run() {
     // description, plutôt que de continuer à gratter leurs pages.
     const parSource = {};
     for (const o of rejetSeniorite) {
-      if (o._descr) continue;
+      if (o._descrExtrait) continue;
       const src = String(o.source || '?').split(':')[0];
       parSource[src] = (parSource[src] || 0) + 1;
     }
@@ -4388,8 +4485,8 @@ async function run() {
   // rien, on ne le fait donc pas.
   let cddRattrapes = 0;
   for (const o of publiables) {
-    if (o.volet !== 'cdi-cdd' || !o._descr || o.contrat === 'CDD') continue;
-    if (CDD_RE.test(o._descr)) {
+    if (o.volet !== 'cdi-cdd' || !o._descrExtrait || o.contrat === 'CDD') continue;
+    if (CDD_RE.test(o._descrExtrait)) {
       o.contrat = 'CDD';
       cddRattrapes++;
     }
@@ -4434,8 +4531,8 @@ async function run() {
     const aveugles = publiables.filter(
       (o) =>
         o.volet === 'cdi-cdd' &&
-        o._descr &&
-        (o._verdictSur == null || o._verdictSur < String(o._descr).length)
+        o._descrExtrait &&
+        (o._verdictSur == null || o._verdictSur < String(o._descrExtrait).length)
     );
     if (aveugles.length) {
       const ex = aveugles[0];
@@ -4445,9 +4542,9 @@ async function run() {
           `  que leur description finale. Le filtre 0-3 ans les a donc jugees sur une\n` +
           `  entree incomplete, sans le signaler.\n\n` +
           `  Exemple : ${ex.emp} — ${String(ex.title).slice(0, 50)}\n` +
-          `            verdict rendu sur ${ex._verdictSur} caracteres, description finale ${String(ex._descr).length}.\n\n` +
+          `            verdict rendu sur ${ex._verdictSur} caracteres, description finale ${String(ex._descrExtrait).length}.\n\n` +
           `  Cause probable : la description a change apres le calcul du verdict.\n` +
-          `  Tout endroit qui ecrit _descr doit recalculer verdictSenioriteDescr\n` +
+          `  Tout endroit qui ecrit _descrExtrait doit recalculer verdictSenioriteDescr\n` +
           `  sur le texte ENTIER, avant toute troncature.`
       );
       process.exitCode = 1;

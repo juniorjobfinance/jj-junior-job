@@ -586,7 +586,12 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
               ville: adr.addressLocality || '',
               pays: adr.addressCountry || '',
               datePosted: jp.datePosted,
-              description: (jp.description || '').replace(/<[^>]*>/g, ' ').slice(0, 3000),
+              // PAS de coupe ici : ce texte va a l'analyse de seniorite, qui
+              // doit voir l'annonce ENTIERE. Le stockage, lui, est borne plus
+              // loin par LIMITE_DESCR. 84 offres sortaient d'ici a exactement
+              // 3 000 caracteres, et l'invariant ne pouvait pas les voir :
+              // verdict et description finale faisaient la meme longueur.
+              description: (jp.description || '').replace(/<[^>]*>/g, ' '),
               organisation: jp.hiringOrganization?.name,
               url: u,
             });
@@ -2167,8 +2172,10 @@ async function enrichirDescriptions(offres, id, concurrence = 2) {
           o.raw.description = ((sections.qualifications && sections.qualifications.text) || '')
             .replace(/<[^>]*>/g, ' ')
             .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
-            .replace(/\s+/g, ' ')
-            .slice(0, 3000);
+            // PAS de coupe : ce texte part a l'analyse de seniorite, qui doit
+            // voir l'annonce ENTIERE. Seul le stockage est borne, plus loin,
+            // par LIMITE_DESCR.
+            .replace(/\s+/g, ' ');
         } catch {
           /* fiche indisponible : on garde l'offre, jugée sur son seul intitulé */
         }

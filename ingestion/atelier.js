@@ -59,6 +59,9 @@ const NOMS = [
   'estGrandeVille',
   'villeDeLaListe',
   'normaliserPourClassement',
+  // Les cles de deduplication, pour pouvoir attribuer un rejet a dedupe().
+  'canonicalKey',
+  'cleSansLieu',
   // Les tables, pour savoir POURQUOI une porte a mordu.
   'MAISONS',
   'FAMILLES',
@@ -68,7 +71,23 @@ const NOMS = [
   'SENIOR_RE',
   'dureeExperienceMax',
   'verdictSenioriteDescr',
+  // Les rouages du verdict, pour pouvoir ventiler un rejet par sa FORME.
+  'NOMBRES_ECRITS',
+  'ANCRE_EXPERIENCE',
+  'FAUX_AMIS',
+  'FORMULES_SENIORITE',
+  'VETO_JUNIOR_DESCR',
+  'SENIOR_TITRE_STRICT_RE',
+  'JUNIOR_MALGRE_TOUT_RE',
+  'LIMITE_DESCR',
   'EXPERIENCE_MAX_ANNEES',
+  // Les seuils chiffres. Tout script qui juge un age ou une longueur les
+  // importe d'ici : un nombre recopie ne suit jamais le pipeline.
+  'MAX_AGE_JOURS',
+  'MAX_AGE_JOURS_ATS_DIRECT',
+  'MAX_AGE_JOURS_CDI_CDD',
+  'MAX_JOURS_ABSENCE',
+  'LIMITE_DESCR',
   'TITRE_SANS_METIER_RE',
   'VENTE_HORS_FINANCE_RE',
   'INTERMEDIAIRE_RE',
