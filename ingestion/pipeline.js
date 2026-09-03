@@ -15,12 +15,32 @@ const fs = require('fs');
 const path = require('path');
 const { fetchAllSources, sourcesReprises, isFinanceOfferFor } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
+const { classify } = require('./classifier');
+const { STRUCTURES: LIBELLES_STRUCTURE } = require('./structures');
 
 const CHECK_LINKS = process.argv.includes('--check-links');
+// `--refonte` ecrit dans des fichiers SEPARES : tant que le nouveau
+// classement n'est pas valide, le catalogue servi en production ne doit pas
+// etre ecrase par un passage de mise au point.
+const REFONTE = process.argv.includes('--refonte');
+const SUFFIXE = REFONTE ? '-refonte' : '';
 const STATE_PATH = path.join(__dirname, 'state.json');
-const OUTPUT_PATH = path.join(__dirname, '..', 'offres.js');
-const RSS_PATH = path.join(__dirname, '..', 'offres.xml');
-const SITEMAP_PATH = path.join(__dirname, '..', 'sitemap.xml');
+const OUTPUT_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.js`);
+const RSS_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.xml`);
+const SITEMAP_PATH = path.join(__dirname, '..', `sitemap${SUFFIXE}.xml`);
+const DATA_DIR = path.join(__dirname, '..', 'data');
+
+// Ce que le classement ecarte, compte pour le rapport de controle. Sans ce
+// releve, une offre rejetee disparait sans laisser de trace — c'est le defaut
+// qu'on vient de corriger, on ne va pas le reintroduire ailleurs.
+const rapportClassement = {
+  rejets: new Map(),
+  nonClasses: [],
+  employeursInconnus: new Map(),
+  // Ce que la regle maisonRef ecarte, avec le verdict que le classifieur
+  // avait DEJA rendu sur ces offres. Sert a decider si on garde la regle.
+  rejetsMaisonRef: [],
+};
 
 // Adresse publique du site : sert au flux RSS et au sitemap. À changer ici et
 // nulle part ailleurs le jour où un vrai nom de domaine remplace le sous-domaine
@@ -2657,19 +2677,36 @@ function normalize(item) {
   // fiche invérifiable — souvent sans ville ni indemnité, comme les deux
   // « VIE » d'Amundi qui n'existent nulle part chez Business France.
   if (volet === 'vie' && __src !== 'vie') return null;
-  const famille = inferFamille(title, romeLibelle, emp);
-  if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
-  // Le résidu n'est pas un fourre-tout. Une offre qu'aucune règle de famille
-  // ne sait ranger n'entre que si son intitulé dit explicitement la finance.
-  // Sans ce contrôle, tout ce qui n'était pas nommément exclu se retrouvait
-  // publié : le résidu avait atteint 26,7 % du catalogue, peuplé d'ajusteurs
-  // composite, de chaudronniers aéronautiques et d'ergothérapeutes.
-  // On donne aussi l'intitulé BRUT : le nettoyage retire « Stage » et
-  // « Stagiaire », or c'est souvent le seul mot qui situe le poste chez une
-  // maison de finance.
-  if (famille === 'Autres métiers de la finance' && !isFinanceOfferFor(emp, title, titreBrut)) return null;
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
+
+  // Le classement décide en quatre temps : pré-filtre, porte finance, famille
+  // au score de spécificité, résidu audité. L'employeur est normalisé JUSTE
+  // AVANT, parce que structures.js résout sur le nom canonique : « BNP Paribas
+  // Mission Handicap » ne se trouve pas dans la table, « BNP Paribas » oui.
+  const verdict = classify({ title, employer: emp });
+
+  if (verdict.status === 'rejected') {
+    rapportClassement.rejets.set(verdict.reason, (rapportClassement.rejets.get(verdict.reason) || 0) + 1);
+    return null;
+  }
+  if (verdict.status === 'unclassified') {
+    // Le résidu ne retombe plus dans « Autres » : il sort du catalogue et va
+    // dans un fichier d'audit, où on peut le lire et décider.
+    rapportClassement.nonClasses.push({
+      title, emp, source: __src, url: raw.url || null, structure: verdict.structure,
+    });
+    return null;
+  }
+  if (!verdict.structure) {
+    rapportClassement.employeursInconnus.set(emp, (rapportClassement.employeursInconnus.get(emp) || 0) + 1);
+  }
+
+  const famille = verdict.familleLabel;
+  // Le garde-fou qui exigeait un intitulé explicitement financier pour le
+  // fourre-tout a disparu avec le fourre-tout lui-même : la porte finance du
+  // classifieur fait ce travail plus tôt, et sur l'employeur plutôt que sur
+  // une liste de mots.
   const maisonRef = trouverMaison(emp);
 
   // JJ ne publie que les maisons de sa liste de référence : banques, sociétés
@@ -2684,9 +2721,27 @@ function normalize(item) {
   // légitimes, qu'aucune liste de maisons de finance ne contiendra jamais.
   // Appliquer la règle à cet onglet le viderait des neuf dixièmes de son
   // contenu sans rien gagner en qualité.
-  if (!maisonRef && volet !== 'vie') return null;
+  if (!maisonRef && volet !== 'vie') {
+    // Le verdict est deja connu : classify() tourne plus haut. On note ce que
+    // l'offre SERAIT devenue, puisque c'est ce chiffre qui decidera du sort de
+    // cette regle.
+    rapportClassement.rejetsMaisonRef.push({
+      intitule: title,
+      entreprise: emp,
+      volet,
+      source: __src,
+      resultat_hypothetique: verdict.status,
+      famille_hypothetique: verdict.familleLabel || null,
+      motif: verdict.reason || null,
+    });
+    return null;
+  }
 
-  const sector = inferSector(emp, maisonRef, title, famille);
+  // structures.js fait autorité : la structure se déduit de l'EMPLOYEUR seul,
+  // jamais de l'intitulé. inferSector() déduisait des deux, ce qui rangeait des
+  // offres BNP côté « Banque de détail » alors quelles sont en BFI, et les
+  // fonds CDPQ et Supernova Invest en « Entreprise ».
+  const sector = LIBELLES_STRUCTURE[verdict.structure] || null;
 
   // Vente et développement commercial : la distinction tient à la MAISON, pas
   // à l'intitulé. Chez un gérant d'actifs, une banque ou un dépositaire, un
@@ -2696,7 +2751,7 @@ function normalize(item) {
   // ou de grande consommation, le même mot désigne la vente de son catalogue :
   // le « Sales Business Analyst & Development » de L'Oréal n'a rien d'un poste
   // financier, il est seulement rattaché à une direction qui l'est.
-  if (sector === 'Entreprise (direction financière)' && VENTE_HORS_FINANCE_RE.test(title)) return null;
+  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title)) return null;
 
   // Dernier contrôle, une fois l'employeur normalisé : le titre doit nommer un
   // métier. C'est ici, et pas plus haut, parce que le nettoyage a pu vider un
@@ -2708,6 +2763,13 @@ function normalize(item) {
     title,
     sector,
     famille,
+    // Identifiants stables à côté des libellés : le site filtre dessus sans
+    // dépendre de l'orthographe d'un libellé qui peut changer.
+    familleId: verdict.famille,
+    structureId: verdict.structure,
+    // Tags transversaux — cumulables, indépendants de la famille. Absents
+    // quand il n'y en a pas, pour ne pas alourdir le fichier servi.
+    ...(verdict.tags.length ? { tags: verdict.tags } : {}),
     volet,
     // « CDI » ou « CDD » quand on a pu le déterminer, absent sinon : la page
     // retombe alors sur la mention générale de l'onglet.
@@ -3509,6 +3571,88 @@ function dateIso(valeur) {
   return d.toISOString();
 }
 
+
+// ---------------------------------------------------------------------------
+// Rapport de controle du classement (tache 6 de la refonte)
+// ---------------------------------------------------------------------------
+//
+// Trois choses que personne ne voyait avant : ce qui est rejete et pourquoi,
+// ce qui passe la porte sans trouver de famille, et quels employeurs manquent
+// a la table des structures. Les deux dernieres sont des LISTES DE TRAVAIL :
+// elles disent quoi corriger, pas seulement qu'il y a un probleme.
+function rapportDeClassement(offres) {
+  const parFamille = {};
+  const parStructure = {};
+  for (const o of offres) {
+    parFamille[o.famille || '(sans famille)'] = (parFamille[o.famille || '(sans famille)'] || 0) + 1;
+    parStructure[o.sector || '(structure inconnue)'] = (parStructure[o.sector || '(structure inconnue)'] || 0) + 1;
+  }
+
+  const ligne = (n, t) => '  ' + String(n).padStart(5) + '  ' + t;
+  const trier = (obj) => Object.entries(obj).sort((a, b) => b[1] - a[1]);
+
+  console.log('\n=== CLASSEMENT — par famille ===');
+  for (const [f, n] of trier(parFamille)) console.log(ligne(n, f));
+
+  console.log('\n=== CLASSEMENT — par type de structure ===');
+  for (const [st, n] of trier(parStructure)) console.log(ligne(n, st));
+
+  const rejets = [...rapportClassement.rejets.entries()].sort((a, b) => b[1] - a[1]);
+  const totalRejets = rejets.reduce((n, [, v]) => n + v, 0);
+  console.log('\n=== REJETS — ' + totalRejets + ' offres, par motif ===');
+  for (const [motif, n] of rejets) console.log(ligne(n, motif));
+
+  const nc = rapportClassement.nonClasses;
+  console.log('\n=== SANS FAMILLE — ' + nc.length + ' offres ===');
+  const parIntitule = {};
+  for (const o of nc) parIntitule[o.title] = (parIntitule[o.title] || 0) + 1;
+  for (const [t, n] of trier(parIntitule).slice(0, 20)) console.log(ligne(n, t));
+
+  const inconnus = [...rapportClassement.employeursInconnus.entries()].sort((a, b) => b[1] - a[1]);
+  const mr = rapportClassement.rejetsMaisonRef;
+  const mrClasses = mr.filter((o) => o.resultat_hypothetique === 'classified');
+  console.log('\n=== REJETES PAR maisonRef — ' + mr.length + ' offres ===');
+  console.log('  dont ' + mrClasses.length + ' auraient ete PUBLIEES avec une vraie famille');
+  const parFamMr = {};
+  for (const o of mrClasses) parFamMr[o.famille_hypothetique] = (parFamMr[o.famille_hypothetique] || 0) + 1;
+  for (const [f, n] of trier(parFamMr).slice(0, 10)) console.log(ligne(n, f));
+  const parEmpMr = {};
+  for (const o of mrClasses) parEmpMr[o.entreprise] = (parEmpMr[o.entreprise] || 0) + 1;
+  console.log('  -- les 10 employeurs les plus perdus --');
+  for (const [e, n] of trier(parEmpMr).slice(0, 10)) console.log(ligne(n, e));
+
+  console.log('\n=== EMPLOYEURS ABSENTS DE structures.js — ' + inconnus.length + ' ===');
+  for (const [e, n] of inconnus.slice(0, 20)) console.log(ligne(n, e));
+
+  // Les deux listes de travail, sur disque : la console defile, pas un fichier.
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(DATA_DIR, `unclassified${SUFFIXE}.json`),
+    JSON.stringify({ genere: new Date().toISOString(), total: nc.length, offres: nc }, null, 2)
+  );
+  fs.writeFileSync(
+    path.join(DATA_DIR, `employeurs-inconnus${SUFFIXE}.json`),
+    JSON.stringify(
+      { genere: new Date().toISOString(), total: inconnus.length, employeurs: inconnus.map(([emp, offres]) => ({ emp, offres })) },
+      null,
+      2
+    )
+  );
+  fs.writeFileSync(
+    path.join(DATA_DIR, `rejets-maisonref${SUFFIXE}.json`),
+    JSON.stringify(
+      {
+        genere: new Date().toISOString(),
+        total: rapportClassement.rejetsMaisonRef.length,
+        dont_classees: rapportClassement.rejetsMaisonRef.filter((o) => o.resultat_hypothetique === 'classified').length,
+        offres: rapportClassement.rejetsMaisonRef,
+      },
+      null,
+      2
+    )
+  );
+  console.log('\n[pipeline] Listes de travail ecrites dans data/.');
+}
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
@@ -3901,6 +4045,7 @@ async function run() {
   }
 
   writeOutput(publiables);
+  rapportDeClassement(publiables);
   console.log(
     `[pipeline] Écrit dans ${path.relative(process.cwd(), OUTPUT_PATH)}` +
       `, ${path.relative(process.cwd(), RSS_PATH)} (flux RSS) et ${path.relative(process.cwd(), SITEMAP_PATH)}.`

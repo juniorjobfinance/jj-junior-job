@@ -46,7 +46,9 @@ for (const f of ['ingestion/pipeline.js', 'ingestion/sources.js', 'ingestion/man
 // Le script de la page n'est pas un fichier .js : on l'extrait pour le compiler.
 try {
   const html = lire('index.html');
-  const m = html.match(/<script>\n\(function \(\) \{[\s\S]*?\n<\/script>/);
+  // `\r?\n` et non `\n` : la copie de travail est en CRLF sous Windows, et le
+  // motif strict faisait échouer ce contrôle sur une page saine.
+  const m = html.match(/<script>\r?\n\(function \(\) \{[\s\S]*?\r?\n<\/script>/);
   if (!m) throw new Error('bloc <script> introuvable');
   new Function(m[0].replace(/^<script>/, '').replace(/<\/script>$/, ''));
   ok('index.html (script de la page)');
@@ -66,15 +68,25 @@ for (const f of ['ingestion/pipeline.js', 'ingestion/sources.js']) {
 console.log('\n--- Cohérence des deux axes ---');
 // Les listes sont dupliquées en dur dans la page : elles ont déjà divergé, et
 // la page affichait alors des familles à zéro.
+//
+// La référence n'est plus pipeline.js mais les MODULES : classifier.js pour
+// les familles, structures.js pour les types de structure. Les tableaux de
+// pipeline.js ne servaient plus à rien, et ce contrôle les validait quand
+// même — il aurait donc dit « identiques » sur du code mort.
 try {
-  const p = lire('ingestion/pipeline.js');
   const h = lire('index.html');
+  const { FAMILIES } = require('./classifier');
+  const { STRUCTURES: LIBELLES } = require('./structures');
+  const source = {
+    FAMILLES: FAMILIES.map((f) => f.label),
+    STRUCTURES: Object.values(LIBELLES),
+  };
   const extraire = (src, mot, nom) => {
     const m = src.match(new RegExp(`${mot} ${nom} = \\[([\\s\\S]*?)\\];`));
     return m ? (m[1].match(/'[^']*'|"[^"]*"/g) || []).map((x) => x.slice(1, -1)) : null;
   };
   for (const nom of ['FAMILLES', 'STRUCTURES']) {
-    const a = extraire(p, 'const', nom);
+    const a = source[nom];
     const b = extraire(h, 'var', nom);
     if (!a || !b) {
       ko(nom, 'liste introuvable dans un des deux fichiers');
@@ -83,7 +95,7 @@ try {
     const manquantes = a.filter((x) => !b.includes(x));
     const enTrop = b.filter((x) => !a.includes(x));
     if (manquantes.length || enTrop.length) {
-      ko(nom, `divergence — pipeline seul : ${manquantes.join(', ') || 'aucune'} ; page seule : ${enTrop.join(', ') || 'aucune'}`);
+      ko(nom, `divergence — module seul : ${manquantes.join(', ') || 'aucune'} ; page seule : ${enTrop.join(', ') || 'aucune'}`);
     } else {
       ok(nom, `${a.length} entrées identiques des deux côtés`);
     }
@@ -207,7 +219,10 @@ try {
   if (!orphelines.length) {
     ok('maisons', `les ${configurees.size} maisons branchées sont toutes dans maisons.txt`);
   } else {
-    alerte(
+    // ÉCHEC et non alerte : DECISIONS.md §16 pose que brancher un connecteur
+    // et inscrire la maison sont un seul geste. Une alerte se lit et s'oublie ;
+    // c'est ce qui a permis la récidive du 3 septembre.
+    ko(
       'maisons',
       `${orphelines.length} branchée(s) mais absente(s) de maisons.txt — leurs offres sont ` +
         `jetées en silence :\n          ${orphelines.join(', ')}`
@@ -216,6 +231,45 @@ try {
 } catch (e) {
   alerte('maisons', e.message);
 }
+console.log('\n--- Maisons vues à la collecte ---');
+try {
+  // Le contrôle ci-dessus est statique : il ne voit que les `emp` déclarés.
+  // Celui-ci porte sur ce que la DERNIÈRE COLLECTE a réellement rencontré.
+  // Un connecteur sert souvent des employeurs sous un autre nom que le sien —
+  // opendatasoft:bpce rend « BPCE Vie » et « BPCE IG », pas « Groupe BPCE ».
+  const fichiers = ['data/rejets-maisonref.json', 'data/rejets-maisonref-refonte.json']
+    .map((f) => path.join(RACINE, f))
+    .filter((f) => fs.existsSync(f));
+
+  if (!fichiers.length) {
+    alerte('maisons vues', 'aucun relevé de collecte — lancer le pipeline une fois pour ce contrôle');
+  } else {
+    const recent = fichiers
+      .map((f) => ({ f, t: fs.statSync(f).mtimeMs }))
+      .sort((a, b) => b.t - a.t)[0].f;
+    const releve = JSON.parse(fs.readFileSync(recent, 'utf8'));
+    const parEmp = new Map();
+    for (const o of releve.offres || []) parEmp.set(o.entreprise, (parEmp.get(o.entreprise) || 0) + 1);
+    const noms = [...parEmp.entries()].sort((a, b) => b[1] - a[1]);
+    const quand = String(releve.genere || '?').slice(0, 10);
+
+    if (!noms.length) {
+      ok('maisons vues', `aucune maison jetée à la collecte du ${quand}`);
+    } else {
+      const total = noms.reduce((n, [, v]) => n + v, 0);
+      ko(
+        'maisons vues',
+        `${noms.length} maison(s) ont servi ${total} offre(s) à la collecte du ${quand} sans être ` +
+          `dans maisons.txt — tout a été jeté :\n          ` +
+          noms.slice(0, 15).map(([e, n]) => `${e} (${n})`).join(', ') +
+          (noms.length > 15 ? `, et ${noms.length - 15} autre(s)` : '')
+      );
+    }
+  }
+} catch (e) {
+  alerte('maisons vues', e.message);
+}
+
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();
