@@ -1205,7 +1205,21 @@
   </nav>
 </footer>
 
-<script src="offres.js"></script>
+<!-- Le catalogue. « ?refonte=1 » dans l'adresse charge offres-refonte.js à la
+     place : c'est ce qui permet de comparer l'ancien et le nouveau classement
+     côte à côte, en local comme sur une prévisualisation, sans jamais écraser
+     le fichier servi en production.
+
+     document.write et non un chargement différé : le script qui suit lit
+     window.__OFFRES__ immédiatement, il lui faut le catalogue déjà là. En
+     l'absence du paramètre, le comportement est strictement celui d'avant. -->
+<script>
+  document.write(
+    '<scr' + 'ipt src="offres' +
+      (/[?&]refonte=1\b/.test(location.search) ? '-refonte' : '') +
+      '.js"><\/scr' + 'ipt>'
+  );
+</script>
 <script>
 (function () {
   'use strict';
