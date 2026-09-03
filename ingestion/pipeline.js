@@ -47,6 +47,12 @@ const fichesRattrapees = new Map();
 
 const rapportClassement = {
   rejets: new Map(),
+  // LE REGISTRE DES ECARTEES, une ligne par offre, tous etages confondus.
+  // La seniorite, l'age et la deduplication ne tenaient qu'un compteur : pour
+  // ventiler 179 rejets le 04/09/2026, il a fallu rejouer deux versions du
+  // pipeline sur une photo au lieu de lire un fichier. Le volet y figure
+  // toujours : c'est la dimension qui manque des qu'on cherche a comprendre.
+  ecartees: [],
   // Les offres elles-memes, par motif : sans elles on ne peut qu'affirmer
   // que le filtre est juste, jamais le montrer.
   exemplesRejets: new Map(),
@@ -1647,6 +1653,22 @@ function fusionnerVerdictSeniorite(offre, texte) {
 }
 // L'offre entière, et non ses champs un par un : le verdict de séniorité est
 // calculé à l'ingestion, sur le texte ENTIER, et voyage avec elle.
+// Une ligne au registre. On ne garde que ce qui sert a comprendre : l'offre
+// entiere pesserait quinze fois plus pour rien.
+function noterEcartee(o, etage, precision) {
+  rapportClassement.ecartees.push({
+    intitule: o.title,
+    employeur: o.emp,
+    volet: o.volet,
+    structure: o.sector || null,
+    famille: o.famille || null,
+    etage,
+    precision: precision || null,
+    source: o.source,
+    url: o.url || null,
+  });
+}
+
 function passesJuniorFilter(offre, strict) {
   const { volet, title } = offre;
   if (SPONTANEOUS_RE.test(title || '')) return false;
@@ -2901,6 +2923,13 @@ function normalize(item) {
     rapportClassement.exemplesRejets.get(verdict.reason).push({
       intitule: title,
       employeur: emp,
+      // Le volet, sans quoi on ne peut pas tirer d'echantillon par onglet : les
+      // rejets sont domines par les CDI-CDD en volume, et le vocabulaire des
+      // stages et alternances est different — « assistant », « charge de
+      // mission », des intitules courts. Un faux positif propre a eux ne
+      // pouvait pas apparaitre dans un tirage tous onglets confondus.
+      volet,
+      motif: verdict.reason,
       structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
       structureId: verdict.structure,
       source: __src,
@@ -2912,7 +2941,7 @@ function normalize(item) {
     // Le résidu ne retombe plus dans « Autres » : il sort du catalogue et va
     // dans un fichier d'audit, où on peut le lire et décider.
     rapportClassement.nonClasses.push({
-      title, emp, source: __src, url: raw.url || null, structure: verdict.structure,
+      title, emp, volet, source: __src, url: raw.url || null, structure: verdict.structure,
     });
     return null;
   }
@@ -3187,6 +3216,7 @@ function dedupe(offers) {
     } else if (!existing.alsoOn.includes(offer.source)) {
       existing.alsoOn.push(offer.source);
     }
+    noterEcartee(offer, 'doublon', 'fondue dans ' + existing.source);
   }
   return [...byKey.values()].map((o) => (o.alsoOn.length ? o : { ...o, alsoOn: undefined }));
 }
@@ -3967,12 +3997,41 @@ function rapportDeClassement(offres) {
   // Tirage AU HASARD, et non les plus frequents : les intitules les plus
   // frequents d'un motif sont les plus caricaturaux, ils ne disent rien de la
   // queue de distribution ou se cachent les faux positifs.
+  // Le registre complet : une ligne par offre ecartee, tous etages confondus.
+  fs.writeFileSync(
+    path.join(DATA_DIR, `rejets-detail${SUFFIXE}.json`),
+    JSON.stringify(
+      {
+        genere: new Date().toISOString(),
+        total: rapportClassement.ecartees.length,
+        par_etage: [...rapportClassement.ecartees.reduce((m, o) => m.set(o.etage, (m.get(o.etage) || 0) + 1), new Map())]
+          .sort((a, b) => b[1] - a[1])
+          .map(([e, n]) => e + ' : ' + n),
+        par_volet: [...rapportClassement.ecartees.reduce((m, o) => m.set(o.volet, (m.get(o.volet) || 0) + 1), new Map())]
+          .sort((a, b) => b[1] - a[1])
+          .map(([v, n]) => v + ' : ' + n),
+        offres: rapportClassement.ecartees,
+      },
+      null,
+      2
+    )
+  );
+  console.log(`[pipeline] Registre des ecartees : ${rapportClassement.ecartees.length} lignes dans data/rejets-detail${SUFFIXE}.json.`);
+
   const TAILLE_ECHANTILLON = 40;
   const echantillons = [
     ['prefilter:retail', 'echantillon-retail'],
     ['gate:big4-sans-marqueur', 'echantillon-gate-big4'],
     ['gate:entreprise-sans-marqueur', 'echantillon-gate-entreprise'],
   ];
+  // Deux echantillons de plus, tires PAR VOLET et tous motifs confondus.
+  // Les trois ci-dessus sont par motif, donc domines par les CDI-CDD.
+  const tousRejets = [].concat(...rapportClassement.exemplesRejets.values());
+  for (const v of ['stage', 'alternance']) {
+    echantillons.push(['volet:' + v, 'echantillon-rejets-' + v]);
+    rapportClassement.exemplesRejets.set('volet:' + v, tousRejets.filter((o) => o.volet === v));
+  }
+
   for (const [motif, nom] of echantillons) {
     const tout = rapportClassement.exemplesRejets.get(motif) || [];
     // Melange de Fisher-Yates sur une copie : on ne touche pas au tableau
@@ -4364,14 +4423,17 @@ async function run() {
     if (!SOURCES_DATE_FIABLE_RE.test(o.source)) return true;
     const t = new Date(o._postedAt || 0).getTime();
     if (!t) return true;
+    const jours = Math.round((Date.now() - t) / 86400000);
     if (SOURCES_AGREGATEUR_RE.test(o.source)) {
       if (t >= seuilAgregateur) return true;
       coupeesAgregateur++;
+      noterEcartee(o, 'age:agregateur', jours + ' j');
       return false;
     }
     const seuil = o.volet === 'cdi-cdd' ? seuilCdiCdd : seuilAtsDirect;
     if (t >= seuil) return true;
     coupeesZombies++;
+    noterEcartee(o, 'age:employeur-direct', jours + ' j');
     return false;
   });
   console.log(
@@ -4380,7 +4442,12 @@ async function run() {
       `${coupeesZombies} écartées : plus de ${MAX_AGE_JOURS_ATS_DIRECT} j même chez l'employeur).`
   );
 
-  const junior = fraiches.filter((o) => passesJuniorFilter(o));
+  const junior = fraiches.filter((o) => {
+    if (passesJuniorFilter(o)) return true;
+    noterEcartee(o, 'seniorite:premier-passage',
+      o._expMax != null ? o._expMax + ' ans' : o._formuleSeniorite || 'intitule');
+    return false;
+  });
   console.log(
     `[pipeline] ${junior.length} offres après filtre junior 0-3 ans (${fraiches.length - junior.length} écartées : senior/confirmé).`
   );
@@ -4438,6 +4505,7 @@ async function run() {
     const seuil = o.volet === 'cdi-cdd' ? seuilApresDatationCdi : seuilApresDatation;
     if (!t || t >= seuil) return true;
     perimees++;
+    noterEcartee(o, 'age:apres-datation', Math.round((Date.now() - t) / 86400000) + ' j');
     return false;
   });
   if (perimees) {
@@ -4454,7 +4522,14 @@ async function run() {
   // séniorité n'était jugée que sur l'intitulé, et un poste demandant cinq ans
   // d'expérience passait dès que son titre ne disait pas « senior ».
   const avantSeniorite = final.length;
-  const publiables = final.filter((o) => passesJuniorFilter(o, true));
+  const publiables = final.filter((o) => {
+    if (passesJuniorFilter(o, true)) return true;
+    noterEcartee(o, 'seniorite:sur-la-fiche',
+      o._expMax != null ? o._expMax + ' ans'
+        : o._formuleSeniorite ? o._formuleSeniorite
+        : o._descrExtrait ? 'intitule' : 'aucune description lisible');
+    return false;
+  });
   // Deux motifs de rejet, comptés séparément : on veut voir lequel domine.
   // « la description dit sept ans » est le but recherché ; « on n'a pas pu lire
   // la description » est le prix de la rigueur, et s'il devenait majoritaire il
