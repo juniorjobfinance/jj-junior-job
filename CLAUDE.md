@@ -147,6 +147,26 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   modification avec `sed -i` a transformé `\\[` en `[` et produit un fichier
   illisible. La règle du premier point vaut aussi pour RÉPARER un script :
   outil Write, toujours.
+- **Une maison absente n'est pas forcément mal branchée.** Air Liquide ne
+  servait rien : le réflexe était d'accuser le connecteur. Son API disait
+  1 125 offres dans le monde et 292 en France — mais **4** en « Finance &
+  Controlling » France. Le connecteur marchait ; la maison ne recrute pas en
+  finance junior. Mesurer l'intersection métier × pays SUR L'API avant de
+  toucher à la configuration.
+- **Un nom de facette n'est pas un domaine.** Chez un industriel, la famille
+  « HSE / Risk Mgt / Quality / Security » contient « Risk » sans avoir le
+  moindre rapport avec le risque financier. L'ajouter parce qu'elle matche
+  `/risk/i` rouvrirait le fourre-tout. C'est le piège des exclusions retourné :
+  « chez un industriel, ce mot veut dire quoi ? »
+- **`rendement.js` dit « publiable » pour `normalize()` + grandes villes**,
+  pas pour le catalogue final : ni séniorité lue sur la description, ni seuil
+  des 120 jours, ni déduplication. L'écart entre son total et `offres.js`
+  n'est donc pas un stock récupérable tant qu'on ne l'a pas décomposé.
+- **Une source « muette » peut mentir sur son volume.** Le rapport créditait
+  `workday:santander` de 79 offres ; en direct elle en rend zéro. Les 79
+  venaient du magasin de récoltes, qui ressert la dernière collecte pendant
+  quatre jours. Toujours confirmer une source suspecte à l'entonnoir, en
+  direct, avant de conclure.
 
 ---
 

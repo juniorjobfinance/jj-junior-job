@@ -10,15 +10,15 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**1006 offres** · **204 employeurs** · **102 maisons** servies sur 204
-référencées.
+**998 offres** · **104 maisons** servies sur **206** référencées — autrement
+dit **la moitié des maisons de référence ne sert rien** (103 sur 206).
 
-| Onglet | Offres | Le 2 au matin |
-|---|---|---|
-| Stage | 489 | 389 |
-| CDI · CDD | 311 | 266 |
-| Alternance | **116** | 60 |
-| VIE | 90 | 83 |
+| Onglet | Offres |
+|---|---|
+| Stage | 500 |
+| CDI · CDD | 305 |
+| Alternance | 102 |
+| VIE | 91 |
 
 Les deux séances des 2 et 3 septembre ont fait passer le catalogue de **798 à
 1006 offres**, et l'alternance de **60 à 116** — elle était le point faible
@@ -44,6 +44,60 @@ Le matin même, ce classement était dominé par Airbus (97), Air Liquide (71) e
 Thales (69) — le fourre-tout « Autres métiers de la finance » avait enflé à
 26,7 % du catalogue et publiait des ajusteurs composite. Voir `DECISIONS.md`
 §15.
+
+---
+
+## Où chercher du volume — mesuré le 03/09/2026 au soir
+
+Passage complet de `ingestion/rendement.js` (147 sources, un quart d'heure) :
+
+> **6 840 offres collectées · 3 363 « publiables » · 998 publiées.**
+
+**Attention au mot « publiable ».** Dans cet outil il signifie seulement
+« passe `normalize()` et le filtre des grandes villes ». Il **n'inclut pas** le
+contrôle de séniorité sur la description, le seuil des 120 jours, ni la
+déduplication. L'écart de 2 365 n'est donc PAS un stock d'offres récupérables :
+une part inconnue est légitime. **Mesurer la composition de cet écart est en
+soi le prochain chantier** — sans elle, on optimiserait à l'aveugle.
+
+### Ce qui est établi, en revanche
+
+**Treize sources collectent et ne publient rien** (~106 offres). Les deux
+premières ont été vérifiées à la main le soir même :
+
+- `workday:santander` — 79 dans le rapport, mais **0 en direct** : le chiffre
+  venait du magasin de récoltes (repli à 4 jours). Le connecteur pointe dans le
+  vide, comme Accenture sur wd3 en son temps.
+- `phenom:careers.capgemini.com` — collecte **zéro**, si silencieusement qu'il
+  n'apparaît même pas dans la liste des muettes. La seule offre Capgemini
+  publiée vient du flux VIE. Leur vraie liste est sur `www.capgemini.com`,
+  **rendue côté serveur** : un connecteur `liste` la lirait, comme pour Crédit
+  Agricole ou BNP.
+
+**Air Liquide n'est pas un gisement**, contrairement à ce que son absence
+laissait croire. Le connecteur marche ; c'est la maison qui ne recrute presque
+pas en finance en France. Mesuré sur leur API Workday : 1 125 offres dans le
+monde, 292 en France, mais **4** en « Finance & Controlling » France et **1** en
+« Group Control & Compliance ». Les deux familles que le connecteur ne voit pas
+rapporteraient UNE offre.
+
+> Piège à ne pas répéter : leur troisième famille, « HSE / Risk Mgt / Quality /
+> Security » (11 en France), n'est PAS du risque financier — c'est la sécurité
+> industrielle. L'ajouter parce qu'elle contient « Risk » rouvrirait exactement
+> le fourre-tout du 2 septembre (`DECISIONS.md` §15).
+>
+> Anomalie restée ouverte : l'entonnoir retient les 4 offres Air Liquide, mais
+> aucune n'est dans `offres.js`. À élucider — c'est un étage postérieur à
+> `normalize()` qui les mange.
+
+### Ordre de travail proposé
+
+1. **Réparer les connecteurs muets** — Capgemini, Santander, puis les onze
+   autres. Borné, vérifiable, et sans toucher à un seul filtre.
+2. **Mesurer la composition de l'écart 3 363 → 998** (séniorité sur
+   description, 120 jours, doublons). C'est la mesure qui manque.
+3. **Le type de contrat deviné au lieu d'être lu** dans sept familles de
+   connecteurs — c'est ce qui étouffe l'alternance (voir plus bas).
 
 ---
 
