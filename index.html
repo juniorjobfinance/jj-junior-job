@@ -228,6 +228,7 @@
     margin: 0 auto;
     padding: 0 1.5rem;
     display: flex;
+    align-items: center;
     gap: 0.25rem;
     border-bottom: 1px solid var(--line);
     background: var(--paper-raised);
@@ -281,45 +282,44 @@
     color: var(--ink-soft);
     margin-left: 0.35rem;
   }
-  .total-bar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0.4rem 1.5rem;
-    text-align: right;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper-raised);
-  }
-  .total-bar .total {
+  nav.tabs .total {
+    margin-left: auto;
+    padding-left: 0.75rem;
     font-family: var(--font-chiffres);
     font-variant-numeric: tabular-nums;
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--ink-soft);
+    white-space: nowrap;
   }
-  /* Sur mobile, les 4 onglets + le total ne tiennent pas sur 375px et « CDI · CDD »
-     se faisait couper. On rend la barre défilable horizontalement (sans barre
-     visible), on empêche les onglets de rétrécir, et on masque le total (déjà
-     rappelé au-dessus de la liste « 252 offres »). */
-  @media (max-width: 640px) {
+  /* Sur mobile, les 4 onglets + le total ne tiennent pas sur 375px à taille
+     confortable : sans cette compression, la barre déborde et devient
+     défilable au toucher — Victor la veut fixe, jamais à faire glisser. Le
+     même calcul déborde dès qu'on repasse sous ~750px (tablette, fenêtre de
+     bureau réduite) : le seuil couvre donc toute cette zone, pas seulement le
+     téléphone. On masque le compteur par onglet (le panneau actif affiche
+     déjà son propre "N offres" juste au-dessus de la liste) et on resserre
+     onglets/marges au minimum pour que tout tienne sur une seule ligne, sans
+     scroll. */
+  @media (max-width: 900px) {
     nav.tabs {
-      padding: 0 1rem;
+      padding: 0 0.35rem;
+      gap: 0.1rem;
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
     }
     nav.tabs::-webkit-scrollbar { display: none; }
-    nav.tabs { padding: 0 0.5rem; }
     nav.tabs button[role="tab"] {
       flex: 0 0 auto;
       white-space: nowrap;
-      padding: 0.75rem 0.4rem;
-      font-size: 0.85rem;
+      padding: 0.75rem 0.25rem;
+      font-size: 0.82rem;
     }
     nav.tabs button[role="tab"]::before { width: 7px; height: 7px; margin-right: 0.25rem; }
-    nav.tabs .tab-count { font-size: 0.72rem; margin-left: 0.2rem; }
-    .total-bar { padding: 0.35rem 1rem; }
-    .total-bar .total { font-size: 0.78rem; }
+    nav.tabs .tab-count { display: none; }
+    nav.tabs .total { font-size: 0.82rem; padding-left: 0.25rem; }
   }
 
   /* ---------- Layout ---------- */
@@ -1062,8 +1062,8 @@
   <button role="tab" data-volet="alternance" aria-selected="false" aria-controls="panel-offres" id="tab-alternance">Alternance</button>
   <button role="tab" data-volet="vie" aria-selected="false" aria-controls="panel-offres" id="tab-vie">VIE</button>
   <button role="tab" data-volet="cdi-cdd" aria-selected="false" aria-controls="panel-offres" id="tab-cdi-cdd">CDI · CDD</button>
+  <span class="total" id="total-count" aria-hidden="true"></span>
 </nav>
-<div class="total-bar"><span class="total" id="total-count"></span></div>
 
 <!-- Bandeau « Pépites JJ » en pleine largeur, juste sous les onglets (et non
      dans la colonne des offres, où il tombait sous les filtres sur mobile).
@@ -1921,7 +1921,10 @@
       tab.querySelector('.tab-count').textContent = n;
     });
     var total = document.getElementById('total-count');
-    if (total) total.textContent = OFFRES.length + ' offres au total';
+    if (total) {
+      var suffixe = window.innerWidth <= 640 ? ' offres' : ' offres au total';
+      total.textContent = OFFRES.length + suffixe;
+    }
   }
 
   buildFamilleFieldset();

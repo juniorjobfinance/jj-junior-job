@@ -3031,31 +3031,47 @@ function scorePepite(o) {
   return score;
 }
 
-// Sélectionne les pépites SÉPARÉMENT pour chaque onglet, pour qu'aucun onglet
-// ne soit privé de mises en avant (avant, les stages raflaient toutes les
-// places et le VIE restait vide). Au plus ~8 par onglet, 2 par maison.
+// Une maison qui fait vraiment rêver : dans la liste de prestige, ou — pour
+// le VIE spécifiquement — un grand groupe reconnaissable (son nom n'est pas
+// dans la liste des maisons de référence, mais un VIE chez TotalEnergies
+// reste une signature).
+function estEnormeMaison(o) {
+  return MAISONS_PRESTIGE.has(o.maison) || (o.volet === 'vie' && GRANDE_STRUCTURE_RE.test(o.emp));
+}
+
+// Une pépite vieille de plusieurs mois, même chez une maison prestigieuse,
+// n'a plus rien d'une trouvaille : Victor la veut fraîche. _firstSeenAt est
+// plus fiable que _postedAt (cf. writeOutput) quand la source ne date pas
+// ses offres.
+const PEPITE_FRAICHEUR_JOURS = 21;
+function estAssezRecente(o) {
+  const brut = dateIso(o._postedAt) || o._firstSeenAt;
+  if (!brut) return false;
+  return (Date.now() - new Date(brut).getTime()) / 86400000 <= PEPITE_FRAICHEUR_JOURS;
+}
+
+// Cinq pépites au total, tous onglets confondus. Victor : « vraiment ce que
+// s'arrache les plus gros étudiants » — une énorme maison ET un poste que
+// tout le monde se dispute (M&A, private equity, trading...) ET une offre
+// récente sont trois conditions OBLIGATOIRES, pas un score à additionner :
+// un poste banal chez une maison prestigieuse, ou un poste rare chez un
+// inconnu, n'est pas une pépite. Le score ne sert plus qu'à départager les
+// candidats qui remplissent déjà les trois. Une seule pépite par maison —
+// deux fois la même signature donnerait l'impression d'un catalogue étroit,
+// alors que la promesse est de faire découvrir.
 function choisirPepites(offers) {
+  const notes = offers
+    .filter((o) => estEnormeMaison(o) && POSTE_RARE_RE.test(o.title) && estAssezRecente(o))
+    .map((o) => ({ o, s: scorePepite(o) }))
+    .sort((a, b) => b.s - a.s);
   const retenus = new Set();
-  for (const volet of ['stage', 'alternance', 'vie', 'cdi-cdd']) {
-    const notes = offers
-      .filter((o) => o.volet === volet)
-      .map((o) => ({ o, s: scorePepite(o) }))
-      .filter((x) => x.s >= 4)
-      .sort((a, b) => b.s - a.s);
-    // Une seule pépite par maison et par onglet : un carrousel qui affiche deux
-    // fois Lazard donne l'impression d'un catalogue étroit, alors que la
-    // promesse est justement de faire découvrir. La même maison peut en
-    // revanche reparaître dans un autre onglet — un stage chez Amundi et un VIE
-    // chez Amundi sont deux opportunités distinctes pour le candidat.
-    const maisonsVues = new Set();
-    let n = 0;
-    for (const { o } of notes) {
-      const cle = o.maison || o.emp;
-      if (maisonsVues.has(cle)) continue;
-      maisonsVues.add(cle);
-      retenus.add(o._key);
-      if (++n >= 8) break;
-    }
+  const maisonsVues = new Set();
+  for (const { o } of notes) {
+    const cle = o.maison || o.emp;
+    if (maisonsVues.has(cle)) continue;
+    maisonsVues.add(cle);
+    retenus.add(o._key);
+    if (retenus.size >= 5) break;
   }
   return retenus;
 }
