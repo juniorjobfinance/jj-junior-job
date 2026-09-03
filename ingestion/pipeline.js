@@ -1765,7 +1765,17 @@ function cleanTitle(title) {
   //    suffit pourtant à lui seul à marquer la fin du préfixe : aucun métier ne
   //    commence par « alternant(e) » ou « apprenti(e) ». Pas de boucle ici,
   //    contrairement à la règle 1) : aucun cas mesuré n'empile deux préfixes.
-  t = t.replace(/^(?:stagiaire|alternant|apprenti)\s*\(e\)\s*/i, '');
+  //    La marque du féminin prend quatre formes selon les maisons, et le
+  //    préfixe s'écrit aussi tout court : « Alternant(e) Chargé(e) »,
+  //    « Alternant.e Consolidation » (Akuo), « Apprenti Trésorier » (Wakam),
+  //    « Alternant Controlling » (Nestlé). Les dix cas mesurés le 03/09 sur
+  //    les 998 offres publiées gardaient tous leur préfixe faute des trois
+  //    dernières formes.
+  //
+  //    Le `\s+` suivi d'au moins deux caractères est le garde-fou : sans lui,
+  //    un intitulé réduit au seul mot « Alternant » serait vidé, et il vaut
+  //    mieux un titre pauvre qu'un titre vide.
+  t = t.replace(/^(?:stagiaire|alternant|apprenti)(?:\s*\(e\)|[.·]e|e)?\s+(?=\S{2})/i, '');
 
   // 1 ter) La durée AVANT le mot de contrat, en anglais : « 12 months
   //    Apprenticeship – » chez L'Oréal. La règle 1) ne sait lire la durée
@@ -1963,6 +1973,15 @@ function cleanTitle(title) {
 
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
+
+  // 11) Capitale initiale. Toutes les règles ci-dessus retirent un préfixe, et
+  //     ce qui reste commence donc souvent par la minuscule qui suivait ce
+  //     préfixe : « contrôleur de gestion R&D » chez Valeo, « conseil santé »
+  //     chez PwC, « comptable - DSCG » chez Deloitte une fois « Alternant »
+  //     retiré. Cinq cas sur les 998 offres du 03/09, plus ceux que la règle
+  //     1 bis élargie va produire. On ne touche qu'à la première lettre : le
+  //     reste de la casse appartient à l'employeur.
+  if (t && /^[a-zà-ÿ]/.test(t)) t = t[0].toUpperCase() + t.slice(1);
 
   return t;
 }
