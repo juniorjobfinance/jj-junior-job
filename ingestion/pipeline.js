@@ -35,6 +35,9 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 // qu'on vient de corriger, on ne va pas le reintroduire ailleurs.
 const rapportClassement = {
   rejets: new Map(),
+  // Les offres elles-memes, par motif : sans elles on ne peut qu'affirmer
+  // que le filtre est juste, jamais le montrer.
+  exemplesRejets: new Map(),
   nonClasses: [],
   employeursInconnus: new Map(),
   // Ce que la regle maisonRef ecarte, avec le verdict que le classifieur
@@ -2788,6 +2791,17 @@ function normalize(item) {
 
   if (verdict.status === 'rejected') {
     rapportClassement.rejets.set(verdict.reason, (rapportClassement.rejets.get(verdict.reason) || 0) + 1);
+    if (!rapportClassement.exemplesRejets.has(verdict.reason)) {
+      rapportClassement.exemplesRejets.set(verdict.reason, []);
+    }
+    rapportClassement.exemplesRejets.get(verdict.reason).push({
+      intitule: title,
+      employeur: emp,
+      structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
+      structureId: verdict.structure,
+      source: __src,
+      url: raw.url || null,
+    });
     return null;
   }
   if (verdict.status === 'unclassified') {
@@ -3751,6 +3765,42 @@ function rapportDeClassement(offres) {
       2
     )
   );
+  // Tirage AU HASARD, et non les plus frequents : les intitules les plus
+  // frequents d'un motif sont les plus caricaturaux, ils ne disent rien de la
+  // queue de distribution ou se cachent les faux positifs.
+  const TAILLE_ECHANTILLON = 40;
+  const echantillons = [
+    ['prefilter:retail', 'echantillon-retail'],
+    ['gate:big4-sans-marqueur', 'echantillon-gate-big4'],
+    ['gate:entreprise-sans-marqueur', 'echantillon-gate-entreprise'],
+  ];
+  for (const [motif, nom] of echantillons) {
+    const tout = rapportClassement.exemplesRejets.get(motif) || [];
+    // Melange de Fisher-Yates sur une copie : on ne touche pas au tableau
+    // d'origine, et chaque offre a la meme chance d'etre tiree.
+    const melange = tout.slice();
+    for (let i = melange.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [melange[i], melange[j]] = [melange[j], melange[i]];
+    }
+    fs.writeFileSync(
+      path.join(DATA_DIR, `${nom}${SUFFIXE}.json`),
+      JSON.stringify(
+        {
+          genere: new Date().toISOString(),
+          motif,
+          total_rejete: tout.length,
+          taille_echantillon: Math.min(TAILLE_ECHANTILLON, melange.length),
+          methode: 'tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents',
+          offres: melange.slice(0, TAILLE_ECHANTILLON),
+        },
+        null,
+        2
+      )
+    );
+    console.log('  echantillon ' + nom + ' : ' + Math.min(TAILLE_ECHANTILLON, melange.length) + ' tirees sur ' + tout.length);
+  }
+
   console.log('\n[pipeline] Listes de travail ecrites dans data/.');
 }
 function writeOutput(offers) {

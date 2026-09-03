@@ -108,7 +108,11 @@ const PREFILTER = [
   [/\brejoignez la\b/, 'retail'],
 
   // Fonctions support / hors finance
-  [/\b(?:ressources humaines|charge de formation|talent|career management|recrutement)\b/, 'support'],
+  // 'talent' seul rejetait les "Talent Program", qui sont des programmes
+  // graduate : il faut le qualifier.
+  [/\b(?:ressources humaines|charge de formation|career management|recrutement)\b/, 'support'],
+  [/\btalent(?:s)? (?:acquisition|management|partner|culture)\b/, 'support'],
+  [/\bgestion des talents\b/, 'support'],
   [/\bmoyens generaux\b/, 'support'],
   [/\bgestionnaire de paie\b/, 'support'],
   [/\badministration des ventes\b/, 'support'],
@@ -217,6 +221,7 @@ const FAMILIES = [
       [/\btitrisations?\b/, 8],
       [/\bipv\b/, 8],
       [/\bmarket data\b/, 7],
+      [/\bmarche de l energie\b/, 8],
       [/\bsecuritised\b/, 8],
       [/\bhigh yield\b/, 7],
       [/\btaux et change\b/, 8],
@@ -522,6 +527,7 @@ const FAMILIES = [
       [/\bclient onboarding\b/, 8],
       [/\bgestionnaire (?:d )?operations?\b/, 8],
       [/\boperations? (?:bancaires?|titres?|de marche|transverses?)\b/, 8],
+      [/\boperations? et processus\b/, 8],
       [/\bbanking operations\b/, 8],
       [/\bvalorisation (?:de fonds|opc)\b/, 9],
       [/\binstruments? financiers?\b/, 7],
@@ -667,8 +673,8 @@ function classify(offer) {
       // des structures qui ne les porte pas encore. Le motif doit nommer ce qu'il
       // mesure, sinon il oriente vers la mauvaise correction.
       //
-      // Ce renommage a déjà été écrasé une fois par une recopie de classifier.js
-      // depuis Downloads : le reporter dans le fichier source avant la prochaine.
+      // ATTENTION : ce renommage a déjà été perdu DEUX fois par une recopie de
+      // classifier.js depuis Downloads. Le reporter dans le fichier source.
       reason: structure ? `gate:${structure}-sans-marqueur` : 'gate:employeur-absent-de-structures',
       structure,
       tags,
@@ -698,6 +704,21 @@ function classify(offer) {
   // Chez une banque d'affaires, "Advisory" ou "Analyst" seuls, c'est du deal.
   if (structure === 'banque-affaires' && (!winner || (winner.id === 'conseil-transformation' && winnerScore <= 4))) {
     winner = byId('fusions-acquisitions');
+    winnerScore = 5;
+  }
+
+  // L'analyste financier generique. "Financial Analyst" ne dit pas le metier :
+  // en entreprise c'est du controle de gestion, en banque ou en gestion c'est
+  // de l'analyse de marche. L'employeur tranche, pas l'intitule.
+  const ANALYSTE_GENERIQUE = /\b(?:analyste financi(?:er|ere)|financial analyst|finance analyst|finance officer|analyste finance)\b/;
+  if (!winner && ANALYSTE_GENERIQUE.test(title)) {
+    const versMarches = new Set(['bfi', 'banque-affaires', 'societe-gestion', 'fonds']);
+    // Chez un regulateur ou une banque centrale, l'analyste financier fait de
+    // la cotation d'entreprises et de l'analyse prudentielle.
+    let cible = 'controle-gestion-tresorerie';
+    if (versMarches.has(structure)) cible = 'marches-financiers';
+    else if (structure === 'institution') cible = 'risques-conformite';
+    winner = byId(cible);
     winnerScore = 5;
   }
 

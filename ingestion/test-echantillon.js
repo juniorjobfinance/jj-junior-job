@@ -88,3 +88,23 @@ for (const f of fails) {
   console.log(`  ${f.employer} — ${f.title}`);
   console.log(`      attendu ${f.expected} / obtenu ${f.got} [${f.status}]${f.reason ? ' ' + f.reason : ''}`);
 }
+
+// --- les 6 VIE perdues, ajoutees apres le rapport du 2026-09-03 ---
+const VIE = [
+  ['Schneider Electric Industries', 'Finance Analyst', 'controle-gestion-tresorerie'],
+  ['Natixis Investment Managers', 'Analyste opérations et processus junior', 'operations-middle-office'],
+  ['Planisware', 'Junior Financial Analyst', 'controle-gestion-tresorerie'],
+  ['Caceis', 'Finance Officer', 'controle-gestion-tresorerie'],
+  ['TotalEnergies', 'Analyste Asset Marché de l’Énergie', 'marches-financiers'],
+  ['Comgest', 'FINANCIAL ANALYST - TALENT PROGRAM (Paris)', 'marches-financiers'],
+  ['Banque de France', 'Analyste financier', 'risques-conformite'],
+  ['Louis Vuitton', 'Analyste financier', 'controle-gestion-tresorerie'],
+];
+let ok2 = 0;
+for (const [e, t, exp] of VIE) {
+  const r = classify({ employer: e, title: t });
+  const g = r.status === 'classified' ? r.famille : 'REJET';
+  if (g === exp) ok2 += 1;
+  else console.log(`  VIE ECART ${e} — ${t} : attendu ${exp}, obtenu ${g}`);
+}
+console.log(`${ok2}/${VIE.length} cas VIE conformes`);
