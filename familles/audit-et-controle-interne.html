@@ -605,12 +605,14 @@
     cursor: pointer;
     transition: color 0.12s, border-color 0.12s, background 0.12s;
   }
+  /* Aucune inversion : le cerne et le glyphe restent orange, l'intérieur reste
+     blanc. Sur téléphone l'état de focus PERSISTE après un tap — un bouton qui
+     s'inverse y reste inversé, et on croit voir un défaut permanent là où il
+     n'y a qu'un état. Le retour visuel se fait par un fond très pâle. */
   .jj-aide:hover,
   .jj-aide:focus-visible,
   .jj-aide[aria-expanded="true"] {
-    background: var(--accent-fort);
-    border-color: var(--accent-fort);
-    color: #fff;
+    background: var(--accent-doux);
   }
   .famille-option .famille-nom { display: flex; align-items: center; gap: 0.4rem; }
   .famille-option input { margin: 0; }
@@ -1706,6 +1708,13 @@
         var memeBulle = ouverte && ouverte.bulle === bulle;
         fermer(false);
         if (memeBulle) return;
+        // Le tiroir des filtres porte un `transform`, et un ancetre transforme
+        // devient le bloc conteneur d un `position: fixed` : la bulle se
+        // positionnerait par rapport au tiroir, pas par rapport a l ecran.
+        // On la sort dans <body>. Le HTML SERVI n en est pas affecte — c est
+        // le DOM vivant qui change, apres interaction — donc Google lit
+        // toujours le texte a sa place.
+        if (bulle.parentNode !== document.body) document.body.appendChild(bulle);
         bulle.hidden = false;
         bouton.setAttribute('aria-expanded', 'true');
         ouverte = { bouton: bouton, bulle: bulle };
@@ -2414,7 +2423,21 @@
     if (state.structure) n++;
     if (state.lieu) n++;
     if (state.emp) n++;
-    els.filtresBasculeEtat.textContent = n ? n + (n > 1 ? ' filtres actifs' : ' filtre actif') : '';
+    // Un seul filtre : on le NOMME. « 1 filtre actif » n apprend rien — on
+    // replie les filtres et on ne sait plus sur quoi on filtre. Au-dela d un,
+    // le compte reste plus lisible qu une enumeration.
+    var seul = '';
+    if (n === 1) {
+      if (state.familles.size === 1) seul = Array.from(state.familles)[0];
+      else if (state.q) seul = '« ' + state.q + ' »';
+      else if (state.newOnly) seul = 'Nouvelles offres (24 h)';
+      else if (state.structure) seul = state.structure;
+      else if (state.lieu) seul = state.lieu;
+      else if (state.emp) seul = state.emp;
+    }
+    els.filtresBasculeEtat.textContent = n
+      ? (seul || n + (n > 1 ? ' filtres actifs' : ' filtre actif'))
+      : '';
   }
 
   // Le tiroir recouvre la page : tant qu'il est ouvert, le fond ne doit pas
