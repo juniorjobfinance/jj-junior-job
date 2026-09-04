@@ -12,6 +12,7 @@
 'use strict';
 
 const fs = require('fs');
+const { ecrireCatalogueHtml } = require('./ecrire-catalogue-html.js');
 const path = require('path');
 // Le cache de collecte est gzippe : il porte les descriptions ENTIERES.
 const zlib = require('zlib');
@@ -4326,6 +4327,25 @@ function writeOutput(offers) {
   fs.writeFileSync(OUTPUT_PATH, header + body);
   writeRss(publicOffers);
   writeSitemap();
+
+  // Le catalogue est aussi ecrit DANS index.html, pour que Google le lise sans
+  // executer de JavaScript. Le gabarit de carte n'est pas recopie ici : il est
+  // decoupe dans index.html entre deux bornes et execute tel quel — voir
+  // ecrire-catalogue-html.js.
+  //
+  // SUFFIXE non vide (--depuis-cache, --refonte) ecrit index-cache.html ou
+  // index-refonte.html, JAMAIS index.html : un passage qui n'est pas une vraie
+  // collecte ne doit pas toucher a la page de production.
+  try {
+    const r = ecrireCatalogueHtml(publicOffers, SUFFIXE);
+    console.log(`   ${r.fichier} : ${r.offres} offres en ${r.groupes} groupes, ` +
+      `${(r.octets / 1024).toFixed(0)} Ko de cartes ecrites dans le HTML.`);
+  } catch (e) {
+    // On ne fait pas echouer tout le passage pour ca : offres.js est deja
+    // ecrit et le site fonctionne sans. Mais on le dit fort, parce qu'une page
+    // dont le catalogue n'est plus a jour est invisible pour Google en silence.
+    console.error('   !! Le catalogue n a PAS ete ecrit dans le HTML : ' + e.message);
+  }
 }
 
 // ---------------------------------------------------------------------------

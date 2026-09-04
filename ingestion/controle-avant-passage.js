@@ -476,6 +476,63 @@ try {
   alerte('deux tables', e.message);
 }
 
+
+console.log('\n--- Le catalogue dans le HTML ---');
+try {
+  const html = lire('index.html');
+  const bornes = html.match(/<!--JJ:OFFRES:DEBUT-->([\s\S]*?)<!--JJ:OFFRES:FIN-->/);
+  if (!bornes) {
+    ko('catalogue HTML', 'les bornes JJ:OFFRES ont disparu d index.html — le pipeline ne peut plus y ecrire');
+  } else {
+    const dedans = bornes[1];
+    const js = lire('offres.js');
+    const catalogue = JSON.parse(js.slice(js.indexOf('['), js.lastIndexOf(']') + 1));
+
+    // Ce que le HTML DEVRAIT contenir, calcule avec le vrai gabarit — jamais
+    // une reimplementation du regroupement.
+    const { chargerGabarit, rendreCartes } = require('./ecrire-catalogue-html.js');
+    const gabarit = chargerGabarit(html);
+    const attendus = gabarit.grouperParAnnonce(catalogue).length;
+
+    const cartes = (dedans.match(/<a class="card"|<div class="card card-groupe">/g) || []).length;
+
+    if (cartes === 0) {
+      ko('catalogue HTML', `aucune carte entre les bornes, alors que offres.js en porte ${catalogue.length}`);
+    } else if (cartes !== attendus) {
+      ko('catalogue HTML',
+        `${cartes} carte(s) dans index.html pour ${attendus} attendue(s) — ` +
+        'generation interrompue, ou HTML plus a jour que le catalogue');
+    } else {
+      ok('catalogue HTML', `${cartes} cartes pour ${catalogue.length} offres`);
+    }
+
+    // Le comptage seul ne suffit pas : un index.html de la veille peut avoir
+    // le meme nombre de cartes. Mais comparer les URL une a une serait FAUX —
+    // cardGroupeHTML dedoublonne les villes d'un groupe, donc deux offres au
+    // meme endroit ne rendent qu'un lien, et deux URL du catalogue manquent
+    // legitimement du HTML.
+    //
+    // On regenere donc le bloc attendu avec le vrai gabarit et on le compare
+    // au bloc present. Meme catalogue, meme gabarit, meme sortie : toute
+    // difference est une vraie panne, et il n'y a aucun seuil a regler.
+    // On appelle la fonction du pipeline, jamais une reimplementation : c'est
+    // elle qui decide de l'espacement, une carte par ligne, et la comparaison
+    // ci-dessous est au caractere pres.
+    const attendu = rendreCartes(catalogue, gabarit).html;
+    if (dedans !== attendu) {
+      const i = [...attendu].findIndex((c, k) => dedans[k] !== c);
+      ko('catalogue HTML',
+        `le HTML ne correspond pas au catalogue (${dedans.length} caracteres ` +
+        `contre ${attendu.length} attendus, premiere divergence au ${i}e) — ` +
+        'relancer le pipeline avant de publier');
+    } else {
+      ok('catalogue HTML', 'identique a ce que le gabarit produit pour ce catalogue');
+    }
+  }
+} catch (e) {
+  ko('catalogue HTML', e.message);
+}
+
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();

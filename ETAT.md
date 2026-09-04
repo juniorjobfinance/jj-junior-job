@@ -539,3 +539,61 @@ cas par l'ordre de déclaration** sur une description. Le second passage devra
 donc exiger un **écart strict** entre le premier et le second, et s'abstenir
 sinon. S'abstenir est le comportement correct : l'offre retourne au résidu, qui
 est compté au journal.
+
+### Le catalogue est écrit dans index.html — 04/09/2026
+
+Google recevait **1 033 caractères** : les offres arrivaient par `offres.js`,
+en JavaScript. Le pipeline écrit désormais les cartes directement dans
+`index.html`, entre deux bornes `<!--JJ:OFFRES:-->`.
+
+**Le gabarit n'est pas recopié.** `ingestion/ecrire-catalogue-html.js` découpe
+le vrai gabarit dans `index.html` entre les bornes `JJ:GABARIT` et l'exécute
+tel quel — le procédé d'`atelier.js`. Un DOM inerte est fourni le temps de
+l'évaluation, puis **verrouillé** : si le gabarit se mettait à lire la page, le
+pipeline lèverait au lieu de produire des cartes silencieusement fausses.
+
+| | brut | brotli |
+|---|---:|---:|
+| socle `index.html` | 93,6 Ko | 25,1 Ko |
+| les 832 cartes (912 offres) | 664,6 Ko | 33,2 Ko |
+| **page complète** | **758,1 Ko** | **58,3 Ko** — ~69 Ko chez Vercel |
+
+Avant : 29,4 Ko + 50 Ko de `offres.js`, et **rien ne s'affichait avant que les
+deux soient arrivés**. Après : ~119 Ko au total, mais le premier affichage
+n'attend que le HTML.
+
+`document.write` a disparu au passage — c'était le vrai défaut, plus grave que
+le SEO : Chrome refuse d'exécuter un script ainsi injecté sur connexion lente,
+et un visiteur en 3G pouvait voir la page **sans aucune offre**. Remplacé par
+`<script defer>`, le démarrage déplacé dans `demarrer()` sur
+`DOMContentLoaded`. Le commutateur `?refonte=1` est abandonné avec lui :
+échafaudage local, jamais déployé.
+
+**Piste écartée pour aujourd'hui, volontairement.** La donnée transite deux
+fois : en cartes HTML pour Google, en JSON pour le filtrage. On pourrait ne
+charger `offres.js` qu'au premier filtre, ou faire lire le DOM au filtrage et
+supprimer `offres.js` — ce qui ramènerait la page à ~69 Ko au lieu de 119.
+**Simple d'abord** : la mesure ne montre aucun problème de poids à 119 Ko, et
+les deux options touchent au filtrage, qui marche.
+
+### Ce que le contrôle du HTML garde
+
+`controle-avant-passage.js` régénère le bloc attendu avec le vrai gabarit et le
+compare **caractère par caractère** à celui du fichier. Aucun seuil à régler :
+même catalogue et même gabarit donnent la même sortie, donc toute différence
+est une panne.
+
+Un premier essai comparait les ENSEMBLES D'URL. Il échouait sur un catalogue
+sain : `cardGroupeHTML` dédoublonne les villes d'un groupe, donc deux offres au
+même endroit ne rendent qu'un lien, et deux URL manquent légitimement du HTML.
+**Un contrôle qui échoue sur l'état correct ne protège de rien**, il apprend à
+ignorer les échecs.
+
+Éprouvé le 04/09/2026 en provoquant les pannes : état correct **vert**,
+génération tronquée à mi-chemin **bloquée**, HTML périmé à nombre de cartes
+identique **bloqué**, bornes disparues **bloquées**.
+
+`index.html` est désormais un **fichier généré**. Le workflow le commite avec
+`offres.js`, `offres.xml` et `sitemap.xml` : sans cela le site servirait le
+HTML de la veille pendant que le JSON se met à jour, et c'est le périmé que
+Google lirait.

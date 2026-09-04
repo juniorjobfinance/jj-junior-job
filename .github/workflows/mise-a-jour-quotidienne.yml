@@ -193,7 +193,7 @@ jobs:
       # catalogue ET appellerait le Deploy Hook — donc deploierait la
       # production depuis une branche. C'est aussi ce qui permet d'eprouver les
       # garde-fous sur GitHub sans rien deployer.
-      - name: Publier offres.js
+      - name: Publier le catalogue
         if: github.ref == 'refs/heads/main'
         id: publication
         run: |
@@ -201,7 +201,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           # state.json et le cache sont gardés par actions/cache, pas par git
           # (ils sont dans .gitignore).
-          git add offres.js offres.xml sitemap.xml
+          # index.html est desormais GENERE : le pipeline y ecrit le catalogue
+          # pour que Google le lise sans executer de JavaScript. Ne pas le
+          # commiter laisserait le HTML de la veille en ligne pendant que
+          # offres.js se met a jour — deux catalogues sur la meme page.
+          git add offres.js offres.xml sitemap.xml index.html
           if git diff --staged --quiet; then
             echo "Aucun changement à publier."
             echo "modifie=non" >> "$GITHUB_OUTPUT"
