@@ -841,3 +841,58 @@ rabaisse pas cesse de mordre en silence : à 8 pour un résidu réel de 3, il
 laisse passer un retour à 8 sans rien dire. C'est le défaut du §27 sous une
 autre forme — un garde-fou qui ne garde plus rien, et dont on croit être
 protégé.
+
+---
+
+## 29. Un champ absent ne rend pas une erreur, il rend zéro — et zéro se lit comme un résultat
+
+**Écrit le 04/09/2026, après trois occurrences dans la même nuit.**
+
+Quand une sonde lit un champ qui n'existe pas, rien ne proteste. `undefined`
+devient `null`, une liste vide devient `0`, une recherche sans résultat rend
+« aucun ». La sonde répond, et sa réponse a l'apparence d'une mesure.
+
+C'est ce qui la rend pire qu'un plantage : **un plantage se voit, un zéro se
+cite.**
+
+Les trois de la nuit :
+
+1. **Le registre des écartées enregistrait `raw.url || null`.** Le connecteur
+   Business France ne fournit aucune url — il la construit depuis `id`. Les 51
+   rejets VIE sur 54 partaient donc avec `url: null`, et devenaient
+   introuvables. Le registre ne signalait rien : il contenait bien 54 lignes.
+
+2. **Ma sonde cherchait les VIE perdus dans la collecte** en lisant `url`,
+   `absolute_url`, `hostedUrl`. Aucune de ces clés n'existe chez ce
+   connecteur. La sonde a trouvé zéro correspondance et j'ai conclu « la source
+   ne les sert plus ». **C'était l'inverse exact de la vérité** : 42 des 43
+   étaient dans la collecte, écartées par nos portes.
+
+3. **`gh issue list --jq '.[0].number'` sur une liste vide imprime « null »**,
+   pas rien. Le test `[ -n "$N" ]` qui suivait était donc vrai quand aucune
+   issue n'existait, et l'étape aurait lancé `gh issue close null` — c'est-à-
+   dire échoué le premier matin où tout va bien.
+
+C'est la même famille que la description tronquée et que le verdict mis en
+cache (§26) : **une décision rendue sur une entrée incomplète, sans que rien ne
+le signale.** Ici l'entrée n'est pas amputée, elle est absente — et l'absence
+se présente comme une valeur.
+
+**La règle : une sonde doit prouver qu'elle a lu quelque chose avant qu'on lise
+sa réponse.** En pratique, trois gestes :
+
+- **Compter ce qu'on a trouvé, pas seulement ce qu'on cherche.** Ma sonde
+  extrayait 5 999 urls pour 6 830 offres brutes. L'écart de 831 était affiché
+  et je ne l'ai pas lu — il disait à lui seul qu'un connecteur entier
+  manquait.
+- **Lire la valeur normalisée, pas la source brute**, quand le pipeline en
+  produit une. `url` était dans la portée vingt lignes plus haut, utilisée par
+  `estExclue(url, emp)`. Le registre lisait `raw.url` alors qu'il avait la
+  bonne valeur sous la main.
+- **Un zéro inattendu se vérifie avant d'être publié.** « Zéro VIE dans la
+  collecte » aurait dû me faire ouvrir la photo, pas rédiger une conclusion.
+
+Corollaire de nommage, déjà appliqué au §26 : une garde d'idempotence doit
+porter sur un marqueur **propre au bloc qu'elle protège**. Celle qui cherchait
+« sans structure » a trouvé cette tournure dans un autre message du même
+fichier, et a sauté l'écriture en silence.

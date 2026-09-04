@@ -411,3 +411,25 @@ Actuariat & Assurance technique — jusqu'au passage.
 
 **Si ce passage échoue, l'issue « Passage quotidien en échec » s'ouvrira en
 nommant le contrôle fautif, et le site gardera le catalogue de la veille.**
+
+### Le vrai gain de la nuit : un second fourre-tout, invisible parce qu'il avait un nom crédible
+
+« Autres métiers de la finance » était le fourre-tout qu'on regardait — 73
+offres, 7,3 %. **« Conseil & Transformation » en était un second, plus gros :
+154 offres, 15,4 % du catalogue.** Personne ne le voyait, parce qu'il portait
+le nom d'une vraie famille.
+
+Suivies une par une après la refonte : 63 sont toujours au catalogue, dont 43
+restées dans la famille et 20 réparties vers M&A, Capital-investissement,
+Comptabilité, Financements et Actuariat. **91 en sont sorties, et elles ne sont
+pas de la finance** — « Conseil en Transformation » et « Conseil : Secteur
+Public » chez Deloitte, « Stratégie IT » et « PMO Aéronautique », « Business
+Analyst » chez des ESN. Trente d'entre elles par `gate:big4-sans-marqueur`,
+les autres par retrait de l'annonce.
+
+C'est le vrai gain : le fourre-tout visible perd 59 offres, celui qu'on ne
+voyait pas en perd 91.
+
+**La leçon vaut au-delà de ce cas : une famille dont le nom est assez large
+pour tout accueillir devient un fourre-tout sans jamais en porter le nom.** Le
+compteur à surveiller n'est pas « Autres », c'est la famille la plus grosse.

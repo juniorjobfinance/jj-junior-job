@@ -2961,7 +2961,7 @@ function normalize(item) {
       etage: 'classifieur',
       precision: verdict.reason,
       source: __src,
-      url: raw.url || null,
+      url: url || null,
     });
     rapportClassement.exemplesRejets.get(verdict.reason).push({
       intitule: title,
@@ -2976,7 +2976,7 @@ function normalize(item) {
       structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
       structureId: verdict.structure,
       source: __src,
-      url: raw.url || null,
+      url: url || null,
     });
     return null;
   }
@@ -2984,7 +2984,7 @@ function normalize(item) {
     // Le résidu ne retombe plus dans « Autres » : il sort du catalogue et va
     // dans un fichier d'audit, où on peut le lire et décider.
     rapportClassement.nonClasses.push({
-      title, emp, volet, source: __src, url: raw.url || null, structure: verdict.structure,
+      title, emp, volet, source: __src, url: url || null, structure: verdict.structure,
     });
     return null;
   }
@@ -3059,7 +3059,7 @@ function normalize(item) {
       etage: 'classifieur',
       precision: 'gate:publication-sans-structure',
       source: __src,
-      url: raw.url || null,
+      url: url || null,
     });
     return null;
   }
