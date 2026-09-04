@@ -146,13 +146,21 @@ jobs:
           set -u
           node ingestion/maisons-a-inscrire.js > /tmp/mi.txt
           cat /tmp/mi.txt
+          # Ces deux grep n ont VOLONTAIREMENT pas de « || true » : sous bash -e,
+          # ils avortent l etape si le script n a rien imprime — c est-a-dire s il
+          # est casse. Les proteger masquerait la panne et ferait ouvrir une issue
+          # au corps vide.
           TOTAL=$(grep "^TOTAL=" /tmp/mi.txt | cut -d= -f2)
           SIG=$(grep "^SIGNATURE=" /tmp/mi.txt | cut -d= -f2)
           TITRE="Maisons à inscrire"
-          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number' || true)
+          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
 
           if [ "$TOTAL" = "0" ]; then
-            if [ -n "$N" ]; then
+            # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
+          if [ -n "$N" ]; then
               gh issue close "$N" --comment "Plus aucune maison à inscrire au $(date +%F) : tout ce que la collecte a vu est reconnu. Refermée automatiquement."
               echo "Issue #$N refermée : la liste est vide."
             else
@@ -161,6 +169,10 @@ jobs:
             exit 0
           fi
 
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
           if [ -z "$N" ]; then
             gh issue create --title "$TITRE" --body-file data/maisons-a-inscrire.md
             echo "Issue ouverte ($TOTAL entrées)."
@@ -264,7 +276,11 @@ jobs:
           sed -i 's/^          //' /tmp/alerte.md
 
           TITRE="Passage quotidien en échec"
-          EXISTANTE=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number' || true)
+          EXISTANTE=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$EXISTANTE" = "null" ]; then EXISTANTE=""; fi
           if [ -n "$EXISTANTE" ]; then
             gh issue comment "$EXISTANTE" --body-file /tmp/alerte.md
             echo "Commentaire ajouté à l'issue #$EXISTANTE."
@@ -335,7 +351,11 @@ jobs:
         run: |
           set -u
           TITRE="Passage quotidien en échec"
-          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number' || true)
+          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
           if [ -n "$N" ]; then
             gh issue close "$N" --comment "Passage vert le $(date +%F) : le catalogue est de nouveau publié. Refermée automatiquement."
             echo "Issue #$N refermée."
