@@ -3033,6 +3033,37 @@ function normalize(item) {
   // fonds CDPQ et Supernova Invest en « Entreprise ».
   const sector = LIBELLES_STRUCTURE[verdict.structure] || null;
 
+  // Sans structure, l'offre serait publiee et INTROUVABLE : le filtre du site
+  // ne la range nulle part. Elle existe, et personne ne peut la voir.
+  //
+  // Le cas se produit parce que le VIE contourne la maison de reference : un
+  // employeur absent de structures.js franchit la porte finance et publie
+  // quand meme. KONI France est passee par la le 04/09/2026.
+  //
+  // On l'ecarte ICI plutot que de la detecter au controle avant vol. Le
+  // controle reste, en ceinture : il ne devrait plus jamais rien trouver, et
+  // s'il trouve, c'est que ce rejet a ete contourne. Empecher vaut mieux que
+  // detecter — une offre invisible dans les filtres vaut mieux ecartee que
+  // publiee.
+  if (!sector) {
+    rapportClassement.rejets.set(
+      'gate:publication-sans-structure',
+      (rapportClassement.rejets.get('gate:publication-sans-structure') || 0) + 1
+    );
+    rapportClassement.ecartees.push({
+      intitule: title,
+      employeur: emp,
+      volet,
+      structure: null,
+      famille: verdict.familleLabel || null,
+      etage: 'classifieur',
+      precision: 'gate:publication-sans-structure',
+      source: __src,
+      url: raw.url || null,
+    });
+    return null;
+  }
+
   // Vente et développement commercial : la distinction tient à la MAISON, pas
   // à l'intitulé. Chez un gérant d'actifs, une banque ou un dépositaire, un
   // poste de « Sales » porte sur des produits financiers — c'est un vrai métier

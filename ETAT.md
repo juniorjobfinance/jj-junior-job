@@ -395,3 +395,19 @@ PUBLIÉS.
 cdi-cdd 358 (81 %), stage 47, alternance 38, VIE 1. Le classifieur recopié le
 04/09 — trou ESG comblé, motifs de relation client institutionnelle — a fait
 passer le stage de 57 à 47 et l'alternance de 40 à 38.
+
+### Le premier passage réel a lieu le 05/09/2026 à 06h30
+
+La refonte est fusionnée sur `main`, mais **aucun catalogue n'a été commité** :
+`offres.js` reste celui du 03/09, avec l'ancienne taxonomie. C'est le passage
+automatique de demain matin qui produira le premier catalogue traversant toute
+la chaîne — classifieur, séniorité sur texte entier, rejet des offres sans
+structure — et qui exercera pour la première fois les cinq contrôles en
+conditions réelles sur la branche de production.
+
+D'ici là, le site sert la nouvelle interface avec l'ancien catalogue. Mesuré :
+zéro offre hors filtre, et deux familles vides — Financements & Coverage,
+Actuariat & Assurance technique — jusqu'au passage.
+
+**Si ce passage échoue, l'issue « Passage quotidien en échec » s'ouvrira en
+nommant le contrôle fautif, et le site gardera le catalogue de la veille.**
