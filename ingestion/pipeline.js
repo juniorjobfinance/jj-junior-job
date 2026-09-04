@@ -2920,6 +2920,21 @@ function normalize(item) {
     if (!rapportClassement.exemplesRejets.has(verdict.reason)) {
       rapportClassement.exemplesRejets.set(verdict.reason, []);
     }
+    // Le registre COMPLET, au meme titre que l'age, la seniorite et les
+    // doublons. Les echantillons de 40 ci-dessous servent a lire ; celui-ci
+    // sert a compter. Sans lui, le plus gros etage de l'entonnoir — 2 116
+    // offres — etait le seul qu'on ne savait pas ventiler par volet.
+    rapportClassement.ecartees.push({
+      intitule: title,
+      employeur: emp,
+      volet,
+      structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
+      famille: null,
+      etage: 'classifieur',
+      precision: verdict.reason,
+      source: __src,
+      url: raw.url || null,
+    });
     rapportClassement.exemplesRejets.get(verdict.reason).push({
       intitule: title,
       employeur: emp,
@@ -4376,7 +4391,16 @@ async function run() {
   }
 
   const normalized = raw.map(normalize).filter(Boolean);
-  console.log(`[pipeline] ${normalized.length} offres normalisées (${raw.length - normalized.length} rejetées : champs manquants).`);
+  // « champs manquants » melangeait trois choses : normalize() rend null pour
+  // une offre incomplete, pour un rejet du classifieur et pour un residu sans
+  // famille. Le libelle nommait le premier cas et comptait les trois — 3 422
+  // annonces le 04/09, dont 2 116 rejets et 457 residus. Tant qu'on ne sait pas
+  // les separer a la source, le libelle dit les trois.
+  console.log(
+    `[pipeline] ${normalized.length} offres normalisées ` +
+      `(${raw.length - normalized.length} écartées à la normalisation : incomplètes, ` +
+      `rejetées et non classées — voir data/rejets-detail${SUFFIXE}.json pour le détail).`
+  );
   // Répartition par onglet DÈS la normalisation, avant tout filtrage. Sans
   // elle, on ne peut pas dire si un onglet est pauvre parce que les maisons
   // n'y recrutent pas, ou parce qu'on perd ses offres en chemin — la question

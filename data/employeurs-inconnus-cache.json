@@ -1,11 +1,7 @@
 {
-  "genere": "2026-09-03T23:40:17.032Z",
-  "total": 42,
+  "genere": "2026-09-04T00:44:12.584Z",
+  "total": 25,
   "employeurs": [
-    {
-      "emp": "Sephora",
-      "offres": 8
-    },
     {
       "emp": "Teora",
       "offres": 5
@@ -63,19 +59,7 @@
       "offres": 1
     },
     {
-      "emp": "Crédit Foncier",
-      "offres": 1
-    },
-    {
-      "emp": "Ensemble Protection Sociale",
-      "offres": 1
-    },
-    {
       "emp": "BPCE Factor",
-      "offres": 1
-    },
-    {
-      "emp": "Banque de Savoie",
       "offres": 1
     },
     {
@@ -107,38 +91,6 @@
       "offres": 1
     },
     {
-      "emp": "Axians Fibre IDF",
-      "offres": 1
-    },
-    {
-      "emp": "SAR",
-      "offres": 1
-    },
-    {
-      "emp": "Citeos Grenoble",
-      "offres": 1
-    },
-    {
-      "emp": "VINCI Energies France Tertiaire NORD EST",
-      "offres": 1
-    },
-    {
-      "emp": "VF HAUTE Provence",
-      "offres": 1
-    },
-    {
-      "emp": "Hestia",
-      "offres": 1
-    },
-    {
-      "emp": "Division des Grands Projets",
-      "offres": 1
-    },
-    {
-      "emp": "Sunmind",
-      "offres": 1
-    },
-    {
       "emp": "KONI France FAB Amortisseurs",
       "offres": 1
     },
@@ -147,27 +99,7 @@
       "offres": 1
     },
     {
-      "emp": "Chaumet",
-      "offres": 1
-    },
-    {
-      "emp": "Rimowa",
-      "offres": 1
-    },
-    {
       "emp": "Givenchy",
-      "offres": 1
-    },
-    {
-      "emp": "Tiffany & Co.",
-      "offres": 1
-    },
-    {
-      "emp": "BeneFit Cosmetics",
-      "offres": 1
-    },
-    {
-      "emp": "Krug",
       "offres": 1
     }
   ]

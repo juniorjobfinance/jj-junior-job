@@ -1,0 +1,409 @@
+{
+  "genere": "2026-09-04T00:44:12.598Z",
+  "motif": "volet:stage",
+  "total_rejete": 82,
+  "taille_echantillon": 40,
+  "methode": "tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents",
+  "offres": [
+    {
+      "intitule": "Assistant Commercial Expertises",
+      "employeur": "Caisse d'Epargne Normandie",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-assistant-commercial-expertises-h-f"
+    },
+    {
+      "intitule": "Consultant strategy customer and operations",
+      "employeur": "KPMG",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "liste:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/marseille/consultant-stagiaire-strategy-customer-and-operations-f-h/2913/35616198848"
+    },
+    {
+      "intitule": "Assistant Conseiller Clientèle Professionnels",
+      "employeur": "BRED Banque Populaire",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-assistant-conseiller-clientele-professionnels-f-h"
+    },
+    {
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f"
+    },
+    {
+      "intitule": "Chargé(e) de projets ESG / Environnement",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage---Charg-e--de-projets-ESG---Environnement--H-F-_R-8997"
+    },
+    {
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-3"
+    },
+    {
+      "intitule": "Assistant Business Analyst Wholesale",
+      "employeur": "Christian Dior Couture",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "lvmh",
+      "url": null
+    },
+    {
+      "intitule": "Assistant(e) Business Analyste",
+      "employeur": "Rexel",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "smartrecruiters:REXEL1",
+      "url": null
+    },
+    {
+      "intitule": "Consultant en implémentation d'entreprises à l'étranger",
+      "employeur": "EY",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "yello:EY",
+      "url": "https://eyglobal.yello.co/jobs/hDELjed-Wv7L7KYNkqFZ6w?job_board_id=c1riT--B2O-KySgYWsZO1Q&locale=fr"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Lyon/Stage-Conseil-en-Transformation-F-H_R-7474"
+    },
+    {
+      "intitule": "Business Analyst / assistant coordinateur Plan Long Terme",
+      "employeur": "TotalEnergies",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "avature",
+      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Business-Analyst-assistant-coordinateur-Plan-Long-Terme-H-F/82830"
+    },
+    {
+      "intitule": "Area Manager (Analyst & Commercial)",
+      "employeur": "CMA CGM",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Marseille-Internship-Area-Manager-%28Analyst-&amp;-Commercial%29/1433510933/"
+    },
+    {
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Marseille/Stage-Conseil-en-Transformation-H-F_R-6089"
+    },
+    {
+      "intitule": "Conseil santé– Industries, Etablissements et Politiques de Santé",
+      "employeur": "PwC",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Stagiaire-conseil-sant--Industries--Etablissements-et-Politiques-de-Sant-F-H_726944WD"
+    },
+    {
+      "intitule": "Consultant IA & Business Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage-Consultant-Transformation-Digitale-et-IA-F-H_R-8987"
+    },
+    {
+      "intitule": "Assistant Commercial & Administratif en Gestion Institutionnelle",
+      "employeur": "Lazard",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque d'affaires indépendante",
+      "structureId": "banque-affaires",
+      "source": "oraclecloud:icbpjb.fa.ocs.oraclecloud.com",
+      "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6461"
+    },
+    {
+      "intitule": "Analyste/commercial ligne maritime",
+      "employeur": "CMA CGM",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "successfactors:jobs.cmacgm-group.com",
+      "url": "https://jobs.cmacgm-group.com/job/Amiens-Stagiaire-analystecommercial-ligne-maritime/1433515733/"
+    },
+    {
+      "intitule": "Ingénieurs de fin d'études",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Ingnieurs-stagiaire-de-fin-d-tudes---Paris-La-Dfense---F-H_R-8312"
+    },
+    {
+      "intitule": "Conseil : Secteur Public",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage-Conseil---Secteur-Public-F-H_R-7146"
+    },
+    {
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-2"
+    },
+    {
+      "intitule": "Consultant(e) en data",
+      "employeur": "EY",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "yello:EY",
+      "url": "https://eyglobal.yello.co/jobs/7mL3fdLaoLH3ngcEhk_e6g?job_board_id=c1riT--B2O-KySgYWsZO1Q&locale=fr"
+    },
+    {
+      "intitule": "Pilotage de Programmes - Economie et Souveraineté",
+      "employeur": "PwC",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Strasbourg/Stage---Pilotage-de-Programmes---Economie-et-Souverainet---Strasbourg---F-H_726929WD-1"
+    },
+    {
+      "intitule": "Investissements en infrastructures",
+      "employeur": "Caisse de dépôt et placement du Québec",
+      "volet": "stage",
+      "motif": "gate:employeur-absent-de-structures",
+      "structure": null,
+      "structureId": null,
+      "source": "workday:cdpq",
+      "url": "https://cdpq.wd10.myworkdayjobs.com/en-US/CDPQ-recrutement-universitaire/job/Paris/Stagiaire--Investissements-en-infrastructures_R05111"
+    },
+    {
+      "intitule": "Optimisation des processus de planification analytique",
+      "employeur": "Sanofi",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Marcy-lEtoile/stage-6-mois-optimisation-des-processus-de-planification-analytique_R2867497"
+    },
+    {
+      "intitule": "Assistant Business Analyst",
+      "employeur": "Christian Dior Couture",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "lvmh",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller commercial",
+      "employeur": "Caisse d'Epargne Ile de France",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-commercial-h-f-vaucresson-92"
+    },
+    {
+      "intitule": "Transformation des organisations et Accompagnement du Changement",
+      "employeur": "PwC",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Marseille/Stage-en-Transformation-des-organisations-et-Accompagnement-du-Changement---Marseille---F-H_729783WD"
+    },
+    {
+      "intitule": "Monitor Deloitte - Conseil en Stratégie",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Monitor-Deloitte---Stage-de-fin-d-tudes---Conseil-en-Stratgie--H-F-_R-5222"
+    },
+    {
+      "intitule": "Talent & Career Management Assistant",
+      "employeur": "BCG",
+      "volet": "stage",
+      "motif": "prefilter:support",
+      "structure": "Cabinet de conseil & stratégie",
+      "structureId": "conseil",
+      "source": "phenom:careers.bcg.com",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller Banque et Assurances",
+      "employeur": "Caisse d'Epargne Grand Est Europe",
+      "volet": "stage",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-conseiller-banque-et-assurances-h-f-2"
+    },
+    {
+      "intitule": "Coordinateur plan long terme - Business Analyst",
+      "employeur": "TotalEnergies",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "avature",
+      "url": "https://jobs.totalenergies.com/fr_FR/careers/JobDetail/STAGE-Coordinateur-plan-long-terme-Business-Analyst-H-F/83766"
+    },
+    {
+      "intitule": "Assistant Business Analyst",
+      "employeur": "Moët Hennessy",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "lvmh",
+      "url": null
+    },
+    {
+      "intitule": "Analyste Performance Commerciale & Reporting",
+      "employeur": "PwC",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Stage-Analyste-Performance-Commerciale---Reporting---F-H_714432WD"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Strasbourg/Stage-Conseil-en-Transformation-F-H_R-7548"
+    },
+    {
+      "intitule": "Retail Operations Assitant Project Manager",
+      "employeur": "Christian Dior Couture",
+      "volet": "stage",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "lvmh",
+      "url": null
+    },
+    {
+      "intitule": "Paris Off-Cycle - Telecoms Team",
+      "employeur": "Evercore",
+      "volet": "stage",
+      "motif": "gate:employeur-absent-de-structures",
+      "structure": null,
+      "structureId": null,
+      "source": "talentlink:evercore.tal.net",
+      "url": "https://evercore.tal.net/vx/mobile-0/appcentre-ext/brand-4/candidate/so/pm/1/pl/2/opp/3145-Paris-Off-Cycle-Internship-Telecoms-Team-January-June-2027/en-GB"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Bordeaux/Stage-Conseil-en-Transformation-F-H_R-7131"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Rennes/Stage-Conseil-en-Transformation-F-H_R-6450"
+    },
+    {
+      "intitule": "Conseil en Transformation",
+      "employeur": "Deloitte",
+      "volet": "stage",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Toulouse/Stage-Conseil-en-Transformation-F-H_R-8405"
+    }
+  ]
+}
