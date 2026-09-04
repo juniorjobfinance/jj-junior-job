@@ -2238,6 +2238,34 @@ function cleanTitle(title) {
   //    d'origine ne dit pas mieux ; au moins il se lit.
   t = t.replace(/^\s*(?:au\s+)?sein\s+d[eu]\s+(?:la\s+|l['’]\s*|les\s+)?/i, '');
 
+  // 9 bis) Miettes de durée en tête, laissées par les règles ci-dessus.
+  //
+  //    Une règle retire le mot de contrat, une autre une partie de la durée,
+  //    et le reste demeure : « Stage 4 à 6 mois - X » devient « 4 à - X »,
+  //    « Alternance (1 an) - X » devient « (1 an) - X », « Internship -
+  //    6 months - X » devient « 6 months - X ». L'offre n'est alors perdue ni
+  //    par la taxonomie ni par un filtre : aucun motif ne peut reconnaître un
+  //    métier derrière « 4 à - ».
+  //
+  //    Trois formes, et le SÉPARATEUR est exigé dans les deux premières :
+  //    sans lui, un titre commençant légitimement par un nombre serait amputé.
+  //
+  //    a) une fourchette, avec ou sans unité : « 4 à - », « 12 ou 24 mois - »
+  t = t.replace(
+    /^\s*[({[]?\s*\d{1,2}\s*(?:[àa]|ou|-|–|to|et|\/)\s*\d{0,2}\s*(?:mois|months?|ans?|ann[ée]es?|years?)?\s*[)}\]]?\s*[:\-–—]\s*/i,
+    ''
+  );
+  //    b) une durée simple, entre parenthèses ou non : « (1 an) - », « 6 months - »
+  t = t.replace(
+    /^\s*[({[]?\s*\d{1,2}\s*(?:mois|months?|ans?|ann[ée]es?|years?)\s*[)}\]]?\s*[:\-–—]\s*/i,
+    ''
+  );
+  //    c) la forme abrégée de la Caisse des Dépôts, sans séparateur : « 24M X ».
+  //       Le M majuscule collé au nombre et suivi d'une lettre : « 3M » seul,
+  //       nom de maison, ne se trouve jamais en tête d'un intitulé suivi d'un
+  //       espace et d'un métier.
+  t = t.replace(/^\d{1,2}M\s+(?=[A-Za-zÀ-ÿ])/, '');
+
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
 

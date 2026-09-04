@@ -1,6 +1,6 @@
 {
-  "genere": "2026-09-04T00:44:12.583Z",
-  "total": 457,
+  "genere": "2026-09-04T00:54:26.297Z",
+  "total": 446,
   "offres": [
     {
       "title": "Manager - Finance",
@@ -1403,14 +1403,6 @@
       "structure": "fintech"
     },
     {
-      "title": "Chargé de Projets ISR",
-      "emp": "AEW",
-      "volet": "stage",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-6-mois-charge-de-projets-isr-f-h",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Chargé d'affaires financements de projets",
       "emp": "Banque Populaire Rives de Paris",
       "volet": "cdi-cdd",
@@ -1435,7 +1427,7 @@
       "structure": "banque-detail"
     },
     {
-      "title": "4 à - Assistant exploitation bancaire",
+      "title": "Assistant exploitation bancaire",
       "emp": "Caisse d'Epargne Loire Centre",
       "volet": "stage",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -1723,7 +1715,7 @@
       "structure": "bfi"
     },
     {
-      "title": "(1 an) - Chargé de mission décarbonation",
+      "title": "Chargé de mission décarbonation",
       "emp": "Groupe BPCE",
       "volet": "alternance",
       "source": "opendatasoft:bpce.opendatasoft.com",
@@ -2099,14 +2091,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Recherche Vote Engagement ESG",
-      "emp": "Mirova",
-      "volet": "stage",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/stage-6-mois-recherche-vote-engagement-esg-f-h",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Gestionniare de clientèle - Pontarlier Europe (25)",
       "emp": "Caisse d'Epargne Bourgogne Franche Comté",
       "volet": "cdi-cdd",
@@ -2379,7 +2363,7 @@
       "structure": "assurance"
     },
     {
-      "title": "6 months - Assistant Chargé d'Affaires",
+      "title": "Assistant Chargé d'Affaires",
       "emp": "Groupe BPCE",
       "volet": "stage",
       "source": "oraclecloud:ekez.fa.em2.oraclecloud.com",
@@ -2643,7 +2627,7 @@
       "structure": "bfi"
     },
     {
-      "title": "12 ou - Chargé(e)de projets",
+      "title": "Chargé(e)de projets",
       "emp": "Allianz France",
       "volet": "alternance",
       "source": "phenom:careers.allianz.com",
@@ -2723,14 +2707,6 @@
       "structure": "bfi"
     },
     {
-      "title": "Analyste - Monitoring Portefeuille ESG",
-      "emp": "Crédit Agricole CIB",
-      "volet": "stage",
-      "source": "talentsoft:jobs.ca-cib.com",
-      "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-analyste-monitoring-portefeuille-esg-h-f_115179.aspx",
-      "structure": "bfi"
-    },
-    {
       "title": "Data & Reporting Analyst",
       "emp": "Crédit Agricole CIB",
       "volet": "stage",
@@ -2753,30 +2729,6 @@
       "source": "talentsoft:jobs.ca-cib.com",
       "url": "https://jobs.ca-cib.com/offre-de-emploi/emploi-quality-analyst-orchestrade-core-team-h-f_107138.aspx",
       "structure": "bfi"
-    },
-    {
-      "title": "Inside Sales - Data-as-a-Service",
-      "emp": "Amundi",
-      "volet": "stage",
-      "source": "talentsoft:jobs.amundi.com",
-      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-inside-sales-data-as-a-service-h-f_112310.aspx",
-      "structure": "societe-gestion"
-    },
-    {
-      "title": "Chargé(e) de projets ESG/Immobilier Durable",
-      "emp": "Amundi",
-      "volet": "stage",
-      "source": "talentsoft:jobs.amundi.com",
-      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-stage-charge-e-de-projets-esg-immobilier-durable-h-f_113646.aspx",
-      "structure": "societe-gestion"
-    },
-    {
-      "title": "Chargé service clients institutionnels et souverains - pôle International",
-      "emp": "Amundi",
-      "volet": "alternance",
-      "source": "talentsoft:jobs.amundi.com",
-      "url": "https://jobs.amundi.com/offre-de-emploi/emploi-alternance-charge-service-clients-institutionnels-et-souverains-pole-international-h-f_109473.aspx",
-      "structure": "societe-gestion"
     },
     {
       "title": "Expert Investissement Responsable et Indicateurs ESG",
@@ -2995,7 +2947,7 @@
       "structure": "entreprise"
     },
     {
-      "title": "24M Chargé / Chargée de relation clientèle prêteur ORLEANS",
+      "title": "Chargé / Chargée de relation clientèle prêteur ORLEANS",
       "emp": "Caisse des Dépôts",
       "volet": "alternance",
       "source": "wordpress:Caisse des Dépôts",
@@ -3315,27 +3267,11 @@
       "structure": "fintech"
     },
     {
-      "title": "Inside Sales - Data-as-a-Service",
-      "emp": "Amundi",
-      "volet": "stage",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Gestionnaire des processus",
       "emp": "Crédit Agricole CIB",
       "volet": "stage",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-gestionnaire-des-processus-hf-reference--2025-105651--/",
-      "structure": "bfi"
-    },
-    {
-      "title": "Analyste - Monitoring Portefeuille ESG",
-      "emp": "Crédit Agricole CIB",
-      "volet": "stage",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-analyste---monitoring-portefeuille-esg-hf-reference--2026-115179--/",
       "structure": "bfi"
     },
     {
@@ -3395,14 +3331,6 @@
       "structure": "banque-detail"
     },
     {
-      "title": "Chargé(e) de projets ESG/Immobilier Durable",
-      "emp": "Amundi",
-      "volet": "stage",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170472-124-stage---chargee-de-projets-esgimmobilier-durable-hf-reference--2026-113646--/",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Gestionnaire Relation Client",
       "emp": "Crédit Agricole Assurances",
       "volet": "cdi-cdd",
@@ -3459,14 +3387,6 @@
       "structure": "assurance"
     },
     {
-      "title": "Chargé service clients institutionnels et souverains - pôle International",
-      "emp": "Amundi",
-      "volet": "alternance",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170478-124-alternance---charge-service-clients-institutionnels-et-souverains---pole-international---hf-reference--2026-109473--/",
-      "structure": "societe-gestion"
-    },
-    {
       "title": "Gestionnaire opérationnel - Centre de services Premium",
       "emp": "Amundi",
       "volet": "cdi-cdd",
@@ -3521,14 +3441,6 @@
       "source": "bpce:Natixis",
       "url": "https://recrutement.natixis.com/job/client-strategy-and-management-officer-f-h",
       "structure": "bfi"
-    },
-    {
-      "title": "Recherche Vote Engagement ESG",
-      "emp": "Mirova",
-      "volet": "stage",
-      "source": "bpce:Natixis",
-      "url": "https://recrutement.natixis.com/job/stage-6-mois-recherche-vote-engagement-esg-f-h",
-      "structure": "societe-gestion"
     },
     {
       "title": "Analyste - Healthcare Sector",

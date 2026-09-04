@@ -322,6 +322,12 @@ const FAMILIES = [
       [/\binvestor relations\b/, 6],
       [/\bfundraising\b/, 6],
       [/\bbuy ?-? ?side\b/, 9],
+      [/\bservice(?:s)? clients? institutionnels?\b/, 8],
+      [/\bclients? institutionnels?\b/, 7],
+      [/\binside sales\b/, 6],
+      [/\brelations? investisseurs?\b/, 8],
+      [/\bchargee? de projets? isr\b/, 8],
+      [/\bmonitoring portefeuille\b/, 8],
       // ESG cote investissement uniquement (le RSE corporate n'est qu'un tag)
       [/\banalyste? esg\b/, 8],
       [/\besg analyst\b/, 8],
@@ -734,6 +740,19 @@ function classify(offer) {
     else if (structure === 'institution') cible = 'risques-conformite';
     winner = byId(cible);
     winnerScore = 5;
+  }
+
+  // Une offre dont le SEUL signal finance est l'ESG n'a, par construction,
+  // aucune famille : l'ESG est un tag transverse et non une famille. Sans ce
+  // rattrapage elle tombe mecaniquement dans le residu. On la range sur son
+  // metier sous-jacent, que l'employeur permet de deviner.
+  // Restreint aux societes de gestion et aux fonds : chez eux, l'ESG est un
+  // metier d'investissement. Ailleurs — banque, assurance, entreprise — c'est
+  // le plus souvent de la RSE d'entreprise, qui n'est pas dans le perimetre.
+  const ESG_METIER = new Set(['societe-gestion', 'fonds']);
+  if (!winner && tags.includes('esg') && ESG_METIER.has(structure)) {
+    winner = byId('gestion-actifs');
+    winnerScore = 4;
   }
 
   // Chez une BFI, les programmes generiques : "Banking" c'est le financement

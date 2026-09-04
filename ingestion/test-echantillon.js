@@ -133,5 +133,34 @@ for (const [e, t, exp] of FP) {
   else console.log(`  FP ECART ${e} — ${t} : attendu ${exp}, obtenu ${g} ${r.reason || ''}`);
 }
 console.log(`${ok3}/${FP.length} faux positifs corriges`);
-// Les trois compteurs decident ensemble : un seul ecart suffit a echouer.
-if (ok !== CAS.length || ok2 !== VIE.length || ok3 !== FP.length) process.exitCode = 1;
+
+// --- residu sans famille releve sur l'entonnoir du 2026-09-04 ---
+const RESIDU = [
+  ['Mirova', 'Recherche Vote Engagement ESG', 'gestion-actifs'],
+  ['AEW', 'Chargé de Projets ISR', 'gestion-actifs'],
+  ['Crédit Agricole CIB', 'Analyste - Monitoring Portefeuille ESG', 'gestion-actifs'],
+  ['Groupe BPCE', 'Chargé de mission décarbonation', 'REJET'],  // RSE d'entreprise en BFI : hors perimetre
+  ['Amundi', 'Chargé service clients institutionnels et souverains - pôle International', 'gestion-actifs'],
+  ['Amundi', 'Inside Sales - Data-as-a-Service', 'gestion-actifs'],
+  // ...sans que l'ESG hors finance ne rentre
+  ["L'Oréal", 'La-Roche-Posay Sustainability Apprentice', 'REJET'],
+  ['Covéa', 'Charge de projets rse f h', 'REJET'],
+];
+let ok4 = 0;
+for (const [e, t, exp] of RESIDU) {
+  const r = classify({ employer: e, title: t });
+  const g = r.status === 'classified' ? r.famille : 'REJET';
+  if (g === exp) ok4 += 1;
+  else console.log(`  RESIDU ECART ${e} — ${t} : attendu ${exp}, obtenu ${g} ${r.reason || ''}`);
+}
+console.log(`${ok4}/${RESIDU.length} cas de residu conformes`);
+
+// Sans cette ligne, la suite sort 0 quoi qu'il arrive et le workflow publie
+// par-dessus n'importe quelle regression, en l'ayant affichee. Les QUATRE
+// compteurs decident ensemble : un seul ecart suffit.
+//
+// A REMETTRE DANS LA SOURCE (Downloads/jj-refonte/) : c'est la troisieme fois
+// qu'une recopie efface un correctif local.
+if (ok !== CAS.length || ok2 !== VIE.length || ok3 !== FP.length || ok4 !== RESIDU.length) {
+  process.exitCode = 1;
+}

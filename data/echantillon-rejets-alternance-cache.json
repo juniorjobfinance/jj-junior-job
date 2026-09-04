@@ -1,10 +1,100 @@
 {
-  "genere": "2026-09-04T00:44:12.598Z",
+  "genere": "2026-09-04T00:54:26.314Z",
   "motif": "volet:alternance",
   "total_rejete": 43,
   "taille_echantillon": 40,
   "methode": "tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents",
   "offres": [
+    {
+      "intitule": "Magasinier.e",
+      "employeur": "Sanofi",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Sisteron/alternance-24-mois---magasiniere_R2854215"
+    },
+    {
+      "intitule": "12/ évolution digitale des analyses qualité et des processus",
+      "employeur": "Sanofi",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Marcy-lEtoile/alternance-12-24-mois-volution-digitale-des-analyses-qualit-et-des-processus_R2869975"
+    },
+    {
+      "intitule": "Assistant conseiller clientèle",
+      "employeur": "BRED Banque Populaire",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/assistant-conseiller-clientele-alternance-f-h"
+    },
+    {
+      "intitule": "Consultant Junior Stratégie IT - Organisation et Performance de la DSI",
+      "employeur": "Deloitte",
+      "volet": "alternance",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:fina",
+      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Alternant-Consultant-Junior-Stratgie-IT---Organisation-et-Performance-de-la-DSI-F-H_R-7658"
+    },
+    {
+      "intitule": "Property Manager",
+      "employeur": "Crédit Agricole Immobilier",
+      "volet": "alternance",
+      "motif": "prefilter:support",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170472-128-alternance---property-manager---asnieres-sur-seine-hf-reference--2026-115030--/"
+    },
+    {
+      "intitule": "Apprenticeship 12 months inclusion operations and project management",
+      "employeur": "Sanofi",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Gentilly/apprenticeship-12-months--project-management-in-inclusion-and-diversity_R2866616"
+    },
+    {
+      "intitule": "Conseiller Clientele Banque",
+      "employeur": "Caisse d'Epargne Rhône Alpes",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-banque-en-alternance"
+    },
+    {
+      "intitule": "Growth & Sales Analyst - ESG Solutions - Apprenticeship",
+      "employeur": "Sesamm",
+      "volet": "alternance",
+      "motif": "gate:employeur-absent-de-structures",
+      "structure": null,
+      "structureId": null,
+      "source": "greenhouse:sesamm",
+      "url": null
+    },
+    {
+      "intitule": "Chargé de Formation",
+      "employeur": "AXA",
+      "volet": "alternance",
+      "motif": "prefilter:support",
+      "structure": "Compagnie d'assurance & mutuelle",
+      "structureId": "assurance",
+      "source": "phenom:careers.axa.com",
+      "url": null
+    },
     {
       "intitule": "Chargé(e) de projets innovation",
       "employeur": "PwC",
@@ -16,14 +106,144 @@
       "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Alternance-Charg-e--de-projets-innovation---F-H_749452WD"
     },
     {
+      "intitule": "La-Roche-Posay Sustainability Apprentice",
+      "employeur": "L'Oréal",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "avature",
+      "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/12-months-Apprenticeship-La-Roche-Posay-Sustainability-Apprentice-January-2027/254614"
+    },
+    {
+      "intitule": "DCG / DSCG Agricole - Champagnole - Maîche - Pontarlier - Vesoul",
+      "employeur": "Forvis Mazars",
+      "volet": "alternance",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "smartrecruiters:mazars",
+      "url": null
+    },
+    {
+      "intitule": "Conseiller Clientèle Particuliers - Prospects",
+      "employeur": "Groupe Crédit Coopératif",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-prospects-f-h-nanterre-alternance"
+    },
+    {
+      "intitule": "Chargé de Clientèle Particuliers",
+      "employeur": "Caisse d'Epargne Bretagne Pays de Loire",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-en-alternance-h-f-vannes"
+    },
+    {
+      "intitule": "Conseiller Clientèle Particuliers - CFA B-School by BNP Paribas",
+      "employeur": "BNP Paribas",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de financement & d'investissement",
+      "structureId": "bfi",
+      "source": "liste:BNP Paribas",
+      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-bac-3-conseiller-clientele-particuliers-h-f-cfa-b-school-by-bnp-paribas"
+    },
+    {
+      "intitule": "Conseiller-ère Clientèle Particuliers",
+      "employeur": "Banque Populaire du Nord",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/alternance-conseiller-ere-clientele-particuliers-f-h"
+    },
+    {
+      "intitule": "Assistant/e Conseiller Clientèle Professionnels",
+      "employeur": "La Banque Postale",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18033.html/alternance---assistanteconseillerclienteleprofessionnelsfh-marne.html"
+    },
+    {
       "intitule": "Chargé de Formation",
       "employeur": "AXA",
       "volet": "alternance",
       "motif": "prefilter:support",
       "structure": "Compagnie d'assurance & mutuelle",
       "structureId": "assurance",
-      "source": "phenom:careers.axa.com",
-      "url": null
+      "source": "axafr",
+      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-24834-charge-de-formation-alternance-12-mois-f-h"
+    },
+    {
+      "intitule": "Charge de projets talents culture et transformation",
+      "employeur": "KPMG",
+      "volet": "alternance",
+      "motif": "prefilter:support",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "liste:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/la-defense/alternant-charge-de-projets-talents-culture-et-transformation-f-h/2913/40533411264"
+    },
+    {
+      "intitule": "Attache Relation Commerciale",
+      "employeur": "Société Générale",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de financement & d'investissement",
+      "structureId": "bfi",
+      "source": "sitemapld:Société Générale",
+      "url": "https://careers.societegenerale.com/offres-d-emploi/attache-relation-commerciale-26000CZT-fr"
+    },
+    {
+      "intitule": "Chargé de Projets Talents, Culture et Transformation",
+      "employeur": "KPMG",
+      "volet": "alternance",
+      "motif": "prefilter:support",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "sitemapld:KPMG",
+      "url": "https://emplois.kpmg.fr/emploi/la-defense/alternant-charge-de-projets-talents-culture-et-transformation-f-h/2913/40533411264"
+    },
+    {
+      "intitule": "Consultant en Investigation et Litiges",
+      "employeur": "PwC",
+      "volet": "alternance",
+      "motif": "gate:big4-sans-marqueur",
+      "structure": "Big Four & cabinets d’audit",
+      "structureId": "big4",
+      "source": "workday:pwc",
+      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Alternant-e--en-Investigation-et-Litiges---H-F_219998WD"
+    },
+    {
+      "intitule": "Chargé(e) Des Moyens Généraux",
+      "employeur": "Scor",
+      "volet": "alternance",
+      "motif": "prefilter:support",
+      "structure": "Compagnie d'assurance & mutuelle",
+      "structureId": "assurance",
+      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
+      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5113"
+    },
+    {
+      "intitule": "Conseiller Clientèle Particuliers - Prospects & Projets Transverses",
+      "employeur": "Groupe Crédit Coopératif",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-particuliers-prospects-projets-transverses-f-h-nanterre-alternance"
     },
     {
       "intitule": "Gestionnaire technique",
@@ -46,166 +266,6 @@
       "url": "https://thales.wd3.myworkdayjobs.com/en-US/Careers/job/Elancourt/ALTERNANCE---Charg-d-oprations---F-H_R0331716-1"
     },
     {
-      "intitule": "Transformation digitale et IA",
-      "employeur": "Sanofi",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/Alternance-12-mois---Transformation-digitale-et-IA_R2849518"
-    },
-    {
-      "intitule": "Gestionnaire de dossiers de surendettement",
-      "employeur": "Banque de France",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Institution publique & régulateur",
-      "structureId": "institution",
-      "source": "workday:bdf",
-      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/NANCY/Gestionnaire-de-dossiers-de-surendettement-H-F_JR100026"
-    },
-    {
-      "intitule": "Chargé de Formation",
-      "employeur": "AXA",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "axafr",
-      "url": "https://recrutement.axa.fr/nos-offres-emploi/2026-24834-charge-de-formation-alternance-12-mois-f-h"
-    },
-    {
-      "intitule": "(1 an) - Chargé de formation offre transverse et linguistique",
-      "employeur": "Groupe BPCE",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Banque de financement & d'investissement",
-      "structureId": "bfi",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/alternance-1-an-charge-de-formation-offre-transverse-et-linguistique-f-h-paris"
-    },
-    {
-      "intitule": "Attache Relation Commerciale",
-      "employeur": "Société Générale",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de financement & d'investissement",
-      "structureId": "bfi",
-      "source": "sitemapld:Société Générale",
-      "url": "https://careers.societegenerale.com/offres-d-emploi/attache-relation-commerciale-26000CZT-fr"
-    },
-    {
-      "intitule": "Attaché / Attachée de Clientèle Marché Entreprises",
-      "employeur": "CIC",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "eicards:recrutement.cic.fr",
-      "url": "https://recrutement.cic.fr/fr/offre.html?annonce=107871"
-    },
-    {
-      "intitule": "La-Roche-Posay Sustainability Apprentice",
-      "employeur": "L'Oréal",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "avature",
-      "url": "https://careers.loreal.com/fr_FR/jobs/JobDetail/12-months-Apprenticeship-La-Roche-Posay-Sustainability-Apprentice-January-2027/254614"
-    },
-    {
-      "intitule": "Property Manager",
-      "employeur": "Crédit Agricole Immobilier",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "liste:Crédit Agricole",
-      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170472-128-alternance---property-manager---asnieres-sur-seine-hf-reference--2026-115030--/"
-    },
-    {
-      "intitule": "12/ évolution digitale des analyses qualité et des processus",
-      "employeur": "Sanofi",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Marcy-lEtoile/alternance-12-24-mois-volution-digitale-des-analyses-qualit-et-des-processus_R2869975"
-    },
-    {
-      "intitule": "Conseiller/ère à Distance",
-      "employeur": "La Banque Postale",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-17534.html/alternance---conseillerereadistancefh.html"
-    },
-    {
-      "intitule": "Assistant/e Conseiller Clientèle Professionnels",
-      "employeur": "La Banque Postale",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-18033.html/alternance---assistanteconseillerclienteleprofessionnelsfh-marne.html"
-    },
-    {
-      "intitule": "Chargé de Projets Talents, Culture et Transformation",
-      "employeur": "KPMG",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Big Four & cabinets d’audit",
-      "structureId": "big4",
-      "source": "sitemapld:KPMG",
-      "url": "https://emplois.kpmg.fr/emploi/la-defense/alternant-charge-de-projets-talents-culture-et-transformation-f-h/2913/40533411264"
-    },
-    {
-      "intitule": "Assistant Administration des ventes",
-      "employeur": "Talan",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Cabinet de conseil & stratégie",
-      "structureId": "conseil",
-      "source": "smartrecruiters:talan",
-      "url": null
-    },
-    {
-      "intitule": "Charge de projets talents culture et transformation",
-      "employeur": "KPMG",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Big Four & cabinets d’audit",
-      "structureId": "big4",
-      "source": "liste:KPMG",
-      "url": "https://emplois.kpmg.fr/emploi/la-defense/alternant-charge-de-projets-talents-culture-et-transformation-f-h/2913/40533411264"
-    },
-    {
-      "intitule": "Chargé(e) Des Moyens Généraux",
-      "employeur": "Scor",
-      "volet": "alternance",
-      "motif": "prefilter:support",
-      "structure": "Compagnie d'assurance & mutuelle",
-      "structureId": "assurance",
-      "source": "oraclecloud:fa-errt-saasfaprod1.fa.ocs.oraclecloud.com",
-      "url": "https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5113"
-    },
-    {
-      "intitule": "Magasinier.e",
-      "employeur": "Sanofi",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Sisteron/alternance-24-mois---magasiniere_R2854215"
-    },
-    {
       "intitule": "Technico-Commercial Assurances",
       "employeur": "Malakoff Humanis",
       "volet": "alternance",
@@ -214,16 +274,6 @@
       "structureId": "assurance",
       "source": "talentsoft:carrieres.malakoffhumanis.com",
       "url": "https://carrieres.malakoffhumanis.com/offre-de-emploi/emploi-alternance-technico-commercial-assurances-f-h_27167.aspx"
-    },
-    {
-      "intitule": "Développement analytique & IA",
-      "employeur": "Sanofi",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/alternance-12-mois---dveloppement-analytique---IA_R2853038"
     },
     {
       "intitule": "Alternance en SAS",
@@ -236,94 +286,24 @@
       "url": "https://valeo.wd3.myworkdayjobs.com/en-US/valeo_jobs/job/Saint-Denis/Alternance-en-SAS_REQ2025061891"
     },
     {
-      "intitule": "Assistant/e Conseiller Clientèle Professionnels",
-      "employeur": "La Banque Postale",
+      "intitule": "Assistant Administration des ventes",
+      "employeur": "Talan",
       "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "liste:La Banque Postale",
-      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-17697.html/alternance---assistanteconseillerclienteleprofessionnelsfh-lille.html"
-    },
-    {
-      "intitule": "Sustainability Solutions",
-      "employeur": "Rexel",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "smartrecruiters:REXEL1",
+      "motif": "prefilter:support",
+      "structure": "Cabinet de conseil & stratégie",
+      "structureId": "conseil",
+      "source": "smartrecruiters:talan",
       "url": null
     },
     {
-      "intitule": "Conseiller Clientele Banque",
-      "employeur": "Caisse d'Epargne Rhône Alpes",
+      "intitule": "Chargé de formation offre transverse et linguistique",
+      "employeur": "Groupe BPCE",
       "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/conseiller-clientele-banque-en-alternance"
-    },
-    {
-      "intitule": "Chargé de Clientèle Particuliers",
-      "employeur": "Caisse d'Epargne Bretagne Pays de Loire",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/charge-de-clientele-particuliers-en-alternance-h-f-vannes"
-    },
-    {
-      "intitule": "New Energies and Business Development Analyst",
-      "employeur": "Air France",
-      "volet": "alternance",
-      "motif": "gate:employeur-absent-de-structures",
-      "structure": null,
-      "structureId": null,
-      "source": "talentsoft:airfrance-recrute.talent-soft.com",
-      "url": "https://airfrance-recrute.talent-soft.com/offre-de-emploi/emploi-apprenti-e-new-energies-and-business-development-analyst-f-h_24576.aspx"
-    },
-    {
-      "intitule": "Apprenticeship 12 months inclusion operations and project management",
-      "employeur": "Sanofi",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:sanofi",
-      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Gentilly/apprenticeship-12-months--project-management-in-inclusion-and-diversity_R2866616"
-    },
-    {
-      "intitule": "Conseiller Clientèle Particuliers - CFA B-School by BNP Paribas",
-      "employeur": "BNP Paribas",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
+      "motif": "prefilter:support",
       "structure": "Banque de financement & d'investissement",
       "structureId": "bfi",
-      "source": "liste:BNP Paribas",
-      "url": "https://group.bnpparibas/emploi-carriere/offre-emploi/alternance-bac-3-conseiller-clientele-particuliers-h-f-cfa-b-school-by-bnp-paribas"
-    },
-    {
-      "intitule": "Assistant conseiller clientèle",
-      "employeur": "BRED Banque Populaire",
-      "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
       "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/assistant-conseiller-clientele-alternance-f-h"
-    },
-    {
-      "intitule": "DCG / DSCG Agricole - Champagnole - Maîche - Pontarlier - Vesoul",
-      "employeur": "Forvis Mazars",
-      "volet": "alternance",
-      "motif": "gate:big4-sans-marqueur",
-      "structure": "Big Four & cabinets d’audit",
-      "structureId": "big4",
-      "source": "smartrecruiters:mazars",
-      "url": null
+      "url": "https://recrutement.bpce.fr/job/alternance-1-an-charge-de-formation-offre-transverse-et-linguistique-f-h-paris"
     },
     {
       "intitule": "Conseiller Clientèle Privée",
@@ -336,14 +316,14 @@
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170478-3-conseiller-clientele-privee-en-alternance-hf-reference--2026-112052--/"
     },
     {
-      "intitule": "Conseiller-ère Clientèle Particuliers",
-      "employeur": "Banque Populaire du Nord",
+      "intitule": "Développement analytique & IA",
+      "employeur": "Sanofi",
       "volet": "alternance",
-      "motif": "prefilter:retail",
-      "structure": "Banque de détail",
-      "structureId": "banque-detail",
-      "source": "opendatasoft:bpce.opendatasoft.com",
-      "url": "https://recrutement.bpce.fr/job/alternance-conseiller-ere-clientele-particuliers-f-h"
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:sanofi",
+      "url": "https://sanofi.wd3.myworkdayjobs.com/en-US/SanofiCareers/job/Vitry-sur-Seine/alternance-12-mois---dveloppement-analytique---IA_R2853038"
     },
     {
       "intitule": "Gestionnaire de dossiers de surendettement",
@@ -356,26 +336,6 @@
       "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/VANNES/Gestionnaire-de-dossiers-de-surendettement-H-F_JR100027"
     },
     {
-      "intitule": "Assistant(e) Ingénieur Procédés – Début",
-      "employeur": "Ipsen",
-      "volet": "alternance",
-      "motif": "gate:entreprise-sans-marqueur",
-      "structure": "Entreprise (direction financière)",
-      "structureId": "entreprise",
-      "source": "workday:ipsen",
-      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Signes/ASSISTANT-INGENIEUR-PROCEDES-ALTERNANT-H-F_R-21226"
-    },
-    {
-      "intitule": "Consultant en Investigation et Litiges",
-      "employeur": "PwC",
-      "volet": "alternance",
-      "motif": "gate:big4-sans-marqueur",
-      "structure": "Big Four & cabinets d’audit",
-      "structureId": "big4",
-      "source": "workday:pwc",
-      "url": "https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Alternant-e--en-Investigation-et-Litiges---H-F_219998WD"
-    },
-    {
       "intitule": "Candidatures spontanées stages, alternances",
       "employeur": "BRED Banque Populaire",
       "volet": "alternance",
@@ -386,24 +346,64 @@
       "url": "https://recrutement.bpce.fr/job/candidatures-spontanees-stages-alternances-cdd-cdi-h-f-2"
     },
     {
-      "intitule": "Growth & Sales Analyst - ESG Solutions - Apprenticeship",
-      "employeur": "Sesamm",
+      "intitule": "Conseiller Relation Clients Assurance Vie",
+      "employeur": "Allianz France",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Compagnie d'assurance & mutuelle",
+      "structureId": "assurance",
+      "source": "phenom:careers.allianz.com",
+      "url": null
+    },
+    {
+      "intitule": "Assistant(e) Ingénieur Procédés – Début",
+      "employeur": "Ipsen",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "workday:ipsen",
+      "url": "https://ipsen.wd103.myworkdayjobs.com/en-US/Ipsen_Careers/job/Signes/ASSISTANT-INGENIEUR-PROCEDES-ALTERNANT-H-F_R-21226"
+    },
+    {
+      "intitule": "Gestionnaire de dossiers de surendettement",
+      "employeur": "Banque de France",
+      "volet": "alternance",
+      "motif": "prefilter:retail",
+      "structure": "Institution publique & régulateur",
+      "structureId": "institution",
+      "source": "workday:bdf",
+      "url": "https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/NANCY/Gestionnaire-de-dossiers-de-surendettement-H-F_JR100026"
+    },
+    {
+      "intitule": "New Energies and Business Development Analyst",
+      "employeur": "Air France",
       "volet": "alternance",
       "motif": "gate:employeur-absent-de-structures",
       "structure": null,
       "structureId": null,
-      "source": "greenhouse:sesamm",
-      "url": null
+      "source": "talentsoft:airfrance-recrute.talent-soft.com",
+      "url": "https://airfrance-recrute.talent-soft.com/offre-de-emploi/emploi-apprenti-e-new-energies-and-business-development-analyst-f-h_24576.aspx"
     },
     {
-      "intitule": "Consultant Junior Stratégie IT - Organisation et Performance de la DSI",
-      "employeur": "Deloitte",
+      "intitule": "Conseiller/ère à Distance",
+      "employeur": "La Banque Postale",
       "volet": "alternance",
-      "motif": "gate:big4-sans-marqueur",
-      "structure": "Big Four & cabinets d’audit",
-      "structureId": "big4",
-      "source": "workday:fina",
-      "url": "https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Alternant-Consultant-Junior-Stratgie-IT---Organisation-et-Performance-de-la-DSI-F-H_R-7658"
+      "motif": "prefilter:retail",
+      "structure": "Banque de détail",
+      "structureId": "banque-detail",
+      "source": "liste:La Banque Postale",
+      "url": "https://www.labanquepostale.com/candidats/offres-d-emploi/nos-offres-d-emploi.job-17534.html/alternance---conseillerereadistancefh.html"
+    },
+    {
+      "intitule": "Sustainability Solutions",
+      "employeur": "Rexel",
+      "volet": "alternance",
+      "motif": "gate:entreprise-sans-marqueur",
+      "structure": "Entreprise (direction financière)",
+      "structureId": "entreprise",
+      "source": "smartrecruiters:REXEL1",
+      "url": null
     }
   ]
 }

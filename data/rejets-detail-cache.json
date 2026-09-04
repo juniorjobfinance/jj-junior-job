@@ -1,18 +1,18 @@
 {
-  "genere": "2026-09-04T00:44:12.585Z",
-  "total": 4179,
+  "genere": "2026-09-04T00:54:26.299Z",
+  "total": 4185,
   "par_etage": [
     "classifieur : 2118",
     "seniorite:premier-passage : 787",
-    "age:employeur-direct : 655",
-    "doublon : 265",
+    "age:employeur-direct : 656",
+    "doublon : 270",
     "age:apres-datation : 217",
     "seniorite:sur-la-fiche : 137"
   ],
   "par_volet": [
     "cdi-cdd : 3734",
-    "stage : 267",
-    "alternance : 124",
+    "stage : 272",
+    "alternance : 125",
     "vie : 54"
   ],
   "offres": [
@@ -8971,7 +8971,7 @@
       "url": "https://recrutement.bpce.fr/job/conseiller-clientele-f-h-19"
     },
     {
-      "intitule": "(1 an) - Chargé de formation offre transverse et linguistique",
+      "intitule": "Chargé de formation offre transverse et linguistique",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -24690,7 +24690,7 @@
       "url": "https://recrutement.bpce.fr/job/business-analyst-credit-consommation-f-h"
     },
     {
-      "intitule": "(1 an) - Chargé de projets méthodes audit",
+      "intitule": "Chargé de projets méthodes audit",
       "employeur": "BPCE IG",
       "volet": "alternance",
       "structure": "Fintech & services financiers spécialisés",
@@ -24745,7 +24745,7 @@
       "url": "https://recrutement.bpce.fr/job/gestionnaire-alm-senior-f-h"
     },
     {
-      "intitule": "1 an - Chargé de souscription Cautions Structurées",
+      "intitule": "Chargé de souscription Cautions Structurées",
       "employeur": "BPCE Compagnie Europeenne de Garanties et Cautions",
       "volet": "alternance",
       "structure": "Fintech & services financiers spécialisés",
@@ -25174,7 +25174,7 @@
       "url": "https://recrutement.bpce.fr/job/business-analyst-credit-consommation-f-h"
     },
     {
-      "intitule": "(1 an) - Data analyste - Analyste quantitatif",
+      "intitule": "Data analyste - Analyste quantitatif",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -25268,7 +25268,7 @@
       "structure": "Cabinet de conseil & stratégie",
       "famille": "Conseil & Transformation",
       "etage": "age:employeur-direct",
-      "precision": "625 j",
+      "precision": "626 j",
       "source": "recruitee:8advisory",
       "url": "https://8advisory.recruitee.com/o/cfo-advisory-analyste-2"
     },
@@ -25933,7 +25933,7 @@
       "url": "https://ekez.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1/job/19471"
     },
     {
-      "intitule": "1 year -Settlement Manager",
+      "intitule": "Settlement Manager",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -25944,7 +25944,7 @@
       "url": "https://ekez.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1/job/19587"
     },
     {
-      "intitule": "2 years - Accounting Controller and Finance Project Officer",
+      "intitule": "Accounting Controller and Finance Project Officer",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -25955,7 +25955,7 @@
       "url": "https://ekez.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1/job/19817"
     },
     {
-      "intitule": "1 year - Cross-functional Risk Analyst",
+      "intitule": "Cross-functional Risk Analyst",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -25966,7 +25966,7 @@
       "url": "https://ekez.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_1/job/20155"
     },
     {
-      "intitule": "1 year - Risk Analyst",
+      "intitule": "Risk Analyst",
       "employeur": "Groupe BPCE",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -26379,7 +26379,7 @@
       "structure": "Big Four & cabinets d’audit",
       "famille": "Comptabilité & Consolidation",
       "etage": "age:employeur-direct",
-      "precision": "213 j",
+      "precision": "214 j",
       "source": "teamtailor:bdofrance",
       "url": "https://bdofrance.teamtailor.com/jobs/7153673-directeur-de-mission-en-expertise-comptable-f-h-creation-d-equipe"
     },
@@ -29563,6 +29563,17 @@
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170470-138--leader-expert-engagement-credit-corporate-hf-hf-reference--2026-111914--/"
     },
     {
+      "intitule": "Chargé service clients institutionnels et souverains - pôle International",
+      "employeur": "Amundi",
+      "volet": "alternance",
+      "structure": "Société de gestion",
+      "famille": "Gestion d'actifs",
+      "etage": "age:employeur-direct",
+      "precision": "140 j",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170478-124-alternance---charge-service-clients-institutionnels-et-souverains---pole-international---hf-reference--2026-109473--/"
+    },
+    {
       "intitule": "Analyste Risque",
       "employeur": "Crédit Agricole Leasing & Factoring",
       "volet": "cdi-cdd",
@@ -29816,7 +29827,7 @@
       "url": "https://recrutement.natixis.com/job/charge-de-conformite-surveillance-marches-f-h"
     },
     {
-      "intitule": "1 an - Gestionnaire Settlement",
+      "intitule": "Gestionnaire Settlement",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -29827,7 +29838,7 @@
       "url": "https://recrutement.natixis.com/job/alternance-1-an-gestionnaire-settlement-f-h"
     },
     {
-      "intitule": "1 an - Analyste des Risques",
+      "intitule": "Analyste des Risques",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -29838,7 +29849,7 @@
       "url": "https://recrutement.natixis.com/job/alternance-1-an-analyste-des-risques-f-h"
     },
     {
-      "intitule": "1 an - Analyste Risques Transverses",
+      "intitule": "Analyste Risques Transverses",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -29849,7 +29860,7 @@
       "url": "https://recrutement.natixis.com/job/alternance-1-an-analyste-risques-transverses-f-h"
     },
     {
-      "intitule": "2 ans - Contrôleur Comptable et Chargé de Projet Finance",
+      "intitule": "Contrôleur Comptable et Chargé de Projet Finance",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -29998,7 +30009,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Opérations & Middle-office",
       "etage": "age:employeur-direct",
-      "precision": "63 j",
+      "precision": "64 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026070005-manager-middle-office-f-h"
     },
@@ -30042,7 +30053,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Actuariat & Assurance technique",
       "etage": "age:employeur-direct",
-      "precision": "70 j",
+      "precision": "71 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026060072-charge-de-relation-grands-comptes-et-courtage-h-f"
     },
@@ -30053,7 +30064,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Actuariat & Assurance technique",
       "etage": "age:employeur-direct",
-      "precision": "70 j",
+      "precision": "71 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_35654-axa-health-business-comptable-technique-assurance-f-h"
     },
@@ -30108,7 +30119,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Actuariat & Assurance technique",
       "etage": "age:employeur-direct",
-      "precision": "71 j",
+      "precision": "72 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026060137-souscripteur-construction-grands-comptes-f-h"
     },
@@ -30185,7 +30196,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Actuariat & Assurance technique",
       "etage": "age:employeur-direct",
-      "precision": "98 j",
+      "precision": "99 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026050129-inspecteur-commercial-assurances-collectives-f-h"
     },
@@ -30251,7 +30262,7 @@
       "structure": "Compagnie d'assurance & mutuelle",
       "famille": "Actuariat & Assurance technique",
       "etage": "age:employeur-direct",
-      "precision": "141 j",
+      "precision": "142 j",
       "source": "axafr",
       "url": "https://recrutement.axa.fr/nos-offres-emploi/AXAFR_2026040073-expert-en-reglement-de-sinistres-caution-f-h"
     },
@@ -39914,6 +39925,17 @@
       "url": "https://pjtpartners.wd1.myworkdayjobs.com/en-US/Careers/job/Paris/Analyst---Strategic-Advisory--France-Coverage-_R0003497"
     },
     {
+      "intitule": "Business Management",
+      "employeur": "Natixis",
+      "volet": "stage",
+      "structure": "Banque de financement & d'investissement",
+      "famille": "Opérations & Middle-office",
+      "etage": "doublon",
+      "precision": "fondue dans opendatasoft:bpce.opendatasoft.com",
+      "source": "opendatasoft:bpce.opendatasoft.com",
+      "url": "https://recrutement.bpce.fr/job/stage-6-mois-business-management-f-h"
+    },
+    {
       "intitule": "Assistant Banquier Privé",
       "employeur": "Banque Palatine",
       "volet": "alternance",
@@ -40827,6 +40849,17 @@
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/1292-170466-4-assistant-pmo-hf-reference--2026-113507--/"
     },
     {
+      "intitule": "Inside Sales - Data-as-a-Service",
+      "employeur": "Amundi",
+      "volet": "stage",
+      "structure": "Société de gestion",
+      "famille": "Gestion d'actifs",
+      "etage": "doublon",
+      "precision": "fondue dans liste:Crédit Agricole",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170478-124-stage---inside-sales---data-as-a-service-hf-reference--2026-112310--/"
+    },
+    {
       "intitule": "Analyste Sustainable Investment Banking",
       "employeur": "Crédit Agricole CIB",
       "volet": "stage",
@@ -40924,6 +40957,17 @@
       "precision": "fondue dans liste:Crédit Agricole",
       "source": "liste:Crédit Agricole",
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/577-170464-4-analyste-risque-de-liquidite-hf-reference--2026-114164--/"
+    },
+    {
+      "intitule": "Analyste - Monitoring Portefeuille ESG",
+      "employeur": "Crédit Agricole CIB",
+      "volet": "stage",
+      "structure": "Banque de financement & d'investissement",
+      "famille": "Gestion d'actifs",
+      "etage": "doublon",
+      "precision": "fondue dans liste:Crédit Agricole",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-analyste---monitoring-portefeuille-esg-hf-reference--2026-115179--/"
     },
     {
       "intitule": "Gestionnaire Référentiels Tiers",
@@ -41410,6 +41454,17 @@
       "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170466-4-business-analyst-junior-hf-reference--2026-114457--/"
     },
     {
+      "intitule": "Chargé(e) de projets ESG/Immobilier Durable",
+      "employeur": "Amundi",
+      "volet": "stage",
+      "structure": "Société de gestion",
+      "famille": "Gestion d'actifs",
+      "etage": "doublon",
+      "precision": "fondue dans liste:Crédit Agricole",
+      "source": "liste:Crédit Agricole",
+      "url": "https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170472-124-stage---chargee-de-projets-esgimmobilier-durable-hf-reference--2026-113646--/"
+    },
+    {
       "intitule": "Back Office Amundi Finance",
       "employeur": "Amundi",
       "volet": "stage",
@@ -41839,6 +41894,17 @@
       "url": "https://recrutement.natixis.com/job/stage-6-mois-analyste-esg-f-h"
     },
     {
+      "intitule": "Recherche Vote Engagement ESG",
+      "employeur": "Mirova",
+      "volet": "stage",
+      "structure": "Société de gestion",
+      "famille": "Gestion d'actifs",
+      "etage": "doublon",
+      "precision": "fondue dans opendatasoft:bpce.opendatasoft.com",
+      "source": "bpce:Natixis",
+      "url": "https://recrutement.natixis.com/job/stage-6-mois-recherche-vote-engagement-esg-f-h"
+    },
+    {
       "intitule": "Gestionnaire Middle Office Corporate & Funds Financing",
       "employeur": "Natixis",
       "volet": "cdi-cdd",
@@ -41960,7 +42026,7 @@
       "url": "https://recrutement.natixis.com/job/stage-6-mois-valuation-risk-analyst-f-h"
     },
     {
-      "intitule": "2 ans - Financial Data Analyst Engineer",
+      "intitule": "Financial Data Analyst Engineer",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -42015,7 +42081,7 @@
       "url": "https://recrutement.natixis.com/job/stage-6-mois-business-management-f-h"
     },
     {
-      "intitule": "2 ans - Business Management",
+      "intitule": "Business Management",
       "employeur": "Natixis",
       "volet": "alternance",
       "structure": "Banque de financement & d'investissement",
@@ -42965,7 +43031,7 @@
       "employeur": "Ardian",
       "volet": "cdi-cdd",
       "structure": "Fonds d'investissement",
-      "famille": "Capital-investissement",
+      "famille": "Gestion d'actifs",
       "etage": "age:apres-datation",
       "precision": "65 j",
       "source": "workday:ardian",
