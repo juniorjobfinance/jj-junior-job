@@ -160,6 +160,52 @@ elle se contente d'être fausse, et d'être poussée.
 
 *Cette règle a été écrite dans ce fichier par un `split`/`join`.*
 
+### Toute vérification compare un APRÈS à un AVANT
+
+**Lire l'état final seul ne prouve rien : on ne sait pas s'il était déjà là.**
+
+Le 04/09/2026, le même défaut a pris quatre formes en une journée, et il a
+fallu les quatre pour le voir comme une famille :
+
+| ce qu'on a lu | ce qui manquait |
+|---|---|
+| `CLS = 0` | l'instrument n'avait jamais été vu rendre autre chose que 0 |
+| `+ 0 octet` | « 3 septembre » et « 4 septembre » ont la même longueur |
+| « déjà fait » | la garde matchait un mot présent AVANT le changement |
+| « 117 offres » après un clic | le compteur affichait déjà 117 avant |
+
+Les quatre lectures étaient exactes. Les quatre conclusions étaient fausses,
+parce qu'aucune ne comparait.
+
+**La forme correcte, partout :**
+
+```js
+const avant = mesurer();
+agir();
+const apres = mesurer();
+// et c'est l'ÉCART qu'on rapporte, jamais « apres » seul
+```
+
+Cela vaut pour un fichier qu'on modifie (comparer le texte, pas seulement sa
+longueur), pour un compteur qu'on lit après un clic, pour un instrument dont
+on croit le zéro — **le faire dire non-zéro sur un cas connu avant de le
+croire** — et pour un contrôle qu'on ajoute : on ne l'a pas vérifié tant qu'on
+ne l'a pas vu échouer.
+
+C'est la même exigence que « un contrôle qu'on n'a jamais vu échouer n'est pas
+vérifié », généralisée : **un instrument, une garde, un compteur et un contrôle
+sont la même chose — quelque chose qui prétend savoir. Aucun ne se croit sur
+parole.**
+
+**Et la cinquième forme, qui a suivi le jour même : comparer un après à un
+avant ne suffit pas, il faut les comparer DANS LA MÊME UNITÉ.** Une mesure de
+déplacement du classifieur rendait « 912 déplacements sur 912 » : elle
+comparait le LIBELLÉ stocké dans `offres.js` (« Gestion d'actifs ») au CODE
+rendu par `classify()` (« gestion-actifs »). Les deux valeurs étaient justes,
+la comparaison était vide de sens. Avant de conclure d'un écart, vérifier que
+les deux membres se mesurent avec la même règle — même champ, même unité, même
+échelle.
+
 ---
 
 ## Pièges vérifiés plusieurs fois
@@ -265,6 +311,18 @@ elle se contente d'être fausse, et d'être poussée.
   périmètre, niveau, famille, maison, séniorité) peuvent toutes dire « ok »
   sur une offre que `isFinanceOfferFor` écarte ensuite. Pour juger de
   l'entrée, appeler `isFinanceOfferFor(emp, titre)` directement.
+- **Tout motif se teste contre le texte APRÈS normalisation, jamais contre le
+  titre tel qu'il s'affiche.** `normalize()` met en minuscules, retire les
+  accents, et remplace apostrophes et barres obliques par des espaces :
+  « RFP Specialist » y devient « rfp specialist », « Alternant DCG / DSCG » y
+  devient « alternant dcg dscg », « appels d'offres » y devient
+  « appels d offres ». Le 04/09/2026, quatre motifs proposés sur dix-sept
+  étaient donc **inertes** — `\bRFP\b`, `\bD[CS]CG\b`, `\bCFO advisory\b`,
+  `\bBIC ?/ ?BNC\b` — parce que leur casse avait été recopiée depuis les
+  titres affichés. **Un motif qui ne peut jamais matcher est pire qu'un motif
+  faux : il ne se plaint jamais**, il n'attrape rien, et on croit avoir couvert
+  un vocabulaire qu'on n'a pas couvert. Passer chaque motif par
+  `normalize()` avant de le poser, sur un titre réel.
 - **Une garde d'idempotence cherche la marque de l'état APRÈS changement,
   jamais un mot présent dans les deux états.** Une garde posée sur `'tags',`
   pour protéger un bloc qui contenait déjà `'familleId', 'structureId',

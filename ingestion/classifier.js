@@ -210,6 +210,11 @@ const PREFILTER = [
 // ---------------------------------------------------------------------------
 
 const FINANCE_MARKERS = [
+  // Ajoute le 04/09/2026 : un diplome comptable francais est un marqueur
+  // finance. Forvis Mazars « DCG / DSCG Agricole » etait rejete a la PORTE
+  // alors que Deloitte « Comptable - DSCG » etait classe. Mesure avant
+  // pose : 1 seule offre entre, aucune hors cabinet comptable.
+  /\bd[cs]cg\b/,
   // Ajoutes le 04/09/2026 : du vocabulaire de metier absent de la porte, qui
   // bloquait des offres reelles — Talan « Post trade Business Analyst » et
   // « Business Analyst Lutte Anti Blanchiment », Banque de France « PMO MNBC
@@ -258,6 +263,9 @@ const FAMILIES = [
     id: 'fusions-acquisitions',
     label: 'Fusions & Acquisitions',
     patterns: [
+      // Restructuring et situations speciales : Forvis Mazars, EY, Eight
+      // Advisory. Lazard « Restructuring & Debt Advisory » reste en M&A.
+      [/\b(?:restructuring|turnaround|special situations?)\b/, 8],
       [/\bm&a\b/, 9],
       [/\bfusions? ?-? ?acquisitions?\b/, 9],
       [/\btransaction services\b/, 9],
@@ -318,6 +326,12 @@ const FAMILIES = [
     id: 'financements-coverage',
     label: 'Financements & Coverage',
     patterns: [
+      // Cautions et garanties internationales : BNP « Redacteur - Garanties
+      // Internationales », HSBC, SG, Allianz, Coface. « garanties » seul est
+      // partout en assurance (les garanties d'un contrat) : d'ou la
+      // qualification. Verifie le 04/09 : Natixis « Gestionnaire Back Office
+      // Garanties » reste en Operations.
+      [/\b(?:garanties? internationales?|caution)\b/, 8],
       [/\bcoverage\b/, 8],
       [/\bcorporate banking\b/, 8],
       [/\bnetwork banking\b/, 8],
@@ -393,6 +407,18 @@ const FAMILIES = [
     id: 'gestion-actifs',
     label: 'Gestion d\'actifs',
     patterns: [
+      // Investissement comme METIER. Ne doit JAMAIS attraper « Investment
+      // Banking » : verifie le 04/09 chez Goldman, Lazard, JPMorgan et
+      // Rothschild, tous restent en Fusions & Acquisitions.
+      [/\b(?:analyst investment|investissements? actions)\b/, 7],
+      // Reponse aux appels d'offres institutionnels. En minuscules et sans
+      // apostrophe : normalize() abaisse la casse et remplace l'apostrophe
+      // par une espace.
+      [/\b(?:rfp|appels? d offres?)\b/, 6],
+      // Recherche buy-side, chez Natixis Investment Managers. Verifie : les
+      // « Equity Research » d'Oddo restent en Marches financiers, leur motif
+      // y pese davantage.
+      [/\b(?:research analyst|analyste recherche)\b/, 8],
       [/\basset management\b/, 8],
       [/\bgestion d actifs\b/, 8],
       [/\bgerant(?:e)? (?:de )?portefeuille\b/, 9],
@@ -497,6 +523,16 @@ const FAMILIES = [
     id: 'comptabilite-consolidation',
     label: 'Comptabilité & Consolidation',
     patterns: [
+      // Categories fiscales francaises. La barre oblique devient une espace
+      // apres normalize() : « BIC/BNC » y est « bic bnc ».
+      [/\bbic bnc\b/, 8],
+      // Diplomes comptables francais. Aussi ajoutes aux MARQUEURS FINANCE :
+      // Forvis Mazars « DCG / DSCG Agricole » etait rejete a la porte alors
+      // que Deloitte « Comptable - DSCG » etait classe.
+      [/\bd[cs]cg\b/, 9],
+      // L'arrete comptable. Mesure sur les 912 publiees : le mot n'y apparait
+      // nulle part ailleurs, aucune ambiguite constatee.
+      [/\barretes?\b/, 8],
       // La fiscalite nomme une DISCIPLINE, pas une chaine accidentelle : le
       // catalogue porte deja « Comptabilite Fiscale » (Rothschild) et
       // « reglementations fiscales » (CACIB). Le bon test n'est pas « combien
@@ -527,6 +563,15 @@ const FAMILIES = [
     id: 'controle-gestion-tresorerie',
     label: 'Contrôle de gestion & Trésorerie',
     patterns: [
+      // Analyse de performance economique, chez Louis Vuitton. Mesure faite :
+      // n'attrape rien d'autre dans les 912 publiees.
+      [/\b(?:analyse (?:de )?performance economique|business performance analyst)\b/, 6],
+      // La version francaise de « transfer pricing », qui fonctionnait deja.
+      [/\bprix de transfert\b/, 8],
+      // Au SINGULIER, et c'est deliberé : CACIB a « Data analyst Cash
+      // Management » et « Global Cash Management Inbound Origination » en
+      // Financements, qui ne doivent pas bouger.
+      [/\bcash manager\b/, 7],
       [/\bcontrole de gestion\b/, 9],
       [/\bcontroleur(?:se)? de gestion\b/, 9],
       // « non controlling interests » = interets minoritaires, du vocabulaire
@@ -583,6 +628,10 @@ const FAMILIES = [
     id: 'risques-conformite',
     label: 'Risques & Conformité',
     patterns: [
+      // Investigation et litiges, chez PwC.
+      [/\b(?:investigation et litiges|forensic)\b/, 7],
+      // Controle de niveau 2 : vocabulaire bancaire standard, sans ambiguite.
+      [/\bcontroleu?r? de niveau 2\b/, 9],
       [/\brisques? (?:de )?credit\b/, 9],
       [/\bcredit risk\b/, 9],
       [/\brisques? (?:de )?marche\b/, 9],
@@ -632,6 +681,14 @@ const FAMILIES = [
     id: 'operations-middle-office',
     label: 'Opérations & Middle-office',
     patterns: [
+      // Qualifie a dessein. Le generique « operations financieres » deplacait
+      // PwC « Consultant en operations financieres » de Conseil vers ici, et
+      // ce a n'importe quel poids — teste a 7, 5 et 4.
+      [/\bcharge d operations financieres\b/, 7],
+      // Retrocessions de commissions. ATTENTION : « Retrocession Analyst » chez
+      // Scor est de la REASSURANCE et doit rester en Actuariat — verifie le
+      // 04/09, son motif actuariel l'emporte.
+      [/\b(?:trailer fees|retrocessions?)\b/, 8],
       [/\bmiddle ?-? ?office\b/, 8],
       [/\bback ?-? ?office\b/, 8],
       [/\bfront to back\b/, 9],
@@ -706,6 +763,8 @@ const FAMILIES = [
     id: 'conseil-transformation',
     label: 'Conseil & Transformation',
     patterns: [
+      // Conseil a la fonction finance : exactement le perimetre qu'on garde.
+      [/\bcfo advisory\b/, 8],
       [/\bconsultant(?:e)?\b/, 4],
       [/\bconseil\b/, 4],
       [/\badvisory\b/, 4],
