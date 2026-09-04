@@ -72,6 +72,7 @@ const EMPLOYER_STRUCTURE = {
   'agicap': 'fintech',
   'air france': 'entreprise',
   'alptis': 'assurance',
+  'leocare': 'assurance',       // neo-assureur auto & habitation
   'bpce achats & services': 'banque-detail',
   'bpce factor': 'fintech',
   'bpce lease': 'fintech',
@@ -95,7 +96,8 @@ const EMPLOYER_STRUCTURE = {
   'societe des brasseries': 'entreprise',
   'sodexo': 'entreprise',
   'verspieren': 'assurance',
-  'yousign': 'fintech',
+  'yousign': 'entreprise',     // editeur de signature electronique, pas un
+                               // service financier : l'axe decrit l'employeur
   'koni': 'entreprise',
   // --- Vues a la collecte du 03/09/2026, sans structure -------------------
   'sar': 'entreprise',

@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 4 septembre 2026, au soir.**
+**Dernière mise à jour : 4 septembre 2026, tard le soir.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -10,49 +10,39 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**998 offres** · **104 maisons** servies sur **206** référencées.
+**912 offres** · **200 employeurs** distincts · **15 familles** · **11 types
+de structure**, tous représentés. Mesuré sur `offres.js` le 04/09/2026 au soir.
 
-> Les 103 maisons qui ne servent rien **ne sont pas 103 pannes**. Une maison
-> sans poste junior ouvert en ce moment est dans son état normal, et c'est le
-> cas de la plupart : vérifié le 03/09 sur Air Liquide (4 offres finance en
-> France, pas une de plus à prendre) et sur Santander (portail vide). Le
-> sous-ensemble réellement actionnable est bien plus étroit — les maisons dont
-> le site AFFICHE des offres et dont on collecte zéro. Un seul cas prouvé à ce
-> jour : Capgemini.
+> Le chiffre a baissé — 1 006 le 03/09, 912 le 04/09 — et c'est voulu. Le
+> durcissement du périmètre (956 → 900 offres retenues) et la porte
+> « publication sans structure » écartent désormais ce qui aurait été publié
+> et introuvable. *Moins d'offres, mais toutes justes.*
 
 | Onglet | Offres |
-|---|---|
-| Stage | 500 |
-| CDI · CDD | 305 |
-| Alternance | 102 |
-| VIE | 91 |
+|---|---:|
+| Stage | 450 |
+| CDI · CDD | 331 |
+| Alternance | 83 |
+| VIE | 48 |
 
-Les deux séances des 2 et 3 septembre ont fait passer le catalogue de **798 à
-1006 offres**, et l'alternance de **60 à 116** — elle était le point faible
-depuis le début.
+> **L'alternance est saisonnière.** Un catalogue d'alternance maigre relevé en
+> septembre ne prouve rien : le contrat démarre à la rentrée, donc les annonces
+> se publient de février à juillet. La mesure qui compte est celle du
+> printemps. Ne rien durcir ni assouplir sur la foi de ce compteur.
 
-**Qualité mesurée le 03/09/2026 :**
+**Les cinq familles les plus fournies** : Comptabilité & Consolidation 117,
+Risques & Conformité 117, Contrôle de gestion & Trésorerie 101, Audit &
+Contrôle interne 73, Capital-investissement 70. Le résidu « Autres métiers de
+la finance » tient à **14 offres, soit 1,5 %** — il était à 26,7 % le
+2 septembre.
 
-- 900/1006 datées (89 %) ; les autres affichent « toujours en ligne chez
-  l'employeur, date inconnue » et passent en fin de liste ;
-- plus ancienne offre datée : 120 jours. Il y a **deux** seuils, et le récap
-  n'en citait qu'un : **60 jours pour un CDI·CDD** (`MAX_AGE_JOURS_CDI_CDD`),
-  120 pour les autres volets chez un employeur direct, 30 sur un agrégateur ;
-- résidu « Autres métiers de la finance » : 5,9 % ;
-- les 13 familles métier tiennent entre 3,9 % et 15,8 % ;
-- les 11 types de structure entre 3,5 % et 20,6 % ;
-- 0 poste senior sur les 311 offres de l'onglet CDI · CDD ;
-- 2 offres sur 1006 mal rangées d'onglet (`audit-catalogue.js`).
+**Les cinq structures les plus fournies** : BFI 189, Entreprise 131, Big Four
+110, Assurance 88, Banque d’affaires 78.
 
-**Douze premières maisons** : PME et start-ups (72, uniquement du VIE),
-BPCE 68, Deloitte 67, Banque de France 41, LVMH 39, Société Générale 36,
-Natixis 34, Crédit Agricole CIB 32, Oddo BHF 32, Lazard 31, Eurazeo 30,
-BNP Paribas 30.
+**Les tables** : `maisons.txt` 214 lignes, `structures.js` 290 employeurs.
 
-Le matin même, ce classement était dominé par Airbus (97), Air Liquide (71) et
-Thales (69) — le fourre-tout « Autres métiers de la finance » avait enflé à
-26,7 % du catalogue et publiait des ajusteurs composite. Voir `DECISIONS.md`
-§15.
+**Le poids servi** : `offres.js` 712 Ko, `index.html` 784 Ko, les quinze pages
+de famille 2 337 Ko au total. Le sitemap déclare **18 URL**.
 
 ---
 
@@ -1043,3 +1033,109 @@ entre deux relevés ne sont pas réglés, leurs offres ont simplement expiré et
 les maisons reviendront. **Inscrire l'union des relevés, jamais le dernier.**
 Vérifié à cette occasion : BPCE Factor, BPCE Lease et Agicap étaient déjà
 couverts — les deux premiers par la regex `bpce` de `maisons.txt`.
+
+
+---
+
+## Le 4 septembre au soir : les pages de famille, la fiche métier, le registre
+
+### Quinze pages de famille, en ligne
+
+Chaque famille a sa page — `/familles/<slug>.html` — avec le texte que Victor
+a écrit pour elle. Ce texte est le produit, pas du remplissage de
+référencement : il explique un métier à quelqu’un qui ne le connaît pas.
+
+- **15 pages**, le sitemap passe de 3 à **18 URL** ;
+- **état neutre par défaut** : la page montre TOUTE la famille, et ses quatre
+  boutons de contrat filtrent à l’intérieur. Ce sont des filtres relâchables
+  (`aria-pressed`), pas des onglets — un onglet ne se relâche pas. Les volets
+  vides sont masqués.
+
+Mesuré sur Comptabilité & Consolidation : **117 offres** à l’arrivée, **79**
+sur CDI · CDD, **11** sur Stage, **18** sur Alternance, et **117** au
+relâchement. Exclusivité respectée, couleurs par contrat conservées.
+
+### Le « ? » et sa bulle — un composant, deux emplacements
+
+Le texte ne s’étale plus sur la page : un **« ? »** à côté du h1 l’ouvre dans
+une petite bulle. Le même « ? » est à côté de chaque famille dans la colonne
+de l’accueil, avec la même implémentation (`.jj-aide` + `.jj-bulle`,
+`brancherAide()`). Voir `DECISIONS.md` §32 et §33.
+
+**Ce que la mesure a tranché**, sur un téléphone de 375 × 812 :
+
+| | intro visible sous le h1 | bulle au clic |
+|---|---:|---:|
+| part d’écran (pire cas) | **58 %** | **0 %** au repos |
+| première carte, pire cas | y = **834** ❌ hors écran | y = **613** ✅ |
+| pages où la 1ʳᵉ carte est visible | 14 / 15 | **15 / 15** |
+
+Et les propriétés vérifiées une à une :
+
+- **la page ne bouge pas** à l’ouverture — 219 → 219 sur ordinateur,
+  369 → 369 sur téléphone. La bulle est en `position: fixed`, donc hors flux
+  ouverte comme fermée ;
+- **le texte est dans le HTML servi, bulle fermée**, sur les quinze pages —
+  c’est toute la raison d’être de ces pages ;
+- **rien n’est coupé** : aucune des quinze bulles ne déborde son cadre
+  — 304 x 441 px sur ordinateur, 304 x 424 px sur telephone ;
+- **le clic sur le « ? » ne fait rien d’autre** : aucune case cochée,
+  compteur inchangé, mêmes cartes — mesuré avant et après ;
+- trois fermetures : deuxième clic sur le « ? », clic à côté, Échap — et
+  Échap **rend le focus au bouton** ;
+- un clic DANS la bulle ne la ferme pas : on peut y sélectionner du texte.
+
+### Le registre des employeurs vus — la fenêtre glissante
+
+`data/employeurs-inconnus.json` était une PHOTO, écrasée chaque matin. Trois
+relevés successifs comptaient 26, 18 puis 17 employeurs : la photo du jour
+sous-déclarait d'au moins un tiers, et reconstituer l'union demandait de
+relire trois commentaires d'issue à la main.
+
+`ingestion/registre-employeurs.js` fusionne au lieu d’écraser :
+
+- **`data/employeurs-vus.json`**, commité (vérifié : non exclu par
+  `.gitignore`), une entrée par employeur avec `premiereVue`, `derniereVue`,
+  `passages` et `offresMax` ;
+- l'issue liste les employeurs vus **au moins une fois dans les 30 derniers
+  jours** — trente jours couvrent un cycle de publication complet — et affiche
+  depuis quand chacun n'a plus été vu ;
+- **il se nettoie tout seul** : un employeur inscrit dans `structures.js`
+  cesse d’apparaître dès le lendemain. La seule chose qui sort un nom de la
+  liste, c’est de régler le problème ;
+- oubli à 180 jours, pour que le fichier ne croisse pas indéfiniment ;
+- le SUFFIXE le suit : un passage `--depuis-cache` écrit dans son propre
+  fichier et ne touche jamais au registre commité.
+
+`ingestion/test-registre.js` : **24 assertions**, horloge simulée — sans quoi
+la fenêtre de 30 jours et l'oubli à 180 ne seraient testables qu'en six mois.
+La suite a été **éprouvée en la cassant** : en remplaçant la fusion par
+l'ancien écrasement, elle sort en erreur sur quatre assertions dont celle qui
+porte le sens (« absente du relevé, TOUJOURS au registre »).
+
+**Un défaut trouvé par cette épreuve** : `ecartJours` comparait une date-jour
+à un instant. L'écart valait 0,66 jour, arrondi à 1 — une maison vue ce matin
+s'affichait « hier ». La fenêtre de trente jours n'en souffrait pas ; c'est ce
+qui rend ce défaut long à trouver : il ne casse que ce qu'on lit, jamais ce
+qu'on filtre.
+
+### Les cinq maisons arbitrées : quatre l’étaient déjà
+
+Sur Servier, Yousign, Alptis, Leocare et KONI France, **quatre étaient déjà
+inscrites**. Seule Leocare manquait (→ `assurance`). Et Yousign était rangée
+en `fintech` : corrigée en `entreprise`, car elle vend de la signature
+électronique — l'axe structure décrit l'employeur, pas ses clients.
+
+**La première mesure s'était trompée de fonction** : elle interrogeait
+`inferSector`, qui rend un libellé par défaut, au lieu de `resolveStructure`,
+qui est la vraie porte. Les cinq paraissaient couvertes. C’est le piège du
+champ lu qui n’est pas le champ demandé, appliqué à une fonction.
+
+### Ce qui reste ouvert
+
+- Le registre **part de zéro** : il se remplira au premier passage du matin.
+  L'union des trois relevés de Victor n'a pas pu être reprise — elle ne vit
+  que dans les commentaires de l'issue. Quelques passages suffiront à la
+  reconstituer.
+- PageSpeed mobile n’a pas été remesuré depuis l’élagage de `offres.js`
+  (quota épuisé le 04/09 au soir). Les ~56 ms attendus restent une estimation.

@@ -1062,3 +1062,108 @@ structures`.
 
 **Un fichier qui existe à deux endroits n'a pas deux versions : il en a une
 juste et une qui attend de la remplacer.**
+
+
+---
+
+## 31. Un relevé écrasé chaque matin est une photo, pas une mémoire
+
+**Tranché le 04/09/2026.**
+
+`data/employeurs-inconnus.json` était réécrit à chaque passage. Il portait le
+relevé du matin, et le relevé du matin effaçait celui de la veille.
+
+**La mesure qui a tranché** : trois relevés successifs comptaient **26, puis
+18, puis 17** employeurs. Un employeur qui disparaît entre deux relevés n’est
+pas réglé pour autant — ses offres ont simplement expiré, et la maison
+reviendra publier. La photo du jour sous-déclarait donc **d’au moins un**
+**tiers**, et reconstituer l’union demandait de relire trois commentaires
+d’issue à la main.
+
+**La règle** : ce qui alimente une décision humaine récurrente se tient dans
+un registre **fusionné et versionné**, jamais dans un instantané. Un
+instantané ne se nettoie pas, il se remplace.
+
+`data/employeurs-vus.json` est commité par le passage quotidien. La fenêtre
+est de **30 jours** : au seuil du pipeline une annonce CDI vit 60 jours, donc
+trente jours attrapent toute maison ayant publié au moins une fois dans le
+mois. Sept jours rateraient les maisons à rotation lente ; quatre-vingt-dix
+feraient enfler la liste de maisons qui ne publient plus. Oubli à 180 jours.
+
+**La propriété qui rend le mécanisme sain, et qu’aucune liste manuelle**
+**n’aurait** : il se nettoie tout seul. Un employeur inscrit dans
+`structures.js` cesse d’apparaître dès le lendemain, puisque
+`resolveStructure` lui répond. Aucune liste de « déjà traités » à tenir — la
+seule chose qui sort un nom de la liste, c’est de régler le problème.
+
+---
+
+## 32. Le texte explicatif se consulte, il ne se traverse pas
+
+**Tranché le 04/09/2026, après trois mesures.**
+
+Les quinze pages de famille existent pour un texte : celui qui explique un
+métier à quelqu’un qui ne le connaît pas. La question était où le mettre.
+
+**Premier essai — le texte visible sous le h1.** Mesuré sur un téléphone de
+375 × 812 : l’intro occupait de 38 % à **58 %** de l’écran selon la famille,
+et sur la plus longue la première offre tombait à y = 834, soit **hors de
+l’écran**. Une page d’offres où l’on ne voit aucune offre.
+
+**Deuxième essai — un panneau modal.** Il assombrissait tout l’écran pour
+une définition de trois lignes. Un panneau se subit ; une définition se
+consulte.
+
+**Retenu — une bulle au clic, ancrée au « ? ».** Elle est petite (300 px,
+corps 0,71 rem), elle flotte par-dessus, et elle se referme de trois façons :
+nouveau clic sur le « ? », clic à côté, Échap.
+
+**Le chiffre qui tranche** : sur les quinze pages, la première carte est
+désormais visible sans défiler sur 375 × 812 — le pire cas est à y = 613 sur
+812, contre 834 avant.
+
+**Les deux propriétés qui ne se négocient pas :**
+
+1. **Le texte reste dans le HTML servi, bulle fermée.** C’est la raison
+   d’être de ces pages : Google doit le lire. `hidden` l’y laisse ;
+   l’injecter par JavaScript l’en aurait sorti.
+2. **`position: fixed` dans les deux états.** La bulle est hors flux qu’elle
+   soit ouverte ou fermée, donc l’ouvrir ne peut pas décaler la page.
+   Vérifié : la première carte reste à y = 219 sur ordinateur et y = 369 sur
+   téléphone, avant comme après ouverture.
+
+---
+
+## 33. Un seul composant, deux emplacements
+
+**Tranché le 04/09/2026.**
+
+Le même « ? » sert à côté du h1 d’une page de famille et à côté de chaque
+famille dans la colonne de l’accueil. **Une seule implémentation** :
+`.jj-aide` + `.jj-bulle`, et une fonction `brancherAide()` qui délègue
+depuis le document.
+
+La délégation n’est pas un détail de style : les quinze boutons de la
+colonne sont **réécrits à chaque rendu**. Un écouteur posé sur chaque bouton
+disparaîtrait au premier filtre appliqué ; un écouteur posé sur le document
+survit à tout.
+
+**Pourquoi pas une infobulle au survol**, qui était l’idée de départ :
+
+1. **Le survol n’existe pas sur téléphone.** C’est la moitié des visites
+   d’un site d’offres.
+2. **Le survol n’existe pas au clavier.** Une bulle qui ne s’ouvre qu’à la
+   souris est invisible pour qui n’en utilise pas.
+
+Le bouton est un vrai `<button>` — donc atteignable en tabulation — et porte
+`aria-expanded` et `aria-controls`. Échap referme et **rend le focus au
+bouton**, sans quoi la tabulation repartirait du début du document.
+
+**Le piège rencontré en chemin** : le « ? » vit à côté du `<label>`, jamais
+dedans — imbriqué, un clic dessus cocherait la case. Mais du coup, le
+masquage des familles sans offre, qui portait sur `.famille-option`,
+laissait quatorze points d’interrogation orphelins flotter dans la colonne
+d’une page de famille. **Envelopper des éléments déplace le niveau auquel
+les règles s’appliquent, et chaque règle posée sur l’ancien niveau doit
+suivre** — le trait de séparation des lignes est tombé dans le même piège la
+même heure.

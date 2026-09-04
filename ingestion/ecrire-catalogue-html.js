@@ -23,11 +23,13 @@
 // sont.
 const fs = require('fs');
 const path = require('path');
+const TEXTES = require('./familles-textes');
 
 const BORNE_GABARIT = /\/\/ ==== JJ:GABARIT:DEBUT[\s\S]*?\/\/ ==== JJ:GABARIT:FIN/;
 const BORNE_OFFRES = /(<!--JJ:OFFRES:DEBUT-->)[\s\S]*?(<!--JJ:OFFRES:FIN-->)/;
 const BORNE_PEPITES = /(<!--JJ:PEPITES:DEBUT-->)[\s\S]*?(<!--JJ:PEPITES:FIN-->)/;
 const BORNE_POINTS = /(<!--JJ:POINTS:DEBUT-->)[\s\S]*?(<!--JJ:POINTS:FIN-->)/;
+const BORNE_TEXTES = /(\/\*JJ:TEXTES:DEBUT\*\/)[\s\S]*?(\/\*JJ:TEXTES:FIN\*\/)/;
 const BANDEAU = /<div id="pepites" class="pepites"( hidden)?>/;
 
 // La plage découpée contient, au premier niveau, la construction de « els » —
@@ -176,6 +178,29 @@ function ecrireCatalogueHtml(offres, suffixe = '') {
       ? '<div id="pepites" class="pepites">'
       : '<div id="pepites" class="pepites" hidden>');
 
+  // --- Les textes des familles, pour la fiche metier de la colonne -----
+  // Meme source que les quinze pages /familles/ : les recopier ici les
+  // condamnerait a diverger.
+  if (!BORNE_TEXTES.test(html)) {
+    throw new Error('Les bornes JJ:TEXTES sont introuvables dans index.html.');
+  }
+  // require differe : pages-familles.js nous require pour `chargerGabarit`.
+  // En tete de fichier, les deux modules se demanderaient leurs exports avant
+  // de les avoir remplis, et le second servi recevrait un objet vide.
+  const { slug } = require('./pages-familles');
+  const textes = {};
+  for (const [famille, t] of Object.entries(TEXTES)) {
+    textes[famille] = {
+      intro: t.intro || '',
+      distinction: t.distinction || '',
+      url: '/familles/' + slug(famille) + '.html',
+    };
+  }
+  // `</script>` dans un texte fermerait la balise et casserait la page ;
+  // `\u003c` traverse JSON.parse sans que le parseur HTML le voie.
+  const json = JSON.stringify(textes).split('<').join('\\u003c');
+  sortie = sortie.replace(BORNE_TEXTES, (_, a, b) =>
+    a + 'window.__FAMILLES_TEXTES__ = ' + json + ';' + b);
   fs.writeFileSync(cible, sortie);
   return {
     groupes,

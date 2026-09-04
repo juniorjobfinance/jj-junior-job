@@ -373,12 +373,36 @@ les deux membres se mesurent avec la même règle — même champ, même unité,
   Ne jamais durcir, assouplir ni « réparer » quoi que ce soit sur la foi d'un
   compteur d'alternance lu à l'automne : la mesure qui compte est celle du
   printemps.
+- **`<!--` est un commentaire JavaScript.** Borner une charge utile dans un
+  `<script>` avec les marqueurs HTML habituels — `<!--JJ:X:DEBUT-->` — commente
+  la ligne entière : c'est un vestige de 1996, quand on cachait les scripts aux
+  navigateurs qui ne les comprenaient pas. Aucune erreur, aucun avertissement,
+  la variable reste simplement `undefined`. Les bornes d'un bloc de JavaScript
+  s'écrivent `/*JJ:X:DEBUT*/`. Corollaire : un contrôle qui se contente de lire
+  la charge entre les bornes ne voit rien — il faut l'EXÉCUTER, comme le
+  navigateur le fera.
+- **Rien ne doit toucher au DOM au chargement d'`index.html`.**
+  `ecrire-catalogue-html.js` évalue ce script avec un faux DOM pour en extraire
+  le gabarit des cartes. Une IIFE qui appelle `querySelector` fait planter le
+  pipeline avant qu'il écrive une seule carte. Tout branchement va dans
+  `demarrer()`.
+- **La fonction interrogée doit être la fonction qui décide.** Pour vérifier si
+  cinq maisons avaient une structure, la mesure a appelé `inferSector` — qui
+  rend un libellé PAR DÉFAUT — au lieu de `resolveStructure`, qui est la porte
+  réelle. Les cinq paraissaient couvertes ; l'une ne l'était pas, et une autre
+  l'était de travers. C'est « un champ lu doit être un champ demandé »,
+  appliqué aux fonctions : avant de conclure, vérifier que la fonction
+  interrogée est bien celle dont le pipeline lit le verdict.
 
 ---
 
 ## Ce qui reste à faire
 
-Voir `DECISIONS.md` et les fiches mémoire. En résumé au 02/09/2026 :
-l'alternance est le point faible (56 offres sur 759), 76 maisons de référence
-sur 153 ne servent encore rien, et les chantiers de visibilité (Search Console,
-données structurées, analytics) sont volontairement reportés.
+**`ETAT.md`**, et lui seul. Ce paragraphe portait autrefois des chiffres —
+nombre d’offres, maisons muettes, alternance — recopiés d’une séance de
+septembre 2026. Trois jours plus tard ils étaient faux, et ils envoyaient
+réparer ce qui marchait.
+
+C’est la règle du haut de ce fichier, appliquée à lui-même : **un document
+qui recopie un chiffre en maintient une version périmée.** Les chantiers
+ouverts sont dans `ETAT.md`, les arbitrages dans `DECISIONS.md`.

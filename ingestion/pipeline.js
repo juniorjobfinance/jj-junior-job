@@ -13,6 +13,8 @@
 
 const fs = require('fs');
 const { ecrireCatalogueHtml } = require('./ecrire-catalogue-html.js');
+const { ecrirePagesFamilles, slug: slugFamille } = require('./pages-familles.js');
+const registreEmployeurs = require('./registre-employeurs.js');
 const path = require('path');
 // Le cache de collecte est gzippe : il porte les descriptions ENTIERES.
 const zlib = require('zlib');
@@ -4077,6 +4079,38 @@ function rapportDeClassement(offres) {
       2
     )
   );
+
+  // --- Le registre : une mémoire, pas une photo -----------------------
+  // Le fichier ci-dessus est écrasé chaque matin ; celui-ci fusionne. Trois
+  // relevés successifs comptaient 26, 18 puis 17 employeurs — un employeur
+  // qui disparaît n'a pas été réglé, ses offres ont expiré. Le SUFFIXE le
+  // suit : un passage sur cache écrit dans son propre fichier et ne touche
+  // jamais au registre commité.
+  const cheminRegistre = path.join(DATA_DIR, `employeurs-vus${SUFFIXE}.json`);
+  const releves = inconnus.map(([emp, offres]) => ({
+    emp,
+    offres,
+    categorie: 'sans-structure',
+  }));
+  const parMaisonAbsente = new Map();
+  for (const o of rapportClassement.rejetsMaisonRef || []) {
+    parMaisonAbsente.set(o.entreprise, (parMaisonAbsente.get(o.entreprise) || 0) + 1);
+  }
+  for (const [emp, offres] of parMaisonAbsente) {
+    releves.push({ emp, offres, categorie: 'maison-absente' });
+  }
+  const fusion = registreEmployeurs.fusionner(
+    registreEmployeurs.charger(cheminRegistre),
+    releves
+  );
+  registreEmployeurs.enregistrer(cheminRegistre, fusion.registre);
+  console.log('\n=== REGISTRE DES EMPLOYEURS VUS ===');
+  console.log('  ' + fusion.registre.employeurs.length + ' au total — ' + fusion.nouveaux +
+    ' nouveau(x), ' + fusion.revus + ' revu(s), ' + fusion.oublies + ' oublié(s) après ' +
+    registreEmployeurs.OUBLI_JOURS + ' jours');
+  console.log('  dans la fenêtre de ' + registreEmployeurs.FENETRE_JOURS + ' jours : ' +
+    registreEmployeurs.actifs(fusion.registre, 'sans-structure').length + ' sans structure, ' +
+    registreEmployeurs.actifs(fusion.registre, 'maison-absente').length + ' hors maisons.txt');
   fs.writeFileSync(
     path.join(DATA_DIR, `rejets-maisonref${SUFFIXE}.json`),
     JSON.stringify(
@@ -4344,7 +4378,25 @@ function writeOutput(offers) {
   const body = `window.__OFFRES__ = ${JSON.stringify(publicOffers, null, 2)};\n`;
   fs.writeFileSync(OUTPUT_PATH, header + body);
   writeRss(publicOffers);
-  writeSitemap();
+  // Les quinze pages par famille. Une famille sans texte dans
+  // familles-textes.js n'est PAS publiee : quinze variantes de la meme page
+  // seraient du contenu duplique pour Google et une perte de temps pour un
+  // visiteur. Le rapport dit lesquelles ont ete sautees.
+  let pagesFam = { ecrites: [], sautees: [], inconnues: [] };
+  try {
+    pagesFam = ecrirePagesFamilles(publicOffers, SUFFIXE);
+    console.log(`   ${pagesFam.ecrites.length} page(s) de famille ecrite(s)` +
+      (pagesFam.sautees.length
+        ? `, ${pagesFam.sautees.length} sautee(s) faute de texte : ` + pagesFam.sautees.join(', ')
+        : '') +
+      (pagesFam.inconnues.length
+        ? `. ENTREES ORPHELINES dans familles-textes.js : ` + pagesFam.inconnues.join(', ')
+        : ''));
+  } catch (e) {
+    console.error('   !! Les pages de famille n ont PAS ete ecrites : ' + e.message);
+  }
+
+  writeSitemap(pagesFam.ecrites.map((e) => e.famille));
 
   // Le catalogue est aussi ecrit DANS index.html, pour que Google le lise sans
   // executer de JavaScript. Le gabarit de carte n'est pas recopie ici : il est
@@ -4386,10 +4438,20 @@ function xmlEscape(s) {
 // matins : le générer avec le reste garantit que la date déclarée aux moteurs
 // est la vraie date du dernier passage, et non celle du jour où quelqu'un a
 // pensé à mettre le fichier à jour.
-function writeSitemap() {
+// Les pages de famille sont passees en parametre plutot que recalculees : le
+// sitemap ne doit declarer que ce qui a REELLEMENT ete ecrit. Une page
+// annoncee mais absente est un 404 servi a Google.
+function writeSitemap(famillesEcrites = []) {
   const jour = new Date().toISOString().slice(0, 10);
   const pages = [
     { chemin: '/', freq: 'daily', priorite: '1.0', maj: jour },
+    // Les pages par famille : la seule longue traine possible sans page par
+    // offre ni lien sortant abandonne. Priorite 0.8 — sous l'accueil, tres
+    // au-dessus des pages legales.
+    ...famillesEcrites.map((f) => ({
+      chemin: '/familles/' + slugFamille(f) + '.html',
+      freq: 'daily', priorite: '0.8', maj: jour,
+    })),
     { chemin: '/mentions-legales.html', freq: 'yearly', priorite: '0.2', maj: jour },
     { chemin: '/confidentialite.html', freq: 'yearly', priorite: '0.2', maj: jour },
   ];

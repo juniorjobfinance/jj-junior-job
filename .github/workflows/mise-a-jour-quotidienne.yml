@@ -53,6 +53,7 @@ jobs:
           node ingestion/test-echantillon.js
           node ingestion/test-seniorite.js
           node ingestion/verif-structures.js
+          node ingestion/test-registre.js
           # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
           # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
           # On le lance pour son journal, pas pour son verdict.
@@ -210,7 +211,20 @@ jobs:
           # pour que Google le lise sans executer de JavaScript. Ne pas le
           # commiter laisserait le HTML de la veille en ligne pendant que
           # offres.js se met a jour — deux catalogues sur la meme page.
-          git add offres.js offres.xml sitemap.xml index.html
+          # Les quinze pages par famille sont generees elles aussi : sans
+          # elles au commit, le sitemap declarerait des URL absentes.
+          # Le registre des employeurs vus est une MEMOIRE : non commite, il
+          # repart de zero chaque matin et redevient la photo du jour, qui
+          # sous-declarait d au moins un tiers. C est le seul fichier de
+          # data/ qui doit survivre au passage.
+          git add offres.js offres.xml sitemap.xml index.html familles/
+          # Le premier passage CREE le registre ; les suivants le mettent a jour.
+          # `git add` sur un chemin absent sort en 128, et l etape tourne sous
+          # `set -e` : sans ce test, le premier passage echouerait au moment meme
+          # ou il produit le fichier.
+          if [ -f data/employeurs-vus.json ]; then
+            git add data/employeurs-vus.json
+          fi
           if git diff --staged --quiet; then
             echo "Aucun changement à publier."
             echo "modifie=non" >> "$GITHUB_OUTPUT"

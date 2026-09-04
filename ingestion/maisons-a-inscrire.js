@@ -28,6 +28,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const registre = require('./registre-employeurs.js');
 
 const RACINE = path.join(__dirname, '..');
 const DATA = path.join(RACINE, 'data');
@@ -49,18 +50,57 @@ function dernier(base) {
   }
 }
 
+// --- Le registre, et la photo du jour en secours -------------------------
+//
+// La photo du jour sous-déclare : trois relevés successifs ont compté 26, 18
+// puis 17 employeurs, et un employeur qui disparaît n'a pas été réglé — ses
+// offres ont expiré, la maison reviendra. On lit donc les employeurs vus au
+// moins une fois dans la fenêtre, pas ceux vus ce matin. La photo reste en
+// secours pour le tout premier passage, avant que le registre existe.
+const reg = dernier('employeurs-vus');
+const AUJ = new Date();
+
+function depuisRegistre(categorie) {
+  const m = new Map();
+  for (const e of registre.actifs(reg, categorie, AUJ)) {
+    m.set(e.emp, { offres: e.offres || 0, vue: e.derniereVue, passages: e.passages || 1 });
+  }
+  return m;
+}
+
 // --- 1. Les maisons vues et jetées ---------------------------------------
 const mr = dernier('rejets-maisonref');
-const maisons = new Map();
-for (const o of (mr && mr.offres) || []) {
-  maisons.set(o.entreprise, (maisons.get(o.entreprise) || 0) + 1);
+let maisons;
+if (reg) maisons = depuisRegistre('maison-absente');
+else {
+  maisons = new Map();
+  for (const o of (mr && mr.offres) || []) {
+    const e = maisons.get(o.entreprise) || { offres: 0, vue: null, passages: 1 };
+    e.offres++;
+    maisons.set(o.entreprise, e);
+  }
 }
 
 // --- 2. Les employeurs sans structure -------------------------------------
-const ei = dernier('employeurs-inconnus');
-const sansStructure = new Map();
-for (const e of (ei && (ei.employeurs || ei.offres)) || []) {
-  if (e && e.emp) sansStructure.set(e.emp, e.offres || 1);
+let sansStructure;
+if (reg) sansStructure = depuisRegistre('sans-structure');
+else {
+  const ei = dernier('employeurs-inconnus');
+  sansStructure = new Map();
+  for (const e of (ei && (ei.employeurs || ei.offres)) || []) {
+    if (e && e.emp) sansStructure.set(e.emp, { offres: e.offres || 1, vue: null, passages: 1 });
+  }
+}
+
+// « vue il y a N jours » : une maison vue ce matin et une maison vue il y a
+// vingt-huit jours ne demandent pas la même attention, et rien d'autre dans
+// le tableau ne les distingue.
+function quand(vue) {
+  if (!vue) return '';
+  const j = registre.ecartJours(vue, AUJ);
+  if (j <= 0) return "aujourd'hui";
+  if (j === 1) return 'hier';
+  return 'il y a ' + j + ' j';
 }
 
 const total = maisons.size + sansStructure.size;
@@ -81,15 +121,15 @@ lignes.push("offres manquent, celles qui sont en ligne restent exactes.");
 lignes.push('');
 
 if (maisons.size) {
-  const n = [...maisons.values()].reduce((a, b) => a + b, 0);
+  const n = [...maisons.values()].reduce((a, b) => a + b.offres, 0);
   lignes.push('## ' + maisons.size + ' maison(s) vues et jetées — ' + n + ' offre(s)');
   lignes.push('');
   lignes.push("Elles ont servi une offre de finance sans figurer dans `ingestion/maisons.txt`.");
   lignes.push('');
-  lignes.push('| Maison | Offres |');
-  lignes.push('|---|---:|');
-  for (const [e, k] of [...maisons].sort((a, b) => b[1] - a[1])) {
-    lignes.push('| ' + e + ' | ' + k + ' |');
+  lignes.push('| Maison | Offres | Vue |');
+  lignes.push('|---|---:|---|');
+  for (const [e, d] of [...maisons].sort((a, b) => b[1].offres - a[1].offres)) {
+    lignes.push('| ' + e + ' | ' + d.offres + ' | ' + quand(d.vue) + ' |');
   }
   lignes.push('');
   lignes.push("**Attention avant d'inscrire** : une filiale ou une marque s'ajoute en ALIAS");
@@ -103,10 +143,10 @@ if (sansStructure.size) {
   lignes.push('Ils publient, mais `ingestion/structures.js` ne leur donne pas de type :');
   lignes.push('la porte finance rejette toutes leurs offres, en silence.');
   lignes.push('');
-  lignes.push('| Employeur | Offres |');
-  lignes.push('|---|---:|');
-  for (const [e, k] of [...sansStructure].sort((a, b) => b[1] - a[1]).slice(0, 60)) {
-    lignes.push('| ' + e + ' | ' + k + ' |');
+  lignes.push('| Employeur | Offres | Vue |');
+  lignes.push('|---|---:|---|');
+  for (const [e, d] of [...sansStructure].sort((a, b) => b[1].offres - a[1].offres).slice(0, 60)) {
+    lignes.push('| ' + e + ' | ' + d.offres + ' | ' + quand(d.vue) + ' |');
   }
   if (sansStructure.size > 60) lignes.push('| … et ' + (sansStructure.size - 60) + ' autre(s) | |');
   lignes.push('');

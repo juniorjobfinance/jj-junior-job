@@ -34,6 +34,10 @@ const path = require('path');
 // pipeline peut être ajoutée ici ; celles-ci sont les portes par lesquelles une
 // offre passe, dans l'ordre où elle les rencontre.
 const NOMS = [
+  // Le sitemap, pour pouvoir le régénérer sans relancer une collecte de
+  // dix-huit minutes : il déclare désormais les quinze pages par famille, et
+  // une page écrite mais non déclarée reste invisible de Google.
+  'writeSitemap',
   // Le chemin complet d'une offre brute vers le catalogue.
   'normalize',
   // La lecture des dates, qu'on veut pouvoir éprouver seule : une date fausse

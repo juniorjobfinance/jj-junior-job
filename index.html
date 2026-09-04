@@ -233,7 +233,7 @@
     border-bottom: 1px solid var(--line);
     background: var(--paper-raised);
   }
-  nav.tabs button[role="tab"] {
+  nav.tabs button {
     appearance: none;
     background: none;
     border: none;
@@ -246,12 +246,12 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  nav.tabs button[role="tab"]:hover { color: var(--ink); }
+  nav.tabs button:hover { color: var(--ink); }
   /* Une puce de la couleur du contrat devant chaque onglet. Elle est là même
      quand l'onglet n'est pas actif : c'est ce qui rend les quatre volets
      lisibles au premier regard, et ce qui relie visuellement un onglet aux
      pastilles des cartes qu'il ouvre. */
-  nav.tabs button[role="tab"]::before {
+  nav.tabs button::before {
     content: "";
     display: inline-block;
     width: 8px;
@@ -269,11 +269,16 @@
   nav.tabs button[data-volet="cdi-cdd"] { --puce: var(--cdi); }
   /* Actif : le trait sous l'onglet prend sa couleur, et le libellé passe en
      encre pleine pour que la sélection se lise sans dépendre de la teinte. */
-  nav.tabs button[data-volet="stage"][aria-selected="true"] { color: var(--stage); border-bottom-color: var(--stage); }
-  nav.tabs button[data-volet="alternance"][aria-selected="true"] { color: var(--alternance); border-bottom-color: var(--alternance); }
-  nav.tabs button[data-volet="vie"][aria-selected="true"] { color: var(--vie); border-bottom-color: var(--vie); }
-  nav.tabs button[data-volet="cdi-cdd"][aria-selected="true"] { color: var(--cdi); border-bottom-color: var(--cdi); }
-  nav.tabs button[role="tab"][aria-selected="true"] { font-weight: 700; }
+  nav.tabs button[data-volet="stage"][aria-selected="true"],
+  nav.tabs button[data-volet="stage"][aria-pressed="true"] { color: var(--stage); border-bottom-color: var(--stage); }
+  nav.tabs button[data-volet="alternance"][aria-selected="true"],
+  nav.tabs button[data-volet="alternance"][aria-pressed="true"] { color: var(--alternance); border-bottom-color: var(--alternance); }
+  nav.tabs button[data-volet="vie"][aria-selected="true"],
+  nav.tabs button[data-volet="vie"][aria-pressed="true"] { color: var(--vie); border-bottom-color: var(--vie); }
+  nav.tabs button[data-volet="cdi-cdd"][aria-selected="true"],
+  nav.tabs button[data-volet="cdi-cdd"][aria-pressed="true"] { color: var(--cdi); border-bottom-color: var(--cdi); }
+  nav.tabs button[aria-selected="true"],
+  nav.tabs button[aria-pressed="true"] { font-weight: 700; }
   /* Le compteur prend la couleur de son contrat, comme la puce, et passe en
      gras : gris et maigre, il se lisait comme une note de bas de page alors
      que c'est l'information que le visiteur cherche en balayant la barre.
@@ -324,7 +329,7 @@
       -webkit-overflow-scrolling: touch;
     }
     nav.tabs::-webkit-scrollbar { display: none; }
-    nav.tabs button[role="tab"] { flex: 0 0 auto; white-space: nowrap; }
+    nav.tabs button { flex: 0 0 auto; white-space: nowrap; }
   }
   @media (max-width: 640px) {
     /* Pourquoi le compteur reste SOUS le libellé, et non à côté comme sur
@@ -339,12 +344,12 @@
        Reste ~11 px de jeu avec « 998 offres », et ~19 dès que le total
        s'abrège (voir chiffreCompact dans le script). */
     nav.tabs { padding: 0.5rem 0.25rem; gap: 0.22rem; }
-    nav.tabs button[role="tab"] {
+    nav.tabs button {
       padding: 0.5rem 0.42rem;
       font-size: 0.82rem;
       line-height: 1.2;
     }
-    nav.tabs button[role="tab"]::before { width: 6px; height: 6px; margin-right: 0.25rem; }
+    nav.tabs button::before { width: 6px; height: 6px; margin-right: 0.25rem; }
     /* La marge gauche ne tombe pas à zéro : le bouton est centré, mais sa
        première ligne commence par la puce, qui pousse le LIBELLÉ vers la
        droite. On rend ce décalage au compteur pour qu'il s'aligne sur le mot
@@ -563,7 +568,48 @@
     line-height: 1.25;
     cursor: pointer;
   }
-  .famille-option + .famille-option { border-top: 1px solid rgba(220, 214, 201, 0.45); }
+  /* La ligne enveloppe le label ET le « ? ». Le trait de separation porte
+     donc sur elle : laisse sur .famille-option, il disparaitrait, les
+     labels n'etant plus adjacents. */
+  .famille-ligne { display: flex; align-items: center; gap: 0.15rem; }
+  .famille-ligne .famille-option { flex: 1; min-width: 0; }
+  .famille-ligne + .famille-ligne { border-top: 1px solid rgba(220, 214, 201, 0.45); }
+
+  /* Le « ? » : discret au repos — il ne doit pas concurrencer le nom de la
+     famille — franc au survol et au focus. Un vrai <button>, donc atteignable
+     au clavier et annonce comme tel. */
+  .jj-aide {
+    /* Ni flex ni grid : le bouton sert dans une ligne de la colonne ET a
+       cote d'un h1. `inline-flex` + `vertical-align` l'alignent sans rien
+       supposer de son conteneur. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    padding: 0;
+    border: 1px solid var(--line-fort);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    /* Pas de voile : --ink-soft a 55 % sur blanc donne 2,5:1, sous le seuil
+       de 4,5:1 exige pour du petit texte — et le « ? » est du texte. La
+       discretion vient de la taille et de la forme. */
+    transition: color 0.12s, border-color 0.12s, background 0.12s;
+  }
+  .jj-aide:hover,
+  .jj-aide:focus-visible {
+    color: var(--accent-fort);
+    border-color: var(--accent-fort);
+    background: var(--accent-doux);
+  }
   .famille-option .famille-nom { display: flex; align-items: center; gap: 0.4rem; }
   .famille-option input { margin: 0; }
   .famille-option .count {
@@ -574,6 +620,65 @@
     min-width: 1.6em;
     text-align: right;
   }
+  /* La bulle d'aide. Un seul composant, deux emplois : à côté du h1 d'une
+     page de famille, et à côté de chaque famille dans la colonne de
+     l'accueil.
+
+     `position: fixed` + `hidden` : hors flux dans les DEUX états. L'ouvrir
+     ne peut donc pas décaler la page — les offres ne descendent jamais d'un
+     pixel. Et `hidden` la laisse dans le HTML servi, ce qui est toute la
+     raison d'être des pages de famille : Google doit lire ce texte. */
+  .jj-bulle {
+    position: fixed;
+    z-index: 90;
+    width: min(19rem, calc(100vw - 1.6rem));
+    /* Assez haut pour que l’intro la plus longue (718 car.) et sa distinction
+       tiennent sans être coupées. */
+    max-height: min(74vh, 34rem);
+    overflow: auto;
+    padding: 0.75rem 0.85rem 0.8rem;
+    border: 1px solid var(--line-fort);
+    border-radius: 10px;
+    background: var(--paper-raised);
+    box-shadow: 0 6px 14px rgba(28, 25, 23, 0.07), 0 16px 40px rgba(28, 25, 23, 0.14);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--ink);
+    text-align: left;
+    font-weight: 400;
+  }
+  .jj-bulle p { margin: 0 0 0.6rem; }
+  .jj-bulle p:last-child { margin-bottom: 0; }
+  /* Le titre porte le nom du métier et un filet : sans lui, on ouvrait une
+     bulle sans savoir de quoi elle parlait. */
+  .jj-bulle .jj-bulle-titre {
+    margin: 0 0 0.55rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.775rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  /* « Ne pas confondre » : un encart teinté plutôt qu’un simple filet. Il se
+     distingue de l’explication au premier coup d’œil. */
+  .jj-bulle .jj-bulle-distinction {
+    margin-top: 0.55rem;
+    padding: 0.45rem 0.55rem;
+    border-radius: 6px;
+    background: var(--accent-doux);
+    color: var(--ink-soft);
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+  .jj-bulle .jj-bulle-lien {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-weight: 600;
+    color: var(--accent-fort);
+    text-decoration: none;
+  }
+  .jj-bulle .jj-bulle-lien:hover { text-decoration: underline; }
   select#structure-filter,
   select#lieu-filter,
   select#emp-filter {
@@ -2085,6 +2190,11 @@
      jamais deploye (il est dans .gitignore), il ne servait qu'en local. -->
 <script defer src="offres.js"></script>
 
+<!-- Les textes des familles, ecrits par le pipeline depuis
+     ingestion/familles-textes.js. Ils alimentent la fiche metier de la
+     colonne de gauche ET les quinze pages /familles/. Une seule source. -->
+<script>/*JJ:TEXTES:DEBUT*/window.__FAMILLES_TEXTES__ = {"Fusions & Acquisitions":{"intro":"Le M&A, c'est conseiller une entreprise qui en achète une autre, qui se vend, ou qui fusionne. Concrètement, un analyste junior construit des modèles financiers, valorise l'entreprise cible par plusieurs méthodes, rédige les documents de présentation envoyés aux acheteurs potentiels, et coordonne les audits d'acquisition. C'est le métier le plus demandé par les étudiants en finance et le plus sélectif : on y entre presque exclusivement par un stage long, souvent après un premier stage ailleurs. Les horaires sont réputés lourds et ils le sont. En échange, on apprend à lire une entreprise plus vite que dans n'importe quel autre poste junior.","distinction":"À ne pas confondre avec Financements & Coverage : le M&A conseille sur l'opération, le financement l'accompagne en prêtant l'argent. Ni avec le Transaction Services des Big Four, qui audite les comptes d'une cible pendant que le M&A exécute la transaction.","url":"/familles/fusions-et-acquisitions.html"},"Marchés financiers":{"intro":"Sous ce nom se cachent quatre métiers différents. Le sales parle aux clients institutionnels et leur propose des produits ; le trader tient le risque de la banque et cote des prix ; le structureur conçoit les produits sur mesure ; l'analyste recherche publie des avis sur des sociétés ou des émetteurs. Un junior arrive presque toujours par un stage en assistanat de l'un de ces quatre, sur une classe d'actifs précise — actions, taux, crédit, change, matières premières. Le rythme est celui du marché : tôt le matin, intense quand ça bouge, et l'apprentissage est très rapide parce que les décisions se prennent en direct.","distinction":"À ne pas confondre avec Opérations & Middle-office, qui traite les opérations une fois qu'elles sont conclues. Le front office prend le risque, le middle et le back le sécurisent.","url":"/familles/marches-financiers.html"},"Capital-investissement":{"intro":"Un fonds de capital-investissement achète des parts d'entreprises non cotées, les accompagne pendant quelques années, puis les revend. L'analyste junior étudie les dossiers qui arrivent, construit le modèle d'acquisition, coordonne les audits, et suit ensuite les sociétés déjà en portefeuille. La différence avec le conseil est fondamentale : ici on engage l'argent du fonds, donc on assume la décision et on vit avec pendant cinq ans. Les stages sont rares et très recherchés, souvent après un premier passage en M&A ou en Transaction Services, mais certaines maisons recrutent directement en sortie d'école.","distinction":"À ne pas confondre avec les Fusions & Acquisitions : le M&A conseille et est payé à l'opération, le capital-investissement investit et est payé à la performance. Beaucoup de juniors font le premier pour rejoindre le second.","url":"/familles/capital-investissement.html"},"Gestion d'actifs":{"intro":"Gérer de l'actif, c'est investir l'argent d'autres personnes — fonds de pension, assureurs, particuliers — selon un mandat précis. Autour du gérant gravitent l'analyste financier qui étudie les sociétés en portefeuille, l'analyste ISR qui évalue leurs pratiques environnementales et sociales, le spécialiste produit qui explique la stratégie aux clients, et l'équipe qui répond aux appels d'offres. C'est un secteur où l'analyse compte plus que la vitesse : on cherche à avoir raison sur trois ans, pas sur trois minutes. Beaucoup de postes juniors passent par l'assistanat de gestion ou l'analyse sectorielle.","distinction":"À ne pas confondre avec la Banque privée & Patrimoine : la gestion d'actifs gère des fonds, la banque privée gère la fortune de personnes. Ni avec les Marchés financiers, qui vendent et cotent là où la gestion achète et détient.","url":"/familles/gestion-d-actifs.html"},"Banque privée & Patrimoine":{"intro":"La banque privée accompagne des particuliers fortunés, souvent des chefs d'entreprise, sur l'ensemble de leur patrimoine : placements, transmission, fiscalité, structuration juridique. Le banquier privé tient la relation ; derrière lui, l'ingénieur patrimonial construit les montages, et le family office coordonne l'ensemble des actifs d'une même famille. Un junior commence en assistanat de banquier privé ou en ingénierie patrimoniale, et le métier demande autant de droit et de fiscalité que de finance. C'est aussi l'un des rares métiers de la finance où la relation humaine compte autant que la technique.","distinction":"À ne pas confondre avec le conseil bancaire en agence, qui s'adresse au grand public et ne figure pas sur ce site. La banque privée commence là où le patrimoine devient assez complexe pour exiger une ingénierie.","url":"/familles/banque-privee-et-patrimoine.html"},"Comptabilité & Consolidation":{"intro":"La comptabilité produit les chiffres sur lesquels tout le reste s'appuie. Le comptable enregistre et justifie les opérations, prépare les arrêtés trimestriels et annuels ; le consolideur additionne les comptes de toutes les filiales d'un groupe pour en faire un seul état, en réglant les écarts de normes et de devises. En cabinet, l'expertise comptable fait le même travail pour plusieurs clients à la fois, ce qui est une excellente école pour voir beaucoup d'entreprises en peu de temps. C'est l'une des deux familles les plus fournies de ce site, et l'une des seules où l'alternance mène très souvent à l'embauche.","distinction":"À ne pas confondre avec le Contrôle de gestion : la comptabilité rend compte de ce qui s'est passé, avec des règles strictes et un lecteur extérieur. Le contrôle de gestion explique et prévoit, pour un lecteur interne.","url":"/familles/comptabilite-et-consolidation.html"},"Contrôle de gestion & Trésorerie":{"intro":"Le contrôleur de gestion est celui qui explique pourquoi les chiffres sont ce qu'ils sont, et ce qu'ils seront. Il construit le budget, suit les écarts entre le prévu et le réalisé, et sert d'interlocuteur financier aux équipes opérationnelles — d'où le terme de business partner. Le trésorier, lui, s'occupe de l'argent disponible : anticiper les besoins, placer les excédents, se couvrir contre le change et les taux. En banque, ce métier prend le nom d'ALM et gère l'équilibre entre les ressources et les emplois du bilan. C'est la porte d'entrée la plus large vers une direction financière.","distinction":"À ne pas confondre avec la Comptabilité : la comptabilité produit le chiffre, le contrôle de gestion l'interprète et le projette. Les deux travaillent sur les mêmes données et ne répondent pas aux mêmes questions.","url":"/familles/controle-de-gestion-et-tresorerie.html"},"Audit & Contrôle interne":{"intro":"L'auditeur externe vérifie que les comptes d'une entreprise reflètent sa situation réelle : il teste, il recoupe, il demande des justificatifs, et il signe. C'est le métier des Big Four et des cabinets d'audit, et il reste la formation la plus complète pour apprendre à lire des états financiers. À l'intérieur des entreprises et des banques, le contrôle interne et l'inspection générale font un travail voisin sur les processus plutôt que sur les comptes : ils vérifient que les procédures existent, qu'elles sont suivies, et qu'elles protègent vraiment. En banque française, ce métier porte souvent le titre d'inspecteur, et il mène loin.","distinction":"À ne pas confondre avec Risques & Conformité : l'audit vérifie après coup que les contrôles fonctionnent ; les risques mesurent l'exposition au jour le jour et la conformité applique la règle en continu.","url":"/familles/audit-et-controle-interne.html"},"Risques & Conformité":{"intro":"Deux métiers voisins sous un même toit. Le côté risques mesure ce que la banque peut perdre : l'analyste crédit étudie la solidité des entreprises financées, l'analyste risques de marché surveille les positions et les limites, le risque opérationnel s'occupe des défaillances internes. Le côté conformité fait respecter les règles : connaissance des clients, lutte contre le blanchiment, sanctions internationales, protection des investisseurs. C'est l'une des familles les plus fournies de ce site, parce que la réglementation ne cesse de croître — et c'est un excellent premier poste pour comprendre comment une banque fonctionne vraiment de l'intérieur.","distinction":"À ne pas confondre avec Audit & Contrôle interne, qui contrôle périodiquement que le dispositif tient. Les risques et la conformité font partie du dispositif ; l'audit le vérifie.","url":"/familles/risques-et-conformite.html"},"Conseil & Transformation":{"intro":"Ces postes consistent à améliorer la façon dont une banque, un assureur ou une direction financière travaille : raccourcir les délais de clôture, mettre en œuvre une nouvelle réglementation, refondre un processus de reporting. On y est consultant, en cabinet ou à l'intérieur d'une maison, et on passe d'un sujet à l'autre au rythme des missions. C'est un bon poste pour ceux qui aiment comprendre les organisations autant que les chiffres, et il ouvre ensuite sur presque tous les autres métiers de cette liste parce qu'on les aura tous croisés.","distinction":"Ce site ne retient que le conseil qui porte sur la finance elle-même. Le conseil en systèmes d'information, en stratégie générale ou en organisation n'y figure pas, même chez les mêmes employeurs.","url":"/familles/conseil-et-transformation.html"},"Opérations & Middle-office":{"intro":"Une opération de marché ne s'arrête pas quand elle est conclue : il faut la confirmer, la comptabiliser, l'appeler en garantie, la régler et la livrer. C'est le travail du middle et du back-office, et il porte sur des volumes considérables avec une exigence d'exactitude totale — une erreur ici se voit tout de suite et coûte cher. Les conservateurs et administrateurs de fonds en ont fait leur métier principal. C'est une entrée souvent sous-estimée par les étudiants, alors qu'elle donne une compréhension des produits que le front office n'a pas toujours, et qu'elle mène vers le contrôle des risques ou la structuration.","distinction":"À ne pas confondre avec les Marchés financiers : le front office décide et prend le risque, les opérations sécurisent et exécutent. Ce sont deux métiers différents, pas deux niveaux du même.","url":"/familles/operations-et-middle-office.html"},"Data & Quant":{"intro":"Ici on écrit les modèles plutôt qu'on ne les utilise. L'analyste quantitatif construit et valide les modèles de risque de crédit, de marché ou de provisionnement ; le data scientist exploite des volumes de données que personne ne lit à la main. Ces postes demandent un vrai bagage en statistiques et en programmation, et ils se trouvent aussi bien en salle de marché qu'à la direction des risques ou chez le régulateur. C'est la famille où le diplôme technique compte le plus, et l'une des rares où un profil d'ingénieur entre en finance sans détour.","distinction":"À ne pas confondre avec les métiers informatiques d'une banque, qui construisent les systèmes. Ici le sujet est le modèle financier ; l'outil informatique n'est qu'un moyen.","url":"/familles/data-et-quant.html"},"Actuariat & Assurance technique":{"intro":"L'actuaire met un prix sur l'incertitude. Il calcule combien doit coûter un contrat d'assurance pour couvrir un risque, et combien la compagnie doit mettre de côté pour tenir ses engagements dans dix ou trente ans. Autour de lui, la souscription décide quels risques accepter, la réassurance transfère une partie du portefeuille à un tiers, et le cadre Solvabilité II impose de tout démontrer par des modèles. C'est un métier peu connu des étudiants en finance générale, alors qu'il recrute beaucoup, paie bien et se trouve rarement en concurrence avec cent candidats par poste.","distinction":"À ne pas confondre avec Risques & Conformité : l'actuaire modélise le risque assuré, celui qu'on accepte volontairement contre une prime. Le risk manager mesure le risque financier qu'on subit.","url":"/familles/actuariat-et-assurance-technique.html"},"Financements & Coverage":{"intro":"C'est le métier qui prête de l'argent aux entreprises, et il est bien plus varié que ce nom laisse croire. Le financement de projet monte le prêt d'une centrale solaire ou d'une autoroute, remboursé par ce que l'ouvrage rapportera. Le financement d'acquisition finance les rachats d'entreprises. Le trade finance sécurise le commerce international, le financement d'actifs porte sur des avions ou des navires. Le coverage, lui, tient la relation avec l'entreprise cliente et lui apporte l'ensemble des produits de la banque. C'est probablement la famille la plus sous-demandée au regard de ce qu'elle offre : mêmes employeurs que le M&A, horaires plus vivables, et une compréhension du crédit qui sert partout ensuite.","distinction":"À ne pas confondre avec les Fusions & Acquisitions : le M&A conseille sur l'achat d'une entreprise, le financement fournit l'argent qui permet de l'acheter. Deux équipes voisines dans la même banque, deux métiers distincts.","url":"/familles/financements-et-coverage.html"},"Autres métiers de la finance":{"intro":"Toutes les offres de ce site ne rentrent pas dans une case, et nous préférons le dire plutôt que de les forcer. On trouve ici des postes d'économiste et d'études économiques — la Banque de France en publie régulièrement —, des sujets d'actifs numériques, et des fonctions transverses qui touchent à plusieurs métiers à la fois. Cette page est volontairement petite : si elle grossit, c'est que la classification a un manque, et c'est nous que ça regarde, pas vous.","distinction":"","url":"/familles/autres-metiers-de-la-finance.html"}};/*JJ:TEXTES:FIN*/</script>
+
 <!-- Mesure d'audience. Relayee par le domaine : le navigateur ne parle qu'a
      juniorjobfinance.com, donc la Content-Security-Policy reste inchangee
      (script-src 'self', connect-src 'self') et aucune ressource tierce n'est
@@ -2182,6 +2292,22 @@
     'Entreprise (direction financière)',
     'Institution publique & régulateur'
   ];
+
+  // null sur l'accueil ; le nom d'une famille sur une page /familles/*.
+  // Trois usages, tous décidant de ce que la page ANNONCE : les pépites mises
+  // en avant, le total en tête, et les compteurs des boutons de contrat. Une
+  // page qui annonce autre chose que ce qu'elle contient trompe son visiteur.
+  var FAMILLE_PAGE = null;
+
+  // Les offres de la page : tout le catalogue sur l'accueil, la famille sur
+  // une page de famille. La colonne de gauche, elle, garde les comptes GLOBAUX
+  // — c'est ce qui montre au visiteur les quatorze autres familles et le
+  // ramène vers le reste du site.
+  function offresDeLaPage() {
+    return FAMILLE_PAGE
+      ? OFFRES.filter(function (o) { return o.famille === FAMILLE_PAGE; })
+      : OFFRES;
+  }
 
   var PAGE_SIZE = 50;
 
@@ -2282,7 +2408,7 @@
   }
 
   var els = {
-    tabs: Array.prototype.slice.call(document.querySelectorAll('nav.tabs button[role="tab"]')),
+    tabs: Array.prototype.slice.call(document.querySelectorAll('nav.tabs button, nav.tabs button.filtre-contrat')),
     filtersPanel: document.getElementById('filters-panel'),
     familleFieldset: document.getElementById('familles-fieldset'),
     tagsFieldset: document.getElementById('tags-fieldset'),
@@ -2305,14 +2431,127 @@
     main: document.getElementById('panel-offres')
   };
 
+  // La bulle d'aide — un seul composant pour les deux emplois.
+  //
+  // Un bouton porte `aria-controls` vers sa bulle ; le composant ne connaît
+  // rien d'autre. C'est ce qui lui permet de servir la colonne de l'accueil,
+  // dont les quinze boutons sont réécrits à chaque rendu, ET le bouton unique
+  // d'une page de famille, écrit en dur par le générateur.
+  //
+  // Appelée par demarrer(), pas au chargement : ecrire-catalogue-html.js
+  // évalue ce script avec un faux DOM pour en extraire le gabarit des cartes,
+  // et rien ne doit toucher au vrai DOM avant qu'il existe.
+  function brancherAide() {
+    var ouverte = null;
+
+    function fermer(rendreLeFocus) {
+      if (!ouverte) return;
+      var bouton = ouverte.bouton;
+      ouverte.bulle.hidden = true;
+      bouton.setAttribute('aria-expanded', 'false');
+      ouverte = null;
+      if (rendreLeFocus) bouton.focus();
+    }
+
+    // La bulle est mesurée UNE FOIS visible : tant qu'elle est `hidden`, sa
+    // hauteur vaut zéro et le calcul de débordement serait faux.
+    function placer(bouton, bulle) {
+      var marge = 8;
+      var r = bouton.getBoundingClientRect();
+      var b = bulle.getBoundingClientRect();
+      // La borne droite ne descend jamais sous la marge : sans ce garde-fou,
+      // une bulle mesurée plus large que l'écran — ce qui arrive si un
+      // ancêtre est encore masqué — envoie « left » dans le négatif et la
+      // bulle hors champ, en silence.
+      var droite = Math.max(marge, window.innerWidth - b.width - marge);
+      // Centrée sur le bouton, pas calée sur son bord gauche : sinon la bulle
+      // part de travers, visuellement décrochée du « ? » qui l’a ouverte.
+      var centre = r.left + r.width / 2 - b.width / 2;
+      var x = Math.min(Math.max(marge, centre), droite);
+      var y = r.bottom + 6;
+      // Pas la place dessous : on bascule au-dessus plutôt que de déborder.
+      if (y + b.height > window.innerHeight - marge) {
+        y = Math.max(marge, r.top - b.height - 6);
+      }
+      bulle.style.left = Math.round(x) + 'px';
+      bulle.style.top = Math.round(y) + 'px';
+    }
+
+    document.addEventListener('click', function (e) {
+      var cible = e.target;
+      if (!cible || !cible.closest) return;
+      var bouton = cible.closest('.jj-aide');
+      if (bouton) {
+        e.preventDefault();
+        var bulle = document.getElementById(bouton.getAttribute('aria-controls'));
+        if (!bulle) return;
+        // Deuxième clic sur le même « ? » : on referme, on ne rouvre pas.
+        var memeBulle = ouverte && ouverte.bulle === bulle;
+        fermer(false);
+        if (memeBulle) return;
+        bulle.hidden = false;
+        bouton.setAttribute('aria-expanded', 'true');
+        ouverte = { bouton: bouton, bulle: bulle };
+        placer(bouton, bulle);
+        // Rejoué à la frame suivante : au premier passage la mise en page
+        // peut ne pas être stabilisée (tiroir qui vient de s'ouvrir), et une
+        // bulle mal mesurée se pose au mauvais endroit.
+        if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(function () {
+            if (ouverte && ouverte.bulle === bulle) placer(bouton, bulle);
+          });
+        }
+        return;
+      }
+      // Clic à côté — mais pas DANS la bulle, où l'on veut pouvoir
+      // sélectionner du texte et suivre le lien.
+      if (ouverte && !cible.closest('.jj-bulle')) fermer(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') fermer(true);
+    });
+
+    // La bulle est en `position: fixed` : au défilement elle se décrocherait
+    // de son bouton. On la referme plutôt que de la laisser flotter à côté
+    // de rien. `true` pour capter aussi le défilement des conteneurs.
+    window.addEventListener('scroll', function () { fermer(false); }, true);
+    // Au redimensionnement on REPLACE, on ne ferme pas : faire pivoter un
+    // telephone ne doit pas escamoter la bulle en pleine lecture.
+    window.addEventListener('resize', function () {
+      if (ouverte) placer(ouverte.bouton, ouverte.bulle);
+    });
+  }
+
   function buildFamilleFieldset() {
     els.familleFieldset.innerHTML = FAMILLES.map(function (f, i) {
       var id = 'famille-' + i;
-      return '<label class="famille-option" for="' + id + '">' +
-        '<span class="famille-nom"><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
-        '<span class="count" data-famille="' + f + '"></span>' +
-        '</label>';
+      // Le « ? » n'est PAS dans le <label> : imbriqué dedans, un clic dessus
+      // cocherait la case. Il vit à côté, dans la même ligne — et sa bulle le
+      // suit immédiatement, pour qu'un lecteur d'écran la rencontre juste
+      // après le bouton qui l'annonce.
+      var t = (window.__FAMILLES_TEXTES__ || {})[f] || {};
+      var idBulle = 'aide-famille-' + i;
+      return '<div class="famille-ligne">' +
+        '<label class="famille-option" for="' + id + '">' +
+          '<span class="famille-nom"><input type="checkbox" id="' + id + '" value="' + f + '"> ' + f + '</span>' +
+          '<span class="count" data-famille="' + f + '"></span>' +
+        '</label>' +
+        (t.intro
+          ? '<button type="button" class="jj-aide" aria-expanded="false"' +
+              ' aria-controls="' + idBulle + '"' +
+              ' aria-label="En quoi consiste le métier : ' + esc(f) + ' ?">?</button>' +
+            '<div class="jj-bulle" id="' + idBulle + '" hidden>' +
+              '<p class="jj-bulle-titre">' + esc(f) + '</p>' +
+              '<p>' + esc(t.intro) + '</p>' +
+              (t.distinction ? '<p class="jj-bulle-distinction">' + esc(t.distinction) + '</p>' : '') +
+              (t.url ? '<a class="jj-bulle-lien" href="' + t.url + '">Voir toutes les offres →</a>' : '') +
+            '</div>'
+          : '') +
+        '</div>';
     }).join('');
+    // Aucun écouteur ici : brancherAide() délègue depuis le document, donc
+    // il survit aux réécritures de cette liste à chaque rendu.
     Array.prototype.forEach.call(els.familleFieldset.querySelectorAll('input'), function (cb) {
       cb.addEventListener('change', function () {
         if (cb.checked) state.familles.add(cb.value); else state.familles.delete(cb.value);
@@ -2484,7 +2723,10 @@
   }
 
   function voletOffers(volet) {
-    return OFFRES.filter(function (o) { return o.volet === volet; });
+    // Volet vide = aucun contrat filtre. N'arrive que sur une page de
+    // famille, dont les boutons sont des bascules relachables.
+    if (!volet) return offresDeLaPage();
+    return offresDeLaPage().filter(function (o) { return o.volet === volet; });
   }
 
   function matchesFilters(o) {
@@ -2525,7 +2767,9 @@
       var f = span.dataset.famille;
       var n = counts[f] || 0;
       span.textContent = n;
-      var ligne = span.closest('.famille-option');
+      // La LIGNE, pas le label : le « ? » vit a cote du label, et masquer le
+      // label seul laissait un point d'interrogation orphelin.
+      var ligne = span.closest('.famille-ligne') || span.closest('.famille-option');
       if (ligne) ligne.hidden = n === 0 && !state.familles.has(f);
     });
   }
@@ -2846,7 +3090,10 @@
 
   function render() {
     var base = voletOffers(state.volet);
-    construirePepites(base);
+    // Une page de famille ne met en avant que des offres qu'elle contient.
+    construirePepites(FAMILLE_PAGE
+      ? base.filter(function (o) { return o.famille === FAMILLE_PAGE; })
+      : base);
     updateFamilleCounts(base);
     updateStructureOptions(base);
     etatNouveauteUtile = nouveauteSignifiante(base);
@@ -2915,9 +3162,21 @@
 
   els.tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
-      els.tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
-      tab.setAttribute('aria-selected', 'true');
-      state.volet = tab.dataset.volet;
+      // Deux comportements pour deux contextes explicites. Sur l'accueil ce
+      // sont des ONGLETS : exclusifs, il y en a toujours un d'actif. Sur une
+      // page de famille ce sont des BASCULES : aucune n'est active au
+      // chargement — la page montre toute la famille — et recliquer sur la
+      // bascule active la relache, ce qui remontre tout.
+      var bascule = tab.classList.contains('filtre-contrat');
+      var attribut = bascule ? 'aria-pressed' : 'aria-selected';
+      var etaitActif = tab.getAttribute(attribut) === 'true';
+      els.tabs.forEach(function (t) { t.setAttribute(attribut, 'false'); });
+      if (bascule && etaitActif) {
+        state.volet = '';
+      } else {
+        tab.setAttribute(attribut, 'true');
+        state.volet = tab.dataset.volet;
+      }
       state.page = 1;
       render();
     });
@@ -3075,9 +3334,10 @@
     });
     var total = document.getElementById('total-count');
     if (total) {
+      var n = offresDeLaPage().length;
       total.textContent = window.innerWidth <= 640
-        ? chiffreCompact(OFFRES.length) + ' offres'
-        : OFFRES.length + ' offres au total';
+        ? chiffreCompact(n) + ' offres'
+        : n + (FAMILLE_PAGE ? ' offres dans cette famille' : ' offres au total');
     }
   }
   window.addEventListener('resize', ecrireCompteurs);
@@ -3088,6 +3348,7 @@
   function demarrer() {
     OFFRES = Array.isArray(window.__OFFRES__) ? window.__OFFRES__ : [];
 
+    brancherAide();
     buildFamilleFieldset();
     buildTagsFieldset();
     buildStructureSelect();
