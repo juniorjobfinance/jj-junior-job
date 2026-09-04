@@ -2084,6 +2084,24 @@
      pouvait pas survivre a une balise statique. offres-refonte.js n'etant
      jamais deploye (il est dans .gitignore), il ne servait qu'en local. -->
 <script defer src="offres.js"></script>
+
+<!-- Mesure d'audience. Relayee par le domaine : le navigateur ne parle qu'a
+     juniorjobfinance.com, donc la Content-Security-Policy reste inchangee
+     (script-src 'self', connect-src 'self') et aucune ressource tierce n'est
+     chargee. « /mesure.js » et « /api/send » sont deux reecritures Vercel.
+
+     data-host-url doit pointer sur NOTRE origine : sans lui le script envoie
+     a https://gateway.umami.is/api/send, en dur dans son code, et le relais
+     ne servirait a rien.
+
+     Sans cookie, sans identifiant persistant, sans suivi d'un site a l'autre.
+     Ce qui remonte : la page vue, et au clic sur une annonce l'evenement
+     « Clic annonce » avec sa famille et son volet — deux listes fermees de
+     quinze et quatre valeurs, aucune donnee personnelle. -->
+<script defer src="/mesure.js"
+        data-website-id="f9a7f63f-5195-414c-afbe-0cd43bae4ebd"
+        data-host-url="https://juniorjobfinance.com"
+        data-domains="juniorjobfinance.com"></script>
 <script>
 (function () {
   'use strict';

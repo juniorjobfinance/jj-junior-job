@@ -225,6 +225,18 @@ dix minutes.
   après, et le dire quand elle est identique. Un script de modification qui ne
   sait pas dire s'il a modifié quelque chose ne vaut pas mieux qu'un contrôle
   qu'on n'a jamais vu échouer.
+
+  **Et la leçon qui dépasse ce piège : quand une règle a été enfreinte quatre
+  fois, ce n'est plus une règle qu'il faut, c'est un mécanisme.** Celle-ci a
+  été violée une quatrième fois **une heure après avoir été écrite ici** — une
+  garde cherchant « depuis un serveur tiers » a matché ce texte ailleurs dans
+  la même page et laissé la ligne visée intacte. Une règle demande de s'en
+  souvenir au bon moment ; c'est précisément ce qui manque au bon moment. La
+  vraie réponse est le mécanisme qui ne demande à personne de se souvenir de
+  rien : **tout script de modification compare la longueur du fichier avant et
+  après, et l'annonce.** Un « + 0 octet » saute aux yeux là où un « déjà fait »
+  se lit sans s'arrêter. Quand un piège se répète malgré sa fiche, chercher le
+  mécanisme, pas la formulation plus insistante.
 $1
   Le panneau de navigation renvoyait `CLS = 0` sur toutes les pages, y
   compris celle que Lighthouse notait à 0,317. Il a fallu **provoquer un

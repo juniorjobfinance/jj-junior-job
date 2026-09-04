@@ -829,3 +829,45 @@ et 9 offres, conformes aux libellés), menus lieu (18), entreprise (68) et
 structure (12) toujours construits, et un lien partagé
 `?contrat=vie&familles=Marchés financiers&tri=entreprise` qui restaure bien
 l'onglet VIE, la case cochée, le tri et ses 3 offres. Les cinq suites au vert.
+
+### Mesure d'audience — posée le 04/09/2026
+
+Umami Cloud, palier gratuit, compte en **région européenne**. Relayée par deux
+réécritures Vercel — `/mesure.js` et `/api/send` — pour que le navigateur ne
+parle qu'à `juniorjobfinance.com` : la Content-Security-Policy n'a pas bougé
+d'un octet, et aucune ressource tierce n'est chargée.
+
+**Le détail décisif, à ne pas perdre : `data-host-url`.** Le script Umami
+contient `K = \`${(x || "https://gateway.umami.is")}/api/send\``, où `x` est
+cet attribut. **Sans lui, le relais ne sert à rien** : le script écrirait
+`gateway.umami.is` en dur et la collecte partirait directement, par-dessus la
+réécriture. C'est le genre de configuration qui « marche » en apparence tout
+en ne faisant pas ce qu'on croit.
+
+**Ce qu'on n'a PAS pu établir, et qu'il ne faut pas ré-affirmer à la légère :**
+que la collecte transite exclusivement par l'Europe. `eu.umami.is` redirige
+(301) vers `cloud.umami.is`, la documentation ne décrit aucun point de
+collecte régional, et **sonder les hôtes ne prouve rien** — `*.umami.is` est
+un joker : `ceci-nexiste-pas-du-tout.umami.is` répond exactement comme
+`eu-gateway.umami.is`. Sans ce test de contrôle, une fausse passerelle
+européenne partait au rapport.
+
+Ce qui est donc écrit au §6 de la politique de confidentialité, et rien de
+plus : les statistiques sont stockées en région européenne, Umami Software,
+Inc. est une société américaine, la collecte passe par un réseau de diffusion
+mondial, et le tout relève des garanties du chapitre V du RGPD.
+
+**Piste, pas chantier — si un jour on veut zéro exposition américaine.**
+Deux voies, et aucune n'est gratuite :
+
+- **héberger Umami soi-même** — un serveur Node et une base PostgreSQL à tenir,
+  sauvegarder et mettre à jour : le contraire exact de l'architecture du site,
+  qui n'a rien qui tourne ;
+- **passer à GoatCounter** — serveurs chez Hetzner en Finlande et en Allemagne,
+  **aucune adresse IP jamais écrite en base**, identifiant de session en mémoire
+  huit heures au plus. Le meilleur profil des quatre outils comparés, au prix
+  d'un projet porté par une personne et financé par dons.
+
+La situation actuelle est celle de presque tous les petits sites européens,
+elle est déclarée honnêtement, et elle est proportionnée au traitement. À
+rouvrir seulement si l'exigence change, pas parce qu'on relit ce paragraphe.
