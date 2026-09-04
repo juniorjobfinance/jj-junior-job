@@ -935,3 +935,25 @@ façon — **en faisant dire à l'appareil quelque chose dont on connaissait dé
 la réponse** : un décalage de 400 px provoqué exprès, un nom d'hôte qui n'existe
 pas. Sans ces deux contrôles, deux fausses conclusions partaient au rapport, et
 l'une était déjà écrite dans ce fichier comme une piste établie.
+
+### Le 04/09 au soir : la première fois qu'un contrôle mord sur du réel
+
+Tous les contrôles du projet avaient été éprouvés sur des pannes **provoquées** :
+on cassait exprès, on vérifiait que ça bloquait. Le contrôle du catalogue dans
+le HTML vient d'attraper une panne que personne n'avait organisée.
+
+Un script d'analyse sauvegarde `index.html`, le tronque volontairement pour
+éprouver le contrôle, puis le restaure. Il a été lancé en canalisant sa sortie
+dans `head -11`. **`head` ferme le tuyau après onze lignes et tue le script par
+SIGPIPE** — avant sa restauration. `index.html` est resté tronqué à **425 cartes
+sur 832**, soit 455 Ko au lieu de 771.
+
+Rien ne le signalait : le fichier était valide, la page s'affichait, le site
+fonctionnait. Seul le contrôle a vu que le HTML ne correspondait plus au
+catalogue, et il l'a dit en deux lignes — le compte, puis la position exacte de
+la première divergence.
+
+**C'est la preuve que ces contrôles servent**, et elle est arrivée par accident
+plutôt que par démonstration. La leçon secondaire vaut aussi : **ne jamais
+canaliser dans `head` un script qui restaure quelque chose.** Il ne meurt pas
+proprement, il meurt au milieu.

@@ -130,6 +130,19 @@ dix minutes.
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a
   déjà dupliqué tout un fichier. Toujours passer une fonction :
   `s.replace(a, () => b)`.
+  **Et ses deux faces cachées, qui ont corrompu CE fichier trois fois le
+  04/09/2026, commitées et poussées.** Passer une fonction empêche bien `$&`
+  et `$'` d'être réinterprétés, mais :
+  1. dans une fonction, **`$1` n'est pas interprété non plus** — il reste
+     littéral et le groupe capturé est perdu ;
+  2. le premier argument de la fonction est la **chaîne matchée, pas un
+     tableau** : `m[1]` y rend le deuxième CARACTÈRE.
+  Les deux erreurs ont remplacé des lignes entières par « $1 », puis par un
+  tiret, puis par une astérisque. La forme sûre est de capturer d'abord et de
+  n'utiliser la fonction que pour insérer :
+  `const m = src.match(re); src.replace(re, () => texte + m[1])`. Plus sûre
+  encore quand elle suffit : `src.split(litteral).join(remplacement)`, qui
+  n'interprète rien du tout.
 - **`\b` est ASCII** : il voit une limite entre le « h » de « March » et le « é »
   de « Marchés ». Utiliser `(?![A-Za-zÀ-ÿ])`.
 - **Les apostrophes des annonces sont typographiques (`’`)**, pas `'`.
@@ -240,7 +253,16 @@ dix minutes.
   — « 3 septembre » et « 4 septembre » — rendent « + 0 octet » sans que rien
   soit anormal. Faire les deux : comparer pour décider, compter pour montrer. Quand un piège se répète malgré sa fiche, chercher le
   mécanisme, pas la formulation plus insistante.
-$1
+- **Ne jamais canaliser dans `head` un script qui restaure quelque chose.**
+  `head` ferme le tuyau après ses N lignes et tue le script par SIGPIPE :
+  **il ne meurt pas proprement, il meurt au milieu**, et le `finally` qui
+  devait remettre le fichier en état ne s'exécute jamais. Un script qui
+  sauvegardait `index.html`, le tronquait pour éprouver un contrôle puis le
+  restaurait a laissé le fichier à **425 cartes sur 832** — valide, affichable,
+  et faux. Seul le contrôle du catalogue l'a vu, et c'était la première fois
+  qu'un de ces contrôles mordait sur du réel et non sur une panne provoquée.
+  Laisser ces scripts écrire toute leur sortie, et filtrer après coup.
+- **Un instrument qu'on n'a pas éprouvé sur un cas connu ne mesure rien.**
   Le panneau de navigation renvoyait `CLS = 0` sur toutes les pages, y
   compris celle que Lighthouse notait à 0,317. Il a fallu **provoquer un
   décalage évident** — insérer un bloc de 400 px en tête de page — pour
@@ -250,7 +272,7 @@ $1
   rien, et le diagnostic était écrit dans `ETAT.md` comme une piste établie.
   C'est le pendant exact de « un contrôle qu'on n'a jamais vu échouer n'est
   pas vérifié » : avant de croire un zéro, faire dire non-zéro à l'appareil.
-$1 Le contrat démarre en septembre, donc les
+- **L'alternance est SAISONNIÈRE.** Le contrat démarre en septembre, donc les
   annonces se publient de février à juillet. Un catalogue d'alternance maigre
   relevé en septembre ou en octobre ne prouve rien — c'est le creux du cycle.
   Ne jamais durcir, assouplir ni « réparer » quoi que ce soit sur la foi d'un
