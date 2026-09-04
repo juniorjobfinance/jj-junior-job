@@ -13,14 +13,55 @@
 
 const fs = require('fs');
 const path = require('path');
+// Le cache de collecte est gzippe : il porte les descriptions ENTIERES.
+const zlib = require('zlib');
 const { fetchAllSources, sourcesReprises, isFinanceOfferFor } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
+const { classify } = require('./classifier');
+const { STRUCTURES: LIBELLES_STRUCTURE } = require('./structures');
 
 const CHECK_LINKS = process.argv.includes('--check-links');
+// `--refonte` ecrit dans des fichiers SEPARES : tant que le nouveau
+// classement n'est pas valide, le catalogue servi en production ne doit pas
+// etre ecrase par un passage de mise au point.
+const REFONTE = process.argv.includes('--refonte');
+
+// `--depuis-cache` rejoue la derniere collecte brute au lieu d'interroger les
+// sources. Reserve a la mise au point du traitement : il ne peut PAS ecrire
+// le catalogue de production, et son suffixe le dit.
+const DEPUIS_CACHE = process.argv.includes('--depuis-cache');
+const SUFFIXE = DEPUIS_CACHE ? '-cache' : REFONTE ? '-refonte' : '';
 const STATE_PATH = path.join(__dirname, 'state.json');
-const OUTPUT_PATH = path.join(__dirname, '..', 'offres.js');
-const RSS_PATH = path.join(__dirname, '..', 'offres.xml');
-const SITEMAP_PATH = path.join(__dirname, '..', 'sitemap.xml');
+const OUTPUT_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.js`);
+const RSS_PATH = path.join(__dirname, '..', `offres${SUFFIXE}.xml`);
+const SITEMAP_PATH = path.join(__dirname, '..', `sitemap${SUFFIXE}.xml`);
+const DATA_DIR = path.join(__dirname, '..', 'data');
+
+// Ce que le classement ecarte, compte pour le rapport de controle. Sans ce
+// releve, une offre rejetee disparait sans laisser de trace — c'est le defaut
+// qu'on vient de corriger, on ne va pas le reintroduire ailleurs.
+// Ce que le rattrapage des fiches a rapporte, indexe par URL. Alimente lors
+// d'une vraie collecte, relu tel quel au rejeu — c'est ce qui permet a
+// --depuis-cache de ne faire aucun appel reseau.
+const fichesRattrapees = new Map();
+
+const rapportClassement = {
+  rejets: new Map(),
+  // LE REGISTRE DES ECARTEES, une ligne par offre, tous etages confondus.
+  // La seniorite, l'age et la deduplication ne tenaient qu'un compteur : pour
+  // ventiler 179 rejets le 04/09/2026, il a fallu rejouer deux versions du
+  // pipeline sur une photo au lieu de lire un fichier. Le volet y figure
+  // toujours : c'est la dimension qui manque des qu'on cherche a comprendre.
+  ecartees: [],
+  // Les offres elles-memes, par motif : sans elles on ne peut qu'affirmer
+  // que le filtre est juste, jamais le montrer.
+  exemplesRejets: new Map(),
+  nonClasses: [],
+  employeursInconnus: new Map(),
+  // Ce que la regle maisonRef ecarte, avec le verdict que le classifieur
+  // avait DEJA rendu sur ces offres. Sert a decider si on garde la regle.
+  rejetsMaisonRef: [],
+};
 
 // Adresse publique du site : sert au flux RSS et au sitemap. À changer ici et
 // nulle part ailleurs le jour où un vrai nom de domaine remplace le sous-domaine
@@ -930,6 +971,57 @@ const DEPTS_IDF = ['hauts-de-seine', 'seine-saint-denis', 'val-de-marne',
 // l'adresse postale complète ("21 AVENUE DU BEL AIR 75012 PARIS"), le code
 // postal collé ("75015 Paris 15e Arrondissement"), un suffixe de plateforme
 // ("Courbevoie(pld)"). On veut juste la ville, lisible.
+
+// Les pays que Business France envoie en capitales et sans accents. La table
+// ne porte que ce qu'aucune regle ne peut deviner : les accents, et la casse
+// des noms composes. Tout le reste passe par nettoyerPays() ci-dessous.
+const PAYS_CANONIQUE = {
+  'etats-unis': 'États-Unis',
+  'royaume-uni': 'Royaume-Uni',
+  'coree du sud': 'Corée du Sud',
+  'tchequie / republique tcheque': 'Tchéquie',
+  'republique tcheque': 'Tchéquie',
+  bresil: 'Brésil',
+  perou: 'Pérou',
+  senegal: 'Sénégal',
+  suede: 'Suède',
+  benin: 'Bénin',
+  hongrie: 'Hongrie',
+  'emirats arabes unis': 'Émirats arabes unis',
+  egypte: 'Égypte',
+  equateur: 'Équateur',
+  ethiopie: 'Éthiopie',
+  'afrique du sud': 'Afrique du Sud',
+  'cote d ivoire': "Côte d'Ivoire",
+  'coree du nord': 'Corée du Nord',
+  finlande: 'Finlande',
+  norvege: 'Norvège',
+  danemark: 'Danemark',
+  grece: 'Grèce',
+  israel: 'Israël',
+  nigeria: 'Nigéria',
+  panama: 'Panamá',
+};
+
+// Particules qui restent en bas de casse au milieu d’un nom : « Corée du Sud »,
+// « Trinité-et-Tobago ». En tête, elles reprennent leur majuscule.
+const PARTICULE_PAYS = new Set(['du', 'de', 'des', 'da', 'la', 'le', 'et', 'aux', 'au', 'd']);
+
+function nettoyerPays(brut) {
+  const nu = String(brut || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  if (!nu) return null;
+  if (PAYS_CANONIQUE[nu]) return PAYS_CANONIQUE[nu];
+  // Repli : majuscule apres chaque espace ET chaque trait d’union — c’est ce
+  // trait d’union que l’ancien code ignorait, d’ou « Etats-unis ».
+  return nu
+    .split(' ')
+    .map((mot, i) =>
+      i > 0 && PARTICULE_PAYS.has(mot)
+        ? mot
+        : mot.replace(/(^|-)([a-zà-öø-ÿ])/g, (_, sep, c) => sep + c.toUpperCase())
+    )
+    .join(' ');
+}
 function nettoyerLieu(loc) {
   let v = (loc || '').trim();
   if (!v) return v;
@@ -1242,45 +1334,11 @@ const AP_ = `['’]`;
 // choix de portée délibéré, pas un oubli.
 const NOMBRE_SENIOR_FR = '(?:[4-9]|[1-9]\\d|quatre|cinq|six|sept|huit|neuf|dix)';
 
-const DESCR_SENIOR_RE = new RegExp(
-  [
-    // FR — "4 ans d'expérience", "3 à 5 ans d'expérience" (on lit la borne
-    // haute : un poste "3 à 5 ans" recrute un profil confirmé).
-    // « et » compte autant que « à » : « entre 3 et 5 ans » est la tournure
-    // la plus courante des annonces françaises, et elle passait entière.
-    `\\b\\d+\\s*(?:à|a|-|/|et|ou)\\s*${NOMBRE_SENIOR_FR}\\s*ans?`,
-    // Même fourchette en anglais : « between 3 and 5 years ».
-    `\\b\\d+\\s*(?:to|and|-|/)\\s*([4-9]|[1-9]\\d)\\s*years?`,
-    `\\b${NOMBRE_SENIOR_FR}\\s*ans?\\s+(?:minimum\\s+|au\\s+moins\\s+)?d${AP_}?e?\\s*exp[ée]rience`,
-    // "Expérience dans un rôle similaire de 5 ans" : mots intercalés tolérés.
-    `exp[ée]rience[^.;·•\\n]{0,40}?\\bde\\s+${NOMBRE_SENIOR_FR}\\s*ans?`,
-    // Le seuil est à QUATRE ans, pas trois : la cible annoncée est « 0-3 ans »,
-    // donc une offre qui demande « minimum 3 ans » reste dans le périmètre —
-    // c'est sa borne haute. À partir de quatre, le poste n'est plus junior.
-    `(?:minimum|au\\s+moins|mini\\.?)\\s+(?:de\\s+)?${NOMBRE_SENIOR_FR}\\s*ans?`,
-    `\\b${NOMBRE_SENIOR_FR}\\s*\\+\\s*ans?`,
-    `exp[ée]rience\\s+confirm[ée]e|exp[ée]rience\\s+significative`,
-    `votre\\s+expertise|exp[ée]riment[ée]e?\\s+sur\\s+ce\\s+poste`,
-    `justifiez\\s+d${AP_}?\\s*une\\s+exp[ée]rience\\s+(?:r[ée]ussie|confirm[ée]e|significative)`,
-    // EN — "5 years of experience", "5+ years", "10 years in Sales Operations".
-    // On exige un mot d'expérience derrière le nombre : sans cette contrainte,
-    // "Master's degree (5 years of study)" ferait sortir un vrai junior.
-    `\\b([4-9]|[1-9]\\d)\\s*(?:\\+|to\\s*\\d+|-\\s*\\d+)?\\s*years?` +
-      `(?:\\s+of)?\\s+(?:relevant\\s+|professional\\s+|proven\\s+|solid\\s+|hands-?on\\s+|work\\s+|prior\\s+)*` +
-      `(?:experience|expertise|in\\b|as\\s+a)`,
-    `\\b([4-9]|[1-9]\\d)\\s*\\+\\s*years?\\s+(?:of\\s+)?(?:relevant\\s+|professional\\s+)*experience`,
-    `(?:minimum|at\\s+least|min\\.?)\\s+(?:of\\s+)?([4-9]|[1-9]\\d)\\s*years?\\s+(?:of\\s+)?(?:\\w+\\s+){0,2}experience`,
-    `proven\\s+(?:track\\s+record|experience)|extensive\\s+experience|senior\\s+level`,
-  ].join('|'),
-  'i'
-);
 
 // À l'inverse, une mention explicite d'ouverture aux débutants l'emporte.
 // Tous les synonymes de « on prend un jeune ». C'est la porte de sortie du
 // mode strict : une annonce qui se déclare ouverte aux débutants est publiée
 // même si rien d'autre ne permet de vérifier le niveau.
-const DESCR_JUNIOR_RE =
-  /d[ée]butant[e]?s?\s+(?:accept|bienvenu|welcome)|jeune\s+dipl[ôo]m|premi[èe]re\s+exp[ée]rience|sans\s+exp[ée]rience|profil\s+junior|ouvert\s+aux\s+d[ée]butants|sortie?\s+d['’]?[ée]cole|\bjunior\b|\bd[ée]butant|entry[\s-]?level|graduate\s+program|no\s+experience\s+required/i;
 
 // Les "candidatures spontanées" ne sont pas des offres : ce sont des
 // formulaires de dépôt de CV, sans poste réel derrière. Les afficher
@@ -1392,69 +1450,259 @@ const VENTE_HORS_FINANCE_RE =
 // d'en publier une seule qui demande sept ans d'expérience. Un candidat qui
 // tombe sur un poste hors de sa portée, sur un site qui promet du 0-3 ans, ne
 // revient pas.
-// Toutes les durées d'expérience citées par une annonce, en années.
-//
-// On ne cherche plus des tournures : on cherche des NOMBRES suivis d'« ans »
-// ou d'« années », puis on regarde autour d'eux si l'on parle bien
-// d'expérience professionnelle. Cette inversion est tout l'objet de la
-// refonte — une annonce peut écrire son exigence de mille façons, elle finit
-// toujours par un nombre et le mot « ans ».
-//
-// Trois garde-fous, chacun payé par un faux positif observé :
-//   - au-delà de vingt ans, ce n'est plus une exigence mais l'âge de la
-//     maison (« façonné par plus de 145 ans d'expérience », Indosuez) ;
-//   - « 5 années d'études » ou « Bac+5 » décrivent un diplôme, pas un poste ;
-//   - le mot « expérience » doit être proche, sinon « 3 000 consultants
-//     depuis 48 bureaux » ferait sortir un stage.
-const ANNEES_RE = /(\d{1,2})\s*(?:\+\s*)?(?:ans?|ann[ée]es?|years?)\b/gi;
-const CONTEXTE_EXPERIENCE_RE = /exp[ée]rience|experience|exp\./i;
-const CONTEXTE_A_IGNORER_RE =
-  /[ée]tudes?|study|studies|dipl[ôo]m|bac\s*\+|scolarit|cursus|formation|anciennet[ée]|fond[ée]e?\s+en|depuis\s+plus|histoire|history|savoir[\s-]faire|contrat de|dur[ée]e (?:du|de la|d[eu]) (?:contrat|mission|stage)|\bcdd\b de/i;
-
-function dureesExperienceCitees(texte) {
-  const trouvees = [];
-  if (!texte) return trouvees;
-  for (const m of String(texte).matchAll(ANNEES_RE)) {
-    const n = parseInt(m[1], 10);
-    if (!Number.isFinite(n) || n < 1 || n > 20) continue;
-    // La fenêtre est large devant (« une expérience réussie de 5 ans ») et
-    // plus courte derrière (« 5 ans d'expérience »).
-    const avant = texte.slice(Math.max(0, m.index - 90), m.index);
-    const apres = texte.slice(m.index, m.index + 60);
-    const fenetre = avant + apres;
-    if (!CONTEXTE_EXPERIENCE_RE.test(fenetre)) continue;
-    if (CONTEXTE_A_IGNORER_RE.test(fenetre)) continue;
-    trouvees.push(n);
-  }
-  return trouvees;
-}
 
 // La borne haute de ce qu'une annonce réclame. « Entre 3 et 5 ans » demande
 // cinq ans ; « 0 à 3 ans » en demande trois. On lit donc le maximum.
 const EXPERIENCE_MAX_ANNEES = 3;
 
-function passesJuniorFilter(volet, title, descr, strict) {
+// Séniorité pour les onglets stage / alternance / VIE. Liste ÉTROITE, et ce
+// n'est pas de la prudence mal placée : mesuré sur les 847 offres du
+// 03/09/2026, la liste large en écarte 14 dont 11 À TORT. « Manager »,
+// « responsable », « expert » et « lead » nomment une équipe ou un outil dans
+// un intitulé junior français — « Data Manager Reporting » est un stage chez
+// Rothschild, « Expert en Finance Durable » un stage chez Natixis. Ne figurent
+// ici que les mots qui ne peuvent nommer QU'UN GRADE.
+const SENIOR_TITRE_STRICT_RE = new RegExp(
+  [
+    `${AV}s[ée]niors?${AP}`,
+    `${AV}vp${AP}`,
+    `${AV}vice[\\s-]?presidents?${AP}`,
+    `${AV}direct(?:eur|rice|or)s?${AP}`,
+    `${AV}head of${AP}`,
+    `${AV}confirm(?:[ée]e?s?|ed)${AP}`,
+    `${AV}exp[ée]riment[ée]e?s?${AP}`,
+    `${AV}partners?${AP}`,
+    `${AV}principal${AP}`,
+  ].join('|'),
+  'i'
+);
+
+// Ce qui annule le marqueur. Un « Summer Analyst » ou un « Graduate » est un
+// poste d'entrée quoi qu'il porte ; « assistant » neutralise à lui seul
+// (« Assistant Responsable Comptable » est bien un assistant).
+//
+// L'exception « senior analyst en banque d'affaires » a été ÉCARTÉE : en
+// France c'est plus souvent un profil expérimenté qu'un grade d'entrée, et
+// l'enjeu total étant de trois offres, l'exception ajoutait du risque pour
+// rien.
+const JUNIOR_MALGRE_TOUT_RE = new RegExp(
+  [
+    `${AV}summer${AP}`,
+    `${AV}graduate${AP}`,
+    `${AV}juniors?${AP}`,
+    `${AV}apprenti(?:e|s|es)?${AP}`,
+    `${AV}alternants?${AP}`,
+    `${AV}assistant(?:e|s|es)?${AP}`,
+  ].join('|'),
+  'i'
+);
+
+
+// ---------------------------------------------------------------------------
+// Durée d'expérience exigée — lecture sur le texte ENTIER
+// ---------------------------------------------------------------------------
+//
+// Le 03/09/2026, quatre offres de plus de trois ans étaient publiées. Le motif
+// de séniorité les reconnaissait toutes ; c'est l'ENTRÉE qui était mutilée :
+// la description était tronquée à 3 000 caractères avant analyse, et
+// l'exigence d'expérience vit dans le « profil recherché », donc à la FIN.
+// Les quatre mentions tombaient aux positions 3437, 3509, 4495 et 6217 —
+// aucune visible avant la coupe. Zéro sur quatre.
+//
+// On analyse donc le texte entier et on ne garde que le verdict ; l'extrait
+// tronqué reste stocké pour tout le reste.
+
+// Ce qu'on STOCKE d'une description. L'analyse, elle, porte sur le texte
+// entier : la troncature protege la memoire, pas la lecture.
+const LIMITE_DESCR = 4000;
+
+// Nombres écrits en lettres. Sous quatre, on ne déclenche pas : un poste à
+// « deux ans » est dans la cible, inutile de les reconnaître.
+const NOMBRES_ECRITS = {
+  quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10, douze: 12, quinze: 15,
+  four: 4, five: 5, seven: 7, eight: 8, nine: 9, ten: 10, twelve: 12, fifteen: 15,
+};
+
+// Le mot qui ancre. Sans lui dans la phrase, aucun nombre n'est compté.
+const ANCRE_EXPERIENCE = /exp[ée]rien/i;
+
+// Ce qui ressemble à une durée d'expérience sans en être une. Vérifié AVANT
+// le comptage, sur le voisinage immédiat du nombre — AMONT seulement, d'où
+// la règle DUREE_ETUDES qui suit, pour ce qui ne se voit qu'en aval.
+const FAUX_AMIS = [
+  // Le nombre du DIPLÔME, et lui seul : il doit être collé au « bac+ ».
+  // « bac+5 », « bac + 5 », « BAC +5 », « master bac+5 ».
+  //
+  // La règle disqualifiait auparavant TOUT nombre situé à moins de 45
+  // caractères d'un « Bac+N ». Dans « Bac+5, vous possédez 5 à 10 ans
+  // d'expérience », le diplôme avalait l'exigence : treize offres publiées
+  // à tort, dont six CNP Assurances et un Talan à 5-10 ans.
+  /bac\s*\+\s*$/i,
+  /\b(?:alternance|apprentissage|contrat|cdd|stage|vie|mission|bail)\b[^.;]{0,30}$/i,
+  /\b(?:cr[ée][ée]e?|fond[ée]e?|existe|existence|anniversaire|depuis)\b[^.;]{0,40}$/i,
+];
+
+// « 5 années d'études » décrit un diplôme, pas un poste — et rien en AMONT
+// du nombre ne permet de le voir : devant lui on lit « Bac+5, », qui ne colle
+// pas au nombre. C'est le mot qui SUIT qui tranche. Cette règle est la
+// contrepartie du resserrement de FAUX_AMIS : sans elle, on rouvrirait le
+// faux positif que le garde-fou d'origine avait été écrit pour fermer.
+const DUREE_ETUDES = /^\s*d[’']\s*[ée]tudes?|^\s*of\s+stud/i;
+
+// Trois formules qui disent la séniorité sans donner de chiffre. Elles ne
+// peuvent rien vouloir dire d'autre — à la différence de « une première
+// expérience » ou « une expérience réussie », qui abondent dans les annonces
+// juniors et ne qualifient que la qualité, jamais la durée.
+const FORMULES_SENIORITE = [
+  [/exp[ée]rience\s+confirm[ée]e?/i, "expérience confirmée"],
+  [/exp[ée]rience\s+significative/i, "expérience significative"],
+  [/solide\s+exp[ée]rience/i, "solide expérience"],
+];
+
+// Le veto : l'annonce s'ouvre explicitement aux débutants. Il annule un rejet
+// fondé sur la DESCRIPTION, jamais sur l'INTITULÉ — un « Senior Manager »
+// reste écarté quoi que dise sa prose. La description est longue et finit
+// toujours par mentionner un junior ; l'intitulé est court et il engage.
+const VETO_JUNIOR_DESCR =
+  /\bd[ée]butants?\b|ouvert(?:e)?s?\s+aux\s+d[ée]butants|jeunes?\s+dipl[ôo]m[ée]s?|profils?\s+juniors?|premi[èe]re\s+exp[ée]rience|sortie?\s+d[\u2019'\s]\s*[ée]cole|no\s+experience\s+required/i;
+
+/**
+ * Lit la durée d'expérience exigée dans un texte. Rend le nombre le plus
+ * élevé trouvé — sur « 3 à 5 ans », la borne haute — ou null.
+ */
+function dureeExperienceMax(texte) {
+  const t = String(texte || '').replace(/\s+/g, ' ');
+  if (!t) return null;
+
+  let max = null;
+  // Phrase par phrase : un nombre ne compte que si SA phrase parle
+  // d'expérience. « Notre société a 10 ans. Vous avez une expérience en
+  // audit. » ne doit pas rendre 10.
+  for (const phrase of t.split(/[.;!?\u2022\n]+/)) {
+    if (!ANCRE_EXPERIENCE.test(phrase)) continue;
+
+    const re = /(\d{1,2}|[a-zà-ÿ]+)\s*\+?\s*(?:ans?|ann[ée]es?|years?)\b/gi;
+    let m;
+    while ((m = re.exec(phrase)) !== null) {
+      const avant = phrase.slice(Math.max(0, m.index - 45), m.index);
+      if (FAUX_AMIS.some((f) => f.test(avant))) continue;
+      // Puis l'aval : « 5 années d'études » est un diplôme, pas un poste.
+      const apres = phrase.slice(m.index + m[0].length, m.index + m[0].length + 24);
+      if (DUREE_ETUDES.test(apres)) continue;
+
+      const brut = m[1].toLowerCase();
+      const n = /^\d+$/.test(brut) ? parseInt(brut, 10) : NOMBRES_ECRITS[brut];
+      if (!n) continue;
+      // Au-delà de vingt ans c'est l'âge de la maison, pas celui du candidat.
+      if (n > 20) continue;
+      if (max === null || n > max) max = n;
+    }
+  }
+  return max;
+}
+
+/**
+ * Verdict de séniorité sur une description :
+ * { _expMax, _formuleSeniorite, _vetoJunior }.
+ * Calculé sur le texte ENTIER, avant toute troncature.
+ */
+function verdictSenioriteDescr(texte) {
+  const t = String(texte || '');
+  if (!t) return { _expMax: null, _formuleSeniorite: null, _vetoJunior: false, _verdictSur: 0 };
+  const formule = (FORMULES_SENIORITE.find(([re]) => re.test(t)) || [])[1] || null;
+  // Prefixe `_` : ce sont des champs de travail, jamais publies. Ils doivent
+  // AUSSI figurer dans la liste de writeOutput, qui ne retire que ce qu elle
+  // nomme — le prefixe seul ne protege de rien.
+  return {
+    _expMax: dureeExperienceMax(t),
+    _formuleSeniorite: formule,
+    _vetoJunior: VETO_JUNIOR_DESCR.test(t),
+    // Sur quelle longueur ce verdict a ete rendu. C'est ce chiffre qui permet
+    // de verifier, avant publication, quil couvre bien la description finale.
+    _verdictSur: t.length,
+  };
+}
+
+/**
+ * Applique un verdict de seniorite a une offre en le FUSIONNANT avec celui
+ * qu'elle porte deja, jamais en le remplacant.
+ *
+ * Un texte supplementaire ne peut qu'ajouter des indices : la plus longue
+ * duree l'emporte, une formule trouvee ne se perd pas, un veto trouve non
+ * plus. Remplacer etait un piege arme — le texte du rattrapage commence par
+ * `_descrExtrait`, deja borne, donc un recalcul pouvait rendre un verdict PLUS
+ * FAIBLE que celui lu a l'ingestion, sans que rien ne le signale.
+ *
+ * C'est la parade generale au defaut rencontre cinq fois : ici, aucune entree
+ * incomplete ne peut plus affaiblir une decision deja prise.
+ */
+function fusionnerVerdictSeniorite(offre, texte) {
+  const v = verdictSenioriteDescr(texte);
+  offre._expMax =
+    offre._expMax == null
+      ? v._expMax
+      : v._expMax == null
+        ? offre._expMax
+        : Math.max(offre._expMax, v._expMax);
+  offre._formuleSeniorite = offre._formuleSeniorite || v._formuleSeniorite;
+  offre._vetoJunior = Boolean(offre._vetoJunior || v._vetoJunior);
+  // La plus grande longueur analysee : c'est elle que le controle d'invariant
+  // compare a la description finale avant publication.
+  offre._verdictSur = Math.max(offre._verdictSur || 0, v._verdictSur);
+  return offre;
+}
+// L'offre entière, et non ses champs un par un : le verdict de séniorité est
+// calculé à l'ingestion, sur le texte ENTIER, et voyage avec elle.
+// Une ligne au registre. On ne garde que ce qui sert a comprendre : l'offre
+// entiere pesserait quinze fois plus pour rien.
+function noterEcartee(o, etage, precision) {
+  rapportClassement.ecartees.push({
+    intitule: o.title,
+    employeur: o.emp,
+    volet: o.volet,
+    structure: o.sector || null,
+    famille: o.famille || null,
+    etage,
+    precision: precision || null,
+    source: o.source,
+    url: o.url || null,
+  });
+}
+
+function passesJuniorFilter(offre, strict) {
+  const { volet, title } = offre;
   if (SPONTANEOUS_RE.test(title || '')) return false;
   if (INDEPENDANT_RE.test(title || '')) return false;
-  if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
+  // Stage, alternance et VIE sont juniors PAR CONTRAT — mais seulement si le
+  // contrat a été lu. Il est deviné dans sept familles de connecteurs, et un
+  // « Comptable Général Senior » deviné en VIE passait ici sans que son
+  // intitulé soit jamais regardé. On le regarde désormais, avec la liste
+  // étroite : un grade explicite dans l'intitulé l'emporte sur un type de
+  // contrat qui, lui, peut être faux.
+  if (volet !== 'cdi-cdd') {
+    if (JUNIOR_MALGRE_TOUT_RE.test(title || '')) return true;
+    return !SENIOR_TITRE_STRICT_RE.test(title || '');
+  }
   if (SENIOR_RE.test(title)) return false;
 
-  // Les durées citées passent AVANT tout le reste, y compris avant le mot
-  // « junior ». Une annonce intitulée « Junior Consultant » qui réclame cinq
-  // ans n'est pas une offre junior : le chiffre est la donnée dure, le
-  // qualificatif est du vocabulaire de marque.
-  const durees = dureesExperienceCitees(descr);
-  if (durees.some((n) => n > EXPERIENCE_MAX_ANNEES)) return false;
+  // Le CHIFFRE passe avant tout, y compris avant le veto : une annonce qui
+  // s'intitule « Junior Consultant » et réclame cinq ans n'est pas junior.
+  // Le nombre est la donnée dure, le reste est du vocabulaire de marque.
+  if (offre._expMax != null && offre._expMax > EXPERIENCE_MAX_ANNEES) return false;
 
-  if (descr) {
-    if (DESCR_SENIOR_RE.test(descr)) return false; // « confirmé », « expertise »
-    if (DESCR_JUNIOR_RE.test(descr)) return true; // ouverture explicite
-    // Une durée citée et compatible vaut acceptation : « 2 ans » est un
-    // niveau annoncé, pas un silence — c'est même le cas le plus fréquent
-    // des offres qui conviennent.
-    if (durees.length) return true;
-    return true; // description lue, aucun signal contraire
-  }
+  // Le veto n'annule qu'un rejet fondé sur la DESCRIPTION. L'intitulé, lui,
+  // a déjà tranché plus haut : un « Senior Manager » reste écarté quoi que
+  // dise sa prose. La description est longue et finit toujours par mentionner
+  // un junior ; l'intitulé est court et il engage l'employeur.
+  if (offre._vetoJunior) return true;
+
+  // « expérience confirmée », « significative », « solide expérience » : les
+  // trois seules formules qui ne peuvent rien vouloir dire d'autre.
+  if (offre._formuleSeniorite) return false;
+
+  // Une description lue sans signal contraire vaut acceptation.
+  if (offre._descrExtrait) return true;
+
   if (JUNIOR_RE.test(title)) return true; // l'intitulé se déclare junior
   return !strict;
 }
@@ -1990,6 +2238,34 @@ function cleanTitle(title) {
   //    d'origine ne dit pas mieux ; au moins il se lit.
   t = t.replace(/^\s*(?:au\s+)?sein\s+d[eu]\s+(?:la\s+|l['’]\s*|les\s+)?/i, '');
 
+  // 9 bis) Miettes de durée en tête, laissées par les règles ci-dessus.
+  //
+  //    Une règle retire le mot de contrat, une autre une partie de la durée,
+  //    et le reste demeure : « Stage 4 à 6 mois - X » devient « 4 à - X »,
+  //    « Alternance (1 an) - X » devient « (1 an) - X », « Internship -
+  //    6 months - X » devient « 6 months - X ». L'offre n'est alors perdue ni
+  //    par la taxonomie ni par un filtre : aucun motif ne peut reconnaître un
+  //    métier derrière « 4 à - ».
+  //
+  //    Trois formes, et le SÉPARATEUR est exigé dans les deux premières :
+  //    sans lui, un titre commençant légitimement par un nombre serait amputé.
+  //
+  //    a) une fourchette, avec ou sans unité : « 4 à - », « 12 ou 24 mois - »
+  t = t.replace(
+    /^\s*[({[]?\s*\d{1,2}\s*(?:[àa]|ou|-|–|to|et|\/)\s*\d{0,2}\s*(?:mois|months?|ans?|ann[ée]es?|years?)?\s*[)}\]]?\s*[:\-–—]\s*/i,
+    ''
+  );
+  //    b) une durée simple, entre parenthèses ou non : « (1 an) - », « 6 months - »
+  t = t.replace(
+    /^\s*[({[]?\s*\d{1,2}\s*(?:mois|months?|ans?|ann[ée]es?|years?)\s*[)}\]]?\s*[:\-–—]\s*/i,
+    ''
+  );
+  //    c) la forme abrégée de la Caisse des Dépôts, sans séparateur : « 24M X ».
+  //       Le M majuscule collé au nombre et suivi d'une lettre : « 3M » seul,
+  //       nom de maison, ne se trouve jamais en tête d'un intitulé suivi d'un
+  //       espace et d'un métier.
+  t = t.replace(/^\d{1,2}M\s+(?=[A-Za-zÀ-ÿ])/, '');
+
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
 
@@ -2060,9 +2336,7 @@ function normalize(item) {
       .replace(/^[A-ZÀ-Ö][A-ZÀ-Ö\s'-]+$/, (v) =>
         v.toLowerCase().replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase())
       );
-    pays = raw.countryName
-      ? raw.countryName.charAt(0) + raw.countryName.slice(1).toLowerCase()
-      : 'International';
+    pays = nettoyerPays(raw.countryName) || 'International';
     url = `https://mon-vie-via.businessfrance.fr/offres/${raw.id}`;
     typeContratRaw = 'VIE';
     // Le classement famille se fait sur le seul intitulé (pas de description).
@@ -2213,7 +2487,8 @@ function normalize(item) {
     pays = 'France';
     url = raw.url;
     typeContratRaw = raw.displayJobTitle;
-    descr = (raw.externalDescription || '').replace(/<[^>]*>/g, ' ').slice(0, 4000);
+    // Texte ENTIER : la troncature se fait plus bas, apres l'analyse.
+    descr = (raw.externalDescription || '').replace(/<[^>]*>/g, ' ');
     {
       const m = String(raw.postingEffectiveDate || '').match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
       postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
@@ -2397,7 +2672,8 @@ function normalize(item) {
     pays = 'France';
     url = raw.url;
     typeContratRaw = raw.type;
-    descr = (raw.description || '').replace(/<[^>]*>/g, ' ').slice(0, 3000);
+    // Texte ENTIER : la troncature se fait plus bas, apres l'analyse.
+    descr = (raw.description || '').replace(/<[^>]*>/g, ' ');
     postedAt = raw.date ? new Date(`${raw.date}T00:00:00Z`).toISOString() : null;
   } else if (__src.startsWith('liste:')) {
     // Carte d'une liste HTML officielle : type de contrat, intitulé et lieu
@@ -2439,7 +2715,8 @@ function normalize(item) {
     pays = 'France'; // déjà filtré côté connecteur
     url = raw.url;
     typeContratRaw = raw.type;
-    descr = String(raw.description || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').slice(0, 4000);
+    // Texte ENTIER : la troncature se fait plus bas, apres l'analyse.
+    descr = String(raw.description || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
     // « 2026-09-01 » ou « 2026-09-01T12:21:44 » : les deux sont acceptés.
     postedAt = raw.date ? dateIso(raw.date) : null;
   } else if (__src.startsWith('successfactors:')) {
@@ -2657,19 +2934,69 @@ function normalize(item) {
   // fiche invérifiable — souvent sans ville ni indemnité, comme les deux
   // « VIE » d'Amundi qui n'existent nulle part chez Business France.
   if (volet === 'vie' && __src !== 'vie') return null;
-  const famille = inferFamille(title, romeLibelle, emp);
-  if (famille === FAMILLE_HORS_PERIMETRE) return null; // réseau / vente : hors périmètre
-  // Le résidu n'est pas un fourre-tout. Une offre qu'aucune règle de famille
-  // ne sait ranger n'entre que si son intitulé dit explicitement la finance.
-  // Sans ce contrôle, tout ce qui n'était pas nommément exclu se retrouvait
-  // publié : le résidu avait atteint 26,7 % du catalogue, peuplé d'ajusteurs
-  // composite, de chaudronniers aéronautiques et d'ergothérapeutes.
-  // On donne aussi l'intitulé BRUT : le nettoyage retire « Stage » et
-  // « Stagiaire », or c'est souvent le seul mot qui situe le poste chez une
-  // maison de finance.
-  if (famille === 'Autres métiers de la finance' && !isFinanceOfferFor(emp, title, titreBrut)) return null;
   emp = normaliserEmployeur(emp);
   if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
+
+  // Le classement décide en quatre temps : pré-filtre, porte finance, famille
+  // au score de spécificité, résidu audité. L'employeur est normalisé JUSTE
+  // AVANT, parce que structures.js résout sur le nom canonique : « BNP Paribas
+  // Mission Handicap » ne se trouve pas dans la table, « BNP Paribas » oui.
+  const verdict = classify({ title, employer: emp });
+
+  if (verdict.status === 'rejected') {
+    rapportClassement.rejets.set(verdict.reason, (rapportClassement.rejets.get(verdict.reason) || 0) + 1);
+    if (!rapportClassement.exemplesRejets.has(verdict.reason)) {
+      rapportClassement.exemplesRejets.set(verdict.reason, []);
+    }
+    // Le registre COMPLET, au meme titre que l'age, la seniorite et les
+    // doublons. Les echantillons de 40 ci-dessous servent a lire ; celui-ci
+    // sert a compter. Sans lui, le plus gros etage de l'entonnoir — 2 116
+    // offres — etait le seul qu'on ne savait pas ventiler par volet.
+    rapportClassement.ecartees.push({
+      intitule: title,
+      employeur: emp,
+      volet,
+      structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
+      famille: null,
+      etage: 'classifieur',
+      precision: verdict.reason,
+      source: __src,
+      url: raw.url || null,
+    });
+    rapportClassement.exemplesRejets.get(verdict.reason).push({
+      intitule: title,
+      employeur: emp,
+      // Le volet, sans quoi on ne peut pas tirer d'echantillon par onglet : les
+      // rejets sont domines par les CDI-CDD en volume, et le vocabulaire des
+      // stages et alternances est different — « assistant », « charge de
+      // mission », des intitules courts. Un faux positif propre a eux ne
+      // pouvait pas apparaitre dans un tirage tous onglets confondus.
+      volet,
+      motif: verdict.reason,
+      structure: verdict.structure ? LIBELLES_STRUCTURE[verdict.structure] : null,
+      structureId: verdict.structure,
+      source: __src,
+      url: raw.url || null,
+    });
+    return null;
+  }
+  if (verdict.status === 'unclassified') {
+    // Le résidu ne retombe plus dans « Autres » : il sort du catalogue et va
+    // dans un fichier d'audit, où on peut le lire et décider.
+    rapportClassement.nonClasses.push({
+      title, emp, volet, source: __src, url: raw.url || null, structure: verdict.structure,
+    });
+    return null;
+  }
+  if (!verdict.structure) {
+    rapportClassement.employeursInconnus.set(emp, (rapportClassement.employeursInconnus.get(emp) || 0) + 1);
+  }
+
+  const famille = verdict.familleLabel;
+  // Le garde-fou qui exigeait un intitulé explicitement financier pour le
+  // fourre-tout a disparu avec le fourre-tout lui-même : la porte finance du
+  // classifieur fait ce travail plus tôt, et sur l'employeur plutôt que sur
+  // une liste de mots.
   const maisonRef = trouverMaison(emp);
 
   // JJ ne publie que les maisons de sa liste de référence : banques, sociétés
@@ -2684,9 +3011,27 @@ function normalize(item) {
   // légitimes, qu'aucune liste de maisons de finance ne contiendra jamais.
   // Appliquer la règle à cet onglet le viderait des neuf dixièmes de son
   // contenu sans rien gagner en qualité.
-  if (!maisonRef && volet !== 'vie') return null;
+  if (!maisonRef && volet !== 'vie') {
+    // Le verdict est deja connu : classify() tourne plus haut. On note ce que
+    // l'offre SERAIT devenue, puisque c'est ce chiffre qui decidera du sort de
+    // cette regle.
+    rapportClassement.rejetsMaisonRef.push({
+      intitule: title,
+      entreprise: emp,
+      volet,
+      source: __src,
+      resultat_hypothetique: verdict.status,
+      famille_hypothetique: verdict.familleLabel || null,
+      motif: verdict.reason || null,
+    });
+    return null;
+  }
 
-  const sector = inferSector(emp, maisonRef, title, famille);
+  // structures.js fait autorité : la structure se déduit de l'EMPLOYEUR seul,
+  // jamais de l'intitulé. inferSector() déduisait des deux, ce qui rangeait des
+  // offres BNP côté « Banque de détail » alors quelles sont en BFI, et les
+  // fonds CDPQ et Supernova Invest en « Entreprise ».
+  const sector = LIBELLES_STRUCTURE[verdict.structure] || null;
 
   // Vente et développement commercial : la distinction tient à la MAISON, pas
   // à l'intitulé. Chez un gérant d'actifs, une banque ou un dépositaire, un
@@ -2696,7 +3041,7 @@ function normalize(item) {
   // ou de grande consommation, le même mot désigne la vente de son catalogue :
   // le « Sales Business Analyst & Development » de L'Oréal n'a rien d'un poste
   // financier, il est seulement rattaché à une direction qui l'est.
-  if (sector === 'Entreprise (direction financière)' && VENTE_HORS_FINANCE_RE.test(title)) return null;
+  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title)) return null;
 
   // Dernier contrôle, une fois l'employeur normalisé : le titre doit nommer un
   // métier. C'est ici, et pas plus haut, parce que le nettoyage a pu vider un
@@ -2708,6 +3053,13 @@ function normalize(item) {
     title,
     sector,
     famille,
+    // Identifiants stables à côté des libellés : le site filtre dessus sans
+    // dépendre de l'orthographe d'un libellé qui peut changer.
+    familleId: verdict.famille,
+    structureId: verdict.structure,
+    // Tags transversaux — cumulables, indépendants de la famille. Absents
+    // quand il n'y en a pas, pour ne pas alourdir le fichier servi.
+    ...(verdict.tags.length ? { tags: verdict.tags } : {}),
     volet,
     // « CDI » ou « CDD » quand on a pu le déterminer, absent sinon : la page
     // retombe alors sur la mention générale de l'onglet.
@@ -2733,7 +3085,8 @@ function normalize(item) {
     sal: sal || undefined,
     url,
     source: __src,
-    _descr: descr,
+    _descrExtrait: descr ? String(descr).slice(0, LIMITE_DESCR) : descr,
+    ...verdictSenioriteDescr(descr),
     // Normalisée dès ici, et non à la seule écriture : les filtres d’âge lisent
     // ce champ, et « 09/01/2026 » leur paraissait tout frais — JavaScript le lit
     // à l’américaine, soit le 1er septembre au lieu du 9 janvier.
@@ -2906,6 +3259,7 @@ function dedupe(offers) {
     } else if (!existing.alsoOn.includes(offer.source)) {
       existing.alsoOn.push(offer.source);
     }
+    noterEcartee(offer, 'doublon', 'fondue dans ' + existing.source);
   }
   return [...byKey.values()].map((o) => (o.alsoOn.length ? o : { ...o, alsoOn: undefined }));
 }
@@ -3340,14 +3694,73 @@ async function completerDatesManquantes(offers) {
   // réputation de la source, pas ce que l'offre porte réellement — alors que
   // leur fiche donne la date en clair : « datePosted: 2026-08-31 » chez Swiss
   // Life. Onze offres restaient sans date à côté de la réponse.
+  // Le critere est le meme dans les deux branches : ce qui aurait ete
+  // rattrape en vraie collecte est exactement ce qui doit se trouver dans le
+  // cache au rejeu. Le nommer une fois evite que les deux derivent.
   const aCompleter = offers.filter(
     (o) =>
       o.url &&
       (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
         o._dateDeLaSource !== true ||
-        (o.volet === 'cdi-cdd' && (!o._descr || o._descr.length < 1500)) ||
+        (o.volet === 'cdi-cdd' && (!o._descrExtrait || o._descrExtrait.length < 1500)) ||
         (o.volet === 'cdi-cdd' && SOURCE_SANS_CONTRAT_RE.test(o.source)))
   );
+
+  // Au rejeu, tout est deja la : on applique et on sort, sans le moindre
+  // appel. Sans cette porte, --depuis-cache prenait 11 min 24 s.
+  if (DEPUIS_CACHE) {
+    let repris = 0;
+    const manquantes = [];
+    for (const o of offers) {
+      const f = fichesRattrapees.get(o.url);
+      if (!f) {
+        // Un manque ne passe jamais en silence : une description absente fait
+        // traverser le filtre de seniorite sans rien voir.
+        if (aCompleter.includes(o)) manquantes.push(o);
+        continue;
+      }
+      // Le verdict est RECALCULE sur le texte entier de la photo, jamais
+      // restitue. Un verdict stocke fige le comportement du code qui l'a
+      // ecrit : apres correction du garde-fou du diplome, le rejeu rendait
+      // encore les `null` de la veille — cache expMax=null, recalcul
+      // expMax=10, sur le meme texte. Un rejeu sert a eprouver le code
+      // d'aujourd'hui ; il doit donc le faire tourner.
+      if (f.descrComplet) {
+        fusionnerVerdictSeniorite(o, String(f.descrComplet));
+        // L'extrait se reborne comme dans une vraie collecte, sinon le rejeu
+        // publierait un champ plus long.
+        o._descrExtrait = String(f.descrComplet).slice(0, LIMITE_DESCR);
+      }
+      if (f.postedAt) {
+        o._postedAt = f.postedAt;
+        o._dateRecuperee = true;
+        o._dateEstMiseAJour = f.dateEstMiseAJour === true;
+        repris++;
+      }
+      if (f.volet && f.volet !== o.volet) {
+        o.volet = f.volet;
+        o.contrat = null;
+        o._voletCorrige = true;
+      }
+    }
+    rapportClassement.fichesManquantes = manquantes.map((o) => ({
+      titre: o.title,
+      emp: o.emp,
+      volet: o.volet,
+      source: o.source,
+      url: o.url,
+    }));
+    console.log(`[pipeline] Fiches relues depuis le cache : ${fichesRattrapees.size} (aucun appel reseau).`);
+    if (manquantes.length) {
+      console.warn(
+        `[pipeline] ATTENTION : ${manquantes.length} offre(s) auraient du voir leur fiche\n` +
+          `  rattrapee et ne sont PAS dans le cache. Leur description est incomplete,\n` +
+          `  donc le filtre de seniorite les juge a l aveugle. Relancer une vraie\n` +
+          `  collecte pour les couvrir. Detail dans le rapport.`
+      );
+    }
+    return repris;
+  }
   if (!aCompleter.length) return 0;
 
   // Une file par hôte : deux sites différents peuvent être interrogés en
@@ -3394,15 +3807,41 @@ async function completerDatesManquantes(offers) {
             // décrivent la mission en JSON-LD et posent leurs exigences dans
             // un encadré — le cas du Crédit Agricole, et de son banquier
             // conseil à « 6 - 10 ans » resté en ligne.
-            const morceaux = [o._descr, fiche.description, texteDeLaPage(texteHtml)];
-            o._descr = morceaux.filter(Boolean).join(' ').slice(0, 16000) || o._descr;
+            const morceaux = [o._descrExtrait, fiche.description, texteDeLaPage(texteHtml)];
+            // `descrComplet` est la SEULE source d'analyse ; `_descrExtrait` est
+            // borne pour le stockage et ne doit jamais servir a juger.
+            const descrComplet = morceaux.filter(Boolean).join(' ');
+            if (descrComplet) {
+              fusionnerVerdictSeniorite(o, descrComplet);
+              o._descrExtrait = descrComplet.slice(0, LIMITE_DESCR);
+            }
+
+            // Retenu pour le cache : c'est ce qui coute cher a aller chercher.
+            fichesRattrapees.set(o.url, {
+              // LE TEXTE, ET RIEN QUE LE TEXTE. Le verdict de seniorite y
+              // figurait aussi ; il figeait le comportement du code qui l'avait
+              // ecrit, et le rejeu certifiait alors la version de la veille. Ce
+              // qui se recalcule ne se stocke pas.
+              //
+              // Le texte est ENTIER. Le champ s'appelait `descr` et rangeait
+              // l'extrait : un rejeu ne voyait alors que 4 000 caracteres la ou
+              // une vraie collecte en lit 14 000 — 72 rejets de seniorite au
+              // rejeu contre 181. Le nom dit desormais ce qu'il contient.
+              descrComplet: descrComplet || o._descrExtrait,
+              postedAt: fiche.date || null,
+              dateEstMiseAJour: fiche.dateEstMiseAJour === true,
+              volet: o.volet,
+              // La date de CAPTURE, pas celle de publication : une fiche lue il y
+              // a trois jours a pu changer, et le rejeu doit pouvoir le dire.
+              capture: new Date().toISOString(),
+            });
 
             // Le contrat, tant qu'on tient la page. Sept familles de
             // connecteurs le devinent sur l'intitulé, et rangent donc en CDI
             // toute alternance dont le titre ne le dit pas — que le filtre
             // 0-3 ans écarte ensuite comme un poste confirmé.
             if (o.volet === 'cdi-cdd') {
-              const vrai = contratDeLaFiche(o._descr);
+              const vrai = contratDeLaFiche(o._descrExtrait);
               if (vrai) {
                 o.volet = vrai;
                 o.contrat = null; // la mention CDI/CDD ne veut plus rien dire
@@ -3509,12 +3948,258 @@ function dateIso(valeur) {
   return d.toISOString();
 }
 
+
+// ---------------------------------------------------------------------------
+// Rapport de controle du classement (tache 6 de la refonte)
+// ---------------------------------------------------------------------------
+//
+// Trois choses que personne ne voyait avant : ce qui est rejete et pourquoi,
+// ce qui passe la porte sans trouver de famille, et quels employeurs manquent
+// a la table des structures. Les deux dernieres sont des LISTES DE TRAVAIL :
+// elles disent quoi corriger, pas seulement qu'il y a un probleme.
+function rapportDeClassement(offres) {
+  const parFamille = {};
+  const parStructure = {};
+  for (const o of offres) {
+    parFamille[o.famille || '(sans famille)'] = (parFamille[o.famille || '(sans famille)'] || 0) + 1;
+    parStructure[o.sector || '(structure inconnue)'] = (parStructure[o.sector || '(structure inconnue)'] || 0) + 1;
+  }
+
+  const ligne = (n, t) => '  ' + String(n).padStart(5) + '  ' + t;
+  const trier = (obj) => Object.entries(obj).sort((a, b) => b[1] - a[1]);
+
+  console.log('\n=== CLASSEMENT — par famille ===');
+  for (const [f, n] of trier(parFamille)) console.log(ligne(n, f));
+
+  console.log('\n=== CLASSEMENT — par type de structure ===');
+  for (const [st, n] of trier(parStructure)) console.log(ligne(n, st));
+
+  const rejets = [...rapportClassement.rejets.entries()].sort((a, b) => b[1] - a[1]);
+  const totalRejets = rejets.reduce((n, [, v]) => n + v, 0);
+  console.log('\n=== REJETS — ' + totalRejets + ' offres, par motif ===');
+  for (const [motif, n] of rejets) console.log(ligne(n, motif));
+
+  const nc = rapportClassement.nonClasses;
+  console.log('\n=== SANS FAMILLE — ' + nc.length + ' offres ===');
+  const parIntitule = {};
+  for (const o of nc) parIntitule[o.title] = (parIntitule[o.title] || 0) + 1;
+  for (const [t, n] of trier(parIntitule).slice(0, 20)) console.log(ligne(n, t));
+
+  const inconnus = [...rapportClassement.employeursInconnus.entries()].sort((a, b) => b[1] - a[1]);
+  const fm = rapportClassement.fichesManquantes || [];
+  if (fm.length) {
+    console.log('\n=== FICHES ABSENTES DU CACHE — ' + fm.length + ' offres jugees a l aveugle ===');
+    console.log('  Leur description est incomplete : le filtre de seniorite ne peut rien y lire.');
+    const parSrc = {};
+    for (const o of fm) parSrc[(o.source || '?').split(':')[0]] = (parSrc[(o.source || '?').split(':')[0]] || 0) + 1;
+    for (const [src, n] of trier(parSrc)) console.log(ligne(n, src));
+  }
+
+  const mr = rapportClassement.rejetsMaisonRef;
+  const mrClasses = mr.filter((o) => o.resultat_hypothetique === 'classified');
+  console.log('\n=== REJETES PAR maisonRef — ' + mr.length + ' offres ===');
+  console.log('  dont ' + mrClasses.length + ' auraient ete PUBLIEES avec une vraie famille');
+  const parFamMr = {};
+  for (const o of mrClasses) parFamMr[o.famille_hypothetique] = (parFamMr[o.famille_hypothetique] || 0) + 1;
+  for (const [f, n] of trier(parFamMr).slice(0, 10)) console.log(ligne(n, f));
+  const parEmpMr = {};
+  for (const o of mrClasses) parEmpMr[o.entreprise] = (parEmpMr[o.entreprise] || 0) + 1;
+  console.log('  -- les 10 employeurs les plus perdus --');
+  for (const [e, n] of trier(parEmpMr).slice(0, 10)) console.log(ligne(n, e));
+
+  console.log('\n=== EMPLOYEURS ABSENTS DE structures.js — ' + inconnus.length + ' ===');
+  for (const [e, n] of inconnus.slice(0, 20)) console.log(ligne(n, e));
+
+  // Les deux listes de travail, sur disque : la console defile, pas un fichier.
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(DATA_DIR, `unclassified${SUFFIXE}.json`),
+    JSON.stringify({ genere: new Date().toISOString(), total: nc.length, offres: nc }, null, 2)
+  );
+  fs.writeFileSync(
+    path.join(DATA_DIR, `employeurs-inconnus${SUFFIXE}.json`),
+    JSON.stringify(
+      { genere: new Date().toISOString(), total: inconnus.length, employeurs: inconnus.map(([emp, offres]) => ({ emp, offres })) },
+      null,
+      2
+    )
+  );
+  fs.writeFileSync(
+    path.join(DATA_DIR, `rejets-maisonref${SUFFIXE}.json`),
+    JSON.stringify(
+      {
+        genere: new Date().toISOString(),
+        total: rapportClassement.rejetsMaisonRef.length,
+        dont_classees: rapportClassement.rejetsMaisonRef.filter((o) => o.resultat_hypothetique === 'classified').length,
+        offres: rapportClassement.rejetsMaisonRef,
+      },
+      null,
+      2
+    )
+  );
+  // Tirage AU HASARD, et non les plus frequents : les intitules les plus
+  // frequents d'un motif sont les plus caricaturaux, ils ne disent rien de la
+  // queue de distribution ou se cachent les faux positifs.
+  // Le registre complet : une ligne par offre ecartee, tous etages confondus.
+  fs.writeFileSync(
+    path.join(DATA_DIR, `rejets-detail${SUFFIXE}.json`),
+    JSON.stringify(
+      {
+        genere: new Date().toISOString(),
+        total: rapportClassement.ecartees.length,
+        par_etage: [...rapportClassement.ecartees.reduce((m, o) => m.set(o.etage, (m.get(o.etage) || 0) + 1), new Map())]
+          .sort((a, b) => b[1] - a[1])
+          .map(([e, n]) => e + ' : ' + n),
+        par_volet: [...rapportClassement.ecartees.reduce((m, o) => m.set(o.volet, (m.get(o.volet) || 0) + 1), new Map())]
+          .sort((a, b) => b[1] - a[1])
+          .map(([v, n]) => v + ' : ' + n),
+        offres: rapportClassement.ecartees,
+      },
+      null,
+      2
+    )
+  );
+  console.log(`[pipeline] Registre des ecartees : ${rapportClassement.ecartees.length} lignes dans data/rejets-detail${SUFFIXE}.json.`);
+
+  const TAILLE_ECHANTILLON = 40;
+  const echantillons = [
+    ['prefilter:retail', 'echantillon-retail'],
+    ['gate:big4-sans-marqueur', 'echantillon-gate-big4'],
+    ['gate:entreprise-sans-marqueur', 'echantillon-gate-entreprise'],
+  ];
+  // Deux echantillons de plus, tires PAR VOLET et tous motifs confondus.
+  // Les trois ci-dessus sont par motif, donc domines par les CDI-CDD.
+  const tousRejets = [].concat(...rapportClassement.exemplesRejets.values());
+  for (const v of ['stage', 'alternance']) {
+    echantillons.push(['volet:' + v, 'echantillon-rejets-' + v]);
+    rapportClassement.exemplesRejets.set('volet:' + v, tousRejets.filter((o) => o.volet === v));
+  }
+
+  for (const [motif, nom] of echantillons) {
+    const tout = rapportClassement.exemplesRejets.get(motif) || [];
+    // Melange de Fisher-Yates sur une copie : on ne touche pas au tableau
+    // d'origine, et chaque offre a la meme chance d'etre tiree.
+    const melange = tout.slice();
+    for (let i = melange.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [melange[i], melange[j]] = [melange[j], melange[i]];
+    }
+    fs.writeFileSync(
+      path.join(DATA_DIR, `${nom}${SUFFIXE}.json`),
+      JSON.stringify(
+        {
+          genere: new Date().toISOString(),
+          motif,
+          total_rejete: tout.length,
+          taille_echantillon: Math.min(TAILLE_ECHANTILLON, melange.length),
+          methode: 'tirage aleatoire uniforme (Fisher-Yates), pas les plus frequents',
+          offres: melange.slice(0, TAILLE_ECHANTILLON),
+        },
+        null,
+        2
+      )
+    );
+    console.log('  echantillon ' + nom + ' : ' + Math.min(TAILLE_ECHANTILLON, melange.length) + ' tirees sur ' + tout.length);
+  }
+
+  console.log('\n[pipeline] Listes de travail ecrites dans data/.');
+}
+// ---------------------------------------------------------------------------
+// Cache de collecte brute
+// ---------------------------------------------------------------------------
+//
+// Les offres TELLES QUE RECUES, avant normalisation : c'est tout l'interet.
+// Rejouer depuis une etape posterieure ne permettrait pas de mettre au point
+// ce qui se passe AVANT elle, et c'est justement la que vivent le nettoyage
+// des intitules, la classification et les filtres.
+// Combien de photos on garde. Trois suffisent pour comparer un passage a
+// celui d'avant sans laisser le dossier enfler.
+const PHOTOS_GARDEES = 3;
+
+// « brut-2026-09-03T2346.json.gz ». L'HEURE, pas seulement le jour : deux
+// passages du meme jour UTC — 22 h 32 et 00 h 55 heure de Paris — s'ecrasaient
+// l'un l'autre, et il a fallu aller rechercher le premier dans git.
+const NOM_RECOLTE = /^brut-\d{4}-\d{2}-\d{2}(?:T\d{4})?\.json(?:\.gz)?$/;
+
+function ecrireRecolteBrute(raw, fiches) {
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    const t = new Date().toISOString();
+    const horodate = t.slice(0, 10) + 'T' + t.slice(11, 13) + t.slice(14, 16);
+    const nom = `brut-${horodate}.json.gz`;
+    fs.writeFileSync(
+      path.join(DATA_DIR, nom),
+      zlib.gzipSync(JSON.stringify({
+        genere: new Date().toISOString(),
+        total: raw.length,
+        offres: raw,
+        // Les fiches allees chercher sur le web : sans elles, le rejeu les
+        // redemanderait une par une et durerait onze minutes.
+        fiches: [...(fiches || new Map()).entries()].map(([url, f]) => ({ url, ...f })),
+      }))
+    );
+    const poids = (fs.statSync(path.join(DATA_DIR, nom)).size / 1048576).toFixed(1);
+    console.log(
+      `[pipeline] Cache ecrit : data/${nom} (${raw.length} offres, ` +
+        `${(fiches || new Map()).size} fiches, ${poids} Mo compresses).`
+    );
+    // On ne garde que les trois dernieres photos, et l'on ne supprime QUE des
+    // fichiers dont le nom correspond au motif : le dossier data/ contient
+    // aussi les listes de travail.
+    const anciennes = fs
+      .readdirSync(DATA_DIR)
+      .filter((f) => NOM_RECOLTE.test(f))
+      .sort()
+      .reverse()
+      .slice(PHOTOS_GARDEES);
+    for (const f of anciennes) {
+      fs.unlinkSync(path.join(DATA_DIR, f));
+      console.log(`[pipeline] Ancienne photo retiree : data/${f}`);
+    }
+  } catch (err) {
+    // Un cache qui echoue ne doit pas faire echouer le passage : il ne sert
+    // qu'a la mise au point.
+    console.warn('[pipeline] cache brut non ecrit :', err.message);
+  }
+}
+
+// La photo la plus recente, quel que soit son jour.
+function derniereRecolteBrute() {
+  try {
+    const fichiers = fs
+      .readdirSync(DATA_DIR)
+      .filter((f) => NOM_RECOLTE.test(f))
+      .sort()
+      .reverse();
+    if (!fichiers.length) return null;
+    // Les photos d'avant la compression restent lisibles : le suffixe decide.
+    const chemin = path.join(DATA_DIR, fichiers[0]);
+    const octets = fs.readFileSync(chemin);
+    const photo = JSON.parse(
+      (fichiers[0].endsWith('.gz') ? zlib.gunzipSync(octets) : octets).toString('utf8')
+    );
+    // Une photo anterieure a la correction range l'EXTRAIT sous `descr`. La
+    // rejouer donnerait des chiffres faux sans rien signaler : on la refuse.
+    const fiches = photo.fiches || [];
+    if (fiches.length && !fiches.some((f) => f.descrComplet)) {
+      console.error('\n[pipeline] Photo ' + fichiers[0] + ' anterieure a la correction du cache.');
+      console.error("  Elle ne contient qu'un extrait de 4 000 caracteres par fiche, pas le");
+      console.error('  texte entier : le filtre de seniorite y verrait 72 rejets au lieu de 181.');
+      console.error('  Relancer une vraie collecte pour constituer une photo utilisable.\n');
+      return null;
+    }
+    return photo;
+  } catch (err) {
+    return null;
+  }
+}
+
 function writeOutput(offers) {
   const pepites = choisirPepites(offers);
   console.log(`[pipeline] ${pepites.size} offres mises en avant comme « Pépites JJ ».`);
 
   const publicOffers = offers.map((o) => {
-    // `_descr` est le texte intégral de l'annonce. Il sert UNIQUEMENT à juger
+    // `_descrExtrait` est le texte intégral de l'annonce. Il sert UNIQUEMENT à juger
     // la séniorité, en interne, et ne doit jamais être publié : ce serait
     // reproduire mot pour mot la prose de l'employeur — ce que JJ n'a aucun
     // droit de faire et aucune raison de vouloir. Il figurait pourtant dans le
@@ -3526,7 +4211,11 @@ function writeOutput(offers) {
     // poste, l'employeur, le lieu, la date, et le lien vers l'annonce d'origine.
     const {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
-      _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descr,
+      _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descrExtrait,
+      // Analyse de séniorité : champs de travail, jamais publiés.
+      _expMax, _formuleSeniorite, _vetoJunior, _verdictSur,
+      // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
+      _voletCorrige,
       ...rest
     } = o;
     // La mention de télétravail complet a déjà servi à la déduplication
@@ -3677,12 +4366,69 @@ function writeRss(offers) {
 // Exécution
 // ---------------------------------------------------------------------------
 async function run() {
-  console.log('[pipeline] Récupération des sources...');
-  const raw = await fetchAllSources();
-  console.log(`[pipeline] ${raw.length} offres brutes récupérées.`);
+  // Le passage automatique ne lit jamais le cache : il servirait la photo
+  // d'un matin indefiniment, sans que rien ne le signale. La variable est
+  // posee par GitHub Actions sur tous ses runs.
+  if (DEPUIS_CACHE && process.env.GITHUB_ACTIONS) {
+    console.error('\n[pipeline] --depuis-cache est INTERDIT dans GitHub Actions.');
+    console.error('  Le passage quotidien doit faire une vraie collecte.\n');
+    process.exitCode = 1;
+    return;
+  }
+
+  let raw;
+  if (DEPUIS_CACHE) {
+    const photo = derniereRecolteBrute();
+    if (!photo) {
+      console.error('\n[pipeline] Aucune collecte en cache dans data/.');
+      console.error('  Lancer une fois sans --depuis-cache pour en constituer une.\n');
+      process.exitCode = 1;
+      return;
+    }
+    raw = photo.offres;
+    for (const f of photo.fiches || []) {
+      const { url, ...reste } = f;
+      fichesRattrapees.set(url, reste);
+    }
+    const age = Math.round((Date.now() - new Date(photo.genere).getTime()) / 60000);
+    const quand = new Date(photo.genere).toLocaleString('fr-FR');
+    console.log('\n' + '='.repeat(66));
+    console.log('  LECTURE DU CACHE — AUCUNE SOURCE INTERROGEE');
+    console.log('  Photo du ' + quand + '  (il y a ' + age + ' min)');
+    console.log('  ' + raw.length + ' offres brutes rejouees.');
+    if (fichesRattrapees.size) {
+      const captures = [...fichesRattrapees.values()].map((f) => f.capture).filter(Boolean).sort();
+      if (captures.length) {
+        const vieille = Math.round((Date.now() - new Date(captures[0]).getTime()) / 3600000);
+        const recente = Math.round((Date.now() - new Date(captures[captures.length - 1]).getTime()) / 3600000);
+        console.log('  ' + fichesRattrapees.size + ' fiches capturees il y a ' +
+          (vieille === recente ? vieille + ' h' : recente + ' a ' + vieille + ' h') +
+          ' — une fiche peut avoir change depuis.');
+      } else {
+        console.log('  ' + fichesRattrapees.size + ' fiches, sans date de capture (cache anterieur a cette version).');
+      }
+    }
+    console.log('  Sortie vers offres-cache.js — le catalogue de production');
+    console.log('  N EST PAS touche.');
+    console.log('='.repeat(66) + '\n');
+  } else {
+    console.log('[pipeline] Récupération des sources...');
+    raw = await fetchAllSources();
+    console.log(`[pipeline] ${raw.length} offres brutes récupérées.`);
+    // Le cache s ecrit plus bas, APRES le rattrapage des fiches.
+  }
 
   const normalized = raw.map(normalize).filter(Boolean);
-  console.log(`[pipeline] ${normalized.length} offres normalisées (${raw.length - normalized.length} rejetées : champs manquants).`);
+  // « champs manquants » melangeait trois choses : normalize() rend null pour
+  // une offre incomplete, pour un rejet du classifieur et pour un residu sans
+  // famille. Le libelle nommait le premier cas et comptait les trois — 3 422
+  // annonces le 04/09, dont 2 116 rejets et 457 residus. Tant qu'on ne sait pas
+  // les separer a la source, le libelle dit les trois.
+  console.log(
+    `[pipeline] ${normalized.length} offres normalisées ` +
+      `(${raw.length - normalized.length} écartées à la normalisation : incomplètes, ` +
+      `rejetées et non classées — voir data/rejets-detail${SUFFIXE}.json pour le détail).`
+  );
   // Répartition par onglet DÈS la normalisation, avant tout filtrage. Sans
   // elle, on ne peut pas dire si un onglet est pauvre parce que les maisons
   // n'y recrutent pas, ou parce qu'on perd ses offres en chemin — la question
@@ -3729,14 +4475,17 @@ async function run() {
     if (!SOURCES_DATE_FIABLE_RE.test(o.source)) return true;
     const t = new Date(o._postedAt || 0).getTime();
     if (!t) return true;
+    const jours = Math.round((Date.now() - t) / 86400000);
     if (SOURCES_AGREGATEUR_RE.test(o.source)) {
       if (t >= seuilAgregateur) return true;
       coupeesAgregateur++;
+      noterEcartee(o, 'age:agregateur', jours + ' j');
       return false;
     }
     const seuil = o.volet === 'cdi-cdd' ? seuilCdiCdd : seuilAtsDirect;
     if (t >= seuil) return true;
     coupeesZombies++;
+    noterEcartee(o, 'age:employeur-direct', jours + ' j');
     return false;
   });
   console.log(
@@ -3745,7 +4494,12 @@ async function run() {
       `${coupeesZombies} écartées : plus de ${MAX_AGE_JOURS_ATS_DIRECT} j même chez l'employeur).`
   );
 
-  const junior = fraiches.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr));
+  const junior = fraiches.filter((o) => {
+    if (passesJuniorFilter(o)) return true;
+    noterEcartee(o, 'seniorite:premier-passage',
+      o._expMax != null ? o._expMax + ' ans' : o._formuleSeniorite || 'intitule');
+    return false;
+  });
   console.log(
     `[pipeline] ${junior.length} offres après filtre junior 0-3 ans (${fraiches.length - junior.length} écartées : senior/confirmé).`
   );
@@ -3772,6 +4526,9 @@ async function run() {
   const nonDatee = (o) => !SOURCES_DATE_FIABLE_RE.test(o.source) && o._dateRecuperee !== true;
   const sansDateAvant = final.filter(nonDatee).length;
   const recuperees = await completerDatesManquantes(final);
+  // Maintenant seulement : le brut ET les fiches rattrapees, pour que le
+  // rejeu se passe entierement du reseau.
+  if (!DEPUIS_CACHE) ecrireRecolteBrute(raw, fichesRattrapees);
   const sansDateApres = final.filter(nonDatee).length;
   console.log(
     `[pipeline] Dates de publication : ${recuperees} récupérées sur les fiches ` +
@@ -3800,6 +4557,7 @@ async function run() {
     const seuil = o.volet === 'cdi-cdd' ? seuilApresDatationCdi : seuilApresDatation;
     if (!t || t >= seuil) return true;
     perimees++;
+    noterEcartee(o, 'age:apres-datation', Math.round((Date.now() - t) / 86400000) + ' j');
     return false;
   });
   if (perimees) {
@@ -3816,13 +4574,20 @@ async function run() {
   // séniorité n'était jugée que sur l'intitulé, et un poste demandant cinq ans
   // d'expérience passait dès que son titre ne disait pas « senior ».
   const avantSeniorite = final.length;
-  const publiables = final.filter((o) => passesJuniorFilter(o.volet, o.title, o._descr, true));
+  const publiables = final.filter((o) => {
+    if (passesJuniorFilter(o, true)) return true;
+    noterEcartee(o, 'seniorite:sur-la-fiche',
+      o._expMax != null ? o._expMax + ' ans'
+        : o._formuleSeniorite ? o._formuleSeniorite
+        : o._descrExtrait ? 'intitule' : 'aucune description lisible');
+    return false;
+  });
   // Deux motifs de rejet, comptés séparément : on veut voir lequel domine.
   // « la description dit sept ans » est le but recherché ; « on n'a pas pu lire
   // la description » est le prix de la rigueur, et s'il devenait majoritaire il
   // faudrait revoir l'arbitrage.
   const rejetSeniorite = new Set(final.filter((o) => !publiables.includes(o)));
-  const demasquees = [...rejetSeniorite].filter((o) => o._descr).length;
+  const demasquees = [...rejetSeniorite].filter((o) => o._descrExtrait).length;
   const invisibles = rejetSeniorite.size - demasquees;
   if (invisibles) {
     // Savoir QUELLES sources restent illisibles est le seul moyen de faire
@@ -3830,7 +4595,7 @@ async function run() {
     // description, plutôt que de continuer à gratter leurs pages.
     const parSource = {};
     for (const o of rejetSeniorite) {
-      if (o._descr) continue;
+      if (o._descrExtrait) continue;
       const src = String(o.source || '?').split(':')[0];
       parSource[src] = (parSource[src] || 0) + 1;
     }
@@ -3847,8 +4612,8 @@ async function run() {
   // rien, on ne le fait donc pas.
   let cddRattrapes = 0;
   for (const o of publiables) {
-    if (o.volet !== 'cdi-cdd' || !o._descr || o.contrat === 'CDD') continue;
-    if (CDD_RE.test(o._descr)) {
+    if (o.volet !== 'cdi-cdd' || !o._descrExtrait || o.contrat === 'CDD') continue;
+    if (CDD_RE.test(o._descrExtrait)) {
       o.contrat = 'CDD';
       cddRattrapes++;
     }
@@ -3886,6 +4651,34 @@ async function run() {
     );
   }
 
+  // INVARIANT : un verdict de seniorite rendu sur moins que la description
+  // finale est un verdict rendu a l'aveugle. Trois defauts differents ont
+  // produit ce cas ce soir ; on controle le point commun, pas les causes.
+  {
+    const aveugles = publiables.filter(
+      (o) =>
+        o.volet === 'cdi-cdd' &&
+        o._descrExtrait &&
+        (o._verdictSur == null || o._verdictSur < String(o._descrExtrait).length)
+    );
+    if (aveugles.length) {
+      const ex = aveugles[0];
+      console.error('\n[pipeline] PUBLICATION ANNULEE — verdict de seniorite incomplet :');
+      console.error(
+        `  ${aveugles.length} offre(s) CDI-CDD portent un verdict rendu sur MOINS de texte\n` +
+          `  que leur description finale. Le filtre 0-3 ans les a donc jugees sur une\n` +
+          `  entree incomplete, sans le signaler.\n\n` +
+          `  Exemple : ${ex.emp} — ${String(ex.title).slice(0, 50)}\n` +
+          `            verdict rendu sur ${ex._verdictSur} caracteres, description finale ${String(ex._descrExtrait).length}.\n\n` +
+          `  Cause probable : la description a change apres le calcul du verdict.\n` +
+          `  Tout endroit qui ecrit _descrExtrait doit recalculer verdictSenioriteDescr\n` +
+          `  sur le texte ENTIER, avant toute troncature.`
+      );
+      process.exitCode = 1;
+      return;
+    }
+  }
+
   const anomalies = anomaliesDePublication(publiables);
   if (anomalies.length && !process.argv.includes('--forcer')) {
     console.error('\n[pipeline] PUBLICATION ANNULÉE — la collecte semble incomplète :');
@@ -3901,6 +4694,7 @@ async function run() {
   }
 
   writeOutput(publiables);
+  rapportDeClassement(publiables);
   console.log(
     `[pipeline] Écrit dans ${path.relative(process.cwd(), OUTPUT_PATH)}` +
       `, ${path.relative(process.cwd(), RSS_PATH)} (flux RSS) et ${path.relative(process.cwd(), SITEMAP_PATH)}.`

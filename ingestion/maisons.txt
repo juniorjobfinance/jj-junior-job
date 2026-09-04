@@ -103,7 +103,7 @@ Coface                   | coface
 MAIF                     | ^maif\b|mutuelle assurance instituteur
 Macif                    | ^macif\b|^aema\b|abeille assurance
 Malakoff Humanis         | malakoff
-AXA                      | ^axa\b
+AXA                      | ^axa\b|direct assurance|gie axa
 Allianz France           | allianz
 CNP Assurances           | ^cnp\b
 Scor                     | ^scor\b
@@ -119,7 +119,7 @@ Société Générale         | societe generale|^sg\b|boursobank|boursorama
 # Les caisses régionales s'appellent "Caisse Régionale de Crédit Agricole..." :
 # le nom de la maison n'est pas en tête, d'où l'alternative non ancrée.
 Crédit Agricole          | credit agricole|^lcl\b|indosuez|.*caisse regionale de credit agricole|.*groupe credit agricole
-BPCE                     | bpce|caisse d.?epargne|banque populaire|^bred\b|banque palatine|credit cooperatif|banque bcp|casden
+BPCE                     | bpce|caisse d.?epargne|banque populaire|^bred\b|banque palatine|credit cooperatif|banque bcp|casden|socfim|^oney|credit foncier|banque de savoie
 Crédit Mutuel            | credit mutuel|^cic\b|banque transatlantique|arkea
 La Banque Postale        | banque postale
 
@@ -135,13 +135,13 @@ Younited                 | younited
 # === Grands groupes — finance d'entreprise, contrôle de gestion =============
 TotalEnergies            | total ?energies|^total\b
 CMA CGM                  | cma ?cgm
-LVMH                     | ^lvmh|mo[eë]t hennessy|christian dior|louis vuitton|^sephora|make up for ever|guerlain|givenchy|c[ée]line|loewe|bulgari|^fendi|kenzo|berluti|^tag heuer|hennessy
+LVMH                     | ^lvmh|mo[eë]t hennessy|christian dior|louis vuitton|^sephora|make up for ever|guerlain|givenchy|c[ée]line|loewe|bulgari|^fendi|kenzo|berluti|^tag heuer|hennessy|parfums christian dior|maison francis kurkdjian|bon marche|officine universelle buly|chaumet|rimowa|tiffany|benefit cosmetics|^krug
 L'Oréal                  | l.?oreal
 Airbus                   | airbus
 Sanofi                   | sanofi
 Kering                   | ^kering\b
 Schneider Electric       | schneider
-Vinci                    | ^vinci\b
+Vinci                    | ^vinci\b|^axians|^citeos|^sar$|^vf haute provence|^hestia|^sunmind|^division des grands projets
 Danone                   | ^danone\b
 Air Liquide              | air liquide
 Safran                   | ^safran\b
@@ -280,3 +280,16 @@ Valeo                    | ^valeo\b
 Supernova Invest         | ^supernova
 
 Compass Lexecon          | ^compass lexecon
+
+# Vues à la collecte du 03/09/2026 et jetées faute d'inscription : le
+# contrôle « maisons vues » les a relevées. AEW, Jefferies et Mutuelle
+# Saint-Christophe étaient déjà dans structures.js — il ne leur manquait que
+# cette liste-ci. Deux tables, deux portes (DECISIONS.md §24).
+AEW                      | ^aew\b
+Jefferies                | ^jefferies
+Mutuelle Saint-Christophe | mutuelle saint.?christophe
+Ensemble Protection Sociale | ensemble protection sociale
+
+# Publiee en VIE sans etre une maison : le VIE contourne la liste. Elle est
+# inscrite ici pour que les deux tables disent la meme chose (paragraphe 24).
+KONI                     | ^koni

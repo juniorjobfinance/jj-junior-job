@@ -35,7 +35,9 @@ depuis le début.
 
 - 900/1006 datées (89 %) ; les autres affichent « toujours en ligne chez
   l'employeur, date inconnue » et passent en fin de liste ;
-- plus ancienne offre datée : 120 jours, pour un seuil à 120 ;
+- plus ancienne offre datée : 120 jours. Il y a **deux** seuils, et le récap
+  n'en citait qu'un : **60 jours pour un CDI·CDD** (`MAX_AGE_JOURS_CDI_CDD`),
+  120 pour les autres volets chez un employeur direct, 30 sur un agrégateur ;
 - résidu « Autres métiers de la finance » : 5,9 % ;
 - les 13 familles métier tiennent entre 3,9 % et 15,8 % ;
 - les 11 types de structure entre 3,5 % et 20,6 % ;
@@ -62,7 +64,8 @@ Passage complet de `ingestion/rendement.js` (147 sources, un quart d'heure) :
 
 **Attention au mot « publiable ».** Dans cet outil il signifie seulement
 « passe `normalize()` et le filtre des grandes villes ». Il **n'inclut pas** le
-contrôle de séniorité sur la description, le seuil des 120 jours, ni la
+contrôle de séniorité sur la description, les seuils d'âge (60 j pour un
+CDI·CDD, 120 sinon), ni la
 déduplication. L'écart de 2 365 n'est donc PAS un stock d'offres récupérables :
 une part inconnue est légitime. **Mesurer la composition de cet écart est en
 soi le prochain chantier** — sans elle, on optimiserait à l'aveugle.
@@ -105,7 +108,12 @@ rapporteraient UNE offre.
 1. **Réparer les connecteurs muets** — Capgemini, Santander, puis les onze
    autres. Borné, vérifiable, et sans toucher à un seul filtre.
 2. **Mesurer la composition de l'écart 3 363 → 998** (séniorité sur
-   description, 120 jours, doublons). C'est la mesure qui manque.
+   description, seuils d'âge 60/120 j, doublons). C'est la mesure qui manque.
+   **Candidat n° 1 de ce chantier : le seuil de 60 jours sur les CDI·CDD.**
+   Mesuré le 04/09/2026 : sur 179 offres écartées par le verdict de séniorité
+   et absentes du catalogue, **59 sont mortes de ce seul seuil** — un tiers.
+   Une annonce de CDI de deux mois et demi n'est pas forcément pourvue. Rien
+   n'a été changé : c'est une mesure, pas une décision.
 3. **Le type de contrat deviné au lieu d'être lu** dans sept familles de
    connecteurs — c'est ce qui étouffe l'alternance (voir plus bas).
 
@@ -331,3 +339,59 @@ site déclare fermés.
 **France Travail et La Bonne Alternance** — débranchés le 01/09, mesure refaite
 le 02/09 : 26 offres finance sur les huit plus gros bassins, dont une seule
 maison de finance. Voir `DECISIONS.md` §2.
+
+---
+
+## La refonte de la classification — sur branche, en attente de fusion
+
+**Mesuré le 04/09/2026 sur `refonte-classification`. Le catalogue en ligne
+reste celui de `main` : rien de ce qui suit n'est publié.**
+
+**954 offres** — stage 444 (47 %), CDI·CDD 371 (39 %), alternance 90 (9 %),
+VIE 49 (5 %). Quinze familles métier, onze types de structure.
+
+Ce chiffre n'est PAS comparable aux 998 de production : deux collectes de
+jours différents, et `main` n'a pas `--depuis-cache`, donc la comparaison à
+entrée identique est impossible. La seule mesure propre porte sur la bascule
+du filtre de séniorité, rejouée sur la même photo : **886 → 953**, soit
+65 offres regagnées et 8 retirées.
+
+### Le VIE est l'onglet le plus sensible aux portes
+
+Il affiche le meilleur taux de survie APRÈS classement — 49 publiées — mais il
+perd **54 offres avant**, soit la moitié de ses candidates. La raison est
+structurelle : le VIE se fait par nature **chez des industriels et des cabinets
+à l'étranger**, précisément les employeurs que `gate:entreprise-sans-marqueur`
+(28 rejets) et `gate:conseil-sans-marqueur` (10) gardent.
+
+**C'est le premier endroit à regarder le jour où l'on voudra élargir.** Avec
+une réserve mesurée le 04/09 : sur ces 54, aucun n'est récupérable en
+inscrivant une maison. Les 28 de `gate:entreprise` sont des postes de vente
+ou de data chez des industriels, les 10 de `gate:conseil` des business
+analysts informatiques, et les 9 de `employeur-absent-de-structures` neuf
+postes commerciaux. Le gisement éventuel est dans les intitulés de contrôle de
+gestion que ces portes attrapent au passage — Bouygues « Cost Control Sweden »,
+TotalEnergies « Cost Data Analyst », Eurofins « Performance Analyst ».
+
+### Deux anomalies relevées et non corrigées
+
+**34 offres écartées faute de structure**, chez des maisons qui SONT dans
+`maisons.txt` mais pas dans `structures.js` — le §24 une fois de plus :
+BPCE Lease (3), Air France (3), Compass Lexecon (2), Alptis (2), Verspieren
+(2), Sesamm, Agicap, et la Caisse de dépôt et placement du Québec dont un
+stage « Investissements en infrastructures ». **C'est le seul motif de rejet
+où inscrire une maison récupère vraiment des offres**, et c'est ce que l'issue
+« Maisons à inscrire » liste désormais.
+
+**Une offre publiée sans structure** : KONI France FAB Amortisseurs,
+« Commercial Controller », VIE. Le VIE contourne la maison de référence, donc
+un employeur inconnu publie quand même — mais sans type, le filtre de
+structure du site ne la trouve nulle part. Le contrôle « deux tables » ne l'a
+pas vue : il vérifie les employeurs VUS à la collecte, pas les employeurs
+PUBLIÉS.
+
+### Le résidu sans famille : 444
+
+cdi-cdd 358 (81 %), stage 47, alternance 38, VIE 1. Le classifieur recopié le
+04/09 — trou ESG comblé, motifs de relation client institutionnelle — a fait
+passer le stage de 57 à 47 et l'alternance de 40 à 38.

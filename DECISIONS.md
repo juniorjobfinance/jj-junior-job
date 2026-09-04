@@ -441,3 +441,403 @@ classer les candidats qui remplissent déjà les trois conditions.
 prestige sur un poste rare, le bandeau peut afficher moins de 5 pépites, voire
 se masquer. C'est voulu — la règle §1 (moins d'offres, mais toutes justes)
 s'applique aussi ici : mieux vaut 2 vraies trouvailles que 8 remplissages.
+
+---
+
+## 21. Le classement se fait au score de spécificité, plus au premier motif
+
+**Décidé le 03/09/2026**, refonte menée avec Claude chat, branchée sur la
+branche `refonte-classification`. Quatre défauts de l'ancien `FAMILLE_RULES`
+l'ont motivée, tous mesurés sur les 998 offres publiées :
+
+1. « La première règle qui matche gagne » créait des vols d'ordre : Marchés
+   volait le middle/back office, Trésorerie volait le risque de crédit.
+2. L'exclusion de la banque de détail était la DERNIÈRE règle, donc presque
+   jamais appliquée.
+3. Aucune règle n'exigeait un contexte finance : `business analyst`, `pmo`,
+   `audit`, `data scientist` matchaient seuls, faisant entrer Dior
+   Merchandising, Veolia PANGEO, SNCF Data Analyst — environ 14 % du catalogue.
+4. « Autres » servait de repli silencieux.
+
+Ce qui remplace, dans cet ordre strict : **pré-filtre** (retail, support, hors
+domaine) → **porte finance** (pour les employeurs non financiers, l'intitulé
+doit porter un marqueur) → **famille au score de spécificité** (`risque de
+crédit` à 9 bat `crédit` à 2) → **résidu audité**, qui sort en `unclassified`
+et va dans un fichier, jamais dans « Autres ».
+
+**Trois choix de fond à ne pas défaire :**
+
+- **L'ESG est un tag, pas une famille.** Les offres durables sont dans l'asset
+  management, le DCM, l'audit et le private equity ; en faire une famille
+  viderait les autres. Deux autres tags cumulables : `real-assets`,
+  `international`.
+- **Deux familles ajoutées** — « Actuariat & Assurance technique » et
+  « Financements & Coverage ». Vingt offres d'actuariat étaient dispersées
+  entre quatre familles ; une trentaine d'offres de coverage et de financements
+  structurés étaient éclatées entre Marchés, M&A et Contrôle de gestion.
+- **La structure vient de l'EMPLOYEUR seul**, jamais de l'intitulé.
+  `structures.js` fait autorité ; l'ancien `inferSector` déduisait des deux et
+  rangeait des offres BNP en « Banque de détail » alors qu'elles sont en BFI.
+
+**Les libellés affichés n'ont pas changé.** Six des onze libellés de structure
+étaient reformulés par la refonte ; ils ont été ramenés à l'identique de ce que
+le site affiche déjà. Un visiteur n'a aucune raison de voir ses repères bouger
+pour une réécriture interne.
+
+Mesure : **998 → 847 offres**, dont 151 écartées à raison. Le garde-fou des
+15 % se déclenche : c'est attendu, on force à la main.
+
+---
+
+## 22. Un contrôle qui échoue à tort est pire qu'un contrôle absent
+
+**Le 03/09/2026.** `controle-avant-passage.js` extrayait le script de la page
+avec un motif exigeant `<script>\n`. Sur une copie de travail Windows, où les
+fichiers sont en CRLF, le motif ne correspond plus : le contrôle échouait sur
+une page parfaitement saine, à chaque passage.
+
+Un contrôle qui crie au loup sur une machine entière est un contrôle qu'on
+apprend à ignorer — et le jour où il a raison, personne ne l'écoute.
+
+C'est exactement le mécanisme qui a laissé passer la deuxième violation de
+§16 : la maison branchée mais non inscrite était signalée en **alerte**, pas en
+échec. Une alerte se lit et s'oublie. Les deux contrôles de maisons sont donc
+passés en ÉCHEC, et le motif du script tolère désormais `\r?\n`.
+
+**Corollaire, appris le même soir :** un contrôle doit porter sur ce qui S'EST
+PASSÉ, pas seulement sur ce qu'on croit avoir configuré. Le contrôle des
+maisons orphelines était statique — il comparait les `emp` déclarés dans
+`sources.js` à `maisons.txt` — et il affichait « les 162 maisons branchées sont
+toutes inscrites », ce qui était vrai. Il ne pouvait pas voir la récidive,
+parce qu'un connecteur sert souvent des employeurs sous un autre nom que le
+sien : `opendatasoft:bpce` rend « BPCE Vie » et « BPCE IG », jamais « Groupe
+BPCE ». Un second contrôle, **observé**, lit désormais le relevé de la dernière
+collecte.
+
+### Un contrôle ne se vérifie qu'en le faisant échouer
+
+**Le 03/09/2026**, en éprouvant le contrôle des deux tables (§24). Premier
+essai : retirer Mutuelle Saint-Christophe et Bank of America de
+`structures.js` pour voir le contrôle rougir. **Il est resté vert** — et il
+avait raison : ces deux employeurs ne sont pas dans `maisons.txt`, donc la
+condition « accepté par l'une, absent de l'autre » ne se déclenchait pas. Le
+test passait pour la mauvaise raison, et ne prouvait rien.
+
+Il a fallu chercher un sujet remplissant les trois conditions à la fois —
+présent dans `maisons.txt`, présent dans `structures.js`, et servant des
+offres — pour que l'échec soit réel. Deloitte et Eurazeo ont fait l'affaire.
+
+**Choisir le sujet d'un test fait partie du test.** Un garde-fou qu'on n'a
+jamais vu échouer n'est pas un garde-fou vérifié : c'est du code qu'on espère
+juste. Lire le code ne suffit pas, il faut provoquer la panne, lire le
+message, puis restaurer et vérifier le retour au vert.
+
+Corollaire pratique, appliqué le même soir : **le message d'échec doit nommer
+la correction**, pas constater l'écart. « 2 employeurs absents de
+`structures.js` » oblige à ouvrir le fichier, comprendre le format de la clé et
+deviner l'identifiant. La ligne prête à coller, avec le nombre d'offres en jeu
+et la liste des valeurs admises, se répare en trente secondes. Un contrôle qui
+constate se contourne ; un contrôle qui prescrit se répare.
+
+---
+
+## 23. La séniorité se lit aussi sur les stages, avec une liste étroite
+
+**Le 03/09/2026**, découvert en dépouillant l'échantillon des 880 offres sans
+famille. `passesJuniorFilter` sortait à sa deuxième ligne pour les stages, les
+alternances et les VIE :
+
+```js
+if (volet !== 'cdi-cdd') return true; // stage/alternance = junior par nature
+```
+
+C'est vrai en droit, mais **ça suppose que le type de contrat a été lu**. Il est
+*deviné* dans sept familles de connecteurs. Un « Comptable Général Senior »
+deviné en VIE passait donc sans que son intitulé soit jamais regardé — et il
+l'était : 14 offres publiées portaient un marqueur de séniorité, **toutes dans
+ces trois onglets, zéro en CDI·CDD**, où le filtre s'applique et fonctionne.
+
+**La liste appliquée à ces trois onglets est ÉTROITE, et c'est mesuré.** Sur les
+847 offres de la collecte de contrôle :
+
+| Liste | Écartées | Dont à tort |
+|---|---|---|
+| Large (15 mots, dont manager / responsable / expert / lead) | 14 | **11** |
+| Étroite (grades seuls) | 3 | **0** |
+
+La raison est linguistique : en finance française, **« manager », « responsable »,
+« expert » et « lead » nomment une ÉQUIPE ou un OUTIL** dans un intitulé junior,
+pas un grade. « Data Manager Reporting » est un stage chez Rothschild, « Expert
+en Finance Durable » un stage chez Natixis, « Portfolio Manager » un VIE chez
+ENGIE. Ne restent donc que les mots qui ne peuvent nommer qu'un grade : senior,
+sénior, VP, vice president, director, directeur, head of, confirmé, expérimenté,
+partner, principal.
+
+Neutralisateurs : `summer`, `graduate`, `junior`, `apprenti`, `alternant`, et
+`assistant` — « Assistant Responsable Comptable » est bien un assistant.
+
+**Une exception a été proposée puis écartée** : « senior analyst reste junior en
+banque d'affaires ». En France c'est plus souvent un profil expérimenté qu'un
+grade d'entrée, et l'enjeu total étant de trois offres, l'exception ajoutait du
+risque pour rien.
+
+**Conséquence à connaître :** le VIE est l'onglet le moins protégé du site — il
+échappe aussi à la règle `maisonRef` (§16), et 15 % de ses offres portaient un
+marqueur de séniorité contre 2 % pour les stages. Un durcissement le touche donc
+plus fort que les autres, et c'est normal.
+
+---
+
+## 24. Deux tables, deux portes : inscrire dans l'une ne sert à rien sans l'autre
+
+**Découvert le 03/09/2026** en ajoutant les alias de filiales.
+
+`maisons.txt` et `structures.js` ne font pas le même travail, et la nuance a
+coûté une correction incomplète :
+
+- **`maisons.txt` décide si l'offre ENTRE au catalogue.** Un employeur qu'il ne
+  reconnaît pas est écarté par `normalize` (§16).
+- **`structures.js` décide de quelle STRUCTURE elle relève.** Un employeur
+  absent de cette table renvoie `null`, ce qui déclenche la **porte finance**
+  du classifieur — et l'offre est rejetée en
+  `gate:employeur-absent-de-structures`.
+
+**Conséquence :** une filiale inscrite dans le seul `maisons.txt` franchit la
+première porte pour tomber sur la seconde. Les huit premières filiales ajoutées
+ce soir — les quatre LVMH, Direct Assurance, GIE AXA, Socfim, ONEY — étaient
+dans ce cas. **Ajouter un employeur, c'est l'ajouter aux DEUX.**
+
+### Le contrôle est étroit, et c'est délibéré
+
+`controle-avant-passage.js` échoue désormais si un employeur **vu à la
+collecte** est accepté par `maisons.txt` sans avoir de structure.
+
+Il aurait été tentant de contrôler toutes les maisons de référence. Mesuré :
+**93 des 206 (45 %) n'ont pas de structure.** Un échec là-dessus rendrait le
+contrôle rouge dès le premier jour, et on apprendrait à l'ignorer — exactement
+le mécanisme du §22. Or ces 93 sont pour l'essentiel des maisons qui ne servent
+rien : Morgan Stanley derrière son pare-feu, UBS sur Taleo, Bain en JavaScript.
+Le piège ne mord que sur une maison qui publie vraiment.
+
+Le contrôle vaut donc zéro aujourd'hui, et rougira le jour où quelqu'un ajoutera
+une maison sans sa structure. Les 93 dormantes sont affichées en information,
+comme liste de travail.
+
+### Une fausse bonne idée, essayée et annulée
+
+Faire retirer « groupe », « la », « le » en tête par `normalizeEmployer`, comme
+le fait déjà `maisons.js`. Essayé : **« Groupe BPCE », « La Banque Postale » et
+« Groupe Crédit Coopératif » sont tombés à `null` d'un coup**, parce que leurs
+CLÉS portent elles-mêmes le préfixe et que la résolution se fait par préfixe le
+plus long. Les filiales s'inscrivent donc une par une, avec leur préfixe s'il y
+en a un. Plus verbeux, plus sûr.
+
+**Corollaire vérifié le même soir :** la résolution par préfixe le plus long
+crée aussi des collisions silencieuses. « Natixis Investment Managers » tombait
+sur `natixis` et devenait BFI au lieu de société de gestion ; « Crédit Agricole
+Assurances » tombait sur `credit agricole` et devenait banque de détail.
+`verif-structures.js` couvre ces cas — 28/28.
+
+---
+
+## 25. Le filtre juge sur le texte entier, et on le vérifie
+
+**Le 03/09/2026.** Trois défauts de la même famille sont apparus en une soirée,
+tous invisibles :
+
+1. La description était **tronquée à 3 000 caractères** avant analyse. Or
+   l'exigence d'expérience vit dans le « profil recherché », donc à la fin :
+   les mentions relevées tombaient aux positions 3437, 3509, 4495 et 6217.
+   Aucune visible avant la coupe — zéro sur quatre.
+2. La coupe corrigée, une **nouvelle limite à 4 000** reproduisait le défaut un
+   cran plus loin : « Superviseur Contrôle Financier » porte son exigence à
+   4302.
+3. Le verdict était calculé dans `normalize()`, donc **avant le rattrapage des
+   fiches**. Pour 673 offres enrichies, il portait sur le texte du connecteur —
+   souvent vide.
+
+**À chaque fois, le filtre a jugé sur une entrée incomplète sans se plaindre.**
+
+### Ce qui remplace
+
+`verdictSenioriteDescr` lit le texte **entier** et rend `_expMax`,
+`_formuleSeniorite`, `_vetoJunior`. Il est recalculé **partout où la
+description change** — à la normalisation, après le rattrapage des fiches, et
+restauré tel quel depuis le cache. **La troncature ne sert qu'au stockage de
+`_descr`, jamais à l'analyse.**
+
+Mesure avant bascule, sur 305 CDI·CDD : **7 offres écartées en plus, 0 dans
+l'autre sens**, toutes avec une description de plus de 4 000 caractères — dont
+le « Banquier Conseil Real Estate Advisory » à « 6 - 10 ans » que les
+commentaires du code citaient déjà comme resté en ligne.
+
+L'ancien chemin — `dureesExperienceCitees`, `DESCR_SENIOR_RE`,
+`DESCR_JUNIOR_RE` et leurs auxiliaires — a été supprimé **dans le même
+commit**. Deux chemins qui coexistent, personne ne sait lequel décide, et on se
+croit protégé par une mesure inerte.
+
+### Le contrôle porte sur l'invariant, pas sur les trois causes
+
+Contrôler les trois causes une par une garantit seulement qu'on attrapera la
+quatrième après coup. Le point commun est ailleurs : **le verdict a-t-il été
+rendu sur la description finale ?**
+
+Chaque verdict porte donc `_verdictSur`, la longueur du texte analysé. Avant
+publication, toute offre CDI·CDD dont `_verdictSur` est inférieur à la longueur
+de `_descr` **annule la publication**, avec le compte et un exemple.
+
+Éprouvé le soir même : sur un cache antérieur à ces champs, le contrôle a
+bloqué 368 offres dont le verdict portait sur 0 caractère pour une description
+de 8 630. C'est précisément le cas qu'on ne voyait pas.
+
+### Ce que cet invariant ne peut PAS voir
+
+Il compare la longueur ANALYSÉE à la longueur STOCKÉE. Il attrape donc toute
+amputation survenue **entre les deux** — une troncature avant analyse, une
+fiche arrivée après le verdict, un recalcul rendu trop tôt.
+
+**Il est aveugle à une amputation survenue AVANT les deux.** Quand un
+connecteur coupe la description à 3 000 caractères, le verdict et la
+description finale font tous deux 3 000 : aucun écart, donc rien à signaler.
+C'est exactement le cas trouvé le 04/09/2026 dans `sitemapld` et
+`smartrecruiters` — 87 offres, découvertes en lisant une annonce à la main,
+pas par un contrôle.
+
+La parade n'est pas un invariant de plus, c'est la règle du §26 : aucun
+connecteur ne borne ce qu'il envoie à l'analyse ; seul le stockage est borné.
+
+---
+
+## 26. Ne jamais stocker une valeur dérivée quand on peut stocker son entrée
+
+**Tranché le 04/09/2026, après sept occurrences du même défaut en une nuit.**
+
+Une valeur dérivée figée ne suit ni les corrections du code, ni les
+changements de sa source. Elle continue d'affirmer ce qui était vrai au moment
+où on l'a écrite, sans que rien ne le signale — c'est ce qui la rend si
+coûteuse : elle n'échoue jamais, elle se trompe.
+
+**Le cache garde le TEXTE ; le verdict se recalcule.**
+
+Les sept occurrences sont la même erreur sous sept déguisements :
+
+1. la description tronquée à 3 000 caractères avant analyse ;
+2. la même à 4 000, une fois la première corrigée ;
+3. le verdict calculé dans `normalize()`, donc avant le rattrapage des fiches ;
+4. le cache rangeant l'extrait borné au lieu du texte entier — 72 rejets de
+   séniorité au rejeu contre 181 en direct ;
+5. le recalcul post-rattrapage repartant de l'extrait, donc capable
+   d'*affaiblir* un verdict déjà rendu ;
+6. le cache rangeant le VERDICT à côté du texte : après correction du garde-fou
+   du diplôme, le rejeu rendait encore les `null` de la veille — cache
+   `expMax=null`, recalcul `expMax=10`, sur le même texte de 6 213 caractères.
+   Un rejeu sert à éprouver le code d'aujourd'hui ; celui-là certifiait la
+   version de la veille ;
+7. mes propres scripts de mesure, qui recopiaient un seuil (120 au lieu de 60)
+   ou bridaient l'entrée de l'ancien code à 4 000 caractères.
+
+**Trois conséquences pratiques, toutes appliquées :**
+
+- Le cache de collecte ne stocke plus que le texte. Le verdict de séniorité est
+  recalculé au rejeu, ce qui n'était pas possible tant que le cache ne gardait
+  qu'un extrait : c'est la correction 4 qui a rendu la 6 possible.
+- Quand une dérivée doit malgré tout voyager avec l'offre, elle se **fusionne**
+  au lieu d'être remplacée : `fusionnerVerdictSeniorite` prend la plus forte
+  exigence, jamais la dernière calculée. Un texte supplémentaire ne peut
+  qu'ajouter des indices.
+- **Aucun script d'analyse ne contient de limite chiffrée en dur.** Il importe
+  la constante du pipeline — l'atelier les expose — ou il n'en met aucune. Un
+  nombre recopié ne suit jamais le pipeline : `controle-avant-passage.js`
+  portait `? 60 : 120` et aurait certifié « aucune offre périmée » en mesurant
+  un seuil abandonné. Un garde-fou qui se trompe est pire que pas de garde-fou.
+
+**Le corollaire de nommage** (même date) : `_descr` contenait un extrait
+tronqué et son nom laissait croire qu'il contenait la description. Chaque fois
+que quelqu'un l'a pris pour source d'une analyse, le défaut est réapparu. Il
+s'appelle désormais `_descrExtrait`, et le texte entier `descrComplet`. Un
+nom juste rend l'erreur impossible à commettre là où un commentaire ou un
+contrôle ne fait que la rattraper après coup — même leçon que la règle
+« tout script passe par Write ».
+
+---
+
+## 27. On bloque quand publier serait mentir, on signale quand ce serait incomplet
+
+**Tranché le 04/09/2026, au premier passage réel des garde-fous.**
+
+Les contrôles avaient tous été mis au même rang : un rouge, et rien n'est
+publié. Le premier passage sur GitHub a échoué au bout de onze minutes — non
+parce que le catalogue était faux, mais parce que **18 employeurs nouveaux
+avaient servi 29 offres sans figurer dans `maisons.txt`**. Le catalogue
+produit était juste ; il lui manquait 29 offres sur 950.
+
+Bloquer ne récupère pas ce qui manque. Ça retire seulement ce qui est juste.
+
+Et comme des noms d'employeurs nouveaux apparaissent presque chaque jour, ce
+garde-fou aurait arrêté la publication presque chaque matin. On n'aurait pas
+gagné un catalogue plus sûr : on aurait fabriqué une alerte quotidienne qu'on
+apprend à ignorer — le défaut du §26 déplacé d'un cran, de la donnée vers
+l'attention.
+
+**BLOQUENT** — publier serait mentir :
+cohérence des deux axes (le filtre du site ne retrouverait aucune offre),
+fuite d'un champ interne dans le catalogue servi, offre au-delà de son seuil
+d'âge, date non ISO, invariant de séniorité, garde-fou de collecte incomplète,
+et toute erreur de syntaxe.
+
+**SIGNALENT** — publier serait incomplet, jamais faux :
+maisons vues et non inscrites, employeurs sans structure, maisons de référence
+qui ne servent rien.
+
+Ce qui signale ne doit pas pour autant s'évaporer : une issue distincte,
+« Maisons à inscrire », est tenue à jour **même sur un passage vert** —
+commentée quand la liste change, refermée quand elle est vide. Un signal sans
+destinataire est un signal perdu, et c'est ce qui avait justifié de tout
+bloquer.
+
+---
+
+## 28. Un correctif se mesure sur ce qu'il change, pas sur ce qu'on en attendait
+
+**Écrit le 04/09/2026, après une prévision fausse.**
+
+Le résidu sans famille contenait des intitulés mutilés par le nettoyage :
+« Stage 4 à 6 mois - Assistant exploitation bancaire » devenait
+« 4 à - Assistant exploitation bancaire ». Une règle retire le mot de contrat,
+une autre une partie de la durée, et le reste demeure.
+
+L'attente était explicite : réparer le nettoyeur devait **récupérer des
+offres**, puisqu'aucun motif ne peut reconnaître un métier derrière « 4 à - ».
+
+**Mesuré à entrée identique, il n'en récupère aucune.** 959 → 958 offres,
+résidu sans famille 446 dans les deux cas. La raison tient en une phrase : ces
+intitulés étaient **déjà classés malgré la mutilation**, parce que
+« (1 an) - Fiscaliste Junior » contient encore le mot « Fiscaliste ». Le
+préfixe parasite gênait la lecture, pas la reconnaissance.
+
+Ce que le correctif répare est donc autre chose, et vaut d'être gardé pour
+cette raison-là : **ce que le candidat lit sur la carte**. Neuf titres au
+catalogue, dont sept Natixis en « 2 ans - X ». Plus une fusion juste — deux
+annonces du même poste devenues identiques une fois nettoyées.
+
+Le travail de taxonomie, lui, a été fait par le classifieur : combler le trou
+ESG et ajouter les motifs de relation client institutionnelle a fait passer le
+résidu de 457 à 446, le stage de 57 à 48 et l'alternance de 40 à 38. C'est là
+qu'était le gisement, pas dans le nettoyage.
+
+**La règle :** on garde un correctif pour l'effet qu'il a, pas pour celui qu'on
+lui prêtait — et on le dit quand les deux diffèrent. Annoncer le gain espéré
+comme s'il était mesuré, c'est fabriquer un chiffre qui servira de base à la
+décision suivante.
+
+### Le corollaire : un seuil de test est un plafond, et il se rabaisse
+
+`test-fourre-tout.js` échoue si le résidu dépasse **8**, son niveau connu du
+04/09/2026. Ce n'est pas une égalité mais un plafond : si le résidu remonte,
+c'est qu'une règle a été perdue ou affaiblie, et le passage bloque.
+
+S'il descend, il faut **baisser le seuil dans la foulée**. Un plafond qu'on ne
+rabaisse pas cesse de mordre en silence : à 8 pour un résidu réel de 3, il
+laisse passer un retour à 8 sans rien dire. C'est le défaut du §27 sous une
+autre forme — un garde-fou qui ne garde plus rien, et dont on croit être
+protégé.

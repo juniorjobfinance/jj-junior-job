@@ -33,3 +33,25 @@ eyjob.html
 
 # Configuration locale de l'éditeur
 .claude/
+
+# Les photos de collecte : gros, quotidiennes, et regenerables. La rotation
+# en supprime une chaque jour — suivies par git, elles font grossir le depot
+# et polluent chaque passage avec une suppression non commitee.
+data/brut-*.json
+data/brut-*.json.gz
+
+# Le corps de l issue « Maisons a inscrire » : regenere a chaque passage.
+data/maisons-a-inscrire.md
+
+# Artefacts de branche : catalogues et releves produits par un passage avec
+# --refonte ou --depuis-cache. Rien ne les sert — le site lit offres.js — et
+# ils sont regeneres a chaque passage. Suivis, ils atterrissent sur main ou ils
+# n ont rien a faire, et un git add -A les remet.
+offres-refonte.js
+offres-refonte.xml
+sitemap-refonte.xml
+offres-cache.js
+offres-cache.xml
+sitemap-cache.xml
+data/*-refonte.json
+data/*-cache.json

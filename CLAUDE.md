@@ -96,11 +96,37 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
 
 ---
 
+## Règle de méthode : tout script passe par Write
+
+**Aucun script — de modification, d'analyse, de mesure — ne s'écrit en `node -e`
+ni en heredoc. On écrit un fichier avec l'outil Write, et on l'exécute.**
+
+Ce n'est pas une précaution à peser au cas par cas : c'est le geste par défaut,
+y compris pour trois lignes, y compris pour un script jetable, y compris pour
+RÉPARER un script cassé.
+
+La raison est mécanique : le shell mange les antislashs. `\b` devient un
+caractère backspace, `\s` devient `s`, `\\[` devient `[`. On obtient des
+expressions régulières qui ne correspondent plus à rien — **sans la moindre
+erreur**. Le script s'exécute, annonce « ancre absente », et on cherche le
+problème dans le fichier cible au lieu de le chercher dans sa propre commande.
+
+Cette règle figurait déjà comme piège, en tête d'une liste de vingt. Elle a été
+enfreinte **trois fois dans la même séance** du 3 septembre 2026, après avoir
+été relue. Un piège se reconnaît ; un geste s'exécute. C'est pour ça qu'elle est
+remontée ici, hors de la liste, et formulée à l'affirmative.
+
+Le corollaire, moins visible et tout aussi coûteux : **une ancre se copie depuis
+le fichier, jamais de mémoire.** Les apostrophes y sont tantôt droites tantôt
+typographiques, les fins de ligne tantôt `\n` tantôt `\r\n`, et un fichier peut
+porter `’` en toutes lettres là où on croit voir une apostrophe. Lire les
+octets avant d'écrire l'ancre coûte dix secondes ; les chercher après en coûte
+dix minutes.
+
+---
+
 ## Pièges vérifiés plusieurs fois
 
-- **Écrire les scripts de modification avec l'outil Write, jamais en heredoc ni
-  `node -e`.** Le shell y transforme `\b` en caractère backspace et produit des
-  expressions régulières qui ne correspondent plus à rien, sans erreur.
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a
   déjà dupliqué tout un fichier. Toujours passer une fonction :
   `s.replace(a, () => b)`.
@@ -145,8 +171,8 @@ node ingestion/atelier.js "Intitulé" "Employeur"      # pourquoi une offre pass
   un identifiant : `req_id`, `jobSeqNo`.
 - **`sed` mange les antislashs comme le heredoc.** Corriger un script de
   modification avec `sed -i` a transformé `\\[` en `[` et produit un fichier
-  illisible. La règle du premier point vaut aussi pour RÉPARER un script :
-  outil Write, toujours.
+  illisible. C'est le même mécanisme que la règle de méthode ci-dessus, et
+  elle couvre aussi ce cas : `sed -i` est un script en ligne comme un autre.
 - **Une maison absente n'est pas forcément mal branchée.** Air Liquide ne
   servait rien : le réflexe était d'accuser le connecteur. Son API disait
   1 125 offres dans le monde et 292 en France — mais **4** en « Finance &

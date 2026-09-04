@@ -14,6 +14,9 @@ on:
 
 permissions:
   contents: write
+  # Pour ouvrir l'issue d'alerte quand un contrôle passe au rouge : sans ce
+  # droit, cette étape échouerait en silence — le défaut qu'elle sert à éviter.
+  issues: write
 
 jobs:
   ingestion:
@@ -37,7 +40,29 @@ jobs:
           key: jj-state-${{ github.run_id }}
           restore-keys: jj-state-
 
+      # --- CONTRÔLE 1 : le code, AVANT de collecter --------------------------
+      # Dix-huit minutes de collecte n'ont aucun intérêt si le classement est
+      # cassé. Ces suites sont pures : ni réseau, ni catalogue. Chacune sort en
+      # erreur au premier écart — ce qui n'était pas le cas jusqu'au 04/09/2026,
+      # où elles affichaient leurs écarts puis sortaient 0 quoi qu'il arrive.
+      - name: Contrôle 1 — les suites de tests
+        id: tests
+        run: |
+          set -e
+          node ingestion/test-classification.js
+          node ingestion/test-echantillon.js
+          node ingestion/test-seniorite.js
+          node ingestion/verif-structures.js
+          # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
+          # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
+          # On le lance pour son journal, pas pour son verdict.
+          node ingestion/test-fourre-tout.js
+          # test-vie.js n'est pas ici : il appelle Business France et demande une
+          # vérification à l'œil. Le lancer chaque matin ajouterait une
+          # dépendance réseau à un contrôle qu'aucune machine ne peut trancher.
+
       - name: Ingestion
+        id: ingestion
         env:
           FRANCE_TRAVAIL_CLIENT_ID: ${{ secrets.FRANCE_TRAVAIL_CLIENT_ID }}
           FRANCE_TRAVAIL_CLIENT_SECRET: ${{ secrets.FRANCE_TRAVAIL_CLIENT_SECRET }}
@@ -56,6 +81,11 @@ jobs:
           # journaux/ est ignoré par git : il n'existe pas sur un dépôt fraîchement
           # récupéré, et « tee » échouerait avant même de lancer l'ingestion.
           mkdir -p journaux
+          # Le passage quotidien fait TOUJOURS une vraie collecte : jamais
+          # --depuis-cache, qui servirait indéfiniment la photo d'un matin sans
+          # que rien ne le signale. Le pipeline refuse déjà ce drapeau quand
+          # GITHUB_ACTIONS est posé ; la ligne ci-dessous est la seconde
+          # serrure, celle qu'on voit en lisant le workflow.
           node ingestion/pipeline.js 2>&1 | tee "journaux/maj-$(date +%F).log"
 
       # Le journal est gardé même quand l'ingestion a échoué — c'est justement
@@ -68,7 +98,103 @@ jobs:
           path: journaux/*.log
           retention-days: 30
 
+      # --- CONTRÔLES 2 à 4 : le catalogue, AVANT de le publier ---------------
+      # controle-avant-passage.js porte trois des cinq garde-fous : la cohérence
+      # des deux axes, LES DEUX TABLES (maisons.txt et structures.js) et LA
+      # LISTE BLANCHE des champs publiés. Il n'existe pas de
+      # controle-deux-tables.js séparé : ces vérifications vivent toutes ici.
+      #
+      # Il sort en 1 au premier ÉCHEC. Le job s'arrête donc avant l'étape de
+      # publication, et le catalogue de la veille reste en ligne — mieux vaut un
+      # catalogue d'hier qu'un catalogue faux.
+      #
+      # Le cinquième garde-fou, l'invariant de séniorité, n'est pas ici : il vit
+      # DANS le pipeline, annule l'écriture de offres.js et sort en 1. L'étape
+      # « Ingestion » ci-dessus échoue alors d'elle-même.
+      - name: Contrôles 2 à 4 — deux axes, deux tables, liste blanche
+        id: controles
+        run: node ingestion/controle-avant-passage.js
+
+
+      # Hors de la branche principale, rien n'est commité : le catalogue produit
+      # partirait donc à la poubelle. On le garde en artefact, c'est ce qui rend
+      # un passage de branche vérifiable autrement que par « ça n'a pas planté ».
+      - name: Conserver le catalogue produit (hors branche principale)
+        if: always() && github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalogue-branche-${{ github.run_id }}
+          path: |
+            offres.js
+            offres.xml
+            sitemap.xml
+            data/*.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+      # --- CE QUI MANQUE, SANS RENDRE LE CATALOGUE FAUX ----------------------
+      # « maisons vues » et « deux tables » ne bloquent plus (DECISIONS.md §27) :
+      # publier serait incomplet, pas mensonger. Mais un signal sans destinataire
+      # est un signal perdu — d'où cette issue, tenue à jour même sur un passage
+      # vert, commentée seulement quand la LISTE change, refermée quand elle est
+      # vide.
+      - name: Tenir à jour « Maisons à inscrire »
+        if: steps.ingestion.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          node ingestion/maisons-a-inscrire.js > /tmp/mi.txt
+          cat /tmp/mi.txt
+          # Ces deux grep n ont VOLONTAIREMENT pas de « || true » : sous bash -e,
+          # ils avortent l etape si le script n a rien imprime — c est-a-dire s il
+          # est casse. Les proteger masquerait la panne et ferait ouvrir une issue
+          # au corps vide.
+          TOTAL=$(grep "^TOTAL=" /tmp/mi.txt | cut -d= -f2)
+          SIG=$(grep "^SIGNATURE=" /tmp/mi.txt | cut -d= -f2)
+          TITRE="Maisons à inscrire"
+          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
+
+          if [ "$TOTAL" = "0" ]; then
+            # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
+          if [ -n "$N" ]; then
+              gh issue close "$N" --comment "Plus aucune maison à inscrire au $(date +%F) : tout ce que la collecte a vu est reconnu. Refermée automatiquement."
+              echo "Issue #$N refermée : la liste est vide."
+            else
+              echo "Rien à inscrire, aucune issue ouverte."
+            fi
+            exit 0
+          fi
+
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
+          if [ -z "$N" ]; then
+            gh issue create --title "$TITRE" --body-file data/maisons-a-inscrire.md
+            echo "Issue ouverte ($TOTAL entrées)."
+            exit 0
+          fi
+
+          # La signature est dans le corps et dans chaque commentaire : si elle
+          # y figure deja, la liste n a pas change et on se tait.
+          DEJA=$(gh issue view "$N" --json body,comments --jq '[.body] + [.comments[].body] | join("\n")' | grep -c "signature: $SIG" || true)
+          if [ "$DEJA" = "0" ]; then
+            gh issue comment "$N" --body-file data/maisons-a-inscrire.md
+            echo "Issue #$N commentée : la liste a changé ($TOTAL entrées)."
+          else
+            echo "Issue #$N inchangée : même liste qu au dernier passage."
+          fi
+      # Ne publier QUE depuis la branche principale. Sans cette condition, un
+      # « Run workflow » lance sur une branche de travail commiterait son
+      # catalogue ET appellerait le Deploy Hook — donc deploierait la
+      # production depuis une branche. C'est aussi ce qui permet d'eprouver les
+      # garde-fous sur GitHub sans rien deployer.
       - name: Publier offres.js
+        if: github.ref == 'refs/heads/main'
         id: publication
         run: |
           git config user.name  "JJ bot"
@@ -93,8 +219,78 @@ jobs:
       #
       # Sans ce déclenchement, l'ingestion tourne dans le vide : les offres sont
       # bien commitées, mais le site continue de servir celles de la veille.
+
+      # --- L'ALERTE ----------------------------------------------------------
+      # Un blocage silencieux est pire qu'une publication fausse : le site sert
+      # la veille, puis l'avant-veille, et personne ne l'apprend. Cette étape
+      # nomme le contrôle qui a mordu et ouvre une issue.
+      - name: Alerter en cas d'échec
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TESTS: ${{ steps.tests.outcome }}
+          INGESTION: ${{ steps.ingestion.outcome }}
+          CONTROLES: ${{ steps.controles.outcome }}
+        run: |
+          set -u
+          if [ "$TESTS" = "failure" ]; then
+            QUOI="Contrôle 1 — les suites de tests"
+            DETAIL="Une suite a signalé un écart. Le pipeline n'a même pas été lancé."
+          elif [ "$INGESTION" = "failure" ]; then
+            QUOI="Ingestion"
+            DETAIL="Le pipeline a refusé de publier : garde-fou de collecte incomplète, ou invariant de séniorité — un verdict rendu sur moins de texte que la description finale."
+          elif [ "$CONTROLES" = "failure" ]; then
+            QUOI="Contrôles 2 à 4 — deux axes, deux tables, liste blanche"
+            DETAIL="Le catalogue produit n'a pas passé le contrôle avant vol."
+          else
+            QUOI="Publication ou redéploiement"
+            DETAIL="La collecte et les contrôles sont passés ; l'échec est en aval."
+          fi
+
+          # Le journal dit POURQUOI. Sa fin est la partie utile.
+          JOURNAL="(aucun journal)"
+          if ls journaux/*.log >/dev/null 2>&1; then JOURNAL=$(tail -n 40 journaux/*.log); fi
+
+          # Heredoc : aucun échappement à compter, contrairement à printf.
+          cat > /tmp/alerte.md <<FIN
+          **$QUOI** a échoué le $(date +%F).
+
+          $DETAIL
+
+          **Le catalogue en ligne est celui de la veille.** Rien n'a été publié,
+          et c'est le comportement voulu : mieux vaut un catalogue d'hier qu'un
+          catalogue faux.
+
+          [Voir le journal complet]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)
+
+          <details><summary>Fin du journal</summary>
+
+          ```
+          $JOURNAL
+          ```
+
+          </details>
+          FIN
+          # Le heredoc est indenté pour la lisibilité du YAML : on retire
+          # l'indentation avant d'envoyer, sinon Markdown lit tout en bloc de code.
+          sed -i 's/^          //' /tmp/alerte.md
+
+          TITRE="Passage quotidien en échec"
+          EXISTANTE=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$EXISTANTE" = "null" ]; then EXISTANTE=""; fi
+          if [ -n "$EXISTANTE" ]; then
+            gh issue comment "$EXISTANTE" --body-file /tmp/alerte.md
+            echo "Commentaire ajouté à l'issue #$EXISTANTE."
+          else
+            gh issue create --title "$TITRE" --body-file /tmp/alerte.md
+            echo "Issue ouverte."
+          fi
+
       - name: Déclencher le redéploiement Vercel
-        if: steps.publication.outputs.modifie == 'oui'
+        if: github.ref == 'refs/heads/main' && steps.publication.outputs.modifie == 'oui'
         env:
           HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: |
@@ -143,3 +339,26 @@ jobs:
               exit 1
               ;;
           esac
+
+      # Une panne qui dure ne doit pas fabriquer une issue par matin : l'alerte
+      # ci-dessus COMMENTE l'issue ouverte. Et des que le passage repasse au
+      # vert, on la referme — une alerte qui reste ouverte apres la reparation
+      # s'apprend a etre ignoree.
+      - name: Refermer l'alerte au premier passage vert
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          TITRE="Passage quotidien en échec"
+          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)
+          # « null » n'est pas un numero d'issue : jq l'imprime quand la liste
+          # est vide. La forme `if` et non `&&` : avec bash -e, un test faux
+          # ferait avorter l'etape dans le cas normal.
+          if [ "$N" = "null" ]; then N=""; fi
+          if [ -n "$N" ]; then
+            gh issue close "$N" --comment "Passage vert le $(date +%F) : le catalogue est de nouveau publié. Refermée automatiquement."
+            echo "Issue #$N refermée."
+          else
+            echo "Aucune alerte ouverte à refermer."
+          fi
