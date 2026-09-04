@@ -973,3 +973,73 @@ le titre, la structure se lit dans la maison.
 **A revoir le jour ou trois ou quatre maisons se retrouveront dans ce cas** —
 une banque privee filiale d'un grand groupe. Pour une seule, le libelle
 imparfait coute moins cher qu'une structure de plus.
+
+### Les 17 maisons ne rapportent RIEN aujourd'hui — et c'est normal
+
+**À lire avant de relire ce chantier en croyant qu'il a rapporté 37 offres.**
+
+Les 17 maisons inscrites le 04/09/2026 l'ont été sur la foi d'un compteur de
+37 offres rejetées. **Elles en publient zéro.** Mesuré après inscription : les
+37 franchissent bien la porte de structure, et meurent aux portes suivantes.
+
+| | |
+|---:|---|
+| **18** | séniorité — « Manager », « Senior », « Vice President », et cinq fiches annonçant 5 à 10 ans d'expérience |
+| **9** | âge — de 64 à 235 jours, pour un seuil CDI·CDD de 60 |
+
+Air Liquide « Consolideur **Manager** », Morgan Stanley « Senior Quantitative
+Valuation Model Reviewer – **Vice President** », Indosuez « Banquier Conseil »
+à **10 ans**. Ce ne sont pas des offres juniors.
+
+**Un compteur de rejets n'est pas un compteur de gains.** C'est la sixième
+forme du défaut de comparaison consigné dans `CLAUDE.md` : on a lu un nombre
+d'offres bloquées à une porte comme s'il annonçait ce qui passerait toutes les
+autres. Personne n'avait mesuré ce qui arrivait ensuite.
+
+**L'inscription reste juste** : c'est un investissement pour le jour où ces
+maisons publieront un poste junior, pas un gain d'aujourd'hui. Un industriel du
+CAC 40 a une direction financière permanente ; ces postes se renouvelleront.
+
+### Le mécanisme d'alerte est sain — le maillon faible était le lecteur
+
+L'issue « Maisons à inscrire » **fonctionnait**. Vérifié le 04/09 : la
+détection est exacte (17 maisons, 37 offres, la même liste que les rejets
+`gate:`, comparée nom par nom : zéro d'un côté seulement), le script rend un
+corps complet, la logique du workflow est correcte, l'issue existe, elle est
+unique, elle porte deux commentaires, et elle contenait ces 17 maisons depuis
+le matin même.
+
+**Ces 17 maisons n'étaient donc pas une découverte : elles étaient signalées et
+non lues.** Une alerte que personne ne lit n'est pas une alerte — c'est le
+même défaut qu'un contrôle qu'on n'a jamais vu échouer, transposé à l'humain.
+Le correctif n'est pas technique : Victor s'abonne à l'issue et la regarde
+chaque matin.
+
+**Une fragilité réelle a quand même été corrigée** : l'étape « Maisons à
+inscrire » passait APRÈS les contrôles bloquants. Un matin où un contrôle est
+rouge, le job s'arrêtait avant — donc on n'apprenait pas ce qui manquait au
+catalogue précisément le matin où on voulait le savoir. Elle passe désormais
+juste après l'ingestion : le relevé de ce qui MANQUE ne dépend plus du succès
+de ce qu'on PUBLIE.
+
+### Evercore : le §24 pris en flagrant délit
+
+Evercore figurait dans `structures.js` en `banque-affaires` **mais était
+absente de `maisons.txt`**. Or c'est `maisons.txt` qui décide de ce qui
+ENTRE : ses offres étaient jetées à la première porte, avant que sa structure
+ne serve à quoi que ce soit.
+
+Son offre « Paris Off-Cycle - Telecoms Team » avait été classée « perte
+assumée », faute d'un motif capable de reconnaître le M&A sectoriel sans
+ouvrir un fourre-tout. **Le diagnostic était faux** : ce n'était pas un
+problème de vocabulaire, c'était une maison absente d'une table sur deux.
+
+Inscrites dans les deux tables le 04/09 : Evercore (`banque-affaires`),
+Repossi et VAL DE LOIRE Maintenance (`entreprise`).
+
+**Et le relevé des employeurs inconnus est une FENÊTRE GLISSANTE.** Trois
+relevés successifs donnaient 26, 18 puis 17 employeurs : ceux qui disparaissent
+entre deux relevés ne sont pas réglés, leurs offres ont simplement expiré et
+les maisons reviendront. **Inscrire l'union des relevés, jamais le dernier.**
+Vérifié à cette occasion : BPCE Factor, BPCE Lease et Agicap étaient déjà
+couverts — les deux premiers par la regex `bpce` de `maisons.txt`.

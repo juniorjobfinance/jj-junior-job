@@ -98,40 +98,11 @@ jobs:
           path: journaux/*.log
           retention-days: 30
 
-      # --- CONTRÔLES 2 à 4 : le catalogue, AVANT de le publier ---------------
-      # controle-avant-passage.js porte trois des cinq garde-fous : la cohérence
-      # des deux axes, LES DEUX TABLES (maisons.txt et structures.js) et LA
-      # LISTE BLANCHE des champs publiés. Il n'existe pas de
-      # controle-deux-tables.js séparé : ces vérifications vivent toutes ici.
-      #
-      # Il sort en 1 au premier ÉCHEC. Le job s'arrête donc avant l'étape de
-      # publication, et le catalogue de la veille reste en ligne — mieux vaut un
-      # catalogue d'hier qu'un catalogue faux.
-      #
-      # Le cinquième garde-fou, l'invariant de séniorité, n'est pas ici : il vit
-      # DANS le pipeline, annule l'écriture de offres.js et sort en 1. L'étape
-      # « Ingestion » ci-dessus échoue alors d'elle-même.
-      - name: Contrôles 2 à 4 — deux axes, deux tables, liste blanche
-        id: controles
-        run: node ingestion/controle-avant-passage.js
-
-
-      # Hors de la branche principale, rien n'est commité : le catalogue produit
-      # partirait donc à la poubelle. On le garde en artefact, c'est ce qui rend
-      # un passage de branche vérifiable autrement que par « ça n'a pas planté ».
-      - name: Conserver le catalogue produit (hors branche principale)
-        if: always() && github.ref != 'refs/heads/main'
-        uses: actions/upload-artifact@v4
-        with:
-          name: catalogue-branche-${{ github.run_id }}
-          path: |
-            offres.js
-            offres.xml
-            sitemap.xml
-            data/*.json
-          retention-days: 7
-          if-no-files-found: ignore
-
+      # Ce releve passe AVANT les controles bloquants, et c'est deliberé.
+      # Il dit ce qui MANQUE au catalogue ; les controles disent si ce qu'on a
+      # est publiable. Deux questions differentes. Place apres, il ne
+      # s'executait pas les matins ou un controle etait rouge — c'est-a-dire
+      # exactement les matins ou l'on veut savoir ce qui manque.
       # --- CE QUI MANQUE, SANS RENDRE LE CATALOGUE FAUX ----------------------
       # « maisons vues » et « deux tables » ne bloquent plus (DECISIONS.md §27) :
       # publier serait incomplet, pas mensonger. Mais un signal sans destinataire
@@ -188,6 +159,40 @@ jobs:
           else
             echo "Issue #$N inchangée : même liste qu au dernier passage."
           fi
+      # --- CONTRÔLES 2 à 4 : le catalogue, AVANT de le publier ---------------
+      # controle-avant-passage.js porte trois des cinq garde-fous : la cohérence
+      # des deux axes, LES DEUX TABLES (maisons.txt et structures.js) et LA
+      # LISTE BLANCHE des champs publiés. Il n'existe pas de
+      # controle-deux-tables.js séparé : ces vérifications vivent toutes ici.
+      #
+      # Il sort en 1 au premier ÉCHEC. Le job s'arrête donc avant l'étape de
+      # publication, et le catalogue de la veille reste en ligne — mieux vaut un
+      # catalogue d'hier qu'un catalogue faux.
+      #
+      # Le cinquième garde-fou, l'invariant de séniorité, n'est pas ici : il vit
+      # DANS le pipeline, annule l'écriture de offres.js et sort en 1. L'étape
+      # « Ingestion » ci-dessus échoue alors d'elle-même.
+      - name: Contrôles 2 à 4 — deux axes, deux tables, liste blanche
+        id: controles
+        run: node ingestion/controle-avant-passage.js
+
+
+      # Hors de la branche principale, rien n'est commité : le catalogue produit
+      # partirait donc à la poubelle. On le garde en artefact, c'est ce qui rend
+      # un passage de branche vérifiable autrement que par « ça n'a pas planté ».
+      - name: Conserver le catalogue produit (hors branche principale)
+        if: always() && github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalogue-branche-${{ github.run_id }}
+          path: |
+            offres.js
+            offres.xml
+            sitemap.xml
+            data/*.json
+          retention-days: 7
+          if-no-files-found: ignore
+
       # Ne publier QUE depuis la branche principale. Sans cette condition, un
       # « Run workflow » lance sur une branche de travail commiterait son
       # catalogue ET appellerait le Deploy Hook — donc deploierait la

@@ -293,3 +293,12 @@ Ensemble Protection Sociale | ensemble protection sociale
 # Publiee en VIE sans etre une maison : le VIE contourne la liste. Elle est
 # inscrite ici pour que les deux tables disent la meme chose (paragraphe 24).
 KONI                     | ^koni
+
+
+# Signalees par l'issue « Maisons a inscrire » et inscrites le 04/09/2026.
+# Evercore etait DEJA dans structures.js mais absente d'ici : ses offres
+# etaient jetees a la premiere porte, celle qui decide de ce qui entre. Les
+# deux tables doivent dire la meme chose (paragraphe 24).
+Evercore                 | ^evercore\b
+Repossi                  | ^repossi\b
+VAL DE LOIRE Maintenance | ^val de loire\b

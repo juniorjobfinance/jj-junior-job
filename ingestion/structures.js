@@ -37,6 +37,10 @@ const EMPLOYER_STRUCTURE = {
   // le principe des deux axes : le metier se lit dans le titre, la structure
   // se lit dans la maison.
   'accenture': 'conseil',
+  // Signalees par le releve « maisons vues et jetees » : elles publiaient sans
+  // figurer dans maisons.txt. Inscrites dans les deux tables le 04/09/2026.
+  'repossi': 'entreprise',
+  'val de loire': 'entreprise',
   'adeo': 'entreprise',
   'aema groupe': 'assurance',
   'air liquide': 'entreprise',
