@@ -758,3 +758,39 @@ s'appelle désormais `_descrExtrait`, et le texte entier `descrComplet`. Un
 nom juste rend l'erreur impossible à commettre là où un commentaire ou un
 contrôle ne fait que la rattraper après coup — même leçon que la règle
 « tout script passe par Write ».
+
+---
+
+## 27. On bloque quand publier serait mentir, on signale quand ce serait incomplet
+
+**Tranché le 04/09/2026, au premier passage réel des garde-fous.**
+
+Les contrôles avaient tous été mis au même rang : un rouge, et rien n'est
+publié. Le premier passage sur GitHub a échoué au bout de onze minutes — non
+parce que le catalogue était faux, mais parce que **18 employeurs nouveaux
+avaient servi 29 offres sans figurer dans `maisons.txt`**. Le catalogue
+produit était juste ; il lui manquait 29 offres sur 950.
+
+Bloquer ne récupère pas ce qui manque. Ça retire seulement ce qui est juste.
+
+Et comme des noms d'employeurs nouveaux apparaissent presque chaque jour, ce
+garde-fou aurait arrêté la publication presque chaque matin. On n'aurait pas
+gagné un catalogue plus sûr : on aurait fabriqué une alerte quotidienne qu'on
+apprend à ignorer — le défaut du §26 déplacé d'un cran, de la donnée vers
+l'attention.
+
+**BLOQUENT** — publier serait mentir :
+cohérence des deux axes (le filtre du site ne retrouverait aucune offre),
+fuite d'un champ interne dans le catalogue servi, offre au-delà de son seuil
+d'âge, date non ISO, invariant de séniorité, garde-fou de collecte incomplète,
+et toute erreur de syntaxe.
+
+**SIGNALENT** — publier serait incomplet, jamais faux :
+maisons vues et non inscrites, employeurs sans structure, maisons de référence
+qui ne servent rien.
+
+Ce qui signale ne doit pas pour autant s'évaporer : une issue distincte,
+« Maisons à inscrire », est tenue à jour **même sur un passage vert** —
+commentée quand la liste change, refermée quand elle est vide. Un signal sans
+destinataire est un signal perdu, et c'est ce qui avait justifié de tout
+bloquer.

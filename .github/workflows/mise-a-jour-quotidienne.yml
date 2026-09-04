@@ -131,6 +131,51 @@ jobs:
             data/*.json
           retention-days: 7
           if-no-files-found: ignore
+
+      # --- CE QUI MANQUE, SANS RENDRE LE CATALOGUE FAUX ----------------------
+      # « maisons vues » et « deux tables » ne bloquent plus (DECISIONS.md §27) :
+      # publier serait incomplet, pas mensonger. Mais un signal sans destinataire
+      # est un signal perdu — d'où cette issue, tenue à jour même sur un passage
+      # vert, commentée seulement quand la LISTE change, refermée quand elle est
+      # vide.
+      - name: Tenir à jour « Maisons à inscrire »
+        if: steps.ingestion.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          node ingestion/maisons-a-inscrire.js > /tmp/mi.txt
+          cat /tmp/mi.txt
+          TOTAL=$(grep "^TOTAL=" /tmp/mi.txt | cut -d= -f2)
+          SIG=$(grep "^SIGNATURE=" /tmp/mi.txt | cut -d= -f2)
+          TITRE="Maisons à inscrire"
+          N=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number' || true)
+
+          if [ "$TOTAL" = "0" ]; then
+            if [ -n "$N" ]; then
+              gh issue close "$N" --comment "Plus aucune maison à inscrire au $(date +%F) : tout ce que la collecte a vu est reconnu. Refermée automatiquement."
+              echo "Issue #$N refermée : la liste est vide."
+            else
+              echo "Rien à inscrire, aucune issue ouverte."
+            fi
+            exit 0
+          fi
+
+          if [ -z "$N" ]; then
+            gh issue create --title "$TITRE" --body-file data/maisons-a-inscrire.md
+            echo "Issue ouverte ($TOTAL entrées)."
+            exit 0
+          fi
+
+          # La signature est dans le corps et dans chaque commentaire : si elle
+          # y figure deja, la liste n a pas change et on se tait.
+          DEJA=$(gh issue view "$N" --json body,comments --jq '[.body] + [.comments[].body] | join("\n")' | grep -c "signature: $SIG" || true)
+          if [ "$DEJA" = "0" ]; then
+            gh issue comment "$N" --body-file data/maisons-a-inscrire.md
+            echo "Issue #$N commentée : la liste a changé ($TOTAL entrées)."
+          else
+            echo "Issue #$N inchangée : même liste qu au dernier passage."
+          fi
       # Ne publier QUE depuis la branche principale. Sans cette condition, un
       # « Run workflow » lance sur une branche de travail commiterait son
       # catalogue ET appellerait le Deploy Hook — donc deploierait la

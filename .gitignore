@@ -33,3 +33,9 @@ eyjob.html
 
 # Configuration locale de l'éditeur
 .claude/
+
+# Les photos de collecte : gros, quotidiennes, et regenerables. La rotation
+# en supprime une chaque jour — suivies par git, elles font grossir le depot
+# et polluent chaque passage avec une suppression non commitee.
+data/brut-*.json
+data/brut-*.json.gz

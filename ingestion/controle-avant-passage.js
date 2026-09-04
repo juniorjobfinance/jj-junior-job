@@ -272,7 +272,12 @@ try {
       ok('maisons vues', `aucune maison jetée à la collecte du ${quand}`);
     } else {
       const total = noms.reduce((n, [, v]) => n + v, 0);
-      ko(
+      // SIGNALE, ne bloque pas. Ces offres manquent au site ; celles qui y sont
+      // restent exactes. Des noms nouveaux apparaissent chaque jour — bloquer
+      // sur eux arreterait la publication presque tous les matins, pour une
+      // raison qui n'est pas une faute. L'issue « Maisons a inscrire » les
+      // porte, et elle, elle est tenue a jour meme sur un passage vert.
+      alerte(
         'maisons vues',
         `${noms.length} maison(s) ont servi ${total} offre(s) à la collecte du ${quand} sans être ` +
           `dans maisons.txt — tout a été jeté :\n          ` +
@@ -411,7 +416,9 @@ try {
           return `            '${normalizeEmployer(e)}': '???',` +
             `${' '.repeat(Math.max(1, 34 - normalizeEmployer(e).length))}// ${e} (${n} offre${n > 1 ? 's' : ''})`;
         });
-      ko(
+      // SIGNALE : meme raison. Un employeur sans structure coute SES offres,
+      // pas celles des autres.
+      alerte(
         'deux tables',
         `${boiteuses.length} employeur(s) publient mais n'ont pas de structure : la porte\n` +
           `          finance rejette TOUTES leurs offres, en silence.\n\n` +
@@ -457,7 +464,10 @@ if (echecs) {
   console.log(`${echecs} ÉCHEC(S) — ne pas laisser le passage tourner en l'état.\n`);
   process.exitCode = 1;
 } else if (alertes) {
-  console.log(`Aucun échec, ${alertes} point(s) à regarder.\n`);
+  console.log(
+    `Aucun échec — le catalogue est publiable. ${alertes} point(s) à regarder :\n` +
+      `il lui manque des offres, il n'en porte pas de fausses.\n`
+  );
 } else {
   console.log('Tout est en ordre pour le passage automatique.\n');
 }
