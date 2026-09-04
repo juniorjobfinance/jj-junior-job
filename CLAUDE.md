@@ -123,6 +123,43 @@ porter `’` en toutes lettres là où on croit voir une apostrophe. Lire les
 octets avant d'écrire l'ancre coûte dix secondes ; les chercher après en coûte
 dix minutes.
 
+### Sur de la PROSE, aucune expression régulière — troisième couche
+
+`CLAUDE.md`, `ETAT.md`, `DECISIONS.md` et toute documentation **ne se modifient
+jamais par `replace` avec une expression régulière.** On édite le fichier
+directement, ou on utilise :
+
+```js
+src.split(litteral).join(remplacement)
+```
+
+qui n'interprète **rien** : ni `$&`, ni `$1`, ni un accent, ni une apostrophe
+typographique.
+
+**Pourquoi cette règle existe alors que deux autres la couvraient déjà.** Le
+04/09/2026, cinq scripts de modification ont échoué sur le même terrain, et
+tous éditaient de la prose par expression régulière — jamais du code. Trois ont
+corrompu `CLAUDE.md` lui-même, commité et poussé : la puce du piège `$&`
+réduite à « - * », celle de l'instrument à « $1 », celle de l'alternance à
+« $1 Le contrat démarre ».
+
+Les deux premières couches n'ont pas suffi :
+
+1. **une règle** — « toujours passer une fonction à `replace` » — qu'on oublie
+   au moment où elle servirait ;
+2. **un mécanisme** — comparer le texte avant et après, annoncer les octets —
+   qui rend le raté visible *après coup*, sans l'empêcher.
+
+La troisième couche ne demande ni mémoire ni vigilance : **elle retire le
+danger.** Un `split`/`join` ne peut pas manger un groupe capturé, parce qu'il
+n'y a pas de groupe.
+
+Le code, lui, garde ses expressions régulières : il est syntaxiquement
+contraint, une erreur s'y voit à l'exécution. La prose ne proteste jamais —
+elle se contente d'être fausse, et d'être poussée.
+
+*Cette règle a été écrite dans ce fichier par un `split`/`join`.*
+
 ---
 
 ## Pièges vérifiés plusieurs fois
