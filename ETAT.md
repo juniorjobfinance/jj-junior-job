@@ -433,3 +433,68 @@ voyait pas en perd 91.
 **La leçon vaut au-delà de ce cas : une famille dont le nom est assez large
 pour tout accueillir devient un fourre-tout sans jamais en porter le nom.** Le
 compteur à surveiller n'est pas « Autres », c'est la famille la plus grosse.
+
+### Imprécision connue et chiffrée : 4 doublons résiduels
+
+La clé de déduplication compare l'employeur, l'intitulé et la ville. Elle est
+calculée **avant** le dernier nettoyage du titre : la mention « (Télétravail
+complet possible) » lui sert à poser `loc = a-distance`, elle n'est donc retirée
+qu'après. Deux annonces du même poste écrites différemment — « (Télétravail
+complet) » contre « (Télétravail complet possible) », « Limousin Dordogne Lot
+Garonne » contre « depuis Limoges » — reçoivent deux clés et survivent toutes
+les deux.
+
+**Mesuré le 04/09/2026 : 4 offres sur 3 183, toutes chez Pennylane.** C'est
+l'habitude d'écriture d'un employeur, pas une classe de titres — 0,1 % du
+catalogue.
+
+**On ne le corrige pas**, et c'est délibéré : un motif taillé pour quatre
+offres casserait à la première variation d'écriture, tout en ayant l'air de
+protéger. À la place :
+
+- la page **fond les villes en double** sur une carte groupée (une ville, un
+  lien, la pastille compte les villes distinctes) ;
+- le pipeline **compte** ces doublons à chaque passage et l'écrit au journal :
+  `N doublons résiduels : même employeur, même intitulé, même ville`.
+
+**Si ce nombre grossit, c'est que la clé se dégrade** — et on le verra dans le
+journal, pas sur une carte. Le seuil à partir duquel il vaut une règle a été
+posé à 15 : en dessous, c'est du sur-mesure.
+
+### Le prochain chantier : faire lire la description au classifieur
+
+Le classifieur ne lit que l'**intitulé**. C'est ce qui a rendu la refonte
+possible — un titre est court, stable, et présent chez toutes les sources —
+et c'est désormais sa limite principale.
+
+**Mesuré le 04/09/2026 : 149 offres sur les seules structures financières
+portent un intitulé générique, illisible ou tronqué** — « Gestionnaire
+contrat », « Chargé d'études et statistiques sur… », « Head of Performance
+Management WEAR », « Assistant Technique ». Aucun motif ne peut les ranger,
+parce qu'il n'y a rien à lire. Elles sortent au résidu, comptées mais perdues.
+
+Ces 149 ne sont pas un stock qui s'épuise : c'est le débit quotidien. Chaque
+matin ramène sa part d'intitulés maison qu'aucune règle de vocabulaire
+n'atteindra.
+
+**La description, elle, dit le métier.** Le pipeline la récupère déjà — c'est
+`descrComplet`, le texte entier, qui sert au filtre de séniorité depuis cette
+nuit. Le classifieur pourrait l'interroger **quand, et seulement quand,
+l'intitulé ne suffit pas** : le résidu deviendrait alors une seconde chance
+plutôt qu'une sortie.
+
+**C'est un changement d'architecture, pas un motif de plus.** Trois questions
+à trancher avant d'écrire une ligne :
+
+1. le classifieur reçoit aujourd'hui `{ title, employer }` ; lui passer la
+   description change sa signature et le contrat de tous ses appelants,
+   `atelier.js` et les cinq suites de tests compris ;
+2. une description est mille fois plus longue qu'un titre, et elle contient le
+   vocabulaire de TOUTE la maison — le risque n'est pas de rater, il est de
+   ranger n'importe où. Il faudra pondérer autrement, et sans doute n'accepter
+   qu'un score très élevé ;
+3. les offres sans description restent aveugles : au 04/09/2026, le journal en
+   compte quatorze écartées « faute de description lisible ».
+
+**C'est le plus gros gisement après les nouveaux employeurs**, et le seul qui
+ne se règle pas en ajoutant du vocabulaire.

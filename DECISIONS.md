@@ -896,3 +896,169 @@ Corollaire de nommage, déjà appliqué au §26 : une garde d'idempotence doit
 porter sur un marqueur **propre au bloc qu'elle protège**. Celle qui cherchait
 « sans structure » a trouvé cette tournure dans un autre message du même
 fichier, et a sauté l'écriture en silence.
+
+---
+
+## 30. Ce qui entre au catalogue : produire ou analyser de l'information financière
+
+**Tranché le 04/09/2026, après un audit des 956 offres publiées.**
+
+Trois arbitrages ont été rendus le même soir — sinistres dehors, souscription
+dedans, audits de systèmes dehors — et les trois auraient été re-tranchés dans
+trois semaines, probablement dans l'autre sens, si l'on n'avait gardé que la
+liste des cas. La règle qui les relie :
+
+**Un métier entre au catalogue s'il PRODUIT ou ANALYSE de l'information
+financière. Il n'y entre pas s'il traite des dossiers, s'il vend un produit,
+ou s'il porte sur un système d'information.**
+
+Les trois cas, relus à cette aune :
+
+- **La souscription reste.** Un souscripteur junior tarife et analyse un
+  risque : il produit de l'information financière. C'est le poste voisin de
+  l'actuaire.
+- **Les sinistres sortent** (17 offres), et **la gestion de contrats aussi**
+  (9). Régler un sinistre, c'est appliquer un barème à un dossier. Rien n'est
+  produit ni analysé.
+- **Les audits de systèmes sortent** (8). Un candidat qui clique sur « Audit &
+  Contrôle interne » cherche de l'audit financier ; lui servir de l'audit de SI
+  lui fait perdre son temps au clic et à l'entretien. Exception nommée :
+  « transformation SI/Finance » porte sur la fonction finance elle-même.
+- **La distribution d'assurance sort** (11). « AXA Prévoyance & Patrimoine »
+  est le nom d'un réseau d'agences, pas d'un métier — le mot « patrimoine »
+  n'exempte plus que lorsqu'il nomme le métier.
+
+### Qui est le sujet, qui est le décor
+
+« Un métier n'entre pas s'il porte sur un système d'information » ne tranche
+pas les cas limites, et la première relecture le montre. Le test n'est pas
+« y a-t-il de l'informatique dans ce titre » — il y en a dans les deux
+colonnes. Le test est **qui est le sujet** :
+
+| le système est le sujet, la finance est le décor | la finance est le sujet, le système est l'outil |
+|---|---|
+| « Business Analyst » | « Consultant Fonctionnel ERP Oracle / **Finance** » |
+| « Assistant PMO » | « Consultant en transformation **SI/Finance** » |
+| « Agile Business Analyst » | « PMO **monnaie numérique de banque centrale** » |
+| « Business analyst MOA et testing » | « **Post trade** Business Analyst » |
+| « audit des systèmes d'information » | « Business Analyst **Lutte Anti Blanchiment** » |
+
+En pratique : un intitulé générique de projet ou de système sort, **sauf s'il
+nomme la finance** — et « nommer la finance » se juge avec `hasFinanceMarker`,
+la définition que la porte finance emploie déjà, jamais avec une liste écrite à
+côté. Une liste faite à la main pour l'occasion a rejeté **159 offres au lieu
+de 7** le 04/09/2026, dont une vingtaine de Business Analysts de marché chez
+Talan : elle ignorait « capital market », « front office », « post trade » et
+« asset management ».
+
+### Le test d'un motif : nommera-t-il encore un métier dans six mois ?
+
+La règle qu'on s'était donnée — « pas de motif pour une offre unique » —
+compte le mauvais objet. Elle aurait interdit `fiscal`, qui nomme une
+discipline et ne portait que deux offres ce jour-là, et autorisé n'importe
+quelle chaîne fréquente sans signification, du type « Junior AI Adoption ».
+
+**Le bon test ne dépend pas du volume du jour : un motif se juge sur ce qu'il
+NOMME.** Nomme-t-il un métier, une discipline, un instrument — quelque chose
+qui existera encore quand l'annonce d'aujourd'hui aura disparu ? Ou n'est-il
+qu'une chaîne de caractères qui se trouve, ce matin, dans deux titres ?
+
+Trois applications du même jour :
+
+- **`fiscal` : écrit**, malgré deux offres. Fiscaliste, tax, fiscalité sont
+  un métier permanent, et le catalogue en portait déjà deux occurrences sous
+  d'autres formes — « Comptabilité Fiscale », « réglementations fiscales ».
+- **`chargé d'études financières` : écrit**, et ajouté à `ANALYSTE_GENERIQUE`
+  plutôt qu'à une famille. C'est un intitulé standard du secteur, mais il ne
+  désigne pas le même métier partout : chez un assureur c'est du contrôle de
+  gestion, chez un gérant de l'analyse de marché, chez un régulateur de
+  l'analyse prudentielle. Le mécanisme qui route selon la structure fait le
+  travail en une ligne, là où trois familles en dur auraient figé un choix.
+- **`ingénieur financier` : PAS écrit**, bien que le terme soit standard. Il
+  désigne deux métiers opposés — structuration de marché en BFI, montage de
+  prêts à la Caisse des Dépôts. **Un motif qui ne sait pas lequel des deux il
+  nomme ne vaut rien**, et l'employeur ne peut pas trancher ici puisque les
+  deux emplois existent des deux côtés.
+
+Le corollaire : quand un terme standard est ambigu et que la structure ne le
+désambiguïse pas, on le laisse au résidu. Le résidu est compté au journal et
+il se relit ; un motif faux, lui, se propage en silence.
+
+### Quand le titre ne suffit pas, c'est l'employeur qui tranche
+
+Trois fois dans la même nuit, un intitulé identique a dû recevoir deux verdicts
+opposés selon la maison. Ce n'est pas une exception à répéter au cas par cas,
+c'est **le rôle du second axe** : les structures ne servent pas qu'à filtrer
+l'affichage, elles désambiguïsent le métier.
+
+**« Recouvrement »** — chez une structure `entreprise`, c'est du *credit
+management* : relancer les clients, piloter le DSO, un vrai poste junior de
+direction financière. Il se range en Contrôle de gestion & Trésorerie. Partout
+ailleurs c'est du recouvrement de créances, donc du traitement de dossier.
+
+> Rexel « Gestionnaire de Recouvrement » → **Contrôle de gestion**
+> Société Générale « Chargé de Recouvrement » → **rejeté**
+> Le titre est le même. L'employeur tranche.
+
+**« Sales »** — chez un gérant d'actifs, une banque ou un dépositaire, un poste
+de vente porte sur des produits financiers ; chez un industriel, il porte sur
+des produits tout court.
+
+**« Analyste financier »** — en entreprise c'est du contrôle de gestion, en
+banque ou en gestion c'est de l'analyse de marché, chez un régulateur c'est de
+la cotation prudentielle.
+
+**Le principe : n'écrire une exception de titre que lorsque l'employeur ne peut
+pas trancher.** Une exception bricolée sur l'intitulé se répète et se contredit ;
+une règle adossée à la structure se lit et se vérifie. C'est aussi pour cela
+qu'un coup de pouce de structure ne doit jamais servir de FILET par défaut
+(§21) : il désambiguïse ce que le titre nomme mal, il n'invente pas ce que le
+titre ne dit pas.
+
+### Le résidu est le vrai indicateur, pas « Autres »
+
+Le fourre-tout visible tenait à 14 offres, soit 1,5 %, et ce chiffre passait
+pour une mesure de qualité du classement. **Il n'en est pas une** : « Autres
+métiers de la finance » est une famille qui contient des économistes, pas un
+bac de récupération. Les offres que le classifieur ne sait pas ranger sortent
+du site — **474 ce jour-là** — sans figurer dans aucun compteur.
+
+Une mesure qui a l'air de dire quelque chose et qui parle d'autre chose : le
+défaut du §26 et du §29, déplacé dans les indicateurs.
+
+Le nombre d'offres SANS FAMILLE est donc désormais **une ligne du journal, à
+côté du total**. Si le classement se dégrade un jour, c'est là que ça se verra
+en premier.
+
+### Un métier se nomme, il ne se devine pas d'après l'employeur
+
+Quatre métiers ont été récupérés du résidu par un MOTIF qui les nomme —
+« structured product » vers les marchés, « reporting réglementaire » vers les
+risques, « chargé d'affaires internationales » vers les financements,
+« responsable bilan » vers l'assurance technique — et non par un coup de pouce
+de structure. La différence est celle du §21 : un coup de pouce d'employeur
+fait rentrer avec le bon tout ce qui traîne. C'est exactement ce qui avait fait
+de « Fusions & Acquisitions » un second fourre-tout, douze offres sur 78 sans
+le moindre vocabulaire de deal.
+
+### Le dépôt est la seule source
+
+Les fichiers de la refonte ont vécu dans `Downloads/jj-refonte/`, un sas utile
+tant que le travail n'était pas fusionné. **Il n'a plus de raison d'être, et
+maintenir deux copies du même fichier a coûté trois corrections perdues dans la
+même nuit** : les codes de sortie des suites de tests, remis à chaque recopie
+et effacés à la suivante, plus le renommage de `gate:employeur-absent-de-
+structures`.
+
+À faire une fois, dans cet ordre :
+
+1. vérifier que le dépôt contient bien la dernière version de chaque fichier
+   (`git diff` doit être vide après une recopie ; s'il ne l'est pas, c'est le
+   dépôt qui a raison, il porte les correctifs) ;
+2. **renommer le dossier** en `jj-refonte-ARCHIVE-nepasrecopier` plutôt que le
+   supprimer — l'historique du sas peut servir, mais son nom doit interdire le
+   réflexe ;
+3. ne plus jamais recopier depuis lui.
+
+**Un fichier qui existe à deux endroits n'a pas deux versions : il en a une
+juste et une qui attend de la remplacer.**

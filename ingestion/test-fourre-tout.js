@@ -115,7 +115,16 @@ buckets.unclassified.forEach((l) => console.log(`   ${l}`));
 
 // Code de sortie : le residu ne doit pas remonter au-dessus de son niveau
 // connu. S'il remonte, une regle a ete perdue ou affaiblie.
-const SEUIL_RESIDU = 8;
+//
+// Passe de 8 a 10 le 04/09/2026, et c est une HAUSSE VOULUE, pas un
+// relachement. Le coup de pouce M&A ne s applique plus sans indice de metier :
+// Rothschild « Junior AI Adoption » et « Digital, IA & Employee Experience » ne
+// sont plus ranges en fusions-acquisitions, ils tombent dans le residu. C est
+// l arbitrage de Victor — un fourre-tout honnete vaut mieux qu un M&A faux.
+//
+// Le seuil reste un PLAFOND au ras du reel : si le residu redescend, il faut
+// le rabaisser dans la foulee, sinon il cesse de mordre (DECISIONS.md 28).
+const SEUIL_RESIDU = 10;
 if (buckets.unclassified.length > SEUIL_RESIDU) {
   console.log(`\nECHEC : ${buckets.unclassified.length} sans famille, seuil ${SEUIL_RESIDU}`);
   process.exit(1);

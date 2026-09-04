@@ -739,6 +739,19 @@
     display: grid;
     gap: 1.1rem;
   }
+  /* Une annonce ouverte dans plusieurs villes : le titre n'est plus cliquable,
+     chaque ville l'est, et chacune porte son propre lien. */
+  .card-groupe { cursor: default; }
+  .card-groupe .villes {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.55rem 0 0.2rem;
+  }
+  .card-groupe .villes .ville {
+    font-size: 0.82rem; padding: 0.15rem 0.55rem; border-radius: 999px;
+    border: 1px solid currentColor; opacity: 0.8; text-decoration: none;
+  }
+  .card-groupe .villes .ville:hover,
+  .card-groupe .villes .ville:focus-visible { opacity: 1; text-decoration: underline; }
+
   .card {
     background: var(--paper-raised);
     border: 1px solid var(--line);
@@ -1695,6 +1708,32 @@
     return '<div class="carte-date ' + age + '">' + texte + '</div>';
   }
 
+  // Deux offres sont la MÊME annonce quand l'employeur et l'intitulé
+  // coïncident : Pennylane ouvre « Spécialiste Support Comptable » dans douze
+  // villes, avec douze liens différents. On les groupe pour l'AFFICHAGE, et
+  // seulement pour lui — le catalogue garde ses douze offres.
+  function cleAnnonce(o) {
+    var n = function (x) {
+      return String(x || '').toLowerCase().normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    };
+    return n(o.emp) + '|' + n(o.title);
+  }
+
+  // Groupe APRÈS le filtre : un filtre sur Bordeaux ne laisse passer que
+  // l'offre de Bordeaux, et la carte n'affiche donc que Bordeaux. C'est ce qui
+  // fait que le filtre par lieu continue de trouver la carte fusionnée.
+  function grouperParAnnonce(offres) {
+    var index = {};
+    var groupes = [];
+    offres.forEach(function (o) {
+      var k = cleAnnonce(o);
+      if (index[k] === undefined) { index[k] = groupes.length; groupes.push([o]); }
+      else { groupes[index[k]].push(o); }
+    });
+    return groupes;
+  }
+
   function cardHTML(o) {
     // Le lieu devient une pastille au même titre que la famille et la
     // structure : il ne doit plus traîner dans l'intitulé.
@@ -1734,6 +1773,60 @@
           '<span class="link-out">Voir l\'annonce →</span>' +
         '</div>' +
       '</a>'
+    );
+  }
+
+  // La carte d'une annonce ouverte dans plusieurs villes. Elle ne peut pas être
+  // un lien unique : chaque ville a son adresse, et envoyer le candidat de
+  // Bordeaux sur l'annonce de Lille serait pire que de ne rien afficher. Le
+  // titre n'est donc plus cliquable, chaque ville l'est.
+  // Le nombre de VILLES distinctes, qui n'est pas le nombre d'offres du
+  // groupe : Pennylane ouvre deux fois le meme poste a Limoges.
+  function nbVilles(groupe) {
+    var vues = {};
+    groupe.forEach(function (o) { vues[String(o.loc || '').toLowerCase()] = true; });
+    return Object.keys(vues).length;
+  }
+
+  function cardGroupeHTML(groupe) {
+    var o = groupe[0];
+    var LIB = { stage: 'Stage', alternance: 'Alternance', vie: 'VIE', 'cdi-cdd': 'CDI · CDD' };
+    var libelleContrat = (o.volet === 'cdi-cdd' && o.contrat) || LIB[o.volet] || o.volet;
+    var metaBits = [
+      '<span class="tag-famille">' + esc(o.famille) + '</span>',
+      '<span class="tag-struct" title="' + esc(o.sector) + '">' + esc(o.sector) + '</span>',
+      '<span class="tag-loc">' + nbVilles(groupe) + ' villes</span>'
+    ];
+    // Une ville ne s'affiche qu'une fois : deux annonces au meme intitule dans
+    // la meme ville sont le meme poste, et deux liens vers « le meme » n'aident
+    // pas a choisir. On garde la premiere adresse.
+    var villesVues = {};
+    var liens = groupe.slice()
+      .sort(function (a, b) { return String(a.loc || '').localeCompare(String(b.loc || '')); })
+      .filter(function (x) {
+        var k = String(x.loc || '').toLowerCase();
+        if (villesVues[k]) return false;
+        villesVues[k] = true;
+        return true;
+      })
+      .map(function (x) {
+        var ville = x.loc && !/^non précisé$/i.test(x.loc) ? x.loc : (x.place || 'Voir');
+        return '<a class="ville" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+          esc(ville) + '</a>';
+      }).join('');
+    return (
+      '<div class="card card-groupe">' +
+        '<span class="contrat ' + esc(o.volet) +
+          (o.volet === 'cdi-cdd' && o.contrat ? ' ' + esc(o.contrat.toLowerCase()) : '') +
+          '">' + esc(libelleContrat) + '</span>' +
+        '<h3>' + esc(o.title) + '</h3>' +
+        '<div class="emp">' + esc(o.emp) + '</div>' +
+        '<div class="meta">' + metaBits.join('') + '</div>' +
+        '<div class="villes">' + liens + '</div>' +
+        '<div class="bas">' + ligneDate(o) +
+          '<div class="badges">' + freshnessBadge(o) + '</div>' +
+        '</div>' +
+      '</div>'
     );
   }
 
@@ -1885,7 +1978,10 @@
     state.emp = els.empSelect.value;
 
     var filtered = sortOffers(base.filter(matchesFilters));
-    var visible = filtered.slice(0, state.page * PAGE_SIZE);
+    // On pagine sur les GROUPES : sans quoi les seize Pennylane seraient
+    // coupées en deux pages et la carte apparaîtrait deux fois.
+    var groupes = grouperParAnnonce(filtered);
+    var visible = groupes.slice(0, state.page * PAGE_SIZE);
     stateToUrl();
 
     els.resultsCount.textContent = filtered.length + ' offre' + (filtered.length > 1 ? 's' : '');
@@ -1898,13 +1994,18 @@
     if (!filtered.length) {
       els.cards.innerHTML = '<div class="empty-state">Aucune offre ne correspond à ces filtres pour le moment.</div>';
     } else {
-      els.cards.innerHTML = visible.map(cardHTML).join('');
+      els.cards.innerHTML = visible
+        .map(function (g) { return g.length > 1 ? cardGroupeHTML(g) : cardHTML(g[0]); })
+        .join('');
     }
 
-    els.loadMore.hidden = visible.length >= filtered.length;
+    // Le compteur du haut dit les OFFRES — une annonce ouverte dans seize
+    // villes, ce sont seize postes auxquels on peut postuler. Le bouton dit les
+    // CARTES, puisque c'est ce qu'il charge.
+    els.loadMore.hidden = visible.length >= groupes.length;
     if (!els.loadMore.hidden) {
       els.loadMore.textContent =
-        'Charger plus d\'offres (' + visible.length + ' sur ' + filtered.length + ')';
+        'Charger plus d\'annonces (' + visible.length + ' sur ' + groupes.length + ')';
     }
   }
 

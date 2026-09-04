@@ -2266,6 +2266,23 @@ function cleanTitle(title) {
   //       espace et d'un métier.
   t = t.replace(/^\d{1,2}M\s+(?=[A-Za-zÀ-ÿ])/, '');
 
+  // 9 ter) Miettes en QUEUE d'intitulé. Une annonce coupée par la source
+  //    laisse un mot de liaison ou un fragment de durée : « Compliance officer
+  //    sanctions de », « Conformité / Contrôle interne à compter de »,
+  //    « Économiste / Data visualisation - 4 à ». Trois cas le 04/09/2026.
+  //
+  //    La phrase de date d'abord, en entier, puis les mots isolés. On boucle :
+  //    « - 4 à » demande deux passes.
+  t = t.replace(/[\s\-–—,(]+[àa] compter(?: (?:de la|des|du|de|d))?\s*$/i, '');
+  for (let i = 0; i < 3; i++) {
+    const avantQueue = t;
+    t = t.replace(
+      /[\s\-–—,(]+(?:\d{1,2}\s*[àa]?|de|du|des|d|en|et|la|le|les|pour|sur|au|aux|par|avec|[àa])\s*$/i,
+      ''
+    );
+    if (t === avantQueue) break;
+  }
+
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
 
@@ -3155,6 +3172,10 @@ function slug(s) {
 // Retire le bruit courant des intitulés pour rapprocher les variantes (H/F, F/H, CDI...).
 function slugTitleFuzzy(title) {
   return slug(title)
+    // « Risk & Compliance » et « Risk and Compliance » sont le meme poste.
+    // slug() transforme « & » en espace et laisse « and » : deux offres KPMG
+    // identiques, MEME VILLE, s'affichaient en double le 04/09/2026.
+    .replace(/\band\b|\bet\b/g, ' ')
     .replace(/\bh f\b|\bf h\b|\bh\/f\b|\bcdi\b|\bcdd\b|\bstage\b|\balternance\b/g, '')
     .replace(/\s+/g, ' ')
     .trim();
@@ -4654,6 +4675,41 @@ async function run() {
   console.log(
     `[pipeline] Contrat précisé sur ${nommes}/${cdiCdd.length} offres CDI-CDD ` +
       `(${cddRattrapes} CDD démasqués par leur fiche).`
+  );
+  // Le residu SANS FAMILLE, a cote du total. « Autres metiers de la finance »
+  // ne le mesure pas : c'est une famille qui contient des economistes. Les
+  // offres que le classifieur ne sait pas ranger sortent du site sans figurer
+  // nulle part — 478 le 04/09/2026 contre 14 dans « Autres ». Si le classement
+  // se degrade un jour, c'est ce nombre-la qui bougera en premier.
+  // Les doublons que la cle n'a pas su fondre : meme employeur, meme intitule
+  // NETTOYE, meme ville. Ils existent parce que la cle est calculee AVANT le
+  // dernier nettoyage du titre — la mention de teletravail lui sert a poser
+  // « a-distance », donc elle n'est retiree qu'apres.
+  //
+  // Quatre offres sur 3 183 le 04/09/2026, toutes chez Pennylane. On ne repare
+  // pas pour si peu : un motif taille sur mesure casserait a la premiere
+  // variation d'ecriture. On COMPTE, et si ce nombre grossit c'est que la cle
+  // se degrade — la page, elle, les fond deja a l'affichage.
+  {
+    const vus = new Map();
+    for (const o of publiables) {
+      const k = String(o.emp || '').toLowerCase() + '|' +
+        String(o.title || '').toLowerCase().replace(/\s*\([^)]*t[ée]l[ée]travail[^)]*\)/gi, '').trim() +
+        '|' + String(o.loc || '').toLowerCase();
+      vus.set(k, (vus.get(k) || 0) + 1);
+    }
+    const enTrop = [...vus.values()].reduce((n, v) => n + v - 1, 0);
+    if (enTrop) {
+      console.log(
+        `[pipeline] ${enTrop} doublons residuels : meme employeur, meme intitule, meme ville — ` +
+          `la page les fond a l'affichage, la cle ne les a pas fondus.`
+      );
+    }
+  }
+
+  console.log(
+    `[pipeline] ${rapportClassement.nonClasses.length} offres SANS FAMILLE, ecartees sans ` +
+      `etre comptees dans une famille (detail : data/unclassified${SUFFIXE}.json).`
   );
   console.log(
     `[pipeline] ${publiables.length} offres après second filtre 0-3 ans sur les fiches ` +

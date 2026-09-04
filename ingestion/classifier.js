@@ -39,6 +39,17 @@ function normalize(raw) {
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .replace(/[’'`]/g, ' ')
+    // La marque du feminin ne doit pas separer deux mots. « gerant(e) de
+    // portefeuille » devenait « gerant e de portefeuille » — les parentheses
+    // deviennent des espaces a la ligne suivante, et le « e » devient un MOT
+    // qui coupe le metier en deux. Le motif valait 9, il ne pouvait plus
+    // s'appliquer. 93 titres sur 1389 portent une de ces formes le 04/09/2026,
+    // dont 34 dans le residu : « (e) », « .e », « -e », « (trice) », « -rice »,
+    // « (se) », « .se », « (rice) », « ·e ».
+    //
+    // On la retire ICI, avant la ponctuation : un seul endroit repare tous les
+    // motifs, la ou les reecrire un par un en aurait rate.
+    .replace(/(?<=[a-z])[(.·\-–]\s*(?:e|se|ne|rice|trice|euse|iere)\s*\)?(?![a-z])/g, '')
     .replace(/[^a-z0-9&+]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -53,6 +64,31 @@ function normalize(raw) {
  * perimetre. Verifie AVANT le pre-filtre : "Conseiller en Gestion de
  * Patrimoine" n'est pas de la vente en agence.
  */
+// Le mot « patrimoine » n'exempte que lorsqu'il nomme le METIER. « AXA
+// Prevoyance & Patrimoine » est le nom d'un RESEAU D'AGENCES : onze offres de
+// mandataires passaient par cette porte le 04/09/2026 — « Entrepreneur
+// specialise », « Animateur Commercial », « Chef(fe) d'entreprise ». Aucune
+// n'est de la gestion de patrimoine.
+const DISTRIBUTION_ASSURANCE =
+  /\b(?:entre?preneur|animateur|animatrice|chef(?:fe)? d entreprise|mandataire|agence|reseau)\b/;
+
+// LE SUJET, PAS LE DECOR. Un intitule generique de projet ou de systeme sort
+// du perimetre — sauf s'il nomme la finance, auquel cas le systeme n'est que
+// l'outil. « Business Analyst » dehors, « ERP Oracle / Finance » dedans.
+const TITRE_DE_SYSTEME =
+  /\b(?:pmo|project management officer|business analyst|business analyste|moa|amoa|maitrise d ouvrage|agile|scrum|product owner|testing|support fonctionnel)\b/;
+
+// Ce qui fait de la finance le SUJET : on reutilise hasFinanceMarker, la
+// definition que la porte finance emploie deja. Une liste ecrite a la main
+// ici ignorait « capital market », « front office », « post trade », « asset
+// management » et « lutte anti blanchiment » — 159 rejets au lieu de 7.
+
+// Le recouvrement de creances est du traitement de dossier — sauf quand
+// l'intitule ANALYSE ou PILOTE, ce qui est un autre metier.
+const RECOUVREMENT_DOSSIER =
+  /\b(?:gestionnaire|charge|chargee)\b[^,]{0,40}\brecouvrement\b|\brecouvrement\b[^,]{0,20}\b(?:contentieux|pre contentieux)\b/;
+const RECOUVREMENT_PILOTAGE = /\b(?:analyste|pilotage|suivi|controle)\b/;
+
 const PREFILTER_EXCEPTIONS = [
   /\bgestion de patrimoine\b/,
   /\bpatrimonial(?:e)?\b/,
@@ -83,6 +119,42 @@ const PREFILTER = [
   [/\bcharg(?:e|ee) d accueil\b/, 'retail'],
   [/\brecouvrement (?:amiable|commercial)\b/, 'retail'],
   [/\bsurendettement\b/, 'retail'],
+  // « Inspecteur commercial » est un poste de reseau, pas d'audit. Le mot
+  // « inspecteur » seul reste accepte : dans la banque francaise, c'est le
+  // titre de l'audit interne — Inspection Generale, Inspecteur Modeles,
+  // Inspecteur-Auditeur. Refuser « inspecteur » non qualifie couterait cinq
+  // offres legitimes pour en attraper une.
+  [/\binspect(?:eur|rice|ion)[^,]{0,12} commercial/, 'retail'],
+
+  // --- HORS PERIMETRE, arbitre le 04/09/2026 (DECISIONS.md paragraphe 30) --
+  //
+  // TRAITEMENT DE DOSSIER. Le sinistre et la gestion de contrat ne produisent
+  // ni n'analysent d'information financiere : ils appliquent un bareme a un
+  // dossier. Dix-sept offres de sinistres et neuf de gestion de contrats
+  // etaient rangees en « Actuariat & Assurance technique ». La SOUSCRIPTION
+  // reste : un souscripteur junior fait de la tarification et de l'analyse de
+  // risque, c'est le poste voisin de l'actuaire.
+  [/\bsinistres?\b/, 'traitement-dossier'],
+  [/\bindemnisation\b/, 'traitement-dossier'],
+  [/\bregleur\b/, 'traitement-dossier'],
+  [/\bgestionnaire (?:de )?recours\b/, 'traitement-dossier'],
+  [/\bgestionnaire (?:en )?assurance/, 'traitement-dossier'],
+  [/\bgestionnaire back office sante\b/, 'traitement-dossier'],
+  [/\bgestionnaire redacteur\b/, 'traitement-dossier'],
+  [/\bcharge de compte en assurance/, 'traitement-dossier'],
+  [/\btechnicien operations assurance\b/, 'traitement-dossier'],
+
+  // SYSTEME D'INFORMATION. Un candidat qui clique sur « Audit & Controle
+  // interne » cherche de l'audit FINANCIER ; lui servir de l'audit de
+  // systemes lui fait perdre son temps au clic et a l'entretien. Huit offres
+  // Big Four le 04/09/2026. Exception explicite : « transformation SI/Finance »
+  // porte sur la fonction finance elle-meme, elle reste en Conseil.
+  [/\baudit it\b/, 'systeme-information'],
+  [/\bit audit\b/, 'systeme-information'],
+  [/\bauditeur des systemes d information\b/, 'systeme-information'],
+  [/\brisques des si\b/, 'systeme-information'],
+  [/\bcyber risk\b/, 'systeme-information'],
+  [/\baudit financier ?\/ ?tech\b/, 'systeme-information'],
 
   // Distribution d'assurance : agents, mandataires, technico-commerciaux.
   // C'est le premier gisement du fourre-tout (AXA, Swiss Life, Matmut, AG2R).
@@ -138,6 +210,16 @@ const PREFILTER = [
 // ---------------------------------------------------------------------------
 
 const FINANCE_MARKERS = [
+  // Ajoutes le 04/09/2026 : du vocabulaire de metier absent de la porte, qui
+  // bloquait des offres reelles — Talan « Post trade Business Analyst » et
+  // « Business Analyst Lutte Anti Blanchiment », Banque de France « PMO MNBC
+  // Interbancaire ». Mesure chez les industriels faite avant/apres, comme
+  // CLAUDE.md l'exige pour tout ajout au FILTRE D'ENTREE.
+  /\bpost[\s-]?trade\b/,
+  /\bblanchiment\b/,
+  /\banti[\s-]?money[\s-]?laundering\b/,
+  /\bmnbc\b/,
+  /\bmonnaie numerique\b/,
   /\bfinanc/, /\bcomptab/, /\baccount/, /\bconsolid/, /\baudit/, /\bfiscal/,
   /\bcontrol(?:e|eur|ling|ler)\b/, /\bcontrole de gestion\b/, /\bfp&a\b/,
   /\btresorerie\b/, /\btreasury\b/, /\bcash management\b/,
@@ -241,6 +323,14 @@ const FAMILIES = [
       [/\bnetwork banking\b/, 8],
       [/\btransaction banking\b/, 8],
       [/\btrade finance\b/, 9],
+      // Le financement de PROJET, jamais « financement » seul : « Charge de
+      // financements aupres de la clientele Professionnelle » (SG) est du
+      // credit d'agence, « Infra & Energy finance » (Natixis) est du
+      // financement d'infrastructure. Cinq offres le 04/09/2026.
+      [/\bfinancements? de projets?\b|\bproject finance\b/, 9],
+      [/\bfinancements? specialises?\b/, 9],
+      [/\binfra(?:structure)? (?:& |et )?energy finance\b/, 9],
+      [/\bfinancement d infrastructure/, 9],
       [/\bcredits? documentaires?\b/, 8],
       [/\bfinancements? structur/, 9],
       [/\bfinancements? syndiqu/, 9],
@@ -275,6 +365,9 @@ const FAMILIES = [
       [/\bprivate equity\b/, 9],
       [/\bprivate (?:debt|credit|assets|capital)\b/, 9],
       [/\bcapital ?-? ?investissement\b/, 9],
+      // « Real Estate Investment » chez un gerant : de l'investissement
+      // immobilier, jamais de la banque d'affaires. ERE et Schroders.
+      [/\breal estate investment\b|\binvestissement immobilier\b/, 8],
       [/\bcapital developpement\b/, 9],
       [/\bventure capital\b/, 9],
       [/\bgrowth (?:equity|capital)\b/, 9],
@@ -305,6 +398,12 @@ const FAMILIES = [
       [/\bgerant(?:e)? (?:de )?portefeuille\b/, 9],
       [/\bgestionnaire de portefeuille\b/, 9],
       [/\bportfolio (?:manager|management|analyst)\b/, 8],
+      // Le suivi du portefeuille d'investissement d'un assureur : « Investment
+      // Reporting Officer » (Scor), « Investissement Responsable » (CNP). Deux
+      // expressions qui nomment la GESTION, jamais le deal — a la difference
+      // d'« investment » seul, qui referait le fourre-tout M&A a l'envers.
+      [/\binvestment reporting\b|\breporting investissement\b/, 8],
+      [/\binvestissement responsable\b|\bresponsible investment\b/, 8],
       [/\bfund manager\b/, 9],
       [/\bassistant(?:e)? gerant\b/, 8],
       [/\bgestion (?:individuelle|conseillee)\b/, 8],
@@ -363,14 +462,17 @@ const FAMILIES = [
       [/\bprovisionnement\b/, 9],
       [/\btarification\b/, 7],
       [/\bpricing actuary\b/, 10],
+      // « Responsable Bilan » chez un assureur : c'est l'arrete des comptes
+      // techniques, pas un poste de direction. Sortait sans famille.
+      [/\bresponsable bilan\b/, 7],
       [/\bsolvabilite ?(?:2|ii)\b/, 9],
       [/\bsolvency ?(?:2|ii)\b/, 9],
       [/\breassurance\b/, 9],
       [/\bretrocession\b/, 9],
       [/\bsouscript/, 8],
       [/\bunderwrit/, 8],
-      [/\bsinistres?\b/, 8],
-      [/\bindemnisation\b/, 8],
+      // Sinistres et indemnisation sont sortis du perimetre le 04/09/2026 :
+      // le pre-filtre les ecarte, ces motifs ne peuvent plus se declencher.
       [/\biard\b/, 8],
       [/\bprevoyance\b/, 8],
       [/\bassurance vie\b/, 7],
@@ -395,6 +497,12 @@ const FAMILIES = [
     id: 'comptabilite-consolidation',
     label: 'Comptabilité & Consolidation',
     patterns: [
+      // La fiscalite nomme une DISCIPLINE, pas une chaine accidentelle : le
+      // catalogue porte deja « Comptabilite Fiscale » (Rothschild) et
+      // « reglementations fiscales » (CACIB). Le bon test n'est pas « combien
+      // aujourd'hui » mais « ce mot designera-t-il encore un metier dans six
+      // mois ».
+      [/\bfiscalist|\banalyste fiscal|\bfiscalite\b|\btax (?:analyst|manager|officer|specialist)\b/, 8],
       [/\bcomptab/, 7],
       [/\baccountant\b/, 7],
       [/\baccounting\b/, 7],
@@ -421,7 +529,9 @@ const FAMILIES = [
     patterns: [
       [/\bcontrole de gestion\b/, 9],
       [/\bcontroleur(?:se)? de gestion\b/, 9],
-      [/\bcontrolling\b/, 8],
+      // « non controlling interests » = interets minoritaires, du vocabulaire
+      // comptable standard. Ce n'est pas du controle de gestion.
+      [/(?<!\bnon[\s-])\bcontrolling\b/, 8],
       [/\bcontroller\b/, 8],
       [/\bfp&a\b/, 9],
       [/\bfinancial planning\b/, 9],
@@ -687,7 +797,35 @@ function classify(offer) {
   // qui plafonnent a 8.
   // Les motifs 'support' et 'hors-domaine' ne beneficient pas du garde-fou :
   // une offre de pharmacovigilance reste hors perimetre quoi qu'elle porte.
-  const exempte = PREFILTER_EXCEPTIONS.some((re) => re.test(title));
+  // Un titre qui nomme la DISTRIBUTION ne peut pas etre exempte, meme s'il
+  // contient « patrimoine » : c'est le nom du reseau, pas celui du metier.
+  const exempte =
+    PREFILTER_EXCEPTIONS.some((re) => re.test(title)) && !DISTRIBUTION_ASSURANCE.test(title);
+  // Le recouvrement de creances : traitement de dossier (§30). « Analyste
+  // Suivi et Pilotage Recouvrement » n'en est pas — il analyse et pilote.
+  // Le recouvrement se juge sur l'EMPLOYEUR, pas sur le titre. Chez un
+  // industriel c'est du credit management — relancer les clients, piloter le
+  // DSO — donc un poste de direction financiere. Chez une banque, un Big Four
+  // ou un assureur, c'est du recouvrement de creances : gestion de dossier.
+  //
+  // Rexel « Gestionnaire de Recouvrement » reste ; Societe Generale « Charge
+  // de Recouvrement » sort. Le titre est le meme, l'employeur tranche.
+  if (
+    RECOUVREMENT_DOSSIER.test(title) &&
+    !RECOUVREMENT_PILOTAGE.test(title) &&
+    structure !== 'entreprise'
+  ) {
+    return { status: 'rejected', reason: 'prefilter:traitement-dossier', structure, tags };
+  }
+
+  // Le systeme comme SUJET : « Business Analyst », « PMO », « Agile BA ».
+  // Le systeme comme OUTIL de la finance reste : « ERP Oracle / Finance »,
+  // « transformation SI/Finance », « PMO monnaie numerique de banque
+  // centrale ». C'est le test du §30 : qui est le sujet, qui est le decor.
+  if (TITRE_DE_SYSTEME.test(title) && !hasFinanceMarker(title)) {
+    return { status: 'rejected', reason: 'prefilter:systeme-information', structure, tags };
+  }
+
   if (!exempte) {
     for (const [re, reason] of PREFILTER) {
       if (!re.test(title)) continue;
@@ -715,6 +853,14 @@ function classify(offer) {
   // Coups de pouce structure : quand l'intitule est generique, l'employeur tranche.
   const byId = (id) => FAMILIES.find((f) => f.id === id);
 
+  // Le credit management d'un industriel : « Gestionnaire de Recouvrement »
+  // chez Rexel n'est pas un intitule generique, c'est le pilotage du poste
+  // client. Il se range en Controle de gestion & Tresorerie.
+  if (!winner && structure === 'entreprise' && /\brecouvrement\b/.test(title)) {
+    winner = byId('controle-gestion-tresorerie');
+    winnerScore = 6;
+  }
+
   // Chez un fonds, un intitule generique releve du capital-investissement.
   if ((!winner || winnerScore <= 4) && structure === 'fonds') {
     winner = byId('capital-investissement');
@@ -722,7 +868,36 @@ function classify(offer) {
   }
 
   // Chez une banque d'affaires, "Advisory" ou "Analyst" seuls, c'est du deal.
-  if (structure === 'banque-affaires' && (!winner || (winner.id === 'conseil-transformation' && winnerScore <= 4))) {
+  // ... mais SEULEMENT si le titre porte deja un indice de metier financier.
+  // Sans cette condition le coup de pouce servait de FILET : douze offres sur
+  // 78 n'avaient aucun vocabulaire de deal — « Product Owner e-banking »,
+  // « Junior AI Adoption », « Services Bancaires ». C'etait le fourre-tout du
+  // Conseil revenu sous un nom credible. Mieux vaut un fourre-tout honnete
+  // qu'un M&A faux.
+  // Quatre metiers que personne ne nommait, trouves dans le residu du
+  // 04/09/2026. On les NOMME plutot que de les rattraper par la structure :
+  // un coup de pouce d'employeur ferait rentrer avec eux tout ce qui traine.
+  if (!winner) {
+    if (/\bstructured product|\bproduits? structures?\b/.test(title)) {
+      winner = byId('marches-financiers');
+      winnerScore = 7;
+    } else if (/\breporting reglementaire|\breporting prudentiel|\bcorep\b|\bfinrep\b/.test(title)) {
+      winner = byId('risques-conformite');
+      winnerScore = 7;
+    } else if (/\bcharge d affaires internationa|\btrade finance\b|\bfinancement du commerce\b/.test(title)) {
+      // Le commerce international se finance : c'est du coverage, pas du M&A.
+      winner = byId('financements-coverage');
+      winnerScore = 7;
+    }
+  }
+
+  const INDICE_METIER_BA =
+    /\b(?:analyst|analyste|advisory|conseil|associate|banker|banquier|deal|transaction|corporate|finance|financier|financiere|investment|fusion|acquisition|lbo|valuation|due diligence|ecm|dcm|leveraged|restructuring|capital|equity|credit|debt|asset|gestion)\b/;
+  if (
+    structure === 'banque-affaires' &&
+    (!winner || (winner.id === 'conseil-transformation' && winnerScore <= 4)) &&
+    INDICE_METIER_BA.test(title)
+  ) {
     winner = byId('fusions-acquisitions');
     winnerScore = 5;
   }
@@ -730,7 +905,12 @@ function classify(offer) {
   // L'analyste financier generique. "Financial Analyst" ne dit pas le metier :
   // en entreprise c'est du controle de gestion, en banque ou en gestion c'est
   // de l'analyse de marche. L'employeur tranche, pas l'intitule.
-  const ANALYSTE_GENERIQUE = /\b(?:analyste financi(?:er|ere)|financial analyst|finance analyst|finance officer|analyste finance)\b/;
+  // « Charge d'etudes financieres » rejoint la liste : c'est un intitule
+  // standard du secteur, et il route DEJA selon la structure — chez un
+  // assureur il va au controle de gestion, chez un gerant a l'analyse de
+  // marche, chez un regulateur a l'analyse prudentielle. Une ligne suffit la
+  // ou trois familles en dur auraient fige un choix par employeur.
+  const ANALYSTE_GENERIQUE = /\b(?:analyste financi(?:er|ere)|financial analyst|finance analyst|finance officer|analyste finance|charge d etudes financieres|chargee d etudes financieres|etudes financieres)\b/;
   if (!winner && ANALYSTE_GENERIQUE.test(title)) {
     const versMarches = new Set(['bfi', 'banque-affaires', 'societe-gestion', 'fonds']);
     // Chez un regulateur ou une banque centrale, l'analyste financier fait de

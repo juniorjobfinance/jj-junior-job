@@ -61,11 +61,15 @@ const CAS = [
   ['Crédit Agricole Assurances', 'Actuaire - Responsable Gestion Financière', 'actuariat-assurance'],
   ['Swiss Life France', 'Gestionnaire Prestations Santé', 'actuariat-assurance'],
   ['Swiss Life France', 'Gestionnaire retraite collective', 'actuariat-assurance'],
-  ['Generali France', 'Technicien Operations Assurance', 'actuariat-assurance'],
+  ['Generali France', 'Technicien Operations Assurance', 'REJET'],
   ['Malakoff Humanis', 'Courtage Epargne', 'actuariat-assurance'],
   ['CMA CGM', 'Group Transfer Pricing Expert', 'controle-gestion-tresorerie'],
   ['Thales', 'Gestionnaire Financier des Contrats', 'controle-gestion-tresorerie'],
   ['Rexel', 'Gestionnaire de Recouvrement', 'controle-gestion-tresorerie'],
+  // Le meme titre, chez une banque : recouvrement de creances, donc dehors.
+  // Le titre ne suffit pas, l'employeur tranche (DECISIONS.md 30).
+  ['Société Générale', 'Chargé de Recouvrement', 'REJET'],
+  ['KPMG', 'Chargee de recouvrement', 'REJET'],
   ['BDO France', 'Responsable Administratif et Financier', 'controle-gestion-tresorerie'],
   ['Altarea', 'Analyste Finance Corporate', 'controle-gestion-tresorerie'],
   ['AEW', 'Analyste Fonds d’Investissement Immobiliers', 'capital-investissement'],
