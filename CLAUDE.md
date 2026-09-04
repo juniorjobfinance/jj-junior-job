@@ -215,7 +215,17 @@ dix minutes.
   périmètre, niveau, famille, maison, séniorité) peuvent toutes dire « ok »
   sur une offre que `isFinanceOfferFor` écarte ensuite. Pour juger de
   l'entrée, appeler `isFinanceOfferFor(emp, titre)` directement.
-- **Un instrument qu'on n'a pas éprouvé sur un cas connu ne mesure rien.**
+- **Une garde d'idempotence cherche la marque de l'état APRÈS changement,
+  jamais un mot présent dans les deux états.** Une garde posée sur `'tags',`
+  pour protéger un bloc qui contenait déjà `'familleId', 'structureId',
+  'tags',` a annoncé « déjà fait » sur un fichier intact, et le contrôle est
+  resté non modifié. **Trois fois dans la même séance** du 4 septembre 2026.
+  Le seul moyen de s'en apercevoir est de **vérifier que le fichier a
+  changé**, pas que la commande a réussi : comparer la longueur avant et
+  après, et le dire quand elle est identique. Un script de modification qui ne
+  sait pas dire s'il a modifié quelque chose ne vaut pas mieux qu'un contrôle
+  qu'on n'a jamais vu échouer.
+$1
   Le panneau de navigation renvoyait `CLS = 0` sur toutes les pages, y
   compris celle que Lighthouse notait à 0,317. Il a fallu **provoquer un
   décalage évident** — insérer un bloc de 400 px en tête de page — pour

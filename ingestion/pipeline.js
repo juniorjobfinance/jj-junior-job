@@ -4269,6 +4269,24 @@ function writeOutput(offers) {
       _expMax, _formuleSeniorite, _vetoJunior, _verdictSur,
       // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
       _voletCorrige,
+      // Valeurs DÉRIVÉES d'un champ déjà publié : familleId se recalcule
+      // depuis famille, structureId depuis sector, maisonReference depuis
+      // maison via maisons.txt. Les trois relations sont bijectives, mesuré
+      // le 04/09/2026. Les publier, c'est transporter deux fois la même
+      // information et se condamner à en maintenir deux versions — la page
+      // porte déjà la cicatrice d'une liste de familles dupliquée qui avait
+      // divergé. Poids retiré : 33 Ko bruts sur 692, soit 4,8 %.
+      //
+      // firstSeenAt, source et alsoOn ne sont PAS dans cette liste, et c'est
+      // délibéré. Ce sont des faits de COLLECTE, non reconstituables depuis
+      // le catalogue publié : firstSeenAt dit quand une offre est apparue,
+      // source par quelle plateforme elle est arrivée (l'employeur ne la
+      // détermine pas : 106 sources pour 200 employeurs), alsoOn quels autres
+      // connecteurs l'ont vue. offres.js étant commité chaque matin, git en
+      // garde toutes les versions : ces trois champs sont la matière d'un
+      // futur observatoire du recrutement junior en finance.
+      // Un champ pas encore utilisé n'est pas un champ mort.
+      familleId, structureId, maisonReference,
       ...rest
     } = o;
     // La mention de télétravail complet a déjà servi à la déduplication

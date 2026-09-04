@@ -724,3 +724,108 @@ seule question ouverte de son côté reste le TBT de 310 ms, qui attend la
 décision sur `offres.js`.
 
 Accessibilité : **91 → 96**, les trois défauts nommés étant corrigés.
+
+### PISTE ÉCARTÉE — le chargement paresseux de `offres.js`
+
+**Écartée le 04/09/2026. Ce n'est pas « à faire plus tard ».**
+
+L'idée : ne charger `offres.js` qu'au premier filtre, pour sortir du chemin
+critique la tâche longue de 358 ms que Lighthouse lui attribue.
+
+Le gain était réel et chiffré — calculateur des courbes Lighthouse 10, éprouvé
+sur les quatre passages connus à **1 point près** :
+
+| | aujourd'hui | après |
+|---|---:|---:|
+| TBT mobile | 310 ms | ~0 ms |
+| **mobile** | 88 | **95** |
+| **bureau** | 96 | **100** |
+
+**Et on ne le fait pas, pour trois raisons qui tiennent toutes seules.**
+
+1. **L'onglet mentirait.** Le HTML porte les 912 offres, tous volets confondus ;
+   l'onglet actif au chargement est « Stage », qui en compte 450. Aujourd'hui le
+   JS résorbe l'écart en ~200 ms. Sans lui, un visiteur qui ne filtre jamais
+   voit **912 offres sous un onglet qui en annonce 450**, un VIE et un CDI
+   compris, avec les compteurs et les menus lieu/entreprise vides. La seule
+   alternative — ne rendre que les 450 du volet — ferait retomber Google à
+   **49 % du catalogue**, ce qui défait le chantier du même jour.
+2. **Le coût ne disparaît pas, il se déplace.** Mesuré : le réveil coûte 25 ms
+   sur un bureau rapide, 358 ms sur le Moto G de Lighthouse. Le chargement
+   paresseux déplace ces ~350 ms **du chargement au premier clic**. Or une
+   latence au chargement est attendue ; une latence après un clic est perçue
+   comme une panne. Lighthouse ne le verrait jamais — il ne mesure que le
+   chargement — donc le score monterait pendant que la sensation se
+   dégraderait.
+3. **Le coût en code est diffus.** 24 écouteurs plus 18 cases posées en boucle,
+   tous à rendre asynchrones ; sept fonctions qui lisent le catalogue au
+   démarrage, dont `remplirSelect` qui **construit** les menus lieu et
+   entreprise ; et une branche à part pour le lien partagé, qui a besoin des
+   données immédiatement pour appliquer le filtre annoncé dans son adresse.
+
+**Si on rouvre cette piste, c'est en ayant répondu au point 1**, pas en voyant
+seulement le +7.
+
+### Pourquoi `firstSeenAt`, `source` et `alsoOn` restent
+
+Trois champs de `offres.js` ne sont lus par aucune ligne de la page. **Ils
+restent quand même**, et il ne faut pas les supprimer en les croyant inutiles.
+
+**La règle, et elle servira au-delà de ce cas : un champ dérivé se
+recalcule, un fait de collecte ne se retrouve pas.** `familleId` se déduit du
+libellé de la famille ; `source` et `alsoOn` n'existent nulle part ailleurs.
+Le critère n'est donc pas « est-ce utilisé ? » — un champ pas encore utilisé
+n'est pas un champ mort — mais « **est-ce reconstituable ?** ».
+
+`offres.js` est commité chaque matin : git en garde toutes les versions, le
+catalogue est donc déjà une série temporelle. Tout fait de collecte qu'il porte
+est archivé de fait.
+
+- **`firstSeenAt`** — quand JJ a vu l'offre pour la première fois. La seule
+  donnée temporelle que le projet produise, et la matière d'un éventuel
+  observatoire du recrutement junior en finance : qui recrute, quand, dans quel
+  métier.
+- **`source`** — la plateforme par laquelle l'offre a été collectée.
+  Mesuré : **106 sources distinctes pour 200 employeurs**, et l'employeur ne
+  détermine PAS la source — une maison peut être collectée par plusieurs
+  connecteurs. Ce n'est donc pas reconstituable depuis le catalogue publié.
+- **`alsoOn`** — les autres connecteurs qui ont vu la même offre, sur 167 des
+  912. Fait de collecte, non reconstituable.
+
+**Un champ pas encore utilisé n'est pas un champ mort.**
+
+### Élagage fait — trois champs dérivés retirés
+
+`familleId`, `structureId` et `maisonReference` sont partis. Mesuré avant de
+les retirer : les trois relations sont **bijectives** — 15 familles pour 15
+`familleId`, 11 secteurs pour 11 `structureId`, et `maison` détermine
+`maisonReference` via `maisons.txt`. Ils transportaient deux fois la même
+information, ce qui est exactement ce que la règle « ne jamais stocker une
+valeur dérivée » interdit.
+
+**Une réserve, à garder en tête le jour où une famille sera renommée.**
+Les identifiants retirés étaient stables là où les libellés ne le sont pas : si
+« Marchés financiers » devient autre chose, les catalogues archivés porteront
+l'ancien libellé et plus aucune clé pour les relier au nouveau. C'est
+reconstituable — le code de chaque jour est dans git, et la table des familles
+avec — mais c'est pénible. Y penser avant de renommer, pas après.
+
+$1
+
+| | avant | après |
+|---|---:|---:|
+| `offres.js` brut | 711,6 Ko | **601,0 Ko** (−15,5 %) |
+| `offres.js` compressé | 36,3 Ko | **35,1 Ko** (−3,1 %, soit 1,1 Ko) |
+
+**Le gain est du calcul, pas de la bande passante.** Les noms de champ répétés
+912 fois se compressent presque à zéro : sur le fil on économise 1,1 Ko. En
+revanche le navigateur analyse 15,5 % de texte en moins, ce qui devrait retirer
+**~56 ms** des 358 ms de tâche longue — une estimation proportionnelle, pas une
+mesure. Seul PageSpeed tranchera, et son quota est épuisé jusqu'à demain.
+
+Vérifié dans le navigateur sur le catalogue élagué : onglets (stage 450,
+cdi-cdd 331, alternance 83, vie 48), filtre famille, filtre structure (147, 55
+et 9 offres, conformes aux libellés), menus lieu (18), entreprise (68) et
+structure (12) toujours construits, et un lien partagé
+`?contrat=vie&familles=Marchés financiers&tri=entreprise` qui restaure bien
+l'onglet VIE, la case cochée, le tri et ses 3 offres. Les cinq suites au vert.

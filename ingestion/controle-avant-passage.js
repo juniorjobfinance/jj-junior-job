@@ -302,10 +302,11 @@ try {
     // Ce que la carte affiche
     'emp', 'title', 'sector', 'famille', 'volet', 'contrat', 'loc', 'zone',
     'place', 'url', 'sal', 'dl',
-    // Les identifiants stables sur lesquels la page filtre
-    'familleId', 'structureId', 'tags',
+    // Le seul identifiant stable qui reste : familleId, structureId et
+    // maisonReference etaient DERIVES de famille, sector et maison.
+    'tags',
     // Provenance et fraicheur
-    'maison', 'maisonReference', 'source', 'verifiedAt', 'postedAt',
+    'maison', 'source', 'verifiedAt', 'postedAt',
     'firstSeenAt', 'datePubFiable', 'dateMaj', 'alsoOn',
     // Mise en avant
     'pepite',
