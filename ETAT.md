@@ -556,11 +556,29 @@ pipeline lèverait au lieu de produire des cartes silencieusement fausses.
 |---|---:|---:|
 | socle `index.html` | 93,6 Ko | 25,1 Ko |
 | les 832 cartes (912 offres) | 664,6 Ko | 33,2 Ko |
-| **page complète** | **758,1 Ko** | **58,3 Ko** — ~69 Ko chez Vercel |
+| **page complète** | **758,9 Ko** | 58,4 Ko en local — **77,0 Ko servis par Vercel** |
 
-Avant : 29,4 Ko + 50 Ko de `offres.js`, et **rien ne s'affichait avant que les
-deux soient arrivés**. Après : ~119 Ko au total, mais le premier affichage
-n'attend que le HTML.
+Le brotli de Vercel est nettement moins agressif que celui de `zlib` en qualité
+11 : 77,0 Ko contre 58,4. La projection faite avant le déploiement annonçait
+69 Ko, elle était optimiste de 12 %. Le chiffre qui fait foi est celui mesuré
+sur le site, à la source.
+
+| | avant | après |
+|---|---:|---:|
+| `index.html` sur le fil | 29,4 Ko | **77,0 Ko** |
+| `offres.js` sur le fil | 50,0 Ko | 49,5 Ko |
+| **total** | **79,4 Ko** | **126,5 Ko** |
+| **chemin critique** | **79,4 Ko**, deux requêtes en série, bloquantes | **77,0 Ko**, le HTML seul |
+
+**Le gain n'est donc pas en octets : il est structurel.** Le total monte de
+59 %, et le chemin critique ne bouge pratiquement pas. Ce qui change, c'est que
+le contenu est peint avant qu'une ligne de JavaScript ne s'exécute, qu'il n'y a
+plus deux requêtes en série, et qu'aucun script bloquant ne peut plus être
+escamoté par Chrome sur connexion lente.
+
+**Mesuré sur le site déployé le 04/09/2026 :** Googlebot recevait
+**1 033 caractères** de texte visible et 3 cartes ; il en reçoit
+**143 860 et 835**.
 
 `document.write` a disparu au passage — c'était le vrai défaut, plus grave que
 le SEO : Chrome refuse d'exécuter un script ainsi injecté sur connexion lente,
