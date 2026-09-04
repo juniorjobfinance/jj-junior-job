@@ -184,16 +184,11 @@ function ecrireCatalogueHtml(offres, suffixe = '') {
   if (!BORNE_TEXTES.test(html)) {
     throw new Error('Les bornes JJ:TEXTES sont introuvables dans index.html.');
   }
-  // require differe : pages-familles.js nous require pour `chargerGabarit`.
-  // En tete de fichier, les deux modules se demanderaient leurs exports avant
-  // de les avoir remplis, et le second servi recevrait un objet vide.
-  const { slug } = require('./pages-familles');
   const textes = {};
   for (const [famille, t] of Object.entries(TEXTES)) {
     textes[famille] = {
       intro: t.intro || '',
       distinction: t.distinction || '',
-      url: '/familles/' + slug(famille) + '.html',
     };
   }
   // `</script>` dans un texte fermerait la balise et casserait la page ;
