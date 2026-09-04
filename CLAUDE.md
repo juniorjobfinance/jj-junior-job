@@ -215,7 +215,17 @@ dix minutes.
   périmètre, niveau, famille, maison, séniorité) peuvent toutes dire « ok »
   sur une offre que `isFinanceOfferFor` écarte ensuite. Pour juger de
   l'entrée, appeler `isFinanceOfferFor(emp, titre)` directement.
-- **L'alternance est SAISONNIÈRE.** Le contrat démarre en septembre, donc les
+- **Un instrument qu'on n'a pas éprouvé sur un cas connu ne mesure rien.**
+  Le panneau de navigation renvoyait `CLS = 0` sur toutes les pages, y
+  compris celle que Lighthouse notait à 0,317. Il a fallu **provoquer un
+  décalage évident** — insérer un bloc de 400 px en tête de page — pour
+  découvrir que l'observateur ne voyait rien du tout : ni entrée de peinture,
+  ni décalage, sur aucune origine. Sans ce test, une demi-séance de mesures
+  fausses concluait « ce n'est pas la police » alors qu'elle ne démontrait
+  rien, et le diagnostic était écrit dans `ETAT.md` comme une piste établie.
+  C'est le pendant exact de « un contrôle qu'on n'a jamais vu échouer n'est
+  pas vérifié » : avant de croire un zéro, faire dire non-zéro à l'appareil.
+$1 Le contrat démarre en septembre, donc les
   annonces se publient de février à juillet. Un catalogue d'alternance maigre
   relevé en septembre ou en octobre ne prouve rien — c'est le creux du cycle.
   Ne jamais durcir, assouplir ni « réparer » quoi que ce soit sur la foi d'un

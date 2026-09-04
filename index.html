@@ -637,15 +637,25 @@
   .pepites-gemme {
     width: 1.05em;
     height: 1.05em;
-    color: var(--accent);
+    color: var(--accent-fort);
     vertical-align: -0.15em;
     margin-right: 0.15em;
+  }
+  /* Visible pour les lecteurs d'écran, invisible à l'œil. « display: none »
+     ne conviendrait pas : il retire aussi le texte de l'arbre d'accessibilité. */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .pepites-titre {
     font-family: var(--font-ui);
     font-size: 1rem;
     letter-spacing: -0.01em;
-    color: var(--accent);
+    color: var(--accent-fort);
     font-weight: 700;
     letter-spacing: 0.01em;
   }
@@ -691,7 +701,7 @@
     color: var(--ink-soft);
     display: flex; gap: 0.5rem 0.9rem; flex-wrap: wrap;
   }
-  .pepite .pepite-cta { color: var(--accent); }
+  .pepite .pepite-cta { color: var(--accent-fort); }
   .pepites-points { display: flex; justify-content: center; gap: 0.35rem; margin-top: 0.7rem; }
   .pepites-points button {
     appearance: none;
@@ -1117,19 +1127,25 @@
      dans la colonne des offres, où il tombait sous les filtres sur mobile).
      Rempli par le script s'il y a des offres mises en avant ; masqué sinon. -->
 <div class="pepites-zone">
-  <div id="pepites" class="pepites" hidden>
+  <div id="pepites" class="pepites">
     <div class="pepites-tete">
       <span class="pepites-titre"><svg class="pepites-gemme" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l5 6-10 12L2 9z" fill="currentColor"/><path d="M7 3 2 9h20l-5-6z" fill="currentColor" opacity="0.5"/></svg> Les Pépites JJ</span>
       <span class="pepites-sous">Des offres qui sortent du lot, repérées pour vous</span>
-      <div class="pepites-nav" aria-hidden="true">
+      <div class="pepites-nav">
         <button type="button" class="pepite-prec" aria-label="Pépite précédente">‹</button>
         <button type="button" class="pepite-suiv" aria-label="Pépite suivante">›</button>
       </div>
     </div>
     <div class="pepites-fenetre">
-      <div class="pepites-piste" id="pepites-piste"></div>
+      <div class="pepites-piste" id="pepites-piste"><!--JJ:PEPITES:DEBUT-->
+<a class="pepite" href="https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Paris/Corporate-Development-Stage---Mars-2027----Paris--H-F-_JR1002088" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Fusions &amp; Acquisitions" data-umami-event-volet="stage"><div class="pepite-mention">Repérée par JJ</div><div class="pepite-titre">Corporate Development (Stratégie - M&amp;A)</div><div class="pepite-emp">Ardian</div><div class="pepite-meta"><span>Paris</span><span>Fusions &amp; Acquisitions</span><span class="pepite-cta">Voir l'annonce →</span></div></a>
+<a class="pepite" href="https://recrutement.bpce.fr/job/stage-6-mois-assistant-trader-f-h" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Marchés financiers" data-umami-event-volet="stage"><div class="pepite-mention">Repérée par JJ</div><div class="pepite-titre">Assistant Trader</div><div class="pepite-emp">Natixis</div><div class="pepite-meta"><span>Paris</span><span>Marchés financiers</span><span class="pepite-cta">Voir l'annonce →</span></div></a>
+<a class="pepite" href="https://eurazeo.csod.com/ux/ats/careersite/1/home/requisition/196?c=eurazeo" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Capital-investissement" data-umami-event-volet="stage"><div class="pepite-mention">Repérée par JJ</div><div class="pepite-titre">Venture Digital</div><div class="pepite-emp">Eurazeo</div><div class="pepite-meta"><span>Paris</span><span>Capital-investissement</span><span class="pepite-cta">Voir l'annonce →</span></div></a>
+<a class="pepite" href="https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/LazardProfessionalCareers/job/6483" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Fusions &amp; Acquisitions" data-umami-event-volet="stage"><div class="pepite-mention">Repérée par JJ</div><div class="pepite-titre">M&amp;A - Generalist team</div><div class="pepite-emp">Lazard</div><div class="pepite-meta"><span>Paris</span><span>Fusions &amp; Acquisitions</span><span class="pepite-cta">Voir l'annonce →</span></div></a>
+<a class="pepite" href="https://search.jobs.barclays/job/paris/sales-trading-and-structuring-off-cycle-internship-programme-2027-paris/13015/100128639600" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Marchés financiers" data-umami-event-volet="stage"><div class="pepite-mention">Repérée par JJ</div><div class="pepite-titre">Sales, Trading and Structuring Off Cycle Programme Paris</div><div class="pepite-emp">Barclays</div><div class="pepite-meta"><span>Paris</span><span>Marchés financiers</span><span class="pepite-cta">Voir l'annonce →</span></div></a>
+<!--JJ:PEPITES:FIN--></div>
     </div>
-    <div class="pepites-points" id="pepites-points" aria-hidden="true"></div>
+    <div class="pepites-points" id="pepites-points" aria-label="Choisir une pépite"><!--JJ:POINTS:DEBUT--><button type="button" data-i="0" aria-label="Pépite 1" aria-current="true"></button><button type="button" data-i="1" aria-label="Pépite 2"></button><button type="button" data-i="2" aria-label="Pépite 3"></button><button type="button" data-i="3" aria-label="Pépite 4"></button><button type="button" data-i="4" aria-label="Pépite 5"></button><!--JJ:POINTS:FIN--></div>
   </div>
 </div>
 
@@ -1198,6 +1214,7 @@
         <span class="results-count" id="results-count"></span>
       </div>
     </div>
+    <h2 class="sr-only">Résultats</h2>
     <div class="cards" id="cards"><!--JJ:OFFRES:DEBUT-->
 <a class="card" href="https://job-boards.greenhouse.io/sesamm/jobs/6116608004" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Gestion d'actifs" data-umami-event-volet="alternance"><span class="contrat alternance">Alternance</span><h3>Growth &amp; Sales Analyst - ESG Solutions - Apprenticeship</h3><div class="emp">Sesamm</div><div class="meta"><span class="tag-famille">Gestion d'actifs</span><span class="tag-struct" title="Fintech &amp; services financiers spécialisés">Fintech &amp; services financiers spécialisés</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://n26.com/en-eu/careers/positions/8141767?gh_jid=8141767" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Opérations &amp; Middle-office" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Banking Operations - OCC FR Specialist (Part-time)</h3><div class="emp">N26</div><div class="meta"><span class="tag-famille">Opérations &amp; Middle-office</span><span class="tag-struct" title="Banque de détail">Banque de détail</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
@@ -2689,6 +2706,39 @@
 
   var etatNouveauteUtile = true;
 
+  // Le rendu d'une pépite, et celui des points du carrousel. Extraits ici
+  // pour que le pipeline les écrive dans le HTML sans recopier le gabarit :
+  // la page et le pipeline appellent la même fonction.
+  function pepiteHTML(o) {
+    var lieu = o.loc && !/non précisé/i.test(o.loc) ? o.loc : (o.place && o.place !== 'France' ? o.place : '');
+    // La maison n'est reprise que si elle dit autre chose que l'employeur :
+    // « Crédit Agricole » sous « Crédit Agricole CIB » situe l'entité, mais
+    // « Lazard » sous « Lazard » écrivait deux fois le même mot.
+    var bits = [];
+    if (o.maison && o.maison !== o.emp) bits.push(esc(o.maison));
+    if (lieu) bits.push(esc(lieu));
+    bits.push(esc(o.famille));
+    return (
+      '<a class="pepite" href="' + esc(o.url) + '" target="_blank" rel="noopener"' + mesureClic(o) + '>' +
+        '<div class="pepite-mention">Repérée par JJ</div>' +
+        '<div class="pepite-titre">' + esc(o.title) + '</div>' +
+        '<div class="pepite-emp">' + esc(o.emp) + '</div>' +
+        '<div class="pepite-meta">' + bits.map(function (b) { return '<span>' + b + '</span>'; }).join('') +
+          '<span class="pepite-cta">Voir l\'annonce →</span>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  function pepitePointsHTML(nb) {
+    var s = '';
+    for (var i = 0; i < nb; i++) {
+      s += '<button type="button" data-i="' + i + '" aria-label="Pépite ' + (i + 1) +
+        '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>';
+    }
+    return s;
+  }
+
   // ==== JJ:GABARIT:FIN ====================================================
   // ---- Pépites JJ : carrousel du haut -------------------------------------
   var pepiteIndex = 0;
@@ -2708,30 +2758,8 @@
     if (!pepitesCourantes.length) { bandeau.hidden = true; if (pepiteTimer) clearInterval(pepiteTimer); return; }
     bandeau.hidden = false;
 
-    piste.innerHTML = pepitesCourantes.map(function (o) {
-      var lieu = o.loc && !/non précisé/i.test(o.loc) ? o.loc : (o.place && o.place !== 'France' ? o.place : '');
-      // La maison n'est reprise que si elle dit autre chose que l'employeur :
-      // « Crédit Agricole » sous « Crédit Agricole CIB » situe l'entité, mais
-      // « Lazard » sous « Lazard » écrivait deux fois le même mot.
-      var bits = [];
-      if (o.maison && o.maison !== o.emp) bits.push(esc(o.maison));
-      if (lieu) bits.push(esc(lieu));
-      bits.push(esc(o.famille));
-      return (
-        '<a class="pepite" href="' + esc(o.url) + '" target="_blank" rel="noopener"' + mesureClic(o) + '>' +
-          '<div class="pepite-mention">Repérée par JJ</div>' +
-          '<div class="pepite-titre">' + esc(o.title) + '</div>' +
-          '<div class="pepite-emp">' + esc(o.emp) + '</div>' +
-          '<div class="pepite-meta">' + bits.map(function (b) { return '<span>' + b + '</span>'; }).join('') +
-            '<span class="pepite-cta">Voir l\'annonce →</span>' +
-          '</div>' +
-        '</a>'
-      );
-    }).join('');
-
-    points.innerHTML = pepitesCourantes.map(function (_, i) {
-      return '<button type="button" data-i="' + i + '"' + (i === 0 ? ' aria-current="true"' : '') + '></button>';
-    }).join('');
+    piste.innerHTML = pepitesCourantes.map(pepiteHTML).join('');
+    points.innerHTML = pepitePointsHTML(pepitesCourantes.length);
 
     pepiteIndex = 0;
     montrerPepite(0);

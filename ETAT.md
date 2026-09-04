@@ -615,3 +615,80 @@ identique **bloqué**, bornes disparues **bloquées**.
 `offres.js`, `offres.xml` et `sitemap.xml` : sans cela le site servirait le
 HTML de la veille pendant que le JSON se met à jour, et c'est le périmé que
 Google lirait.
+
+### PageSpeed Insights — 04/09/2026, après le passage au HTML
+
+Lighthouse 13.4.1. Mobile : Moto G Power émulé, 4G lente, processeur bridé
+1,2×. Bureau : émulation ordinateur, limitation personnalisée.
+
+| | mobile | bureau |
+|---|---:|---:|
+| **Performances** | **88** | **84** |
+| Accessibilité | 91 | 91 |
+| Bonnes pratiques | **100** | 100 |
+| SEO | **100** | 100 |
+| First Contentful Paint | 1,9 s | 0,4 s |
+| Largest Contentful Paint | 2,3 s | 0,5 s |
+| Total Blocking Time | 310 ms | 0 ms |
+| **Cumulative Layout Shift** | **0** | **0,317** |
+| Speed Index | 4,0 s | 0,6 s |
+
+CrUX ne rend rien : pas assez de trafic pour que Google agrège des données de
+vrais visiteurs. Le laboratoire est donc le seul chiffre disponible.
+
+**Ce qui coûte des points sans gêner personne** — la minification du JS (10 Kio
+annoncés) et du CSS (2 Kio) : sur une page servie en brotli le gain réel est une
+fraction de ça, et le prix serait une étape de construction ou un `index.html`
+illisible, contre la règle du dépôt. « Optimiser la taille du DOM » sanctionne
+les 832 cartes, c'est-à-dire le choix qu'on vient de faire exprès.
+
+**Ce qui gêne réellement, même sans coûter de points :**
+
+1. **CLS 0,317 sur bureau** — la page bougeait sous les yeux au premier
+   chargement. Seule métrique en zone rouge, et **la totalité** de l'écart
+   entre le 84 du bureau et le ~100 que le reste mérite : FCP 0,4 s,
+   LCP 0,5 s, TBT 0 ms.
+
+   **Cause retenue : le bandeau des Pépites**, 558 px de haut à 302 px du
+   sommet, écrit avec `hidden` dans le HTML puis dévoilé par le JS — donc
+   après le premier affichage sur bureau, où le FCP tombe à 0,4 s. Sur mobile
+   le FCP est à 1,9 s : tout arrive avant, et le CLS y est de 0.
+
+   **La piste « font-display: swap sur Manrope » n'a jamais été établie**, et
+   il ne faut pas la ressortir : elle a été écrite ici comme « la plus
+   crédible » sur la foi de mesures qui ne mesuraient rien.
+
+   Corrigé le 04/09 : le pipeline écrit le bandeau comme il écrit les cartes.
+   Vérifié en retardant `offres.js` de 3 s — le HTML de la piste est
+   **identique au caractère près** avant et après l'exécution du JS, et la
+   hauteur du bandeau ne change pas. Cinq offres mises en avant deviennent au
+   passage lisibles par Google.
+2. **Total Blocking Time 310 ms sur mobile**, dont une tâche longue de 358 ms
+   attribuée à `offres.js`. Le contenu est peint — c'est le gain du chantier —
+   mais pendant un tiers de seconde sur un téléphone d'entrée de gamme, taper
+   dans la recherche ou changer d'onglet ne répond pas. C'est exactement la
+   piste notée plus haut : ne charger `offres.js` qu'au premier filtre.
+3. **Speed Index 4,0 s sur mobile** contre un LCP de 2,3 s : la page continue
+   de se peindre bien après le premier contenu utile. 832 cartes à dessiner.
+
+### Accessibilité — les trois défauts corrigés le 04/09/2026
+
+| | avant | après |
+|---|---|---|
+| `.pepites-titre` | 3,22 | **4,69** |
+| `.pepite-cta` | 3,22 | **4,69** |
+
+Aucune couleur inventée : `--accent-fort` (#c2410c) était **déjà dans la
+palette** et déjà utilisé par `.pepite-emp`, juste à côté. Le titre et le nom
+de l'employeur partagent désormais le même orange.
+
+`aria-hidden="true"` retiré de `.pepites-nav` et de `#pepites-points` : les
+deux masquaient aux lecteurs d'écran des boutons qui restaient dans l'ordre de
+tabulation — une personne au clavier atteignait un bouton dont son lecteur ne
+disait rien. Les points du carrousel, qui n'avaient aucun nom, s'annoncent
+maintenant « Pépite 1 » à « Pépite 5 ».
+
+Enchaînement des titres : il sautait de `H1 Offres` aux `H3` des cartes. Un
+`<h2 class="sr-only">Résultats</h2>` comble le trou — invisible à l'œil
+(1 × 1 px), lu par les lecteurs d'écran. Le gabarit des cartes n'est pas touché :
+il est partagé avec le pipeline.

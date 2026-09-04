@@ -490,7 +490,8 @@ try {
 
     // Ce que le HTML DEVRAIT contenir, calcule avec le vrai gabarit — jamais
     // une reimplementation du regroupement.
-    const { chargerGabarit, rendreCartes } = require('./ecrire-catalogue-html.js');
+    const { chargerGabarit, rendreCartes, rendrePepites, voletParDefaut } =
+  require('./ecrire-catalogue-html.js');
     const gabarit = chargerGabarit(html);
     const attendus = gabarit.grouperParAnnonce(catalogue).length;
 
@@ -527,6 +528,35 @@ try {
         'relancer le pipeline avant de publier');
     } else {
       ok('catalogue HTML', 'identique a ce que le gabarit produit pour ce catalogue');
+    }
+
+    // Le bandeau des Pepites, meme methode : on regenere et on compare.
+    // Il est ecrit dans le HTML depuis le 04/09 — auparavant il etait cache
+    // puis devoile par le JS, ce qui decalait toute la page apres le premier
+    // affichage.
+    const bp = html.match(/<!--JJ:PEPITES:DEBUT-->([\s\S]*?)<!--JJ:PEPITES:FIN-->/);
+    const bpts = html.match(/<!--JJ:POINTS:DEBUT-->([\s\S]*?)<!--JJ:POINTS:FIN-->/);
+    if (!bp || !bpts) {
+      ko('bandeau pépites', 'les bornes JJ:PEPITES ou JJ:POINTS ont disparu d index.html');
+    } else {
+      const attenduP = rendrePepites(catalogue, gabarit, voletParDefaut(html));
+      const cache = /<div id="pepites" class="pepites" hidden>/.test(html);
+      if (bp[1] !== attenduP.piste || bpts[1] !== attenduP.points) {
+        ko('bandeau pépites',
+          `le bandeau ne correspond pas au catalogue (${bp[1].length} caracteres ` +
+          `contre ${attenduP.piste.length} attendus) — relancer le pipeline`);
+      } else if (attenduP.nombre && cache) {
+        ko('bandeau pépites',
+          `${attenduP.nombre} pepite(s) ecrite(s) mais le bandeau porte « hidden » : ` +
+          'elles seraient invisibles, et le JS les devoilerait apres coup');
+      } else if (!attenduP.nombre && !cache) {
+        ko('bandeau pépites',
+          'aucune pepite mais le bandeau est visible : il occuperait 558 px de vide');
+      } else {
+        ok('bandeau pépites', attenduP.nombre
+          ? `${attenduP.nombre} pepite(s) dans le HTML, bandeau visible`
+          : 'aucune pepite pour ce volet, bandeau masque — normal');
+      }
     }
   }
 } catch (e) {

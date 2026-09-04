@@ -26,6 +26,9 @@ const path = require('path');
 
 const BORNE_GABARIT = /\/\/ ==== JJ:GABARIT:DEBUT[\s\S]*?\/\/ ==== JJ:GABARIT:FIN/;
 const BORNE_OFFRES = /(<!--JJ:OFFRES:DEBUT-->)[\s\S]*?(<!--JJ:OFFRES:FIN-->)/;
+const BORNE_PEPITES = /(<!--JJ:PEPITES:DEBUT-->)[\s\S]*?(<!--JJ:PEPITES:FIN-->)/;
+const BORNE_POINTS = /(<!--JJ:POINTS:DEBUT-->)[\s\S]*?(<!--JJ:POINTS:FIN-->)/;
+const BANDEAU = /<div id="pepites" class="pepites"( hidden)?>/;
 
 // La plage découpée contient, au premier niveau, la construction de « els » —
 // des document.getElementById. On fournit donc un DOM inerte, le temps de
@@ -81,7 +84,8 @@ function chargerGabarit(htmlSource) {
     AIDES + m[0] + `
     __domVerrouille = true;
     return { grouperParAnnonce: grouperParAnnonce, cardHTML: cardHTML,
-             cardGroupeHTML: cardGroupeHTML, cleAnnonce: cleAnnonce };`
+             cardGroupeHTML: cardGroupeHTML, cleAnnonce: cleAnnonce,
+             pepiteHTML: pepiteHTML, pepitePointsHTML: pepitePointsHTML };`
   );
   return fabrique();
 }
@@ -109,6 +113,30 @@ function rendreCartes(offres, gabarit) {
   return { html: '\n' + cartes.join('\n') + '\n', groupes: groupes.length };
 }
 
+// Le bandeau des Pépites était écrit avec `hidden` puis dévoilé par le JS.
+// 558 px de haut à 302 px du sommet, révélés APRÈS le premier affichage : tout
+// ce qui suit sautait d'un coup. C'est le candidat au CLS de 0,317 que
+// Lighthouse mesure sur bureau, et les cinq offres mises en avant étaient au
+// passage invisibles pour Google.
+//
+// Le volet retenu n'est pas écrit en dur : on le lit dans `state` — la page
+// affiche ce volet-là au premier rendu, et le HTML doit dire la même chose,
+// sinon on remplace un décalage par un autre.
+function voletParDefaut(htmlSource) {
+  const m = htmlSource.match(/var state = \{[\s\S]{0,200}?volet:\s*'([a-z-]+)'/);
+  if (!m) throw new Error("Le volet par defaut est introuvable dans index.html : on n'ecrit pas de pepites plutot que d'en deviner.");
+  return m[1];
+}
+
+function rendrePepites(offres, gabarit, volet) {
+  const pepites = offres.filter((o) => o.volet === volet && o.pepite);
+  return {
+    piste: pepites.length ? '\n' + pepites.map((o) => gabarit.pepiteHTML(o)).join('\n') + '\n' : '',
+    points: pepites.length ? gabarit.pepitePointsHTML(pepites.length) : '',
+    nombre: pepites.length,
+  };
+}
+
 /**
  * Ecrit les cartes entre les bornes d'index.html.
  * @param {Array} offres  le catalogue publie
@@ -132,15 +160,30 @@ function ecrireCatalogueHtml(offres, suffixe = '') {
   }
   // Une fonction, jamais une chaine : un `$&` ou un `$\'` dans un intitule
   // d offre dupliquerait le fichier. C est arrive.
-  const sortie = html.replace(BORNE_OFFRES, (_, ouvre, ferme) => ouvre + cartes + ferme);
+  let sortie = html.replace(BORNE_OFFRES, (_, ouvre, ferme) => ouvre + cartes + ferme);
+
+  // --- Le bandeau des Pepites ------------------------------------------
+  if (!BORNE_PEPITES.test(html) || !BORNE_POINTS.test(html) || !BANDEAU.test(html)) {
+    throw new Error('Les bornes JJ:PEPITES / JJ:POINTS ou le bandeau sont introuvables dans index.html.');
+  }
+  const p = rendrePepites(offres, gabarit, voletParDefaut(html));
+  sortie = sortie
+    .replace(BORNE_PEPITES, (_, a, b) => a + p.piste + b)
+    .replace(BORNE_POINTS, (_, a, b) => a + p.points + b)
+    // Aucune pepite dans ce volet : le bandeau reste cache, comme le faisait la
+    // page. On remet `hidden` plutot que de laisser un cadre vide de 558 px.
+    .replace(BANDEAU, () => p.nombre
+      ? '<div id="pepites" class="pepites">'
+      : '<div id="pepites" class="pepites" hidden>');
 
   fs.writeFileSync(cible, sortie);
   return {
     groupes,
     offres: offres.length,
+    pepites: p.nombre,
     octets: Buffer.byteLength(cartes, 'utf8'),
     fichier: path.relative(racine, cible),
   };
 }
 
-module.exports = { ecrireCatalogueHtml, chargerGabarit, rendreCartes };
+module.exports = { ecrireCatalogueHtml, chargerGabarit, rendreCartes, rendrePepites, voletParDefaut };
