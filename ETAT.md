@@ -692,3 +692,35 @@ Enchaînement des titres : il sautait de `H1 Offres` aux `H3` des cartes. Un
 `<h2 class="sr-only">Résultats</h2>` comble le trou — invisible à l'œil
 (1 × 1 px), lu par les lecteurs d'écran. Le gabarit des cartes n'est pas touché :
 il est partagé avec le pipeline.
+
+### La preuve par le résultat — 04/09/2026, 15h08
+
+Après avoir fait écrire le bandeau des Pépites par le pipeline, **bureau** :
+
+| | avant | après |
+|---|---:|---:|
+| **Performances** | 84 | **98** puis **96** (deux passages) |
+| **Cumulative Layout Shift** | **0,317** | **0,035** puis **0,028** |
+| Accessibilité | 91 | **96** |
+| First Contentful Paint | 0,4 s | 0,4 – 0,7 s |
+| Largest Contentful Paint | 0,5 s | 0,5 – 0,8 s |
+| Total Blocking Time | 0 ms | 40 – 170 ms |
+| Speed Index | 0,6 s | 0,7 – 1,3 s |
+| Bonnes pratiques / SEO | 100 / 100 | 100 / 100 |
+
+**Le CLS tombe de 0,317 à 0,03**, soit d'une zone rouge (> 0,25) au vert
+(< 0,1). Le diagnostic est confirmé par le résultat : c'était bien le bandeau,
+et jamais la police.
+
+Les autres métriques bougent un peu — la page est plus lourde de cinq pépites
+écrites en dur — mais toutes restent au vert, et le TBT reste sous les 200 ms.
+L'écart entre les deux passages est la variabilité normale de Lighthouse.
+
+**Le mobile n'a pas pu être mesuré** : l'API publique répond 429 (quota
+anonyme épuisé pour la journée) et l'interface a échoué côté Google —
+`THROTTLED_TASK_LIMIT`, « too many render requests ». À reprendre demain. Le
+mobile était déjà à CLS 0 et n'avait donc rien à gagner de ce correctif ; la
+seule question ouverte de son côté reste le TBT de 310 ms, qui attend la
+décision sur `offres.js`.
+
+Accessibilité : **91 → 96**, les trois défauts nommés étant corrigés.
