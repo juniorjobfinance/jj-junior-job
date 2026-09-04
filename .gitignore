@@ -39,3 +39,6 @@ eyjob.html
 # et polluent chaque passage avec une suppression non commitee.
 data/brut-*.json
 data/brut-*.json.gz
+
+# Le corps de l issue « Maisons a inscrire » : regenere a chaque passage.
+data/maisons-a-inscrire.md
