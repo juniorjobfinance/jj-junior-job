@@ -957,3 +957,19 @@ la première divergence.
 plutôt que par démonstration. La leçon secondaire vaut aussi : **ne jamais
 canaliser dans `head` un script qui restaure quelque chose.** Il ne meurt pas
 proprement, il meurt au milieu.
+
+### Une tension notee, pas encore un chantier : le libelle « banque-affaires »
+
+Indosuez Wealth Management est inscrite en `banque-affaires` le 04/09/2026.
+C'est le moins faux des onze choix disponibles, pas le juste : le libelle de
+cette structure dit **« Banque d'affaires independante »**, ce qu'une filiale
+de Credit Agricole n'est pas.
+
+On n'ajoute PAS de douzieme structure pour autant. L'axe metier porte deja
+« Banque privee & Patrimoine », et c'est la que ces offres atterrissent quel
+que soit l'employeur. Deux axes, chacun son travail : le metier se lit dans
+le titre, la structure se lit dans la maison.
+
+**A revoir le jour ou trois ou quatre maisons se retrouveront dans ce cas** —
+une banque privee filiale d'un grand groupe. Pour une seule, le libelle
+imparfait coute moins cher qu'une structure de plus.

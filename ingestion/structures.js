@@ -25,6 +25,41 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  // --- Ecartees faute de structure, inscrites le 04/09/2026 --------------
+  // 37 offres rejetees par « gate:publication-sans-structure », dont les 37
+  // etaient deja classables par leur seul intitule : ce n'etaient pas des
+  // rejets de perimetre, c'etaient des maisons absentes de cette table.
+  //
+  // L'axe STRUCTURE decrit l'EMPLOYEUR, jamais l'offre. Akur8 est inscrite en
+  // fintech — editeur de logiciel de tarification qui vend aux assureurs —
+  // et non en assurance, bien que son unique offre soit « Senior Life
+  // Actuary ». Laisser une offre decider de la nature de sa maison inverserait
+  // le principe des deux axes : le metier se lit dans le titre, la structure
+  // se lit dans la maison.
+  'accenture': 'conseil',
+  'adeo': 'entreprise',
+  'aema groupe': 'assurance',
+  'air liquide': 'entreprise',
+  'akur8': 'fintech',
+  'amf': 'institution',
+  'bforbank': 'banque-detail',
+  // Filiale de services immobiliers du groupe BPCE, pas un etablissement de
+  // credit : DECISIONS.md §30 tranche sur l'employeur, pas sur l'actionnaire.
+  'bpce solutions immobilieres': 'entreprise',
+  'givenchy': 'entreprise',
+  'idia capital investissement': 'fonds',
+  // Banque privee du groupe Credit Agricole. « banque-affaires » est le moins
+  // faux, pas le juste : son libelle dit « independante », ce qu'Indosuez
+  // n'est pas. Tension notee dans ETAT.md — a revoir si trois ou quatre
+  // maisons se retrouvent dans ce cas, pas pour une seule.
+  'indosuez wealth management': 'banque-affaires',
+  'intesa sanpaolo': 'bfi',
+  'morgan stanley': 'bfi',
+  'reden solar': 'entreprise',
+  'swile': 'fintech',
+  'teora': 'assurance',
+  'trustpair': 'fintech',
+
   // --- Ecartes faute de structure le 04/09/2026 --------------------------
   // 34 offres perdues chez des maisons souvent DEJA dans maisons.txt : le
   // paragraphe 24, deux tables et deux portes. Inscrire ici ne fait entrer
