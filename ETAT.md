@@ -498,3 +498,44 @@ plutôt qu'une sortie.
 
 **C'est le plus gros gisement après les nouveaux employeurs**, et le seul qui
 ne se règle pas en ajoutant du vocabulaire.
+
+### Le plafond structurel du chantier « lire la description »
+
+**Mesuré le 04/09/2026, avant d'écrire une ligne.**
+
+Le résidu sans famille sur structures financières compte **184 offres** par
+passage. Leur description n'est pas acquise :
+
+| | offres |
+|---|---:|
+| description présente dans le brut du connecteur | 60 (33 %) |
+| récupérées en allant lire la fiche | +101 |
+| **couverture atteignable** | **161 / 184 — 88 %** |
+| **aveugles quoi qu'on fasse** | **23 (12 %)** |
+
+Les 23 n'ont ni JSON-LD ni corps de page exploitable. **Ce n'est pas un réglage,
+c'est un plafond** : le second passage doit les laisser sortir proprement — pas
+planter, pas deviner, pas les compter comme un échec du classement.
+
+Le rattrapage ciblé — le résidu des structures financières seulement, jamais
+les 6 800 offres collectées — **coûte 34 secondes**, délais par hôte compris
+(3 000 ms chez `groupecreditagricole.jobs`, 1 500 ms chez `group.bnpparibas`).
+C'est mesuré en conditions réelles : la même mesure sans les délais annonçait
+17 secondes, un chiffre qu'on n'aurait jamais retrouvé en production.
+
+**Et un second plafond, plus dur que le premier.** Sur les descriptions
+disponibles, les motifs de familles ne désignent pas un gagnant net :
+
+- une description fait **4 093 caractères en médiane contre 34 pour un
+  intitulé** — un rapport de 120, pas de 1 000 ;
+- en ne comptant que les motifs de poids ≥ 8, **2,4 familles** marquent en
+  moyenne, et **21 offres sur 60 ont une égalité en tête** ;
+- en montant à ≥ 9, le bruit tombe mais **33 offres sur 60 ne marquent plus
+  rien du tout**.
+
+Autrement dit : la règle « le score le plus haut gagne, l'ordre de déclaration
+départage » — qui fonctionne sur un intitulé — ferait trancher **un tiers des
+cas par l'ordre de déclaration** sur une description. Le second passage devra
+donc exiger un **écart strict** entre le premier et le second, et s'abstenir
+sinon. S'abstenir est le comportement correct : l'offre retourne au résidu, qui
+est compté au journal.
