@@ -353,6 +353,32 @@ try {
             `          writeOutput (ingestion/pipeline.js).`
         );
       }
+
+      // Une offre PUBLIEE sans structure est invisible dans le filtre du site :
+      // elle existe et personne ne peut la trouver. C'est pire qu'une offre
+      // absente, donc c'est un ECHEC au meme titre qu'un champ hors liste.
+      //
+      // Le controle « deux tables » ne l'attrape pas : il regarde les
+      // employeurs VUS a la collecte. Le VIE contourne la maison de reference,
+      // donc un employeur inconnu publie quand meme — KONI France est passee
+      // par la le 04/09/2026, et les deux tables etaient vertes.
+      const muettes = offres.filter((o) => !o.sector);
+      if (muettes.length) {
+        fautifs++;
+        ko(
+          f,
+          `${muettes.length} offre(s) publiee(s) SANS structure — invisibles dans le\n` +
+            `          filtre du site : elles existent et personne ne peut les trouver.\n\n` +
+            muettes
+              .slice(0, 10)
+              .map((o) => `            ${String(o.emp).slice(0, 26)} — ${String(o.title).slice(0, 42)}`)
+              .join('\n') +
+            (muettes.length > 10 ? `\n            … et ${muettes.length - 10} autre(s)` : '') +
+            `\n\n          A inscrire dans ingestion/structures.js, table EMPLOYER_STRUCTURE.`
+        );
+      } else {
+        ok(f, 'toutes les offres publiees portent une structure');
+      }
     }
     if (!fautifs && fichiers.length > 1) {
       console.log('        les ' + fichiers.length + ' catalogues respectent la meme liste.');

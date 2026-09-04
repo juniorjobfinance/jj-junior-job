@@ -25,6 +25,39 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  // --- Ecartes faute de structure le 04/09/2026 --------------------------
+  // 34 offres perdues chez des maisons souvent DEJA dans maisons.txt : le
+  // paragraphe 24, deux tables et deux portes. Inscrire ici ne fait entrer
+  // aucune mauvaise offre — elle passe a la porte suivante, qui exige un
+  // marqueur finance dans l'intitule.
+  'agicap': 'fintech',
+  'air france': 'entreprise',
+  'alptis': 'assurance',
+  'bpce achats & services': 'banque-detail',
+  'bpce factor': 'fintech',
+  'bpce lease': 'fintech',
+  'beiersdorf': 'entreprise',
+  'caisse de depot et placement du quebec': 'fonds',
+  'capitole finance': 'fintech',
+  'compass lexecon': 'conseil',
+  'ecm technologies': 'entreprise',
+  'evercore': 'banque-affaires',
+  'groupe voltaire': 'entreprise',
+  'icape': 'entreprise',
+  'lucca': 'entreprise',
+  'merck': 'entreprise',
+  'michelin': 'entreprise',
+  'morningstar': 'fintech',
+  'on train': 'entreprise',
+  'rail logistics': 'entreprise',
+  'servier': 'entreprise',
+  'sesamm': 'fintech',
+  'shine': 'fintech',
+  'societe des brasseries': 'entreprise',
+  'sodexo': 'entreprise',
+  'verspieren': 'assurance',
+  'yousign': 'fintech',
+  'koni': 'entreprise',
   // --- Vues a la collecte du 03/09/2026, sans structure -------------------
   'sar': 'entreprise',
   'vf haute provence': 'entreprise',

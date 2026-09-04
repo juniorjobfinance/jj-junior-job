@@ -289,3 +289,7 @@ AEW                      | ^aew\b
 Jefferies                | ^jefferies
 Mutuelle Saint-Christophe | mutuelle saint.?christophe
 Ensemble Protection Sociale | ensemble protection sociale
+
+# Publiee en VIE sans etre une maison : le VIE contourne la liste. Elle est
+# inscrite ici pour que les deux tables disent la meme chose (paragraphe 24).
+KONI                     | ^koni
