@@ -794,3 +794,50 @@ Ce qui signale ne doit pas pour autant s'évaporer : une issue distincte,
 commentée quand la liste change, refermée quand elle est vide. Un signal sans
 destinataire est un signal perdu, et c'est ce qui avait justifié de tout
 bloquer.
+
+---
+
+## 28. Un correctif se mesure sur ce qu'il change, pas sur ce qu'on en attendait
+
+**Écrit le 04/09/2026, après une prévision fausse.**
+
+Le résidu sans famille contenait des intitulés mutilés par le nettoyage :
+« Stage 4 à 6 mois - Assistant exploitation bancaire » devenait
+« 4 à - Assistant exploitation bancaire ». Une règle retire le mot de contrat,
+une autre une partie de la durée, et le reste demeure.
+
+L'attente était explicite : réparer le nettoyeur devait **récupérer des
+offres**, puisqu'aucun motif ne peut reconnaître un métier derrière « 4 à - ».
+
+**Mesuré à entrée identique, il n'en récupère aucune.** 959 → 958 offres,
+résidu sans famille 446 dans les deux cas. La raison tient en une phrase : ces
+intitulés étaient **déjà classés malgré la mutilation**, parce que
+« (1 an) - Fiscaliste Junior » contient encore le mot « Fiscaliste ». Le
+préfixe parasite gênait la lecture, pas la reconnaissance.
+
+Ce que le correctif répare est donc autre chose, et vaut d'être gardé pour
+cette raison-là : **ce que le candidat lit sur la carte**. Neuf titres au
+catalogue, dont sept Natixis en « 2 ans - X ». Plus une fusion juste — deux
+annonces du même poste devenues identiques une fois nettoyées.
+
+Le travail de taxonomie, lui, a été fait par le classifieur : combler le trou
+ESG et ajouter les motifs de relation client institutionnelle a fait passer le
+résidu de 457 à 446, le stage de 57 à 48 et l'alternance de 40 à 38. C'est là
+qu'était le gisement, pas dans le nettoyage.
+
+**La règle :** on garde un correctif pour l'effet qu'il a, pas pour celui qu'on
+lui prêtait — et on le dit quand les deux diffèrent. Annoncer le gain espéré
+comme s'il était mesuré, c'est fabriquer un chiffre qui servira de base à la
+décision suivante.
+
+### Le corollaire : un seuil de test est un plafond, et il se rabaisse
+
+`test-fourre-tout.js` échoue si le résidu dépasse **8**, son niveau connu du
+04/09/2026. Ce n'est pas une égalité mais un plafond : si le résidu remonte,
+c'est qu'une règle a été perdue ou affaiblie, et le passage bloque.
+
+S'il descend, il faut **baisser le seuil dans la foulée**. Un plafond qu'on ne
+rabaisse pas cesse de mordre en silence : à 8 pour un résidu réel de 3, il
+laisse passer un retour à 8 sans rien dire. C'est le défaut du §27 sous une
+autre forme — un garde-fou qui ne garde plus rien, et dont on croit être
+protégé.

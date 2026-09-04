@@ -112,3 +112,12 @@ for (const [reason, list] of Object.entries(buckets.rejected).sort((a, b) => b[1
 
 console.log(`\n=== ENCORE SANS FAMILLE (${buckets.unclassified.length}) ===`);
 buckets.unclassified.forEach((l) => console.log(`   ${l}`));
+
+// Code de sortie : le residu ne doit pas remonter au-dessus de son niveau
+// connu. S'il remonte, une regle a ete perdue ou affaiblie.
+const SEUIL_RESIDU = 8;
+if (buckets.unclassified.length > SEUIL_RESIDU) {
+  console.log(`\nECHEC : ${buckets.unclassified.length} sans famille, seuil ${SEUIL_RESIDU}`);
+  process.exit(1);
+}
+process.exit(0);

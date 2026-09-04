@@ -155,12 +155,8 @@ for (const [e, t, exp] of RESIDU) {
 }
 console.log(`${ok4}/${RESIDU.length} cas de residu conformes`);
 
-// Sans cette ligne, la suite sort 0 quoi qu'il arrive et le workflow publie
-// par-dessus n'importe quelle regression, en l'ayant affichee. Les QUATRE
-// compteurs decident ensemble : un seul ecart suffit.
-//
-// A REMETTRE DANS LA SOURCE (Downloads/jj-refonte/) : c'est la troisieme fois
-// qu'une recopie efface un correctif local.
-if (ok !== CAS.length || ok2 !== VIE.length || ok3 !== FP.length || ok4 !== RESIDU.length) {
-  process.exitCode = 1;
-}
+// Code de sortie sur les QUATRE compteurs. Sans lui, la suite sort 0 quoi
+// qu'elle trouve. Ne jamais le retirer lors d'une recopie.
+const tousVerts = ok === CAS.length && ok2 === VIE.length
+  && ok3 === FP.length && ok4 === RESIDU.length;
+process.exit(tousVerts ? 0 : 1);

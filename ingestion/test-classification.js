@@ -100,10 +100,6 @@ for (const [employer, title, expected] of CASES) {
 }
 
 console.log(`\n${ok}/${CASES.length} cas conformes\n`);
-// Un test qui ne peut pas echouer n'est pas un test : sans cette ligne, le
-// workflow publiait par-dessus n'importe quelle regression, en l'ayant
-// affichee.
-if (ok !== CASES.length) process.exitCode = 1;
 if (fails.length) {
   console.log('Ecarts :');
   for (const f of fails) {
@@ -111,3 +107,7 @@ if (fails.length) {
     console.log(`      attendu ${f.expected} / obtenu ${f.got}${f.reason ? ' (' + f.reason + ')' : ''}`);
   }
 }
+
+// Code de sortie : sans lui, la suite reussit toujours et le workflow publie
+// par-dessus n'importe quelle regression. Ne jamais le retirer.
+process.exit(fails.length === 0 ? 0 : 1);
