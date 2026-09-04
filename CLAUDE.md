@@ -235,7 +235,10 @@ dix minutes.
   vraie réponse est le mécanisme qui ne demande à personne de se souvenir de
   rien : **tout script de modification compare la longueur du fichier avant et
   après, et l'annonce.** Un « + 0 octet » saute aux yeux là où un « déjà fait »
-  se lit sans s'arrêter. Quand un piège se répète malgré sa fiche, chercher le
+  se lit sans s'arrêter. Le compteur est la partie VISIBLE du mécanisme ; la partie FIABLE est la
+  comparaison du texte avant et après, car deux versions de même longueur
+  — « 3 septembre » et « 4 septembre » — rendent « + 0 octet » sans que rien
+  soit anormal. Faire les deux : comparer pour décider, compter pour montrer. Quand un piège se répète malgré sa fiche, chercher le
   mécanisme, pas la formulation plus insistante.
 $1
   Le panneau de navigation renvoyait `CLS = 0` sur toutes les pages, y

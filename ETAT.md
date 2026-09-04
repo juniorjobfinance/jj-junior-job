@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 3 septembre 2026, au soir.**
+**Dernière mise à jour : 4 septembre 2026, au soir.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -292,9 +292,13 @@ Victor peut la capturer dans l'onglet Réseau du navigateur.
 **5. Une offre morte dans `manuel.js`.** Le passage la signale à chaque fois ;
 sa ligne est à retirer du fichier.
 
-**6. Visibilité — reporté à la demande de Victor.** Google Search Console,
-vérification que le pare-feu Vercel ne bloque pas Googlebot, données
-structurées JobPosting, analytics, poids de `offres.js`.
+**6. Visibilité — fait le 04/09/2026.** Search Console, mesure d'audience et
+poids de `offres.js` sont traités ; voir le bilan en fin de fichier. Reste
+ouvert : les données structurées `JobPosting`, **hors d'atteinte par
+construction** — Google interdit le balisage sur une page de liste et exige la
+description complète, que JJ ne reproduit pas (§6 des mentions légales). Ce
+n'est pas un chantier en attente, c'est une porte fermée par deux règles
+fondatrices du projet.
 
 ---
 
@@ -830,7 +834,24 @@ structure (12) toujours construits, et un lien partagé
 `?contrat=vie&familles=Marchés financiers&tri=entreprise` qui restaure bien
 l'onglet VIE, la case cochée, le tri et ses 3 offres. Les cinq suites au vert.
 
-### Mesure d'audience — posée le 04/09/2026
+### Search Console — inscrite le 04/09/2026
+
+Propriété **validée** par enregistrement TXT chez Gandi, où se trouve la zone
+DNS du domaine. `sitemap.xml` **envoyé** — opération effectuée, **3 pages
+découvertes** — et l'indexation de la page d'accueil **demandée**.
+
+Ce que Google trouve en arrivant, mesuré le même jour avec l'agent
+`Googlebot/2.1` : **143 860 caractères de texte visible et 835 cartes**, là où
+il en recevait 1 033 et 3 le matin.
+
+Les 3 pages du sitemap sont l'accueil et les deux pages légales. **C'est le
+plafond d'indexation du site** : le `canonical` ramène tous les filtres à `/`,
+ce qui est le bon réglage contre le contenu dupliqué et supprime toute longue
+traîne. La suite, si on la veut, ce sont les **15 pages par famille** — toutes
+avec au moins 5 offres, ~0,5 Mo compressé, générables par le pipeline comme
+`sitemap.xml` l'est déjà. Ni page par offre, ni lien sortant abandonné : les
+deux règles fondatrices tiennent.
+$1
 
 Umami Cloud, palier gratuit, compte en **région européenne**. Relayée par deux
 réécritures Vercel — `/mesure.js` et `/api/send` — pour que le navigateur ne
@@ -871,3 +892,46 @@ Deux voies, et aucune n'est gratuite :
 La situation actuelle est celle de presque tous les petits sites européens,
 elle est déclarée honnêtement, et elle est proportionnée au traitement. À
 rouvrir seulement si l'exigence change, pas parce qu'on relit ce paragraphe.
+
+---
+
+## Le bilan du 4 septembre 2026
+
+Six chantiers en une journée, et **chaque chiffre ci-dessous est mesuré, pas
+estimé** :
+
+| | avant | après |
+|---|---:|---:|
+| texte reçu par Googlebot | **1 033 caractères** | **143 860** |
+| cartes dans le HTML servi | 3 | **835** |
+| CLS bureau | **0,317** 🔴 | **0,03** ✅ |
+| PageSpeed bureau | **84** | **98** |
+| Accessibilité | 91 | **96** |
+| SEO mobile et bureau | 100 | **100** |
+
+Et deux acquis qui ne se comptent pas en points :
+
+- **`document.write` retiré.** C'était le défaut le plus grave de la journée,
+  et il n'avait rien à voir avec le référencement : Chrome refuse d'exécuter un
+  script ainsi injecté sur connexion lente et hors cache. Un visiteur en 3G
+  pouvait voir la page **sans aucune offre**, sans que rien ne le signale. Le
+  site ne peut plus être escamoté.
+- **Search Console et Umami en place, RGPD documenté.** La mesure est relayée
+  par le domaine, sans cookie, sans identifiant persistant, et le §4 de la
+  politique porte le fondement réel de l'exemption de consentement plutôt
+  qu'une formule commode. Ce qu'on n'a pas pu établir — que la collecte
+  transite exclusivement par l'Europe — est écrit comme tel.
+
+**Ce qui reste une estimation, et qui doit le rester jusqu'à mesure :** les
+~56 ms que l'élagage de `offres.js` devrait retirer de la tâche longue. C'est
+une proportion, pas un relevé. PageSpeed mobile tranchera — son quota était
+épuisé le 4 au soir.
+
+**Et la leçon de la journée**, qui vaut mieux que ses six chantiers : deux
+fois, un instrument a menti sans le dire. Le panneau de navigation rendait
+`CLS = 0` sur une page que Lighthouse notait 0,317 ; `*.umami.is` répondait
+normalement sur un sous-domaine inventé. Les deux ont été démasqués de la même
+façon — **en faisant dire à l'appareil quelque chose dont on connaissait déjà
+la réponse** : un décalage de 400 px provoqué exprès, un nom d'hôte qui n'existe
+pas. Sans ces deux contrôles, deux fausses conclusions partaient au rapport, et
+l'une était déjà écrite dans ce fichier comme une piste établie.
