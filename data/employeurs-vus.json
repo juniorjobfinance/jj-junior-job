@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "genere": "2026-09-05T04:44:26.133Z",
+  "fenetreJours": 30,
+  "employeurs": [
+    {
+      "emp": "Sogea Nord Ouest TP",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Bessac",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "NAOS",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "SHIFT Technology",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Albioma",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Fred",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-05",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    }
+  ]
+}
