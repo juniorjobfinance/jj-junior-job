@@ -1166,4 +1166,55 @@ laissait quatorze points d’interrogation orphelins flotter dans la colonne
 d’une page de famille. **Envelopper des éléments déplace le niveau auquel
 les règles s’appliquent, et chaque règle posée sur l’ancien niveau doit
 suivre** — le trait de séparation des lignes est tombé dans le même piège la
-même heure.
+même heure.
+
+---
+
+## 34. Une date fabriquée passe pour fiable — constat du 06/09/2026, non corrigé
+
+**Relevé, pas tranché. À décider.**
+
+Quatorze branches de `normalize()` datent une offre au JOUR DE LA COLLECTE
+quand leur source ne donne rien : `postedAt = new Date().toISOString()`. Ce
+n’est pas un format inconnu, c’est une **absence de date déguisée en date
+d’aujourd’hui**.
+
+Les branches concernées : `vie`, `labonnealternance`, `recruitee:`,
+`oraclecloud:`, `teamtailor:`, `ashby:`, `adzuna`, `servicepublic`,
+`eicards:`, `sitemapld:`, `successfactors:`, `talentsoft:`, `manuel`.
+
+**Les chiffres, mesurés sur le catalogue en ligne du 05/09 (943 offres) :**
+
+| | |
+|---|---:|
+| offres issues de ces branches | **234** (25 %) |
+| dont portant la date du jour de collecte | **2** |
+| dont marquées « date fiable » | **233 / 234** |
+
+**Ce qui est rassurant** : la plupart de ces 234 offres ont fini par recevoir
+une vraie date, de leur source ou de la lecture de leur fiche. Le repli ne
+sert que rarement.
+
+**Ce qui ne l’est pas, et qui est le vrai sujet** : quand il sert, la date
+fabriquée est marquée FIABLE. `_dateDeLaSource` vaut `Boolean(dateIso(postedAt))`,
+et `new Date().toISOString()` est une date parfaitement valide — le pipeline ne
+peut donc pas distinguer « la source a dit aujourd’hui » de « nous avons écrit
+aujourd’hui faute de mieux ».
+
+**La conséquence, si le repli s’applique deux matins de suite** : l’offre est
+ré-estampillée du jour à chaque passage. Son âge vaut zéro en permanence, le
+filtre d’âge ne peut jamais l’expirer, et une annonce ouverte depuis dix-huit
+mois paraît publiée ce matin. C’est le contraire de la troisième règle du
+projet — *datées, vérifiées*.
+
+**Pourquoi ce n’est pas corrigé le soir même** : la correction est simple à
+décrire — une date fabriquée doit être NULLE, pas d’aujourd’hui, et l’offre
+passe alors en fin de liste avec la mention « toujours en ligne, date
+inconnue » qui existe déjà. Mais elle touche quatorze branches et un quart du
+catalogue, et le site sort de deux matins sans publication. On mesure d’abord
+ce que devient le catalogue quand ces 234 offres perdent leur date, on décide
+ensuite.
+
+**Comment c’est apparu** : en cherchant le format de date de Talentsoft. Le
+connecteur n’en a pas — il n’a pas de date du tout. La question « quel format
+? » a donc trouvé, à la place, une réponse plus lourde : « aucune ».

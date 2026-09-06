@@ -173,6 +173,7 @@ jobs:
       # Le cinquième garde-fou, l'invariant de séniorité, n'est pas ici : il vit
       # DANS le pipeline, annule l'écriture de offres.js et sort en 1. L'étape
       # « Ingestion » ci-dessus échoue alors d'elle-même.
+
       - name: Contrôles 2 à 4 — deux axes, deux tables, liste blanche
         id: controles
         run: node ingestion/controle-avant-passage.js
@@ -247,6 +248,19 @@ jobs:
       # Un blocage silencieux est pire qu'une publication fausse : le site sert
       # la veille, puis l'avant-veille, et personne ne l'apprend. Cette étape
       # nomme le contrôle qui a mordu et ouvre une issue.
+      # Le format de date des sources, confronte aux preuves de la recolte du
+      # matin. Il lit le BRUT et non le catalogue : une offre ecartee a l'age
+      # parce que sa date etait mal lue ne figure plus dans le catalogue —
+      # c'est exactement la que Bank of America s'est cachee jusqu'au 06/09.
+      #
+      # Il ne bloque pas : une source qui change de format ne rend pas le
+      # catalogue faux, elle rend quelques offres mal datees (DECISIONS.md §27).
+      # Mais son echec est visible dans le resume du passage.
+      - name: Contrôle 5 — le format de date des sources
+        id: formats
+        if: always()
+        run: node ingestion/test-formats-date.js
+
       - name: Alerter en cas d'échec
         if: failure()
         env:
@@ -254,14 +268,43 @@ jobs:
           TESTS: ${{ steps.tests.outcome }}
           INGESTION: ${{ steps.ingestion.outcome }}
           CONTROLES: ${{ steps.controles.outcome }}
+          FORMATS: ${{ steps.formats.outcome }}
+          # De quoi repondre a la seule question qui compte a 7 h : le site
+          # est-il a jour ? Le controle 5 passant APRES la publication, un
+          # passage peut etre rouge sur un catalogue parfaitement a jour.
+          PUBLICATION: ${{ steps.publication.outcome }}
+          MODIFIE: ${{ steps.publication.outputs.modifie }}
         run: |
           set -u
+
+          # Le journal dit POURQUOI. On le LIT pour nommer le garde fautif :
+          # le message disait « collecte incomplète OU invariant de séniorité »
+          # et laissait son lecteur faire le travail. Une alerte qui pose la
+          # question au lieu d'y répondre n'est pas une alerte.
+          RAISON=$(grep -h "PUBLICATION ANNUL" journaux/*.log 2>/dev/null | head -n 1 || true)
+          ANOMALIES=$(grep -h "^  - " journaux/*.log 2>/dev/null | head -n 5 || true)
+
           if [ "$TESTS" = "failure" ]; then
             QUOI="Contrôle 1 — les suites de tests"
             DETAIL="Une suite a signalé un écart. Le pipeline n'a même pas été lancé."
           elif [ "$INGESTION" = "failure" ]; then
-            QUOI="Ingestion"
-            DETAIL="Le pipeline a refusé de publier : garde-fou de collecte incomplète, ou invariant de séniorité — un verdict rendu sur moins de texte que la description finale."
+            case "$RAISON" in
+              *"verdict de seniorite incomplet"*)
+                QUOI="Ingestion — invariant de séniorité"
+                DETAIL="Des offres CDI·CDD portent un verdict de séniorité rendu sur MOINS de texte que leur description finale : le filtre 0-3 ans les a jugées sur une entrée incomplète. L'offre donnée en exemple est dans le journal ci-dessous."
+                ;;
+              *"la collecte semble incomplète"*)
+                QUOI="Ingestion — garde-fou de collecte incomplète"
+                DETAIL="La collecte a perdu trop d'offres, ou un connecteur qui servait est tombé à zéro."
+                ;;
+              *)
+                QUOI="Ingestion"
+                DETAIL="Le pipeline s'est arrêté avant de publier, sans marqueur de garde connu."
+                ;;
+            esac
+          elif [ "$FORMATS" = "failure" ]; then
+            QUOI="Contrôle 5 — format de date non déclaré"
+            DETAIL="Une source sert une date à barres obliques que rien ne déclare. Elle est lue à l'européenne par défaut, ce qui peut vieillir ses offres de plusieurs mois en silence — c'est ce qui est arrivé à Bank of America le 06/09/2026."
           elif [ "$CONTROLES" = "failure" ]; then
             QUOI="Contrôles 2 à 4 — deux axes, deux tables, liste blanche"
             DETAIL="Le catalogue produit n'a pas passé le contrôle avant vol."
@@ -270,33 +313,53 @@ jobs:
             DETAIL="La collecte et les contrôles sont passés ; l'échec est en aval."
           fi
 
-          # Le journal dit POURQUOI. Sa fin est la partie utile.
-          JOURNAL="(aucun journal)"
-          if ls journaux/*.log >/dev/null 2>&1; then JOURNAL=$(tail -n 40 journaux/*.log); fi
-
-          # Heredoc : aucun échappement à compter, contrairement à printf.
-          cat > /tmp/alerte.md <<FIN
-          **$QUOI** a échoué le $(date +%F).
-
-          $DETAIL
-
+          # AUCUN texte extérieur ne traverse un contexte interprété par le
+          # shell. Le squelette est un heredoc QUOTÉ — rien n'y est substitué,
+          # pas même les accents graves. Les variables passent par printf en
+          # ARGUMENT, jamais dans la chaîne de format. Le journal est versé par
+          # cat. Le 06/09/2026, un heredoc non quoté a fait EXÉCUTER le journal
+          # par bash : les intitulés d'offres relevés chez les employeurs
+          # atteignaient un shell.
+          {
+            # La seule question qu'on se pose a 7 h. Elle passe AVANT tout le
+            # reste : un passage rouge ne veut plus dire « rien n'est publie »
+            # depuis que le controle 5 s'execute apres la publication.
+            if [ "$PUBLICATION" = "success" ] && [ "$MODIFIE" = "oui" ]; then
+              # -o puis wc -l : on compte les OCCURRENCES. `grep -c` compterait
+              # les lignes, et le chiffre dependrait de la mise en forme du fichier.
+              N=$(grep -o '"emp":' offres.js 2>/dev/null | wc -l | tr -d ' ')
+              printf '## CATALOGUE PUBLIÉ — %s offres en ligne.\n\n' "$N"
+              printf 'Signalement : **%s**.\n\n' "$QUOI"
+            else
+              printf '## CATALOGUE NON PUBLIÉ — le site sert celui de la veille.\n\n'
+              printf 'Cause : **%s**.\n\n' "$QUOI"
+            fi
+            printf '%s\n\n' "$(date +%F)"
+            printf '%s\n\n' "$DETAIL"
+            if [ -n "$ANOMALIES" ]; then
+              printf '%s\n' "$ANOMALIES"
+              printf '\n'
+            fi
+            cat <<'FIN'
           **Le catalogue en ligne est celui de la veille.** Rien n'a été publié,
           et c'est le comportement voulu : mieux vaut un catalogue d'hier qu'un
           catalogue faux.
-
-          [Voir le journal complet]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)
-
-          <details><summary>Fin du journal</summary>
-
-          ```
-          $JOURNAL
-          ```
-
-          </details>
           FIN
-          # Le heredoc est indenté pour la lisibilité du YAML : on retire
-          # l'indentation avant d'envoyer, sinon Markdown lit tout en bloc de code.
-          sed -i 's/^          //' /tmp/alerte.md
+            printf '\n[Voir le journal complet](%s/%s/actions/runs/%s)\n\n' \
+              "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
+            # La CAUSE a cote du SYMPTOME : quand une source sert une date
+            # dont le format n'est pas declare, le garde-fou voit son
+            # connecteur tomber a zero et l'alerte disait seulement ca. Les
+            # deux messages se lisent desormais ensemble.
+            if [ -f data/formats-non-declares.md ]; then
+              cat data/formats-non-declares.md
+              printf '\n'
+            fi
+            printf '<details><summary>Fin du journal</summary>\n\n'
+            printf '```\n'
+            tail -n 60 journaux/*.log 2>/dev/null || printf '(aucun journal)\n'
+            printf '```\n\n</details>\n'
+          } > /tmp/alerte.md
 
           TITRE="Passage quotidien en échec"
           EXISTANTE=$(gh issue list --state open --search "$TITRE in:title" --json number --jq '.[0].number // empty' || true)

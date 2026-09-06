@@ -206,6 +206,29 @@ la comparaison était vide de sens. Avant de conclure d'un écart, vérifier que
 les deux membres se mesurent avec la même règle — même champ, même unité, même
 échelle.
 
+**Sixième forme, et la plus silencieuse : l’unité peut être fausse sans que
+rien ne soit invalide.** Le 06/09/2026, le passage a refusé de publier parce
+que le connecteur Bank of America était tombé de dix offres à zéro. Ni le
+réseau ni l’employeur : leur API date en **MM/JJ/AAAA**, le pipeline lit en
+**JJ/MM/AAAA**. Une offre publiée le 1ᵉʳ septembre — `09/01/2026` — devenait le
+9 janvier, vieille de 240 jours au lieu de 5. Les dix ont franchi le seuil
+d’âge le même matin, et le garde-fou a mordu.
+
+Ce qui distingue ce cas des cinq autres : **les deux lectures étaient valides.**
+Le champ existait, la fonction rendait une date, aucune erreur n’a été levée.
+Une seule des quatorze dates était auto-révélatrice — `07/29/2026`, où le 29 ne
+peut pas être un mois. Sans ce 29, la source aurait menti indéfiniment.
+
+**Une unité ambiguë se déclare, elle ne se devine pas.** `07/03/2026` est
+valide en JJ/MM comme en MM/JJ ; aucune inspection de la valeur ne tranchera
+jamais. Le format se décide donc par SOURCE, une fois pour toutes, au même
+endroit que son URL — jamais offre par offre, et jamais par un cas particulier
+greffé sur la fonction de lecture.
+
+Et le corollaire de méthode, pour l’auditer : **la preuve d’un format est un
+nombre qui dépasse 12.** Second nombre > 12 : américain. Premier nombre > 12 :
+européen. Aucun des deux : indécidable — et c’est là que le silence commence.
+
 ---
 
 ## Pièges vérifiés plusieurs fois

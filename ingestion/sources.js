@@ -26,6 +26,32 @@ const path = require('path');
 const DEMO_DATA = process.env.DEMO_DATA === '1';
 const { MANUAL_OFFERS } = require('./manuel');
 
+// Le format de date d'une source se DECLARE, il ne se devine pas.
+//
+// « 09/01/2026 » est le 1er septembre chez un Americain et le 9 janvier
+// chez nous. Bank of America a fait tomber la publication du 06/09/2026
+// sur cette seule ambiguite : ses offres, vieilles de cinq jours, etaient
+// enregistrees a huit mois et franchissaient toutes le seuil d'age le meme
+// matin.
+//
+// Le format est une propriete du connecteur, au meme titre que son URL. Il
+// n'a pas de valeur par defaut : un defaut, meme raisonnable, est ce qui a
+// laisse passer Bank of America pendant des semaines.
+function dateDeSource(valeur, format) {
+  const t = String(valeur == null ? '' : valeur).trim();
+  if (!t) return null;
+  const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  if (!m) return t; // deja ISO, ou autre chose : on laisse passer
+  const an = m[3].length === 2 ? '20' + m[3] : m[3];
+  let jour, mois;
+  if (format === 'MM/JJ/AAAA') { mois = m[1]; jour = m[2]; }
+  else if (format === 'JJ/MM/AAAA') { jour = m[1]; mois = m[2]; }
+  else throw new Error('dateDeSource : format non declare pour « ' + t + ' »');
+  if (Number(mois) < 1 || Number(mois) > 12 || Number(jour) < 1 || Number(jour) > 31) return null;
+  return an + '-' + String(mois).padStart(2, '0') + '-' + String(jour).padStart(2, '0');
+}
+
+
 // ---------------------------------------------------------------------------
 // Utilitaire HTTP minimal (Node 18+ a fetch en global, pas de dépendance)
 // ---------------------------------------------------------------------------
@@ -1461,7 +1487,10 @@ async function fetchBankOfAmerica() {
         ville: 'Paris',
         url: o.jcrURL ? `https://careers.bankofamerica.com${o.jcrURL}` : null,
         division: [o.division, o.family].filter(Boolean).join(' '),
-        date: o.postedDate || null,
+        // Format AMERICAIN, prouve : « 07/29/2026 » — il n'existe pas de mois
+        // 29. Lu en europeen, le 1er septembre devenait le 9 janvier et les
+        // dix offres franchissaient le seuil d'age le meme matin.
+        date: dateDeSource(o.postedDate, 'MM/JJ/AAAA'),
       },
     }))
     .filter((o) => o.raw.url);
@@ -2015,7 +2044,9 @@ const TARGET_COMPANIES = {
     // Dix-huit offres, dont seize de courtage que le filtre réseau écarte : ce
     // qu'on vient chercher ici, c'est Oliver Wyman.
     { host: 'careers.marsh.com', widgets: true, emp: 'Marsh McLennan' },
-    { host: 'careers.axa.com', emp: 'AXA' },
+    // Format prouve sur la recolte du 06/09/2026 : dix dates dont le premier
+    // nombre depasse 12 (« 22/06/2026 »), impossible en MM/JJ.
+    { host: 'careers.axa.com', emp: 'AXA', formatDate: 'JJ/MM/AAAA' },
     { host: 'portal.careers.hsbc.com', pid: '563774609123718', domain: 'hsbc.com', emp: 'HSBC France' },
     { host: 'careers.bcg.com', widgets: true, emp: 'BCG' },
     { host: 'careers.allianz.com', widgets: true, emp: 'Allianz France' },
@@ -3029,10 +3060,24 @@ function finaliserPhenomWidgets(jobs, host, emp, country) {
     }));
 }
 
-async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain, widgets }) {
+// Phenom sert CINQ locataires, dont trois maisons non francaises : Marsh
+// McLennan, HSBC et BCG. Rien ne dit qu'elles datent comme AXA. Le format se
+// lit donc sur le locataire, jamais sur la plateforme — et quand il n'est pas
+// declare, on ne convertit pas : mieux vaut une offre sans date qu'une offre
+// vieillie de huit mois, ce qui est arrive a Bank of America.
+function marquerDatePhenom(lot, formatDate) {
+  if (!formatDate || !Array.isArray(lot)) return lot;
+  for (const o of lot) {
+    const brut = o && o.raw && (o.raw.posted_date || o.raw.postedDate);
+    if (brut) o.raw.__dateIso = dateDeSource(brut, formatDate);
+  }
+  return lot;
+}
+
+async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000, pid, domain, widgets, formatDate }) {
   // Portails de deuxième et troisième génération : on passe la main.
-  if (widgets) return fetchPhenomWidgets({ host, emp, country });
-  if (pid) return fetchPhenomV2({ host, pid, domain: domain || host, emp, country });
+  if (widgets) return marquerDatePhenom(await fetchPhenomWidgets({ host, emp, country }), formatDate);
+  if (pid) return marquerDatePhenom(await fetchPhenomV2({ host, pid, domain: domain || host, emp, country }), formatDate);
 
   // Phenom ne connaît que « page ». « offset », « from », « start » et « skip »
   // sont acceptés sans effet : chacun renvoie la PREMIÈRE page. La boucle
@@ -3062,10 +3107,15 @@ async function fetchPhenom({ host, emp, country = 'France', crawlDelayMs = 5000,
     return [];
   }
 
-  return [...vus.values()]
+  // AXA passe par ici : sans ce marquage, sa déclaration de format serait
+  // inerte — posée, jamais lue.
+  return marquerDatePhenom(
+    [...vus.values()]
     .filter((j) => (j.country || '').toLowerCase() === country.toLowerCase())
     .filter((j) => isFinanceOfferFor(emp, j.title, (j.categories || j.category || []).join(' ')))
-    .map((j) => ({ __src: `phenom:${host}`, emp, raw: j }));
+      .map((j) => ({ __src: `phenom:${host}`, emp, raw: j })),
+    formatDate
+  );
 }
 
 // ---------------------------------------------------------------------------

@@ -2801,6 +2801,10 @@ function normalize(item) {
     // l'offre passe en fin de liste, sans prétendre à une fraîcheur qu'elle
     // n'a pas.
     postedAt =
+      // Date DEJA convertie par le connecteur, selon le format declare par
+      // son locataire. Elle passe avant les champs bruts : eux sont ambigus,
+      // elle ne l'est pas.
+      raw.__dateIso ||
       raw.posted_date ||
       raw.postedDate ||
       (raw.t_create ? new Date(raw.t_create).toISOString() : null) ||
@@ -3957,7 +3961,48 @@ function parConnecteur(offres) {
 }
 
 // Renvoie la liste des anomalies. Vide = on peut publier.
-function anomaliesDePublication(nouvelles) {
+// Un connecteur tombe a zero pose DEUX questions distinctes, et le message
+// doit dire laquelle : la source n'a-t-elle rien renvoye, ou a-t-elle renvoye
+// des offres que nous avons ensuite jetees ?
+//
+// Le 06/09/2026 le message ne disait que « passe de 10 offres a zero ». Il a
+// envoye chercher une panne de reseau alors que Bank of America avait repondu
+// en deux secondes : le defaut etait chez nous, une date lue en JJ/MM quand
+// elle est en MM/JJ. Une matinee perdue sur la mauvaise piste.
+function diagnosticConnecteur(nom, avantN, brutes) {
+  const collectees = (brutes || []).filter(
+    (o) => String(o.__src || '').split(':')[0] === nom
+  ).length;
+  const tete = `le connecteur « ${nom} » passe de ${avantN} offres à zéro`;
+
+  if (!collectees) {
+    return tete +
+      ` — 0 collectée ce matin : LA SOURCE N'A RIEN RENVOYÉ` +
+      ` (réseau du runner, API fermée, ou portail vide chez l'employeur).`;
+  }
+
+  // Elle a repondu : le defaut est donc chez nous, et on nomme l'etage ou
+  // les offres sont mortes.
+  const parEtage = new Map();
+  for (const e of rapportClassement.ecartees) {
+    if (String(e.source || '').split(':')[0] !== nom) continue;
+    const cle = String(e.etage || '?');
+    parEtage.set(cle, (parEtage.get(cle) || 0) + 1);
+  }
+  const causes = [...parEtage.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([e, n]) => `${n} ${e}`)
+    .join(', ');
+  return tete +
+    ` — ${collectees} collectée(s), 0 retenue(s) : LA SOURCE A RÉPONDU,` +
+    ` ce sont nos filtres qui les ont écartées` +
+    (causes
+      ? ` (${causes}).`
+      : `, sans trace d'écartement — chercher dans la déduplication ou le filtre d'entrée.`);
+}
+
+function anomaliesDePublication(nouvelles, brutes) {
   const anciennes = lireCatalexistant();
   if (!anciennes || anciennes.length < 50) return [];
 
@@ -3974,7 +4019,7 @@ function anomaliesDePublication(nouvelles) {
   const apres = parConnecteur(nouvelles);
   for (const [nom, n] of avant) {
     if (n >= SEUIL_CONNECTEUR_MUET && !apres.get(nom)) {
-      soucis.push(`le connecteur « ${nom} » passe de ${n} offres à zéro`);
+      soucis.push(diagnosticConnecteur(nom, n, brutes));
     }
   }
   return soucis;
@@ -4866,7 +4911,9 @@ async function run() {
     }
   }
 
-  const anomalies = anomaliesDePublication(publiables);
+  // `raw` porte les offres telles que les connecteurs les ont rendues : c'est
+  // lui qui permet de distinguer « rien collecté » de « tout écarté ».
+  const anomalies = anomaliesDePublication(publiables, raw);
   if (anomalies.length && !process.argv.includes('--forcer')) {
     console.error('\n[pipeline] PUBLICATION ANNULÉE — la collecte semble incomplète :');
     for (const a of anomalies) console.error(`  - ${a}`);
