@@ -3419,6 +3419,11 @@ async function applyFreshnessAndDeadRemoval(offers) {
     nextState[key] = { ...prev };
   }
 
+  // `nextState` est reconstruit a vide a chaque passage : sans cette ligne,
+  // le compteur des connecteurs muets serait efface tous les matins et
+  // n'atteindrait jamais trois. Les clefs d'offres sont « emp|titre|ville »,
+  // une clef en « __ » ne peut donc pas entrer en collision.
+  if (prevState.__connecteursMuets) nextState.__connecteursMuets = prevState.__connecteursMuets;
   saveState(nextState);
   const nouvelles = result.filter((o) => o._firstSeenAt === now).length;
   console.log(
@@ -4002,14 +4007,49 @@ function diagnosticConnecteur(nom, avantN, brutes) {
       : `, sans trace d'écartement — chercher dans la déduplication ou le filtre d'entrée.`);
 }
 
-function anomaliesDePublication(nouvelles, brutes) {
-  const anciennes = lireCatalexistant();
-  if (!anciennes || anciennes.length < 50) return [];
+// Trois passages consecutifs a zero : au-dela, ce n'est plus un incident.
+const PASSAGES_AVANT_BLOCAGE = 3;
 
-  const soucis = [];
+// Le compteur des connecteurs suivis. Deux regles, et elles comptent :
+//
+//   1. il ne DEMARRE que sur une chute depuis au moins SEUIL_CONNECTEUR_MUET.
+//      Un connecteur mort depuis trois mois est a zero tous les matins ; s'il
+//      incrementait, il bloquerait la publication au nom d'une source dont
+//      plus personne n'attend rien.
+//   2. il se REMET A ZERO des que le connecteur rend une offre. Pas au bout
+//      d'un moment, pas au passage vert : des qu'il rend une offre.
+function suivreConnecteursMuets(avant, apres, suivis) {
+  // 2. Remise a zero — avant tout le reste : un connecteur qui sert de
+  //    nouveau ne doit pas passer par la case incrementation.
+  for (const nom of Object.keys(suivis)) {
+    if (apres.get(nom)) delete suivis[nom];
+  }
+  // 1. Demarrage — seulement sur une chute depuis un connecteur qui SERVAIT.
+  for (const [nom, n] of avant) {
+    if (apres.get(nom)) continue;
+    if (n >= SEUIL_CONNECTEUR_MUET && !(nom in suivis)) suivis[nom] = 0;
+  }
+  // Incrementation des seuls connecteurs suivis, toujours a zero.
+  for (const nom of Object.keys(suivis)) {
+    if (!apres.get(nom)) suivis[nom] += 1;
+  }
+  return suivis;
+}
+
+// Rend DEUX listes, et la distinction est la regle du projet :
+//   bloquantes  — publier rendrait le catalogue FAUX
+//   signalements — publier le rendrait seulement INCOMPLET
+function anomaliesDePublication(nouvelles, brutes, suivis) {
+  const anciennes = lireCatalexistant();
+  if (!anciennes || anciennes.length < 50) return { bloquantes: [], signalements: [] };
+
+  const bloquantes = [];
+  const signalements = [];
+
+  // Une chute massive : le catalogue serait FAUX, pas seulement incomplet.
   const chute = (anciennes.length - nouvelles.length) / anciennes.length;
   if (chute > SEUIL_CHUTE) {
-    soucis.push(
+    bloquantes.push(
       `le catalogue passe de ${anciennes.length} à ${nouvelles.length} offres ` +
         `(-${Math.round(chute * 100)} %, seuil ${Math.round(SEUIL_CHUTE * 100)} %)`
     );
@@ -4017,12 +4057,20 @@ function anomaliesDePublication(nouvelles, brutes) {
 
   const avant = parConnecteur(anciennes);
   const apres = parConnecteur(nouvelles);
-  for (const [nom, n] of avant) {
-    if (n >= SEUIL_CONNECTEUR_MUET && !apres.get(nom)) {
-      soucis.push(diagnosticConnecteur(nom, n, brutes));
+  const compte = suivreConnecteursMuets(avant, apres, suivis || {});
+  for (const [nom, n] of Object.entries(compte)) {
+    if (apres.get(nom)) continue;
+    const combien = avant.get(nom) || SEUIL_CONNECTEUR_MUET;
+    const msg = diagnosticConnecteur(nom, combien, brutes);
+    if (n >= PASSAGES_AVANT_BLOCAGE) {
+      bloquantes.push(msg + ` — ${n}ᵉ passage consécutif à zéro : ce n'est plus un` +
+        ` incident, c'est un connecteur mort qu'on n'a pas réparé.`);
+    } else {
+      signalements.push(msg + ` — passage ${n} sur ${PASSAGES_AVANT_BLOCAGE} ; le` +
+        ` catalogue part sans lui.`);
     }
   }
-  return soucis;
+  return { bloquantes, signalements };
 }
 
 // Une date publiée est toujours en ISO, ou absente. Chaque connecteur rend la
@@ -4913,10 +4961,38 @@ async function run() {
 
   // `raw` porte les offres telles que les connecteurs les ont rendues : c'est
   // lui qui permet de distinguer « rien collecté » de « tout écarté ».
-  const anomalies = anomaliesDePublication(publiables, raw);
-  if (anomalies.length && !process.argv.includes('--forcer')) {
-    console.error('\n[pipeline] PUBLICATION ANNULÉE — la collecte semble incomplète :');
-    for (const a of anomalies) console.error(`  - ${a}`);
+  // Le compteur des connecteurs muets vit dans l'etat des passages, sous une
+  // clef reservee : il doit survivre a la reconstruction de `nextState`.
+  const etatMuets = loadState();
+  const suivis = etatMuets.__connecteursMuets || {};
+  const { bloquantes, signalements } = anomaliesDePublication(publiables, raw, suivis);
+  etatMuets.__connecteursMuets = suivis;
+  saveState(etatMuets);
+
+  // LE SIGNALEMENT : publier rend le catalogue INCOMPLET, pas FAUX. Dix offres
+  // sur 928 ont gele le site trois matins ; le remede coutait cent fois le mal.
+  // Mais un cri sans destinataire laisse pourrir : le verdict part dans un
+  // fichier que l'alerte attachera, et une etape posterieure a la publication
+  // fait echouer le passage pour qu'une issue s'ouvre.
+  const CHEMIN_SIGNALEMENTS = path.join(DATA_DIR, `signalements${SUFFIXE}.md`);
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (signalements.length) {
+    console.log('\n[pipeline] SIGNALEMENT — le catalogue part, incomplet :');
+    for (const s of signalements) console.log(`  - ${s}`);
+    fs.writeFileSync(CHEMIN_SIGNALEMENTS, [
+      '### Connecteur muet',
+      '',
+      'Le catalogue a été publié SANS ces connecteurs. Il est incomplet, pas faux.',
+      '',
+    ].concat(signalements.map((s) => '- ' + s)).concat(['']).join('\n'));
+  } else if (fs.existsSync(CHEMIN_SIGNALEMENTS)) {
+    fs.unlinkSync(CHEMIN_SIGNALEMENTS);
+  }
+
+  // LE BLOCAGE : publier rendrait le catalogue FAUX.
+  if (bloquantes.length && !process.argv.includes('--forcer')) {
+    console.error('\n[pipeline] PUBLICATION ANNULÉE — le catalogue serait faux :');
+    for (const a of bloquantes) console.error(`  - ${a}`);
     console.error(
       '\n  Le catalogue en ligne est conservé tel quel. Relancer le passage suffit\n' +
         '  le plus souvent : ces pannes sont presque toujours passagères (réseau du\n' +

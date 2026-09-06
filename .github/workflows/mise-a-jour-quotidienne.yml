@@ -261,6 +261,20 @@ jobs:
         if: always()
         run: node ingestion/test-formats-date.js
 
+      # Un connecteur muet ne bloque PLUS la publication : le catalogue part,
+      # incomplet de quelques offres, plutot que de rester a celui de la veille.
+      # Mais un cri sans destinataire laisse pourrir — cette etape echoue donc
+      # pour qu une issue s ouvre, APRES que le catalogue soit parti.
+      - name: Contrôle 6 — signalements non bloquants
+        if: always()
+        id: signalements
+        run: |
+          if [ -f data/signalements.md ]; then
+            cat data/signalements.md
+            exit 1
+          fi
+          echo "Aucun signalement."
+
       - name: Alerter en cas d'échec
         if: failure()
         env:
@@ -269,6 +283,7 @@ jobs:
           INGESTION: ${{ steps.ingestion.outcome }}
           CONTROLES: ${{ steps.controles.outcome }}
           FORMATS: ${{ steps.formats.outcome }}
+          SIGNALEMENTS: ${{ steps.signalements.outcome }}
           # De quoi repondre a la seule question qui compte a 7 h : le site
           # est-il a jour ? Le controle 5 passant APRES la publication, un
           # passage peut etre rouge sur un catalogue parfaitement a jour.
@@ -302,6 +317,9 @@ jobs:
                 DETAIL="Le pipeline s'est arrêté avant de publier, sans marqueur de garde connu."
                 ;;
             esac
+          elif [ "$SIGNALEMENTS" = "failure" ]; then
+            QUOI="Connecteur muet"
+            DETAIL="Un connecteur qui servait est tombé à zéro. Le catalogue est parti SANS lui : il est incomplet, pas faux. S'il est encore muet au troisième passage consécutif, il bloquera la publication."
           elif [ "$FORMATS" = "failure" ]; then
             QUOI="Contrôle 5 — format de date non déclaré"
             DETAIL="Une source sert une date à barres obliques que rien ne déclare. Elle est lue à l'européenne par défaut, ce qui peut vieillir ses offres de plusieurs mois en silence — c'est ce qui est arrivé à Bank of America le 06/09/2026."
@@ -351,6 +369,10 @@ jobs:
             # dont le format n'est pas declare, le garde-fou voit son
             # connecteur tomber a zero et l'alerte disait seulement ca. Les
             # deux messages se lisent desormais ensemble.
+            if [ -f data/signalements.md ]; then
+              cat data/signalements.md
+              printf '\n'
+            fi
             if [ -f data/formats-non-declares.md ]; then
               cat data/formats-non-declares.md
               printf '\n'

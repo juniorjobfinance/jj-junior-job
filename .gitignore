@@ -45,6 +45,7 @@ data/maisons-a-inscrire.md
 # Ecrit par test-formats-date.js, lu par l alerte, efface au premier passage
 # vert : un fichier de travail, pas un etat du projet.
 data/formats-non-declares.md
+data/signalements.md
 
 # Artefacts de branche : catalogues et releves produits par un passage avec
 # --refonte ou --depuis-cache. Rien ne les sert — le site lit offres.js — et

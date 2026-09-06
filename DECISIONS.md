@@ -1217,4 +1217,53 @@ ensuite.
 
 **Comment c’est apparu** : en cherchant le format de date de Talentsoft. Le
 connecteur n’en a pas — il n’a pas de date du tout. La question « quel format
-? » a donc trouvé, à la place, une réponse plus lourde : « aucune ».
+? » a donc trouvé, à la place, une réponse plus lourde : « aucune ».
+
+---
+
+## 35. Un contrôle bloque quand publier serait FAUX, il crie quand ce serait INCOMPLET
+
+**Tranché le 07/09/2026, après trois matins sans publication.**
+
+Le garde-fou « un connecteur passant de ≥ 10 offres à zéro » a gelé le site
+**trois matins de suite** pour **dix offres sur 928**. Publier sans elles
+donnait un catalogue incomplet de 1 % ; ne pas publier en donnait un vieux de
+trois jours, pendant que les offres nouvelles des 137 autres connecteurs
+restaient dehors. Le remède coûtait cent fois le mal.
+
+**La règle, désormais explicite :**
+
+> Un contrôle **bloque** quand publier rendrait le catalogue **FAUX**.
+> Il se contente de **crier** quand publier le rendrait seulement **INCOMPLET**.
+
+**Restent bloquants** — publier produirait un catalogue faux : la chute de
+15 %, le contrôle du catalogue dans le HTML, l’invariant de séniorité.
+
+**Devient un signalement** : un connecteur qui tombe à zéro. Le catalogue
+part, l’issue s’ouvre, et sa première ligne tranche — *CATALOGUE PUBLIÉ —
+N offres en ligne, connecteur X muet*.
+
+**Ce qu’il ne faut pas perdre en route.** Le garde-fou existait pour une
+bonne raison : une panne partielle silencieuse, c’est ainsi qu’un catalogue
+pourrit sans qu’on le voie. Si l’on ne fait plus que crier et que personne
+n’agit, la pourriture avance quand même — c’est le défaut de l’alerte des
+maisons non inscrites.
+
+**L’escalade se fait donc dans le TEMPS, pas dans la sévérité immédiate.** Au
+premier passage, le connecteur muet publie et crie. **Au troisième passage**
+**consécutif à zéro, il bloque** : à ce stade ce n’est plus un incident,
+c’est un connecteur mort qu’on n’a pas réparé.
+
+**Les deux propriétés du compteur, sans lesquelles il nuit** (éprouvées dans
+`ingestion/test-connecteur-muet.js`) :
+
+1. **Il ne démarre que sur une chute depuis ≥ 10 offres.** Un connecteur mort
+   depuis trois mois est à zéro tous les matins ; s’il incrémentait, il
+   bloquerait la publication au nom d’une source dont plus personne n’attend
+   rien.
+2. **Il se remet à zéro dès que le connecteur rend une offre.** Pas au bout
+   d’un moment, pas au passage vert : dès la première offre.
+
+Et une troisième, moins évidente : **le compteur survit à une publication**
+**faite sans lui.** Le lendemain, le connecteur n’est plus dans le catalogue
+de la veille — sans cette persistance, l’escalade ne se déclencherait jamais.

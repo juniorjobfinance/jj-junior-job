@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genere": "2026-09-05T04:44:26.133Z",
+  "genere": "2026-09-06T22:40:52.115Z",
   "fenetreJours": 30,
   "employeurs": [
     {
@@ -10,8 +10,8 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -22,8 +22,8 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -33,8 +33,8 @@
         "sans-structure"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -44,8 +44,8 @@
         "sans-structure"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -55,8 +55,8 @@
         "sans-structure"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -67,8 +67,8 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-05",
-      "passages": 1,
+      "derniereVue": "2026-09-06",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     }
