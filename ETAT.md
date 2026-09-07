@@ -1503,11 +1503,36 @@ de six offres. Cinq minutes.
 **5. `corpus-etiquetage.md`** — 518 lignes commitées le 07/09 et jamais
 relues. C’est lui qui débloque les **190 offres indécidables au titre**.
 
-Deux candidats de vocabulaire trouvés le soir du 07/09 en cliquant sur une
-annonce Nestlé, à poser avec les trois mots ci-dessus : **`cash`** (9
-occurrences sur les quatre populations — « Cash & FX Manager » chez Nestlé,
-« CASH MANAGER » chez Celine, « Spécialiste Recouvrement Cash » chez Airbus,
-toutes de la vraie trésorerie) et **`fx`** (2 occurrences). Étroits et
-propres, mais ils touchent la porte des 433 : ils passent par le jugement des
-intitulés, comme les trois autres.
+#### Deux candidats trouvés en cliquant sur une annonce Nestlé — l’un est tranché
+
+**`cash` tout nu : NON.** Jugement de Victor le 07/09 au soir, et c’est le
+piège de la porte des 433 dans sa forme la plus pure. « Cash & Carry » est un
+format de distribution, « cashier » est un caissier : chez un employeur de
+type entreprise, le mot ferait entrer du commerce de gros. C’est le mécanisme
+de « stress test » chez Safran.
+
+**Et la mesure montre pourquoi le contre-test seul n’aurait pas suffi.** Sur
+les 6 511 intitulés de la récolte du 07/09 : `cash & carry` → **0**,
+`cashier`/`caissier` → **0**, `VFX` → **0**, `FX` au sens effets spéciaux →
+**0**. Le danger est **latent, pas présent**. Un contre-test ne voit que la
+population du jour — c’est la leçon de « chargé d’affaires », où il regardait
+l’industriel pendant que le danger dormait chez le réseau bancaire. **Un mot
+se juge sur ce qu’il NOMME, pas sur ce qu’il attrape ce soir.**
+
+Il n’entre donc que **qualifié**, et la forme qualifiée est mesurée propre :
+
+| motif | big4 | conseil | entreprise | industriel |
+|---|---|---|---|---|
+| `cash management` / `pooling` / `flow` / `collection` | 2 | 1 | **0** | **0** |
+
+**Mais elle ne récupère pas l’offre qui a lancé la conversation** : « Cash &
+FX Manager » (Nestlé) ne porte ni *management*, ni *pooling*, ni *flow*. Ni
+« CASH MANAGER » (Celine), qui est de la trésorerie aussi. Il faudrait
+`cash manager` comme paire qualifiée — **non mesurée**, à faire avec les autres.
+
+**`fx` : à mesurer.** Propre sur le fond — *foreign exchange* ne veut rien dire
+d’autre en finance — mais « FX » désigne aussi les effets spéciaux, et chez un
+industriel ou une agence ça peut mordre. Contre-test sur les quatre
+populations comme les autres. Ce soir : 2 occurrences, aucune au sens effets
+spéciaux — latent là aussi.
 
