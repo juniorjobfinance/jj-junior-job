@@ -378,6 +378,8 @@ const EMPLOYER_STRUCTURE = {
   'societe air france': 'entreprise',
   planisware: 'entreprise',
   numberly: 'entreprise',
+  ocde: 'institution',
+  oecd: 'institution',           // OCDE, graphie anglaise — maisons.txt reconnait les deux           // OCDE — organisation internationale, siege a Paris
 
   // Inscrites le 07/09/2026. Leurs offres VIE mouraient sur
   // gate:publication-sans-structure : pour le VIE, maisons.txt est saute et

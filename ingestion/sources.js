@@ -1781,6 +1781,13 @@ const TARGET_COMPANIES = {
     { id: 'tradition', emp: 'Tradition' },
     { id: 'tikehaucapital', emp: 'Tikehau Capital' },
     { id: 'cegid', emp: 'Cegid' },
+    // OCDE : le siege est a Paris et ses huit offres du 07/09 y sont toutes.
+    // Elle publie surtout des analystes de politiques publiques et d'energie
+    // — l'AIE est hebergee chez elle —, que le classement ecarte faute de
+    // famille. Elle est branchee pour ses postes de finance publique, de
+    // fiscalite internationale et d'economie, qui passent : le temoin
+    // « Economist - Public Finance » est classe.
+    { id: 'OECD', emp: 'OCDE' },
   ],
   // Détectés avec ingestion/detect-workday.js (le tenant, le datacenter et le
   // nom du site sont propres à chaque entreprise, aucun n'est devinable).

@@ -307,3 +307,6 @@ VAL DE LOIRE Maintenance | ^val de loire\b
 # clef `alan` (Alan, la mutuelle sante) avalait « alantra » par prefixe et la
 # rendait « fintech ». Elle a maintenant sa propre clef, en banque-affaires.
 Alantra                  | ^alantra\b
+
+# Branchee le 07/09/2026 sur SmartRecruiters (slug OECD). Siege a Paris.
+OCDE                     | ^ocde\b|^oecd\b
