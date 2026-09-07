@@ -1204,3 +1204,110 @@ data, qualité, PMO informatique.
 sans qu’aucun motif ne soit enregistré.** Un rejet sur quatre ne laisse aucune
 trace, et personne ne peut dire s’il est légitime sans rejouer le pipeline à
 la main.
+
+---
+
+## Le 7 septembre 2026 — la journée où rien n’a été corrigé sans être mesuré
+
+Sept correctifs, tous précédés d’une mesure, et **quatre instruments pris en
+faute avant d’avoir servi à conclure**. C’est le fait marquant de la journée :
+ce n’est pas la liste des corrections qui compte, c’est que chacune a été
+chiffrée avant d’être écrite, et que les mesures fausses ont été attrapées
+par la personne qui les avait faites.
+
+### Ce qui a été corrigé
+
+**Le passage obligé des dates.** L’API de Bank of America date en MM/JJ/AAAA,
+le pipeline lisait en JJ/MM/AAAA : le 1ᵉʳ septembre devenait le 9 janvier, et
+les dix offres franchissaient le seuil d’âge le même matin. Pire, une chaîne
+« 25/12/2026 » levait une `RangeError` qui **tuait le passage entier**.
+Désormais une seule fonction lit toute date, le format se **déclare** par
+source, et une date illisible refuse l’OFFRE, jamais le PASSAGE.
+
+**Le garde-fou proportionné.** Un connecteur muet ne bloque plus la
+publication au premier jour : il est suivi trois passages, et l’alerte nomme
+le coupable au lieu de dire « le réseau ou l’employeur ».
+
+**Le tag « international », retiré.** 12 offres sur 920 le portaient, **dix
+étaient en France**, dont « International Corporate Banking Graduate
+Programme *Paris* ». Le tag était posé sur l’intitulé, jamais sur le lieu :
+son premier motif était `/\bvie\b/`, il attrapait un TYPE DE CONTRAT en
+croyant attraper un PAYS.
+
+**Les villes.** `nettoyerLieu` gardait le dernier mot de tout libellé en
+capitales : « SAINT LÔ » devenait « Lô », « FONTENAY SOUS BOIS » devenait
+« Bois ». Le correctif regarde le CONTENU (un marqueur de voie) et non la
+casse. Avec 23 communes de banlieue inscrites, **28 offres réelles gagnées**,
+attribuées en comparant les deux catalogues sur l’URL.
+
+**Les zones, et le contrôle qui va avec.** Ces 28 offres étaient au catalogue
+et **introuvables** : `GRANDES_VILLES` avait été rempli, `ZONES` non, et
+elles tombaient dans « Autres villes ». C’était la **cinquième fois de la
+semaine** que deux tables se désynchronisaient. Un contrôle permanent le dit
+désormais, et il a mordu à son premier passage sur `guipavas`, un oubli réel
+que personne n’avait vu.
+
+**Les préfixes d’employeur.** La clef `alan` capturait « Alantra » et l’aurait
+publiée en « fintech ». Le préfixe exige maintenant une limite de mot — 0
+changement sur 920 offres, 6 verdicts changés sur des noms inventés.
+
+**Plus aucun rejet n’est muet.** Seize offres VIE sortaient de `normalize`
+sans laisser de trace, et **deux étaient de vraies offres de contrôle de
+gestion**. Huit sorties sont instrumentées, et un FILET attrape toute porte
+future : `normalize` enveloppe la fonction réelle et écrit lui-même si aucun
+des six registres n’a bougé. Mesure : **3 494 rejets, 3 494 motifs, zéro
+muet**. Éprouvé en désarmant le filet — le contrôle échoue et compte
+exactement les muets.
+
+**Le faux ami « commercial ».** En anglais `commercial` veut dire « lié à
+l’activité », pas « vendeur ». `VENTE_HORS_FINANCE_RE` écartait **quatre**
+offres sur toute la récolte, et **les quatre étaient des erreurs** — Airbus,
+CMA CGM, Ipsen, KONI, toutes du contrôle de gestion. Rendement du motif :
+zéro rejet légitime. L’exception exige les deux mots ; huit intitulés de vente
+pure restent dehors.
+
+Les autres mots à double sens ont été mesurés et ne font **aucun dégât** :
+`assurance` (278 intitulés, 5 au sens « Quality Assurance », 0 publiée),
+`contrôle`, `action`, `formation`, `bourse`, `exercice`, `prime`.
+
+**Sept maisons VIE inscrites** — Nexans, Elior, Virya, NAOS, Albioma, Shift
+Technology, Pramex. Pour le VIE, `maisons.txt` est sauté : c’est
+`structures.js` SEULE qui décide.
+
+### Les quatre instruments pris en faute
+
+Ils valent plus que les correctifs, parce qu’ils disent comment se tromper.
+
+| ce que l’instrument disait | ce qui était vrai |
+|---|---|
+| « 19 rejets muets » | **16** — trois traçaient dans `nonClasses`, un registre non lu sur six |
+| « 391 rejets sans motif » | le filet ne comptait qu’`ecartees` ; ils traçaient ailleurs |
+| « 109 captures suspectes dans `maisons.txt` » | la table faisait son travail : rattacher Guerlain à LVMH |
+| « 9 motifs de famille sur 10 rendent zéro » | `normaliserPourClassement` n’est pas la normalisation du classifieur — les motifs étaient **inertes** |
+
+Le dernier est le piège du 04/09 dans sa forme exacte : *un motif qui ne peut
+jamais matcher ne se plaint jamais*. Neuf zéros d’affilée l’ont trahi. Depuis,
+tout motif est éprouvé sur un cas connu avant d’être cru : `C.normalize("Chargé
+d'Affaires")` doit rendre `charge d affaires`, et on le VÉRIFIE.
+
+### Ce qui reste, mesuré, prêt à décider
+
+**384 offres sans famille** (et non 371 : la récolte a bougé). Elles passent
+la porte d’entrée — le pipeline les reconnaît comme de la finance — mais
+aucune famille ne sait les nommer. Réparties surtout en banque de détail (90),
+fintech (73), assurance (66), BFI (59), et à 76 % dans l’onglet CDI·CDD.
+
+Neuf motifs candidats en couvriraient **81**, dont deux qui portent presque
+tout :
+
+- **`chargé d’affaires` → 38 offres.** Métier bancaire français, stable, et le
+  contre-test chez l’industriel n’en fait entrer **qu’une**.
+- **`gestionnaire` → 35 offres**, mais **8 chez un industriel** et des
+  intitulés hétérogènes (« Gestionnaire Adhésions », « Gestionnaire Technique
+  Immobilier »). Ce mot nomme un NIVEAU, pas un métier — à ne pas poser seul.
+
+**433 offres aux portes sans marqueur** — non encore décomposées. Cette porte
+est celle qui a fait tomber le fourre-tout de 26,7 % à 1,4 % : l’assouplir
+rouvre le 2 septembre. Tout mot proposé pour elle doit être mesuré **chez un
+industriel** avant d’être écrit, sans exception.
+
