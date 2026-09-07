@@ -1445,3 +1445,69 @@ chemin des fiches. **556 offres y sont datées à chaque passage.**
 La détection est donc à garder telle quelle. C’est la RÉACTION qui était
 disproportionnée — voir `DECISIONS.md` §39.
 
+---
+
+## L’ordre de travail du 8 septembre 2026, arrêté par Victor
+
+**1. La ligne 3899** — la conversion européenne codée en dur du lecteur de
+fiches. C’est la jumelle des deux retirées de `normalize()` le 07/09, elle
+date **556 offres par passage**, et c’est elle qui bloque `bofa`. La faire
+passer par `lireDatePublication` avec un format déclaré.
+
+> **L’épreuve est écrite d’avance** : les dix offres BofA doivent ressortir au
+> **1ᵉʳ septembre**. Aujourd’hui la liste dit `2026-09-01` et la fiche rend
+> `2026-01-09` — 235 jours d’écart, l’inversion jour/mois.
+
+**2. Les institutions internationales de Paris.** L’OCDE est branchée mais son
+intérêt est différé : elle publie des analystes de politiques publiques et
+d’énergie (l’AIE est hébergée chez elle). Ses voisines, elles, recrutent de la
+finance junior toute l’année, et **aucune n’est branchée** :
+
+| institution | où | ce qu’elle recrute |
+|---|---|---|
+| **EBA** — Autorité bancaire européenne | Paris La Défense depuis 2019 | régulation bancaire, stress tests, analystes juniors |
+| **ESMA** — Autorité européenne des marchés financiers | Paris | supervision des marchés, données, risques |
+| **AFD** et sa filiale **Proparco** | Paris | financement de projet, analyse crédit souverain, analystes financiers juniors |
+| **Expertise France** (filiale AFD) | Paris | — |
+| **Banque européenne d’investissement** | bureau de Paris | — |
+
+La méthode est celle appliquée à l’OCDE, et ses deux leçons :
+
+1. **La plateforme d’abord** (`sonder-carrieres.js`), puis les offres lues
+   **directement au connecteur** — `valider-maisons.js` ne sait pas lire le
+   lieu SmartRecruiters et rend « aucune en France » à tort (défaut noté dans
+   son en-tête).
+2. **Avant de brancher, la mesure du 07/09** : inscrire la maison pour de vrai
+   dans `structures.js`, mesurer ce que le classement en fait, restaurer dans
+   un `finally`. `classify()` résout la structure lui-même — lui passer un
+   paramètre `structure` ne simule **rien**.
+
+Pour chacune : combien d’offres à Paris, combien passent le classement,
+combien restent au résidu. **Zéro aujourd’hui ne disqualifie pas** : si la
+maison recrute de la finance en temps normal, le branchement vaut la peine —
+coût d’une ligne, et l’offre entre le jour où elle paraît. C’est le
+raisonnement qui a fait brancher l’OCDE.
+
+Réserve de méthode : la règle 2 ne se discute pas. Une institution derrière un
+pare-feu ou dont le `robots.txt` nous ferme la porte reste hors d’atteinte, et
+se note comme telle.
+
+**3. Le compteur d’escalade** — `DECISIONS.md` §39. Il n’incrémente que
+lorsque la SOURCE ne répond pas ; quand elle répond et que nos filtres
+écartent tout, ça crie fort et ça n’escalade jamais.
+
+**4. Les trois mots prouvés** — `restructuring` / `turnaround`, `special
+situations`, `BIC / BNC`. Contre-test déjà fait sur quatre populations, gain
+de six offres. Cinq minutes.
+
+**5. `corpus-etiquetage.md`** — 518 lignes commitées le 07/09 et jamais
+relues. C’est lui qui débloque les **190 offres indécidables au titre**.
+
+Deux candidats de vocabulaire trouvés le soir du 07/09 en cliquant sur une
+annonce Nestlé, à poser avec les trois mots ci-dessus : **`cash`** (9
+occurrences sur les quatre populations — « Cash & FX Manager » chez Nestlé,
+« CASH MANAGER » chez Celine, « Spécialiste Recouvrement Cash » chez Airbus,
+toutes de la vraie trésorerie) et **`fx`** (2 occurrences). Étroits et
+propres, mais ils touchent la porte des 433 : ils passent par le jugement des
+intitulés, comme les trois autres.
+
