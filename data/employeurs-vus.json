@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genere": "2026-09-07T04:47:45.942Z",
+  "genere": "2026-09-07T19:29:47.830Z",
   "fenetreJours": 30,
   "employeurs": [
     {
@@ -69,6 +69,17 @@
       "premiereVue": "2026-09-05",
       "derniereVue": "2026-09-07",
       "passages": 3,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Bulgari",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-07",
+      "derniereVue": "2026-09-07",
+      "passages": 1,
       "offres": 1,
       "offresMax": 1
     }
