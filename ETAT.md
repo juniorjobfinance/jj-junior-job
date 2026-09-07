@@ -1551,3 +1551,52 @@ commerce de gros**, même s’ils rendent zéro dans la récolte du 07/09 :
 & Carry ». C’est la règle qui sort de la journée — *un contre-test ne voit que
 la population du jour, et le danger de `cash` est latent, pas absent.*
 
+### Les cinq institutions parisiennes — sondées le 07/09/2026 au soir
+
+**Aucune n’est du paquet A.** La seule qui soit sur une plateforme déjà
+branchée refuse l’accès non authentifié.
+
+| institution | plateforme | verdict |
+|---|---|---|
+| **AFD** | Cornerstone, tenant `afd` | **HTTP 401** — API fermée |
+| **Proparco** | Cornerstone, **même tenant** `afd` | idem, filiale sur le même portail |
+| **Expertise France** | **Gestmax** (`expertise-france.gestmax.fr`) | paquet B |
+| **EBA** | portail propre `careers.eba.europa.eu` | plateforme non identifiée, **zéro vacance ce soir** |
+| **ESMA** | **Adequasys** (`esmacareers.adequasys.com`) | paquet B |
+| **BEI** | **PeopleSoft** (`erecruitment.eib.org/psc/hr/`) | paquet B — et siège au **Luxembourg** |
+
+#### AFD : le refus est de leur côté, prouvé
+
+Le connecteur Cornerstone a été éprouvé sur un cas connu avant d’accuser :
+**Eurazeo rend 35 offres**, l’AFD rend `HTTP 401` sur `siteId` 1 et 2. Le
+connecteur fonctionne ; c’est l’instance de l’AFD qui exige une
+authentification. **Règle 2 : on ne contourne pas.** À noter injoignable
+comme Bpifrance et Alvarez & Marsal, sauf si un autre point d’entrée public
+existe — non cherché ce soir.
+
+#### Les étapes 3 et 4 sont sans objet
+
+Compter les offres parisiennes puis simuler l’inscription n’a de sens que si
+un connecteur peut les ramener. Les étapes 1 et 2 les arrêtent toutes les
+cinq avant. Ce n’est **pas** le cas de l’OCDE, où le connecteur marchait et
+où la mesure a donc pu trancher.
+
+#### Ce qu’il faudrait pour le paquet B
+
+La règle de Victor : *une plateforme qui sert dix maisons vaut le connecteur,
+une qui en sert une ne le vaut pas.* Sur les trois trouvées, **je n’ai pas
+mesuré combien de maisons les partagent** — et c’est ce qui décide :
+
+- **Gestmax** — très répandu dans le secteur public français ; à sonder sur
+  d’autres agences avant de conclure.
+- **PeopleSoft** — répandu chez les institutions internationales et les
+  grands groupes ; même remarque.
+- **Adequasys** — paraît confidentiel ; sans doute une maison pour une.
+
+Réserve sur la **BEI** : son siège est au Luxembourg, et le périmètre est la
+France (décision du 07/09). Son portail listera surtout du luxembourgeois.
+
+Réserve sur l’**EBA** : son portail est en ligne et fonctionne, il affiche
+*« No current vacancies »* ce soir. Zéro aujourd’hui ne disqualifie pas — mais
+ici il n’y a même pas de connecteur pour le savoir demain.
+
