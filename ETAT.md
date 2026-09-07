@@ -1675,3 +1675,59 @@ Aucun de ces mots n’a été posé : ils rejoignent la file du jugement des
 intitulés, avec `restructuring`, `special situations`, `BIC / BNC`,
 `cash manager` et `fx`.
 
+### Quinze annonces pointées le 07/09 au soir — quatre maisons à brancher
+
+Victor a envoyé quinze URL depuis une session de navigation. **Elles ont
+produit plus que le sondage systématique des 92 candidates.** Chaque
+plateforme testée en `fetch` Node pur, chaque connecteur appelé en Node.
+
+#### Quatre paquets A, mesurés au connecteur, prêts à poser
+
+| maison | plateforme | offres | en France | ce qui manque |
+|---|---|---|---|---|
+| **Chanel** | Workday `cc` / wd3 / `ChanelCareers` | 24 | **23** | `sources.js` **et** `structures.js` |
+| **FDJ United** | Workday `groupefdj` / wd103 / `FDJ-UNITED` | 24 | **18** | les trois tables |
+| **Photosol** | Teamtailor `photosol` | 7 | 5 | **`sources.js` seul** — les deux tables l’ont déjà |
+| **Nabla** | Ashby `nabla` | 1 | 1 | les trois tables |
+
+Chanel à elle seule porte une douzaine de stages finance : *STAGE - TREASURY
+ANALYST - Corporate*, *STAGE - Audit interne*, *Assistant Contrôleur de
+gestion*, *Analyste Financier Projets Stratégiques*, *Comptabilité générale*.
+FDJ porte un *Analyste M&A - Stage* à Boulogne-Billancourt.
+
+**Chanel figurait déjà dans la liste des « maisons sans aucune offre »** de
+chaque passage. Elle n’était pas muette : elle n’était pas branchée.
+
+#### Un défaut de notre connecteur Teamtailor
+
+`fetchTeamtailor` construit `https://<company>.teamtailor.com/jobs.json`.
+Les maisons sur **domaine propre** lui échappent : ChapsVision publie sur
+`careers.chapsvision.com`, dont le `jobs.json` répond **HTTP 200 avec 473 Ko
+et 5 entrées**, quand `chapsvision.teamtailor.com` rend 404.
+
+Ce n’est pas une source injoignable, c’est **une limite de notre code**. Reste
+à savoir combien de maisons Teamtailor sont dans ce cas — non mesuré.
+
+#### Deux plateformes nouvelles, un paquet B chacune
+
+- **Flatchr** (`careers.flatchr.io`) — lisible en `fetch` pur, 171 Ko, titre et
+  employeur présents ; `robots.txt` ne bloque que FacebookBot, bingbot et
+  quelques robots de mesure. L’offre pointée est un *Fund Analyst H/F stage*
+  chez **ClubFunding AM**, société de gestion parisienne.
+- **iCIMS** (`careers-stifel.icims.com`) — lisible, `robots.txt` permissif,
+  sitemap publié. Sans intérêt pour Stifel (offres américaines) mais **Aon
+  France est sur iCIMS** : à mesurer, combien de maisons françaises ?
+
+#### Deux injoignables
+
+- **Stifel Europe** — 50skills, coquille JavaScript, API sous clé. Sa page
+  « EU campus » ne fait que renvoyer vers 50skills : la boucle est fermée.
+- **PVH** (Tommy Hilfiger, Calvin Klein) — `HTTP 202` avec **0 octet** sur un
+  `fetch` sans navigateur : filtre anti-robot. Règle 2.
+
+#### Déjà chez nous, vérifié
+
+Ipsen (*FP&A / Junior Financial Analyst* — **au catalogue**), Valeo (*Stagiaire
+Front Office* — **au catalogue**, 8 offres publiées), Groupe BPCE, Crédit
+Mutuel, Schroders (`ekbq`), Nestlé.
+
