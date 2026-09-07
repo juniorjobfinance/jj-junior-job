@@ -1572,6 +1572,26 @@ const INDEPENDANT_RE =
 const VENTE_HORS_FINANCE_RE =
   /\bsales\b|\bcommercial(?:e|es|aux)?\b|business\s+develop|d[ée]veloppement\s+commercial|\bkey\s+account\b|chargé\w*\s+d[e']\s*affaires?\s+commercial/i;
 
+// LE FAUX AMI. En francais « commercial » designe un vendeur ; en anglais
+// `commercial` veut dire « lie a l activite de l entreprise ». Commercial
+// Controller, Commercial Finance Manager et Commercial FP&A sont des
+// intitules de CONTROLE DE GESTION courants chez les industriels
+// anglo-saxons — et le motif ci-dessus les prenait pour de la vente.
+//
+// Mesure du 07/09/2026 sur la recolte entiere : VENTE_HORS_FINANCE_RE
+// ecartait QUATRE offres, et les quatre etaient celles-ci — Airbus, CMA CGM,
+// Ipsen, KONI. Zero rejet legitime, quatre erreurs. Deux d entre elles ne
+// sont apparues que parce qu un chemin muet a ete instrumente le meme jour :
+// un rejet sans motif cache des pertes reelles.
+//
+// L exception exige les DEUX mots : « commercial » ne suffit pas, il faut
+// qu un metier de finance soit nomme dans le meme intitule. Un « Commercial
+// Manager » ou un « Responsable commercial » reste dehors.
+const COMMERCIAL_EST_UN_ANGLICISME =
+  /\bcommercial\b/i;
+const METIER_DE_FINANCE_DANS_LE_TITRE =
+  /\bcontroll?er\b|\bcontrolling\b|\bfp&?a\b|\bfinance\b|\bfinancial\b|\baccounting\b|\bcontr[oô]le\s+de\s+gestion\b|\btreasury\b|\baudit\b/i;
+
 // Le dernier paramètre distingue les deux passages du filtre. Au premier, les
 // descriptions n'ont pas encore été récupérées : refuser les offres qui n'en
 // ont pas viderait le catalogue avant même être allé les lire. Au second,
@@ -3253,7 +3273,8 @@ function normalizeInterne(item) {
   // ou de grande consommation, le même mot désigne la vente de son catalogue :
   // le « Sales Business Analyst & Development » de L'Oréal n'a rien d'un poste
   // financier, il est seulement rattaché à une direction qui l'est.
-  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title)) {
+  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title) &&
+      !(COMMERCIAL_EST_UN_ANGLICISME.test(title) && METIER_DE_FINANCE_DANS_LE_TITRE.test(title))) {
     noterEcartee({ title: title || '(intitulé vide)', emp, volet: volet, sector: null, famille: null, source: __src },
       'normalize', 'vente-hors-finance');
     return null;

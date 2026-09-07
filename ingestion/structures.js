@@ -379,6 +379,22 @@ const EMPLOYER_STRUCTURE = {
   planisware: 'entreprise',
   numberly: 'entreprise',
 
+  // Inscrites le 07/09/2026. Leurs offres VIE mouraient sur
+  // gate:publication-sans-structure : pour le VIE, maisons.txt est saute et
+  // c'est structures.js SEULE qui decide. Meotec passait sans etre dans
+  // maisons.txt, parce quelle avait une structure.
+  //
+  // Les sept clefs ont ete verifiees contre le nom sous lequel chaque
+  // employeur PUBLIE dans la recolte, pas contre le nom d'une liste : trois
+  // clefs ecrites le meme jour depuis des noms courts etaient inertes.
+  'nexans france':                'entreprise',    // Nexans France — cablier industriel
+  'elior group':                  'entreprise',    // Elior Group — restauration collective
+  'virya energy services france': 'entreprise',    // Virya Energy Services — energeticien
+  'naos':                         'entreprise',    // NAOS — cosmetique (Bioderma)
+  'albioma':                      'entreprise',    // Albioma — energie renouvelable
+  'shift technology':             'fintech',       // Shift Technology — detection de fraude vendue aux assureurs
+  'pramex international':         'conseil',       // Pramex International — filiale BPCE, conseil en developpement international
+
   // --- Les 34 maisons a moitie inscrites, plus Alantra --------------------
   // Elles etaient dans maisons.txt sans etre ici : § 24, une maison presente
   // dans UNE SEULE des deux tables rend zero offre, et le pipeline refuse de
