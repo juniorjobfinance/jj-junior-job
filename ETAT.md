@@ -1138,4 +1138,69 @@ champ lu qui n’est pas le champ demandé, appliqué à une fonction.
   que dans les commentaires de l'issue. Quelques passages suffiront à la
   reconstituer.
 - PageSpeed mobile n’a pas été remesuré depuis l’élagage de `offres.js`
-  (quota épuisé le 04/09 au soir). Les ~56 ms attendus restent une estimation.
+  (quota épuisé le 04/09 au soir). Les ~56 ms attendus restent une estimation.
+
+---
+
+## Le sondage des 92 candidates — 7 septembre 2026, abandonné
+
+Quatre-vingt-onze domaines sondés, **une seule maison validée** avec une offre
+réelle en France : Memo Bank, sur Teamtailor. Ce n’est pas une conclusion sur
+les maisons — c’est une conclusion sur la **méthode**, et elle est à garder
+pour ne pas la refaire dans trois mois.
+
+### Les trois défauts qui ont produit ce résultat
+
+**1. Les domaines venaient de mémoire.** Un domaine faux rend « aucune
+plateforme reconnue » sans le dire. Sur 91 sondages, 77 ont rendu ce message :
+impossible de distinguer une maison sans site carrières d’un domaine mal
+écrit. Le silence n’est pas une réponse.
+
+**2. Le sondeur capte la signature de la PLATEFORME, pas le locataire.**
+Trois maisons différentes — Breega, Mooncard, Memo Bank — ont rendu le même
+slug Teamtailor `app`. Daphni a rendu `NielsenIQ`, Frst a rendu `maki`,
+Optimind a rendu le Workday d’**Accenture**. Sur quatorze « OK », **douze
+étaient faux**. Le validateur nomme ce défaut dans son propre en-tête depuis
+longtemps — il n’a pas été relu avant de lancer le sondage.
+
+**3. Le sondeur et les connecteurs ne parlent pas la même langue.** Le sondeur
+écrit `slug`, `fetchTeamtailor` et `fetchRecruitee` attendent `company`,
+`fetchSmartRecruiters` attend `id`. Le premier passage du validateur a donc
+appelé `https://undefined.teamtailor.com/` et rendu « 0 offre » pour tout le
+monde — un verdict entièrement faux, qui aurait fait écarter des maisons
+saines. C’est « un champ lu doit être un champ demandé », entre deux outils du
+même dépôt.
+
+### Ce qu’il faudrait avant de recommencer
+
+1. **Une source de domaines vérifiée**, pas une liste écrite de mémoire.
+2. **Le sondeur doit refuser les slugs génériques** — `app`, `www`, `tt`, `jobs`
+   — au lieu de les rendre comme des locataires.
+3. **Un vocabulaire commun** entre `sonder-carrieres.js` et les connecteurs :
+   tant que l’un écrit `slug` et l’autre lit `company`, toute validation est
+   fausse.
+4. **Le lecteur de lieu du validateur ne lit pas SmartRecruiters** (il rend
+   « [object Object] ») : son verdict « aucune en France » est faux sur cette
+   plateforme. Noté dans `valider-maisons.js`.
+
+### La veine à creuser à la place
+
+Les offres qu’on **ramène déjà et qu’on jette**. Aucun connecteur à écrire,
+aucun domaine à deviner :
+
+- **74 sur le seul VIE** (122 collectées, 48 survivantes, 45 publiées) ;
+- **804 sur l’ensemble du catalogue** — 371 sans famille, 433 aux portes sans
+  marqueur.
+
+Sur les 74 du VIE, la décomposition du 07/09 donne **sept offres de vraie
+finance junior** qu’une ligne dans `structures.js` suffirait à publier :
+Nexans (Installation financial analyst), Elior (Contrôleur de gestion
+financier), Pramex International (Analyste M&A), Virya Energy (M&A Analyst),
+NAOS (Technicien comptable), Shift Technology (Analyst FP&A), Albioma
+(Corporate finance). Les 67 autres sont écartées à juste titre — commerciaux,
+data, qualité, PMO informatique.
+
+**Et un défaut à corriger dans le registre lui-même : 19 des 74 sont refusées
+sans qu’aucun motif ne soit enregistré.** Un rejet sur quatre ne laisse aucune
+trace, et personne ne peut dire s’il est légitime sans rejouer le pipeline à
+la main.

@@ -40,6 +40,11 @@ const NOMS = [
   'writeSitemap',
   // Le chemin complet d'une offre brute vers le catalogue.
   'normalize',
+  // Le registre des ecartees : il porte le MOTIF de chaque rejet. Sans lui on
+  // sait qu'une offre est refusee, pas pourquoi — et rejouer les portes une a
+  // une donne des faux verdicts, la porte « maison de reference » etant sautee
+  // pour le VIE alors que atelier.js ne connait pas le volet.
+  'rapportClassement',
   // La lecture des dates, qu'on veut pouvoir éprouver seule : une date fausse
   // place une annonce périmée en tête du site. `ficheJsonLd` est la lecture de
   // la fiche elle-même — le dernier recours quand la source ne date pas.

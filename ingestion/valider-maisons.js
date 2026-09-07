@@ -41,6 +41,13 @@ const CONNECTEURS = {
   avature: src.fetchAvature,
 };
 
+// DEFAUT CONNU, NON CORRIGE (07/09/2026) : la forme SmartRecruiters n est
+// pas lue. Le lieu y est un OBJET, et il ressort « [object Object] » — donc
+// le verdict « aucune en France » est FAUX pour cette plateforme, et il le
+// sera en silence. Sycomore AM a ete jugee « aucune en France » sur une offre
+// « Stage 6 mois en Conformite / Controle interne » qui est tres probablement
+// parisienne. Tant que ceci n est pas corrige, ne pas croire un verdict
+// SmartRecruiters.
 // Le lieu se cache sous un nom différent dans chaque API.
 function lieuDe(raw) {
   const brut =
