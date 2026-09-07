@@ -61,6 +61,13 @@ const NOMS = [
   'niveauHorsCible',
   'passesJuniorFilter',
   'estGrandeVille',
+  // Les rouages du LIEU. `estGrandeVille` decide de ce qui ENTRE, `inferZone`
+  // du REGROUPEMENT AFFICHE : deux tables, et le controle des zones a besoin
+  // des deux pour verifier quon ne remplit pas lune sans lautre.
+  'inferZone',
+  'GRANDES_VILLES',
+  'GRAND_PARIS',
+  'ZONES',
   'villeDeLaListe',
   'normaliserPourClassement',
   // Les cles de deduplication, pour pouvoir attribuer un rejet a dedupe().

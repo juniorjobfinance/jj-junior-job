@@ -36,6 +36,7 @@ const CONNECTEURS = {
   ashby: src.fetchAshby,
   teamtailor: src.fetchTeamtailor,
   recruitee: src.fetchRecruitee,
+  smartrecruiters: src.fetchSmartRecruiters,
   phenom: src.fetchPhenom,
   avature: src.fetchAvature,
 };

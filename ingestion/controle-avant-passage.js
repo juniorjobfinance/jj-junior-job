@@ -564,6 +564,40 @@ try {
   ko('catalogue HTML', e.message);
 }
 
+console.log('\n--- Les deux tables du lieu ---');
+// GRANDES_VILLES decide de ce qui ENTRE au catalogue ; ZONES decide du
+// REGROUPEMENT affiche dans le filtre des lieux. Une commune inscrite dans la
+// premiere et absente de la seconde donne une offre PUBLIEE mais INTROUVABLE :
+// elle tombe dans « Autres villes », et le candidat qui cherche Rennes ne voit
+// pas les offres de Saint-Gregoire.
+//
+// C'est arrive le 07/09/2026 sur vingt-huit offres. C'est le meme defaut que
+// maisons.txt sans structures.js (paragraphe 24) : deux tables, une seule
+// remplie. La regle « penser aux deux » a echoue cinq fois cette semaine ;
+// ce controle ne demande a personne de s'en souvenir.
+//
+// On interroge inferZone, la fonction qui DECIDE, et non une comparaison de
+// listes : une commune peut etre couverte par un autre chemin (GRAND_PARIS,
+// un arrondissement) sans figurer dans ZONES, et comparer les listes
+// crierait a tort.
+try {
+  const FOURRE_TOUT = new Set(['Autres villes', 'Département seul', 'Lieu non précisé']);
+  const orphelines = (P.GRANDES_VILLES || [])
+    .filter((ville) => FOURRE_TOUT.has(P.inferZone(ville)))
+    .filter((v, i, t) => t.indexOf(v) === i);
+  if (!P.GRANDES_VILLES || !P.inferZone) {
+    ko('zones', 'GRANDES_VILLES ou inferZone ne sont pas exposes — le controle ne controle rien');
+  } else if (orphelines.length) {
+    ko('zones',
+      `${orphelines.length} commune(s) admise(s) par GRANDES_VILLES mais sans zone : ` +
+      `${orphelines.join(', ')} — leurs offres seront publiees et introuvables dans le filtre des lieux`);
+  } else {
+    ok('zones', `les ${P.GRANDES_VILLES.length} communes de GRANDES_VILLES ont toutes une zone`);
+  }
+} catch (e) {
+  ko('zones', e.message);
+}
+
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();
