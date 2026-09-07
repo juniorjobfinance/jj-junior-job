@@ -1600,3 +1600,48 @@ Réserve sur l’**EBA** : son portail est en ligne et fonctionne, il affiche
 *« No current vacancies »* ce soir. Zéro aujourd’hui ne disqualifie pas — mais
 ici il n’y a même pas de connecteur pour le savoir demain.
 
+### Sept annonces pointées le 07/09 au soir — ce qu’elles ont révélé
+
+Victor a envoyé sept URL depuis une session de navigation. Mesuré à chaque
+fois au connecteur, jamais par le validateur.
+
+| maison | plateforme | verdict |
+|---|---|---|
+| Nestlé | connectée | l’offre meurt faute de `cash` / `fx` |
+| Groupe BPCE (`ekez`) | connectée | publie normalement |
+| Crédit Mutuel | connectée | 9 collectées, 2 publiées |
+| **Ipsen** | connectée | **l’offre pointée EST au catalogue** |
+| **Nabla** | **Ashby — branché** | 1 stage Finance à Paris, **bloqué** |
+| **P&G** | **Phenom — branché** | absente des trois tables |
+| **Stifel** | **50skills — nouvelle** | **14 offres à Paris** |
+
+#### Deux paquets A à une ligne
+
+- **Nabla** rend exactement une offre : *« Internship - Finance Analyst »,
+  Paris office, département Finance*. Elle meurt sur `employeursInconnus` —
+  Nabla n’est dans aucune des deux tables. Ashby est branché.
+- **P&G** est sur Phenom, que nous lisons pour cinq maisons déjà. Le
+  « Strategic Finance Internship » pointé est notre cible exacte.
+
+#### Un gisement réel, mais paquet B
+
+**Stifel : 24 offres, dont 14 à Paris** — des stages en banque d’affaires.
+C’est plus que tout ce que la journée du 07/09 a rapporté. Mais `50skills`
+n’est aucune de nos 23 plateformes. Avant d’écrire le connecteur : combien de
+maisons partagent `50skills` ? La règle du paquet B ne se contourne pas.
+
+#### Trois prises manquées, trouvées en chemin
+
+- **`fiscaliste`** — « Fiscaliste - H/F » (Ipsen) meurt à `porte-finance`.
+  Métier français stable et sans ambiguïté, mais c’est le **filtre d’entrée**,
+  et Ipsen est un industriel : contre-test obligatoire.
+- **L’analyse sectorielle en banque d’affaires** — « Analyste Healthcare
+  Industry Group » (BPCE) meurt à `porte-finance`, « Analyste - Healthcare
+  Sector » (Natixis) est au résidu sans famille. Deux fois le même trou.
+- **« Stagiaire Finance Commercial & Global Alliances »** (Ipsen) — résidu
+  sans famille.
+
+Aucun de ces mots n’a été posé : ils rejoignent la file du jugement des
+intitulés, avec `restructuring`, `special situations`, `BIC / BNC`,
+`cash manager` et `fx`.
+
