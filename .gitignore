@@ -51,6 +51,8 @@ data/signalements.md
 # --refonte ou --depuis-cache. Rien ne les sert — le site lit offres.js — et
 # ils sont regeneres a chaque passage. Suivis, ils atterrissent sur main ou ils
 # n ont rien a faire, et un git add -A les remet.
+index-refonte.html
+familles-refonte/
 offres-refonte.js
 offres-refonte.xml
 sitemap-refonte.xml

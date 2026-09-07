@@ -2390,7 +2390,9 @@ function normalize(item) {
     pays = 'France';
     url = raw.hostedUrl;
     typeContratRaw = raw.categories?.commitment;
-    postedAt = new Date(raw.createdAt).toISOString();
+    // Horodatage en millisecondes. Le passage le reconnait ; le laisser a
+    // `new Date()` faisait lever une RangeError sur une valeur inattendue.
+    postedAt = raw.createdAt;
   } else if (__src.startsWith('smartrecruiters:')) {
     emp = item.emp;
     title = raw.name;
@@ -2439,7 +2441,7 @@ function normalize(item) {
     pays = 'France';
     url = raw.url;
     typeContratRaw = raw.titre;
-    postedAt = raw.date ? new Date(raw.date).toISOString() : null;
+    postedAt = raw.date;
   } else if (__src.startsWith('talentlink:')) {
     // Le lieu n'est donné que dans l'intitulé, sous forme de liste de bureaux :
     // « (Paris / London) ». Le connecteur n'a retenu que celles qui nomment
@@ -2450,7 +2452,7 @@ function normalize(item) {
     pays = 'France';
     url = raw.url;
     typeContratRaw = raw.titre;
-    postedAt = raw.date ? new Date(raw.date).toISOString() : null;
+    postedAt = raw.date;
   } else if (__src === 'lvmh') {
     // `requiredExperience` dit le niveau attendu en clair — « Débutant »,
     // « Minimum 5 ans », « Minimum 10 years ». On le passe au filtre 0-3 ans
@@ -2465,7 +2467,7 @@ function normalize(item) {
     romeLibelle = raw.functionFilter;
     descr = raw.requiredExperience || '';
     postedAt = raw.publicationTimestamp
-      ? new Date(raw.publicationTimestamp * 1000).toISOString()
+      ? raw.publicationTimestamp * 1000
       : null;
   } else if (__src === 'axafr') {
     // Le site français d'AXA situe ses offres au département (« Savoie ») plutôt
@@ -2509,10 +2511,11 @@ function normalize(item) {
     typeContratRaw = raw.displayJobTitle;
     // Texte ENTIER : la troncature se fait plus bas, apres l'analyse.
     descr = (raw.externalDescription || '').replace(/<[^>]*>/g, ' ');
-    {
-      const m = String(raw.postingEffectiveDate || '').match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-      postedAt = m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString() : null;
-    }
+    // Format EUROPÉEN, prouvé sur la récolte du 07/09 : 23 dates dont le
+    // premier nombre dépasse 12. La conversion codée en dur ici supposait
+    // l'européen sans le déclarer, et convertissait AVANT le passage obligé —
+    // qui en devenait aveugle.
+    postedAt = lireDatePublication(raw.postingEffectiveDate, 'JJ/MM/AAAA');
   } else if (__src.startsWith('recruitee:')) {
     emp = item.emp;
     title = raw.title;
@@ -2681,7 +2684,7 @@ function normalize(item) {
     // Le flux donne bien une date. La renseigner fait entrer McKinsey dans le
     // filtre d'âge commun, qui écarte alors de lui-même les annonces de 2016 et
     // 2019 encore présentes dans leur catalogue.
-    postedAt = raw.date ? new Date(`${raw.date}T00:00:00Z`).toISOString() : null;
+    postedAt = raw.date;
   } else if (__src.startsWith('bpce:')) {
     // API JSON du groupe : l'enseigne qui recrute (Natixis CIB France, Natixis
     // IM...) prime sur le nom du groupe, comme pour les entités du Crédit
@@ -2694,7 +2697,7 @@ function normalize(item) {
     typeContratRaw = raw.type;
     // Texte ENTIER : la troncature se fait plus bas, apres l'analyse.
     descr = (raw.description || '').replace(/<[^>]*>/g, ' ');
-    postedAt = raw.date ? new Date(`${raw.date}T00:00:00Z`).toISOString() : null;
+    postedAt = raw.date;
   } else if (__src.startsWith('liste:')) {
     // Carte d'une liste HTML officielle : type de contrat, intitulé et lieu
     // France ». La liste ne porte aucune date de publication — on le dit
@@ -2714,18 +2717,19 @@ function normalize(item) {
     url = raw.url;
     typeContratRaw = raw.type;
     // « Mis à jour le 31/08/2026 » -> date réelle quand la source la donne.
+    //
+    // Deux formes selon la maison : « 31/08/2026 » chez EDF, et l'ISO
+    // « 2026-09-01 » que La Banque Postale écrit dans l'attribut datetime de
+    // ses cartes. Les deux passent par le passage obligé ; le format déclaré
+    // ne sert qu'à la première, l'ISO se lisant sans rien supposer.
+    //
+    // La conversion codée en dur qui vivait ici supposait l'européen sans le
+    // déclarer, et convertissait AVANT le passage obligé — qui en devenait
+    // aveugle sur elle.
     {
-      // Deux formats selon la maison : « 31/08/2026 » chez EDF, et l'ISO
-      // « 2026-09-01 » que La Banque Postale écrit dans l'attribut datetime de
-      // ses cartes. Ne connaître que le premier faisait tomber le second dans
-      // le vide, sans erreur.
-      const iso = (raw.date || '').match(/(\d{4})-(\d{2})-(\d{2})/);
-      const m = iso || (raw.date || '').match(/(\d{2})\/(\d{2})\/(\d{4})/);
-      postedAt = !m
-        ? null
-        : iso
-          ? new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`).toISOString()
-          : new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`).toISOString();
+      const brut = String(raw.date || '');
+      const m = brut.match(/(\d{4}-\d{2}-\d{2})|(\d{1,2}\/\d{1,2}\/\d{4})/);
+      postedAt = m ? lireDatePublication(m[0], 'JJ/MM/AAAA') : null;
     }
   } else if (__src.startsWith('wordpress:')) {
     // WordPress REST : la réponse JSON porte tout, y compris le texte.
@@ -2807,7 +2811,7 @@ function normalize(item) {
       raw.__dateIso ||
       raw.posted_date ||
       raw.postedDate ||
-      (raw.t_create ? new Date(raw.t_create).toISOString() : null) ||
+      raw.t_create ||
       raw.dateCreated ||
       null;
   } else if (__src === 'manuel') {
@@ -2818,7 +2822,7 @@ function normalize(item) {
     url = raw.url;
     typeContratRaw = raw.typeContrat;
     romeLibelle = raw.category;
-    postedAt = raw.addedOn ? new Date(raw.addedOn).toISOString() : new Date().toISOString();
+    postedAt = raw.addedOn || new Date().toISOString();
   } else {
     return null; // source inconnue -> ignorée
   }
@@ -3103,6 +3107,26 @@ function normalize(item) {
   // intitulé qui semblait fourni au départ (« Internship - Andera Infra »).
   if (!titreNommeUnMetier(title, emp)) return null;
 
+  // LE PASSAGE OBLIGÉ. Toute chaîne devient une date ici, et le refus porte
+  // sur l'OFFRE, jamais sur le passage : une date illisible rend le catalogue
+  // INCOMPLET, pas FAUX (§27, §35). On rend null, sous un motif nommé, et la
+  // chaîne continue — `filter(Boolean)` fait déjà ce travail.
+  // Une branche qui declare son format a deja appele le passage : elle nous
+  // transmet alors son verdict, pas une chaine. Le relire convertirait le
+  // symbole en texte et rapporterait « Symbol(date illisible) » comme s'il
+  // etait la date fautive.
+  const dateLue = postedAt === DATE_REFUSEE ? DATE_REFUSEE : lireDatePublication(postedAt);
+  if (dateLue === DATE_REFUSEE) {
+    noterEcartee(
+      { title, emp, volet: null, sector: null, famille: null, source: __src },
+      'date',
+      postedAt === DATE_REFUSEE
+        ? 'format refusé par la déclaration du connecteur'
+        : 'format illisible : « ' + String(postedAt).slice(0, 24) + ' »'
+    );
+    return null;
+  }
+
   return {
     emp,
     title,
@@ -3145,7 +3169,11 @@ function normalize(item) {
     // Normalisée dès ici, et non à la seule écriture : les filtres d’âge lisent
     // ce champ, et « 09/01/2026 » leur paraissait tout frais — JavaScript le lit
     // à l’américaine, soit le 1er septembre au lieu du 9 janvier.
-    _postedAt: dateIso(postedAt) || new Date().toISOString(),
+    // Une date que le passage n'a pas su lire ne parvient jamais ici :
+    // l'offre a été refusée plus haut. Reste le cas licite d'une source qui
+    // ne date pas — et là, la date de collecte est un repli assumé, signalé
+    // par `_dateDeLaSource: false` (voir DECISIONS.md §34).
+    _postedAt: dateLue || new Date().toISOString(),
     // La source a-t-elle VRAIMENT daté cette offre ? Le drapeau de fiabilité se
     // calculait sur le seul nom de la source, si bien qu'une source réputée
     // fiable mais muette sur une offre précise lui faisait afficher la date de
@@ -3154,7 +3182,7 @@ function normalize(item) {
     // Une date que le pipeline n’a pas su lire ne compte pas comme une date :
     // sinon l’offre serait publiée avec l’heure de collecte présentée comme sa
     // date de parution, ce qui est précisément le mensonge qu’on évite.
-    _dateDeLaSource: Boolean(dateIso(postedAt)),
+    _dateDeLaSource: Boolean(dateLue),
     // Avature ne donne que le « lastmod » de son sitemap : une date de
     // MODIFICATION, la seule que ces portails exposent. Elle est réelle et
     // propre à l'annonce, mais la carte écrira « Mise à jour », pas « Publiée ».
@@ -4071,6 +4099,58 @@ function anomaliesDePublication(nouvelles, brutes, suivis) {
     }
   }
   return { bloquantes, signalements };
+}
+
+// ---------------------------------------------------------------------------
+// LE PASSAGE OBLIGE — toute chaîne devient une date ici, et nulle part ailleurs
+// ---------------------------------------------------------------------------
+//
+// Quarante-deux endroits lisaient une date, et aucun ne consultait une
+// déclaration sur place. Deux conventions opposées coexistaient : `new Date()`
+// lit à l'américaine, `dateIso` à l'européenne — 234 jours d'écart sur la même
+// chaîne « 09/01/2026 ».
+//
+// IL REFUSE L'OFFRE, JAMAIS LE PASSAGE. Une date illisible rend le catalogue
+// INCOMPLET, pas FAUX (DECISIONS.md §27 et §35). `normalize()` rend donc `null`
+// pour cette offre, sous un motif nommé, et la chaîne continue. Si un portail
+// change de format, toutes ses offres sont refusées, son connecteur tombe à
+// zéro, le garde-fou non bloquant crie avec le motif, et le catalogue part
+// sans lui — du symptôme à la cause, sans une ligne de plus.
+//
+// Le format d'une source se DÉCLARE au point d'appel, là où le code sait de
+// quelle source il parle. Sans déclaration, une chaîne « A/B/AAAA » est
+// refusée : la deviner par défaut est ce qui a coûté trois matins.
+const DATE_REFUSEE = Symbol('date illisible');
+
+function lireDatePublication(valeur, format) {
+  if (valeur == null || valeur === '') return null; // pas de date : licite
+  // Un horodatage : aucune ambiguïté possible.
+  if (typeof valeur === 'number') {
+    const d = new Date(valeur < 1e11 ? valeur * 1000 : valeur);
+    return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
+  const t = String(valeur).trim();
+  if (!t) return null;
+  // ISO, avec ou sans heure : la seule forme qui se lit sans rien supposer.
+  if (/^\d{4}-\d{2}-\d{2}/.test(t)) {
+    const d = new Date(t.length === 10 ? t + 'T00:00:00Z' : t);
+    return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
+  // « A/B/AAAA » : indécidable sans déclaration.
+  const m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+  if (m) {
+    if (!format) return DATE_REFUSEE;
+    const an = m[3].length === 2 ? '20' + m[3] : m[3];
+    const jour = format === 'MM/JJ/AAAA' ? m[2] : m[1];
+    const mois = format === 'MM/JJ/AAAA' ? m[1] : m[2];
+    if (Number(mois) < 1 || Number(mois) > 12 || Number(jour) < 1 || Number(jour) > 31) return DATE_REFUSEE;
+    const d = new Date(`${an}-${String(mois).padStart(2, '0')}-${String(jour).padStart(2, '0')}T00:00:00Z`);
+    return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
+  // Tout le reste : on laisse `dateIso` faire ce qu'il sait faire (formats
+  // français en toutes lettres, ISO partiels), et on refuse s'il échoue.
+  const iso = dateIso(t);
+  return iso || DATE_REFUSEE;
 }
 
 // Une date publiée est toujours en ISO, ou absente. Chaque connecteur rend la
