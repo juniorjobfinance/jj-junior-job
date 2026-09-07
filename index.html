@@ -575,6 +575,12 @@
   .famille-ligne .famille-option { flex: 1; min-width: 0; }
   .famille-ligne + .famille-ligne { border-top: 1px solid rgba(220, 214, 201, 0.45); }
 
+  /* Les thematiques n'ont pas de « ? ». Sans reserve, leur nombre se posait
+     22 px a droite de ceux des familles — la largeur du bouton (1,25 rem)
+     plus l'ecart de la ligne (0,15 rem). On la leur rend, pour que les deux
+     colonnes de chiffres soient la meme colonne. */
+  #tags-fieldset .famille-option { padding-right: calc(1.25rem + 0.15rem); }
+
   /* Le « ? ». Cercle orange, glyphe orange, intérieur blanc : il doit se
      repérer d'un coup d'œil à côté d'un nom de famille, et l'orange est
      réservé dans ce site à ce qui se clique — ce qu'il est.
@@ -2792,6 +2798,32 @@
     });
   }
 
+  // Les trois thématiques se comptent sur un autre axe : une offre peut en
+  // porter deux (ESG ET immobilier), donc on itère sur son tableau au lieu
+  // de compter une valeur unique. Sans ce compteur, le span posé par
+  // buildTagsFieldset restait vide — il était créé, jamais rempli.
+  function updateTagCounts(base) {
+    var counts = {};
+    base.forEach(function (o) {
+      (o.tags || []).forEach(function (t) { counts[t] = (counts[t] || 0) + 1; });
+    });
+    var visibles = 0;
+    Array.prototype.forEach.call(els.tagsFieldset.querySelectorAll('.count'), function (span) {
+      var t = span.dataset.tag;
+      var n = counts[t] || 0;
+      span.textContent = n;
+      var ligne = span.closest('.famille-option');
+      if (!ligne) return;
+      ligne.hidden = n === 0 && !state.tags.has(t);
+      if (!ligne.hidden) visibles++;
+    });
+    // Trois lignes seulement : si aucune ne subsiste, le titre « Thématique »
+    // resterait seul au-dessus du vide. Il part avec elles.
+    var titre = els.tagsFieldset.previousElementSibling;
+    if (titre && titre.tagName === 'H2') titre.hidden = visibles === 0;
+    els.tagsFieldset.hidden = visibles === 0;
+  }
+
   // Même règle pour la liste déroulante des structures. L'option choisie est
   // toujours conservée, y compris à zéro : la retirer réinitialiserait le
   // filtre en silence pendant que le visiteur change simplement d'onglet.
@@ -3114,6 +3146,7 @@
       : base);
     updateFamilleCounts(base);
     updateStructureOptions(base);
+    updateTagCounts(base);
     etatNouveauteUtile = nouveauteSignifiante(base);
     // Le filtre "nouvelles offres" disparaît avec le badge : proposer de filtrer
     // sur un critère que tout le monde remplit ne mène qu'à une déception.
