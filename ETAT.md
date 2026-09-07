@@ -1311,3 +1311,55 @@ est celle qui a fait tomber le fourre-tout de 26,7 % à 1,4 % : l’assouplir
 rouvre le 2 septembre. Tout mot proposé pour elle doit être mesuré **chez un
 industriel** avant d’être écrit, sans exception.
 
+### Le mot « chargé d’affaires » est mort, et son contre-test aussi
+
+Il attrapait 38 des 384 sans-famille — le plus gros gisement apparent. **32,
+soit 84 %, viennent de la banque de détail.** Ce sont des postes de réseau :
+ils vendent un produit, ils ne produisent ni n’analysent d’information
+financière. Le site les exclut depuis le premier jour, et §30 le redit.
+
+**Et la forme qualifiée ne sauve rien.** Mesurée sur les mêmes 38 :
+
+| qualificatif | offres | hors réseau |
+|---|---|---|
+| financements structurés | 0 | 0 |
+| LBO / acquisition | 0 | 0 |
+| corporate finance | 0 | 0 |
+| ETI / grandes entreprises | 5 | **0** |
+| immobilier / actifs | 3 | **0** |
+| international / européennes | 1 | 1 |
+
+Les six offres hors réseau, jugées une par une, n’en laissent **qu’une** de
+vraie finance : « Chargé d’affaires Junior » chez Edmond de Rothschild. Et
+elle ne porte **aucun qualificatif** — aucun des motifs ci-dessus ne la
+prendrait. Les cinq autres sont « Chargé d’affaires européennes » à la Banque
+de France (relations institutionnelles), « Chargé d’Affaires PME » chez BPCE
+Factor (commercial de l’affacturage), « Chargé d’Affaires Entrepreneurs » chez
+BNP Paribas (banque privée commerciale), « Assistant Chargé d’Affaires » chez
+Groupe BPCE (entité générique, poste indéterminable) et « Chargé d’Affaires
+Patrimoine » chez EDF (patrimoine immobilier d’un énergéticien).
+
+**La leçon de méthode, et elle est plus large que ce mot.** Mon contre-test
+cherchait le danger *chez l’industriel* — c’est celui que « stress test » chez
+Safran avait imposé. Il n’a rien vu, parce que le danger n’était pas là : il
+était chez le **réseau bancaire**, qui est un employeur de finance et franchit
+donc toutes les portes. Un contre-test ne vaut que contre le danger qu’il
+vise ; il faut nommer le danger avant de choisir la population de contrôle.
+
+Si le mot doit entrer un jour, ce ne sera pas par l’intitulé mais par
+l’EMPLOYEUR — « chargé d’affaires chez une banque d’affaires ou une BFI » —,
+ce qui rapporte trois offres aujourd’hui, dont deux indéterminables.
+
+### Deux titres vides, à traiter au nettoyage d’intitulé
+
+Repérés dans le tirage des quarante, ils ne relèvent pas de la famille :
+
+- **« Portzamparc »** (BNP Paribas) — un nom de filiale, pas un métier ;
+- **« Assistant »** (Crédit Agricole Assurances) — un niveau, pas un métier.
+
+`titreNommeUnMetier` aurait dû les prendre. À regarder quand le nettoyage
+d’intitulé passera sur l’établi — pas ce soir.
+
+Le filtre de lieu, lui, tient : les deux offres BBVA de Cancún et San Luis
+Potosí figurent bien dans le résidu et non au catalogue.
+
