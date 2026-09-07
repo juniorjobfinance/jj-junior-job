@@ -2430,7 +2430,7 @@ function cleanTitle(title) {
   return t;
 }
 
-function normalize(item) {
+function normalizeInterne(item) {
   const { __src, raw } = item;
   let emp, title, ville, pays, url, typeContratRaw, romeLibelle, postedAt, sal, descr;
 
@@ -3066,19 +3066,35 @@ function normalize(item) {
       if (!retire) break;
     }
   }
-  if (!title || !url) return null;
-  if (!estUneOffreFinance(title)) return null;
+  if (!title || !url) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: null, sector: null, famille: null, source: __src },
+      'normalize', 'titre-ou-url-absent');
+    return null;
+  }
+  if (!estUneOffreFinance(title)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: null, sector: null, famille: null, source: __src },
+      'normalize', 'porte-finance');
+    return null;
+  }
 
   // Garde-fou central : JJ promet un lien vers l'annonce de la MAISON (§2 du
   // brief). Un lien vers un job board intermédiaire (JobTeaser, Welcome to the
   // Jungle, Wizbii, Indeed...) oblige le candidat à passer par un tiers, souvent
   // derrière un compte — exactement ce qu'on reproche aux concurrents. On les
   // écarte quelle que soit la source, y compris les ajouts manuels.
-  if (INTERMEDIAIRE_RE.test(url)) return null;
+  if (INTERMEDIAIRE_RE.test(url)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: null, sector: null, famille: null, source: __src },
+      'normalize', 'lien-intermediaire');
+    return null;
+  }
 
   // Retrait demandé par la maison : contrôlé ici, avant tout classement, pour
   // qu'aucune offre ne puisse ressortir par un autre chemin.
-  if (estExclue(url, emp)) return null;
+  if (estExclue(url, emp)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: null, sector: null, famille: null, source: __src },
+      'normalize', 'retrait-demande-par-la-maison');
+    return null;
+  }
 
   const volet = classifyVolet({ src: __src, typeContratRaw, title: titreBrut, url });
   const contrat =
@@ -3090,9 +3106,17 @@ function normalize(item) {
   // Une maison qui annonce un VIE sur son seul ATS sans l'y déposer donne une
   // fiche invérifiable — souvent sans ville ni indemnité, comme les deux
   // « VIE » d'Amundi qui n'existent nulle part chez Business France.
-  if (volet === 'vie' && __src !== 'vie') return null;
+  if (volet === 'vie' && __src !== 'vie') {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: volet, sector: null, famille: null, source: __src },
+      'normalize', 'vie-hors-business-france');
+    return null;
+  }
   emp = normaliserEmployeur(emp);
-  if (EMPLOYEUR_ECOLE_RE.test(emp)) return null; // école/CFA : pas l'employeur réel
+  if (EMPLOYEUR_ECOLE_RE.test(emp)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: volet, sector: null, famille: null, source: __src },
+      'normalize', 'employeur-ecole');
+    return null;
+  }
 
   // Le classement décide en quatre temps : pré-filtre, porte finance, famille
   // au score de spécificité, résidu audité. L'employeur est normalisé JUSTE
@@ -3229,12 +3253,20 @@ function normalize(item) {
   // ou de grande consommation, le même mot désigne la vente de son catalogue :
   // le « Sales Business Analyst & Development » de L'Oréal n'a rien d'un poste
   // financier, il est seulement rattaché à une direction qui l'est.
-  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title)) return null;
+  if (verdict.structure === 'entreprise' && VENTE_HORS_FINANCE_RE.test(title)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: volet, sector: null, famille: null, source: __src },
+      'normalize', 'vente-hors-finance');
+    return null;
+  }
 
   // Dernier contrôle, une fois l'employeur normalisé : le titre doit nommer un
   // métier. C'est ici, et pas plus haut, parce que le nettoyage a pu vider un
   // intitulé qui semblait fourni au départ (« Internship - Andera Infra »).
-  if (!titreNommeUnMetier(title, emp)) return null;
+  if (!titreNommeUnMetier(title, emp)) {
+    noterEcartee({ title: title || '(intitulé vide)', emp, volet: volet, sector: null, famille: null, source: __src },
+      'normalize', 'titre-sans-metier');
+    return null;
+  }
 
   // LE PASSAGE OBLIGÉ. Toute chaîne devient une date ici, et le refus porte
   // sur l'OFFRE, jamais sur le passage : une date illisible rend le catalogue
@@ -3319,6 +3351,48 @@ function normalize(item) {
     _dateEstMiseAJour: __src === 'avature',
   };
 }
+
+// LE FILET : aucune offre ne sort sans motif enregistre.
+//
+// normalize compte treize `return null`. Huit sont desormais instrumentes,
+// mais compter sur la discipline de celui qui ajoutera le quatorzieme, c est
+// une regle — et une regle demande de s en souvenir au moment precis ou on ne
+// s en souvient pas. Le 07/09/2026, SEIZE offres VIE sur 74 sortaient sans
+// trace, et deux d entre elles etaient de vraies offres de controle de
+// gestion tuees par un motif ecrit contre la vente. Un rejet muet cache des
+// pertes reelles.
+//
+// L enveloppe compare le registre avant et apres. Si la fonction rend null
+// sans avoir rien ecrit, elle ecrit elle-meme, sous un motif qui NOMME le
+// defaut : la porte n est pas instrumentee. Le controle avant passage lit ce
+// motif et fait echouer le passage.
+// L empreinte des six registres : une offre ecartee doit en faire bouger au
+// moins un. Compter `ecartees` seul faisait crier le filet sur 391 rejets qui
+// laissent leur trace dans `nonClasses`, `rejets` ou `rejetsMaisonRef`.
+function empreinteRegistres() {
+  return rapportClassement.ecartees.length + rapportClassement.nonClasses.length +
+    rapportClassement.rejetsMaisonRef.length + rapportClassement.rejets.size +
+    rapportClassement.exemplesRejets.size + rapportClassement.employeursInconnus.size;
+}
+
+function normalize(item) {
+  const avant = empreinteRegistres();
+  const sortie = normalizeInterne(item);
+  if (sortie === null && empreinteRegistres() === avant) {
+    const raw = (item && item.raw) || {};
+    noterEcartee(
+      {
+        title: raw.title || raw.missionTitle || raw.text || raw.intitule || '(intitulé non lu)',
+        emp: (item && item.emp) || raw.organizationName || '(employeur non lu)',
+        volet: null, sector: null, famille: null,
+        source: (item && item.__src) || '(source non lue)',
+      },
+      'normalize', 'SORTIE NON INSTRUMENTEE — une porte de normalize rend null sans motif'
+    );
+  }
+  return sortie;
+}
+
 
 // ---------------------------------------------------------------------------
 // Déduplication (PROJET.md §8.5)

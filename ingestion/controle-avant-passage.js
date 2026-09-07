@@ -564,6 +564,71 @@ try {
   ko('catalogue HTML', e.message);
 }
 
+console.log('\n--- Tout rejet laisse un motif ---');
+// Un rejet muet est un angle mort : il ne se compte pas, ne se ventile pas,
+// et personne ne peut dire s'il est legitime sans rejouer le pipeline a la
+// main. Le 07/09/2026, seize offres VIE sur 74 sortaient de normalize sans
+// trace — et DEUX etaient de vraies offres de controle de gestion tuees par
+// un motif ecrit contre la vente. Ce qui ne s'enregistre pas ne s'audite pas.
+//
+// On rejoue la derniere recolte et on compare deux nombres qui doivent etre
+// EGAUX : les offres refusees, et les motifs ecrits. L'ecart, s'il existe,
+// est le nombre de rejets muets.
+try {
+  const zlib = require('zlib');
+  const dossier = path.join(RACINE, 'data');
+  const recoltes = fs.existsSync(dossier)
+    ? fs.readdirSync(dossier).filter((n) => /^brut-.*\.json\.gz$/.test(n)).sort()
+    : [];
+  if (!recoltes.length) {
+    alerte('motifs', 'aucune recolte dans data/ — controle sans objet');
+  } else {
+    const fichier = recoltes[recoltes.length - 1];
+    const lot = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(dossier, fichier))).toString());
+    const RC = P.rapportClassement;
+    let refuses = 0;
+    let motifs = 0;
+    let muets = 0;
+    const filet = [];
+    // Une offre ecartee doit faire bouger au moins UN des six registres.
+    // Compter `ecartees` seul ferait crier sur les rejets du bloc classifieur,
+    // qui ecrivent dans `nonClasses` ou `rejets`.
+    const empreinte = () => RC.ecartees.length + RC.nonClasses.length +
+      RC.rejetsMaisonRef.length + RC.rejets.size + RC.exemplesRejets.size +
+      RC.employeursInconnus.size;
+    for (const o of lot.offres) {
+      const avantN = empreinte();
+      const avantE = RC.ecartees.length;
+      let n;
+      try { n = P.normalize(JSON.parse(JSON.stringify(o))); } catch { continue; }
+      if (n) continue;
+      refuses++;
+      if (empreinte() > avantN) motifs++; else muets++;
+      for (let k = avantE; k < RC.ecartees.length; k++) {
+        if (/SORTIE NON INSTRUMENTEE/.test(RC.ecartees[k].precision || '')) filet.push(RC.ecartees[k]);
+      }
+    }
+    if (muets) {
+      ko('motifs', `${muets} rejet(s) sur ${refuses} sortent sans motif enregistre — ` +
+        `un rejet muet ne se ventile pas et ne s'audite pas`);
+    } else if (filet.length) {
+      // Le filet a fait son travail : ces rejets PORTENT un motif, les deux
+      // comptes sont egaux. Ce qui manque est le NOM de la porte. L'audit est
+      // moins precis, le catalogue nest pas faux — §35, ca crie.
+      alerte('motifs',
+        `${refuses} rejets, ${motifs} motifs — aucun rejet muet. Mais ${filet.length} ` +
+        `sortent par une porte SANS NOM, rattrapes par le filet. Exemple : ` +
+        `« ${String(filet[0].intitule || filet[0].title).slice(0, 44)} » (${filet[0].source})`);
+    } else if (motifs !== refuses) {
+      ko('motifs', `${motifs} motif(s) pour ${refuses} rejet(s) — les deux nombres doivent etre egaux`);
+    } else {
+      ok('motifs', `${refuses} rejets, ${motifs} motifs — aucun rejet muet dans ${fichier}`);
+    }
+  }
+} catch (e) {
+  ko('motifs', e.message);
+}
+
 console.log('\n--- Les deux tables du lieu ---');
 // GRANDES_VILLES decide de ce qui ENTRE au catalogue ; ZONES decide du
 // REGROUPEMENT affiche dans le filtre des lieux. Une commune inscrite dans la
