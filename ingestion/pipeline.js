@@ -875,6 +875,12 @@ const GRAND_PARIS = [
   // seul Crédit Agricole — cash management, financements structurés,
   // back-office paiements.
   'saint-quentin-en-yvelines', 'saint-quentin en yvelines', 'montigny-le-bretonneux',
+
+  // Deux communes de l agglomeration parisienne, inscrites le 07/09/2026 :
+  // Champs-sur-Marne (Cite Descartes, RER A, siege de Casden) et Chambourcy
+  // (Yvelines, a cote de Saint-Germain-en-Laye qui figure deja ici).
+  // Ce sont les deux seules du lot dont le rattachement se discute.
+  'champs-sur-marne', 'chambourcy',                 // 4 et 4 offres
 ];
 
 // Métropoles régionales (>100 000 hab. ou pôle économique majeur).
@@ -890,6 +896,31 @@ const GRANDES_VILLES = [
   'lorient', 'niort', 'chartres', 'blois', 'quimper', 'valenciennes', 'dunkerque',
   'bagneux', 'sassenage', 'blagnac', 'labege', 'labège', 'meylan', 'ecully', 'écully',
   'marcq-en-baroeul', 'marcq-en-barœul', 'lezennes', 'wasquehal', 'lesquin',
+
+  // Banlieues de metropoles deja couvertes, inscrites le 07/09/2026. Le
+  // nombre entre parentheses est le nombre d offres MESURE sur la recolte du
+  // jour : chaque ligne se justifie par un chiffre, pas par la geographie.
+  // Total : 87 offres qui mouraient sur le lieu alors que leur metropole est
+  // au catalogue depuis le premier jour.
+  'orvault', 'saint-herblain', 'vertou',            // Nantes (10, 9, 6)
+  'saint-gregoire',                                 // Rennes (19, trois orthographes)
+  'balma',                                          // Toulouse (10)
+  'le haillan', 'bruges', 'merignac', 'mérignac',   // Bordeaux (4, 2, 1)
+  'pessac', 'talence',                              // Bordeaux (1, 1)
+  'bezannes',                                       // Reims (6)
+  'ecouflant', 'écouflant',                         // Angers (4)
+  'seyssinet-pariset', 'echirolles', 'échirolles',  // Grenoble (3, 1)
+  // Lille n a PAS sa banlieue « Croix » (3 offres) : l audit du 07/09 a montre
+  // qu elle admettait aussi « La Croix St Ouen », dans l Oise, a 80 km.
+  // contientVille compare des mots, et « Croix » est un mot frequent de la
+  // toponymie — Sainte-Croix, La Croix-Valmer, Croix-de-Vie. Une entree de
+  // liste blanche n admet pas une commune : elle admet un MOT.
+  'ifs',                                            // Caen (2)
+  'saran',                                          // Orleans (2)
+  'guipavas',                                       // Brest (2)
+  'perols', 'pérols',                               // Montpellier (1)
+  'saint-priest',                                   // Lyon (1)
+  'bois-guillaume',                                 // Rouen (1)
 ];
 
 // Certaines sources (Adzuna notamment) ne donnent que la RÉGION, voire juste
@@ -1025,6 +1056,39 @@ function nettoyerPays(brut) {
     )
     .join(' ');
 }
+// La convention toponymique francaise, appliquee au nom AFFICHE.
+//
+// Les composants d un nom de commune se joignent par des tirets et les
+// particules restent en bas de casse — Fontenay-sous-Bois, Neuilly-sur-Seine,
+// Issy-les-Moulineaux, Saint-Quentin-en-Yvelines. Mais un ARTICLE INITIAL
+// garde son espace : La Rochelle, Le Havre, Les Lilas, La Roche-sur-Yon.
+// Sans cette clause, une regle « espaces -> tirets » produisait La-Rochelle.
+const PARTICULES_TOPO = /^(?:sur|sous|en|le|la|les|l[eè]s|du|de|des|d|aux|au|et|[àa])$/i;
+const ARTICLES_TOPO = /^(?:la|le|les|l)$/i;
+function normaliserToponyme(v) {
+  const brut = String(v || "").trim();
+  if (!brut) return brut;
+  // Un arrondissement, un site entre parentheses, une liste : ce ne sont pas
+  // des noms de commune. « Paris 9 », « Lyon (Bourse) », « Paris 15ème ».
+  if (/[\d(),]/.test(brut)) return brut;
+  // La sentinelle des offres sans lieu connu n est pas un toponyme.
+  if (/^non\s*pr[ée]cis/i.test(brut)) return brut;
+  const bruts = brut.split(/[\s\-–]+/).filter(Boolean);
+  if (bruts.length < 2) return brut;
+  // Trois portes d entree, et une seule suffit. Sans elles, « Sao Paulo »
+  // devenait « Sao-Paulo » : la convention francaise ne vaut que pour des
+  // toponymes francais.
+  const aParticule = bruts.some((m, x) => x > 0 && PARTICULES_TOPO.test(m));
+  const commenceSaint = /^saintes?$|^saints?$/i.test(bruts[0]);
+  if (!aParticule && !commenceSaint && !estGrandeVille(brut)) return brut;
+  const mots = bruts.map((m, x) =>
+    x > 0 && PARTICULES_TOPO.test(m) ? m.toLowerCase()
+      : m.toLowerCase().replace(/(^|['’])(.)/g, (_, s, c) => s + c.toUpperCase()));
+  return ARTICLES_TOPO.test(bruts[0])
+    ? mots[0] + " " + mots.slice(1).join("-")
+    : mots.join("-");
+}
+
 function nettoyerLieu(loc) {
   let v = (loc || '').trim();
   if (!v) return v;
@@ -1037,23 +1101,77 @@ function nettoyerLieu(loc) {
   if (m) v = m[1];
   // Reste un code postal isolé en tête ? on le retire.
   v = v.replace(/^\s*\d{5}\s*/, '').replace(/\s{2,}/g, ' ').trim();
-  // "21 AVENUE DU BEL AIR PARIS" tout en capitales -> "Paris"
-  if (v === v.toUpperCase() && v.length > 3) {
+  // Un tiret ENTOURE D ESPACES separe souvent l employeur ou le site du vrai
+  // lieu : « AG2R - LEVALLOIS PERRET », « Paris - Pyramides ». On garde le
+  // morceau que estGrandeVille reconnait — c est la fonction qui decide du
+  // lieu qui choisit, pas une heuristique de plus — et le premier a defaut.
+  if (/\s[-–]\s/.test(v)) {
+    const bouts = v.split(/\s[-–]\s/).map((b) => b.trim()).filter(Boolean);
+    v = bouts.find((b) => estGrandeVille(b)) || bouts[0] || v;
+  }
+  // Le suffixe « France » colle par un tiret echappait au retrait fait dans
+  // estGrandeVille, qui exige un espace ou une virgule devant : « Levallois
+  // Perret-France » restait entier. On ne le retire JAMAIS quand ce qui reste
+  // finit par une particule, sinon « Ile-de-France » devient « Ile-de » — le
+  // piege deja paye deux fois.
+  {
+    const sans = v.replace(/[\s,\-–]+france\s*$/i, "").trim();
+    const dernier = sans.split(/[\s\-–]+/).pop() || "";
+    if (sans && !/^(?:de|du|des|d|en|sur|sous|la|le|les|aux|au|et|a)$/i.test(dernier)) v = sans;
+  }
+  // "21 AVENUE DU BEL AIR PARIS" tout en capitales -> "Paris".
+  //
+  // MAIS SEULEMENT SI C'EST UNE ADRESSE. Ce raccourci gardait le dernier mot
+  // de TOUT libelle en capitales, y compris un nom de commune compose :
+  // « SAINT LÔ » devenait « Lô », « LA ROCHE SUR YON » devenait « Yon »,
+  // « FONTENAY SOUS BOIS » devenait « Bois » et « NEUILLY SUR SEINE »
+  // devenait « Seine » — deux communes du Grand Paris que le filtre aurait
+  // acceptees telles quelles. La liste PARIS|LYON|MARSEILLE|LILLE qui vivait
+  // ici etait un rattrapage ville par ville de ce meme defaut : elle part
+  // avec lui.
+  //
+  // Une adresse porte un marqueur de voie ou un numero ; un nom de commune
+  // n'en porte jamais. C'est ce marqueur qu'on cherche, pas la casse.
+  const MARQUEUR_DE_VOIE = /\b(?:\d+\s*(?:bis|ter)?\s+)?(?:AVENUE|AV|RUE|BOULEVARD|BD|PLACE|CHEMIN|ALLEE|ALL[ÉE]E|IMPASSE|QUAI|ROUTE|RTE|COURS|ESPLANADE|SQUARE|VILLA|PASSAGE|SENTIER|PARC|ZAC|ZI|ZA|IMMEUBLE|TOUR|BATIMENT|B[ÂA]TIMENT)\b/i;
+  if (v === v.toUpperCase() && v.length > 3 && MARQUEUR_DE_VOIE.test(v)) {
     const mots = v.split(/\s+/);
-    const ville = mots.slice(-2).join(' ').match(/^(?:PARIS|LYON|MARSEILLE|LILLE|LA D[ÉE]FENSE)/i)
-      ? mots.slice(-2).join(' ')
-      : mots[mots.length - 1];
-    v = ville
-      .toLowerCase()
-      .replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase());
+    v = mots[mots.length - 1];
+  }
+  // La casse des capitales se corrige dans tous les cas, adresse ou non :
+  // « SAINT LÔ » doit s'afficher « Saint Lô », pas crier.
+  if (v === v.toUpperCase() && v.length > 3) {
+    v = v.toLowerCase().replace(/(^|[\s'-])([a-zà-öø-ÿ])/g, (_, s, c) => s + c.toUpperCase());
   }
   // Une même ville écrite de quatre façons devient quatre entrées dans le
   // filtre par lieu, et un candidat qui coche l'une perd les autres. La table
   // est volontairement une table : chaque ligne est une décision vérifiable,
   // là où une normalisation automatique des accents fusionnerait des communes
   // réellement distinctes.
-  const CANONIQUE = { 'paris la défense': 'La Défense', 'paris la defense': 'La Défense', 'la defense': 'La Défense', 'la défense': 'La Défense' };
-  const canon = CANONIQUE[v.toLowerCase().trim()];
+  // Tirets et espaces ramenes a UNE SEULE FORME.
+  //
+  // Mesure du 07/09/2026 : 67 offres et 12 entrees en trop dans le menu des
+  // lieux (sur 154) venaient de la. « Levallois-Perret » et « Levallois
+  // Perret », « Neuilly-sur-Seine » / « Neuilly sur Seine » / « Neuilly Sur
+  // Seine », « Fontenay Sous Bois » et « Fontenay-sous-Bois ». Un candidat qui
+  // coche l une perd les autres — exactement ce que le commentaire ci-dessous
+  // annoncait deja sans que rien ne le corrige.
+  //
+  // Les ACCENTS ne sont PAS normalises : cela fusionnerait des communes
+  // reellement distinctes, comme le dit la table ci-dessous. Aucune paire de
+  // communes francaises ne se distingue par un tiret ; par un accent, si.
+  v = normaliserToponyme(v);
+  // Une même ville écrite de quatre façons devient quatre entrées dans le
+  // filtre par lieu, et un candidat qui coche l'une perd les autres. La table
+  // est volontairement une table : chaque ligne est une décision vérifiable,
+  // là où une normalisation automatique des accents fusionnerait des communes
+  // réellement distinctes.
+  //
+  // Sa clef ignore tirets, espaces, accents et casse, pour que la
+  // normalisation ci-dessus ne la fasse pas manquer : « PARIS LA DEFENSE » y
+  // arrive desormais sous la forme « Paris-la-Defense ».
+  const CANONIQUE = { "paris la defense": "La Défense", "la defense": "La Défense" };
+  const clefCanon = v.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-–]/g, " ").replace(/\s+/g, " ").trim();
+  const canon = CANONIQUE[clefCanon];
   if (canon) return canon;
 
   // Cas symétrique du précédent : « nice », « nanterre », « amiens » arrivaient
@@ -1135,6 +1253,12 @@ function estGrandeVille(loc) {
   // et il empêchait de reconnaître ce qui le précède : le Crédit Agricole
   // écrit « Ile-de-France - France », libellé pourtant on ne peut plus clair,
   // qui était rejeté comme une petite commune.
+  // Le retrait du suffixe se fait sur une COPIE, et le libelle d'origine
+  // reste jugeable. « Ile de France » y perdait son dernier mot et devenait
+  // « Ile de », alors que « ile de france » figure dans REGIONS_ET_INCONNU :
+  // le piege deja documente sur « ile-de-france », reste ouvert sur la forme
+  // ecrite avec des espaces.
+  const vEntier = v;
   v = v.replace(/[\s,]+[-–]?\s*france\s*$/, '').trim() || v;
   // Le séparateur d'un libellé composé peut être une virgule ou un tiret.
   const commencePar = (t) => {
@@ -1142,7 +1266,12 @@ function estGrandeVille(loc) {
     const b = sansLiaisons(t);
     return a === b || a.startsWith(b + ',') || a.startsWith(b + ' ');
   };
-  if (REGIONS_ET_INCONNU.some(commencePar)) return true;
+  const commenceParEntier = (t) => {
+    const a = sansLiaisons(vEntier);
+    const b = sansLiaisons(t);
+    return a === b || a.startsWith(b + ',') || a.startsWith(b + ' ');
+  };
+  if (REGIONS_ET_INCONNU.some(commencePar) || REGIONS_ET_INCONNU.some(commenceParEntier)) return true;
   // Département seul : même statut qu'une région.
   if (DEPARTEMENTS.some(commencePar)) return true;
   // "1er Arrondissement", "13ème Arrondissement" sans le nom de la ville : ces

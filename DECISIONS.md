@@ -1266,4 +1266,182 @@ c’est un connecteur mort qu’on n’a pas réparé.
 
 Et une troisième, moins évidente : **le compteur survit à une publication**
 **faite sans lui.** Le lendemain, le connecteur n’est plus dans le catalogue
-de la veille — sans cette persistance, l’escalade ne se déclencherait jamais.
+de la veille — sans cette persistance, l’escalade ne se déclencherait jamais.
+
+---
+
+## 36. Le courtage élargit un libellé, il ne crée pas une douzième structure
+
+*Tranché le 07/09/2026.*
+
+Marsh France attendait un type de structure, et les onze n'en avaient pas
+pour un courtier. Deux réponses se présentaient : ouvrir une douzième valeur
+— « Courtage & conseil en risques » — ou forcer le courtage dans
+« Compagnie d'assurance & mutuelle », qui ne le nommait pas.
+
+**La mesure a tranché.** Les courtiers du marché français — Marsh, Aon,
+Diot-Siaci, Verlingue, Gras Savoye, WTW, Filhet-Allard, Henner, Satec —
+rendent **88 offres dans la récolte** et **4 au catalogue** : trois chez
+Marsh McLennan, une chez Verlingue. Une douzième structure coûte quinze pages
+de famille, une ligne de filtre dans la colonne, un libellé à écrire et une
+taxonomie à rouvrir — figée le 01/09. Pour quatre offres, c'est hors de
+proportion.
+
+**La décision : le libellé s'élargit.** « Compagnie d'assurance & mutuelle »
+devient **« Assurance, mutuelle & courtage »**. Marsh France reste en
+`assurance`, et le libellé dit désormais la vérité sur ce qu'il contient.
+
+**La règle générale.** Un axe de taxonomie gagne une VALEUR quand la
+population nouvelle justifie sa propre page ; il élargit un LIBELLÉ quand
+cette population est petite et adjacente. Le libellé est un mot, la valeur
+est une page — ils ne se paient pas au même prix.
+
+**Ce qui a rendu le renommage sûr, et qu'il fallait vérifier avant :**
+
+1. **Le libellé se décide en un seul endroit.** `structures.js` porte la
+   table vivante ; `pipeline.js` en garde 22 occurrences qui sont du CODE
+   MORT — `inferSector` n'y est appelée nulle part hors d'un commentaire, et
+   les 920 offres publiées portent toutes, sans exception, le libellé que
+   rend `structures.js`. Interrogée directement, la table de `pipeline.js`
+   répond « Entreprise (direction financière) » pour AXA, BNP Paribas et
+   Ardian : si elle décidait, le catalogue le montrerait. Il ne le montre pas.
+2. **Aucune mesure d'audience ne porte la structure.** Les cartes émettent
+   1 877 `data-umami-event-famille` et 1 877 `data-umami-event-volet`, et
+   rien d'autre. Renommer un libellé de structure ne casse donc aucun
+   historique.
+
+**Avec, dans le même lot : CDC Habitat passe d'`institution` à `entreprise`.**
+Le précédent est net dans la table : la Caisse des Dépôts est une
+`institution`, EDF est une `entreprise`. CDC Habitat est un bailleur social,
+pas un régulateur — sa direction financière recrute comme celle d'une
+entreprise.
+
+---
+
+## 37. Un tag transversal doit dire ce que les axes ne disent pas — « international » ne le faisait pas
+
+*Tranché le 07/09/2026, tag supprimé.*
+
+Les tags transversaux existent pour nommer ce qui traverse les familles : une
+offre ESG peut être en gestion d'actifs, en DCM, en audit ou en
+capital-investissement (paragraphe des TAGS dans `classifier.js`). « ESG » et
+« Immobilier & infrastructure » tiennent cette promesse. « International »
+ne la tenait pas.
+
+**La mesure.** 12 offres sur 920 le portaient. **Dix étaient en France** —
+Paris, Montrouge, La Défense, Strasbourg, Reims. L'une d'elles s'appelle
+« International Corporate Banking Graduate Programme **Paris** ». Les deux
+seules réellement à l'étranger — Selangor et Dublin, chez Caceis — sont des
+**VIE**, donc déjà rassemblées par l'onglet VIE, qui les dit mieux et sans
+se tromper.
+
+**Le mécanisme du défaut.** Le tag était marqué sur l'INTITULÉ, jamais sur le
+lieu, et son premier motif était `/\bvie\b/` : il attrapait un TYPE DE
+CONTRAT en croyant attraper un PAYS. Sur les douze, sept venaient du mot
+« international » dans le titre, deux d'« EMEA », trois de « VIE ». Aucun
+n'a jamais regardé où était le poste.
+
+**La règle.** Un tag transversal ne se garde que s'il dit quelque chose
+qu'aucun axe existant ne dit. Celui-ci doublait l'onglet VIE pour les vrais
+cas, et mentait pour les autres. Supprimé de `classifier.js` et d'`index.html`
+— les douze offres gardent leur famille, il n'y a rien à redistribuer.
+
+**Et le corollaire, pour le jour où l'on voudra vraiment un axe géographique :**
+il se lira sur le LIEU, jamais sur l'intitulé. Le lieu est un champ ; le titre
+est une phrase écrite par un employeur.
+
+---
+
+## 38. Une liste blanche de villes n'admet pas une commune, elle admet un MOT
+
+*Tranché le 07/09/2026.*
+
+339 offres mouraient sur le lieu. En les regardant une à une, ce n'était pas
+un filtre trop dur : c'étaient **trois défauts distincts**, dont deux qui
+n'avaient rien à voir avec la politique de couverture.
+
+### Défaut 1 — le raccourci d'adresse mangeait les noms composés
+
+`nettoyerLieu` gardait le **dernier mot** de tout libellé écrit en capitales.
+La règle avait été écrite pour une adresse postale — « 21 AVENUE DU BEL AIR
+PARIS » doit rendre « Paris ». Mais elle mordait sur n'importe quel libellé en
+capitales, et les portails en envoient beaucoup :
+
+| ce que la source envoie | ce que le pipeline en faisait |
+|---|---|
+| `SAINT LÔ` | « Lô » |
+| `LA ROCHE SUR YON` | « Yon » |
+| `SAINT FLOUR` | « Flour » |
+| `FONTENAY SOUS BOIS` | « Bois » |
+| `NEUILLY SUR SEINE` | « Seine » |
+| `LEVALLOIS PERRET` (AG2R) | « Perret-France » |
+
+Les trois dernières sont des communes du Grand Paris **déjà inscrites** : le
+filtre les aurait acceptées telles quelles. Elles étaient jetées par une
+troncature, pas par une décision.
+
+La liste `PARIS|LYON|MARSEILLE|LILLE|LA DÉFENSE` qui vivait dans cette
+fonction était un rattrapage ville par ville du même défaut — la preuve que
+quelqu'un l'avait déjà rencontré sans le nommer.
+
+**Le correctif ne regarde plus la casse, il regarde le contenu :** une adresse
+porte un marqueur de voie (AVENUE, RUE, ZAC, BÂTIMENT…), un nom de commune
+n'en porte jamais. La mise en forme des capitales, elle, s'applique dans les
+deux cas — « SAINT LÔ » s'affiche « Saint Lô » et ne crie plus.
+
+### Défaut 2 — le retrait du suffixe « France » mangeait « Ile de France »
+
+`estGrandeVille` retire « France » en fin de libellé, pour que « Ile-de-France
+- France » reste lisible. Sur « **Ile de France** », écrit avec des espaces,
+il ne restait que « Ile de » — et le libellé était rejeté alors que
+`ile de france` figure noir sur blanc dans `REGIONS_ET_INCONNU`.
+
+C'est le piège déjà documenté dans `CLAUDE.md` (« le retrait du suffixe
+France coupait ile-de-france en ile »), **refermé sur la forme à tirets
+seulement.** Le libellé d'origine est maintenant conservé et jugé lui aussi.
+
+### Défaut 3 — les banlieues de métropoles déjà couvertes
+
+Là seulement il s'agissait d'une vraie décision. 87 offres se trouvaient dans
+la banlieue immédiate d'une métropole au catalogue depuis le premier jour :
+Saint-Grégoire pour Rennes (19), Orvault, Saint-Herblain et Vertou pour Nantes
+(25), Balma pour Toulouse (10), cinq communes pour Bordeaux (9), Bezannes pour
+Reims (6), Écouflant pour Angers (4).
+
+**Chaque commune inscrite est justifiée par un nombre d'offres mesuré**, jamais
+par la géographie seule. Une commune sans offre n'entre pas : la liste se paie
+en surface d'attaque.
+
+### Et la règle que tout cela a fait apparaître
+
+**Une entrée de liste blanche n'admet pas une commune : elle admet un MOT.**
+`contientVille` compare des mots — c'est ce qui empêche « Lillebonne » de
+passer pour Lille. Mais c'est aussi ce qui fait que `croix`, inscrite pour la
+banlieue lilloise (3 offres), laissait entrer **« La Croix St Ouen »**, dans
+l'Oise, à 80 km. « Croix » est un mot fréquent de la toponymie française :
+Sainte-Croix, La Croix-Valmer, Croix-de-Vie.
+
+`croix` a donc été **retirée** — trois offres ne valent pas cette porte
+(règle 3 : moins d'offres, mais toutes justes). Et un audit accompagne
+désormais toute inscription : **on demande à chaque entrée de montrer, sur des
+libellés réels, tout ce qu'elle fait entrer.** Sur les 23 communes du lot, une
+seule débordait — mais il fallait la mesure pour le savoir, pas l'intuition.
+
+*Note de méthode : le premier audit a répondu « une entrée déborde encore »
+APRÈS le retrait de `croix`. Il testait ma liste écrite en dur, pas le
+fichier. C'est « la fonction interrogée doit être la fonction qui décide »,
+appliqué à l'instrument lui-même.*
+
+### La mesure
+
+Sur la récolte du 07/09, à l'étage du lieu et à cet étage seul :
+
+| | offres perdues sur le lieu | libellés distincts |
+|---|---|---|
+| avant | 339 | 173 |
+| après | 215 | 136 |
+
+**124 offres franchissent désormais l'étage du lieu.** Ce n'est pas 124 offres
+de plus au catalogue : les étages suivants — âge, séniorité, déduplication —
+en écartent une partie. Le chiffre du catalogue se lit sur `offres.js`, après
+un passage complet, jamais sur cette mesure intermédiaire.

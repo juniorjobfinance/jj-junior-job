@@ -21,6 +21,15 @@ permissions:
 jobs:
   ingestion:
     runs-on: ubuntu-latest
+    # La limite par defaut de GitHub est de 360 minutes, et elle n etait pas
+    # declaree. Une collecte bloquee occupait donc le runner SIX HEURES avant
+    # d echouer -- et l alerte ne parle qu apres le pipeline : six heures de
+    # silence, un matin sans site, sans explication.
+    #
+    # 120 minutes : au-dessus du pire passage observe (1 h 27 le 03/09/2026,
+    # contre 8 a 25 minutes d ordinaire), tres en dessous des six heures. Un
+    # blocage devient un echec bruyant en deux heures.
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 

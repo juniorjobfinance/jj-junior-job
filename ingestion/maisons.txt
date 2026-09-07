@@ -302,3 +302,8 @@ KONI                     | ^koni
 Evercore                 | ^evercore\b
 Repossi                  | ^repossi\b
 VAL DE LOIRE Maintenance | ^val de loire\b
+
+# Inscrite le 07/09/2026. Elle etait dans structures.js par ACCIDENT : la
+# clef `alan` (Alan, la mutuelle sante) avalait « alantra » par prefixe et la
+# rendait « fintech ». Elle a maintenant sa propre clef, en banque-affaires.
+Alantra                  | ^alantra\b

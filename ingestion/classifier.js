@@ -809,7 +809,6 @@ const FAMILIES = [
 const TAGS = [
   ['esg', [/\besg\b/, /\bisr\b/, /\brse\b/, /\bsustainab/, /\bdurable\b/, /\bimpact\b/, /\bclimat\b/, /\bcsrd\b/, /\bsfdr\b/, /\bextra ?-? ?financier\b/]],
   ['real-assets', [/\bimmobilier\b/, /\breal estate\b/, /\binfrastructure/, /\breal assets\b/, /\bhospitality\b/]],
-  ['international', [/\bvie\b/, /\binternational\b/, /\bemea\b/, /\bcross ?-? ?border\b/]],
 ];
 
 // ---------------------------------------------------------------------------

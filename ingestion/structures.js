@@ -16,7 +16,7 @@ const STRUCTURES = {
   'banque-detail': 'Banque de détail',
   'societe-gestion': 'Société de gestion',
   fonds: 'Fonds d\'investissement',
-  assurance: "Compagnie d'assurance & mutuelle",
+  assurance: 'Assurance, mutuelle & courtage',
   big4: 'Big Four & cabinets d’audit',
   conseil: 'Cabinet de conseil & stratégie',
   fintech: 'Fintech & services financiers spécialisés',
@@ -378,6 +378,51 @@ const EMPLOYER_STRUCTURE = {
   'societe air france': 'entreprise',
   planisware: 'entreprise',
   numberly: 'entreprise',
+
+  // --- Les 34 maisons a moitie inscrites, plus Alantra --------------------
+  // Elles etaient dans maisons.txt sans etre ici : § 24, une maison presente
+  // dans UNE SEULE des deux tables rend zero offre, et le pipeline refuse de
+  // publier une offre sans structure (gate:publication-sans-structure).
+  // Inscrites le 07/09/2026 apres validation.
+  //
+  // TROIS CLEFS DU LOT ONT ETE RETIREES LE JOUR MEME : « sycomore am »,
+  // « swiss life am france », « marsh france ». Elles etaient INERTES — les
+  // employeurs publient sous « sycomore asset management », « swiss life
+  // france » et « marsh mclennan », qui figuraient deja ici. Une clef qui ne
+  // peut jamais matcher ne se plaint jamais : elle donne l illusion d une
+  // couverture qu on n a pas.
+  'ostrum am':                     'societe-gestion',   // Ostrum AM — gestion obligataire, filiale Natixis IM
+  'carmignac':                     'societe-gestion',   // Carmignac — societe de gestion independante
+  'la financiere de l echiquier':  'societe-gestion',   // La Financiere de l'Echiquier — groupe LBP AM
+  'groupama am':                   'societe-gestion',   // Groupama AM — gestion d actifs du groupe Groupama
+  'cpr am':                        'societe-gestion',   // CPR AM — filiale de gestion d Amundi
+  'accuracy':                      'conseil',           // Accuracy — conseil financier, transaction services
+  'oliver wyman':                  'conseil',           // Oliver Wyman — conseil en strategie, groupe Marsh McLennan
+  'rsm france':                    'big4',              // RSM France — reseau d audit et d expertise comptable
+  'macif':                         'assurance',         // MACIF — mutuelle d assurance
+  'mma':                           'assurance',         // MMA — assureur, groupe Covea
+  'groupama':                      'assurance',         // Groupama — mutuelle d assurance
+  'gmf':                           'assurance',         // GMF — mutuelle, groupe Covea
+  'astorg':                        'fonds',             // Astorg — capital-investissement, LBO europeen
+  'antin infrastructure partners': 'fonds',             // Antin Infrastructure Partners — infrastructure
+  'andera partners':               'fonds',             // Andera Partners — capital-investissement et biotech
+  'siparex':                       'fonds',             // Siparex — capital-investissement regional
+  'lbo france':                    'fonds',             // LBO France — capital-investissement
+  'sagard':                        'fonds',             // Sagard — capital-investissement, groupe Power Corporation
+  'partech':                       'fonds',             // Partech — capital-risque international
+  'alven':                         'fonds',             // Alven — capital-risque francais
+  'messier & associes':            'banque-affaires',   // Messier & Associes — boutique de conseil en M&A
+  'centerview france':             'banque-affaires',   // Centerview France — boutique americaine de M&A
+  'swan':                          'fintech',           // Swan — banking-as-a-service
+  'spendesk':                      'fintech',           // Spendesk — gestion des depenses
+  'silvr':                         'fintech',           // Silvr — financement fonde sur les revenus
+  'ledger':                        'fintech',           // Ledger — securite des actifs numeriques
+  'payfit':                        'fintech',           // Payfit — paie et gestion sociale
+  'bpifrance':                     'institution',       // Bpifrance — banque publique d investissement
+  'agence france tresor':          'institution',       // Agence France Tresor — gestion de la dette de l Etat
+  'acpr':                          'institution',       // ACPR — superviseur bancaire et assurantiel
+  'cdc habitat':                   'entreprise',        // CDC Habitat — bailleur social, pas un regulateur
+  'alantra':                       'banque-affaires',   // Alantra — boutique M&A. La clef `alan` l avalait par prefixe et la rendait fintech
 };
 
 /** Normalise un nom d'employeur pour la resolution. */
@@ -403,11 +448,29 @@ function resolveStructure(rawEmployer) {
 
   let best = null;
   let bestLen = 0;
+  // Le prefixe doit s arreter sur une LIMITE DE MOT.
+  //
+  // Sans cette condition, la clef `alan` (Alan, la mutuelle sante) capturait
+  // « alantra » — boutique M&A — et l aurait publiee en « fintech ». Aucune
+  // erreur, aucun signal : une maison sous un type faux, en silence.
+  //
+  // 56 clefs de la table font cinq caracteres ou moins : `axa`, `ey`, `cic`,
+  // `mma`, `sar`, `edf`, `amf`... Chacune est un prefixe pour des noms qu on
+  // ne connait pas encore. Le cas particulier se serait repete.
+  //
+  // La mesure du 07/09 : exiger la limite de mot ne change RIEN sur les 920
+  // offres publiees ni sur les 344 employeurs de la recolte. Les 41 offres
+  // qui resolvent par prefixe le font toutes sur une limite de mot — ce sont
+  // les declinaisons voulues, « Caisse d Epargne Hauts de France ».
+  //
+  // C est deja ce que fait contientVille pour les villes ; cette table etait
+  // la derniere a comparer sans limite de mot.
   for (const key of Object.keys(EMPLOYER_STRUCTURE)) {
-    if (name.startsWith(key) && key.length > bestLen) {
-      best = EMPLOYER_STRUCTURE[key];
-      bestLen = key.length;
-    }
+    if (!name.startsWith(key) || key.length <= bestLen) continue;
+    const suivant = name[key.length];
+    if (suivant !== undefined && /[a-z0-9à-öø-ÿ]/.test(suivant)) continue;
+    best = EMPLOYER_STRUCTURE[key];
+    bestLen = key.length;
   }
   return best;
 }

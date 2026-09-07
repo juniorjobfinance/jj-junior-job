@@ -417,6 +417,42 @@ européen. Aucun des deux : indécidable — et c’est là que le silence comme
   appliqué aux fonctions : avant de conclure, vérifier que la fonction
   interrogée est bien celle dont le pipeline lit le verdict.
 
+- **`resolveStructure` resout par PREFIXE, sans limite de mot.** Egalite
+  stricte d'abord, puis le préfixe le plus long — ce qui couvre bien
+  « Caisse d'Épargne Hauts de France » sous `caisse d epargne`, et avale
+  aussi ce qu'on n'avait pas prévu : la clef `alan` (Alan, la mutuelle
+  santé) capturait **Alantra**, boutique M&A, et la rendait « fintech ».
+  Aucune erreur, aucun signal : une maison publiée sous un type faux. Toute
+  clef courte — `alan`, `axa`, `bpi`, `cnp` — est un préfixe pour des noms
+  qu'on ne connaît pas encore. **Avant d'inscrire une maison, demander son
+  type à `resolveStructure` : si elle répond déjà quelque chose alors
+  qu'elle n'est pas dans la table, c'est un préfixe qui parle à sa place.**
+
+- **Une clef d’employeur se vérifie contre le nom sous lequel l’employeur
+  PUBLIE, jamais contre celui qu’on lui donne dans une conversation.** Le
+  07/09/2026, trente-cinq clefs ont été écrites depuis une liste de noms
+  courts. Trois étaient **inertes** : « sycomore am », « swiss life am
+  france » et « marsh france ». Les employeurs publient sous « Sycomore Asset
+  Management », « Swiss Life France » et « Marsh McLennan » — trois noms qui
+  figuraient **déjà** dans la table. Les clefs écrites étaient des doublons
+  sous des noms que personne n’écrit, et la vérification les avait déclarées
+  « à ajouter » parce qu’elle interrogeait `resolveStructure` avec MA liste,
+  pas avec la récolte.
+
+  C’est exactement le défaut déjà nommé pour les motifs — « un motif qui ne
+  peut jamais matcher est pire qu’un motif faux : il ne se plaint jamais » —
+  et il donne ici la même illusion de couverture. **Le seul test valable est
+  de chercher la clef dans la récolte réelle** : si aucun employeur collecté
+  ne commence par elle, elle ne sert à rien, quel que soit le sérieux du nom.
+
+  Et le corollaire qui ferme la boucle avec la découverte du même jour :
+  **inscrire une maison dans `maisons.txt` et `structures.js` ne la BRANCHE
+  pas.** Ces deux tables la CLASSENT si un connecteur la ramène, rien de plus.
+  Sur les trente-cinq du lot, vingt-six n’apparaissaient nulle part dans la
+  récolte : elles ne pouvaient rien rapporter, et ne le pouvaient pas avant
+  qu’on les inscrive non plus. Le levier est dans `sources.js`, jamais dans
+  les tables de classement.
+
 ---
 
 ## Ce qui reste à faire
