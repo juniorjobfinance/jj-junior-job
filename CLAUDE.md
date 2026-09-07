@@ -123,6 +123,34 @@ porter `’` en toutes lettres là où on croit voir une apostrophe. Lire les
 octets avant d'écrire l'ancre coûte dix secondes ; les chercher après en coûte
 dix minutes.
 
+### Un MESSAGE DE COMMIT passe par un fichier, jamais par `printf`
+
+Même famille que ci-dessus, même remède, et c’est la **troisième** fois de la
+semaine qu’un formatage de chaîne mange du contenu en silence — après
+`String.replace` et les heredocs.
+
+Le 07/09/2026, un `git commit -m "$(printf ...)"` a produit un message tronqué
+à **326 caractères sur 1 900**. `printf` est mort sur le `%` de « 53 % », qui
+est pour lui un caractère de format. Le commit est parti, poussé, avec un
+message qui s’arrête au milieu d’une phrase — et **git n’a rien signalé**,
+parce que du point de vue de git le message était simplement court.
+
+La forme sûre, sans exception :
+
+```bash
+git commit -F chemin/vers/message.txt   # fichier écrit avec l’outil Write
+```
+
+`%`, `\n`, `\t`, `%s` : tout caractère de format est un piège, et le message
+de commit est précisément l’endroit où l’on écrit des pourcentages et des
+chemins. Réécrire l’historique pour une phrase coupée ne vaut pas un
+`push --force` : la seule protection est de ne pas produire le défaut.
+
+**La règle générale que ces trois cas dessinent** : dès qu’un contenu compte,
+il s’écrit dans un fichier avec Write, puis on désigne le fichier. Le shell,
+`printf` et `String.replace` interprètent tous quelque chose, et aucun ne
+prévient quand il l’a fait.
+
 ### Sur de la PROSE, aucune expression régulière — troisième couche
 
 `CLAUDE.md`, `ETAT.md`, `DECISIONS.md` et toute documentation **ne se modifient

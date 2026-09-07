@@ -1530,9 +1530,24 @@ FX Manager » (Nestlé) ne porte ni *management*, ni *pooling*, ni *flow*. Ni
 « CASH MANAGER » (Celine), qui est de la trésorerie aussi. Il faudrait
 `cash manager` comme paire qualifiée — **non mesurée**, à faire avec les autres.
 
+**Deux motifs SÉPARÉS, et pas un motif élargi.** Après `normalize`, « Cash &
+FX Manager » devient `cash fx manager` : les deux mots ne sont pas adjacents,
+donc un `cash manager` collé ne l’attrape pas. Et **tolérer un mot intercalé
+ferait entrer « Cash & Carry Manager »**, poste de commerce de gros — le
+danger revient par la porte qu’on vient de fermer. Les deux motifs se
+complètent sans rien assouplir :
+
+- **`cash manager` adjacent** prend « CASH MANAGER » (Celine) ;
+- **`fx`** prend « Cash & FX Manager » (Nestlé), si son contre-test passe.
+
 **`fx` : à mesurer.** Propre sur le fond — *foreign exchange* ne veut rien dire
 d’autre en finance — mais « FX » désigne aussi les effets spéciaux, et chez un
-industriel ou une agence ça peut mordre. Contre-test sur les quatre
-populations comme les autres. Ce soir : 2 occurrences, aucune au sens effets
-spéciaux — latent là aussi.
+industriel ou une agence ça peut mordre. Ce soir : 2 occurrences, aucune en ce
+sens — latent là aussi.
+
+**Et le contre-test de `cash manager` porte explicitement les libellés du
+commerce de gros**, même s’ils rendent zéro dans la récolte du 07/09 :
+« Cash & Carry Manager », « Responsable Cash & Carry », « Chef de secteur Cash
+& Carry ». C’est la règle qui sort de la journée — *un contre-test ne voit que
+la population du jour, et le danger de `cash` est latent, pas absent.*
 
