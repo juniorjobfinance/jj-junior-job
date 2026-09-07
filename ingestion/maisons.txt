@@ -310,3 +310,7 @@ Alantra                  | ^alantra\b
 
 # Branchee le 07/09/2026 sur SmartRecruiters (slug OECD). Siege a Paris.
 OCDE                     | ^ocde\b|^oecd\b
+
+# Branchees le 07/09/2026 au soir, mesurees au connecteur.
+FDJ United               | ^fdj\b|groupe fdj|fdj united
+Nabla                    | ^nabla\b

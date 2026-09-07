@@ -1797,6 +1797,15 @@ const TARGET_COMPANIES = {
     // « db », site « DBWebsite ». Deux postes parisiens seulement — c'est leur
     // réalité, pas un défaut du connecteur.
     { tenant: 'db', dc: 'wd3', site: 'DBWebsite', emp: 'Deutsche Bank' },
+    // Chanel : elle figurait dans « maisons sans aucune offre » a chaque
+    // passage. Elle n'etait pas muette, elle n'etait pas branchee — le compte
+    // des muettes ne distingue pas les deux. 24 offres au connecteur le
+    // 07/09, 23 en France, dont une douzaine de stages finance : Treasury
+    // Analyst Corporate, Audit interne, Controle de gestion, Comptabilite.
+    { tenant: 'cc', dc: 'wd3', site: 'ChanelCareers', emp: 'Chanel' },
+    // FDJ United : 24 offres, 18 en France, dont un « Analyste M&A - Stage »
+    // a Boulogne-Billancourt.
+    { tenant: 'groupefdj', dc: 'wd103', site: 'FDJ-UNITED', emp: 'FDJ United' },
     // Ipsen : laboratoire pharmaceutique, mais sa direction financière recrute
     // des stagiaires en relations investisseurs et en M&A. Le filtre finance
     // écarte de lui-même le médical et le marketing, majoritaires chez eux.
@@ -2067,6 +2076,9 @@ const TARGET_COMPANIES = {
     { company: 'finary', emp: 'Finary' },
     { company: 'akur8', emp: 'Akur8' },
     { company: 'spendesk', emp: 'Spendesk' },
+    // Nabla : editeur d'IA medicale. Une seule offre, mais c'est la notre —
+    // « Internship - Finance Analyst », Paris, departement Finance.
+    { company: 'nabla', emp: 'Nabla' },
   ],
   // Teamtailor : endpoint JSON Feed public https://{company}.teamtailor.com/jobs.json
   teamtailor: [
