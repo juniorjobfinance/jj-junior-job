@@ -259,6 +259,36 @@ européen. Aucun des deux : indécidable — et c’est là que le silence comme
 
 ---
 
+### Ne jamais mesurer avec un instrument plus PUISSANT que celui qui travaille
+
+Le 07/09/2026, une page carrières a été lue **au navigateur** et déclarée
+riche de « 24 offres, dont 14 à Paris ». Le même jour, `ETAT.md` disait à sa
+ligne 326 que cette plateforme était **sans API lisible**. C’est la ligne 326
+qui avait raison.
+
+Un `fetch` Node pur — ce que le pipeline fait à 6h30 — rend **2 422 octets de
+coquille**, deux `<script type="module">`, aucune charge JSON, zéro offre. La
+page d’une annonce précise rend le même document que la liste. L’API répond
+`401`. Le navigateur voyait des offres parce qu’il **exécutait le JavaScript
+qui appelle l’API authentifiée**.
+
+**La règle :**
+
+> Un portail se juge avec l’outil qui le lira en production, jamais avec un
+> outil plus capable. Un navigateur exécute le JavaScript, suit les
+> redirections, porte des cookies et une session — le pipeline ne fait rien de
+> tout cela. **Un portail lu au navigateur n’est pas un portail lu.**
+
+C’est « ne jamais recopier une fonction du pipeline pour la tester »,
+généralisé de la fonction à l’OUTIL. Et le symptôme est le même dans les deux
+cas : une mesure qui promet un gisement que le passage du matin ne trouvera
+jamais.
+
+Corollaire pratique : le sondage d’un site carrières se termine **toujours**
+par un `fetch` Node sur la page de liste ET sur une annonce. Si les deux
+rendent le même document, c’est une application JavaScript : hors d’atteinte,
+et cela se note avant d’aller plus loin.
+
 ## Pièges vérifiés plusieurs fois
 
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a

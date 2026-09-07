@@ -1613,7 +1613,7 @@ fois au connecteur, jamais par le validateur.
 | **Ipsen** | connectée | **l’offre pointée EST au catalogue** |
 | **Nabla** | **Ashby — branché** | 1 stage Finance à Paris, **bloqué** |
 | **P&G** | **Phenom — branché** | absente des trois tables |
-| **Stifel** | **50skills — nouvelle** | **14 offres à Paris** |
+| ~~Stifel~~ | 50skills | **INJOIGNABLE** — coquille JavaScript, API sous clé |
 
 #### Deux paquets A à une ligne
 
@@ -1623,12 +1623,42 @@ fois au connecteur, jamais par le validateur.
 - **P&G** est sur Phenom, que nous lisons pour cinq maisons déjà. Le
   « Strategic Finance Internship » pointé est notre cible exacte.
 
-#### Un gisement réel, mais paquet B
+#### Stifel : le gisement n’existait pas, et l’erreur est instructive
 
-**Stifel : 24 offres, dont 14 à Paris** — des stages en banque d’affaires.
-C’est plus que tout ce que la journée du 07/09 a rapporté. Mais `50skills`
-n’est aucune de nos 23 plateformes. Avant d’écrire le connecteur : combien de
-maisons partagent `50skills` ? La règle du paquet B ne se contourne pas.
+**J’avais annoncé « 24 offres, dont 14 à Paris ». C’est faux.** `ETAT.md` se
+contredisait avec sa propre ligne 326 — *« Plateformes sans API lisible — UBS
+(Taleo), Stifel (50skills)… »* —, et c’est la ligne 326 qui avait raison.
+
+Le test qui tranche est un `fetch` Node **pur**, exactement ce que le pipeline
+fera à 6h30 : pas de navigateur, pas de rendu JavaScript, pas de clé.
+
+```
+page liste   HTTP 200   2 422 octets   <script> : 2   charge JSON : aucune
+une offre    HTTP 200   2 428 octets   ← la MÊME coquille que la liste
+robots.txt   HTTP 404
+api.50skills.com   HTTP 401  {"detail":"Authentication credentials were not provided."}
+```
+
+Une coquille de 2 422 octets, un `<title>50skills Careers</title>` générique,
+et **zéro offre**. La page d’une annonce précise rend le même document que la
+liste. C’est **Bain** : lisible dans un navigateur qui exécute le JavaScript
+appelant l’API authentifiée, illisible pour le pipeline.
+
+**La leçon de méthode, et c’est elle qui compte.** J’ai mesuré avec le
+navigateur alors que l’instrument qui décide est `fetch`. C’est « ne jamais
+recopier une fonction du pipeline pour la tester », généralisé :
+
+> **Ne jamais mesurer avec un instrument plus puissant que celui qui fera le
+> travail.** Un connecteur qu’on ne peut pas faire tourner à 6h30 ne vaut
+> rien, et un portail lu au navigateur n’est pas un portail lu.
+
+Le sondage de l’OCDE, de Nabla et de l’AFD n’est pas touché : ceux-là ont été
+lus **au connecteur**, en Node, comme il fallait. Seul Stifel a été jugé sur
+une page rendue.
+
+Il n’y a donc **aucun arbitrage Stifel / Taleez à écrire** : il n’y a pas de
+décision à prendre, la source est hors d’atteinte. Stifel reste à sa place,
+ligne 326.
 
 #### Trois prises manquées, trouvées en chemin
 
