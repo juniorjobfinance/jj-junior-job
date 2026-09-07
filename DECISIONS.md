@@ -1445,3 +1445,69 @@ Sur la récolte du 07/09, à l'étage du lieu et à cet étage seul :
 de plus au catalogue : les étages suivants — âge, séniorité, déduplication —
 en écartent une partie. Le chiffre du catalogue se lit sur `offres.js`, après
 un passage complet, jamais sur cette mesure intermédiaire.
+
+## 39. Un défaut de NOTRE côté ne se répare pas en s’empêchant de publier
+
+**Constat du 07/09/2026 au soir, correction prévue et non appliquée.**
+
+Le garde-fou des connecteurs muets compte « trois passages consécutifs à
+zéro » et bloque au troisième. Il ne distingue pas les deux pannes que **son
+propre message distingue depuis le matin même** :
+
+- **« LA SOURCE N’A RIEN RENVOYÉ »** — le portail est tombé, l’API a fermé,
+  le connecteur pointe dans le vide. On ne peut rien y faire depuis ici.
+- **« LA SOURCE A RÉPONDU, ce sont nos filtres qui les ont écartées »** — le
+  portail va bien, et le défaut est chez nous.
+
+**Le compteur ignore la distinction que l’alerte fait.**
+
+### Ce que ça a coûté
+
+Le 07/09 à 21h13, `bofa` a bloqué la publication du catalogue entier au
+troisième passage. Or `bofa` n’est pas mort : **il répond quatorze offres en
+deux secondes.** Ses dix offres mouraient sur `age:apres-datation`, à cause
+d’une conversion de date européenne codée en dur dans notre lecteur de fiches
+(ligne 3899) — la jumelle des deux retirées de `normalize()` le matin même.
+
+Le catalogue de 990 offres auquel il manquait ces dix-là était **incomplet de
+1 %, avec une cause identifiée à la ligne près**. Ce n’est pas un catalogue
+faux. Le paragraphe 35 tranche : on bloque quand publier serait FAUX, on crie
+quand ce serait INCOMPLET. L’escalade a appliqué la mauvaise moitié.
+
+### Pourquoi l’escalade existait, et pourquoi elle ne vaut pas ici
+
+Elle a été conçue pour un connecteur **MORT** : une source qu’on ne répare
+pas, qu’il faut cesser d’attendre, et dont l’absence prolongée finit
+effectivement par rendre le catalogue faux. Trois passages à zéro sont alors
+le bon signal.
+
+Appliquée à une source qui répond, elle produit exactement la disproportion
+qu’on avait retirée le matin du 07/09 : **un site entier qui ne publie pas à
+cause d’un défaut interne**, alors que le défaut, lui, ne se répare pas en
+s’empêchant de publier. Bloquer n’a pas rapproché d’une correction : cela a
+seulement privé les visiteurs de 990 offres pour en protéger dix.
+
+### La règle
+
+**Le compteur d’escalade n’incrémente que lorsque la SOURCE ne répond pas.**
+
+Quand la source répond et que nos filtres écartent tout, le passage **crie
+fort — et n’escalade jamais**. Le message porte déjà la ventilation par étage
+(`10 age:apres-datation, 3 seniorite:premier-passage, 1 normalize`) : il dit
+où regarder, ce qui est le seul service utile dans ce cas.
+
+C’est le paragraphe 35 appliqué à l’escalade elle-même, et le corollaire du
+principe déjà écrit pour le passage obligé des dates : **il refuse l’offre,
+jamais le passage.**
+
+### Ce que l’incident a prouvé au passage
+
+Le garde-fou a mordu **au bon moment et avec le bon message**. C’est la
+première fois de la semaine qu’une alerte a nommé sa cause du premier coup :
+sans la ventilation par étage ajoutée le matin même, le réflexe aurait été
+d’accuser le connecteur — et de « réparer » ce qui marche, ce que ce document
+documente déjà comme une erreur payée deux fois (Air Liquide, Santander).
+
+Le défaut est donc dans la RÉACTION, pas dans la DÉTECTION. La détection est
+à garder telle quelle.
+

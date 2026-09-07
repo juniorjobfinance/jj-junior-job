@@ -1422,3 +1422,26 @@ cette porte le soir du 7 septembre, après quatorze heures de travail.
   « Senior Manager Prix de transfert » (Ipsen), « Group Transfer Pricing
   Expert » (CMA CGM).
 
+### Le garde-fou a mordu au bon moment, avec le bon message
+
+Le 07/09 à 21h13, la collecte du soir a refusé de publier. Le message :
+
+> *le connecteur « bofa » passe de 10 offres à zéro — **14 collectée(s), 0
+> retenue(s) : LA SOURCE A RÉPONDU, ce sont nos filtres qui les ont écartées**
+> (10 age:apres-datation, 3 seniorite:premier-passage, 1 normalize)*
+
+**C’est la première fois de la semaine qu’une alerte nomme sa cause du premier
+coup.** Sans la ventilation par étage ajoutée le matin même, le réflexe aurait
+été d’accuser le connecteur — et de « réparer » ce qui marche, l’erreur déjà
+payée deux fois avec Air Liquide et Santander.
+
+La cause réelle, trouvée en dix minutes grâce à ce message : le lecteur de
+fiches convertit les dates à l’européenne **en dur**, ligne 3899. La liste dit
+`2026-09-01`, la fiche rend `2026-01-09` — **235 jours**. C’est la jumelle des
+deux conversions retirées de `normalize()` le matin, et mon inventaire ne
+l’avait pas vue parce qu’il couvrait les branches de `normalize`, pas le
+chemin des fiches. **556 offres y sont datées à chaque passage.**
+
+La détection est donc à garder telle quelle. C’est la RÉACTION qui était
+disproportionnée — voir `DECISIONS.md` §39.
+
