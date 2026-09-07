@@ -1363,3 +1363,62 @@ d’intitulé passera sur l’établi — pas ce soir.
 Le filtre de lieu, lui, tient : les deux offres BBVA de Cancún et San Luis
 Potosí figurent bien dans le résidu et non au catalogue.
 
+### Les 438 aux portes « sans marqueur » — 43 % sont indécidables au titre
+
+Mesure du 07/09/2026. La répartition réelle est **178 Big Four, 166
+entreprise, 94 conseil**, soit 438 et non 433 : la récolte a bougé avec les
+correctifs du jour.
+
+Les 438, rangées par ce que leur TITRE permet de savoir :
+
+| | offres | part |
+|---|---|---|
+| **A.** hors finance au titre — un domaine est nommé, ce n’est pas la finance | 234 | 53 % |
+| **B.** INDÉCIDABLE au titre seul — aucun domaine nommé | **190** | **43 %** |
+| **C.** finance nommée au titre, et pourtant refusée | 14 | 3 % |
+
+Et les 14 du groupe C fondent : sept venaient d’un motif `performance` trop
+large **écrit dans le script de mesure, pas dans le classifieur** — vérifié en
+interrogeant `classify()`, qui rejette bien « Responsable performance
+énergétique » (Sanofi) et « Business Performance Analyst » (Criteo) tout en
+classant « Business Performance Analyst Finance ». Ses motifs sont bornés
+(`/\bperformance (?:analyst|financiere|operationnelle)\b/`), jamais nus.
+
+**Il reste donc sept offres que le vocabulaire pourrait prendre, contre 190
+que rien ne tranchera jamais au titre** : « Manager » chez Forvis Mazars,
+« Césure » chez Altarea, « Conseil en Transformation » chez Deloitte, « Junior
+Consultant » chez Roland Berger, « Consultant PhD » chez BCG.
+
+C’est l’argument chiffré du chantier de LECTURE DES FICHES : 43 % du gisement
+est hors d’atteinte du vocabulaire **par construction**. Il est bloqué sur le
+corpus de cinquante offres — `corpus-etiquetage.md`, 518 lignes, commité le
+07/09 et jamais relu depuis. À regarder en premier : il est peut-être plus
+avancé qu’on ne le croit.
+
+#### Trois mots gardés, prouvés, à poser en cinq minutes
+
+Contre-test fait sur QUATRE populations — big4 (1 163 intitulés), conseil
+(258), entreprise (612), industriel (304) — parce qu’on ne sait pas d’avance
+où le danger dort.
+
+| motif | big4 | conseil | entreprise | industriel | gain |
+|---|---|---|---|---|---|
+| `restructuring` / `turnaround` | 4 | 5 | **0** | **0** | 3 offres |
+| `special situations` | 2 | 0 | **0** | **0** | 2 offres |
+| `BIC / BNC` | 1 | 0 | **0** | **0** | 1 offre |
+
+Les trois nomment des métiers et les nommeront encore dans six mois. Aucun ne
+nomme un niveau. Gain total : **six offres** — ce qui ne valait pas d’ouvrir
+cette porte le soir du 7 septembre, après quatorze heures de travail.
+
+#### Deux mots écartés définitivement, avec leur raison
+
+- **`due diligence`** — son unique entrée « entreprise » au contre-test est
+  *« Country, Geopolitical Risk & Due diligence Analyst »* chez **Geopost**,
+  exactement l’offre signalée comme mal rangée en Fusions & Acquisitions. Le
+  mot fait entrer du **risque pays**. Et il ne gagnerait rien : ses 38 offres
+  Big Four passent déjà.
+- **`prix de transfert`** — fait entrer du **sénior chez l’industriel** :
+  « Senior Manager Prix de transfert » (Ipsen), « Group Transfer Pricing
+  Expert » (CMA CGM).
+
