@@ -257,6 +257,31 @@ Et le corollaire de méthode, pour l’auditer : **la preuve d’un format est u
 nombre qui dépasse 12.** Second nombre > 12 : américain. Premier nombre > 12 :
 européen. Aucun des deux : indécidable — et c’est là que le silence commence.
 
+**LA PREUVE PAR CONCORDANCE, quand aucun nombre ne dépasse 12.** Le
+corollaire ci-dessus est muet sur « 09/01/2026 » : ni 09 ni 01 ne tranchent,
+et c’est précisément le cas de Bank of America. Il existe pourtant une preuve,
+et elle est plus forte que l’inspection d’une valeur :
+
+> **Quand deux champs décrivent la MÊME offre et qu’un seul est ambigu, le
+> non-ambigu prouve l’autre.** La liste de BofA dit `2026-09-01` en ISO, sa
+> fiche dit `09/01/2026` : la fiche est donc en MM/JJ/AAAA. Dix offres sur dix
+> l’ont confirmé le 08/09/2026.
+
+Les paires utilisables sont partout dans le pipeline : **la liste et la fiche**
+(le cas de BofA), un champ ISO et un champ à barres dans le même objet JSON,
+ou la même offre servie par deux connecteurs. La condition est unique : les
+deux champs doivent porter sur la **même annonce**, pas sur deux annonces du
+même employeur.
+
+Ce qu’elle ne fait pas : elle ne tranche pas quand le jour ÉGALE le mois
+(« 07/07 »), ni quand aucun des deux champs n’est non ambigu. Appliquée le
+08/09 à Marsh McLennan, HSBC et BCG — trois sources laissées sans déclaration
+« faute de preuve » —, elle a montré qu’il n’y avait **rien à prouver** :
+leurs dates sont en ISO des deux côtés. Une source sans date ambiguë n’a pas
+besoin de déclaration, et le noter ferme le sujet au lieu de le laisser
+ouvert.
+
+
 ---
 
 ### Ne jamais mesurer avec un instrument plus PUISSANT que celui qui travaille

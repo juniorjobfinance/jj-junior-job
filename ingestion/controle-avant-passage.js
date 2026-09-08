@@ -564,6 +564,66 @@ try {
   ko('catalogue HTML', e.message);
 }
 
+console.log('\n--- Aucun test n’est un décor ---');
+// Un fichier de test present dans ingestion/ mais que RIEN n execute donne
+// l'illusion d'une protection sans en fournir aucune. Le 08/09/2026,
+// test-passage-date.js et test-connecteur-muet.js etaient dans ce cas depuis
+// leur commit de la veille — trouves par hasard, pas par un controle.
+//
+// « Appele » n'est pas « mentionne » : le workflow contient « test-vie.js
+// n'est pas ici », un commentaire qui dit le CONTRAIRE d'un appel. On ne
+// cherche donc que des lignes de commande hors commentaire, et des require().
+try {
+  const dossier = path.join(RACINE, 'ingestion');
+  const tests = fs.readdirSync(dossier)
+    .filter((n) => /^(test-|verif-|controle-)/.test(n) && n.endsWith('.js'))
+    .sort();
+
+  // Exemptions, chacune avec sa raison. Une exemption sans raison est un
+  // oubli qui se deguise.
+  const EXEMPTS = {
+    'test-vie.js':
+      'appelle Business France et demande une vérification à l’œil : le lancer chaque matin ajouterait une dépendance réseau à un contrôle qu’aucune machine ne peut trancher',
+  };
+
+  // Les lignes de commande des workflows, commentaires retires.
+  const dossierWf = path.join(RACINE, '.github', 'workflows');
+  const commandes = [];
+  for (const w of fs.readdirSync(dossierWf)) {
+    for (const l of fs.readFileSync(path.join(dossierWf, w), 'utf8').split(/\r?\n/)) {
+      const t = l.trim();
+      if (t && !t.startsWith('#')) commandes.push(t);
+    }
+  }
+  // Le JavaScript qui pourrait en require un, commentaires retires.
+  const js = {};
+  for (const n of ['pipeline.js', ...tests]) {
+    js[n] = fs.readFileSync(path.join(dossier, n), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, ' ')
+      .split(/\r?\n/).map((l) => l.replace(/\/\/.*$/, '')).join('\n');
+  }
+
+  const decors = [];
+  for (const t of tests) {
+    if (EXEMPTS[t]) continue;
+    const base = t.replace(/\.js$/, '').replace(/-/g, '\\-');
+    const lance = commandes.some((c) => new RegExp('(^|\\s|&&|;)node\\s+\\S*' + base + '\\.js').test(c));
+    const requis = Object.entries(js).some(([n, s]) => n !== t && new RegExp("require\\(['\"]\\./" + base + "['\"]\\)").test(s));
+    if (!lance && !requis) decors.push(t);
+  }
+
+  if (decors.length) {
+    ko('décors', `${decors.length} test(s) présent(s) dans ingestion/ que RIEN n’exécute : ` +
+      `${decors.join(', ')} — un test qu’on ne lance pas ne se plaint jamais`);
+  } else {
+    const n = tests.length - Object.keys(EXEMPTS).length;
+    ok('décors', `les ${n} tests sont tous exécutés` +
+      (Object.keys(EXEMPTS).length ? ` (${Object.keys(EXEMPTS).join(', ')} exempté avec sa raison)` : ''));
+  }
+} catch (e) {
+  ko('décors', e.message);
+}
+
 console.log('\n--- Tout rejet laisse un motif ---');
 // Un rejet muet est un angle mort : il ne se compte pas, ne se ventile pas,
 // et personne ne peut dire s'il est legitime sans rejouer le pipeline a la
