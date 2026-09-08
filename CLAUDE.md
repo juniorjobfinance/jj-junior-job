@@ -306,6 +306,61 @@ ouvert.
 
 ---
 
+### UN CONTRÔLE QUI COMPARE UN RENDU neutralise d’abord ce qui varie
+
+Le 08/09/2026, le contrôle du catalogue HTML — **bloquant** — a rendu un
+faux échec, et l’alerte est remontée jusqu’à « le site sert le catalogue
+d’hier, 72 offres sont invisibles pour Google ». Il n’en était rien.
+
+Il comparait, au caractère près, le bloc de cartes présent dans `index.html`
+à celui que le gabarit régénère. Les 924 caractères d’écart se
+décomposaient ainsi :
+
+| ce qui différait | caractères | est-ce du contenu ? |
+|---|---:|---|
+| `\r\n` contre `\n` (checkout Windows, `core.autocrlf=true`) | 916 | **non** |
+| « Publiée il y a **5** jours » contre « **4** jours » | 8 | **non** |
+| le catalogue lui-même | **0** | — |
+
+**Aucun des deux n’est du contenu.** Les fins de ligne viennent du système
+de fichiers ; la date relative et sa classe (`recente` / `moyenne` /
+`ancienne`) se calculent par rapport à MAINTENANT — le rendu était donc
+vrai à l’instant de sa génération et dérivait avec l’horloge.
+
+Conséquence : **le contrôle échouait depuis toute machine Windows, et
+quelques heures après le passage.** Il passait à 6h30 sur Linux, à
+l’instant même de la génération, et nulle part ailleurs.
+
+> **Un contrôle bloquant qui ment est pire qu’un contrôle absent : on
+> apprend à l’ignorer.** On passe des jours à faire qu’aucun rejet ne soit
+> muet et qu’aucune alerte ne soit décorative ; une alerte qui crie à tort
+> défait tout ce travail, parce qu’elle enseigne que les alertes se
+> contournent.
+
+**La règle :** avant de comparer deux rendus, neutraliser des DEUX CÔTÉS ce
+qui varie sans que le contenu change — les fins de ligne, l’horodatage,
+tout libellé relatif au moment présent. Ce qui reste comparé est le
+contenu, et lui seul.
+
+```js
+const neutraliser = (t) => String(t)
+  .replace(/\r\n/g, '\n')
+  .replace(/<div class="carte-date [a-z-]*">[\s\S]*?<\/div>/g, '§DATE§');
+```
+
+**Et la contre-épreuve, sinon on remplace un contrôle bruyant par un
+contrôle sourd.** Sept défauts provoqués, quatre de contenu (carte retirée,
+intitulé tronqué, employeur changé, URL changée) et trois de bruit (libellé
+de date, classe de date, fins de ligne). Les sept doivent se comporter comme
+prévu — 7/7 le 08/09. Faire taire un contrôle sans vérifier qu’il entend
+encore, c’est le supprimer en croyant le réparer.
+
+C’est le pendant de « un contrôle qu’on n’a jamais vu échouer n’est pas
+vérifié » : **un contrôle qu’on n’a jamais vu se taire à tort ne l’est pas
+non plus.**
+
+---
+
 ### Ne jamais mesurer avec un instrument plus PUISSANT que celui qui travaille
 
 Le 07/09/2026, une page carrières a été lue **au navigateur** et déclarée

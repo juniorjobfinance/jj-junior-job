@@ -520,12 +520,47 @@ try {
     // On appelle la fonction du pipeline, jamais une reimplementation : c'est
     // elle qui decide de l'espacement, une carte par ligne, et la comparaison
     // ci-dessous est au caractere pres.
+    // NEUTRALISER CE QUI VARIE SANS QUE LE CONTENU CHANGE.
+    //
+    // Ce controle compare un RENDU au caractere pres. Deux choses y bougent
+    // sans que rien de reel ne change :
+    //
+    // 1. LES FINS DE LIGNE. `rendreCartes` produit du \n ; un checkout
+    //    Windows (core.autocrlf=true, aucun .gitattributes) rend du \r\n.
+    //    916 caracteres d ecart, et une « premiere divergence au 0e » qui
+    //    ne veut rien dire.
+    //
+    // 2. LES DATES RELATIVES. Chaque carte porte
+    //    « <div class="carte-date recente">Publiee il y a 5 jours</div> » :
+    //    le libelle ET la classe se calculent par rapport a MAINTENANT. Le
+    //    controle etait donc vrai a l instant de la generation et derivait
+    //    avec l horloge — « il y a 5 jours » contre « il y a 4 jours ».
+    //
+    // Le 08/09/2026 il a rendu un faux echec bloquant, et l alerte est
+    // remontee jusqu a « le site sert le catalogue d hier ». Il n en etait
+    // rien : 916 caracteres de \r et 8 caracteres d horloge.
+    //
+    // CE QU IL CONTINUE D ATTRAPER : une carte manquante, un intitule
+    // tronque, un employeur faux, une URL changee, un gabarit desynchronise.
+    // CE QU IL CESSE D ATTRAPER : l heure et le systeme de fichiers.
+    const neutraliserRendu = (texte) =>
+      String(texte)
+        .replace(/\r\n/g, '\n')
+        .replace(
+          /<div class="carte-date [a-z-]*">[\s\S]*?<\/div>/g,
+          '<div class="carte-date">§DATE§</div>'
+        );
+
     const attendu = rendreCartes(catalogue, gabarit).html;
-    if (dedans !== attendu) {
-      const i = [...attendu].findIndex((c, k) => dedans[k] !== c);
+    const dedansN = neutraliserRendu(dedans);
+    const attenduN = neutraliserRendu(attendu);
+    if (dedansN !== attenduN) {
+      const i = [...attenduN].findIndex((c, k) => dedansN[k] !== c);
+      const extrait = (t) => JSON.stringify(String(t).slice(Math.max(0, i - 50), i + 50));
       ko('catalogue HTML',
-        `le HTML ne correspond pas au catalogue (${dedans.length} caracteres ` +
-        `contre ${attendu.length} attendus, premiere divergence au ${i}e) — ` +
+        `le HTML ne correspond pas au catalogue (${dedansN.length} caracteres ` +
+        `contre ${attenduN.length} attendus, premiere divergence au ${i}e) — ` +
+        `present ${extrait(dedansN)} contre attendu ${extrait(attenduN)} — ` +
         'relancer le pipeline avant de publier');
     } else {
       ok('catalogue HTML', 'identique a ce que le gabarit produit pour ce catalogue');
@@ -542,7 +577,8 @@ try {
     } else {
       const attenduP = rendrePepites(catalogue, gabarit, voletParDefaut(html));
       const cache = /<div id="pepites" class="pepites" hidden>/.test(html);
-      if (bp[1] !== attenduP.piste || bpts[1] !== attenduP.points) {
+      if (neutraliserRendu(bp[1]) !== neutraliserRendu(attenduP.piste) ||
+          neutraliserRendu(bpts[1]) !== neutraliserRendu(attenduP.points)) {
         ko('bandeau pépites',
           `le bandeau ne correspond pas au catalogue (${bp[1].length} caracteres ` +
           `contre ${attenduP.piste.length} attendus) — relancer le pipeline`);
