@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genere": "2026-09-07T22:14:48.894Z",
+  "genere": "2026-09-08T04:46:56.417Z",
   "fenetreJours": 30,
   "employeurs": [
     {
@@ -10,8 +10,8 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-07",
-      "passages": 3,
+      "derniereVue": "2026-09-08",
+      "passages": 4,
       "offres": 1,
       "offresMax": 1
     },
@@ -22,8 +22,31 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-07",
-      "passages": 3,
+      "derniereVue": "2026-09-08",
+      "passages": 4,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Fred",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-08",
+      "passages": 4,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Bulgari",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-07",
+      "derniereVue": "2026-09-08",
+      "passages": 2,
       "offres": 1,
       "offresMax": 1
     },
@@ -57,29 +80,6 @@
       "premiereVue": "2026-09-05",
       "derniereVue": "2026-09-07",
       "passages": 3,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "Fred",
-      "categories": [
-        "sans-structure",
-        "maison-absente"
-      ],
-      "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-07",
-      "passages": 3,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "Bulgari",
-      "categories": [
-        "sans-structure"
-      ],
-      "premiereVue": "2026-09-07",
-      "derniereVue": "2026-09-07",
-      "passages": 1,
       "offres": 1,
       "offresMax": 1
     }
