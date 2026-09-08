@@ -4319,13 +4319,29 @@ function parConnecteur(offres) {
 // envoye chercher une panne de reseau alors que Bank of America avait repondu
 // en deux secondes : le defaut etait chez nous, une date lue en JJ/MM quand
 // elle est en MM/JJ. Une matinee perdue sur la mauvaise piste.
+// LA SOURCE A-T-ELLE REPONDU ?
+//
+// Extrait de diagnosticConnecteur, qui faisait deja ce test pour REDIGER son
+// message. Le compteur doit lire exactement la meme chose : deux tests
+// separes pour la meme question divergent tot ou tard, et alors le message
+// dit « la source a repondu » pendant que le compteur escalade comme si elle
+// etait morte.
+//
+// `brutes` absent = on ne sait pas ce que la source a rendu. On repond alors
+// NON, ce qui laisse l escalade se comporter comme avant : ne pas savoir ne
+// doit pas desarmer un garde-fou.
+function laSourceARepondu(nom, brutes) {
+  if (!brutes || !brutes.length) return false;
+  return brutes.some((o) => String(o.__src || '').split(':')[0] === nom);
+}
+
 function diagnosticConnecteur(nom, avantN, brutes) {
   const collectees = (brutes || []).filter(
     (o) => String(o.__src || '').split(':')[0] === nom
   ).length;
   const tete = `le connecteur « ${nom} » passe de ${avantN} offres à zéro`;
 
-  if (!collectees) {
+  if (!laSourceARepondu(nom, brutes)) {
     return tete +
       ` — 0 collectée ce matin : LA SOURCE N'A RIEN RENVOYÉ` +
       ` (réseau du runner, API fermée, ou portail vide chez l'employeur).`;
@@ -4363,7 +4379,7 @@ const PASSAGES_AVANT_BLOCAGE = 3;
 //      plus personne n'attend rien.
 //   2. il se REMET A ZERO des que le connecteur rend une offre. Pas au bout
 //      d'un moment, pas au passage vert : des qu'il rend une offre.
-function suivreConnecteursMuets(avant, apres, suivis) {
+function suivreConnecteursMuets(avant, apres, suivis, brutes) {
   // 2. Remise a zero — avant tout le reste : un connecteur qui sert de
   //    nouveau ne doit pas passer par la case incrementation.
   for (const nom of Object.keys(suivis)) {
@@ -4376,7 +4392,19 @@ function suivreConnecteursMuets(avant, apres, suivis) {
   }
   // Incrementation des seuls connecteurs suivis, toujours a zero.
   for (const nom of Object.keys(suivis)) {
-    if (!apres.get(nom)) suivis[nom] += 1;
+    if (apres.get(nom)) continue;
+    // §39 — LE COMPTEUR N INCREMENTE QUE LORSQUE LA SOURCE NE REPOND PAS.
+    //
+    // Quand elle repond et que nos filtres ecartent tout, le defaut est chez
+    // nous : il ne se repare pas en s empechant de publier. Le passage crie
+    // fort — le message porte deja la ventilation par etage, qui dit ou
+    // regarder — et n escalade jamais.
+    //
+    // On n a pas non plus REMIS A ZERO : le compteur garde la memoire des
+    // passages ou la source etait vraiment muette. Il cesse seulement de
+    // grandir tant que le defaut est de notre cote.
+    if (laSourceARepondu(nom, brutes)) continue;
+    suivis[nom] += 1;
   }
   return suivis;
 }
@@ -4402,17 +4430,23 @@ function anomaliesDePublication(nouvelles, brutes, suivis) {
 
   const avant = parConnecteur(anciennes);
   const apres = parConnecteur(nouvelles);
-  const compte = suivreConnecteursMuets(avant, apres, suivis || {});
+  const compte = suivreConnecteursMuets(avant, apres, suivis || {}, brutes);
   for (const [nom, n] of Object.entries(compte)) {
     if (apres.get(nom)) continue;
     const combien = avant.get(nom) || SEUIL_CONNECTEUR_MUET;
     const msg = diagnosticConnecteur(nom, combien, brutes);
-    if (n >= PASSAGES_AVANT_BLOCAGE) {
+    // Meme au troisieme passage, une source QUI REPOND ne bloque pas : c est
+    // le §35 applique a l escalade elle-meme — on bloque quand publier serait
+    // FAUX, on crie quand ce serait seulement INCOMPLET.
+    if (n >= PASSAGES_AVANT_BLOCAGE && !laSourceARepondu(nom, brutes)) {
       bloquantes.push(msg + ` — ${n}ᵉ passage consécutif à zéro : ce n'est plus un` +
         ` incident, c'est un connecteur mort qu'on n'a pas réparé.`);
     } else {
-      signalements.push(msg + ` — passage ${n} sur ${PASSAGES_AVANT_BLOCAGE} ; le` +
-        ` catalogue part sans lui.`);
+      signalements.push(msg + (laSourceARepondu(nom, brutes)
+        ? ` — la source REPOND : le compteur n\u2019escalade pas (§39), le catalogue` +
+          ` part sans elle. Le defaut est chez nous, et il ne se repare pas en` +
+          ` s\u2019empechant de publier.`
+        : ` — passage ${n} sur ${PASSAGES_AVANT_BLOCAGE} ; le catalogue part sans lui.`));
     }
   }
   return { bloquantes, signalements };

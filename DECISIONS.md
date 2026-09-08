@@ -1448,7 +1448,7 @@ un passage complet, jamais sur cette mesure intermédiaire.
 
 ## 39. Un défaut de NOTRE côté ne se répare pas en s’empêchant de publier
 
-**Constat du 07/09/2026 au soir, correction prévue et non appliquée.**
+**Constat du 07/09/2026 au soir. POSÉ le 08/09/2026, avec sa contre-épreuve.**
 
 Le garde-fou des connecteurs muets compte « trois passages consécutifs à
 zéro » et bloque au troisième. Il ne distingue pas les deux pannes que **son
@@ -1499,6 +1499,65 @@ où regarder, ce qui est le seul service utile dans ce cas.
 C’est le paragraphe 35 appliqué à l’escalade elle-même, et le corollaire du
 principe déjà écrit pour le passage obligé des dates : **il refuse l’offre,
 jamais le passage.**
+
+### Ce que la pose a demandé — 08/09/2026
+
+`laSourceARepondu(nom, brutes)` est **extrait de `diagnosticConnecteur`**, qui
+faisait déjà ce test pour rédiger son message. Le compteur lit désormais
+exactement la même chose que le message : deux tests séparés pour la même
+question divergent tôt ou tard, et alors le message dit « la source a
+répondu » pendant que le compteur escalade comme si elle était morte.
+
+Trois points où la garde s’applique :
+
+1. **le compteur n’incrémente pas** quand la source répond ;
+2. **le blocage ne se déclenche pas** même à trois passages, quand la source
+   répond ;
+3. **le message dit pourquoi** — « la source RÉPOND : le compteur n’escalade
+   pas (§39) » — sinon on cherche pendant vingt minutes pourquoi le
+   troisième passage n’a pas bloqué.
+
+**`brutes` absent = on répond NON.** Ne pas savoir ce que la source a rendu ne
+doit pas désarmer un garde-fou : le comportement reste alors celui d’avant.
+C’est ce qui a permis aux sept assertions existantes de continuer à passer
+sans être réécrites.
+
+### La contre-épreuve, et ce qu’elle a révélé
+
+Deux défauts provoqués, `pipeline.js` restauré à l’identique :
+
+| défaut provoqué | échecs |
+|---|---:|
+| la garde du compteur retirée | **2** |
+| le blocage qui ignore le prédicat | **3** |
+
+**Le second n’était pas couvert au premier jet**, et c’est le plus important :
+la garde du compteur suffit au cas simple — la source répond, le compteur
+reste à zéro, rien ne bloque —, mais il existe une séquence réelle où le
+compteur est **déjà à trois** :
+
+```
+jours 1-3   la source est vraiment muette        -> le compteur monte à 3
+jour 4      la source répond, nos filtres écartent tout
+```
+
+Au jour 4, sans le second garde-fou, le catalogue entier ne partirait pas pour
+un défaut de notre côté — exactement l’incident du 07/09 à 21h13. C’est **la**
+propriété qui protège le site, et elle demande le chemin d’intégration :
+`anomaliesDePublication` lit le catalogue de la veille sur le disque. Le test
+le fait, et si `offres.js` manque ou porte moins de cinquante offres, il le
+**dit** au lieu de croire au succès.
+
+`ingestion/test-connecteur-muet.js` : 21 assertions, câblé au Contrôle 1.
+
+### Ce qui reste ouvert sur le même code
+
+**`--forcer` réarme le compteur.** Le garde-fou compare une source à ce
+qu’elle rendait au passage PRÉCÉDENT ; publier en forçant acte la baisse, et
+le lendemain la source ne « passe » plus de dix à zéro — elle reste à zéro, ce
+qui n’est plus une chute. Une source réellement morte pourrait devenir
+invisible. Non corrigé : les deux touchent le même code, et celui-ci était le
+seul à pouvoir coûter le site entier.
 
 ### Ce que l’incident a prouvé au passage
 
