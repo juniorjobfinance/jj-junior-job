@@ -63,6 +63,21 @@ jobs:
           node ingestion/test-seniorite.js
           node ingestion/verif-structures.js
           node ingestion/test-registre.js
+          # Les trois epreuves des DATES et du garde-fou. Elles etaient dans le
+          # depot depuis le 07/09 sans etre appelees : un test qu'on n'execute
+          # pas ne se plaint jamais, et donne l illusion d une protection.
+          #
+          # test-passage-date : une date illisible refuse l OFFRE, jamais le
+          # passage. Avant lui, « 25/12/2026 » levait une RangeError qui tuait
+          # le passage entier.
+          node ingestion/test-passage-date.js
+          # test-fiche-date : le lecteur de fiches date 556 offres par passage.
+          # Sa conversion etait codee en dur a l europeenne, et vieillissait les
+          # offres de Bank of America de 235 jours.
+          node ingestion/test-fiche-date.js
+          # test-connecteur-muet : le garde-fou ne bloque plus au premier jour,
+          # et son message nomme la cause au lieu de dire « le reseau ou eux ».
+          node ingestion/test-connecteur-muet.js
           # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
           # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
           # On le lance pour son journal, pas pour son verdict.

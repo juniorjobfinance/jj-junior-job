@@ -3871,7 +3871,7 @@ function contratDeLaFiche(texte) {
   return null; // CDI, CDD, intérim : rien à corriger
 }
 
-function ficheJsonLd(html) {
+function ficheJsonLd(html, format) {
   const resultat = { date: null, description: null };
   for (const bloc of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
     let noeuds;
@@ -3893,12 +3893,18 @@ function ficheJsonLd(html) {
       if (!brut || resultat.date) continue;
       // Deux écritures selon les sites : « 31/08/2026 » (Crédit Agricole) et
       // ISO « 2026-08-31 », parfois sans zéro initial (KPMG : « 2026-8-25 »).
-      const fr = String(brut).match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-      const iso = String(brut).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-      let d = null;
-      if (fr) d = new Date(`${fr[3]}-${fr[2]}-${fr[1]}T00:00:00Z`);
-      else if (iso) d = new Date(`${iso[1]}-${String(iso[2]).padStart(2, '0')}-${String(iso[3]).padStart(2, '0')}T00:00:00Z`);
-      if (!d || isNaN(d)) continue;
+      // LE PASSAGE OBLIGE, ici aussi. Cette conversion etait codee en dur a
+      // l europeenne — l'hypothese venait d'UN site (Credit Agricole) et
+      // s appliquait a TOUS. Bank of America envoie « 09/01/2026 » a
+      // l americaine : le 1er septembre devenait le 9 janvier.
+      //
+      // Un refus n'ecarte pas l'offre, il ecarte LA DATE DE LA FICHE : l offre
+      // garde celle de sa liste. C est la difference avec normalize, ou le
+      // refus porte sur l'offre.
+      const lue = lireDatePublication(String(brut).trim(), format);
+      if (lue === DATE_REFUSEE || !lue) continue;
+      const d = new Date(lue);
+      if (isNaN(d)) continue;
       // Garde-fou : une date future ou antérieure à 2015 est une erreur de la
       // source, pas une information. On préfère ne rien dire.
       const an = d.getUTCFullYear();
@@ -4095,6 +4101,21 @@ async function completerDatesManquantes(offers) {
   }
 
   const DELAI_PAR_HOTE = { 'groupecreditagricole.jobs': 3000, 'group.bnpparibas': 1500 };
+  // Le format de date des FICHES, par hote. Il se declare, il ne se devine
+  // pas : « 07/03/2026 » est valide en JJ/MM comme en MM/JJ, et aucune
+  // inspection de la valeur ne tranchera jamais. Sans declaration, le passage
+  // oblige refuse — et la carte garde la date de la liste.
+  //
+  // Chaque ligne porte sa preuve, mesuree le 08/09/2026 :
+  const FORMAT_FICHE_PAR_HOTE = {
+    // La liste dit « 2026-09-01 » en ISO et la fiche « 09/01/2026 » pour la
+    // MEME offre : la fiche est donc americaine. Aucun de ses nombres ne
+    // depasse 12 — la regle du « nombre > 12 » est muette ici, et c est la
+    // concordance des deux champs qui prouve.
+    'careers.bankofamerica.com': 'MM/JJ/AAAA',
+    // « 17/08/2026 » : 17 ne peut pas etre un mois.
+    'groupecreditagricole.jobs': 'JJ/MM/AAAA',
+  };
   let trouvees = 0;
 
   await Promise.all(
@@ -4108,7 +4129,7 @@ async function completerDatesManquantes(offers) {
           });
           if (r.ok) {
             const texteHtml = await r.text();
-            const fiche = ficheJsonLd(texteHtml);
+            const fiche = ficheJsonLd(texteHtml, FORMAT_FICHE_PAR_HOTE[hote]);
             if (fiche.date) {
               o._postedAt = fiche.date;
               o._dateRecuperee = true;
@@ -4355,7 +4376,24 @@ function lireDatePublication(valeur, format) {
   }
   const t = String(valeur).trim();
   if (!t) return null;
+  // « 2026/07/24 » : de l ISO a barres obliques. L annee vient en premier,
+  // donc rien n est ambigu — mais aucun motif ne le lisait, et les dates de
+  // Societe Generale etaient perdues en silence.
+  const isoBarres = t.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+  if (isoBarres) {
+    const d = new Date(`${isoBarres[1]}-${String(isoBarres[2]).padStart(2, "0")}-${String(isoBarres[3]).padStart(2, "0")}T00:00:00Z`);
+    return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
   // ISO, avec ou sans heure : la seule forme qui se lit sans rien supposer.
+  // ISO sans zero initial : « 2026-8-25 » chez KPMG. Il faut le normaliser
+  // AVANT de le donner a `new Date`, qui lirait « 2026-8-25 » en heure locale
+  // et le rendrait decale d un jour une fois converti en UTC. L ancien lecteur
+  // de fiches le gerait ; le passage oblige doit le gerer aussi.
+  const isoCourt = t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (isoCourt) {
+    const d = new Date(`${isoCourt[1]}-${String(isoCourt[2]).padStart(2, "0")}-${String(isoCourt[3]).padStart(2, "0")}T00:00:00Z`);
+    return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
   if (/^\d{4}-\d{2}-\d{2}/.test(t)) {
     const d = new Date(t.length === 10 ? t + 'T00:00:00Z' : t);
     return isNaN(d) ? DATE_REFUSEE : d.toISOString();

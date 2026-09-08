@@ -1731,3 +1731,31 @@ Ipsen (*FP&A / Junior Financial Analyst* — **au catalogue**), Valeo (*Stagiair
 Front Office* — **au catalogue**, 8 offres publiées), Groupe BPCE, Crédit
 Mutuel, Schroders (`ekbq`), Nestlé.
 
+### Forcer une publication remet le compteur d’escalade à zéro le lendemain
+
+**Effet de bord découvert le 08/09/2026 au matin. Ni voulu, ni faux — mais il
+faut le connaître.**
+
+Le 07/09 au soir, `bofa` était au **cinquième** passage consécutif à zéro et
+bloquait la publication. Nous avons forcé, en connaissance de cause : le
+catalogue était incomplet de dix offres, pas faux (§35).
+
+Le lendemain matin, le passage de 6h30 **a publié normalement**, et `bofa`
+n’a pas bloqué. Pourquoi : **le garde-fou compare une source à ce qu’elle
+rendait au passage PRÉCÉDENT.** En publiant un catalogue où `bofa` valait
+déjà zéro, la publication forcée a **acté la baisse**. Le lendemain, la
+source ne « passe » plus de dix à zéro : elle reste à zéro, ce qui n’est plus
+une chute. Le compteur repart de zéro.
+
+**Le danger, s’il n’est pas connu :** quelqu’un force un soir en croyant
+seulement publier, et découvre trois jours plus tard que le compteur ne monte
+jamais — parce que chaque publication forcée réarme la référence. Une source
+réellement morte deviendrait alors invisible.
+
+**Ce n’est pas un défaut à corriger tel quel.** Le garde-fou fait ce pour quoi
+il est écrit : comparer à la veille. Mais il se combine avec `--forcer` d’une
+façon que personne n’avait prévue, et cela s’écrit AVANT que quelqu’un ne s’y
+fie. À reprendre avec la correction du compteur (`DECISIONS.md` §39), qui doit
+de toute façon distinguer « la source ne répond pas » de « nos filtres ont
+tout écarté » — les deux chantiers touchent le même code.
+
