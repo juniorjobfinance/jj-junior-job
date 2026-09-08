@@ -1974,3 +1974,110 @@ une erreur.
   Alven, Partech, Sagard) : **absentes de la récolte**, portail non vérifié.
   Elles ne sont **pas** notées « sans portail » — c’est Victor qui les
   ouvrira, et c’est là que son aide vaut le plus.
+
+## Le 8 septembre, deuxième partie — un chiffre corrigé, une lecture posée
+
+### Le champ d’entité — la correction : dix offres, pas 271
+
+**Le chiffre écrit plus haut dans ce fichier était faux, et l’erreur est la
+plus coûteuse de la journée : j’ai mesuré l’ENTRÉE et l’ai rapportée comme
+la SORTIE.** Le compte des entités divergentes portait sur `o.emp` dans la
+récolte brute. Or `normalize()` réécrit l’employeur : une offre brute
+« Crédit Agricole » portant `entite: Amundi` ressort déjà « **Amundi** ».
+
+La bonne mesure compare l’entité au nom **après** `normalize()` :
+
+| | |
+|---|---:|
+| offres brutes portant une entité lisible | 1 336 |
+| survivant à `normalize()` — les seules qui s’affichent | 528 |
+| portant **déjà** le bon nom | **518** |
+| affichant encore un nom différent | **10** |
+
+Les 134 offres LCL et les 15 Amundi que j’avais comptées comme un défaut
+étaient **déjà corrigées**. Le pipeline lit l’entité presque partout ; il
+restait un seul connecteur, `phenom:careers.axa.com`, et trois marques :
+Mutuelle Saint-Christophe (4), GIE AXA (4), Direct Assurance (2).
+
+C’est « toute vérification compare un APRÈS à un AVANT » pris à l’envers :
+j’avais comparé **deux AVANT**.
+
+### Ce qui a été posé, et pourquoi c’est borné
+
+`CHAMP_ENTITE_PAR_SOURCE` + `entiteQuiRecrute()` dans `pipeline.js`, appelés
+dans la branche Phenom. Deux bornes, chacune imposée par une mesure :
+
+1. **Le champ se déclare par SOURCE, pas par plateforme.** `tags3` porte
+   l’entité chez AXA-Phenom et la DATE chez Talentsoft. Sur les cinq tenants
+   Phenom de la récolte, seul AXA remplit `tags3` — une règle « chez Phenom »
+   aurait été fausse dès le premier tenant qui le remplirait autrement.
+2. **Une déclinaison de la même maison ne se substitue pas.** Sans cette
+   borne, **371 offres « AXA » deviendraient « AXA France »** — ce qui
+   n’apprend rien au candidat et casse la déduplication, `canonicalKey`
+   commençant par `slugEmp(offer.emp)`.
+
+L’écart mesuré, les deux pipelines chargés côte à côte sur la même récolte :
+**3 308 offres avant, 3 308 après, 10 employeurs changent.** Et un effet
+qu’on n’attendait pas : ces trois marques existaient **déjà** au catalogue
+via l’autre source AXA (`axafr`, qui lit `LegalEntity`). Le changement les
+fusionne au lieu de les éparpiller entre « AXA » et leur nom.
+
+`ingestion/test-entite.js` — 26 assertions, câblé au Contrôle 1. Éprouvé sur
+deux défauts provoqués : borne retirée → 7 échecs, lecture par nom de champ
+→ 4 échecs, pipeline restauré à l’identique.
+
+### CACEIS et UPTEVIA sont typées `fintech` — relevé, non corrigé
+
+CACEIS est un dépositaire, UPTEVIA un teneur de comptes-titres. Ni l’un ni
+l’autre n’est une fintech. 58 offres au total. **Relevé le 08/09/2026, à
+traiter séparément** : changer un type de structure déplace des offres entre
+les filtres du site, et cela ne se fait pas en marge d’un autre chantier.
+
+### RSM — le coût tombe à 4,7 minutes, et le levier existait déjà
+
+Le filtrage au slug avant de visiter la fiche, mesuré avec les vraies portes :
+
+| filtre | fiches à visiter | coût (`Crawl-delay: 10`) |
+|---|---:|---:|
+| sitemap entier | 103 | 17,2 min |
+| + `isFinanceOfferFor` + lieu | 75 | 12,5 min |
+| + **`SENIOR_RE` sur le titre** | **28** | **4,7 min** |
+
+Les 28 sont la cible : *auditeur financier junior*, *apprenti collaborateur
+comptable*, *stagiaire transaction services*, *stage en audit janvier 2027*.
+
+**La réserve à connaître avant de brancher** : ce pré-filtre est plus STRICT
+que le pipeline, pas équivalent. `normalize()` n’applique pas `SENIOR_RE` au
+titre — il lit la séniorité sur la description. Les 47 écartés le seraient
+de toute façon, mais après lecture de leur fiche. Les cas limites se perdent :
+« assistant manager en transaction services » tombe sur le mot *manager*,
+alors qu’en cabinet c’est souvent 2-4 ans.
+
+### Trois portails de plus, et un déjà branché
+
+- **Amazon** (`amazon.jobs`) — `search.json?country=FRA&base_query=finance`
+  répond **200 avec l’en-tête du dépôt**, 24 offres, avec ville, date
+  (« June 3, 2026 »), `is_intern`, `job_family` et la description complète.
+  `robots.txt` ne ferme que `/internal`. **Branchable.** La date est en
+  anglais long — sans ambiguïté, mais `lireDatePublication` doit savoir la
+  lire.
+- **CCEP** (`ccep.jobs`, Coca-Cola Europacific Partners) — SuccessFactors +
+  Radancy, JSON-LD `JobPosting` avec `datePosted: "2026-8-19"` (ISO sans
+  zéro initial, le cas déjà couvert le 07/09), `addressCountry: France`,
+  sitemap de 737 URL. **Branchable.**
+- **Aareal Bank** (`aareal-bank-group.onlyfy.jobs`) — plateforme Onlyfy/XING,
+  lisible aux deux en-têtes, `robots.txt` permissif (`Crawl-delay: 1`), mais
+  **aucun JSON-LD** et des fiches en `/de/job/`. Banque allemande : le
+  gisement français reste à établir.
+- **Thales** — `careers.thalesgroup.com` est **déjà branchée deux fois** :
+  `workday:thales` (`sources.js:1843`) et Phenom (`sources.js:2103`),
+  30 offres dans la récolte du 07/09. Rien à faire.
+
+### Un sondeur d’URL, hors dépôt
+
+Victor envoie des URL plus vite qu’on ne réécrit des scripts. Un sondeur
+réutilisable vit dans le répertoire de travail temporaire : il fait toujours
+les mêmes gestes — `robots.txt` d’abord, **les deux en-têtes** ensuite, la
+signature de plateforme, le JSON-LD, la comparaison liste/fiche, le sitemap.
+Il n’est pas dans le dépôt : il n’a pas été demandé, et `sonder-carrieres.js`
+y occupe déjà la place voisine.

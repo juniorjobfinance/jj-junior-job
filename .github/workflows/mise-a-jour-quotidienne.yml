@@ -78,6 +78,13 @@ jobs:
           # test-connecteur-muet : le garde-fou ne bloque plus au premier jour,
           # et son message nomme la cause au lieu de dire « le reseau ou eux ».
           node ingestion/test-connecteur-muet.js
+          # test-entite : la lecture de l'entite qui recrute change le nom
+          # AFFICHE de 10 offres et, avec lui, leur cle de deduplication.
+          # Deux bornes a tenir : le champ se declare par SOURCE (tags3 porte
+          # l'entite chez AXA-Phenom et la DATE chez Talentsoft), et une
+          # declinaison de la meme maison ne se substitue pas — sans cette
+          # borne, 371 offres « AXA » deviendraient « AXA France ».
+          node ingestion/test-entite.js
           # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
           # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
           # On le lance pour son journal, pas pour son verdict.

@@ -2450,6 +2450,50 @@ function cleanTitle(title) {
   return t;
 }
 
+// L ENTITE QUI RECRUTE, quand la source la donne.
+//
+// Une meme plateforme sert plusieurs maisons, et chacune range ses champs
+// « tags » comme elle veut. Chez AXA-Phenom, `tags3` porte l entite qui
+// recrute — « Direct Assurance », « MUTUELLE SAINT-CHRISTOPHE ». Chez
+// Talentsoft, LE MEME NOM DE CHAMP porte la date de publication : un compte
+// d'entites bati sur le nom du champ a rendu « 04/09/2026 » et trente-huit
+// autres dates comme des employeurs, le 08/09/2026.
+//
+// Le champ se declare donc PAR SOURCE, comme le format de date — jamais par
+// plateforme, jamais par nom de champ. Mesure du 08/09 : sur les cinq
+// tenants Phenom de la recolte, seul AXA remplit `tags3`.
+const CHAMP_ENTITE_PAR_SOURCE = {
+  'phenom:careers.axa.com': 'tags3',
+};
+
+// On ne substitue QUE lorsque l entite est une AUTRE marque. « AXA France »,
+// « AXA Banque », « AXA XL » disent la meme maison que « AXA » : les afficher
+// separement fragmenterait l'employeur sans rien apprendre au candidat, et
+// changerait la cle de deduplication — qui commence par slugEmp(offer.emp),
+// si bien que deux noms pour une meme offre en font deux offres.
+//
+// Ce qu'on repare est precis : un etudiant lisait « AXA » sur une annonce de
+// la Mutuelle Saint-Christophe, qui n est pas une filiale d AXA.
+function entiteQuiRecrute(__src, raw, empParent) {
+  const champ = CHAMP_ENTITE_PAR_SOURCE[__src];
+  if (!champ) return null;
+  let v = raw[champ];
+  if (Array.isArray(v)) v = v.length === 1 ? v[0] : null;
+  if (typeof v !== 'string') return null;
+  v = v.trim();
+  if (!v || v.length > 70) return null;
+  const plat = (s) =>
+    String(s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  const a = plat(v);
+  const b = plat(empParent);
+  if (!a || !b || a === b || a.startsWith(b) || b.startsWith(a)) return null;
+  return v;
+}
 function normalizeInterne(item) {
   const { __src, raw } = item;
   let emp, title, ville, pays, url, typeContratRaw, romeLibelle, postedAt, sal, descr;
@@ -2912,6 +2956,10 @@ function normalizeInterne(item) {
     postedAt = new Date().toISOString(); // la liste ne porte pas de date
   } else if (__src.startsWith('phenom:')) {
     emp = item.emp;
+    // Quand la source nomme l'entite qui recrute et que c'est une AUTRE
+    // marque que la maison mere, on affiche celle-la : elle est le vrai
+    // employeur, et le candidat postule chez elle.
+    emp = entiteQuiRecrute(__src, raw, emp) || emp;
     // Les deux générations de l'API ne nomment pas les champs pareil :
     // la première dit title/city/apply_url, la seconde name/location/id.
     title = raw.title || raw.name;

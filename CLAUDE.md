@@ -359,6 +359,21 @@ et cela se note avant d’aller plus loin.
 - **Les apostrophes des annonces sont typographiques (`’`)**, pas `'`.
 - **Un champ lu doit être un champ demandé** : le pipeline lisait
   `raw.description` d'une API qui ne l'envoyait pas.
+  **Et sa version multi-plateformes, qui coûte plus cher : LE MÊME NOM DE
+  CHAMP dit deux choses selon la plateforme.** Le 08/09/2026, un compte des
+  entités bâti sur le nom `tags3` a rendu **« 04/09/2026 », « 07/09/2026 »
+  et trente-sept autres dates comme des employeurs** — « 51 entités
+  divergentes, 41 à inscrire ». Chez AXA-Phenom `tags3` porte l’entité qui
+  recrute ; chez Talentsoft il porte la date de publication. Après filtre :
+  onze, pas cinquante et une.
+
+  Le champ n’était pas absent, il n’était pas vide, il n’a levé aucune
+  erreur — il **répondait autre chose**. Un nom de champ n’est donc pas un
+  contrat : il se déclare **par SOURCE**, exactement comme le format de
+  date, et jamais par plateforme. Mesuré le même jour : sur les cinq
+  tenants Phenom de la récolte, seul AXA remplit `tags3` — une règle
+  « chez Phenom, `tags3` porte l’entité » aurait donc été fausse dès le
+  premier tenant qui le remplit autrement.
 - **Vérifier avant de brancher.** Une configuration fausse ne casse rien : elle
   rend zéro offre en silence, et la maison paraît branchée.
 - Le `Promise.all` de `fetchAllSources` est **destructuré** : ajouter un appel
