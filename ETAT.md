@@ -2206,3 +2206,119 @@ connecteur. Onze assertions ajoutées à `test-passage-date.js`.
 - **`fetchAmazon` et la facette** : sans le contrôle « le paramètre
   change-t-il le résultat ? », le connecteur aurait filtré sur une facette
   inerte et ramené 216 offres de logistique.
+
+## La file ouverte au 8 septembre au soir — chantiers de mécanique, en attente
+
+Victor a arrêté les chantiers de mécanique le 08/09 : **ils ne rapportent
+plus d’offres.** La priorité redevient brancher des maisons. Ce qui suit est
+gardé pour ne pas être remesuré.
+
+### 1. Les trois mots prouvés — le contre-test est FAIT, la pose ne l’est pas
+
+Contre-test refait le 08/09 sur les quatre populations de la récolte : big4
+(1 167 intitulés), conseil (257), entreprise (417), industriel (248).
+« Entrent » = matchent le motif ET n’avaient **aucun** marqueur existant.
+
+| motif | big4 | conseil | entreprise | industriel | entrent |
+|---|---:|---:|---:|---:|---:|
+| `restructuring` / `turnaround` | 4 | 1 | 0 | 0 | **5** |
+| `special situations` | 2 | 0 | 0 | 0 | **2** |
+| `bic bnc` | 1 | 0 | 0 | 0 | **1** |
+
+**Zéro chez les industriels pour les trois** — c’est ce que le contre-test
+devait vérifier, et il le vérifie.
+
+**Ce que le contre-test d’hier ne disait pas, et qui change la valeur :**
+sur les cinq de `restructuring`, **deux sont des avocats** — « Avocat junior
+en droit des affaires : Restructuring » et « Stage en droit des affaires :
+Restructuring » (Deloitte). Ils seraient rattrapés par
+`METIER_HORS_PERIMETRE_RE`, mais ils montrent que le mot voyage avec le
+droit. Et les deux de `special situations` comme celui de `bic bnc` sont
+titrés **Senior** ou **Manager** : ils mourraient à `SENIOR_RE`.
+
+Le gain réel est donc **au plus deux offres** — « Restructuring - Analyste »
+(Eight Advisory) et « Stagiaire - Restructuring - janvier 2027 » (Grant
+Thornton) — et non six. Les mots restent bons ; c’est leur rendement qui est
+plus faible qu’annoncé.
+
+Où poser : `FINANCE_MARKERS` dans `ingestion/classifier.js` (ligne 212). Ils
+sont **déjà** dans les familles (lignes 268, 283, 528) — c’est bien le filtre
+d’entrée qui leur manque. Écrire `bic bnc`, jamais `BIC/BNC` : après
+`normalize()`, la barre oblique est un espace.
+
+### 2. `fx` — MESURÉ, ET LA MESURE DIT NON
+
+Le contre-test explicite du vocabulaire voisin :
+
+```
+ENTRE   « FX Trader »        ENTRE   « Artiste FX »
+ENTRE   « Analyste FX »      ENTRE   « FX Artist »
+ENTRE   « FX Sales »         ENTRE   « Technicien effets speciaux FX »
+ENTRE   « Superviseur FX / VFX »   ENTRE   « Motion Design & FX »
+```
+
+**Les effets spéciaux entrent en bloc.** Aucun n’est dans la récolte
+aujourd’hui — mais c’est exactement le mécanisme de « stress test », qui
+avait fait entrer des ingénieurs de Safran, Airbus et Valeo.
+
+En face, le gain est **une** offre : « Cash & FX Manager F/M » (Nestlé) — et
+elle est titrée *Manager*, donc écartée par `SENIOR_RE` de toute façon.
+
+**Verdict : ne pas poser `fx`.** Un mot qui ouvre un métier entier pour zéro
+offre nette n’est pas un arbitrage difficile. À rouvrir seulement si une
+source de marché arrive, et alors sous une forme bornée (`fx trader`,
+`fx sales`, `analyste fx`), jamais `fx` seul.
+
+### 3. `cash manager` — la paire adjacente est PROPRE, le gain est d’une offre
+
+Les trois adjacents que Victor voulait au contre-test, même à zéro :
+
+```
+refuse  « Cash & Carry Manager »          refuse  « Chef de secteur Cash & Carry »
+refuse  « Responsable Cash & Carry »      refuse  « Cash Management Officer »
+ENTRE   « Cash Manager »                  ENTRE   « Store Cash Manager »
+                                          ENTRE   « Caisse Cash Manager »
+```
+
+Le `&` survit à `normalize()`, si bien que « cash & carry manager » ne
+contient pas « cash manager » : la grande distribution ne passe pas. **Zéro
+« cash & carry » dans la récolte** aujourd’hui, ce qui ne prouve rien mais ne
+contredit rien.
+
+Ce qui passe en revanche : « Store Cash Manager » et « Caisse Cash Manager »,
+des postes de caisse. Gain : **une** offre, « CASH MANAGER (F/H/X) » chez
+Céline — un vrai poste de trésorerie.
+
+**À trancher par Victor** : une offre gagnée contre un vocabulaire de caisse
+ouvert. Moins net que `fx`, moins rentable que les trois mots.
+
+### 4. Le compteur d’escalade — `DECISIONS.md` §39, décidé et non posé
+
+**Le compteur n’incrémente que lorsque la SOURCE ne répond pas.** Quand elle
+répond et que nos filtres écartent tout, le passage crie fort et n’escalade
+jamais. La règle est écrite depuis le 07/09 au soir ; le code ne l’applique
+pas.
+
+À reprendre avec l’effet de bord découvert le 08/09 : **`--forcer` réarme le
+compteur**, parce que le garde-fou compare une source à ce qu’elle rendait au
+passage PRÉCÉDENT. Publier en forçant acte la baisse, et le lendemain la
+source ne « passe » plus de dix à zéro — elle reste à zéro, ce qui n’est plus
+une chute. Une source réellement morte deviendrait invisible. Les deux
+touchent le même code.
+
+### 5. `corpus-etiquetage.md` — 518 lignes jamais relues
+
+Écrit le 07/09, jamais rouvert. Il mérite une séance à lui seul. À regarder
+en premier : il est peut-être plus avancé qu’on ne le croit.
+
+### Ce qui a été mesuré et refusé aujourd’hui, pour ne pas y revenir
+
+- **Renault** — 201 offres au connecteur, 7 au catalogue, 2 ou 3 vraies, et
+  `locationsText` absent chez ce tenant : elles sortiraient sans ville.
+  Refusé au rendement.
+- **`METIER_HORS_PERIMETRE_RE` et le mot « communication »** — 158 offres
+  brutes nomment un métier de finance et sont bloquées par ce motif, mais la
+  ventilation montre des refus **justes** : Avocat 25, Chef de projet 11,
+  droit 9, SAP 8, Juriste 6, Achats 4, paie 3. Restent « Fiscalité » et
+  « Tax » (~34), qui sont la question déjà en file, et un cas isolé chez
+  Bouygues Telecom. **Chantier non ouvert.**
