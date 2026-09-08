@@ -25,6 +25,10 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  // Revelees par la collecte du 08/09/2026 — le controle des deux tables les
+  // a vues parce qu il lit desormais la recolte. Toutes deux en plein sujet.
+  'direction generale du tresor':        'institution',  // DIRECTION GENERALE DU TRESOR — comme 'agence france tresor' et 'banque de france'
+  'nomura':                              'bfi',          // Nomura — banque d investissement japonaise, comme 'mufg'
   // Les six revelees le 08/09/2026, le jour ou le controle des deux tables a
   // cesse de ne regarder que le catalogue publie. Elles etaient acceptees par
   // maisons.txt et sans structure ici : leurs 44 offres mouraient a la porte,

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genere": "2026-09-08T04:46:56.417Z",
+  "genere": "2026-09-08T15:33:30.964Z",
   "fenetreJours": 30,
   "employeurs": [
     {
@@ -36,8 +36,8 @@
       "premiereVue": "2026-09-05",
       "derniereVue": "2026-09-08",
       "passages": 4,
-      "offres": 1,
-      "offresMax": 1
+      "offres": 2,
+      "offresMax": 2
     },
     {
       "emp": "Bulgari",
@@ -47,6 +47,17 @@
       "premiereVue": "2026-09-07",
       "derniereVue": "2026-09-08",
       "passages": 2,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Amethis Advisory",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-08",
+      "derniereVue": "2026-09-08",
+      "passages": 1,
       "offres": 1,
       "offresMax": 1
     },
