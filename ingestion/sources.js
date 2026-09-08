@@ -1977,6 +1977,21 @@ const TARGET_COMPANIES = {
   ],
 
   sitemapld: [
+    // Coca-Cola Europacific Partners. Leur sitemap porte 306 fiches
+    // individuelles — dont 32 a Issy-les-Moulineaux — et chaque fiche
+    // expose un JSON-LD JobPosting complet : titre, datePosted en ISO,
+    // addressLocality, addressCountry. Rien a ecrire, le connecteur
+    // generique suffit.
+    //
+    // Leur robots.txt ferme /search-jobs/ : on ne touche donc pas a la page
+    // de recherche, seulement au sitemap et aux fiches, qui sont ouverts.
+    {
+      sitemap: 'https://www.ccep.jobs/sitemap.xml',
+      emp: 'Coca-Cola Europacific Partners',
+      jobPathRe: /\/job\//,
+      maxFiches: 200,
+      delayMs: 200,
+    },
     // Barclays et Vinci exposent un sitemap complet et du JSON-LD sur chaque
     // fiche : titre, date et lieu y sont structurés. Rien à écrire, le
     // connecteur générique suffit.
@@ -3978,13 +3993,62 @@ async function recolter(nom, recoltes, fn) {
 // aperçoive. Le passage doit le dire.
 const sourcesReprises = [];
 
+// Amazon — amazon.jobs sert une API de recherche publique. Son robots.txt
+// ne ferme que /internal, et l en-tete du depot y est accepte : verifie le
+// 08/09/2026, 200 avec « JJ job board » comme avec un navigateur
+// (DECISIONS.md §40 — un portail se sonde avec l en-tete du depot).
+//
+// ON NE FILTRE PAS SUR LEUR FACETTE METIER. `business_category=finance`
+// est ACCEPTE SANS EFFET : il rend les 216 offres de France, fulfillment-ops
+// et AWS comprises. C est le piege deja paye chez Phenom — un parametre
+// accepte sans effet ne se voit qu en verifiant qu il CHANGE le resultat.
+// On prend donc la France entiere, 216 offres, et on laisse
+// isFinanceOfferFor trancher, comme pour les autres industriels.
+async function fetchAmazon({ emp = 'Amazon' } = {}) {
+  const offres = [];
+  const vus = new Set();
+  try {
+    for (let offset = 0; offset < 1000; offset += 100) {
+      const url =
+        `https://www.amazon.jobs/en/search.json?country=FRA&result_limit=100&offset=${offset}`;
+      const res = await fetchAvecReprise(url, {
+        headers: { 'user-agent': UA_HTML, accept: 'application/json' },
+        signal: AbortSignal.timeout(25000),
+      });
+      if (!res.ok) break;
+      const json = await res.json();
+      const lot = json.jobs || [];
+      // La boucle s arrete quand une page n apporte AUCUNE offre nouvelle.
+      // C est le seul garde-fou contre un parametre de pagination accepte
+      // sans effet : AXA n a servi que 100 de ses 560 offres pendant des
+      // semaines parce que la boucle relisait six fois la meme page.
+      let neuves = 0;
+      for (const o of lot) {
+        const cle = o.id_icims || o.id;
+        if (!cle || vus.has(cle)) continue;
+        vus.add(cle);
+        neuves++;
+        offres.push(o);
+      }
+      if (!lot.length || !neuves) break;
+    }
+  } catch (err) {
+    console.warn('[sources] Amazon indisponible:', err.message);
+    return [];
+  }
+  return offres
+    .filter((o) => String(o.country_code || '').toUpperCase() === 'FRA')
+    .filter((o) => isFinanceOfferFor(emp, o.title))
+    .map((o) => ({ __src: 'amazon', emp, raw: o }));
+}
+
 async function fetchAllSources() {
   const recoltes = lireRecoltes();
   sourcesReprises.length = 0;
 
   // Les grandes familles sont récoltées séparément : si l'une tombe, les
   // autres n'en savent rien et le magasin ne rend que celle-là périmée.
-  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, tikehau, jef, evr, pwp, mck, yello, gs, ef, bofa] = await Promise.all([
+  const [franceTravail, lba, ats, adzuna, vie, listes, bpce, axafr, lvmh, tikehau, jef, evr, pwp, mck, yello, gs, ef, bofa, amz] = await Promise.all([
     recolter('France Travail', recoltes, fetchFranceTravail),
     recolter('La Bonne Alternance', recoltes, fetchLaBonneAlternance),
     fetchAllATS(recoltes), // découpé par connecteur, chacun a sa propre entrée
@@ -4026,10 +4090,11 @@ async function fetchAllSources() {
     recolter('Goldman Sachs', recoltes, fetchGoldmanSachs),
     recolter('Eightfold', recoltes, fetchTousEightfold),
     recolter('Bank of America', recoltes, fetchBankOfAmerica),
+    recolter('Amazon', recoltes, fetchAmazon),
   ]);
 
   ecrireRecoltes(recoltes);
-  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...tikehau, ...jef, ...evr, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...fetchManual()];
+  return [...franceTravail, ...lba, ...ats, ...adzuna, ...vie, ...listes, ...bpce, ...axafr, ...lvmh, ...tikehau, ...jef, ...evr, ...pwp, ...mck, ...yello, ...gs, ...ef, ...bofa, ...amz, ...fetchManual()];
 }
 
 // ---------------------------------------------------------------------------
@@ -4163,6 +4228,7 @@ module.exports = {
   fetchTalentSoft,
   fetchSuccessFactors,
   fetchSitemapJsonLd,
+  fetchAmazon,
   fetchEiCards,
   fetchAvature,
   fetchServicePublic,

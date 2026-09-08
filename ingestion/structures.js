@@ -25,6 +25,8 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  'amazon':                            'entreprise', // Amazon — commerce et informatique en nuage
+  'coca cola europacific partners':    'entreprise', // CCEP — embouteilleur, siege France a Issy-les-Moulineaux
   // --- Ecartees faute de structure, inscrites le 04/09/2026 --------------
   // 37 offres rejetees par « gate:publication-sans-structure », dont les 37
   // etaient deja classables par leur seul intitule : ce n'etaient pas des

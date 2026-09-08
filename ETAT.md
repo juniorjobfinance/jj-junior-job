@@ -2081,3 +2081,128 @@ les mêmes gestes — `robots.txt` d’abord, **les deux en-têtes** ensuite, la
 signature de plateforme, le JSON-LD, la comparaison liste/fiche, le sitemap.
 Il n’est pas dans le dépôt : il n’a pas été demandé, et `sonder-carrieres.js`
 y occupe déjà la place voisine.
+
+## Le 8 septembre, troisième partie — deux principes, deux connecteurs, un défaut en ligne
+
+### ⚠ `index.html` et `offres.js` sont désynchronisés SUR LE SITE
+
+**Constat, non corrigé — à trancher.** Le contrôle échoue sur le dépôt tel
+qu’il est publié, et l’échec **préexiste à tout le travail du jour** : mesuré
+en remettant les cinq fichiers modifiés à `HEAD`, les deux mêmes échecs
+apparaissent, et **zéro n’est introduit par le travail du jour**.
+
+| | |
+|---|---:|
+| `offres.js`, généré le 2026-09-08T04:46Z | **999 offres** |
+| compteur écrit dans `index.html` | **« 1004 offres »** |
+| cartes dans `index.html` | 917 |
+| URL d’`offres.js` absentes du HTML | 72 |
+
+**1004 est le chiffre de la publication forcée d’hier soir** (`c795ecb`). Le
+passage de 6h30 a donc réécrit `offres.js` à 999 **sans régénérer le
+catalogue du HTML**. La page en ligne sert le catalogue d’hier soir avec le
+compteur d’hier soir, pendant qu’`offres.js` porte celui de ce matin.
+
+Le remède que le contrôle lui-même indique est de relancer le passage. Ce
+n’est pas fait : un passage complet republierait le catalogue, et cela se
+décide.
+
+### Principe 1 — brancher une filiale peut créer des doublons
+
+`canonicalKey` vaut `slugEmp(emp)|slugTitleFuzzy(title)|lieu` : **le nom de
+l’employeur fait partie de la clé**, donc deux offres identiques publiées sous
+deux noms ne peuvent jamais se dédupliquer. Comme on branche des maisons tous
+les jours et que plusieurs sont des filiales de maisons déjà collectées, le
+risque est quotidien.
+
+La règle est dans `CLAUDE.md` : avant de brancher, vérifier que le parent ne
+publie pas déjà — et si oui, que les deux noms se normalisent vers la MÊME
+chaîne. Le contrôle « une URL, un employeur » fait échouer le passage sur ce
+cas ; mesuré avant d’être posé (995 URL au catalogue, 3 167 dans la récolte,
+zéro partagée), puis éprouvé en le faisant mordre sur un doublon fabriqué.
+
+Il ne crie pas sur une URL répétée sous le MÊME employeur : quatre cas chez
+BPCE, tous légitimes — une annonce ouverte sur deux sites, l’URL le dit
+elle-même (`charge-de-conformite-f-h-dijon-paris`).
+
+### Principe 2 — le pré-filtre RSM est ABANDONNÉ, la mesure l’interdit
+
+Le critère était clair : le pré-filtre ne doit écarter **aucune** offre que le
+pipeline aurait gardée, sinon c’est un filtre caché qui retire des offres sans
+laisser de motif de rejet.
+
+Mesuré en allant chercher la fiche de chaque offre coupée et en demandant son
+verdict au pipeline :
+
+| version du pré-filtre | fiches à visiter | offres perdues |
+|---|---:|---:|
+| `SENIOR_RE` entier | 28 | non mesuré |
+| sous-ensemble conservateur | 38 | **30 sur 37 coupées** |
+
+**Trente offres perdues sur trente-sept coupées.** Même « senior », « manager »
+et « head of » — ce que Victor jugeait indiscutable — écartent des offres que
+le pipeline garde : *collaborateur comptable senior*, *manager expertise
+comptable*, *auditeur financier senior*.
+
+**Ce que ça révèle, et qui dépasse RSM** : le pipeline **publie aujourd’hui des
+offres titrées « senior »**. Sa séniorité se lit sur la DESCRIPTION, pas sur
+le titre, et les descriptions de ces annonces n’énoncent pas de durée
+d’expérience. C’est un écart à la règle 3 (0-3 ans) qui n’a rien à voir avec
+RSM et qui n’est **pas** corrigé ici : durcir la séniorité sur le titre
+toucherait tout le catalogue, et cela se mesure séparément.
+
+RSM reste donc brancheable au coût plein — 103 fiches, 17,2 minutes — ou pas
+du tout. Le raccourci n’existe pas.
+
+### Amazon et CCEP — branchés, 6 offres
+
+**La vérification du principe 1 d’abord** : aucune des deux n’apparaît au
+catalogue ni dans la récolte sous quelque nom que ce soit. Aucun risque de
+doublon.
+
+**Amazon** — `amazon.jobs/en/search.json`, API publique, `robots.txt` ne ferme
+que `/internal`, 200 avec l’en-tête du dépôt. 216 offres en France, 13 après
+`isFinanceOfferFor`, **4 au catalogue**.
+
+> **Leur facette métier est acceptée SANS EFFET.**
+> `business_category=finance` rend les 216 offres de France, fulfillment-ops
+> et AWS comprises. C’est le piège Phenom, et le seul moyen de le voir est de
+> vérifier que le paramètre CHANGE le résultat. Le connecteur prend donc la
+> France entière et laisse `isFinanceOfferFor` trancher.
+
+**CCEP** (Coca-Cola Europacific Partners) — sitemap de 306 fiches, JSON-LD
+complet sur chacune, par le connecteur générique `fetchSitemapJsonLd`.
+35 offres rendues, **2 au catalogue** : *Contrôleur de Gestion – Siège* et
+*Manager Contrôle de Gestion FP&A*, toutes deux à Issy-les-Moulineaux.
+Leur `robots.txt` ferme `/search-jobs/` : on ne touche qu’au sitemap et aux
+fiches.
+
+Les deux inscrites dans **les deux tables** (§24) — elles rendaient zéro tant
+que `structures.js` était vide. Le garde de préfixe posé ce matin tient :
+« Amazonas Conseil » et « Cocalico » restent à `null`.
+
+### « June 3, 2026 » reculait la date d’un jour
+
+Le mois est écrit en toutes lettres, donc **rien n’est ambigu** — mais
+`new Date('June 3, 2026')` lit en heure LOCALE : minuit à Paris vaut 22 h UTC
+la veille. Six formes étaient décalées.
+
+C’est le défaut de « 2026-8-25 » (corrigé le 07/09) sur une **autre branche de
+la même fonction**. La leçon tient en une phrase : ne jamais laisser
+`new Date` deviner le fuseau, lui donner une chaîne en Z.
+
+**Aucune source ne l’envoyait avant Amazon** — le défaut attendait un
+connecteur. Onze assertions ajoutées à `test-passage-date.js`.
+
+### Les instruments qui ont encore eu tort
+
+- **`lireDatePublication` n’est pas dans les `NOMS` d’`atelier.js`** : mes six
+  « ERREUR » venaient de là, pas du pipeline. Chargée comme le fait
+  `test-fiche-date.js`, elle répondait très bien.
+- **Mon garde de préfixe était plus grossier que la vraie fonction.** Il
+  criait sur « Amazonas Conseil » avec un `startsWith` nu ; `resolveStructure`
+  exige une limite de mot depuis ce matin et rend `null`. Interroger la
+  fonction qui décide, pas une imitation.
+- **`fetchAmazon` et la facette** : sans le contrôle « le paramètre
+  change-t-il le résultat ? », le connecteur aurait filtré sur une facette
+  inerte et ramené 216 offres de logistique.

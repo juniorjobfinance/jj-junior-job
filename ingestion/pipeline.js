@@ -3011,6 +3011,23 @@ function normalizeInterne(item) {
       raw.t_create ||
       raw.dateCreated ||
       null;
+  } else if (__src === 'amazon') {
+    emp = item.emp;
+    title = raw.title;
+    ville = raw.city;
+    pays = 'France'; // deja filtre sur country_code === FRA cote connecteur
+    // `job_path` est le chemin de L ANNONCE ; `url_next_step` mene au
+    // formulaire de candidature. La regle 1 du projet veut la premiere.
+    url = raw.job_path ? `https://www.amazon.jobs${raw.job_path}` : null;
+    typeContratRaw = [raw.job_schedule_type, raw.is_intern ? 'internship' : '', raw.title]
+      .filter(Boolean)
+      .join(' ');
+    romeLibelle = raw.job_category;
+    // « June 3, 2026 » : le mois est ecrit, donc rien n est ambigu — mais
+    // `new Date` lirait cette forme en heure LOCALE et reculerait la date
+    // d un jour. Le passage oblige sait la lire depuis le 08/09/2026 ; on
+    // ne convertit donc RIEN ici, on lui passe la valeur telle quelle.
+    postedAt = raw.posted_date || raw.updated_time || null;
   } else if (__src === 'manuel') {
     emp = item.emp;
     title = raw.title;
@@ -4415,6 +4432,14 @@ function anomaliesDePublication(nouvelles, brutes, suivis) {
 // refusée : la deviner par défaut est ce qui a coûté trois matins.
 const DATE_REFUSEE = Symbol('date illisible');
 
+// Les mois anglais, indexes a partir de UN. MOIS_FR existe deja plus haut
+// pour les annonces francaises ; celui-ci sert aux sources anglophones qui
+// datent en toutes lettres — amazon.jobs, « June 3, 2026 ».
+const MOIS_ANGLAIS_INDEX = {
+  jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+  jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+};
+
 function lireDatePublication(valeur, format) {
   if (valeur == null || valeur === '') return null; // pas de date : licite
   // Un horodatage : aucune ambiguïté possible.
@@ -4456,6 +4481,32 @@ function lireDatePublication(valeur, format) {
     if (Number(mois) < 1 || Number(mois) > 12 || Number(jour) < 1 || Number(jour) > 31) return DATE_REFUSEE;
     const d = new Date(`${an}-${String(mois).padStart(2, '0')}-${String(jour).padStart(2, '0')}T00:00:00Z`);
     return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+  }
+  // « June 3, 2026 » (amazon.jobs). Le mois est ecrit en toutes lettres,
+  // donc RIEN N'EST AMBIGU — mais `new Date('June 3, 2026')` lit en heure
+  // LOCALE : minuit a Paris vaut 22 h UTC la veille, et la date reculait
+  // d'un jour. C'est le defaut de « 2026-8-25 » (corrige le 07/09) sur une
+  // autre branche de la meme fonction : la lecon est de ne jamais laisser
+  // `new Date` deviner le fuseau, mais de lui donner une chaine en Z.
+  //
+  // Les six formes mesurees etaient decalees : « June 3, 2026 », « Jun 3,
+  // 2026 », « 3 June 2026 » et leurs variantes. Aucune source ne les
+  // envoyait avant Amazon — le defaut attendait un connecteur.
+  const moisAnglais = t.match(/^([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})$/);
+  const jourDabord = t.match(/^(\d{1,2})\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})$/);
+  if (moisAnglais || jourDabord) {
+    const nomMois = (moisAnglais ? moisAnglais[1] : jourDabord[2]).toLowerCase().slice(0, 3);
+    const jour = moisAnglais ? moisAnglais[2] : jourDabord[1];
+    const an = moisAnglais ? moisAnglais[3] : jourDabord[3];
+    const mois = MOIS_ANGLAIS_INDEX[nomMois];
+    if (mois) {
+      const d = new Date(
+        `${an}-${String(mois).padStart(2, '0')}-${String(jour).padStart(2, '0')}T00:00:00Z`
+      );
+      return isNaN(d) ? DATE_REFUSEE : d.toISOString();
+    }
+    // Un mot de trois lettres qui n est pas un mois : on ne devine pas.
+    return DATE_REFUSEE;
   }
   // Tout le reste : on laisse `dateIso` faire ce qu'il sait faire (formats
   // français en toutes lettres, ISO partiels), et on refuse s'il échoue.

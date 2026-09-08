@@ -208,5 +208,38 @@ const DECLARENT_JJMM = ['cornerstone:', 'liste:', 'phenom:careers.axa.com'];
     P.lireDatePublication('09/01/2026') === P.DATE_REFUSEE);
 }
 
+// === LE MOIS EN TOUTES LETTRES, ET LE FUSEAU ============================
+// « June 3, 2026 » (amazon.jobs) n'est pas ambigu — le mois est ecrit. Mais
+// `new Date('June 3, 2026')` lit en heure LOCALE : minuit a Paris vaut 22 h
+// UTC la veille, et la date reculait d'un jour. Six formes etaient touchees.
+//
+// C'est le defaut de « 2026-8-25 » (corrige le 07/09) sur une AUTRE branche
+// de la meme fonction. La lecon tient en une phrase : ne jamais laisser
+// `new Date` deviner le fuseau — lui donner une chaine en Z.
+{
+  for (const [entree, attendu] of [
+    ['June 3, 2026', '2026-06-03'],
+    ['September 2, 2026', '2026-09-02'],
+    ['July 27, 2026', '2026-07-27'],
+    ['December 15, 2025', '2025-12-15'],
+    ['Jun 3, 2026', '2026-06-03'],
+    ['3 June 2026', '2026-06-03'],
+    ['1 Jan 2026', '2026-01-01'],
+  ]) {
+    const r = P.lireDatePublication(entree);
+    const ok = r !== P.DATE_REFUSEE && jour(r) === attendu;
+    verifier('mois anglais — « ' + entree + ' » est le ' + attendu, ok,
+      ok ? null : 'rendu : ' + (r === P.DATE_REFUSEE ? 'REFUSÉ' : jour(r)));
+  }
+  // Un mot qui ressemble a un mois mais n en est pas : on refuse, on ne
+  // devine pas. Sans cela « Foo 3, 2026 » passerait par `new Date` et
+  // rendrait Invalid Date — ou pire, quelque chose.
+  verifier('mois anglais — « Foo 3, 2026 » est REFUSÉ',
+    P.lireDatePublication('Foo 3, 2026') === P.DATE_REFUSEE);
+  verifier('mois anglais — « Mai 3, 2026 » (francais) est REFUSÉ ou lu, jamais decale',
+    (() => { const r = P.lireDatePublication('Mai 3, 2026');
+      return r === P.DATE_REFUSEE || jour(r) === '2026-05-03'; })());
+}
+
 console.log('\n  ' + (echecs ? echecs + ' ÉCHEC(S)' : 'les trois épreuves passent'));
 process.exit(echecs ? 1 : 0);
