@@ -3300,9 +3300,22 @@ function teamtailorPlace(item) {
   return { city: addr.addressLocality || '', country: addr.addressCountry || '' };
 }
 
-async function fetchTeamtailor({ company, emp }) {
+// `host` est optionnel : sans lui, le connecteur construit le sous-domaine
+// standard <company>.teamtailor.com. Avec lui, il interroge le domaine propre.
+//
+// Certaines maisons servent Teamtailor depuis leur propre domaine et le
+// sous-domaine standard rend alors 404 : ChapsVision publie sur
+// careers.chapsvision.com — jobs.json y repond avec 473 Ko — quand
+// chapsvision.teamtailor.com est introuvable. Sans ce champ, ces maisons nous
+// echappent en silence, et rien ne les distingue d une source vide.
+//
+// On DECLARE le domaine, on ne l essaie pas au hasard : une seconde URL tentee
+// a chaque passage doublerait les appels pour les 23 maisons qui n en ont pas
+// besoin — mesure du 08/09/2026 : elles repondent toutes sur le standard.
+async function fetchTeamtailor({ company, emp, host }) {
+  const base = host ? `https://${host}` : `https://${company}.teamtailor.com`;
   try {
-    const json = await getJSON(`https://${company}.teamtailor.com/jobs.json`);
+    const json = await getJSON(`${base}/jobs.json`);
     return (json.items || [])
       .map((o) => ({ item: o, place: teamtailorPlace(o) }))
       .filter(({ place }) => place.country === 'FR')
@@ -3313,7 +3326,7 @@ async function fetchTeamtailor({ company, emp }) {
         raw: { ...item, city: place.city },
       }));
   } catch (err) {
-    console.warn(`[sources] Teamtailor (${company}) indisponible:`, err.message);
+    console.warn(`[sources] Teamtailor (${host || company}) indisponible:`, err.message);
     return [];
   }
 }
