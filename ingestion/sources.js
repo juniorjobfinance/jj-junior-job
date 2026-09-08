@@ -1803,6 +1803,11 @@ const TARGET_COMPANIES = {
     // 07/09, 23 en France, dont une douzaine de stages finance : Treasury
     // Analyst Corporate, Audit interne, Controle de gestion, Comptabilite.
     { tenant: 'cc', dc: 'wd3', site: 'ChanelCareers', emp: 'Chanel' },
+    // Pernod Ricard : 92 offres au connecteur, toutes en France. Neuf passent
+    // le classement — M&A Strategie, Tresorerie Internationale, Tech Finance
+    // Analyst, Controle de gestion, Comptable Generale. Les 41 autres meurent
+    // au marqueur d'entreprise, ce qui est son travail.
+    { tenant: 'pernodricard', dc: 'wd3', site: 'pernod-ricard', emp: 'Pernod Ricard' },
     // FDJ United : 24 offres, 18 en France, dont un « Analyste M&A - Stage »
     // a Boulogne-Billancourt.
     { tenant: 'groupefdj', dc: 'wd103', site: 'FDJ-UNITED', emp: 'FDJ United' },

@@ -382,7 +382,8 @@ const EMPLOYER_STRUCTURE = {
   // Branchees le 07/09/2026 au soir, chacune mesuree au connecteur.
   chanel: 'entreprise',          // Chanel — maison de luxe, direction financiere
   'fdj united': 'entreprise',    // FDJ United — loterie et paris sportifs, cotee
-  nabla: 'entreprise',           // Nabla — editeur d'IA medicale
+  nabla: 'entreprise',
+  'pernod ricard': 'entreprise', // Pernod Ricard — spiritueux, direction financiere           // Nabla — editeur d'IA medicale
   oecd: 'institution',           // OCDE, graphie anglaise — maisons.txt reconnait les deux           // OCDE — organisation internationale, siege a Paris
 
   // Inscrites le 07/09/2026. Leurs offres VIE mouraient sur
