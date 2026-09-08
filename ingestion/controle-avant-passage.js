@@ -424,6 +424,44 @@ try {
     }
   }
 
+  // LA RECOLTE, pas le catalogue.
+  //
+  // Les deux sources ci-dessus — le catalogue publie et les rejets maisonRef —
+  // ne portent que des employeurs DEJA PASSES quelque part. Un employeur dont
+  // toutes les offres meurent a la porte de structure n apparait dans aucun
+  // des deux : le controle cense le detecter ne le voyait donc jamais.
+  //
+  // RSM en a perdu vingt-huit en silence le 08/09/2026, controle au vert. Un
+  // controle qui verifie ce qui est passe ne peut pas, PAR CONSTRUCTION, voir
+  // ce qui ne passe pas. La recolte est le seul endroit ou un employeur figure
+  // avant toute porte.
+  try {
+    const zlib = require('zlib');
+    const dossier = path.join(RACINE, 'data');
+    const dernier = fs.existsSync(dossier)
+      ? fs
+          .readdirSync(dossier)
+          .filter((n) => /^brut-.*\.json\.gz$/.test(n))
+          .sort()
+          .pop()
+      : null;
+    if (dernier) {
+      const brut = JSON.parse(
+        zlib.gunzipSync(fs.readFileSync(path.join(dossier, dernier))).toString()
+      );
+      for (const o of brut.offres || []) {
+        if (o.emp) { vus.add(o.emp); compter(o.emp); }
+      }
+      console.log(`        recolte lue : ${dernier} (${(brut.offres || []).length} offres brutes)`);
+    } else {
+      console.log('        aucune recolte dans data/ — le controle ne voit que le catalogue');
+    }
+  } catch (e) {
+    // Une recolte illisible ne doit pas faire echouer le controle des tables :
+    // elle le rend seulement moins clairvoyant, et on le dit.
+    console.log(`        recolte illisible (${e.message}) — controle limite au catalogue`);
+  }
+
   if (!vus.size) {
     alerte('deux tables', 'aucun catalogue lisible — controle impossible');
   } else {

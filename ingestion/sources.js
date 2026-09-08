@@ -642,11 +642,18 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
   const departFiches = Date.now();
 
   // 3) Visiter chaque fiche et lire son JSON-LD JobPosting.
+  let interrompu = false;
   const offres = [];
   let idx = 0;
   await Promise.all(
     Array.from({ length: concurrence }, async () => {
       while (idx < fiches.length) {
+        // Le budget se consulte ENTRE deux fiches : on ne coupe jamais une
+        // lecture en cours, et ce qui est deja collecte est rendu.
+        if (budgetDepasse()) {
+          interrompu = true;
+          break;
+        }
         const u = fiches[idx++];
         try {
           const r = await fetch(u, {
@@ -691,7 +698,9 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
   );
 
   console.log(
-    `[sources] ${emp} : ${offres.length} JobPosting sur ${fiches.length} fiche(s) visitee(s), ` +
+    `[sources] ${emp} : ${offres.length} JobPosting sur ${idx} fiche(s) visitee(s) ` +
+      `de ${fiches.length} prevue(s), ` +
+      (interrompu ? 'INTERROMPU (budget de temps epuise), ' : '') +
       `${Math.round((Date.now() - departFiches) / 6000) / 10} min reellement passees`
   );
   return offres
@@ -4067,12 +4076,97 @@ function ecrireRecoltes(recoltes) {
 
 // Exécute une source et range son résultat. En cas d'échec ou de moisson vide,
 // ressort la dernière récolte connue si elle est encore fraîche.
+// ---------------------------------------------------------------------------
+// LE BUDGET DE TEMPS D UN CONNECTEUR
+// ---------------------------------------------------------------------------
+//
+// Le passage tourne sans personne devant : publier a 7h35 au lieu de 7h ne
+// gene aucun etudiant. Ce n est donc pas une question de patience, c est une
+// question de MECANISME — on ne compte pas sur une source pour rester rapide,
+// on borne ce qu elle peut couter.
+//
+// La mesure qui l a impose : RSM a mis 47 minutes un matin et 10,7 le
+// suivant, pour la meme charge de trente-trois fiches. Un facteur quatre, et
+// rien n empechait le pire cas de manger le passage entier.
+//
+// LE BUDGET EST COOPERATIF, ce n est pas un Promise.race. Une course tuerait
+// le connecteur et jetterait ce qu il avait deja collecte ; on veut au
+// contraire qu il RENDE CE QU IL A. recolter() ouvre l echeance, les boucles
+// couteuses la consultent entre deux fiches, et s arretent proprement.
+//
+// Corollaire : une boucle qui ne consulte pas `budgetDepasse()` n est pas
+// bornee. recolter() le dit alors au journal — un connecteur qui deborde sans
+// s arreter devient visible, meme s il ne coopere pas.
+const BUDGET_DEFAUT_MS = 15 * 60 * 1000;
+// Un budget par connecteur, quand le defaut ne convient pas. La clef est le
+// NOM passe a recolter(), pas le nom de la fonction.
+const BUDGETS_MS = {
+  // RSM : trente-trois fiches a dix secondes de Crawl-delay, plus la latence
+  // de leur serveur.
+  //
+  // TRENTE MINUTES, ET LARGE A DESSEIN. Les deux seules durees dont on dispose
+  // — 10,7 et 47 minutes — ont ete chronometrees A TRAVERS UN PARTAGE DE
+  // CONNEXION 4G, pas depuis un centre de donnees. Elles ne disent RIEN du
+  // temps sur GitHub Actions.
+  //
+  // Un budget serre sur une mesure fausse couperait une source saine. Le vrai
+  // chiffre viendra du journal du passage de 6h30, par les deux lignes que ce
+  // connecteur ecrit desormais — on resserrera ensuite.
+  'RSM France': 30 * 60 * 1000,
+};
+let echeanceConnecteur = null;
+function ouvrirBudget(ms) {
+  echeanceConnecteur = Date.now() + (ms || BUDGET_DEFAUT_MS);
+}
+function fermerBudget() {
+  echeanceConnecteur = null;
+}
+// `true` des que le connecteur en cours a epuise son temps. Toujours faux
+// hors d un appel a recolter() : un sondage isole n est jamais interrompu.
+function budgetDepasse() {
+  return echeanceConnecteur !== null && Date.now() > echeanceConnecteur;
+}
+
 async function recolter(nom, recoltes, fn) {
   let obtenu = null;
   try {
+    ouvrirBudget(BUDGETS_MS[nom]);
+    const departConnecteur = Date.now();
     obtenu = await fn();
+    const dureeMin = Math.round((Date.now() - departConnecteur) / 6000) / 10;
+    const budgetMin = Math.round((BUDGETS_MS[nom] || BUDGET_DEFAUT_MS) / 6000) / 10;
+    // UNE TOLERANCE, parce que coopérer coûte un dépassement.
+    // Une boucle qui consulte le budget finit la fiche EN COURS avant de
+    // s arreter : elle depasse donc toujours un peu. Comparer a l egalite
+    // faisait crier l avertissement sur une boucle parfaitement bornee —
+    // exactement le defaut du controle HTML corrige le meme jour : une alerte
+    // qui ment est une alerte qu on apprend a ignorer.
+    //
+    // Une fiche coute au plus le Crawl-delay plus le delai d expiration, soit
+    // moins d une minute. Au-dela de la moitie du budget en trop, ce n est
+    // plus un dernier tour de boucle : la boucle ne consulte rien.
+    // On compare en MILLISECONDES, pas en minutes arrondies : `Math.round`
+    // ecrasait un budget de deux secondes a zero, et la tolerance avalait le
+    // depassement. Les minutes ne servent qu a l affichage.
+    const budgetMs = BUDGETS_MS[nom] || BUDGET_DEFAUT_MS;
+    const dureeMs = Date.now() - departConnecteur;
+    // CINQ MINUTES DE TOLERANCE, et le chiffre est mesure : chez RSM, le
+    // 08/09/2026, UNE SEULE FICHE a mis 3,9 minutes a repondre. Une boucle qui
+    // consulte le budget entre deux fiches depasse donc de la duree de la
+    // fiche en vol, et une minute ne suffisait pas — l avertissement criait sur
+    // une boucle parfaitement bornee.
+    if (dureeMs > budgetMs * 1.5 + 5 * 60000) {
+      // Le connecteur a depasse sans s arreter : sa boucle ne consulte pas
+      // budgetDepasse(). Ce n est pas une panne, mais cela DOIT se voir.
+      console.warn(
+        `[sources] ${nom} a pris ${dureeMin} min pour un budget de ${budgetMin} — ` +
+          `sa boucle ne consulte pas le budget, elle n est donc pas bornee.`
+      );
+    }
   } catch (err) {
     console.warn(`[sources] ${nom} a échoué :`, err.message);
+  } finally {
+    fermerBudget();
   }
 
   if (obtenu && obtenu.length) {
@@ -4338,6 +4432,9 @@ module.exports = {
   fetchSitemapJsonLd,
   fetchAmazon,
   declarerFiltreSeniorite,
+  // Exporte pour etre EPROUVE : c est lui qui ouvre le budget de temps,
+  // et un mecanisme qu on ne peut pas faire agir a la demande ne se verifie pas.
+  recolter,
   fetchEiCards,
   fetchAvature,
   fetchServicePublic,

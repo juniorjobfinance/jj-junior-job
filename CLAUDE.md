@@ -391,6 +391,40 @@ par un `fetch` Node sur la page de liste ET sur une annonce. Si les deux
 rendent le même document, c’est une application JavaScript : hors d’atteinte,
 et cela se note avant d’aller plus loin.
 
+### LE RÉSEAU FAIT PARTIE DE L’INSTRUMENT
+
+Le 08/09/2026, un connecteur a été chronométré à **47 minutes** un coup et
+**10,7** le suivant, pour la même charge. J’en ai tiré « la source est lente
+et sa latence varie d’un facteur quatre », posé un budget de temps, et
+presque refusé de la brancher.
+
+Les deux mesures avaient été prises **à travers un partage de connexion
+4G**. Le passage réel tourne sur GitHub Actions, dans un centre de données.
+Aucun des deux chiffres ne dit quoi que ce soit du coût réel.
+
+C’est « ne jamais mesurer avec un instrument plus PUISSANT que celui qui
+travaille » d’un cran plus loin. On avait déjà étendu la règle du MOTEUR
+(navigateur contre `fetch` Node, le cas Stifel) à l’EN-TÊTE (`UA_HTML`
+contre une chaîne de navigateur, le cas Bpifrance). Elle va plus loin
+encore :
+
+> **Une DURÉE ne se mesure que sur le réseau qui la subira.** Le moteur et
+> l’en-tête décident de ce qu’on OBTIENT ; le réseau décide de ce que ça
+> COÛTE. Les deux se vérifient séparément, et une mesure de temps prise
+> ailleurs que là où le travail tournera n’est pas une mesure — c’est une
+> anecdote.
+
+Le remède n’est pas de mieux chronométrer depuis ici : c’est **de faire
+écrire le chiffre par le passage lui-même**. Un connecteur qui annonce au
+journal ce qu’il a visité et le temps qu’il y a mis rend la question
+inutile — le vrai chiffre arrive tout seul le lendemain matin.
+
+Corollaire pour les budgets : tant qu’on n’a pas le chiffre du passage, un
+budget se règle **large**. Un budget serré sur une mesure fausse coupe une
+source saine.
+
+---
+
 ## Pièges vérifiés plusieurs fois
 
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a
@@ -412,6 +446,21 @@ et cela se note avant d’aller plus loin.
 - **`\b` est ASCII** : il voit une limite entre le « h » de « March » et le « é »
   de « Marchés ». Utiliser `(?![A-Za-zÀ-ÿ])`.
 - **Les apostrophes des annonces sont typographiques (`’`)**, pas `'`.
+- **Un contrôle qui vérifie ce qui est PASSÉ ne peut pas voir ce qui NE
+  PASSE PAS.** Le contrôle des deux tables tirait sa liste d’employeurs du
+  **catalogue publié** et des rejets `maisonRef`. Or un employeur dont
+  *toutes* les offres meurent à la porte de structure n’apparaît dans aucun
+  des deux — il était donc invisible au contrôle écrit pour le détecter.
+
+  RSM a perdu **vingt-huit offres** ainsi le 08/09/2026, contrôle au vert.
+  Branché sur la RÉCOLTE — le seul endroit où un employeur figure avant
+  toute porte — le même contrôle en signale **six**, dont AlixPartners, un
+  cabinet de restructuring qui est exactement notre cible.
+
+  La question à poser de tout contrôle : **sur quelle population
+  travaille-t-il, et cette population contient-elle le défaut qu’il
+  cherche ?** Un contrôle qui lit le résultat cherche ses défauts parmi les
+  survivants.
 - **Un champ lu doit être un champ demandé** : le pipeline lisait
   `raw.description` d'une API qui ne l'envoyait pas.
   **Et sa version multi-plateformes, qui coûte plus cher : LE MÊME NOM DE
