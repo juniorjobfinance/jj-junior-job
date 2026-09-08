@@ -65,6 +65,28 @@ mécanisme, ce qui le corrige. Ils sont faits pour être lus dans six mois.
    site.
 2. **On ne contourne aucun pare-feu ni robots.txt.** Bpifrance, Morgan Stanley
    et Alvarez & Marsal sont hors d'atteinte, et le restent.
+
+   **Un pare-feu peut trier sur l'EN-TÊTE, et alors il est invisible.** Le
+   08/09/2026, `talents.bpifrance.fr` a été mesuré « WordPress ouvert, lisible
+   en fetch pur, 153 Ko, JSON-LD complet sur chaque fiche, 86 offres » — et la
+   conclusion était de le brancher. Le même URL, avec l'en-tête que le dépôt
+   envoie réellement (`UA_HTML`, « Mozilla/5.0 (compatible; JJ job board) »),
+   rend **403 en 919 octets**. Ma sonde se présentait en Chrome.
+
+   Les deux hôtes de Bpifrance refusent donc, mais pas de la même façon :
+   `bpifrance.fr` ferme franchement, `talents.bpifrance.fr` ouvre aux
+   navigateurs et ferme aux robots qui se nomment. La seule manière de le lire
+   serait de **se déguiser en navigateur qu'on n'est pas** — c'est un
+   contournement, pas une lecture, et la règle 2 l'interdit.
+
+   C'est « ne jamais mesurer avec un instrument plus PUISSANT que celui qui
+   travaille », d'un cran plus fin : rester en Node ne suffit pas, il faut
+   aussi **le même en-tête**. Un sondage se fait avec `UA_HTML`, jamais avec
+   une chaîne de navigateur — sinon on promet des gisements que le passage de
+   6h30 ne trouvera pas. Vérifié le même jour sur RSM, Carmignac et Groupama :
+   eux répondent à l'identique aux deux en-têtes, Bpifrance était le seul à
+   trier.
+
 3. **Moins d'offres, mais toutes justes.** 0-3 ans, datées, vérifiées. Un
    durcissement qui fait chuter le catalogue est un succès, pas un incident.
 

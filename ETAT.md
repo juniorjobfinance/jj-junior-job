@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 4 septembre 2026, tard le soir.**
+**Dernière mise à jour : 8 septembre 2026, dans la journée.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -1759,3 +1759,218 @@ fie. À reprendre avec la correction du compteur (`DECISIONS.md` §39), qui doit
 de toute façon distinguer « la source ne répond pas » de « nos filtres ont
 tout écarté » — les deux chantiers touchent le même code.
 
+
+
+## Le 8 septembre 2026 — six portails sondés, et le verdict le plus sûr renversé
+
+Victor a fourni les URL, ce qui a supprimé la part de devinette : six
+portails jugés en une matinée, contre une maison validée sur 91 domaines
+devinés le 7. La division du travail est actée — il ouvre les pages, le
+dépôt mesure.
+
+### Bpifrance — le seul verdict que j’avais rendu faux, et il était le plus assuré
+
+`talents.bpifrance.fr` a été mesuré « WordPress ouvert, lisible en fetch
+pur, 153 Ko, `robots.txt` autorisant `/opportunites/`, aucun `Crawl-delay`,
+JSON-LD complet sur chaque fiche, **86 offres** déroulées sur neuf pages ».
+Les intitulés étaient exactement la cible : six *Analyste Private Equity*,
+*Analyste Mid Cap Dette Privée*, *Analyste Fonds Build-Up International*.
+La conclusion était de brancher, et Victor l’avait validée.
+
+Le même URL, avec l’en-tête que le dépôt envoie réellement — `UA_HTML`,
+« Mozilla/5.0 (compatible; JJ job board) » — rend **403 en 919 octets**.
+Liste et fiche, les deux.
+
+| | en-tête navigateur | en-tête `JJ job board` |
+|---|---|---|
+| Bpifrance liste | 200, 153 047 o | **403, 919 o** |
+| Bpifrance fiche | 200, 139 257 o, JSON-LD | **403, 919 o** |
+| RSM sitemap et fiche | 200 | 200, à l’identique |
+| Carmignac | 200 | 200, à l’identique |
+| Groupama | 200 | 200, à l’identique |
+
+Bpifrance était **la seule des six** à trier sur l’en-tête. Toutes mes
+sondes de la matinée se présentaient en Chrome ; sur cinq portails cela ne
+changeait rien, sur le sixième cela inventait un gisement de 86 offres.
+
+La règle qui manquait est écrite dans `CLAUDE.md`, sous la règle 2 : « ne
+jamais mesurer avec un instrument plus PUISSANT que celui qui travaille »
+ne s’arrête pas au moteur, elle va jusqu’à **l’en-tête**. Rester en Node
+ne suffisait pas.
+
+Bpifrance reste donc **hors d’atteinte**, et la note d’origine avait
+raison — mais pas pour la raison qu’on croyait : `bpifrance.fr` ferme
+franchement, `talents.bpifrance.fr` ouvre aux navigateurs et ferme aux
+robots qui se nomment. La lire supposerait de se déguiser en navigateur
+qu’on n’est pas.
+
+### Renault — mesuré, et refusé sur le rendement
+
+Workday, tenant `alliancewd` / `wd3` / `renault-group-careers` (celui de
+l’Alliance). Le connecteur existant marche sans une ligne de code :
+**201 offres**. La simulation, en processus séparés :
+
+| état | offres au catalogue | motif dominant |
+|---|---:|---|
+| sans `structures.js` | **0** / 201 | `gate:employeur-absent-de-structures` (122) |
+| avec `renault: entreprise` | **7** / 201 | `gate:entreprise-sans-marqueur` (122) |
+
+Sur ces 7, deux ou trois seulement tiennent : *Analyste financier
+entreprises junior*, *Pricing Analyst*, *Chargé de recouvrement*. Les
+autres sont un *Consolideur **senior***, un *Analyste **senior*** en
+réglementation bancaire, un *Responsable Cybersécurité* rangé en
+« risques-conformité », et une thèse CIFRE.
+
+**Et un défaut d’affichage qui tranche avant le rendement :**
+`locationsText` est **`undefined`** chez ce tenant — le lieu est dans
+`bulletFields[0]` (« Noisy-Le-Grand »). Les sept sortiraient **sans ville**,
+donc introuvables au filtre des lieux.
+
+Lire `bulletFields[0]` comme lieu n’est **pas** une correction générique.
+Mesuré sur les 30 tenants Workday de la récolte : `locationsText` est
+présent sur **100 %** d’entre eux (401/401 chez `fina`, 154/154 chez `pwc`,
+128/128 chez `bdf`…), et `bulletFields[0]` y est un **numéro de
+réquisition** — « R-8093 », « JR016405 », « REQ2026077834 » —, un type de
+contrat chez AG2R, `null` chez Ardian et PJT. Nulle part une ville. La
+correction serait donc une déclaration PAR TENANT, comme le format de date.
+
+**Verdict : non.** 201 offres collectées chaque matin pour deux ou trois
+publiables, plus une déclaration par tenant à maintenir. À rouvrir si le
+tenant se met à servir `locationsText`.
+
+### Hermès — 403, la note de `sources.js:1721` tient
+
+TalentLink sur `hermes.recruitmentplatform.com`. Les 24 combinaisons
+`brand × board` du flux Atom : rien. La racine rend **403 Forbidden**,
+239 octets. `sources.js:1721` la notait déjà « sondée, sans accès public
+trouvé » — la note était juste, et elle a été trouvée en élargissant à
+`sources.js` la vérification qu’on ne faisait que sur `ETAT.md`.
+
+### RSM France — ni Flatchr ni une maison : DigitalRecruiters (Cegid HR)
+
+La forme `/fr/annonces` et `/fr/annonce/<id>-<slug>` ressemblait à Flatchr ;
+c’est **DigitalRecruiters**. `robots.txt` autorise (`Allow: /`, seul
+`/dashboard` fermé, **`Crawl-delay: 10`**). La liste est une application
+Nuxt qui affiche « Loading… » : aucune annonce dans son HTML.
+
+Ce qui marche : **`/sitemap.xml` → 103 annonces**, et le slug porte
+l’intitulé, la ville et le code postal
+(`4358717-stage-en-audit-janvier-2027-hf-75009-paris`).
+
+**La question qui décidait — une offre sans date vieillit-elle ?** Non, et
+c’est écrit comme une règle : `pipeline.js:5142`, `if (!dateCredible)
+return true;` **exempte** de la porte d’âge toute offre dont la date n’est
+pas crédible. Brancher RSM sur le seul sitemap injecterait donc 103
+annonces immortelles (`DECISIONS.md` §34).
+
+Mais les fiches, elles, sont datées : **6 sur 6** portent un JSON-LD avec
+`datePosted: "2026-09-07"` en ISO. Le connecteur générique
+`fetchSitemapJsonLd` lit exactement cela, et `_dateRecuperee` passe alors à
+`true` : les offres vieilliraient normalement.
+
+Le coût est le vrai obstacle : **103 fiches × 10 s de `Crawl-delay` ≈ 17
+minutes** pour une seule maison, sur un passage qui en dure 18. À décider
+contre le rendement, pas contre la faisabilité. Le chemin est propre.
+
+### Carmignac et Groupama — pas de liste publique, et c’est définitif
+
+**Carmignac** (`carmignac.com/fr-fr/nous-connaitre/carrieres`) : la page
+rend 200 Ko de vrai HTML, identique aux deux en-têtes, et **zéro
+vocabulaire d’offre** — 0 « stage », 0 « alternance », 0 « CDI », 0 « CDD »,
+0 « analyste ». Aucun iframe, aucune plateforme citée, `__NEXT_DATA__` sans
+offres, sitemap sans URL d’emploi. Le seul chemin de candidature est un
+`mailto:`. **Ce n’est pas un portail difficile à lire : il n’y a pas de
+liste.**
+
+**Groupama** (`groupama-gan-recrute.com/nos-offres/`) : WordPress, API REST
+ouverte — et **aucun type de contenu « offre »**. Les types déclarés sont
+les onze types standard (`post`, `page`, `attachment`, `wp_block`…). Ses
+annonces ne sont donc pas des articles WordPress. Rien dans le HTML servi,
+aucune action AJAX citée, sitemap sans section emploi.
+
+C’est la réponse à la question des petites maisons : **certaines n’ont
+vraiment pas de liste publique**, et il faut que ce soit écrit pour ne pas
+le rechercher dans six mois.
+
+### Le champ d’entité — onze, pas quatre-vingts
+
+Mesuré sur toute la récolte (6 881 offres brutes), sur douze noms de champ
+susceptibles de porter une entité :
+
+| | |
+|---|---:|
+| entités distinctes lisibles | 119 |
+| entités **différant** du nom affiché | **11** |
+| déjà résolues par `structures.js` | **10** |
+| à inscrire | **1** (aixigo AG, allemande) |
+| offres concernées | **271** |
+
+Le détail, par volume :
+
+| entité | offres | affichée aujourd’hui sous | `resolveStructure` |
+|---|---:|---|---|
+| LCL | **134** | Crédit Agricole | banque-detail |
+| CACEIS | 54 | CACEIS, Crédit Agricole | fintech |
+| Direct Assurance | 27 | AXA | assurance |
+| MUTUELLE SAINT-CHRISTOPHE | 22 | AXA | assurance |
+| Amundi | 15 | Crédit Agricole | societe-gestion |
+| GIE AXA | 6 | AXA | assurance |
+| BforBank | 4 | Crédit Agricole | banque-detail |
+| UPTEVIA | 4 | Crédit Agricole | fintech |
+| Indosuez Wealth Management | 3 | Crédit Agricole | banque-affaires |
+| aixigo AG | 1 | Amundi | — absente — |
+| IDIA Capital Investissement | 1 | Crédit Agricole | fonds |
+
+**Le chantier est donc petit** : dix des onze entités sont déjà typées, il
+ne manque qu’une société allemande que la porte France écarterait de toute
+façon. Ce qui reste à écrire, c’est la LECTURE du champ, pas la table.
+
+Deux choses à noter avant de le faire. **LCL, 134 offres affichées
+« Crédit Agricole »** : c’est la première marque du lot, loin devant.
+**Amundi, 15 offres affichées « Crédit Agricole »** alors qu’Amundi a son
+propre connecteur — la même maison paraît donc à deux endroits sous deux
+noms. Et **CACEIS et UPTEVIA sont typées `fintech`** : un dépositaire et un
+teneur de comptes-titres, ce qui mérite d’être revu, mais séparément.
+
+**Ce que la mesure ne dit pas** : ni AXA IM ni CPR AM n’apparaissent nulle
+part dans la récolte. Elles sont vraiment absentes, pas cachées sous le
+parent.
+
+### Quatre instruments qui ont eu tort avant le sujet mesuré
+
+Tous les quatre relèvent de la même famille — l’outil ment sans se plaindre
+— et trois ont été pris en flagrant délit par une INVRAISEMBLANCE, pas par
+une erreur.
+
+1. **Le registre lu au mauvais nom de champ.** `noterEcartee` écrit `etage`
+   et `precision` ; ma mesure lisait `motif`. Résultat : « (sans motif) »
+   **198 fois**. Un motif inconnu passe encore ; 198 sur 198, c’est
+   l’instrument.
+2. **`require.cache` a rendu deux états identiques.** La mesure Renault
+   « avant / après inscription » rendait les mêmes 122 rejets
+   `gate:employeur-absent-de-structures` — **après** avoir inscrit Renault,
+   alors que `resolveStructure` répondait bien « entreprise ». Le pipeline
+   chargé par `new Function` gardait l’ancien `structures.js` en cache.
+   Deux mesures dans le même processus ne sont pas deux mesures : refait
+   **un processus par état**.
+3. **Un événement Vue pris pour un point d’entrée d’API.** `get-job-ads`,
+   trouvé dans le bundle Nuxt de RSM, est un `$emit`, pas une URL. Six
+   requêtes en 404 avant de relire le contexte.
+4. **Un champ `tags3` qui porte une DATE.** Le premier compte d’entités
+   rendait « 51 divergentes, 41 à inscrire » — dont « 04/09/2026 »,
+   « 07/09/2026 », quarante dates. Chez AXA-Phenom `tags3` porte l’entité
+   légale, chez Talentsoft il porte la date de publication. **Le même nom
+   de champ ne veut pas dire la même chose d’une plateforme à l’autre** —
+   c’est « un nom de facette n’est pas un domaine », appliqué aux champs.
+   Après filtre : 11, pas 51.
+
+### Ce qui reste ouvert après cette séance
+
+- **La lecture du champ d’entité** : 271 offres, 11 entités, 10 déjà typées.
+  Petit chantier, gain visible — c’est le meilleur rapport du jour.
+- **RSM** : chemin propre, 17 minutes de coût. À trancher au rendement.
+- **CACEIS et UPTEVIA typées `fintech`** : à revoir, hors de ce chantier.
+- Les huit petites maisons (Messier, Centerview, LBO France, IDIA, Andera,
+  Alven, Partech, Sagard) : **absentes de la récolte**, portail non vérifié.
+  Elles ne sont **pas** notées « sans portail » — c’est Victor qui les
+  ouvrira, et c’est là que son aide vaut le plus.

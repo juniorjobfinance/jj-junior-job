@@ -1511,3 +1511,42 @@ documente déjà comme une erreur payée deux fois (Air Liquide, Santander).
 Le défaut est donc dans la RÉACTION, pas dans la DÉTECTION. La détection est
 à garder telle quelle.
 
+
+
+## 40. Un sondage se fait avec l’en-tête du dépôt — tranché le 08/09/2026
+
+**Décidé.** Toute sonde de portail envoie `UA_HTML`, la chaîne que le
+pipeline envoie en production : « Mozilla/5.0 (compatible; JJ job board) ».
+Jamais une chaîne de navigateur.
+
+**La mesure qui l’a imposé.** `talents.bpifrance.fr` a été jugé « WordPress
+ouvert, 153 Ko, JSON-LD sur chaque fiche, 86 offres, `robots.txt`
+autorisant `/opportunites/` », et la décision de le brancher était prise.
+Le même URL, avec `UA_HTML`, rend **403 en 919 octets** — liste et fiche.
+Ma sonde se présentait en Chrome ; le gisement n’existait que pour elle.
+
+Sur les cinq autres portails du jour — RSM, Carmignac, Groupama, et les
+deux fiches associées — les deux en-têtes rendent **exactement la même
+chose**. Bpifrance était le seul à trier. C’est ce qui rend le piège
+coûteux : il ne se manifeste presque jamais, donc rien n’entretient la
+vigilance.
+
+**Et le corollaire, qui est une question de règle et non de technique.** Un
+site qui répond 200 à un navigateur et 403 à un robot qui se nomme exprime
+un refus. Le lire supposerait d’envoyer une chaîne de navigateur qu’on
+n’est pas : c’est un **contournement**, pas une lecture, et la règle 2 de
+`CLAUDE.md` l’interdit. La question ne se rouvre pas au motif que « ça
+marcherait » — précisément, ça marcherait.
+
+Le dépôt est cohérent sur ce point : `UA_HTML` vaut
+« Mozilla/5.0 (compatible; JJ job board) » partout, aucun connecteur ne se
+déguise. Cette décision ne corrige donc pas le code, elle protège une
+propriété qu’il a déjà.
+
+**Ce que ça généralise.** « Ne jamais mesurer avec un instrument plus
+PUISSANT que celui qui travaille » (07/09, le cas Stifel) visait le moteur
+— navigateur contre `fetch` Node. Le 08/09 montre que rester en Node ne
+suffit pas : **l’en-tête fait partie de l’instrument.** Deux outils qui
+exécutent le même code peuvent obtenir deux réponses différentes du même
+serveur, et la seule mesure qui vaut est celle qui se présente comme le
+passage de 6h30 se présentera.
