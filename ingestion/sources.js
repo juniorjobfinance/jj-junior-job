@@ -542,7 +542,31 @@ async function fetchAdzuna() {
 const SLUG_FINANCE_RE =
   /financ|audit|risk|risque|complian|conformit|comptab|tresor|treasury|credit|analyst|m-?and-?a|\bm-a\b|inspecteur|actuar|asset|invest|banking|banquier|kyc|middle-office|back-office|controle|controller|patrimoine|clientele|conseiller|stage|alternan|apprenti|intern|graduate|junior|vie-|equity|research|\balm\b|quant|marche|trading|structur|portefeuille|fiscal|consolid|reporting|souscript|sinistre/i;
 
-async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4, filtrerSlug = true }) {
+// LE FILTRE DE SENIORITE, INJECTE PAR LE PIPELINE.
+//
+// Certaines sources coutent une requete PAR ANNONCE. Chez RSM (103 fiches,
+// Crawl-delay: 10) cela fait 17 minutes, dont 16 pour des offres que le
+// pipeline rejettera. Le slug portant l intitule, on peut trancher AVANT
+// d ouvrir la fiche — a une condition absolue : appliquer EXACTEMENT le
+// test que le pipeline appliquera, sinon le pre-filtre retire des offres
+// sans laisser de motif de rejet, et devient un filtre cache.
+//
+// SENIOR_RE vit dans pipeline.js, qui requiert ce fichier : on ne peut pas
+// le requerir en retour, et le RECOPIER le ferait deriver. Le pipeline le
+// DONNE donc au demarrage. Tant qu il ne l a pas donne, le pre-filtre ne
+// coupe rien — un sondage isole visite toutes les fiches, ce qui est lent
+// mais jamais faux.
+//
+// Mesure du 08/09/2026 sur les 47 offres coupees chez RSM, fiche par fiche :
+// ZERO que le pipeline complet aurait gardee. Meme « auditeur senior
+// chambery », dont la description annonce 3 ans, est ecartee par le
+// pipeline — le titre mord avant la description.
+let filtreSeniorite = null;
+function declarerFiltreSeniorite(fn) {
+  filtreSeniorite = typeof fn === 'function' ? fn : null;
+}
+
+async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4, filtrerSlug = true, titreDuSlug = null, forcerEmp = false }) {
   let urls;
   try {
     const res = await fetch(sitemap, {
@@ -560,14 +584,28 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
   // 1) Ne garder que les fiches d'offres, pré-filtrées par slug.
   // 2) La même offre existe souvent en -fr et -en : on garde une seule langue
   //    par référence (le suffixe -XXXXXXX-fr/-en), préférence au français.
+  // Le total AVANT tout pre-filtre : sans lui on ne peut ni dire ce que le
+  // pre-filtre economise, ni voir le jour ou il cesse d agir.
+  let auSitemap = 0;
   const parRef = new Map();
   for (const u of urls) {
     if (!jobPathRe.test(u)) continue;
+    auSitemap++;
     // Le vocabulaire de l'adresse ne décide que si on OUVRE la fiche. Chez une
     // maison dont le sitemap tient en un millier d'entrées, mieux vaut tout
     // ouvrir : chez Société Générale ce pré-filtre écartait 40 % des fiches,
     // dont des postes de marché dont le slug est en anglais.
     if (filtrerSlug && !SLUG_FINANCE_RE.test(u)) continue;
+    // Le pre-filtre au TITRE, quand la source ecrit son intitule dans son
+    // adresse. Deux portes, et seulement celles que le pipeline appliquera :
+    // la porte finance, et la seniorite. Tout ce qui est douteux passe et
+    // coute une fiche — une offre perdue coute une offre.
+    if (titreDuSlug) {
+      const titre = titreDuSlug(u);
+      if (!titre) continue;
+      if (!isFinanceOfferFor(emp, titre)) continue;
+      if (filtreSeniorite && filtreSeniorite(titre)) continue;
+    }
     const ref = (u.match(/-(\w{8})-(?:fr|en)$/) || [])[1] || u;
     const estFr = /-fr$/.test(u) || /offres-d-emploi/.test(u);
     if (!parRef.has(ref) || estFr) parRef.set(ref, u);
@@ -581,6 +619,27 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
     (/-fr$/.test(u) || /offres-d-emploi/.test(u) ? 2 : 0) +
     (/controleur|charge-|conseiller|tresor|comptab|alternance|stage-|juriste|risques|gestionnaire|analyste|charg-e/i.test(u) ? 1 : 0);
   const fiches = [...parRef.values()].sort((a, b) => scoreFr(b) - scoreFr(a)).slice(0, maxFiches);
+
+  // CE QUE LE PASSAGE DOIT POUVOIR LIRE DANS SON JOURNAL.
+  //
+  // Une regression de performance qui produit une sortie JUSTE est invisible.
+  // Si le filtre de seniorite n est jamais declare, le pre-filtre ne coupe
+  // rien : la collecte passe de quatre minutes a dix-sept chaque matin, le
+  // catalogue reste correct, et rien ne se plaint. C est la famille des
+  // epreuves decoratives — presentes dans le depot, jamais appelees.
+  //
+  // On MESURE donc au lieu de supposer, et le journal porte le nombre : un 28
+  // qui devient 103 saute aux yeux, et cela sert aussi le jour ou le sitemap
+  // de la maison grossit.
+  const minutesPrevues = Math.round((fiches.length * delayMs) / Math.max(1, concurrence) / 6000) / 10;
+  console.log(
+    `[sources] ${emp} : ${auSitemap} annonce(s) au sitemap, ${fiches.length} fiche(s) a visiter` +
+      (titreDuSlug
+        ? ` — pre-filtre au titre ${filtreSeniorite ? 'ACTIF' : 'INACTIF (filtre de seniorite non declare)'}`
+        : '') +
+      ` — ${minutesPrevues} min prevues`
+  );
+  const departFiches = Date.now();
 
   // 3) Visiter chaque fiche et lire son JSON-LD JobPosting.
   const offres = [];
@@ -631,10 +690,23 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
     })
   );
 
+  console.log(
+    `[sources] ${emp} : ${offres.length} JobPosting sur ${fiches.length} fiche(s) visitee(s), ` +
+      `${Math.round((Date.now() - departFiches) / 6000) / 10} min reellement passees`
+  );
   return offres
     .filter((o) => /^(fr|france)$/i.test(o.pays) || FRANCE_LOCATION_RE.test(o.ville))
-    .filter((o) => isFinanceOfferFor(o.organisation || emp, o.titre))
-    .map((o) => ({ __src: `sitemapld:${emp}`, emp: o.organisation || emp, raw: o }));
+    // L organisation du JSON-LD prime d ordinaire : elle nomme la filiale qui
+    // recrute. Mais elle peut aussi nommer AUTREMENT que nos tables — RSM y
+    // annonce « RSM » quand maisons.txt et structures.js connaissent « RSM
+    // France ». resolveStructure rend alors null et TOUTES les offres meurent
+    // sur gate:publication-sans-structure. `forcerEmp` garde notre nom.
+    .filter((o) => isFinanceOfferFor(forcerEmp ? emp : o.organisation || emp, o.titre))
+    .map((o) => ({
+      __src: `sitemapld:${emp}`,
+      emp: forcerEmp ? emp : o.organisation || emp,
+      raw: o,
+    }));
 }
 
 // ---------------------------------------------------------------------------
@@ -1977,6 +2049,42 @@ const TARGET_COMPANIES = {
   ],
 
   sitemapld: [
+    // RSM France — DigitalRecruiters (Cegid HR) sur domaine propre. Leur
+    // liste est une application Nuxt qui affiche « Loading… » : aucune
+    // annonce dans son HTML. Le sitemap, lui, porte les 103 fiches, et
+    // chacune expose un JSON-LD JobPosting date en ISO.
+    //
+    // robots.txt : Allow: /, seul /dashboard ferme, et CRAWL-DELAY: 10 —
+    // honore par delayMs et concurrence: 1. C est ce qui rend le
+    // pre-filtre necessaire : 103 fiches couteraient 17 minutes, 28 en
+    // coutent 4,7.
+    //
+    // Le slug porte l intitule, le code postal et la ville :
+    // « 4358717-stage-en-audit-janvier-2027-hf-75009-paris ».
+    {
+      sitemap: 'https://recrutement.rsmfrance.fr/sitemap.xml',
+      emp: 'RSM France',
+      // Mesure du 08/09/2026 : leur JSON-LD annonce « RSM », que ni
+      // maisons.txt ni structures.js ne connaissent — resolveStructure rend
+      // null et les 28 offres meurent sur gate:publication-sans-structure.
+      // On garde notre nom.
+      forcerEmp: true,
+      jobPathRe: /\/annonce\//,
+      // SLUG_FINANCE_RE ecarterait « assistant-affaires-speciales-
+      // entreprises-en-difficultes-restructuring », qui est notre cible.
+      // Le pre-filtre ci-dessous fait mieux : il lit le vrai intitule.
+      filtrerSlug: false,
+      titreDuSlug: (u) => {
+        const slug = (u.match(/\/annonce\/([^/?#]+)/) || [])[1] || '';
+        const sansId = slug.replace(/^\d+-/, '');
+        const m = sansId.match(/^(.*?)-(\d{5})-(.+)$/);
+        const brut = m ? m[1] : sansId;
+        return brut.replace(/-/g, ' ').replace(/\s+(hf|h f|f h)$/i, '').trim();
+      },
+      maxFiches: 60,
+      delayMs: 10000,
+      concurrence: 1,
+    },
     // Coca-Cola Europacific Partners. Leur sitemap porte 306 fiches
     // individuelles — dont 32 a Issy-les-Moulineaux — et chaque fiche
     // expose un JSON-LD JobPosting complet : titre, datePosted en ISO,
@@ -4229,6 +4337,7 @@ module.exports = {
   fetchSuccessFactors,
   fetchSitemapJsonLd,
   fetchAmazon,
+  declarerFiltreSeniorite,
   fetchEiCards,
   fetchAvature,
   fetchServicePublic,

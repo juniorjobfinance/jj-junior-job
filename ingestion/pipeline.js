@@ -18,7 +18,7 @@ const registreEmployeurs = require('./registre-employeurs.js');
 const path = require('path');
 // Le cache de collecte est gzippe : il porte les descriptions ENTIERES.
 const zlib = require('zlib');
-const { fetchAllSources, sourcesReprises, isFinanceOfferFor } = require('./sources');
+const { fetchAllSources, sourcesReprises, isFinanceOfferFor, declarerFiltreSeniorite } = require('./sources');
 const { trouverMaison, MAISONS } = require('./maisons');
 const { classify } = require('./classifier');
 const { STRUCTURES: LIBELLES_STRUCTURE } = require('./structures');
@@ -1820,6 +1820,13 @@ function noterEcartee(o, etage, precision) {
     url: o.url || null,
   });
 }
+
+// Certaines sources coutent une requete par annonce et peuvent trancher au
+// TITRE avant d ouvrir la fiche — mais seulement avec le test que le
+// pipeline appliquera lui-meme. On le leur DONNE plutot que de les laisser
+// le recopier : une copie derive, et le pre-filtre deviendrait un filtre
+// cache qui retire des offres sans laisser de motif.
+declarerFiltreSeniorite((titre) => SENIOR_RE.test(String(titre || '')));
 
 function passesJuniorFilter(offre, strict) {
   const { volet, title } = offre;
