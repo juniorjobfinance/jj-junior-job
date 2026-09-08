@@ -25,6 +25,16 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  // Les six revelees le 08/09/2026, le jour ou le controle des deux tables a
+  // cesse de ne regarder que le catalogue publie. Elles etaient acceptees par
+  // maisons.txt et sans structure ici : leurs 44 offres mouraient a la porte,
+  // et aucun controle ne pouvait le voir puisqu il inspectait les survivants.
+  'bpce sa':                             'bfi',          // BPCE SA — la holding du groupe, comme 'groupe bpce'
+  'bouygues telecom':                    'entreprise',   // Bouygues Telecom — operateur, comme Vinci
+  'bulgari':                             'entreprise',   // Bulgari — marque LVMH, comme 'chaumet' et 'sephora'
+  'alixpartners':                        'conseil',      // AlixPartners — restructuring, comme Oliver Wyman
+  'bpce car lease':                      'fintech',      // BPCE Car Lease — credit-bail, comme 'bpce lease'
+  'bpce infogerance et technologies':    'entreprise',   // BPCE Infogérance et Technologies — informatique, comme 'bpce solutions immobilieres'
   'amazon':                            'entreprise', // Amazon — commerce et informatique en nuage
   'coca cola europacific partners':    'entreprise', // CCEP — embouteilleur, siege France a Issy-les-Moulineaux
   // --- Ecartees faute de structure, inscrites le 04/09/2026 --------------

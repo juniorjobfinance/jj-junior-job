@@ -839,6 +839,55 @@ try {
   } else {
     ok('une URL, un employeur', `${parUrl.size} URL, aucune partagee entre deux employeurs`);
   }
+
+  // ET LA CAUSE, PAS SEULEMENT LE MAL.
+  //
+  // Ce qui precede lit le catalogue : il ne voit un doublon que si les DEUX
+  // copies ont survecu. Or la CAUSE naît dans la recolte — deux sources qui
+  // nomment differemment le meme employeur. Tant qu une seule copie passe,
+  // rien ne parait, et le desaccord attend.
+  //
+  // Le 08/09/2026 : zero collision au catalogue, UNE dans la recolte —
+  // « BNP Paribas || Hello bank! » sur la meme annonce. Alerte, pas echec :
+  // aucun doublon n est publie, il n y a rien a bloquer.
+  try {
+    const zlib = require('zlib');
+    const dossier = path.join(RACINE, 'data');
+    const dernier = fs.existsSync(dossier)
+      ? fs.readdirSync(dossier).filter((n) => /^brut-.*\.json\.gz$/.test(n)).sort().pop()
+      : null;
+    if (dernier) {
+      const brut = JSON.parse(
+        zlib.gunzipSync(fs.readFileSync(path.join(dossier, dernier))).toString()
+      );
+      const parUrlBrut = new Map();
+      for (const o of brut.offres || []) {
+        const r = o.raw || {};
+        const u = String(r.url || r.lien || r.apply_url || r.jobUrl || r.job_path || '').trim();
+        if (!u || !o.emp) continue;
+        if (!parUrlBrut.has(u)) parUrlBrut.set(u, new Set());
+        parUrlBrut.get(u).add(String(o.emp));
+      }
+      const partageesBrut = [...parUrlBrut].filter(([, e]) => e.size > 1);
+      if (partageesBrut.length) {
+        alerte(
+          'une URL, un employeur (recolte)',
+          `${partageesBrut.length} URL portee(s) par deux employeurs DANS LA RECOLTE, ` +
+            `sans doublon publie a ce jour : ` +
+            partageesBrut
+              .slice(0, 3)
+              .map(([u, e]) => `${[...e].join(' / ')} -> ${String(u).slice(0, 70)}`)
+              .join(' ; ') +
+            `. Le jour ou les deux copies passent, le doublon est publie et ` +
+            `canonicalKey ne peut pas le voir : les deux noms font deux cles.`
+        );
+      } else {
+        ok('une URL, un employeur (recolte)', `${parUrlBrut.size} URL brutes, aucune partagee`);
+      }
+    }
+  } catch (e) {
+    console.log(`        recolte illisible (${e.message}) — cause non verifiee`);
+  }
 } catch (e) {
   ko('une URL, un employeur', e.message);
 }

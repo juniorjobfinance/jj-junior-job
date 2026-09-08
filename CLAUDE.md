@@ -425,6 +425,46 @@ source saine.
 
 ---
 
+### SUR QUELLE POPULATION ? — la première question de tout contrôle
+
+**Un contrôle qui inspecte la SORTIE ne peut jamais détecter ce que
+l’ENTRÉE a perdu.** Il cherche ses défauts parmi les survivants, et le
+défaut qu’il cherche est précisément ce qui n’a pas survécu.
+
+Ce n’est pas une anecdote : c’est le même défaut **trois fois**, sur trois
+sujets sans rapport.
+
+| le contrôle | population lue | ce qu’il ne pouvait pas voir |
+|---|---|---|
+| les deux tables | catalogue publié | un employeur dont *toutes* les offres meurent à la porte — les 28 de RSM |
+| le compte « 3 offres perdues » | catalogue publié | les offres perdues, par définition absentes du catalogue |
+| les maisons muettes | catalogue publié | la différence entre « ne publie rien » et « pas branchée » — Chanel y a dormi |
+
+À chaque fois la mesure était **juste** et la conclusion **fausse**, parce
+que la population ne contenait pas le sujet.
+
+> **La règle :** avant d’écrire un contrôle, demander *sur quelle
+> population travaille-t-il, et cette population contient-elle le défaut
+> qu’il cherche ?* La réponse est presque toujours « celle d’AVANT le
+> filtre, pas celle d’après » — la récolte, pas le catalogue.
+
+**L’exception, et elle est nette :** un contrôle dont le SUJET EST
+l’artefact produit lit légitimement la sortie. Vérifier qu’`index.html`
+est syntaxiquement valide, que les dates publiées sont en ISO, ou que le
+texte des annonces ne fuite pas — ce sont des propriétés du fichier, pas
+des offres qu’il aurait perdues. Relecture des dix-sept sections de
+`controle-avant-passage.js` le 08/09/2026 : six ne lisent que la sortie,
+**cinq à juste titre**, et la sixième — « une URL, un employeur » — voyait
+le mal sans voir la cause. Elle lit désormais les deux : le catalogue en
+échec (un doublon publié arrête la publication), la récolte en alerte (un
+désaccord de nom, avant qu’il nuise).
+
+**Le corollaire opératoire :** un contrôle branché sur la bonne population
+change de chiffre, pas seulement de portée. Les deux tables passaient de
+**zéro** signalement à **six** le jour où on leur a donné la récolte.
+
+---
+
 ## Pièges vérifiés plusieurs fois
 
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a
@@ -447,20 +487,9 @@ source saine.
   de « Marchés ». Utiliser `(?![A-Za-zÀ-ÿ])`.
 - **Les apostrophes des annonces sont typographiques (`’`)**, pas `'`.
 - **Un contrôle qui vérifie ce qui est PASSÉ ne peut pas voir ce qui NE
-  PASSE PAS.** Le contrôle des deux tables tirait sa liste d’employeurs du
-  **catalogue publié** et des rejets `maisonRef`. Or un employeur dont
-  *toutes* les offres meurent à la porte de structure n’apparaît dans aucun
-  des deux — il était donc invisible au contrôle écrit pour le détecter.
-
-  RSM a perdu **vingt-huit offres** ainsi le 08/09/2026, contrôle au vert.
-  Branché sur la RÉCOLTE — le seul endroit où un employeur figure avant
-  toute porte — le même contrôle en signale **six**, dont AlixPartners, un
-  cabinet de restructuring qui est exactement notre cible.
-
-  La question à poser de tout contrôle : **sur quelle population
-  travaille-t-il, et cette population contient-elle le défaut qu’il
-  cherche ?** Un contrôle qui lit le résultat cherche ses défauts parmi les
-  survivants.
+  PASSE PAS** — voir la règle « SUR QUELLE POPULATION ? » ci-dessus. Le
+  contrôle des deux tables lisait le catalogue publié : RSM y a perdu
+  vingt-huit offres, contrôle au vert.
 - **Un champ lu doit être un champ demandé** : le pipeline lisait
   `raw.description` d'une API qui ne l'envoyait pas.
   **Et sa version multi-plateformes, qui coûte plus cher : LE MÊME NOM DE
