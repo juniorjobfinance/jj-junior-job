@@ -723,6 +723,52 @@ try {
   ko('zones', e.message);
 }
 
+console.log('\n--- Une URL, un employeur ---');
+// canonicalKey commence par slugEmp(offer.emp). Le nom de l’employeur fait
+// donc PARTIE DE LA CLE : deux offres identiques publiees sous deux noms
+// rendent deux cles, et le dedoublonnage ne les voit jamais.
+//
+// Le risque est quotidien, parce qu’on branche des maisons : si le parent
+// publie deja l’annonce sous le nom du groupe et qu’on branche la filiale,
+// la meme offre parait DEUX FOIS. Aujourd’hui il n’y a pas de doublon parce
+// que normalize() ramene Amundi sous son nom depuis la liste du Credit
+// Agricole — un heureux hasard tant que ce n’est pas verifie.
+//
+// L’URL, elle, ne ment pas sur l’identite de l’annonce : deux offres qui la
+// partagent sont la meme annonce. Deux EMPLOYEURS pour une URL est donc un
+// doublon certain.
+//
+// On ne crie PAS sur une URL repetee sous le MEME employeur : BPCE publie
+// une annonce pour deux sites (« ...-dijon-paris »), et le candidat de Dijon
+// comme celui de Paris doivent la trouver. Quatre cas legitimes le
+// 08/09/2026, tous a deux lieux et un seul titre.
+try {
+  global.window = {};
+  delete require.cache[require.resolve(path.join(RACINE, 'offres.js'))];
+  require(path.join(RACINE, 'offres.js'));
+  const O = global.window.__OFFRES__ || [];
+  const parUrl = new Map();
+  for (const o of O) {
+    const u = String(o.url || '').trim();
+    if (!u) continue;
+    if (!parUrl.has(u)) parUrl.set(u, new Set());
+    parUrl.get(u).add(String(o.emp || ''));
+  }
+  const partagees = [...parUrl].filter(([, emps]) => emps.size > 1);
+  if (!O.length) {
+    ko('une URL, un employeur', 'offres.js vide — le controle ne controle rien');
+  } else if (partagees.length) {
+    ko('une URL, un employeur',
+      `${partagees.length} URL portee(s) par plusieurs employeurs — la meme annonce ` +
+      `parait deux fois et le dedoublonnage ne peut pas la voir. ` +
+      partagees.slice(0, 3).map(([u, e]) => `${[...e].join(' / ')} -> ${u}`).join(' ; '));
+  } else {
+    ok('une URL, un employeur', `${parUrl.size} URL, aucune partagee entre deux employeurs`);
+  }
+} catch (e) {
+  ko('une URL, un employeur', e.message);
+}
+
 console.log('\n--- Dépôt ---');
 try {
   const sale = execSync('git status --porcelain', { cwd: RACINE }).toString().trim();

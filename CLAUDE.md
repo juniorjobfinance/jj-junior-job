@@ -374,6 +374,23 @@ et cela se note avant d’aller plus loin.
   tenants Phenom de la récolte, seul AXA remplit `tags3` — une règle
   « chez Phenom, `tags3` porte l’entité » aurait donc été fausse dès le
   premier tenant qui le remplit autrement.
+- **BRANCHER UNE FILIALE PEUT CRÉER DES DOUBLONS, parce que `canonicalKey`
+  commence par le nom de l’employeur.** `canonicalKey` vaut
+  `slugEmp(emp)|slugTitleFuzzy(title)|lieu` : le nom fait partie de la clé,
+  donc **deux offres identiques publiées sous deux noms ne peuvent jamais se
+  dédupliquer**. Si le parent publie déjà l’annonce sous le nom du groupe et
+  qu’on branche la filiale, elle paraît deux fois.
+
+  Avant de brancher une maison, donc : **le parent publie-t-il déjà ses
+  offres, et si oui, les deux noms se normalisent-ils vers la MÊME chaîne ?**
+  C’est ce que fait `normalize()` pour Amundi sous la liste du Crédit
+  Agricole — et c’est pourquoi il n’y a aucun doublon aujourd’hui. C’était un
+  heureux hasard tant que ce n’était pas une règle.
+
+  Le contrôle « une URL, un employeur » de `controle-avant-passage.js` fait
+  échouer le passage sur ce cas. Il ne demande à personne de s’en souvenir —
+  et il ne crie pas sur une URL répétée sous le MÊME employeur, qui est le
+  cas légitime d’une annonce ouverte sur deux sites (BPCE, quatre cas).
 - **Vérifier avant de brancher.** Une configuration fausse ne casse rien : elle
   rend zéro offre en silence, et la maison paraît branchée.
 - Le `Promise.all` de `fetchAllSources` est **destructuré** : ajouter un appel
