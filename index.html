@@ -3483,8 +3483,12 @@
   // « 50k ». En dessous de mille, et sur les écrans larges, le nombre reste
   // écrit en entier.
   function chiffreCompact(n) {
-    if (window.innerWidth > 640 || n < 1000) return String(n);
-    if (n < 10000) return String(Math.round(n / 100) / 10).replace('.', ',') + 'k';
+    // Le seuil est DIX MILLE et non mille : mesure du 10/09/2026, a 375 px
+    // un total a quatre chiffres tient exactement dans la barre d onglets,
+    // et seuls cinq chiffres debordent (7 px). L ancien seuil a mille
+    // affichait « 1k » pour 1 047 offres — Math.round(10.47)/10 vaut 1, donc
+    // meme pas « 1,0k ». Quarante-sept offres perdues a l affichage.
+    if (window.innerWidth > 640 || n < 10000) return String(n);
     return Math.round(n / 1000) + 'k';
   }
 
@@ -3520,8 +3524,26 @@
     var total = document.getElementById('total-count');
     if (total) {
       var n = offresDeLaPage().length;
+      // LE NOMBRE EXACT TOUJOURS, ET C EST LE MOT QUI SE RETIRE.
+      //
+      // Mesure du 10/09/2026 sur le site en ligne, debordement de la barre
+      // d onglets en pixels (<= 0 = tient) :
+      //
+      //   largeur   « 1k offres »   « 1 047 offres »   « 1 047 »
+      //     375          0                 0               0
+      //     360          0                14               0
+      //     344          0                30               0
+      //     320         36                54              17
+      //
+      // Le nombre complet SANS le mot est donc moins encombrant que
+      // l abreviation AVEC — 17 px de debordement contre 36 a 320 px. On ne
+      // sacrifie plus le chiffre : c est lui que le visiteur retient.
+      //
+      // A cinq chiffres il faudra refaire la mesure : « 10 047 offres »
+      // debordait deja de 7 px a 375 px.
+      var placePourLeMot = window.innerWidth >= 375;
       total.textContent = window.innerWidth <= 640
-        ? chiffreCompact(n) + ' offres'
+        ? n + (placePourLeMot ? ' offres' : '')
         : n + (FAMILLE_PAGE ? ' offres dans cette famille' : ' offres au total');
     }
   }
