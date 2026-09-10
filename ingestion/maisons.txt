@@ -316,3 +316,6 @@ FDJ United               | ^fdj\b|groupe fdj|fdj united
 Nabla                    | ^nabla\b
 Amazon                   | ^amazon(?![a-z])
 Coca-Cola Europacific Partners | coca.?cola europacific|^ccep(?![a-z])
+PGIM                     | ^pgim\b
+Butagaz                  | ^butagaz\b|groupe butagaz
+DNCA Finance             | ^dnca\b

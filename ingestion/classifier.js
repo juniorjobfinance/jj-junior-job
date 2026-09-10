@@ -183,6 +183,25 @@ const PREFILTER = [
   // 'talent' seul rejetait les "Talent Program", qui sont des programmes
   // graduate : il faut le qualifier.
   [/\b(?:ressources humaines|charge de formation|career management|recrutement)\b/, 'support'],
+  // Les memes en ANGLAIS. « HR Learning | Paris » chez Ardian etait publiee
+  // le 10/09/2026 : le motif francais ne la voyait pas.
+  //
+  // L EXEMPTION est dans le motif meme : « HR Controlling » et « Human
+  // Resources Controlling » (CMA CGM) sont du controle de gestion applique
+  // aux RH — de la finance. Ils scorent 8 en controle-gestion-tresorerie la
+  // ou « HR Learning » et « HR Business Partner » scorent 0. On ne peut pas
+  // s en remettre au garde-fou de score : le paragraphe de classify() dit
+  // expressement que 'support' n en beneficie pas, et c est voulu.
+  //
+  // Contre-test du 10/09/2026, 15 cas sur 15 : ecarte HR Learning, HR
+  // Business Partner, Human Resources Intern, Learning and Development,
+  // People Operations ; garde HRIS Analyst, « reporting RH Finance »,
+  // « Hors Bilan », Hedge Fund, RSE.
+  [
+    /^(?!.*\b(?:controlling|controle de gestion|financ|comptab|budget|tresorerie|paie)\b).*\b(?:hr|human resources|people operations|people partner)\b/,
+    'support',
+  ],
+  [/\blearning (?:and|&) development\b/, 'support'],
   [/\btalent(?:s)? (?:acquisition|management|partner|culture)\b/, 'support'],
   [/\bgestion des talents\b/, 'support'],
   [/\bmoyens generaux\b/, 'support'],
@@ -410,7 +429,24 @@ const FAMILIES = [
       // Investissement comme METIER. Ne doit JAMAIS attraper « Investment
       // Banking » : verifie le 04/09 chez Goldman, Lazard, JPMorgan et
       // Rothschild, tous restent en Fusions & Acquisitions.
-      [/\b(?:analyst investment|investissements? actions)\b/, 7],
+      // « analyst investment » etait L ORDRE INVERSE : un motif INERTE, qui
+      // ne pouvait matcher aucun titre reel. Verifie le 10/09/2026 —
+      // « Investment Analyst » et « Analyste investissement » rendaient
+      // false, seul « analyst investment », que personne n ecrit, rendait
+      // true. Il dormait depuis le 04/09.
+      //
+      // Le poids reste a 7 : « Investment Analyst, Hotel Private Equity »
+      // (Schroders) et « Real Estate Investment Analyst » (ERE) doivent
+      // rester en capital-investissement, ou leurs motifs pesent davantage.
+      // LES DEUX ORDRES, et le second n est pas decoratif : « analyst
+      // investment » matche « Stage 6mois - Analyst Investment H/F Septembre »
+      // chez Allianz France. Je l avais declare inerte le 10/09/2026 et son
+      // retrait faisait disparaitre cette offre — la mesure avant/apres sur
+      // toute la recolte l a rattrape avant la publication.
+      //
+      // « Un motif qui ne peut jamais matcher » se PROUVE sur la recolte,
+      // jamais sur l intuition qu un ordre de mots est improbable.
+      [/\b(?:investment analyst|analyst investment|analyste investissements?|investissements? actions)\b/, 7],
       // Reponse aux appels d'offres institutionnels. En minuscules et sans
       // apostrophe : normalize() abaisse la casse et remplace l'apostrophe
       // par une espace.
@@ -421,8 +457,27 @@ const FAMILIES = [
       [/\b(?:research analyst|analyste recherche)\b/, 8],
       [/\basset management\b/, 8],
       [/\bgestion d actifs\b/, 8],
+      // La MULTIGESTION selectionne des fonds pour composer un portefeuille.
+      // Le mot manquait : « Analyste Multi Gestion » chez Rothschild ne
+      // marquait AUCUNE famille, et le repli « banque d affaires » plus bas
+      // le rangeait en Fusions & Acquisitions.
+      //
+      // Contre-test du 10/09/2026 — le motif ignore « multi-sites »,
+      // « multi-canal », « multi-pays », « multi services », « gestion
+      // locative » et « controleur de gestion ». Il n attrape que les trois
+      // formulations du metier.
+      [/\bmulti ?gestion\b|\bmultigestion\b|\bfonds de fonds\b/, 9],
       [/\bgerant(?:e)? (?:de )?portefeuille\b/, 9],
       [/\bgestionnaire de portefeuille\b/, 9],
+      // L ACTIVITE, pas seulement la personne. « Assistant(e) Gestion de
+      // Portefeuilles » chez Rothschild scorait ZERO et tombait en M&A par le
+      // repli « banque d affaires » plus bas.
+      //
+      // Contre-test du 10/09/2026, 9 cas sur 9 : ignore « Conseiller
+      // portefeuille clients », « Chargé de clientèle », « Gestionnaire de
+      // sinistres ». Six intitules concernes dans la recolte, tous de la
+      // vraie gestion.
+      [/\bgestion de portefeuilles?\b|\bportfolio management\b/, 9],
       [/\bportfolio (?:manager|management|analyst)\b/, 8],
       // Le suivi du portefeuille d'investissement d'un assureur : « Investment
       // Reporting Officer » (Scor), « Investissement Responsable » (CNP). Deux
@@ -689,6 +744,12 @@ const FAMILIES = [
       // Scor est de la REASSURANCE et doit rester en Actuariat — verifie le
       // 04/09, son motif actuariel l'emporte.
       [/\b(?:trailer fees|retrocessions?)\b/, 8],
+      // L ADMINISTRATION DE FONDS. « Investor Relations Client
+      // Administration » chez Ardian tombait en gestion d actifs par le motif
+      // « investor relations » (poids 6) : le 8 le place au-dessus, sans
+      // toucher a ce motif — un vrai poste d Investor Relations chez un
+      // gerant reste en gestion d actifs, ce qui est juste.
+      [/\b(?:client|fund) administration\b|\badministration de fonds\b/, 8],
       [/\bmiddle ?-? ?office\b/, 8],
       [/\bback ?-? ?office\b/, 8],
       [/\bfront to back\b/, 9],

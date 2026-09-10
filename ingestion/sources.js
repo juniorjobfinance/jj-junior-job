@@ -566,6 +566,19 @@ function declarerFiltreSeniorite(fn) {
   filtreSeniorite = typeof fn === 'function' ? fn : null;
 }
 
+// LE « + » DE application/ld+json PEUT ETRE ENCODE EN HTML.
+//
+// werecruit ecrit « type="application/ld&#x2B;json" ». Le bloc JobPosting
+// est complet — titre, datePosted ISO, ville, contrat, 2 545 caracteres de
+// description — mais un motif qui cherche le PLUS litteral ne le voit pas,
+// et le connecteur rend ZERO sans se plaindre.
+//
+// Mesure du 10/09/2026 : sur la fiche Butagaz, le motif litteral trouvait
+// 1 bloc (un Organization, inutile) et le motif elargi en trouve 2, dont le
+// JobPosting. C est la troisieme fois qu un encodage HTML rend un champ
+// invisible sans lever d erreur.
+const SCRIPT_LD_JSON = /<script[^>]*application\/ld(?:\+|&#x2[bB];|&#43;)json[^>]*>([\s\S]*?)<\/script>/gi;
+
 async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, delayMs = 400, concurrence = 4, filtrerSlug = true, titreDuSlug = null, forcerEmp = false }) {
   let urls;
   try {
@@ -662,7 +675,7 @@ async function fetchSitemapJsonLd({ sitemap, emp, jobPathRe, maxFiches = 250, de
           });
           if (!r.ok) continue;
           const html = await r.text();
-          for (const m of html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
+          for (const m of html.matchAll(SCRIPT_LD_JSON)) {
             let j;
             try {
               j = JSON.parse(m[1]);
@@ -1931,6 +1944,10 @@ const TARGET_COMPANIES = {
     // MMC = Marsh McLennan : porte Oliver Wyman, Mercer, Marsh et Guy Carpenter.
     { tenant: 'mmc', dc: 'wd1', site: 'MMC', emp: 'Marsh McLennan' },
     { tenant: 'morningstar', dc: 'wd5', site: 'Morningstar', emp: 'Morningstar' },
+    // PGIM — la gestion d actifs de Prudential Financial. Mesure du
+    // 10/09/2026 : 1 offre, « Real Estate Private Equity Analyst Intern »,
+    // Paris. Une maison de cette taille en publiera d autres.
+    { tenant: 'pru', dc: 'wd5', site: 'Careers', emp: 'PGIM' },
     { tenant: 'lseg', dc: 'wd3', site: 'Careers', emp: 'LSEG' },
     // Ces deux tenants sont mondiaux et n'ont pas de niveau "pays" : le
     // connecteur coche les villes françaises de la facette lieux.
@@ -2058,6 +2075,31 @@ const TARGET_COMPANIES = {
   ],
 
   sitemapld: [
+    // BUTAGAZ, sur werecruit — une PLATEFORME, pas un site propre.
+    //
+    // La page de l employeur ne rend qu un lien en HTML (la candidature
+    // spontanee) : sa liste est en JavaScript. Le sitemap, lui, porte les 32
+    // annonces de la maison sur les 24 964 du site, et chaque fiche expose un
+    // JobPosting complet — a condition de tolerer le « + » encode de
+    // « application/ld&#x2B;json » (voir SCRIPT_LD_JSON).
+    //
+    // robots.txt : Allow: /, aucun Crawl-delay. Meme reponse aux deux
+    // en-tetes, verifie le 10/09/2026.
+    //
+    // Une maison de plus sur cette plateforme = une entree ici, avec son
+    // propre jobPathRe. On ne prend PAS tout werecruit : ses 657 offres de
+    // finance sont surtout des cabinets comptables regionaux, et les avaler
+    // ferait +63 % sur le catalogue en changeant ce qu est le site.
+    {
+      sitemap: 'https://careers.werecruit.io/sitemap.xml',
+      emp: 'Butagaz',
+      forcerEmp: true,
+      jobPathRe: /\/fr\/butagaz\/offres\//,
+      filtrerSlug: false,
+      maxFiches: 40,
+      delayMs: 300,
+      concurrence: 2,
+    },
     // RSM France — DigitalRecruiters (Cegid HR) sur domaine propre. Leur
     // liste est une application Nuxt qui affiche « Loading… » : aucune
     // annonce dans son HTML. Le sitemap, lui, porte les 103 fiches, et

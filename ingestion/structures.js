@@ -25,6 +25,11 @@ const STRUCTURES = {
 };
 
 const EMPLOYER_STRUCTURE = {
+  // Posees le 10/09/2026. Piege du prefixe verifie avant ecriture : les
+  // trois rendaient null, aucune clef courte ne parlait a leur place.
+  'pgim':                            'societe-gestion',  // PGIM — la gestion d actifs de Prudential Financial
+  'butagaz':                         'entreprise',       // Butagaz — energie, comme les autres industriels
+  'dnca':                            'societe-gestion',  // DNCA Finance — gestion d actifs, comme Comgest ou Carmignac
   // Revelees par la collecte du 08/09/2026 — le controle des deux tables les
   // a vues parce qu il lit desormais la recolte. Toutes deux en plein sujet.
   'direction generale du tresor':        'institution',  // DIRECTION GENERALE DU TRESOR — comme 'agence france tresor' et 'banque de france'
