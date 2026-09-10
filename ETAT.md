@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 8 septembre 2026, dans la journée.**
+**Dernière mise à jour : 10 septembre 2026.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -2322,3 +2322,72 @@ en premier : il est peut-être plus avancé qu’on ne le croit.
   droit 9, SAP 8, Juriste 6, Achats 4, paie 3. Restent « Fiscalité » et
   « Tax » (~34), qui sont la question déjà en file, et un cas isolé chez
   Bouygues Telecom. **Chantier non ouvert.**
+
+## Le 10 septembre — la mesure de référence du brassage
+
+### Le chiffre, à garder comme point de comparaison
+
+Le passage du 10/09 affichait **79 arrivées et 70 départs** là où celui du
+09/09 en montrait 15 et 13 — cinq fois plus en un jour. L’explication
+spontanée était « c’est la rentrée ». Elle était plausible, et à moitié
+fausse.
+
+Rapproché sur un triplet **employeur + intitulé + ville** (jamais sur
+`canonicalKey`, qui était le suspect) :
+
+| | | |
+|---|---:|---:|
+| catalogue | **1 047** offres | |
+| arrivées réelles | **67** | 6,4 % |
+| départs réels | **58** | 5,5 % |
+| republications d’employeur | **12** | 1,1 % |
+
+**C’est le premier point de comparaison dont on dispose.** Sans lui, le
+prochain « 7 % » sera de nouveau jugé à l’intuition. Un brassage se compare
+désormais à 6,4 %, et un écart franc se mesure avant de s’expliquer.
+
+Les douze republications sont tranchées et closes : `DECISIONS.md` §41. Ni
+`emp`, ni `loc`, ni `title`, ni `source` ne bougent — notre clé est stable,
+c’est l’identifiant de l’employeur qui change.
+
+### Un instrument de plus
+
+**`ingestion/rotation-reelle.js`** — répond à « ce brassage est-il réel ? ».
+Il sépare les vraies arrivées des offres revenues sous une autre adresse, et
+nomme le champ qui a bougé : si `emp` ou `loc` en font partie, c’est NOTRE
+clé ; si seule `url` bouge, c’est l’employeur qui a réémis.
+
+```bash
+node ingestion/rotation-reelle.js                  # les deux derniers passages
+node ingestion/rotation-reelle.js <avant> <apres>  # deux commits précis
+node ingestion/rotation-reelle.js --urls           # + comment chaque URL a changé
+```
+
+Ce n’est **pas un contrôle** : il ne bloque rien et ne tourne pas à 6h30. On
+l’ouvre quand un brassage surprend. Sans argument, il prend de lui-même les
+deux derniers passages automatiques.
+
+### Le compteur mobile disait « 1k »
+
+`chiffreCompact` abrégeait dès **mille**. Avec 1 047 offres,
+`Math.round(1047 / 100) / 10` vaut **1** : le visiteur lisait « 1k offres »,
+pas même « 1,0k ».
+
+Débordement de la barre d’onglets, mesuré sur le site en ligne (≤ 0 = tient) :
+
+| largeur | `1k offres` | `1 047 offres` | `1 047` |
+|---:|---:|---:|---:|
+| 375 | 0 | **0** | 0 |
+| 360 | 0 | 14 | **0** |
+| 344 | 0 | 30 | **0** |
+| 320 | 36 | 54 | **17** |
+
+Deux choses que la mesure a dites : le seuil devait être **dix mille** et non
+mille — à 375 px quatre chiffres tiennent exactement —, et **c’est le mot
+« offres » qui coûte la place, pas les chiffres**. Le nombre complet SANS le
+mot est moins encombrant que l’abréviation AVEC : 17 px de débordement contre
+36 à 320 px.
+
+Corrigé : le nombre exact toujours, le mot se retire sous 375 px. Mieux
+qu’avant à **toutes** les largeurs. À cinq chiffres il faudra refaire la
+mesure — « 10 047 offres » débordait déjà de 7 px à 375 px.

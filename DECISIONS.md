@@ -1609,3 +1609,63 @@ suffit pas : **l’en-tête fait partie de l’instrument.** Deux outils qui
 exécutent le même code peuvent obtenir deux réponses différentes du même
 serveur, et la seule mesure qui vaut est celle qui se présente comme le
 passage de 6h30 se présentera.
+
+## 41. Une offre REPUBLIÉE est conservée avec sa nouvelle date — tranché le 10/09/2026
+
+**Décidé. Ne pas rouvrir.**
+
+Quand un employeur retire une annonce et la republie sous un nouvel
+identifiant, l’offre ressort du catalogue puis y rentre — et sa `postedAt`
+saute à la date de republication. Une annonce ouverte depuis juin peut ainsi
+se réafficher « publiée avant-hier ».
+
+**Ce n’est pas un contournement du filtre d’âge, c’est le meilleur signal
+que ce filtre puisse recevoir.** Le seuil d’âge existe pour écarter ce qui
+est *probablement pourvu* ; une republication démontre l’inverse — le poste
+est **encore ouvert**, et l’employeur vient de le dire lui-même. Aucune autre
+information dont nous disposons n’est aussi fraîche.
+
+### La mesure qui l’a tranché
+
+Passage du 10/09/2026, rapproché sur un triplet **employeur + intitulé +
+ville** — jamais sur `canonicalKey`, qui était le suspect :
+
+| | |
+|---|---:|
+| catalogue | 1 047 offres |
+| arrivées brutes | 79 |
+| départs bruts | 70 |
+| **republications** | **12** |
+| arrivées réelles | 67 |
+| départs réels | 58 |
+
+**Douze cas sur 1 047 offres**, tous des republications d’ATS :
+
+- **Guerlain**, cinq d’un coup — même préfixe `jobId`, suffixe de `10865xx`
+  à `10935xx`, `postedAt` du 27/07 au 08/09 : une campagne réémise en lot ;
+- **BPCE** — `…-controle-comptable` devient `…-controle-comptable-2`, un
+  doublon chez l’employeur ;
+- **CMA CGM** — `Marseille-Internship-Assistant-Chartering-Controller`
+  devient `Marseille-Stage-…`, le mot traduit dans le slug et
+  l’identifiant qui suit.
+
+### Ce que la mesure innocente, et c’est le point
+
+`emp`, `loc`, `title` et `source` sont **stables sur 12/12**. Seules `url`
+(12/12) et `postedAt` (10/12) bougent. **Notre clé n’est donc pas en cause :**
+c’est l’identifiant que l’employeur donne à son annonce qui change.
+
+Et ce n’est pas un battement quotidien : **10 des 12** portaient encore la
+même URL le 08/09. L’adresse a tenu deux jours puis a changé — un événement
+chez l’employeur, pas une instabilité qui se répéterait chaque matin.
+
+`firstSeenAt` ne bouge pas (il reste au 02/09 pour Guerlain) : l’offre ne se
+présente donc pas comme neuve au visiteur. Ce comportement est le bon, et il
+tient parce que `firstSeenAt` est mémorisé ailleurs que sur l’URL.
+
+### L’instrument
+
+`ingestion/rotation-reelle.js` refait cette mesure sur deux passages
+quelconques. Il existe parce qu’un brassage qui surprend appelle une
+explication, et qu’une explication n’est pas une mesure — « c’est la
+rentrée » était plausible et à moitié faux.
