@@ -149,12 +149,34 @@ const PREFILTER = [
   // systemes lui fait perdre son temps au clic et a l'entretien. Huit offres
   // Big Four le 04/09/2026. Exception explicite : « transformation SI/Finance »
   // porte sur la fonction finance elle-meme, elle reste en Conseil.
+  // Un titre qui NOMME LA FINANCE echappe aux deux motifs ci-dessous. Le
+  // radical s ecrit SANS limite de mot finale : « \bfinanc\b » ne matche
+  // jamais « finance », et cette erreur a rendu un contre-test entier faux
+  // le 10/09/2026.
+  //
+  // (Declare ici plutot que dans chaque motif : deux copies du meme radical
+  // divergeraient.)
   [/\baudit it\b/, 'systeme-information'],
   [/\bit audit\b/, 'systeme-information'],
   [/\bauditeur des systemes d information\b/, 'systeme-information'],
   [/\brisques des si\b/, 'systeme-information'],
   [/\bcyber risk\b/, 'systeme-information'],
   [/\baudit financier ?\/ ?tech\b/, 'systeme-information'],
+  // La PROTECTION DES DONNEES. « IT Documents & Privacy » chez Ardian etait
+  // publiee : un fonds n est pas une structure gardee, donc son titre
+  // n avait aucun marqueur finance a produire.
+  //
+  // Contre-test du 10/09/2026, 11 cas sur 11 : ecarte « Data Privacy
+  // Officer », « DPO », « RGPD » ; garde « Compliance & Privacy Officer »,
+  // « Juriste Data Privacy & Conformité », « IT Controller », « IT Support
+  // Fixed Income Bonds ».
+  [/^(?!.*\b(?:financ|comptab|risqu|conformit|compliance|tresorerie|controle de gestion|assurance|credit|audit|fiscal|march[eé])).*(?:\bprivacy\b|\bdata protection\b|\brgpd\b|\bgdpr\b|\bdpo\b)/, 'systeme-information'],
+  // La TRANSFORMATION DIGITALE tout court. « Consultant Digital
+  // Transformation FINANCE » est un vrai metier de finance et reste ;
+  // « Digital Transformation » seul est de l informatique.
+  //
+  // Contre-test du 10/09/2026, 8 cas sur 8.
+  [/^(?!.*\b(?:financ|comptab|risqu|conformit|compliance|tresorerie|controle de gestion|assurance|credit|audit|fiscal|march[eé])).*\bdigital transformation\b/, 'systeme-information'],
 
   // Distribution d'assurance : agents, mandataires, technico-commerciaux.
   // C'est le premier gisement du fourre-tout (AXA, Swiss Life, Matmut, AG2R).
