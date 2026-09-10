@@ -1406,6 +1406,21 @@ const SENIOR_RE = new RegExp(
     `${AV}managers?${AP}`,
     `${AV}direct(?:eur|rice|or)s?${AP}`,
     `${AV}head of${AP}`,
+    // LE RECRUTEMENT LATERAL. « Experienced Hire » designe un professionnel
+    // confirme, par opposition au « graduate ». PJT Partners publiait
+    // « Analyst - Strategic Advisory (France Coverage) - Experienced Hire » :
+    // le mot « Analyst » le faisait passer pour un poste junior.
+    //
+    // Mesure du 10/09/2026 : DEUX intitules touches sur 6 749, dont un
+    // « Recruiter - Experienced Hire » qui devait sortir de toute facon.
+    // Contre-test 8 cas sur 8 — « Experienced in Excel - Stage » reste.
+    //
+    // Ajoute a SENIOR_RE seul : SENIOR_TITRE_STRICT_RE est volontairement
+    // etroite, et un stage « experienced hire » n existe pas.
+    `${AV}experienced hire${AP}`,
+    `${AV}lateral hire${AP}`,
+    `${AV}experienced professional${AP}`,
+    `${AV}mid[\\s-]?level${AP}`,
     // Titres seniors des banques d'affaires anglo-saxonnes : un "Vice President"
     // ou un "Executive Director" en BFI, c'est 5-10 ans d'expérience.
     `${AV}vice[\\s-]?presidents?${AP}`,

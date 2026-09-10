@@ -227,6 +227,19 @@ const PREFILTER = [
   [/\btalent(?:s)? (?:acquisition|management|partner|culture)\b/, 'support'],
   [/\bgestion des talents\b/, 'support'],
   [/\bmoyens generaux\b/, 'support'],
+  // LE SUPPORT PUR. « Administrative Assistant - Investment Banking »
+  // (Bank of America) entrait par le NOM DE L EQUIPE : « investment
+  // banking » a servi de metier. Un assistant administratif ne produit ni
+  // n analyse d information financiere — hors perimetre (§30).
+  //
+  // L EXEMPTION EST INDISPENSABLE : « Employees’ investments Fund
+  // Administrative Assistant » chez Ardian est de l ADMINISTRATION DE
+  // FONDS, un metier de middle-office. Le motif epargne donc tout titre
+  // qui nomme un fonds ou un office.
+  //
+  // Contre-test du 10/09/2026, 8 cas sur 8. Sur la recolte : 8 intitules
+  // touches, 1 garde (Ardian), 5 deja rejetes par ailleurs.
+  [/^(?!.*\b(?:fund|fonds|middle office|back office)).*(?:\bassistant(?:e)? administratif(?:ve)?\b|\badministrative assistant\b|\bsecretaire\b|\boffice manager\b|\bhotesse d accueil\b|\bcharge(?:e)? d accueil\b)/, 'support'],
   [/\bgestionnaire de paie\b/, 'support'],
   [/\badministration des ventes\b/, 'support'],
   [/\bproperty manager\b/, 'support'],
@@ -774,6 +787,15 @@ const FAMILIES = [
       [/\b(?:client|fund) administration\b|\badministration de fonds\b/, 8],
       [/\bmiddle ?-? ?office\b/, 8],
       [/\bback ?-? ?office\b/, 8],
+      // L ONBOARDING CLIENT et la revue des dossiers : entree en relation,
+      // revue KYC des comptes existants. « Client account management team
+      // onboarding reviews analyst » (Rothschild) n avait AUCUNE famille et
+      // tombait en M&A par le repli « banque d affaires ».
+      //
+      // On vise l onboarding CLIENT, pas le mot seul : « Responsable
+      // Onboarding Comptable » (Pennylane) reste en comptabilite, et les
+      // intitules KYC restent en risques-conformite, ce qui est juste.
+      [/\bclient account management\b|\bclient onboarding\b|\bonboarding client\b/, 8],
       [/\bfront to back\b/, 9],
       [/\bpost ?-? ?marche\b/, 9],
       [/\bdepositaire\b/, 9],
@@ -912,6 +934,28 @@ function scoreFamily(family, title) {
  *            reason?: string, structure: string|null,
  *            famille?: string, familleLabel?: string, score?: number, tags: string[]}}
  */
+// Les familles qui nomment un SEGMENT DE MARCHE — le decor possible. Une
+// famille de FONCTION (comptabilite, audit, middle-office, controle de
+// gestion) n y figure pas : deux fonctions qui se disputent une offre ne
+// relevent pas de cette regle.
+const FAMILLES_SEGMENT = new Set([
+  'banque-privee-patrimoine',
+  'actuariat-assurance',
+  'capital-investissement',
+  'gestion-actifs',
+  'marches-financiers',
+  'financements-coverage',
+]);
+
+// Les metiers qui ne se discutent pas. Chacun est un NOM DE POSTE et jamais
+// un perimetre : on n audite pas « un auditeur », on ne gere pas « un
+// comptable ». C est ce qui autorise a les faire primer.
+const METIER_PRIME = [
+  [/\bauditeur(?:s)?\b|\bauditrice(?:s)?\b|\baudit interne\b|\binternal audit\b/, 'audit-controle-interne'],
+  [/\bcomptable(?:s)?\b|\bcomptabilite\b/, 'comptabilite-consolidation'],
+  [/\bcontroleur(?:se)? de gestion\b/, 'controle-gestion-tresorerie'],
+];
+
 function classify(offer) {
   const title = normalize(offer.title);
   const structure = resolveStructure(offer.employer);
@@ -925,6 +969,37 @@ function classify(offer) {
     if (score > winnerScore) {
       winner = family;
       winnerScore = score;
+    }
+  }
+
+  // LE METIER PRIME SUR LE SEGMENT.
+  //
+  // « Auditeur Interne - Banque de Detail, Banque Privee et Assurance » est
+  // un AUDITEUR : « Banque Privee » est le perimetre qu il audite, pas son
+  // metier. Le classifieur le rangeait pourtant en Banque privee, parce que
+  // les mots du SECTEUR pesent 8-9 quand ceux du METIER pesent 7 — le decor
+  // gagnait toujours.
+  //
+  // LA RESTRICTION EST LE COEUR DE LA REGLE : le metier ne prime que sur une
+  // famille qui nomme un SEGMENT DE MARCHE, jamais sur une autre FONCTION.
+  // « Analyste comptable Operations de marche » reste en middle-office : ce
+  // sont deux metiers qui se disputent l offre, pas un sujet et un decor.
+  // Sans cette restriction, la regle deplacait 25 offres dont 5 discutables ;
+  // avec, elle en deplace 18, toutes des ameliorations nettes.
+  //
+  // Mesure du 10/09/2026 sur les 7 065 intitules de la recolte.
+  if (winner && FAMILLES_SEGMENT.has(winner.id)) {
+    for (const [re, id] of METIER_PRIME) {
+      if (!re.test(title) || winner.id === id) continue;
+      // FAMILIES et non byId : ce dernier est un const declare plus bas dans
+      // classify(), donc inaccessible ici (zone morte temporelle).
+      const vise = FAMILIES.find((x) => x.id === id);
+      if (!vise) break;
+      winner = vise;
+      // Le score suit le metier : le garde-fou du pre-filtre lit winnerScore,
+      // et lui laisser l ancien serait lui mentir.
+      winnerScore = Math.max(winnerScore, scoreFamily(vise, title));
+      break;
     }
   }
 

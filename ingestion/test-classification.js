@@ -55,7 +55,11 @@ const CASES = [
   ['Scor', 'Retrocession Analyst', 'actuariat-assurance'],
   ['La Banque Postale', 'Analyste Tarification', 'actuariat-assurance'],
   ['Covéa', 'Charge d etudes statistiques actuarielles pilotage de la performance', 'actuariat-assurance'],
-  ['Verlingue', 'Comptable Technique Assurance', 'actuariat-assurance'],
+  // Change le 10/09/2026 : « LE METIER PRIME SUR LE SEGMENT ». Un comptable
+  // technique tient les comptes techniques d un assureur — c est de la
+  // comptabilite, et « assurance » est le secteur, pas le metier. Le test
+  // portait l ancienne attente et a vu le changement : c est son role.
+  ['Verlingue', 'Comptable Technique Assurance', 'comptabilite-consolidation'],
   ['Wakam', 'Reinsurance Technical Accountant', 'actuariat-assurance'],
   ['Crédit Agricole CIB', "Analyste Chargé d'affaires - Financements Structurés Immobiliers", 'financements-coverage'],
   ['Barclays', 'International Corporate Banking Graduate Programme Paris', 'financements-coverage'],
