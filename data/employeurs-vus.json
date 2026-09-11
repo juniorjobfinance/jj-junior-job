@@ -1,8 +1,78 @@
 {
   "version": 1,
-  "genere": "2026-09-10T04:51:07.283Z",
+  "genere": "2026-09-11T04:51:07.300Z",
   "fenetreJours": 30,
   "employeurs": [
+    {
+      "emp": "Fred",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-05",
+      "derniereVue": "2026-09-11",
+      "passages": 7,
+      "offres": 2,
+      "offresMax": 2
+    },
+    {
+      "emp": "Amethis Advisory",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-08",
+      "derniereVue": "2026-09-11",
+      "passages": 4,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Délégation Nord-Est / Belgique",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-10",
+      "derniereVue": "2026-09-11",
+      "passages": 2,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Direction Opérationnelle Centre-Est",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-11",
+      "passages": 1,
+      "offres": 2,
+      "offresMax": 2
+    },
+    {
+      "emp": "Geostock",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-11",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "ACE ORGA LAB",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-11",
+      "passages": 1,
+      "offres": 1,
+      "offresMax": 1
+    },
     {
       "emp": "Sogea Nord Ouest TP",
       "categories": [
@@ -24,41 +94,6 @@
       "premiereVue": "2026-09-05",
       "derniereVue": "2026-09-10",
       "passages": 6,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "Fred",
-      "categories": [
-        "sans-structure",
-        "maison-absente"
-      ],
-      "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-10",
-      "passages": 6,
-      "offres": 2,
-      "offresMax": 2
-    },
-    {
-      "emp": "Amethis Advisory",
-      "categories": [
-        "sans-structure"
-      ],
-      "premiereVue": "2026-09-08",
-      "derniereVue": "2026-09-10",
-      "passages": 3,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "Délégation Nord-Est / Belgique",
-      "categories": [
-        "sans-structure",
-        "maison-absente"
-      ],
-      "premiereVue": "2026-09-10",
-      "derniereVue": "2026-09-10",
-      "passages": 1,
       "offres": 1,
       "offresMax": 1
     },
