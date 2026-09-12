@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "genere": "2026-09-11T04:51:07.300Z",
+  "genere": "2026-09-12T04:50:57.675Z",
   "fenetreJours": 30,
   "employeurs": [
     {
@@ -10,8 +10,8 @@
         "maison-absente"
       ],
       "premiereVue": "2026-09-05",
-      "derniereVue": "2026-09-11",
-      "passages": 7,
+      "derniereVue": "2026-09-12",
+      "passages": 8,
       "offres": 2,
       "offresMax": 2
     },
@@ -21,8 +21,54 @@
         "sans-structure"
       ],
       "premiereVue": "2026-09-08",
-      "derniereVue": "2026-09-11",
-      "passages": 4,
+      "derniereVue": "2026-09-12",
+      "passages": 5,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Direction Opérationnelle Centre-Est",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-12",
+      "passages": 2,
+      "offres": 2,
+      "offresMax": 2
+    },
+    {
+      "emp": "Geostock",
+      "categories": [
+        "sans-structure",
+        "maison-absente"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-12",
+      "passages": 2,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "ACE ORGA LAB",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-11",
+      "derniereVue": "2026-09-12",
+      "passages": 2,
+      "offres": 1,
+      "offresMax": 1
+    },
+    {
+      "emp": "Klepierre Management",
+      "categories": [
+        "sans-structure"
+      ],
+      "premiereVue": "2026-09-12",
+      "derniereVue": "2026-09-12",
+      "passages": 1,
       "offres": 1,
       "offresMax": 1
     },
@@ -35,41 +81,6 @@
       "premiereVue": "2026-09-10",
       "derniereVue": "2026-09-11",
       "passages": 2,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "Direction Opérationnelle Centre-Est",
-      "categories": [
-        "sans-structure",
-        "maison-absente"
-      ],
-      "premiereVue": "2026-09-11",
-      "derniereVue": "2026-09-11",
-      "passages": 1,
-      "offres": 2,
-      "offresMax": 2
-    },
-    {
-      "emp": "Geostock",
-      "categories": [
-        "sans-structure",
-        "maison-absente"
-      ],
-      "premiereVue": "2026-09-11",
-      "derniereVue": "2026-09-11",
-      "passages": 1,
-      "offres": 1,
-      "offresMax": 1
-    },
-    {
-      "emp": "ACE ORGA LAB",
-      "categories": [
-        "sans-structure"
-      ],
-      "premiereVue": "2026-09-11",
-      "derniereVue": "2026-09-11",
-      "passages": 1,
       "offres": 1,
       "offresMax": 1
     },
