@@ -274,6 +274,27 @@ const PREFILTER = [
   [/\bsupply chain\b/, 'hors-domaine'],
   [/\blogistique\b/, 'hors-domaine'],
   [/\bseo\b/, 'hors-domaine'],
+  // LE TRADER MEDIA. Un « trader » qui achete de l espace publicitaire n a
+  // aucun rapport avec une salle de marche. Les onze « trader » de la
+  // recolte du 13/09/2026 sont tous de vrais traders de marche — mais
+  // uniquement parce qu aucune agence de communication n est branchee.
+  //
+  // L exclusion porte donc sur le MOT, jamais sur la maison : un garde-fou
+  // qui protege d une maison protege d une maison, un garde-fou qui protege
+  // d un mot protege de toutes. C est le piege « quality analyst » et
+  // « nom de facette » pris a l endroit.
+  // Les formes qui nomment le media : sans ambiguite possible.
+  [/\btrader media\b|\bmedia trader\b|\btrader programmatique\b|\bmedia trading\b|\bachat d espaces?\b|\bachat media\b/, 'hors-domaine'],
+  // « Junior Digital Trader » chez Havas est le meme metier sans le mot
+  // « media » — il est passe au premier jet, classe Marches financiers.
+  // Mais « digital trader » ne peut pas etre exclu sec : une salle de marche
+  // pourrait nommer ainsi un poste de trading electronique. L EXEMPTION EST
+  // DANS LE MOTIF : un titre qui nomme un instrument, un marche ou un desk
+  // n est pas un acheteur d espace publicitaire.
+  [
+    /^(?!.*\b(?:fx|change|taux|rates?|equity|equities|actions?|credit|bond|obligataire|derives?|commodit\w*|matieres premieres|desk|sales|marches?|electronic|execution|buy ?-? ?side|asset|portefeuille)\b).*\b(?:digital trader|trader digital)\b/,
+    'hors-domaine',
+  ],
 ];
 
 // ---------------------------------------------------------------------------
@@ -281,6 +302,18 @@ const PREFILTER = [
 // ---------------------------------------------------------------------------
 
 const FINANCE_MARKERS = [
+  // « Relations investisseurs » en FRANCAIS. L anglais « investor relations »
+  // passait deja — 14 intitules dans la recolte du 13/09/2026, tous gardes —
+  // le francais rendait zero. Ce n etait pas un motif inerte mais un motif
+  // ABSENT : aucune maison branchee ne l ecrit ainsi, et Havas le fait.
+  //
+  // IL ENTRE, IL NE RANGE PAS. Arbitre par Victor le 13/09 : pas de motif de
+  // famille sur ce mot. « Investor relations » est un faux ami — les onze
+  // offres anglaises se repartissent entre gestion d actifs, middle-office,
+  // banque privee et capital-investissement, parce que chez un fonds les
+  // relations investisseurs consistent a lever et servir, pas a gerer. Un
+  // motif unique ne peut pas trancher ca. C est le reste du titre qui range.
+  /\brelations? investisseurs?\b/,
   // Ajoute le 04/09/2026 : un diplome comptable francais est un marqueur
   // finance. Forvis Mazars « DCG / DSCG Agricole » etait rejete a la PORTE
   // alors que Deloitte « Comptable - DSCG » etait classe. Mesure avant
@@ -319,8 +352,56 @@ const FINANCE_MARKERS = [
   /\binsurance\b/, /\bexpertise conseil\b/, /\bexpertise comptable\b/,
 ];
 
+// Le vocabulaire des relations investisseurs, dans les deux langues. Il sert
+// a la REDIRECTION PAR STRUCTURE plus bas, pas a ranger : c est justement ce
+// qu un motif unique ne sait pas faire.
+const RELATIONS_INVESTISSEURS = /\brelations? investisseurs?\b|\binvestor relations\b/;
+
+// Deux lignes, et c est assez. `fonds` et `societe-gestion` ne figurent pas
+// dans la table : ne rien y faire EST la decision, et Gestion d actifs y est
+// juste. Les autres structures non plus : on y laisse le titre decider.
+const REDIRECTION_RELATIONS_INVESTISSEURS = {
+  entreprise: 'controle-gestion-tresorerie',
+};
+
 function hasFinanceMarker(title) {
   return FINANCE_MARKERS.some((re) => re.test(title));
+}
+
+// DES MOTS QUI NE SONT UN MARQUEUR QUE CHEZ CERTAINES STRUCTURES.
+//
+// « Restructuring » est univoque chez un Big Four ou un cabinet de conseil :
+// c est le conseil aux entreprises en difficulte. Chez un INDUSTRIEL, un
+// « charge de mission restructuration » est un plan social — des RH, hors
+// perimetre (§30).
+//
+// Mesure du 13/09/2026 sur les 7 105 brutes : 9 intitules portent
+// « restructuring », tous chez big4, conseil, banque d affaires ou BFI,
+// ZERO chez un industriel. Mais la porte vaut aussi pour les maisons qu on
+// branchera demain : d ou la restriction par structure plutot que l ajout au
+// marqueur general. On pose le motif a la porte la plus etroite qui regle le
+// cas — celui de BDO France, « Stage en Restructuring ».
+//
+// « turnaround » N EST PAS AJOUTE, et c est mesure : une seule occurrence
+// dans la recolte, qui porte deja « restructuring ». Le motif serait inerte
+// — et dangereux, parce que dans la chimie et le petrole un turnaround est
+// un arret d usine pour maintenance. Risque pur, gain nul.
+//
+// L EXEMPTION est dans la table : « Avocat junior en droit des affaires :
+// Restructuring » et « Stage en droit des affaires » chez Deloitte sont du
+// conseil juridique, qui ne produit ni n analyse d information financiere.
+const MARQUEURS_PAR_STRUCTURE = [
+  {
+    structures: new Set(['big4', 'conseil']),
+    motif: /\brestructuring\b|\brestructuration\b/,
+    sauf: /\bdroit\b|\bavocat\b|\bavocate\b|\bjuridique\b|\bjuriste\b/,
+  },
+];
+
+function marqueurDeStructure(title, structure) {
+  return MARQUEURS_PAR_STRUCTURE.some(
+    (m) => m.structures.has(structure) && m.motif.test(title) && !(m.sauf && m.sauf.test(title))
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -404,6 +485,20 @@ const FAMILIES = [
       // Garanties » reste en Operations.
       [/\b(?:garanties? internationales?|caution)\b/, 8],
       [/\bcoverage\b/, 8],
+      // « Group Corporate Financing » chez CMA CGM et « Group Senior
+      // Financing Officer » chez Coface franchissaient la porte finance et
+      // tombaient au FOURRE-TOUT : aucune famille ne scorait « financing ».
+      // Or le residu n est pas publie (pipeline.js, « le residu ne retombe
+      // plus dans Autres ») — l offre etait donc perdue APRES etre entree,
+      // ce qui est le pire endroit pour la perdre.
+      //
+      // Mesure du 13/09/2026 : 9 intitules portent « financing », 3 au
+      // fourre-tout, 6 deja bien ranges ailleurs. Le poids 6 est choisi bas
+      // exprès : « Head of Financing BACK OFFICE » doit rester en
+      // Operations, « Ressources & Financing » chez un quant doit rester en
+      // Data & Quant. Le score le plus haut gagne.
+      [/\bcorporate financing\b|\bstructured financing\b/, 9],
+      [/\bfinancing\b/, 6],
       [/\bcorporate banking\b/, 8],
       [/\bnetwork banking\b/, 8],
       [/\btransaction banking\b/, 8],
@@ -1069,7 +1164,11 @@ function classify(offer) {
 
   // Etape 2 — porte finance
   const gated = GATED_STRUCTURES.has(structure);
-  if (gated && !hasFinanceMarker(title)) {
+  // `marqueurDeStructure` n ouvre la porte que chez les structures nommees
+  // dans sa table : « restructuring » passe chez un big4 et un cabinet de
+  // conseil, jamais chez un industriel ni chez un employeur qu on ne sait
+  // pas typer.
+  if (gated && !hasFinanceMarker(title) && !marqueurDeStructure(title, structure)) {
     return {
       status: 'rejected',
       // Nom du motif : ces employeurs SONT dans maisons.txt, c'est la table des
@@ -1085,6 +1184,34 @@ function classify(offer) {
 
   // Coups de pouce structure : quand l'intitule est generique, l'employeur tranche.
   const byId = (id) => FAMILIES.find((f) => f.id === id);
+
+  // RELATIONS INVESTISSEURS : LE METIER DEPEND DE LA MAISON.
+  //
+  // Chez un FONDS ou une societe de gestion, les relations investisseurs
+  // consistent a lever des fonds et a servir des LP : c est bien le metier
+  // de la maison, et Gestion d actifs est juste — on ne touche a rien.
+  //
+  // Chez une ENTREPRISE cotee, c est de la COMMUNICATION FINANCIERE :
+  // publication des resultats, relation avec les analystes, rapport annuel,
+  // consensus. Ca produit de l information financiere (§30) et ca vit dans
+  // la direction financiere. Une agence de publicite n a pas d actifs sous
+  // gestion : « Relations Investisseurs » chez Havas classe en Gestion
+  // d actifs etait faux.
+  //
+  // AILLEURS — BFI, banque d affaires, assurance, big4 — ON NE FORCE RIEN :
+  // une offre « Investor Relations » dans une BFI peut etre du coverage, et
+  // c est au reste du titre de le dire. Le motif de famille continue d y
+  // scorer 8, un motif plus precis le bat.
+  //
+  // C est le mecanisme du coup de pouce « recouvrement » ci-dessous, pas un
+  // motif de famille global : un motif unique ne peut pas trancher ce que la
+  // structure tranche toute seule. Mesure du 13/09/2026 : 11 offres portent
+  // ce vocabulaire, UNE SEULE est chez une entreprise. Deux lignes suffisent
+  // donc ; s il y en a plus de cinq un jour, on remesurera.
+  if (winner && winner.id === 'gestion-actifs' && RELATIONS_INVESTISSEURS.test(title)) {
+    const vise = REDIRECTION_RELATIONS_INVESTISSEURS[structure];
+    if (vise) winner = byId(vise) || winner;
+  }
 
   // Le credit management d'un industriel : « Gestionnaire de Recouvrement »
   // chez Rexel n'est pas un intitule generique, c'est le pilotage du poste

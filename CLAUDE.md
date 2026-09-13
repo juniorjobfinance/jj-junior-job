@@ -528,6 +528,30 @@ déclare **par source**, comme le format de date et le nom de champ.
 - **`\b` est ASCII** : il voit une limite entre le « h » de « March » et le « é »
   de « Marchés ». Utiliser `(?![A-Za-zÀ-ÿ])`.
 - **Les apostrophes des annonces sont typographiques (`’`)**, pas `'`.
+- **UNE LIMITE DE MOT APRÈS UN RADICAL empêche le radical de matcher le mot
+  complet.** `\bfinanc\b` ne matche jamais « finance » ; `\bcommodit\b` ne
+  matche jamais « commodities ». Le `\b` exige une frontière juste après le
+  radical, et il n’y en a pas au milieu d’un mot.
+
+  Deux fois en trois jours, les 11 et 13/09/2026, et la seconde dans une
+  liste d’exemption : « Digital Trader Commodities » chez JPMorgan sortait du
+  périmètre alors que l’exemption était écrite pour le garder. **Le motif ne
+  se plaint pas** — il est simplement inerte, et on croit avoir couvert un
+  vocabulaire qu’on n’a pas couvert.
+
+  La forme juste est `commodit\w*`, ou l’énumération explicite
+  (`commodity|commodities`). Et la règle qui les couvre toutes : **un radical
+  se termine par `\w*`, jamais par `\b`.** Le `\b` ne se pose qu’après un mot
+  entier.
+
+  C’est la sœur de « `\b` est ASCII » ci-dessus : l’un se trompe sur les
+  lettres accentuées, l’autre sur les mots tronqués. Les deux rendent un
+  motif silencieusement faux.
+
+  **Ce qui l’a attrapé les deux fois : le contre-test, pas la relecture.**
+  Un motif inerte est invisible à l’œil et évident dès qu’on lui soumet le
+  mot complet. C’est précisément à ça que sert un cas attendu « garde » à
+  côté des cas attendus « écarte ».
 - **Un contrôle qui vérifie ce qui est PASSÉ ne peut pas voir ce qui NE
   PASSE PAS** — voir la règle « SUR QUELLE POPULATION ? » ci-dessus. Le
   contrôle des deux tables lisait le catalogue publié : RSM y a perdu

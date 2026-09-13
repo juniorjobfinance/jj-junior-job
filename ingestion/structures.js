@@ -359,6 +359,11 @@ const EMPLOYER_STRUCTURE = {
   'sncf voyages developpement': 'entreprise',
   'technip energies france': 'entreprise',
   'cma cgm': 'entreprise',
+  // Havas : groupe de communication. Sa direction financiere est une
+  // direction financiere d'entreprise comme une autre. Verifie avant
+  // inscription : aucun employeur de la recolte ne commence par « havas »,
+  // la clef n'est donc le prefixe de personne (le piege Alan / Alantra).
+  'havas': 'entreprise',
   accor: 'entreprise',
   nexity: 'entreprise',
   altarea: 'entreprise',

@@ -1892,3 +1892,71 @@ visiteur venu de Google a besoin de lire.
 Sur ordinateur (1280 × 800) le texte n'est pas replié : la première offre est
 à y = 807, soit au pli. C'est accepté, et c'est le levier qui reste si Victor
 veut la carte plus haut.
+
+---
+
+## 45. Relations investisseurs : le métier dépend de la maison
+
+**Tranché le 13/09/2026 par Victor.**
+
+> **Relations investisseurs : le métier dépend de la maison. Chez un fonds,
+> c'est lever et servir des LP → gestion d'actifs. Chez une société cotée,
+> c'est de la communication financière → contrôle de gestion & trésorerie.
+> Un motif unique ne peut pas trancher, la structure le peut. Mesuré le
+> 13/09 : 11 offres, dont 1 seule en entreprise.**
+
+### Comment le sujet s'est ouvert
+
+Une URL d'Havas — « Stagiaire Relations Investisseurs », Puteaux. Elle
+n'entrait pas : « relations investisseurs » en **français** n'était pas un
+marqueur finance, alors que l'anglais « investor relations » l'était. Motif
+absent, et non motif inerte — aucune maison branchée ne l'écrivait ainsi.
+
+Le marqueur ajouté, l'offre entrait… et ressortait classée **Gestion
+d'actifs**, parce que la famille `gestion-actifs` porte déjà le motif
+`[/\brelations? investisseurs?\b/, 8]` depuis longtemps. Une agence de
+publicité n'a pas d'actifs sous gestion.
+
+**Le changement de porte n'a pas créé ce défaut : il l'a rendu atteignable.**
+Avant, ces offres n'entraient jamais, et le motif de famille ne pouvait pas
+se tromper faute de sujet.
+
+### Ce qui a été écarté, et pourquoi
+
+- **Ajouter un motif de famille français** vers `gestion-actifs` : ce serait
+  la faute du 10/09 — « investor relations » est un faux ami comme
+  « commercial » l'était. Les onze offres anglaises se répartissent entre
+  gestion d'actifs, middle-office, banque privée et capital-investissement,
+  selon le reste du titre. Un motif unique ne peut pas trancher.
+- **Neutraliser le motif chez `entreprise`** : l’offre serait entrée puis
+  tombée au fourre-tout, qui n'est pas publié (`pipeline.js` — « le résidu ne
+  retombe plus dans Autres »). Donc perdue APRÈS être entrée, le pire endroit
+  pour la perdre.
+
+### Ce qui est posé
+
+Une **redirection par structure** — le mécanisme du coup de pouce
+« recouvrement » chez un industriel, pas un motif de famille :
+
+| structure | vers | pourquoi |
+|---|---|---|
+| `fonds`, `societe-gestion` | gestion d'actifs *(inchangé)* | lever des fonds et servir des LP est le métier de la maison |
+| `entreprise` | contrôle de gestion & trésorerie | résultats, analystes, rapport annuel, consensus : de la communication financière, dans la direction financière |
+| tout le reste | **rien n'est forcé** | une offre « Investor Relations » en BFI peut être du coverage — au titre de le dire |
+
+**Deux lignes, et c'est assez.** Une seule offre est concernée aujourd'hui.
+S'il y en a plus de cinq un jour, on remesurera — plutôt que de construire
+une table extensible pour un cas.
+
+**Sa limite, écrite pour qu'on ne la cherche pas :** un employeur **sans
+structure** ne peut pas être redirigé — la table est indexée par structure et
+`null` n'y figure pas. Son offre reste en Gestion d'actifs. Ce n'est pas un
+défaut de la redirection, mais celui que le contrôle « deux tables » signale
+déjà, et il se répare en typant la maison.
+
+### Mesure
+
+Contre-test **22/22** sur `classify()`. Effet global sur les 7 105 brutes :
+**0 perdue, 0 déplacée** — la redirection ne bouge rien sur la récolte
+actuelle, parce qu'aucune offre de relations investisseurs n'y est encore
+chez une entreprise. Havas était la première, et elle n'était pas branchée.

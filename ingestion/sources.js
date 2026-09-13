@@ -1948,6 +1948,19 @@ const TARGET_COMPANIES = {
     // « db », site « DBWebsite ». Deux postes parisiens seulement — c'est leur
     // réalité, pas un défaut du connecteur.
     { tenant: 'db', dc: 'wd3', site: 'DBWebsite', emp: 'Deutsche Bank' },
+    // Havas : groupe de communication, mais sa direction financiere recrute
+    // des juniors — controle de gestion, compliance, comptabilite. Mesure du
+    // 13/09/2026 : 373 offres au total, 113 en France, 6 ou 7 en finance
+    // junior. Le reste est de la publicite et des medias.
+    //
+    // ATTENTION AU FAUX AMI QU ELLE APPORTE : « Assistant(e) Trader Media
+    // Programmatique » est un acheteur d espace publicitaire. Le garde-fou
+    // est dans classifier.js, ecrit sur le MOT et non sur cette maison —
+    // sinon il ne protegerait que d elle.
+    //
+    // Son adresse publique est sur wd3.myworkdaySITE.com, qui ne repond pas
+    // en fetch : le tenant est bien sur myworkdayJOBS.com.
+    { tenant: 'havas', dc: 'wd3', site: 'GroupExternalCareerSite', emp: 'Havas' },
     // Chanel : elle figurait dans « maisons sans aucune offre » a chaque
     // passage. Elle n'etait pas muette, elle n'etait pas branchee — le compte
     // des muettes ne distingue pas les deux. 24 offres au connecteur le

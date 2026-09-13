@@ -135,6 +135,7 @@ Younited                 | younited
 # === Grands groupes — finance d'entreprise, contrôle de gestion =============
 TotalEnergies            | total ?energies|^total\b
 CMA CGM                  | cma ?cgm
+Havas                    | ^havas\b
 LVMH                     | ^lvmh|mo[eë]t hennessy|christian dior|louis vuitton|^sephora|make up for ever|guerlain|givenchy|c[ée]line|loewe|bulgari|^fendi|kenzo|berluti|^tag heuer|hennessy|parfums christian dior|maison francis kurkdjian|bon marche|officine universelle buly|chaumet|rimowa|tiffany|benefit cosmetics|^krug
 L'Oréal                  | l.?oreal
 Airbus                   | airbus
