@@ -782,6 +782,35 @@ const LISTES_HTML = [
     // Elles sont lues dans le même lot (concurrence: 2) à dessein : la boucle
     // de fetchListeHtml s'arrête à la première page vide, et un jour sans
     // stage aurait donc empêché de lire la page des emplois.
+    emp: 'Danone',
+    base: 'https://careers.danone.com',
+    // Leur recherche AEM filtre le pays par parametre. ATTENTION : ne JAMAIS
+    // ajouter « fulltext » a cette adresse — robots.txt l'interdit
+    // explicitement (« Disallow: /*?*fulltext »), et c'est le seul
+    // parametre qu'il refuse.
+    page: (n) =>
+      'https://careers.danone.com/fr/fr/jobs.html' +
+      '?643720274_group.propertyvalues.property=jcr%3Acontent%2Fdata%2Fmaster%2Fcountry' +
+      '&643720274_group.propertyvalues.operation=equals' +
+      '&643720274_group.propertyvalues.26_values=France' +
+      '&layout=teaserList&p.limit=100&p.offset=' + (n - 1) * 100,
+    // 103 offres France le 13/09/2026 : deux pages pleines suffisent, la
+    // troisieme rend zero et la boucle s'arrete d'elle-meme.
+    maxPages: 4,
+    blocRe: /<div class="cmp-job-card">/,
+    blocFin: 'dn-jobdetails__meta-logo',
+    lienRe: /href="(\/fr\/fr\/jobs\/[^"]+\.html)"/,
+    motifs: {
+      // `job-card__title` et NON le texte de l'ancre : celui-ci contient
+      // aussi la famille metier, et c'est elle qui faisait entrer le
+      // juridique.
+      titre: /job-card__title">\s*([^<]+?)\s*</,
+      lieu: /job-card__city">[\s\S]*?<span>\s*([^<]+?)\s*</,
+      pays: /dn-jobdetails__countries">[\s\S]*?alt=""\/>\s*([^<]+?)\s*<\/span>/,
+    },
+    delaiMs: 700,
+  },
+  {
     emp: 'DNCA Finance',
     base: 'https://www.dnca-investments.com',
     // Une page unique, sans pagination : leur liste tient sur /carrieres.

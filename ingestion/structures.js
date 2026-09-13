@@ -364,6 +364,13 @@ const EMPLOYER_STRUCTURE = {
   // inscription : aucun employeur de la recolte ne commence par « havas »,
   // la clef n'est donc le prefixe de personne (le piege Alan / Alantra).
   'havas': 'entreprise',
+  // Danone : groupe agroalimentaire. Sa direction financiere est une
+  // direction financiere d'entreprise. Inscrite le 13/09/2026 en meme temps
+  // que son connecteur — une maison branchee sans type voit TOUTES ses
+  // offres rejetees sous « gate:employeur-absent-de-structures », en
+  // silence. Mesure avant inscription : 10 offres lues, 0 publiable ; apres,
+  // voir le journal du jour.
+  'danone': 'entreprise',
   accor: 'entreprise',
   nexity: 'entreprise',
   altarea: 'entreprise',
