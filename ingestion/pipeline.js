@@ -2457,6 +2457,24 @@ function cleanTitle(title) {
     if (t === avantQueue) break;
   }
 
+  // 9 quater) LE LIEU EN QUEUE, derrière une barre verticale.
+  //
+  //    Ardian écrit « Investor Relations Client Solution Stage - Janvier
+  //    2027 I Paris (M/F) » — et le séparateur est un « I » MAJUSCULE, pas
+  //    une barre : leur gabarit tape la lettre. Vingt offres publiées le
+  //    portaient le 13/09/2026, et la carte affiche déjà le lieu juste en
+  //    dessous de l'intitulé. C'était le défaut le plus visible du site.
+  //
+  //    LA CONDITION EST QUE LA QUEUE SOIT UN LIEU QU'ON RECONNAÎT. Sans
+  //    elle on amputerait « Analyst M&A | Latin America (Portuguese
+  //    speaking) » chez EURO Latina Finance et « PGIM | Real Estate Private
+  //    Equity Analyst », où ce qui suit la barre EST le métier. C'est
+  //    `estGrandeVille` qui tranche — la fonction dont le pipeline lit déjà
+  //    le verdict pour le lieu, et non une liste recopiée à côté.
+  t = t.replace(/\s+(?:\||I)\s+([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’\- ]{2,24})\s*$/, (segment, lieu) =>
+    estGrandeVille(lieu.trim()) ? '' : segment
+  );
+
   // 10) Ponctuation résiduelle en bord, guillemets et barres obliques compris.
   t = t.replace(/\s+/g, ' ').replace(/^[\s:\-–—,|\/«»"]+|[\s:\-–—,|\/«»"]+$/g, '').trim();
 

@@ -465,6 +465,48 @@ change de chiffre, pas seulement de portée. Les deux tables passaient de
 
 ---
 
+### UN CHAMP ABÎMÉ EST UN SYMPTÔME, pas un défaut d’affichage
+
+Le 13/09/2026, sept intitulés Citi et six Rothschild étaient publiés en
+bouillie — « Banking financing equity capital markets placement analyst
+paris », « Compliancerisk officer mwd schwerpunkt risk management ». Ces
+quatre connecteurs lisent leur liste en mode `depuisLien` : le titre n’est
+pas lu, il est **reconstruit depuis le slug de l’adresse**.
+
+Le réflexe était d’embellir la reconstruction. Deux mesures l’ont démenti.
+
+**Le vrai titre était déjà là.** Le découpage prend tout ce qui va de
+`<a href="…">` à `</a>` : le texte du lien est dans le bloc, et personne ne
+le lisait. Chez Citi il porte l’intitulé complet, virgules et capitales
+comprises. La correction ne coûtait aucune requête.
+
+**Et surtout, l’adresse servait AUSSI de preuve de nationalité.** Le filtre
+pays s’écrivait `… : cfg.depuisLien || /france/i.test(o.lieu)` : lire sa
+liste par les liens valait laissez-passer. Mesuré le même jour :
+**25 des 49 cartes Rothschild sont en France**, et quatre des six offres
+publiées étaient à Luxembourg, Francfort, Londres et Dubaï. La règle 1 du
+site, enfreinte en silence depuis que ce connecteur existe.
+
+> **La règle :** quand une valeur arrive abîmée, ne pas demander « comment
+> l’embellir » mais **« par quelle porte est-elle entrée, et qu’est-ce que
+> cette porte ne vérifie pas ? »**. Un champ dégradé signale une lecture
+> approximative, et une lecture approximative ne s’arrête jamais à un seul
+> champ.
+
+C’est la sœur de « un champ lu doit être un champ demandé ». Celle-là dit
+qu’un champ peut RÉPONDRE AUTRE CHOSE ; celle-ci dit qu’un champ visiblement
+faux en accuse d’autres qu’on ne regarde pas, parce qu’eux ne se voient pas.
+Le titre criait ; le pays se taisait.
+
+**Le corollaire, qui aurait suffi à l’éviter :** un mode de LECTURE ne dit
+rien du CONTENU. Qu’on lise une liste par ses liens, par ses attributs ou par
+ses motifs ne prouve ni la nationalité, ni la date, ni la séniorité. Toute
+condition de la forme « si on lit comme ça, alors c’est bon » est un
+laissez-passer déguisé. Ce qui est vrai se déclare — `paysImplicite` — et se
+déclare **par source**, comme le format de date et le nom de champ.
+
+---
+
 ## Pièges vérifiés plusieurs fois
 
 - **`String.replace` réinterprète `$&` et `$'`** dans le texte inséré. Un `$'` a

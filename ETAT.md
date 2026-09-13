@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 10 septembre 2026.**
+**Dernière mise à jour : 13 septembre 2026.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -10,39 +10,67 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**912 offres** · **200 employeurs** distincts · **15 familles** · **11 types
-de structure**, tous représentés. Mesuré sur `offres.js` le 04/09/2026 au soir.
+**1 060 offres** · **215 employeurs** distincts · **15 familles** · **11 types
+de structure**, tous représentés. Mesuré sur `offres.js` le 13/09/2026.
 
-> Le chiffre a baissé — 1 006 le 03/09, 912 le 04/09 — et c'est voulu. Le
-> durcissement du périmètre (956 → 900 offres retenues) et la porte
-> « publication sans structure » écartent désormais ce qui aurait été publié
-> et introuvable. *Moins d'offres, mais toutes justes.*
+> 1 073 la veille, 1 060 aujourd'hui. La baisse est voulue et se décompose :
+> quinze offres Rothschild qui n'étaient **pas en France** (§43), vingt titres
+> Ardian nettoyés de leur suffixe « I Paris », et une offre écartée comme
+> hors périmètre (§42). *Moins d'offres, mais toutes justes.*
 
 | Onglet | Offres |
 |---|---:|
-| Stage | 450 |
-| CDI · CDD | 331 |
-| Alternance | 83 |
-| VIE | 48 |
+| Stage | 563 |
+| CDI · CDD | 378 |
+| Alternance | 68 |
+| VIE | 51 |
 
 > **L'alternance est saisonnière.** Un catalogue d'alternance maigre relevé en
 > septembre ne prouve rien : le contrat démarre à la rentrée, donc les annonces
 > se publient de février à juillet. La mesure qui compte est celle du
 > printemps. Ne rien durcir ni assouplir sur la foi de ce compteur.
 
-**Les cinq familles les plus fournies** : Comptabilité & Consolidation 117,
-Risques & Conformité 117, Contrôle de gestion & Trésorerie 101, Audit &
-Contrôle interne 73, Capital-investissement 70. Le résidu « Autres métiers de
-la finance » tient à **14 offres, soit 1,5 %** — il était à 26,7 % le
+**Les cinq familles les plus fournies** : Comptabilité & Consolidation 148,
+Contrôle de gestion & Trésorerie 132, Risques & Conformité 124, Audit &
+Contrôle interne 100, Capital-investissement 86. Le résidu « Autres métiers
+de la finance » tient à **12 offres, soit 1,1 %** — il était à 26,7 % le
 2 septembre.
 
-**Les cinq structures les plus fournies** : BFI 189, Entreprise 131, Big Four
-110, Assurance 88, Banque d’affaires 78.
+**Les cinq structures les plus fournies** : BFI 203, Entreprise 169, Big Four
+167, Banque d’affaires indépendante 94, Fonds d’investissement 86.
 
-**Les tables** : `maisons.txt` 214 lignes, `structures.js` 290 employeurs.
+**Les tables** : `maisons.txt` 292 lignes.
 
-**Le poids servi** : `offres.js` 712 Ko, `index.html` 784 Ko, les quinze pages
-de famille 2 337 Ko au total. Le sitemap déclare **18 URL**.
+**Le poids servi** : `offres.js` 696 Ko, `index.html` 920 Ko, les quinze pages
+de famille 2 878 Ko au total. Le sitemap déclare **18 URL**.
+
+---
+
+## Le référencement, au 13 septembre 2026
+
+Mesuré, pas supposé — le détail et les arbitrages sont au **§44** de
+`DECISIONS.md`.
+
+| | avant le 13/09 | après |
+|---|---:|---:|
+| liens de l'accueil vers `/familles/` | **0** | 15 |
+| texte de famille VISIBLE (15 pages) | **0 car.** | 13 077 car. |
+| pages portant du JSON-LD | **0 / 16** | 16 / 16 |
+| `<h2>` d'interface sur l'accueil | 7 | 1 |
+
+Les quinze pages étaient **orphelines** : elles n'existaient que dans le
+sitemap. Le pied de page les nomme désormais toutes, chaque page de famille
+porte les quatorze autres, et les dix familles citées dans « à ne pas
+confondre avec… » sont devenues des liens.
+
+`JobPosting` est **écarté définitivement** : Google exige la description
+complète du poste sur la page qui le porte, et le lien mène chez l'employeur.
+
+**Ce qui est en attente d'une mesure, pas d'une décision** : les dix plus gros
+croisements famille × volet, chacun avec un paragraphe écrit à la main. On les
+écrit **si et seulement si** les impressions des quinze pages de famille ont
+bougé dans la Search Console **autour du 4 octobre 2026**. Sinon le problème
+est ailleurs, et on aura économisé dix pages écrites pour rien.
 
 ---
 

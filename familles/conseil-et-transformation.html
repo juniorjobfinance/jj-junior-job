@@ -9,6 +9,15 @@
 <meta name="description" content="Conseil en transformation de la fonction finance et projets réglementaires : les offres juniors en cabinet, en Big Four et en banque.">
 <link rel="preload" href="polices/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://juniorjobfinance.com/familles/conseil-et-transformation.html">
+<!-- Données structurées. BORNÉES : les pages de famille remplacent ce bloc
+     par leur BreadcrumbList — un WebSite sur une sous-page serait faux.
+
+     PAS de JobPosting, et ce n’est pas un oubli : Google exige que la page
+     qui le porte affiche la description complète du poste. On n’en a pas,
+     par construction — le lien mène chez l’employeur (règle 1). Baliser des
+     cartes sans description est précisément ce qui vaut une action manuelle
+     aux agrégateurs. -->
+<!--JJ:JSONLD:DEBUT--><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://juniorjobfinance.com/"},{"@type":"ListItem","position":2,"name":"Conseil & Transformation","item":"https://juniorjobfinance.com/familles/conseil-et-transformation.html"}]}</script><!--JJ:JSONLD:FIN-->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Junior Job Finance">
 <meta property="og:title" content="Conseil &amp; Transformation : stages, alternances et premiers postes">
@@ -537,14 +546,18 @@
     .tiroir-valider { display: block; }
     .tiroir-valider[hidden] { display: none; }
   }
-  aside.filters h2 {
+  /* Étiquettes de la colonne de filtres. <h3> et non <h2> : Google lit la
+     structure d’une page par ses titres, et « Recherche », « Lieu »,
+     « Entreprise » lui racontaient un formulaire. Ce sont des étiquettes
+     d’interface, elles ne concurrencent plus le titre du contenu. */
+  aside.filters h3 {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--ink-soft);
     margin: 1rem 0 0.5rem;
   }
-  aside.filters h2:first-child { margin-top: 0; }
+  aside.filters h3:first-child { margin-top: 0; }
   aside.filters input[type="search"] {
     width: 100%;
     padding: 0.5rem 0.6rem;
@@ -659,16 +672,55 @@
   }
   .jj-bulle p { margin: 0 0 0.6rem; }
   .jj-bulle p:last-child { margin-bottom: 0; }
-  /* Le titre porte le nom du métier et un filet : sans lui, on ouvrait une
-     bulle sans savoir de quoi elle parlait. */
+  /* Le titre porte le nom du métier, un filet, et la croix de fermeture :
+     sans le titre, on ouvrait une bulle sans savoir de quoi elle parlait.
+
+     `sticky` : la bulle défile quand le texte dépasse (74vh sur téléphone),
+     et une croix qui s’en va au premier défilement ne ferme rien. Les marges
+     négatives la font saigner jusqu’aux bords du rembourrage, sinon le texte
+     défilerait dans la gouttière à côté d’elle. */
   .jj-bulle .jj-bulle-titre {
-    margin: 0 0 0.55rem;
-    padding-bottom: 0.4rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: -0.75rem -0.85rem 0.55rem;
+    padding: 0.7rem 0.85rem 0.4rem;
     border-bottom: 1px solid var(--line);
+    background: var(--paper-raised);
     font-size: 0.775rem;
     font-weight: 700;
     line-height: 1.3;
     color: var(--ink);
+  }
+  /* La croix. 1,75rem de cible : un doigt qui la rate touche le texte
+     derrière et ne ferme rien — c’est le défaut qu’on vient corriger. */
+  .jj-bulle .jj-bulle-fermer {
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: -0.3rem -0.35rem 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--ink-soft);
+    font: inherit;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .jj-bulle .jj-bulle-fermer:hover {
+    background: var(--accent-doux);
+    color: var(--ink);
+  }
+  .jj-bulle .jj-bulle-fermer:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
   }
   /* « Ne pas confondre » : un encart teinté plutôt qu’un simple filet. Il se
      distingue de l’explication au premier coup d’œil. */
@@ -750,6 +802,106 @@
   }
   /* Visible pour les lecteurs d'écran, invisible à l'œil. « display: none »
      ne conviendrait pas : il retire aussi le texte de l'arbre d'accessibilité. */
+  /* Le pied qui nomme les quinze familles. Il est VISIBLE : un lien dans un
+     bloc `hidden` est exploré, mais il n’aide pas le lecteur qui arrive de
+     Google et cherche où aller ensuite — et c’est lui qui compte. */
+  footer.site .familles-liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.85rem;
+    align-items: baseline;
+    margin: 0.9rem 0 0.2rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+  }
+  footer.site .familles-liens-titre {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  footer.site .familles-liens a { white-space: nowrap; }
+  /* La famille de la page courante : nommée, pas cliquable. */
+  footer.site .familles-liens .courant {
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* LE TEXTE DE LA FAMILLE, en clair et haut dans la page — n’existe que
+     sur les quinze pages /familles/. Sur l’accueil il reste dans une bulle,
+     où la place manque ; ici il EST la page. Un visiteur venu de Google sur
+     « stage M&A » doit lire ce que fait le métier avant la liste d’offres,
+     et c’est le seul contenu original du site. */
+  .famille-intro {
+    margin: 0 0 1.1rem;
+    padding: 0.9rem 1rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-raised);
+  }
+  .famille-intro h2 {
+    margin: 0 0 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .famille-intro p {
+    margin: 0;
+    max-width: 68ch;
+    font-size: 0.83rem;
+    line-height: 1.62;
+    color: var(--ink);
+  }
+  .famille-intro .famille-distinction {
+    margin-top: 0.7rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 6px;
+    background: var(--accent-doux);
+    color: var(--ink-soft);
+    font-size: 0.79rem;
+    line-height: 1.5;
+  }
+  /* LE REPLI SUR TÉLÉPHONE. Le §32 avait mesuré et refusé le texte entier
+     sous le h1 le 04/09/2026 : il poussait la première offre à y = 834 sur
+     812. Remesuré le 13/09 sur « Financements & Coverage » : 70 % de
+     l’écran, première offre à y = 1098. Une page d’offres où l’on ne voit
+     aucune offre.
+
+     Le texte reste donc VISIBLE — ses cinq premières lignes — et se déplie
+     sur place. Le texte entier est dans le HTML dans les deux états, et la
+     classe `replie` est posée PAR LE JAVASCRIPT : sans lui, on retombe sur
+     le texte entier, jamais sur un texte tronqué qu’on ne peut plus lire. */
+  .famille-intro.replie .famille-texte {
+    display: -webkit-box;
+    /* TROIS, mesuré. Page « Financements & Coverage », 375 x 812, position
+       de la première offre : sans intro 635, à 2 lignes 804, à 3 lignes 826,
+       à 5 lignes 869, texte entier 1098. Le plancher de 635 est la structure
+       de la page — en-tête, onglets, pépites, barre de filtres — pas ce
+       texte. Trois lignes montrent la phrase de définition. */
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .famille-intro.replie .famille-distinction { display: none; }
+  .famille-intro-plus {
+    margin-top: 0.6rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent-fort);
+    font: inherit;
+    font-size: 0.79rem;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .famille-h2-offres {
+    margin: 0 0 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
   .sr-only {
     position: absolute;
     width: 1px; height: 1px;
@@ -1266,7 +1418,7 @@
       <span>Filtres</span>
       <button type="button" class="tiroir-fermer" id="tiroir-fermer" aria-label="Fermer les filtres">✕</button>
     </div>
-    <h2>Recherche</h2>
+    <h3>Recherche</h3>
     <input type="search" id="q" placeholder="Poste, entreprise…" aria-label="Rechercher un poste ou une entreprise">
 
     <label class="new-only" for="new-only">
@@ -1274,23 +1426,23 @@
       <span class="count" id="new-count"></span>
     </label>
 
-    <h2>Famille métier</h2>
+    <h3>Famille métier</h3>
     <fieldset id="familles-fieldset"></fieldset>
 
-    <h2>Thématique</h2>
+    <h3>Thématique</h3>
     <fieldset id="tags-fieldset"></fieldset>
 
-    <h2>Type de structure</h2>
+    <h3>Type de structure</h3>
     <select id="structure-filter" aria-label="Filtrer par type de structure">
       <option value="">Toutes structures</option>
     </select>
 
-    <h2>Lieu</h2>
+    <h3>Lieu</h3>
     <select id="lieu-filter" aria-label="Filtrer par lieu">
       <option value="">Toute la France</option>
     </select>
 
-    <h2>Entreprise</h2>
+    <h3>Entreprise</h3>
     <select id="emp-filter" aria-label="Filtrer par entreprise">
       <option value="">Toutes les maisons</option>
     </select>
@@ -1303,7 +1455,7 @@
 
   <section aria-live="polite">
     <div class="results-head">
-      <h1 style="font-size:1.1rem; margin:0;">Conseil &amp; Transformation <button type="button" class="jj-aide" aria-expanded="false" aria-controls="aide-conseil-et-transformation" aria-label="En quoi consiste le métier : Conseil &amp; Transformation ?">?</button></h1><div class="jj-bulle" id="aide-conseil-et-transformation" hidden><p class="jj-bulle-titre">Conseil &amp; Transformation</p><p>Ces postes consistent à améliorer la façon dont une banque, un assureur ou une direction financière travaille : raccourcir les délais de clôture, mettre en œuvre une nouvelle réglementation, refondre un processus de reporting. On y est consultant, en cabinet ou à l'intérieur d'une maison, et on passe d'un sujet à l'autre au rythme des missions. C'est un bon poste pour ceux qui aiment comprendre les organisations autant que les chiffres, et il ouvre ensuite sur presque tous les autres métiers de cette liste parce qu'on les aura tous croisés.</p><p class="jj-bulle-distinction">Ce site ne retient que le conseil qui porte sur la finance elle-même. Le conseil en systèmes d'information, en stratégie générale ou en organisation n'y figure pas, même chez les mêmes employeurs.</p></div>
+      <h1 style="font-size:1.1rem; margin:0;">Conseil &amp; Transformation</h1>
       <div class="results-tools">
         <label class="sort-label" for="sort">Trier&nbsp;:
           <select id="sort" aria-label="Trier les offres">
@@ -1315,7 +1467,7 @@
         <span class="results-count" id="results-count"></span>
       </div>
     </div>
-    <h2 class="sr-only">Résultats</h2>
+    <section class="famille-intro"><h2>Conseil &amp; Transformation&nbsp;: en quoi consiste le métier&nbsp;?</h2><p class="famille-texte">Ces postes consistent à améliorer la façon dont une banque, un assureur ou une direction financière travaille : raccourcir les délais de clôture, mettre en œuvre une nouvelle réglementation, refondre un processus de reporting. On y est consultant, en cabinet ou à l'intérieur d'une maison, et on passe d'un sujet à l'autre au rythme des missions. C'est un bon poste pour ceux qui aiment comprendre les organisations autant que les chiffres, et il ouvre ensuite sur presque tous les autres métiers de cette liste parce qu'on les aura tous croisés.</p><p class="famille-distinction">Ce site ne retient que le conseil qui porte sur la finance elle-même. Le conseil en systèmes d'information, en stratégie générale ou en organisation n'y figure pas, même chez les mêmes employeurs.</p></section><h2 class="famille-h2-offres">Offres en Conseil &amp; Transformation&nbsp;: stage, alternance, VIE, CDI et CDD</h2>
     <div class="cards" id="cards"><!--JJ:OFFRES:DEBUT-->
 <a class="card" href="https://jobs.smartrecruiters.com/Sia/744000146191819" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Final Year Consultant in Financial Transformation</h3><div class="emp">Sia Partners</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Cabinet de conseil &amp; stratégie">Cabinet de conseil &amp; stratégie</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 2 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <div class="card card-groupe"><span class="contrat cdi-cdd cdi">CDI</span><h3>Financial Transformation Consultant</h3><div class="emp">Sia Partners</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Cabinet de conseil &amp; stratégie">Cabinet de conseil &amp; stratégie</span><span class="tag-loc">2 villes</span></div><div class="villes"><a class="ville" href="https://jobs.smartrecruiters.com/Sia/744000146175099" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd">Lyon</a><a class="ville" href="https://jobs.smartrecruiters.com/Sia/744000146190029" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd">Paris</a></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 2 semaines</div><div class="badges"></div></div></div>
@@ -1331,8 +1483,8 @@
 <a class="card" href="https://jobs.smartrecruiters.com/Talan/744000127834654" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Talan - Consultant de Fin d'études - Banque</h3><div class="emp">Talan</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Cabinet de conseil &amp; stratégie">Cabinet de conseil &amp; stratégie</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 4 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://jobs.smartrecruiters.com/Talan/744000127835069" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Talan – Consultant de Fin d'études – Assurance &amp; Santé</h3><div class="emp">Talan</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Cabinet de conseil &amp; stratégie">Cabinet de conseil &amp; stratégie</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 4 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://cc.wd3.myworkdayjobs.com/en-US/ChanelCareers/job/Paris/STAGE---Assistant-Program-Manager---Transformation-Finance---Operations-Europe---Corporate--H-F-X-_JOBREQ00116456" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Assistant Program Manager - Transformation Finance &amp; Operations Europe - Corporate</h3><div class="emp">Chanel</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://pernodricard.wd3.myworkdayjobs.com/en-US/pernod-ricard/job/Paris/Finance-Business-Analyst-Internship--July-2026_JR-054900" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Finance Business Analyst</h3><div class="emp">Pernod Ricard</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 5 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage---Consultant-Transformation-et-Capital-Humain--F-H----Conseil-Organisation--RH---Digital_R-7652" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Deloitte Capital Humain Conseil en organisation, conduite du changement, stratégie sociale et digital RH</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 2 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://pernodricard.wd3.myworkdayjobs.com/en-US/pernod-ricard/job/Paris/Finance-Business-Analyst-Internship--July-2026_JR-054900" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Finance Business Analyst</h3><div class="emp">Pernod Ricard</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 6 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage---Consultant-Transformation-et-Capital-Humain--F-H----Conseil-Organisation--RH---Digital_R-7652" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Deloitte Capital Humain Conseil en organisation, conduite du changement, stratégie sociale et digital RH</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 3 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stage-Debt---Capital-Advisory-F-H_R-9220" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Debt &amp; Capital Advisory</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Auditeur-junior-analyste---Financial-Services-Industry-Assurance-Advisory---F-H_R-9032" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant junior - Financial Services Industry Assurance Advisory</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 3 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Marseille/Consultant-en-transformation-SI-Finance-F-H_R-8607-1" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant en transformation SI/Finance</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Marseille</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
@@ -1342,8 +1494,8 @@
 <a class="card" href="https://ag.wd3.myworkdayjobs.com/en-US/Airbus/job/Marseille-Area/Finance-Transformation-Specialist---Reporting---Planning--f-m-_JR10411788-1" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Finance Transformation Specialist - Reporting &amp; Planning</h3><div class="emp">Airbus</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Marseille</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Lille/Consultant-en-Transformation-de-la-fonction-Finance---Lille---F-H_747445WD" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant en Transformation de la fonction Finance</h3><div class="emp">PwC</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Lille</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Stage-Consultant-en-oprations-financires---F-H_704070WD-1" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Consultant en opérations financières</h3><div class="emp">PwC</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Neuilly-sur-Seine</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 4 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://recrutement.bpce.fr/job/stage-6-mois-expert-conseil" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Expert conseil</h3><div class="emp">Caisse d'Epargne Loire Centre</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Banque de détail">Banque de détail</span><span class="tag-loc">Tours</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://recrutement.bpce.fr/job/consultant-en-organisation-et-transformation-f-h" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant en Organisation et Transformation</h3><div class="emp">Groupe BPCE</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Banque de financement &amp; d'investissement">Banque de financement &amp; d'investissement</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 5 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://recrutement.bpce.fr/job/stage-6-mois-expert-conseil" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Expert conseil</h3><div class="emp">Caisse d'Epargne Loire Centre</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Banque de détail">Banque de détail</span><span class="tag-loc">Tours</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5298" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Group Reporting &amp; URD Project Management</h3><div class="emp">Scor</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://careers.axa.com/jobs/35203?lang=en-us" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="alternance"><span class="contrat alternance">Alternance</span><h3>Consultant Transformation</h3><div class="emp">AXA</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Nanterre</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://careers.axa.com/jobs/23470?lang=en-us" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Life &amp; Health Claims Performance &amp; Transformation - August</h3><div class="emp">GIE AXA</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 3 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
@@ -1358,8 +1510,8 @@
 <a class="card" href="https://group.bnpparibas/emploi-carriere/offre-emploi/consultant-immobilier-d-entreprise-specialise-bureau-h-f-2" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant Immobilier d’Entreprise Spécialisé Bureau</h3><div class="emp">BNP Paribas</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Banque de financement &amp; d'investissement">Banque de financement &amp; d'investissement</span><span class="tag-loc">Aubervilliers</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 5 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://group.bnpparibas/emploi-carriere/offre-emploi/consultant-immobilier-d-entreprise-specialise-bureaux-h-f-2" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Consultant Immobilier d’Entreprise spécialisé Bureaux</h3><div class="emp">BNP Paribas</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Banque de financement &amp; d'investissement">Banque de financement &amp; d'investissement</span><span class="tag-loc">Nice</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://groupecreditagricole.jobs/fr/nos-offres-emploi/579-170470-126-stagiaire--transformation-digitale-et-collaboration-microsoft-365-hf-reference--2026-114522--/" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Transformation Digitale &amp; Collaboration Microsoft 365</h3><div class="emp">Crédit Agricole Payment Services</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Fintech &amp; services financiers spécialisés">Fintech &amp; services financiers spécialisés</span><span class="tag-loc">Guyancourt</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://emea3.recruitmentplatform.com/apply-app/pages/application-form?jobId=PYZFK026203F3VBQB798N7VG6-1093487&amp;langCode=fr_FR" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Assistant Système d'informations Finance</h3><div class="emp">Guerlain</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 5 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://eyglobal.yello.co/jobs/1ZFCL0pY_LSe3O1QCgSRLw?job_board_id=c1riT--B2O-KySgYWsZO1Q&amp;locale=fr" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant Débutant en lutte contre la criminalité financière</h3><div class="emp">EY</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date inconnue">Toujours en ligne chez l'employeur · date de publication inconnue</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://emea3.recruitmentplatform.com/apply-app/pages/application-form?jobId=PYZFK026203F3VBQB798N7VG6-1093487&amp;langCode=fr_FR" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Assistant Système d'informations Finance</h3><div class="emp">Guerlain</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Entreprise (direction financière)">Entreprise (direction financière)</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://eyglobal.yello.co/jobs/1ZFCL0pY_LSe3O1QCgSRLw?job_board_id=c1riT--B2O-KySgYWsZO1Q&amp;locale=fr" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Conseil &amp; Transformation" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant Débutant en lutte contre la criminalité financière</h3><div class="emp">EY</div><div class="meta"><span class="tag-famille">Conseil &amp; Transformation</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 2 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <!--JJ:OFFRES:FIN--></div>
     <button id="load-more" type="button" hidden>Charger plus d'offres</button>
   </section>
@@ -1372,6 +1524,41 @@
   <br>
   Pour être prévenu des nouvelles offres sans créer de compte ni donner votre adresse :
   <a href="/offres.xml">flux RSS des 100 dernières offres</a>.
+  <!-- LES QUINZE PAGES DE FAMILLE, en liens.
+
+       Mesuré le 13/09/2026 : l’accueil n’en portait AUCUN. Elles
+       n’existaient que dans le sitemap — orphelines, donc peu explorées et
+       sans aucune autorité interne. Un site dont la page d’accueil ne pointe
+       pas vers ses pages de contenu n’a, de fait, pas de pages de contenu.
+
+       Les quinze pages de famille sont construites À PARTIR de ce fichier :
+       elles héritent donc ce bloc, et chacune remplace sa propre entrée par
+       un <span> — elle porte alors les quatorze autres.
+
+       Les adresses sont ABSOLUES : le même bloc sert à la racine et un cran
+       plus bas dans /familles/. Et la liste est CALCULÉE depuis
+       familles-textes.js : une famille sans texte n’a pas de page, et son
+       lien serait un 404. Le contrôle d’avant-passage le vérifie. -->
+  <nav class="familles-liens" aria-label="Les métiers de la finance junior">
+    <span class="familles-liens-titre">Les métiers&nbsp;:</span>
+<!--JJ:FAMILLES-LIENS:DEBUT-->
+    <a href="/familles/fusions-et-acquisitions.html">Fusions &amp; Acquisitions</a>
+    <a href="/familles/marches-financiers.html">Marchés financiers</a>
+    <a href="/familles/capital-investissement.html">Capital-investissement</a>
+    <a href="/familles/gestion-d-actifs.html">Gestion d'actifs</a>
+    <a href="/familles/banque-privee-et-patrimoine.html">Banque privée &amp; Patrimoine</a>
+    <a href="/familles/comptabilite-et-consolidation.html">Comptabilité &amp; Consolidation</a>
+    <a href="/familles/controle-de-gestion-et-tresorerie.html">Contrôle de gestion &amp; Trésorerie</a>
+    <a href="/familles/audit-et-controle-interne.html">Audit &amp; Contrôle interne</a>
+    <a href="/familles/risques-et-conformite.html">Risques &amp; Conformité</a>
+    <span class="courant" aria-current="page">Conseil &amp; Transformation</span>
+    <a href="/familles/operations-et-middle-office.html">Opérations &amp; Middle-office</a>
+    <a href="/familles/data-et-quant.html">Data &amp; Quant</a>
+    <a href="/familles/actuariat-et-assurance-technique.html">Actuariat &amp; Assurance technique</a>
+    <a href="/familles/financements-et-coverage.html">Financements &amp; Coverage</a>
+    <a href="/familles/autres-metiers-de-la-finance.html">Autres métiers de la finance</a>
+<!--JJ:FAMILLES-LIENS:FIN-->
+  </nav>
   <nav class="liens-legaux">
     <a href="/mentions-legales.html">Mentions légales</a>
     <a href="/confidentialite.html">Politique de confidentialité</a>
@@ -1692,6 +1879,14 @@
     document.addEventListener('click', function (e) {
       var cible = e.target;
       if (!cible || !cible.closest) return;
+      // La croix, testée AVANT tout le reste : un clic dans la bulle ne
+      // ferme rien par ailleurs — c’est là qu’on sélectionne le texte — et
+      // la croix vit dans la bulle. On rend le focus au « ? » qui a ouvert.
+      if (cible.closest('.jj-bulle-fermer')) {
+        e.preventDefault();
+        fermer(true);
+        return;
+      }
       var bouton = cible.closest('.jj-aide');
       if (bouton) {
         e.preventDefault();
@@ -1708,6 +1903,22 @@
         // le DOM vivant qui change, apres interaction — donc Google lit
         // toujours le texte a sa place.
         if (bulle.parentNode !== document.body) document.body.appendChild(bulle);
+        // La croix est INJECTÉE, pas écrite dans le HTML : ce n’est pas du
+        // contenu, Google n’a rien à en lire, et deux générateurs écrivent
+        // ces bulles — cette colonne en JavaScript, les quinze pages de
+        // famille en dur. Une seule copie du bouton, et les pages déjà
+        // publiées l’obtiennent sans être régénérées.
+        if (!bulle.querySelector('.jj-bulle-fermer')) {
+          var titre = bulle.querySelector('.jj-bulle-titre');
+          if (titre) {
+            var croix = document.createElement('button');
+            croix.type = 'button';
+            croix.className = 'jj-bulle-fermer';
+            croix.setAttribute('aria-label', 'Fermer');
+            croix.textContent = '\u00D7';
+            titre.appendChild(croix);
+          }
+        }
         bulle.hidden = false;
         bouton.setAttribute('aria-expanded', 'true');
         ouverte = { bouton: bouton, bulle: bulle };
@@ -2673,10 +2884,33 @@
   // Le catalogue arrive par un script differe : il s'execute apres l'analyse
   // du document mais AVANT DOMContentLoaded. Demarrer ici, et non a l'analyse,
   // est ce qui permet de ne plus bloquer l'analyseur.
+  // Le texte de la famille, sur téléphone. Voir le style plus haut et le
+  // §32 de DECISIONS.md : entier, il pousse la première offre hors de
+  // l’écran. Replié, il en montre assez pour dire de quel métier il s’agit.
+  //
+  // N’existe que sur les quinze pages /familles/ : sur l’accueil il n’y a
+  // pas de `.famille-intro`, et la fonction ne fait rien.
+  function replierIntro() {
+    var section = document.querySelector('.famille-intro');
+    if (!section || window.innerWidth >= 700) return;
+    if (section.querySelector('.famille-intro-plus')) return;
+    section.classList.add('replie');
+    var bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'famille-intro-plus';
+    bouton.textContent = 'Lire la suite';
+    bouton.addEventListener('click', function () {
+      section.classList.remove('replie');
+      bouton.parentNode.removeChild(bouton);
+    });
+    section.appendChild(bouton);
+  }
+
   function demarrer() {
     OFFRES = Array.isArray(window.__OFFRES__) ? window.__OFFRES__ : [];
 
     brancherAide();
+    replierIntro();
     buildFamilleFieldset();
     buildTagsFieldset();
     buildStructureSelect();

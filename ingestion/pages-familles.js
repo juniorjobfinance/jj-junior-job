@@ -27,6 +27,9 @@ const SITE = 'https://juniorjobfinance.com';
 const DOSSIER = 'familles';
 const VOLETS = ['stage', 'alternance', 'vie', 'cdi-cdd'];
 const LIBELLE = { stage: 'Stage', alternance: 'Alternance', vie: 'VIE', 'cdi-cdd': 'CDI · CDD' };
+// Les memes, mais DANS UNE PHRASE : « CDI · CDD » avec un point median ne
+// se lit pas dans un titre, et « vie » en minuscules n est pas le sigle.
+const LIBELLE_H2 = { stage: 'stage', alternance: 'alternance', vie: 'VIE', 'cdi-cdd': 'CDI et CDD' };
 
 function slug(s) {
   return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -54,6 +57,11 @@ function ecrirePagesFamilles(offres, suffixe = '') {
   }
 
   const familles = [...new Set(offres.map((o) => o.famille).filter(Boolean))];
+  // Les familles qui auront REELLEMENT une page. Une famille sans intro est
+  // sautee plus bas : un lien vers elle serait un 404, et le maillage qu on
+  // vient de poser deviendrait un piege a explorateur.
+  const avecPage = familles.filter(
+    (f) => textes[f] && String(textes[f].intro || '').trim());
   const dossier = path.join(racine, DOSSIER + suffixe);
   const ecrites = [], sautees = [], inconnues = [];
 
@@ -106,31 +114,103 @@ function ecrirePagesFamilles(offres, suffixe = '') {
         boutons + '\n  <span class="total" id="total-count" aria-hidden="true"></span>\n</nav>');
 
     // --- Le titre et le texte -------------------------------------------
-    // Un depliant, pas un pave : une ligne en tete de page, le texte au clic.
-    // Un « ? » à côté du h1, et la bulle juste après — le même composant que
-    // la colonne de l'accueil, `.jj-aide` + `.jj-bulle`, branché une fois
-    // pour toutes par brancherAide().
     //
-    // La bulle est écrite EN DUR ici, jamais injectée par JavaScript : c'est
-    // la raison d'être de ces quinze pages — Google doit lire ce texte dans
-    // le HTML servi, bulle fermée comprise. `hidden` l'y laisse, et
-    // `position: fixed` la garde hors flux dans les deux états, si bien que
-    // l'ouvrir ne pousse jamais les offres vers le bas.
-    const idBulle = 'aide-' + slug(famille);
-    const bouton =
-      ' <button type="button" class="jj-aide" aria-expanded="false"' +
-      ' aria-controls="' + idBulle + '"' +
-      ' aria-label="En quoi consiste le métier : ' + esc(famille) + ' ?">?</button>';
-    const bulle =
-      '<div class="jj-bulle" id="' + idBulle + '" hidden>' +
-        '<p class="jj-bulle-titre">' + esc(famille) + '</p>' +
-        '<p>' + esc(t.intro) + '</p>' +
+    // LE TEXTE EST LA PAGE. Il vivait dans une bulle `hidden`, ouverte au
+    // clic sur un « ? ». Sur l'accueil c'est la bonne forme — la place y
+    // manque, et quinze paragraphes dans la colonne de gauche la rendraient
+    // illisible. Ici, non : un visiteur venu de Google sur « stage M&A »
+    // arrivait sur une liste d'intitulés, sans un mot d'explication. Le seul
+    // contenu original du site était caché sur les quinze pages dont il est
+    // la raison d'être.
+    //
+    // Il est donc EN CLAIR et HAUT dans la page, avant la liste d'offres.
+    //
+    // Et le « ? » disparaît d'ici — il mettait son point d'interrogation
+    // DANS le h1 : la page M&A annonçait « Fusions & Acquisitions ? » à
+    // Google, au lieu de la requête visée.
+    const h1 = esc(t.h1);
+
+    // Deux titres de CONTENU, là où la page n'en avait aucun : ses <h2>
+    // étaient « Recherche », « Lieu », « Résultats » — des étiquettes
+    // d'interface, qui racontaient un formulaire à Google. Ils se calculent
+    // ici faute de mieux ; `h2Metier` et `h2Offres` dans familles-textes.js
+    // les remplacent dès qu'ils sont écrits à la main.
+    const h2Metier = String(t.h2Metier || '').trim()
+      ? esc(t.h2Metier.trim())
+      : h1 + '&nbsp;: en quoi consiste le métier&nbsp;?';
+    // Le second ne nomme QUE les contrats réellement présents : annoncer un
+    // VIE dans le titre quand la famille n'en a aucun est un titre qui ment.
+    const h2Offres = String(t.h2Offres || '').trim()
+      ? esc(t.h2Offres.trim())
+      : 'Offres en ' + h1 + '&nbsp;: ' + presents.map((v) => LIBELLE_H2[v]).join(', ');
+
+    // « À ne pas confondre avec Financements & Coverage » : l'ancre est déjà
+    // écrite, il ne manquait que le lien. C'est le maillage le plus naturel
+    // qui existe — dix liens sur les quinze pages, mesurés le 13/09/2026.
+    //
+    // PAR ÉGALITÉ DE CHAÎNE, sur le libellé exact et après échappement.
+    // Jamais par ressemblance : « Contrôle » désigne deux familles,
+    // « finance » en désigne une troisième, et un liage approximatif aurait
+    // envoyé le lecteur sur la mauvaise page sans que rien ne le signale.
+    // Du plus long au plus court, au cas où un libellé en contiendrait un
+    // autre — ce n'est pas le cas aujourd'hui, et ça ne se surveille pas.
+    const lier = (texte) => {
+      let out = esc(texte);
+      for (const autre of avecPage.slice().sort((a, b) => b.length - a.length)) {
+        if (autre === famille) continue;
+        const libelle = esc(autre);
+        if (!out.includes(libelle)) continue;
+        out = out.split(libelle).join(
+          '<a href="/' + DOSSIER + '/' + slug(autre) + '.html">' + libelle + '</a>');
+      }
+      return out;
+    };
+
+    const intro =
+      '<section class="famille-intro">' +
+        '<h2>' + h2Metier + '</h2>' +
+        '<p class="famille-texte">' + esc(t.intro) + '</p>' +
         (String(t.distinction || '').trim()
-          ? '<p class="jj-bulle-distinction">' + esc(t.distinction) + '</p>'
+          ? '<p class="famille-distinction">' + lier(t.distinction) + '</p>'
           : '') +
-      '</div>';
-    page = page.replace(/<h1 style="font-size:1\.1rem; margin:0;">Offres<\/h1>/,
-      () => '<h1 style="font-size:1.1rem; margin:0;">' + esc(t.h1) + bouton + '</h1>' + bulle);
+      '</section>';
+
+    page = page
+      .replace(/<h1 style="font-size:1\.1rem; margin:0;">Offres<\/h1>/,
+        () => '<h1 style="font-size:1.1rem; margin:0;">' + h1 + '</h1>')
+      // Le texte se glisse à la place du titre muet « Résultats », donc
+      // AVANT la liste des cartes et juste après le h1.
+      .replace(/<h2 class="sr-only">Résultats<\/h2>/,
+        () => intro + '<h2 class="famille-h2-offres">' + h2Offres + '</h2>');
+
+    // --- Le maillage : les quatorze autres en pied -----------------------
+    //
+    // Le bloc de liens vient d'index.html : la page en hérite déjà. Ce qui
+    // manque est qu'elle ne se lie pas à elle-même — une page qui se cite en
+    // lien gaspille un lien, et « la page courante » doit se voir.
+    const monLien = '<a href="/' + DOSSIER + '/' + slug(famille) + '.html">' +
+      esc(famille) + '</a>';
+    page = page.replace(
+      /(<!--JJ:FAMILLES-LIENS:DEBUT-->)([\s\S]*?)(<!--JJ:FAMILLES-LIENS:FIN-->)/,
+      (_, a, bloc, b) => a + bloc.split(monLien).join(
+        '<span class="courant" aria-current="page">' + esc(famille) + '</span>') + b);
+
+    // --- Le fil d'Ariane -------------------------------------------------
+    //
+    // index.html porte un WebSite, qui serait faux sur une sous-page : on
+    // remplace le bloc borné. Pas de JobPosting ici non plus — voir la
+    // raison écrite dans index.html, à la borne.
+    const fil = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE + '/' },
+        { '@type': 'ListItem', position: 2, name: t.h1, item: url },
+      ],
+    });
+    page = page.replace(
+      /(<!--JJ:JSONLD:DEBUT-->)[\s\S]*?(<!--JJ:JSONLD:FIN-->)/,
+      (_, a, b) => a + '<script type="application/ld+json">' + fil + '</script>' + b);
 
     // --- Le contexte de la page -----------------------------------------
     page = page

@@ -1669,3 +1669,199 @@ tient parce que `firstSeenAt` est mémorisé ailleurs que sur l’URL.
 quelconques. Il existe parce qu’un brassage qui surprend appelle une
 explication, et qu’une explication n’est pas une mesure — « c’est la
 rentrée » était plausible et à moitié faux.
+
+---
+
+## 42. La structure n'est pas le métier — « Coordinateur Relation Client » chez un courtier
+
+**Tranché le 13/09/2026 par Victor.**
+
+« Coordinateur Relation Client - Courtage en assurance grands risques »
+(Marsh McLennan) était rangée en **Actuariat & Assurance technique**. Elle y
+entrait par le DÉCOR : « assurance » et « risques » sont dans l'intitulé, le
+courtage est dans nos structures depuis le §36.
+
+Le métier nommé, lui, est la relation client — du service et du commercial.
+Ça ne produit ni n'analyse d'information financière : **hors périmètre au sens
+du §30**, comme le chargé de clientèle en agence qu'on écarte déjà.
+
+> **La structure ne dit rien du métier.** Qu'un employeur soit courtier,
+> banque ou fonds décide de ce qu'on ACCEPTE d'y trouver, jamais de ce qu'un
+> intitulé donné y désigne. C'est le test du §30 sous un autre angle : qui est
+> le sujet, qui est le décor.
+
+### L'exemption est dans le motif, et la mesure a dit pourquoi
+
+Un motif nu sur « relation client » attrape **« Investor Relations Client
+Administration »** et **« Investor Relations Client Solution »** chez Ardian —
+les deux offres rangées en middle-office et en gestion d'actifs trois jours
+plus tôt — ainsi que « Chargé de relations clients - Middle Office » à la
+Caisse d'Épargne. Le garde-fou « le motif *retail* cède à partir de 9 » ne les
+sauve pas : elles plafonnent à 8.
+
+Le motif épargne donc tout intitulé qui nomme un ancrage financier —
+*investor*, *investisseur*, *middle office*, *back office*, *fund*, *fonds*,
+*banque privée*, *private bank*, *wealth*, *patrimoine*.
+
+**Mesuré avant de poser** : contre-test 16/16 sur `classify()`, et sur la
+récolte entière **3 391 → 3 390 offres retenues**. La seule offre perdue est
+celle que Victor avait nommée.
+
+---
+
+## 43. Un titre reconstruit depuis l'adresse cache autre chose qu'un défaut d'affichage
+
+**Tranché le 13/09/2026, sur une mesure qui cherchait autre chose.**
+
+Quatre maisons lisent leur liste en mode `depuisLien` : l'intitulé n'est pas
+lu, il est **reconstruit depuis le slug de l'URL**. D'où « Banking financing
+equity capital markets placement analyst paris » chez Citi et
+« Compliancerisk officer mwd schwerpunkt risk management » chez Rothschild.
+
+Le défaut paraissait cosmétique. Deux choses l'ont démenti.
+
+### 1. Le vrai intitulé était déjà dans le bloc découpé
+
+Le découpage prend tout ce qui va de `<a href="…">` à `</a>` : **le texte du
+lien y est déjà**, personne ne le lisait. Chez Citi il porte l'intitulé complet
+avec ses virgules et ses capitales, chez Covéa aussi. La correction ne coûte
+aucune requête supplémentaire.
+
+Chez KPMG, non : son ancre colle les facettes à l'intitulé (« … F/H Audit Audit
+financier et extra-financier Lyon »), et son slug est plus propre. **On ne lui
+pose pas `titreDuLien`** — une correction qui améliore trois maisons sur quatre
+s'arrête à la quatrième, elle ne s'y impose pas.
+
+### 2. Le filtre pays était INERTE, et c'est ça le vrai sujet
+
+```js
+const enFrance = cfg.lieuLibre ? … : o.pays ? … : cfg.depuisLien || /france/…
+```
+
+`cfg.depuisLien` valait **laissez-passer**. Lire sa liste par les liens
+n'apprend pourtant rien sur la géographie : la condition était vraie sans
+condition, pour les quatre maisons.
+
+Résultat mesuré : **25 des 49 cartes Rothschild sont en France**, et **quatre
+des six offres Rothschild publiées** étaient à Luxembourg, Francfort, Londres
+et Dubaï. La règle 1 du site, enfreinte en silence depuis que ce connecteur
+existe.
+
+Rothschild lit désormais **la carte, pas l'adresse** : un `<h3>` exact, le pays
+en premier détail, la ville en second (48 cartes sur 49 ont cette forme).
+Épreuve sur le connecteur réel : **30 → 16 offres, dont ZÉRO française parmi
+les quinze écartées.** Les trois autres maisons déclarent `paysImplicite`,
+qui est ce qu'elles sont vraiment — des portails français.
+
+> **La leçon, qui dépasse le cas :** un champ dégradé est un symptôme, pas un
+> défaut. Quand une valeur arrive abîmée, la question n'est pas « comment
+> l'embellir » mais **« par quelle porte est-elle entrée, et qu'est-ce que
+> cette porte ne vérifie pas ? »**. Ici l'adresse servait de titre ET de
+> preuve de nationalité ; elle ne pouvait être ni l'un ni l'autre.
+
+---
+
+## 44. Le référencement : ce qui manquait, et ce qu'on ne fera pas
+
+**Tranché le 13/09/2026 par Victor, après mesure.**
+
+L'impression de départ — « ces cartes ne permettent aucun référencement » —
+était fausse sur le diagnostic et juste sur le symptôme. Les cartes SONT dans
+le HTML servi : 982 sur l'accueil, 169 023 caractères de texte visible,
+`robots.txt` ouvert, sitemap, flux RSS.
+
+**Trois manques réels, mesurés :**
+
+### 1. Les quinze pages de famille étaient ORPHELINES
+
+```
+liens vers /familles/ depuis l'accueil   : 0
+liens entre pages de famille             : 0
+```
+
+Elles n'existaient que dans le sitemap. Un site dont la page d'accueil ne
+pointe pas vers ses pages de contenu n'a, de fait, pas de pages de contenu.
+Corrigé : un pied de page nomme les quinze familles, chaque page de famille
+porte les quatorze autres, et les familles citées dans « à ne pas confondre
+avec… » sont devenues des liens — **dix ancres, déjà écrites, auxquelles il ne
+manquait que le lien**.
+
+Le liage se fait **par égalité de chaîne sur le libellé exact**, jamais par
+ressemblance : « Contrôle » désigne deux familles, « finance » une troisième.
+
+### 2. Le seul contenu original du site était caché
+
+13 077 caractères d'explication écrits à la main, derrière `hidden` sur toutes
+les pages — **y compris les quinze dont ils sont la raison d'être**. Un
+visiteur arrivant de Google sur « stage M&A » voyait une liste d'intitulés et
+repartait. Voir le §32bis ci-dessous, qui dit ce que ça a coûté.
+
+### 3. Aucune donnée structurée — et pas de JobPosting
+
+Zéro JSON-LD sur seize pages. Posé : `WebSite` sur l'accueil,
+`BreadcrumbList` sur les quinze pages de famille.
+
+**`JobPosting` est écarté, et ce n'est pas un oubli.** Google exige que la page
+qui le porte affiche la **description complète du poste**. On n'en a pas, par
+construction : le lien mène chez l'employeur (règle 1). Baliser des cartes sans
+description est précisément ce qui vaut une action manuelle aux agrégateurs.
+**On n'y touche pas**, quelle que soit la tentation du carrousel « Google for
+Jobs ».
+
+### Ce qu'on NE fait PAS maintenant : les pages famille × volet
+
+Le catalogue pourrait porter ~120 pages avec au moins cinq offres chacune
+(36 croisements famille × volet, 21 zones, 11 structures, 55 employeurs).
+**Refusé le 13/09.** Cent vingt pages au même gabarit, avec une liste filtrée
+et aucun texte propre, sont exactement ce que Google a appris à déclasser. Les
+pages employeur et zone sont les pires du lot.
+
+Ce qu'on fera, plus tard et autrement : **les dix plus gros croisements
+famille × volet, chacun avec son paragraphe écrit à la main par Victor.** Pas
+généré, pas reformulé depuis la page de famille. Dix pages, pas cent vingt.
+
+### LA MESURE QUI DÉCIDERA — notée le 13/09/2026
+
+Trois semaines après ce passage, soit **autour du 4 octobre 2026**, regarder
+dans la Search Console si les impressions des quinze pages de famille ont
+bougé.
+
+- **Elles montent** → on écrit les dix croisements.
+- **Elles ne bougent pas** → le problème est ailleurs, et on aura économisé dix
+  pages écrites pour rien.
+
+---
+
+## 32bis. Le texte visible coûte ce que le §32 avait mesuré — et le §32 avait raison
+
+**Constaté le 13/09/2026, en appliquant le §44.**
+
+Le §32 avait refusé le texte visible sous le h1 le 04/09, sur un chiffre : sur
+375 × 812 la première offre tombait à **y = 834**. Remis visible comme le
+demandait le §44, le même texte donne pire :
+
+| état | première offre (375 × 812) | part de l'écran |
+|---|---:|---:|
+| sans aucune intro | **635** | — |
+| repliée à 2 lignes | 804 | 19 % |
+| **repliée à 3 lignes — retenu** | **826** | **21 %** |
+| repliée à 5 lignes | 869 | 27 % |
+| texte entier | **1 098** | 70 % |
+
+**Le plancher de 635 n'est pas le texte** : c'est la structure de la page —
+en-tête, onglets, bandeau des pépites, barre de filtres. Le texte entier
+coûtait 463 px de plus ; replié à trois lignes, il en coûte 191.
+
+**Retenu : le texte reste visible, replié à trois lignes, et se déplie sur
+place.** Trois lignes montrent la phrase de définition, qui est ce qu'un
+visiteur venu de Google a besoin de lire.
+
+> **La polarité du repli n'est pas négociable.** La classe `replie` est posée
+> PAR LE JAVASCRIPT, jamais par la feuille de style seule. Sans JavaScript, le
+> texte s'affiche ENTIER — on retombe sur le défaut du §32, jamais sur un texte
+> tronqué que plus rien ne peut déplier. Et dans les deux états il est dans le
+> HTML servi, ce qui reste la raison d'être de ces pages.
+
+Sur ordinateur (1280 × 800) le texte n'est pas replié : la première offre est
+à y = 807, soit au pli. C'est accepté, et c'est le levier qui reste si Victor
+veut la carte plus haut.

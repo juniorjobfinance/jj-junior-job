@@ -797,6 +797,53 @@ try {
   ko('zones', e.message);
 }
 
+console.log('\n--- Le maillage interne ---');
+// Les quinze pages de famille etaient ORPHELINES : mesure du 13/09/2026,
+// zero lien depuis l'accueil, elles n'existaient que dans le sitemap. Le
+// pied de page les nomme desormais toutes. Ce controle verifie que chacun
+// de ces liens mene a un fichier qui existe — une famille dont le texte se
+// vide perd sa page, et son lien deviendrait un 404 sans un mot.
+try {
+  const pages = ['index.html'];
+  const dossier = path.join(RACINE, 'familles');
+  if (fs.existsSync(dossier)) {
+    for (const f of fs.readdirSync(dossier)) pages.push('familles/' + f);
+  }
+  let morts = 0;
+  let sansBloc = [];
+  let total = 0;
+  for (const rel of pages) {
+    const html = lire(rel);
+    const m = html.match(/<!--JJ:FAMILLES-LIENS:DEBUT-->([\s\S]*?)<!--JJ:FAMILLES-LIENS:FIN-->/);
+    if (!m) { sansBloc.push(rel); continue; }
+    for (const l of m[1].matchAll(/href="\/familles\/([^"]+)"/g)) {
+      total++;
+      if (!fs.existsSync(path.join(dossier, l[1]))) { morts++; ko('maillage', rel + ' -> /familles/' + l[1] + ' n existe pas'); }
+    }
+  }
+  if (sansBloc.length) {
+    ko('maillage', sansBloc.length + ' page(s) sans bloc de liens de famille : ' + sansBloc.slice(0, 4).join(', '));
+  } else if (!morts) {
+    ok('maillage', total + ' lien(s) interne(s) sur ' + pages.length + ' page(s), tous resolus');
+  }
+  // Une page de famille ne doit pas se lier a elle-meme : elle porte les
+  // quatorze autres, et son entree devient un <span>. Un lien vers soi
+  // n'est pas une faute grave, mais c'est un lien gaspille et le signe que
+  // la substitution a rate.
+  let versSoi = 0;
+  for (const rel of pages) {
+    if (!rel.startsWith('familles/')) continue;
+    const html = lire(rel);
+    const m = html.match(/<!--JJ:FAMILLES-LIENS:DEBUT-->([\s\S]*?)<!--JJ:FAMILLES-LIENS:FIN-->/);
+    if (!m) continue;
+    if (m[1].includes('href="/' + rel + '"')) { versSoi++; }
+  }
+  if (versSoi) alerte('maillage', versSoi + ' page(s) de famille se lient a elles-memes : la substitution en <span> a rate');
+  else if (!sansBloc.length) ok('maillage', 'aucune page de famille ne se lie a elle-meme');
+} catch (e) {
+  ko('maillage', e.message);
+}
+
 console.log('\n--- Une URL, un employeur ---');
 // canonicalKey commence par slugEmp(offer.emp). Le nom de l’employeur fait
 // donc PARTIE DE LA CLE : deux offres identiques publiees sous deux noms

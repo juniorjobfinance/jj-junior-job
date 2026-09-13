@@ -9,6 +9,15 @@
 <meta name="description" content="Actuaires, tarification, provisionnement et réassurance : les offres juniors en compagnie d'assurance, mutuelle, cabinet et banque-assurance.">
 <link rel="preload" href="polices/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://juniorjobfinance.com/familles/actuariat-et-assurance-technique.html">
+<!-- Données structurées. BORNÉES : les pages de famille remplacent ce bloc
+     par leur BreadcrumbList — un WebSite sur une sous-page serait faux.
+
+     PAS de JobPosting, et ce n’est pas un oubli : Google exige que la page
+     qui le porte affiche la description complète du poste. On n’en a pas,
+     par construction — le lien mène chez l’employeur (règle 1). Baliser des
+     cartes sans description est précisément ce qui vaut une action manuelle
+     aux agrégateurs. -->
+<!--JJ:JSONLD:DEBUT--><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://juniorjobfinance.com/"},{"@type":"ListItem","position":2,"name":"Actuariat & Assurance technique","item":"https://juniorjobfinance.com/familles/actuariat-et-assurance-technique.html"}]}</script><!--JJ:JSONLD:FIN-->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Junior Job Finance">
 <meta property="og:title" content="Actuariat &amp; Assurance technique : stages, alternances et premiers postes">
@@ -537,14 +546,18 @@
     .tiroir-valider { display: block; }
     .tiroir-valider[hidden] { display: none; }
   }
-  aside.filters h2 {
+  /* Étiquettes de la colonne de filtres. <h3> et non <h2> : Google lit la
+     structure d’une page par ses titres, et « Recherche », « Lieu »,
+     « Entreprise » lui racontaient un formulaire. Ce sont des étiquettes
+     d’interface, elles ne concurrencent plus le titre du contenu. */
+  aside.filters h3 {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--ink-soft);
     margin: 1rem 0 0.5rem;
   }
-  aside.filters h2:first-child { margin-top: 0; }
+  aside.filters h3:first-child { margin-top: 0; }
   aside.filters input[type="search"] {
     width: 100%;
     padding: 0.5rem 0.6rem;
@@ -659,16 +672,55 @@
   }
   .jj-bulle p { margin: 0 0 0.6rem; }
   .jj-bulle p:last-child { margin-bottom: 0; }
-  /* Le titre porte le nom du métier et un filet : sans lui, on ouvrait une
-     bulle sans savoir de quoi elle parlait. */
+  /* Le titre porte le nom du métier, un filet, et la croix de fermeture :
+     sans le titre, on ouvrait une bulle sans savoir de quoi elle parlait.
+
+     `sticky` : la bulle défile quand le texte dépasse (74vh sur téléphone),
+     et une croix qui s’en va au premier défilement ne ferme rien. Les marges
+     négatives la font saigner jusqu’aux bords du rembourrage, sinon le texte
+     défilerait dans la gouttière à côté d’elle. */
   .jj-bulle .jj-bulle-titre {
-    margin: 0 0 0.55rem;
-    padding-bottom: 0.4rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: -0.75rem -0.85rem 0.55rem;
+    padding: 0.7rem 0.85rem 0.4rem;
     border-bottom: 1px solid var(--line);
+    background: var(--paper-raised);
     font-size: 0.775rem;
     font-weight: 700;
     line-height: 1.3;
     color: var(--ink);
+  }
+  /* La croix. 1,75rem de cible : un doigt qui la rate touche le texte
+     derrière et ne ferme rien — c’est le défaut qu’on vient corriger. */
+  .jj-bulle .jj-bulle-fermer {
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: -0.3rem -0.35rem 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--ink-soft);
+    font: inherit;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .jj-bulle .jj-bulle-fermer:hover {
+    background: var(--accent-doux);
+    color: var(--ink);
+  }
+  .jj-bulle .jj-bulle-fermer:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
   }
   /* « Ne pas confondre » : un encart teinté plutôt qu’un simple filet. Il se
      distingue de l’explication au premier coup d’œil. */
@@ -750,6 +802,106 @@
   }
   /* Visible pour les lecteurs d'écran, invisible à l'œil. « display: none »
      ne conviendrait pas : il retire aussi le texte de l'arbre d'accessibilité. */
+  /* Le pied qui nomme les quinze familles. Il est VISIBLE : un lien dans un
+     bloc `hidden` est exploré, mais il n’aide pas le lecteur qui arrive de
+     Google et cherche où aller ensuite — et c’est lui qui compte. */
+  footer.site .familles-liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.85rem;
+    align-items: baseline;
+    margin: 0.9rem 0 0.2rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+  }
+  footer.site .familles-liens-titre {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  footer.site .familles-liens a { white-space: nowrap; }
+  /* La famille de la page courante : nommée, pas cliquable. */
+  footer.site .familles-liens .courant {
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* LE TEXTE DE LA FAMILLE, en clair et haut dans la page — n’existe que
+     sur les quinze pages /familles/. Sur l’accueil il reste dans une bulle,
+     où la place manque ; ici il EST la page. Un visiteur venu de Google sur
+     « stage M&A » doit lire ce que fait le métier avant la liste d’offres,
+     et c’est le seul contenu original du site. */
+  .famille-intro {
+    margin: 0 0 1.1rem;
+    padding: 0.9rem 1rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-raised);
+  }
+  .famille-intro h2 {
+    margin: 0 0 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .famille-intro p {
+    margin: 0;
+    max-width: 68ch;
+    font-size: 0.83rem;
+    line-height: 1.62;
+    color: var(--ink);
+  }
+  .famille-intro .famille-distinction {
+    margin-top: 0.7rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 6px;
+    background: var(--accent-doux);
+    color: var(--ink-soft);
+    font-size: 0.79rem;
+    line-height: 1.5;
+  }
+  /* LE REPLI SUR TÉLÉPHONE. Le §32 avait mesuré et refusé le texte entier
+     sous le h1 le 04/09/2026 : il poussait la première offre à y = 834 sur
+     812. Remesuré le 13/09 sur « Financements & Coverage » : 70 % de
+     l’écran, première offre à y = 1098. Une page d’offres où l’on ne voit
+     aucune offre.
+
+     Le texte reste donc VISIBLE — ses cinq premières lignes — et se déplie
+     sur place. Le texte entier est dans le HTML dans les deux états, et la
+     classe `replie` est posée PAR LE JAVASCRIPT : sans lui, on retombe sur
+     le texte entier, jamais sur un texte tronqué qu’on ne peut plus lire. */
+  .famille-intro.replie .famille-texte {
+    display: -webkit-box;
+    /* TROIS, mesuré. Page « Financements & Coverage », 375 x 812, position
+       de la première offre : sans intro 635, à 2 lignes 804, à 3 lignes 826,
+       à 5 lignes 869, texte entier 1098. Le plancher de 635 est la structure
+       de la page — en-tête, onglets, pépites, barre de filtres — pas ce
+       texte. Trois lignes montrent la phrase de définition. */
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .famille-intro.replie .famille-distinction { display: none; }
+  .famille-intro-plus {
+    margin-top: 0.6rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent-fort);
+    font: inherit;
+    font-size: 0.79rem;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .famille-h2-offres {
+    margin: 0 0 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
   .sr-only {
     position: absolute;
     width: 1px; height: 1px;
@@ -1265,7 +1417,7 @@
       <span>Filtres</span>
       <button type="button" class="tiroir-fermer" id="tiroir-fermer" aria-label="Fermer les filtres">✕</button>
     </div>
-    <h2>Recherche</h2>
+    <h3>Recherche</h3>
     <input type="search" id="q" placeholder="Poste, entreprise…" aria-label="Rechercher un poste ou une entreprise">
 
     <label class="new-only" for="new-only">
@@ -1273,23 +1425,23 @@
       <span class="count" id="new-count"></span>
     </label>
 
-    <h2>Famille métier</h2>
+    <h3>Famille métier</h3>
     <fieldset id="familles-fieldset"></fieldset>
 
-    <h2>Thématique</h2>
+    <h3>Thématique</h3>
     <fieldset id="tags-fieldset"></fieldset>
 
-    <h2>Type de structure</h2>
+    <h3>Type de structure</h3>
     <select id="structure-filter" aria-label="Filtrer par type de structure">
       <option value="">Toutes structures</option>
     </select>
 
-    <h2>Lieu</h2>
+    <h3>Lieu</h3>
     <select id="lieu-filter" aria-label="Filtrer par lieu">
       <option value="">Toute la France</option>
     </select>
 
-    <h2>Entreprise</h2>
+    <h3>Entreprise</h3>
     <select id="emp-filter" aria-label="Filtrer par entreprise">
       <option value="">Toutes les maisons</option>
     </select>
@@ -1302,7 +1454,7 @@
 
   <section aria-live="polite">
     <div class="results-head">
-      <h1 style="font-size:1.1rem; margin:0;">Actuariat &amp; Assurance technique <button type="button" class="jj-aide" aria-expanded="false" aria-controls="aide-actuariat-et-assurance-technique" aria-label="En quoi consiste le métier : Actuariat &amp; Assurance technique ?">?</button></h1><div class="jj-bulle" id="aide-actuariat-et-assurance-technique" hidden><p class="jj-bulle-titre">Actuariat &amp; Assurance technique</p><p>L'actuaire met un prix sur l'incertitude. Il calcule combien doit coûter un contrat d'assurance pour couvrir un risque, et combien la compagnie doit mettre de côté pour tenir ses engagements dans dix ou trente ans. Autour de lui, la souscription décide quels risques accepter, la réassurance transfère une partie du portefeuille à un tiers, et le cadre Solvabilité II impose de tout démontrer par des modèles. C'est un métier peu connu des étudiants en finance générale, alors qu'il recrute beaucoup, paie bien et se trouve rarement en concurrence avec cent candidats par poste.</p><p class="jj-bulle-distinction">À ne pas confondre avec Risques &amp; Conformité : l'actuaire modélise le risque assuré, celui qu'on accepte volontairement contre une prime. Le risk manager mesure le risque financier qu'on subit.</p></div>
+      <h1 style="font-size:1.1rem; margin:0;">Actuariat &amp; Assurance technique</h1>
       <div class="results-tools">
         <label class="sort-label" for="sort">Trier&nbsp;:
           <select id="sort" aria-label="Trier les offres">
@@ -1314,21 +1466,20 @@
         <span class="results-count" id="results-count"></span>
       </div>
     </div>
-    <h2 class="sr-only">Résultats</h2>
+    <section class="famille-intro"><h2>Actuariat &amp; Assurance technique&nbsp;: en quoi consiste le métier&nbsp;?</h2><p class="famille-texte">L'actuaire met un prix sur l'incertitude. Il calcule combien doit coûter un contrat d'assurance pour couvrir un risque, et combien la compagnie doit mettre de côté pour tenir ses engagements dans dix ou trente ans. Autour de lui, la souscription décide quels risques accepter, la réassurance transfère une partie du portefeuille à un tiers, et le cadre Solvabilité II impose de tout démontrer par des modèles. C'est un métier peu connu des étudiants en finance générale, alors qu'il recrute beaucoup, paie bien et se trouve rarement en concurrence avec cent candidats par poste.</p><p class="famille-distinction">À ne pas confondre avec <a href="/familles/risques-et-conformite.html">Risques &amp; Conformité</a> : l'actuaire modélise le risque assuré, celui qu'on accepte volontairement contre une prime. Le risk manager mesure le risque financier qu'on subit.</p></section><h2 class="famille-h2-offres">Offres en Actuariat &amp; Assurance technique&nbsp;: stage, alternance, CDI et CDD</h2>
     <div class="cards" id="cards"><!--JJ:OFFRES:DEBUT-->
 <a class="card" href="https://jobs.smartrecruiters.com/Sia/744000127485419" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Final Year - Insurance</h3><div class="emp">Sia Partners</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Cabinet de conseil &amp; stratégie">Cabinet de conseil &amp; stratégie</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 4 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://jobs.smartrecruiters.com/MAZARS/744000146513469" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant Junior Assurance de personnes (Santé et Prévoyance)</h3><div class="emp">Forvis Mazars</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Levallois-Perret</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Consultant-Actuariat-F-H_R-9190" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant Actuariat</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 3 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fina.wd103.myworkdayjobs.com/en-US/DeloitteRecrute/job/Paris-La-Dfense/Stagiaire-en-Actuariat-F-H_R-8419" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Actuariat</h3><div class="emp">Deloitte</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">La Défense</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 4 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Wasquehal---Chateau-Blanc/Gestionnaire-Prvoyance-H-F_R_363792-1" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Gestionnaire Prévoyance</h3><div class="emp">Marsh McLennan</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Wasquehal</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 5 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://mmc.wd1.myworkdayjobs.com/en-US/MMC/job/Paris---Pyramides/Coordinateur-Relation-Client---Courtage-en-assurance-grands-risques_R_359865-1" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Coordinateur Relation Client - Courtage en assurance grands risques</h3><div class="emp">Marsh McLennan</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://pwc.wd3.myworkdayjobs.com/en-US/Global_Campus_Careers/job/Neuilly-sur-Seine/Consultant-en-Oprations-financires-junior---Insurance---F-H_749288WD" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Consultant en Opérations financières junior - Insurance</h3><div class="emp">PwC</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Big Four &amp; cabinets d’audit">Big Four &amp; cabinets d’audit</span><span class="tag-loc">Neuilly-sur-Seine</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://ag2rlamondiale.wd3.myworkdayjobs.com/en-US/Candidats/job/PARIS/CHARGE-D-ETUDES-ACTUARIELLES-F-H_DP004047" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Charge D'etudes Actuarielles</h3><div class="emp">AG2R La Mondiale</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Division_France_Career_Site/job/Puteaux/Stagiaire---Actuaire-Sant-Prvoyance--F-H-_R11739" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Actuaire Santé Prévoyance</h3><div class="emp">Swiss Life France</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Puteaux</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://recrutement.bpce.fr/job/chargee-detudes-actuarielles-f-h-rennes" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Chargé(e) d'études actuarielles</h3><div class="emp">BPCE Vie</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Saint-Grégoire</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://recrutement.bpce.fr/job/actuaire-tarification-rentabilite-f-h-rennes" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Actuaire Tarification &amp; Rentabilité Rennes</h3><div class="emp">BPCE Compagnie Europeenne de Garanties et Cautions</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Fintech &amp; services financiers spécialisés">Fintech &amp; services financiers spécialisés</span><span class="tag-loc">Saint-Grégoire</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://recrutement.bpce.fr/job/actuaire-f-h" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Actuaire</h3><div class="emp">Casden - Banque Populaire</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Banque de détail">Banque de détail</span><span class="tag-loc">Champs-sur-Marne</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://recrutement.bpce.fr/job/specialiste-en-iard-professionnel-h-f-externe" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Spécialiste en IARD Professionnel - externe</h3><div class="emp">Caisse d'Epargne Grand Est Europe</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Banque de détail">Banque de détail</span><span class="tag-loc">Reims</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://recrutement.bpce.fr/job/chargee-detudes-actuarielles-f-h-rennes" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Chargé(e) d'études actuarielles</h3><div class="emp">BPCE Vie</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Saint-Grégoire</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://recrutement.bpce.fr/job/actuaire-tarification-rentabilite-f-h-rennes" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Actuaire Tarification &amp; Rentabilité Rennes</h3><div class="emp">BPCE Compagnie Europeenne de Garanties et Cautions</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Fintech &amp; services financiers spécialisés">Fintech &amp; services financiers spécialisés</span><span class="tag-loc">Saint-Grégoire</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/4950" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="stage"><span class="contrat stage">Stage</span><h3>Retrocession Analyst</h3><div class="emp">Scor</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://fa-errt-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/fr/sites/CX_2001/job/5292" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="alternance"><span class="contrat alternance">Alternance</span><h3>Actuariat</h3><div class="emp">Scor</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Paris</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://alptis.teamtailor.com/jobs/8287824-inspecteur-courtage-en-assurances-f-h" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Inspecteur courtage en assurances</h3><div class="emp">Alptis</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Rennes</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 2 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
@@ -1348,14 +1499,12 @@
 <a class="card" href="https://careers.axa.com/jobs/36183?lang=en-us" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Rédacteur souscripteur risques agricoles</h3><div class="emp">AXA</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Angers</span></div><div class="bas"><div class="carte-date ancienne">Publiée il y a 1 mois</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://careers.axa.com/jobs/35888?lang=en-us" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Souscripteur Lignes Financières</h3><div class="emp">AXA</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Nanterre</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://careers.axa.com/jobs/34105?lang=en-us" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Rédacteur souscripteur construction</h3><div class="emp">AXA</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Nanterre</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 3 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-cdd-actuaire-sur-angers-12-mois-h-f_7950.aspx" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>ACTUAIRE sur Angers</h3><div class="emp">CNP Assurances</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Angers</span></div><div class="bas"><div class="carte-date recente">Publiée aujourd'hui</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://cnp-recrute.talent-soft.com/offre-de-emploi/emploi-charge-d-etudes-statistiques-et-techniques-cdd-8-mois-h-f_7926.aspx" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Charge D Etudes Statistiques et Techniques</h3><div class="emp">CNP Assurances</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Issy-les-Moulineaux</span></div><div class="bas"><div class="carte-date recente">Publiée aujourd'hui</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://recrutement.maif.fr/offre-de-emploi/emploi-charge-d-etudes-assurances-ace-tarification-f-h_10778.aspx" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Chargé d'études assurances ACE - Tarification</h3><div class="emp">MAIF</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Niort</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://recrutement.maif.fr/offre-de-emploi/emploi-charge-d-etudes-reassurance-f-h_10711.aspx" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Chargé d'études réassurance</h3><div class="emp">MAIF</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Niort</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://carrieres.generali.fr/job/NANTES-CDI-CHARGE-D&amp;amp;apos;OPERATIONS-D&amp;amp;apos;ASSURANCE-HF-44300/1370823757/" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Charge D'operations D'assurance</h3><div class="emp">Generali France</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Nantes</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://carrieres.generali.fr/job/MARSEILLE-CDI-SOUSCRIPTEUR-RC-HF-13002/1370705357/" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdi">CDI</span><h3>Souscripteur RC</h3><div class="emp">Generali France</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Marseille</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 2 semaines</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <a class="card" href="https://groupecreditagricole.jobs/fr/nos-offres-emploi/578-170479-137-gestionnaire-prevoyance-hf-reference--2026-107717--/" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Gestionnaire prévoyance</h3><div class="emp">Crédit Agricole Assurances</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span><span class="tag-loc">Villeneuve-D'Ascq</span></div><div class="bas"><div class="carte-date recente">Publiée il y a 4 jours</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
-<a class="card" href="https://recrutement.covea.com/job/cdd-charge-e-d-etudes-statistiques-actuarielles-pilotage-de-la-performance-et-suivi-d-activite-f-h-in-chauray-fr-jid-1118" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Charge d etudes statistiques actuarielles pilotage de la performance et suivi d activite</h3><div class="emp">Covéa</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
+<a class="card" href="https://recrutement.covea.com/job/cdd-charge-e-d-etudes-statistiques-actuarielles-pilotage-de-la-performance-et-suivi-d-activite-f-h-in-chauray-fr-jid-1118" target="_blank" rel="noopener" data-umami-event="Clic annonce" data-umami-event-famille="Actuariat &amp; Assurance technique" data-umami-event-volet="cdi-cdd"><span class="contrat cdi-cdd cdd">CDD</span><h3>Chargé(e) d’études statistiques / actuarielles Pilotage de la performance et suivi d activité</h3><div class="emp">Covéa</div><div class="meta"><span class="tag-famille">Actuariat &amp; Assurance technique</span><span class="tag-struct" title="Assurance, mutuelle &amp; courtage">Assurance, mutuelle &amp; courtage</span></div><div class="bas"><div class="carte-date moyenne">Publiée il y a 1 semaine</div><div class="badges"></div><span class="link-out">Voir l'annonce →</span></div></a>
 <!--JJ:OFFRES:FIN--></div>
     <button id="load-more" type="button" hidden>Charger plus d'offres</button>
   </section>
@@ -1368,6 +1517,41 @@
   <br>
   Pour être prévenu des nouvelles offres sans créer de compte ni donner votre adresse :
   <a href="/offres.xml">flux RSS des 100 dernières offres</a>.
+  <!-- LES QUINZE PAGES DE FAMILLE, en liens.
+
+       Mesuré le 13/09/2026 : l’accueil n’en portait AUCUN. Elles
+       n’existaient que dans le sitemap — orphelines, donc peu explorées et
+       sans aucune autorité interne. Un site dont la page d’accueil ne pointe
+       pas vers ses pages de contenu n’a, de fait, pas de pages de contenu.
+
+       Les quinze pages de famille sont construites À PARTIR de ce fichier :
+       elles héritent donc ce bloc, et chacune remplace sa propre entrée par
+       un <span> — elle porte alors les quatorze autres.
+
+       Les adresses sont ABSOLUES : le même bloc sert à la racine et un cran
+       plus bas dans /familles/. Et la liste est CALCULÉE depuis
+       familles-textes.js : une famille sans texte n’a pas de page, et son
+       lien serait un 404. Le contrôle d’avant-passage le vérifie. -->
+  <nav class="familles-liens" aria-label="Les métiers de la finance junior">
+    <span class="familles-liens-titre">Les métiers&nbsp;:</span>
+<!--JJ:FAMILLES-LIENS:DEBUT-->
+    <a href="/familles/fusions-et-acquisitions.html">Fusions &amp; Acquisitions</a>
+    <a href="/familles/marches-financiers.html">Marchés financiers</a>
+    <a href="/familles/capital-investissement.html">Capital-investissement</a>
+    <a href="/familles/gestion-d-actifs.html">Gestion d'actifs</a>
+    <a href="/familles/banque-privee-et-patrimoine.html">Banque privée &amp; Patrimoine</a>
+    <a href="/familles/comptabilite-et-consolidation.html">Comptabilité &amp; Consolidation</a>
+    <a href="/familles/controle-de-gestion-et-tresorerie.html">Contrôle de gestion &amp; Trésorerie</a>
+    <a href="/familles/audit-et-controle-interne.html">Audit &amp; Contrôle interne</a>
+    <a href="/familles/risques-et-conformite.html">Risques &amp; Conformité</a>
+    <a href="/familles/conseil-et-transformation.html">Conseil &amp; Transformation</a>
+    <a href="/familles/operations-et-middle-office.html">Opérations &amp; Middle-office</a>
+    <a href="/familles/data-et-quant.html">Data &amp; Quant</a>
+    <span class="courant" aria-current="page">Actuariat &amp; Assurance technique</span>
+    <a href="/familles/financements-et-coverage.html">Financements &amp; Coverage</a>
+    <a href="/familles/autres-metiers-de-la-finance.html">Autres métiers de la finance</a>
+<!--JJ:FAMILLES-LIENS:FIN-->
+  </nav>
   <nav class="liens-legaux">
     <a href="/mentions-legales.html">Mentions légales</a>
     <a href="/confidentialite.html">Politique de confidentialité</a>
@@ -1688,6 +1872,14 @@
     document.addEventListener('click', function (e) {
       var cible = e.target;
       if (!cible || !cible.closest) return;
+      // La croix, testée AVANT tout le reste : un clic dans la bulle ne
+      // ferme rien par ailleurs — c’est là qu’on sélectionne le texte — et
+      // la croix vit dans la bulle. On rend le focus au « ? » qui a ouvert.
+      if (cible.closest('.jj-bulle-fermer')) {
+        e.preventDefault();
+        fermer(true);
+        return;
+      }
       var bouton = cible.closest('.jj-aide');
       if (bouton) {
         e.preventDefault();
@@ -1704,6 +1896,22 @@
         // le DOM vivant qui change, apres interaction — donc Google lit
         // toujours le texte a sa place.
         if (bulle.parentNode !== document.body) document.body.appendChild(bulle);
+        // La croix est INJECTÉE, pas écrite dans le HTML : ce n’est pas du
+        // contenu, Google n’a rien à en lire, et deux générateurs écrivent
+        // ces bulles — cette colonne en JavaScript, les quinze pages de
+        // famille en dur. Une seule copie du bouton, et les pages déjà
+        // publiées l’obtiennent sans être régénérées.
+        if (!bulle.querySelector('.jj-bulle-fermer')) {
+          var titre = bulle.querySelector('.jj-bulle-titre');
+          if (titre) {
+            var croix = document.createElement('button');
+            croix.type = 'button';
+            croix.className = 'jj-bulle-fermer';
+            croix.setAttribute('aria-label', 'Fermer');
+            croix.textContent = '\u00D7';
+            titre.appendChild(croix);
+          }
+        }
         bulle.hidden = false;
         bouton.setAttribute('aria-expanded', 'true');
         ouverte = { bouton: bouton, bulle: bulle };
@@ -2669,10 +2877,33 @@
   // Le catalogue arrive par un script differe : il s'execute apres l'analyse
   // du document mais AVANT DOMContentLoaded. Demarrer ici, et non a l'analyse,
   // est ce qui permet de ne plus bloquer l'analyseur.
+  // Le texte de la famille, sur téléphone. Voir le style plus haut et le
+  // §32 de DECISIONS.md : entier, il pousse la première offre hors de
+  // l’écran. Replié, il en montre assez pour dire de quel métier il s’agit.
+  //
+  // N’existe que sur les quinze pages /familles/ : sur l’accueil il n’y a
+  // pas de `.famille-intro`, et la fonction ne fait rien.
+  function replierIntro() {
+    var section = document.querySelector('.famille-intro');
+    if (!section || window.innerWidth >= 700) return;
+    if (section.querySelector('.famille-intro-plus')) return;
+    section.classList.add('replie');
+    var bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'famille-intro-plus';
+    bouton.textContent = 'Lire la suite';
+    bouton.addEventListener('click', function () {
+      section.classList.remove('replie');
+      bouton.parentNode.removeChild(bouton);
+    });
+    section.appendChild(bouton);
+  }
+
   function demarrer() {
     OFFRES = Array.isArray(window.__OFFRES__) ? window.__OFFRES__ : [];
 
     brancherAide();
+    replierIntro();
     buildFamilleFieldset();
     buildTagsFieldset();
     buildStructureSelect();

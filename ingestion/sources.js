@@ -960,6 +960,11 @@ const LISTES_HTML = [
   {
     emp: 'Covéa',
     base: 'https://recrutement.covea.com',
+    // Mutuelle française, catalogue français.
+    paysImplicite: true,
+    // Le premier lien de chaque carte porte l'intitulé ; les deux suivants
+    // disent « En savoir plus » et sont écartés par le repli.
+    titreDuLien: true,
     page: (n) => `https://recrutement.covea.com/jobs?page=${n}`,
     blocRe: /<a[^>]+href="\/job\//i,
     blocFin: '</a>',
@@ -976,6 +981,10 @@ const LISTES_HTML = [
   {
     emp: 'Citi',
     base: 'https://jobs.citi.com',
+    // La requête porte « /France/ » : le pays est déjà filtré à la source.
+    paysImplicite: true,
+    // Leur ancre porte l'intitulé complet, virgules et capitales comprises.
+    titreDuLien: true,
     // Leur page « France » est rendue côté serveur et tient sur une seule page.
     // Attention : ajouter un numéro de page casse le filtre pays et fait
     // remonter le catalogue mondial — on n'en lit donc qu'une.
@@ -997,19 +1006,35 @@ const LISTES_HTML = [
     // Workday branché par ailleurs ne porte que les profils confirmés, et
     // aucune de ces 37 offres — dont les alternances — n'y figure.
     page: () => 'https://www.rothschildandco.com/fr/carrieres/profils-experimentes/nos-carrieres/',
-    blocRe: /<a[^>]+href="\/fr\/carrieres\/profils-experimentes\/nos-carrieres\//i,
-    blocFin: '</a>',
-    lienRe: /^([^"?]+)"/,
-    lienPrefixe: '/fr/carrieres/profils-experimentes/nos-carrieres/',
-    depuisLien: true,
-    // /fr/carrieres/profils-experimentes/nos-carrieres/{intitulé}/ : le titre
-    // est le cinquième segment.
-    positionTitre: 4,
+    // LA CARTE, PAS L'ADRESSE. Le slug perd la ponctuation :
+    // « Compliance/Risk Officer (m/w/d) – Schwerpunkt Risk Management » y
+    // devenait « Compliancerisk officer mwd schwerpunkt risk management ».
+    //
+    // Et il ne porte PAS LE PAYS. Mesuré le 13/09/2026 : 25 des 49 cartes
+    // sont en France, et quatre des six offres publiées chez nous étaient à
+    // Luxembourg, Francfort, Londres et Dubaï — la règle 1 du site.
+    //
+    // La carte donne les deux : un <h3> exact, puis le pays en premier
+    // détail et la ville en second (48 cartes sur 49 ont cette forme ; la
+    // quarante-neuvième n'a pas de pays et sort d'elle-même).
+    blocRe: /<article class="roths-career-office-event-card">/,
+    blocFin: '</article>',
+    lienRe: /href="(\/fr\/carrieres\/profils-experimentes\/nos-carrieres\/[^"?]+)"/,
+    motifs: {
+      titre: /card-title[^>]*>\s*([^<]+?)\s*<\/h3>/,
+      pays: /card-detail">\s*([^<]+?)\s*<\/li>/,
+      lieu: /card-detail">[^<]*<\/li>\s*<li[^>]*card-detail">\s*([^<]+?)\s*<\/li>/,
+    },
     maxPages: 1,
   },
   {
     emp: 'KPMG',
     base: 'https://emplois.kpmg.fr',
+    // emplois.kpmg.fr ne publie que la France.
+    paysImplicite: true,
+    // Pas de `titreDuLien` ici : leur ancre colle les facettes à l'intitulé
+    // (« … F/H Audit Audit financier et extra-financier Lyon, Île-de-France »).
+    // Le slug est plus propre — mesuré le 13/09/2026.
     page: (n) => `https://emplois.kpmg.fr/recherche-d%27offres?p=${n}`,
     // Les cartes n'ont pas de balise propre : on découpe sur le lien lui-même,
     // dont le chemin porte déjà la ville et l'intitulé.
@@ -1037,6 +1062,12 @@ function decodeAttribut(v) {
 }
 
 // Découpe une page de liste en offres, selon la description du site.
+// Un lien dont le texte ne nomme rien : on retombe alors sur le slug, qui
+// est ce qu'on avait avant. Trois caractères au minimum, sinon un « › » ou
+// un espace insécable passerait pour un intitulé.
+const TEXTE_DE_LIEN_VIDE =
+  /^(?:.{0,3}|en savoir plus|voir (?:l'offre|plus|le poste)|postuler|apply(?: now)?|d[ée]couvrir|lire la suite)$/i;
+
 function parseListeHtml(html, cfg) {
   const offres = [];
 
@@ -1050,6 +1081,27 @@ function parseListeHtml(html, cfg) {
       const chemin = m[1];
       if (vus.has(chemin)) continue;
       vus.add(chemin);
+      // LE VRAI INTITULÉ EST SOUVENT DÉJÀ LÀ, dans le texte du lien — on ne
+      // le lisait pas. Chez Citi, l'adresse donnait « Banking financing
+      // equity capital markets placement analyst paris » là où l'ancre dit
+      // « Banking, Financing, Equity Capital Markets, Placement Analyst
+      // Internship, Paris - France 2027 ».
+      //
+      // Le repli sur le slug est indispensable : certaines maisons écrivent
+      // « En savoir plus » dans leurs liens secondaires, et Rothschild n'y
+      // écrit jamais rien d'autre.
+      let texteDuLien = '';
+      if (cfg.titreDuLien) {
+        const suite = html.slice(m.index + m[0].length, m.index + m[0].length + 1500);
+        const ouvre = suite.indexOf('>');
+        const ferme = suite.indexOf('</a>');
+        if (ouvre >= 0 && ferme > ouvre) {
+          texteDuLien = decodeEntities(suite.slice(ouvre + 1, ferme).replace(/<[^>]+>/g, ' '))
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+        if (TEXTE_DE_LIEN_VIDE.test(texteDuLien)) texteDuLien = '';
+      }
       const parts = chemin.split('/').filter(Boolean);
       // Le titre n'est pas au même rang selon les sites : troisième segment
       // chez KPMG (/emploi/{ville}/{intitulé}), dernier chez Rothschild.
@@ -1082,7 +1134,7 @@ function parseListeHtml(html, cfg) {
           .replace(/^([a-zà-öø-ÿ])/, (c) => c.toUpperCase());
       offres.push({
         url: cfg.base + chemin,
-        titre: versTexte(parts[rangTitre]),
+        titre: texteDuLien || versTexte(parts[rangTitre]),
         // Certains chemins portent la ville avant l'intitulé, d'autres non.
         lieu: cfg.positionLieu != null ? versTexte(parts[cfg.positionLieu]) : '',
         type: '',
@@ -1236,7 +1288,12 @@ async function fetchListeHtml(cfg) {
         ? FRANCE_LOCATION_RE.test(o.lieu || '') || REGIONS_FR_RE.test(o.lieu || '')
         : o.pays
           ? /^france$/i.test(o.pays)
-          : cfg.depuisLien || /\bfrance\b/i.test(o.lieu || '');
+          // `cfg.depuisLien` figurait ici et valait laissez-passer : lire sa
+          // liste par les liens n'apprend rien sur la géographie, et la
+          // condition était donc toujours vraie. Rothschild y publiait ses
+          // offres de Luxembourg, Francfort, Londres et Dubaï. Les maisons
+          // dont la requête porte déjà le pays le déclarent : `paysImplicite`.
+          : /\bfrance\b/i.test(o.lieu || '');
       // « paysImplicite » : la requête porte déjà le filtre pays, et le libellé
       // de lieu ne répète pas la France (EDF écrit « CLERMONT-FERRAND (63000) »).
       // Le filtre finance ci-dessous, lui, s'applique toujours.
@@ -3544,7 +3601,11 @@ function decodeEntities(t) {
     .replace(/&nbsp;/g, ' ')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n));
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n))
+    // Citi écrit ses tirets « &#x2013; » et KPMG ses accents « &#xE9; » :
+    // la forme hexadécimale traversait le décodage intacte et s'affichait
+    // telle quelle dans l'intitulé publié.
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
 }
 
 // Deux mises en page cohabitent sur Avature selon le portail :
@@ -4477,6 +4538,10 @@ module.exports = {
   // Exporte pour etre EPROUVE : c est lui qui ouvre le budget de temps,
   // et un mecanisme qu on ne peut pas faire agir a la demande ne se verifie pas.
   recolter,
+  // Exportee pour etre INTERROGEE : quand le VIE s erode, la seule question
+  // qui tranche est « combien la source rend-elle EN BRUT ? », et y repondre
+  // sans cet export demanderait de recopier le connecteur.
+  fetchVie,
   fetchEiCards,
   fetchAvature,
   fetchServicePublic,

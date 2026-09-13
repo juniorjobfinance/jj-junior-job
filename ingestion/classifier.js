@@ -112,6 +112,23 @@ const PREFILTER = [
   [/\bconseill(?:er|ere|ers|eres)\b/, 'retail'],
   [/\bcharg(?:e|ee|es)\b (?:de )?clientele\b/, 'retail'],
   [/\bgestionnaire (?:de )?clientele\b/, 'retail'],
+  // LA RELATION CLIENT COMME METIER — hors perimetre (§30), 13/09/2026.
+  // « Coordinateur Relation Client - Courtage en assurance grands risques »
+  // (Marsh McLennan) entrait par le DECOR : « assurance » et « risques »
+  // lui donnaient Actuariat & Assurance technique. Le metier nomme est la
+  // relation client : du service et du commercial.
+  //
+  // L EXEMPTION EST INDISPENSABLE, et elle est dans le motif meme. Mesure
+  // du 13/09/2026 sur la recolte : un motif nu attrape « Investor Relations
+  // Client Administration » et « Investor Relations Client Solution »
+  // (Ardian), deux offres de middle-office et de gestion d actifs, ainsi
+  // que « Charge de relations clients - Middle Office » (Caisse d Epargne).
+  // Le garde-fou « retail cede a partir de 9 » ne les sauve pas : elles
+  // plafonnent a 8.
+  [
+    /^(?!.*\b(?:investor|investisseurs?|middle office|back office|fund|fonds|banque privee|private bank|wealth|patrimoine)\b).*\b(?:relations? clients?|service clients?|customer (?:service|success|relations?))\b/,
+    'retail',
+  ],
   [/\bconseiller (?:specialise|commercial|financier)\b/, 'retail'],
   [/\b(?:directeur|adjoint) d agence\b/, 'retail'],
   [/\b(?:guichetier|teleconseiller)\b/, 'retail'],
