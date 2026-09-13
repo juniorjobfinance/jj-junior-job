@@ -782,6 +782,42 @@ const LISTES_HTML = [
     // Elles sont lues dans le même lot (concurrence: 2) à dessein : la boucle
     // de fetchListeHtml s'arrête à la première page vide, et un jour sans
     // stage aurait donc empêché de lire la page des emplois.
+    emp: 'DNCA Finance',
+    base: 'https://www.dnca-investments.com',
+    // Une page unique, sans pagination : leur liste tient sur /carrieres.
+    page: () => 'https://www.dnca-investments.com/carrieres',
+    maxPages: 1,
+    // Le libelle de lieu ne porte pas le pays — il dit « Paris » tout court.
+    // `lieuLibre` reconnait la France au nom de la ville, comme pour Comgest.
+    lieuLibre: true,
+    blocRe: /<div class="col-md-12 col-sm-12 offre-emploi">/,
+    // La carte se ferme sur le bouton « Lire l'offre », qui vient APRES
+    // l'intitule, la date, le contrat et le lieu. Couper au premier </div>
+    // tronquerait la carte : ses div sont imbriquees.
+    blocFin: 'bt-lire-offre',
+    lienRe: /href="(\/carrieres\/[A-Za-z0-9]+)"/,
+    // Lecture par MOTIF et non par rang : l'intitule porte une classe, et
+    // les trois autres champs vivent dans des <span> successifs d'un meme
+    // paragraphe. Ce sont les seuls a ne pas etre nommes — si DNCA en
+    // intercale un quatrieme, la date et le lieu se decalent. C'est la
+    // fragilite connue de ce connecteur, et le garde-fou des maisons
+    // muettes est ce qui la signalera.
+    motifs: {
+      titre: /title-content-article"[^>]*>\s*([^<]+?)\s*</,
+      date: /subtitles-content-article offer"><span>\s*([^<]+?)\s*</,
+      type: /subtitles-content-article offer"><span>[^<]*<\/span><span>[^<]*<\/span><span>\s*([^<]+?)\s*</,
+      lieu: /subtitles-content-article offer"><span>[^<]*<\/span><span>[^<]*<\/span><span>[^<]*<\/span><span>[^<]*<\/span><span>\s*([^<]+?)\s*</,
+    },
+    // RIEN A PROUVER sur le format de date, verifie le 13/09/2026 : leur
+    // seule offre est datee « 07/09/2026 », ni 07 ni 09 ne depasse 12, et
+    // aucune date ISO n existe ni sur la liste ni sur la fiche — la preuve
+    // par concordance n a pas de second champ a comparer. Les deux lectures
+    // tombent dans la fenetre des 120 jours, donc rien ne depend du choix.
+    // Le pipeline lit en JJ/MM, la convention francaise. Le format se
+    // declarera le jour ou un nombre depassera 12.
+    delaiMs: 500,
+  },
+  {
     emp: 'Comgest',
     base: 'https://www.comgest.com',
     page: (n) =>

@@ -1,0 +1,63 @@
+# Les 37 maisons inscrites dans maisons.txt qu'aucun connecteur ne ramène, et
+# dont aucun document du dépôt ne porte de verdict écrit.
+#
+# Établie le 13/09/2026 en croisant maisons.txt avec la récolte du jour, puis
+# avec ETAT.md, DECISIONS.md et CLAUDE.md.
+#
+# Le domaine est celui du site institutionnel : le sondeur y cherche la page
+# carrières et lit la signature de la plateforme. Quand il est marqué
+# « à confirmer », c'est une supposition de ma part — un échec sur cette ligne
+# accuse le domaine avant d'accuser la maison.
+
+# --- Fonds et banques d'affaires -------------------------------------------
+Messier & Associés:messierpartners.com
+Centerview Partners:centerviewpartners.com
+Antin Infrastructure:antin-ip.com
+Andera Partners:anderapartners.com
+
+# --- Gestion d'actifs et banque privée --------------------------------------
+Groupama AM:groupama-am.com
+Candriam:candriam.com
+DNCA Finance:dnca-investments.com
+State Street:statestreet.com
+Julius Baer:juliusbaer.com
+Uptevia:uptevia.com
+
+# --- Marchés : courtiers interdealer ----------------------------------------
+TP ICAP:tpicap.com
+Tradition:tradition.com
+
+# --- Institutions publiques -------------------------------------------------
+ACPR:acpr.banque-france.fr
+Agence France Trésor:aft.gouv.fr
+
+# --- Assurance ---------------------------------------------------------------
+Macif:macif.fr
+
+# --- Conseil -----------------------------------------------------------------
+Oliver Wyman:oliverwyman.com
+
+# --- Fintechs ----------------------------------------------------------------
+PayFit:payfit.com
+Swile:swile.co
+Spendesk:spendesk.com
+Ledger:ledger.com
+Swan:swan.io
+MangoPay:mangopay.com
+Powens:powens.com
+FLOA:floabank.fr
+Silvr:silvr.co
+Indy:indy.fr
+Bridge:bridgeapi.io
+Wise:wise.com
+Akur8:akur8.com
+Linedata:linedata.com
+
+# --- Entreprises (direction financière) --------------------------------------
+Kering:kering.com
+Danone:danone.com
+Vitol:vitol.com
+Colliers France:colliers.com
+Geodis:geodis.com
+Vattenfall:vattenfall.fr
+Intermarché:intermarche.com
