@@ -46,6 +46,88 @@ de famille 2 878 Ko au total. Le sitemap déclare **18 URL**.
 
 ---
 
+## Défaut connu, non réparé : le « M&A » qui perd son « A »
+
+**Repéré et mesuré le 13/09/2026. Coût aujourd'hui : ZÉRO offre perdue —
+donc zéro priorité.** Cette fiche existe pour qu'on le reconnaisse en dix
+minutes le jour où il mordra, au lieu de le rediagnostiquer de zéro.
+
+### Le mécanisme
+
+L'esperluette ne se perd pas chez nous : **elle n'existe jamais dans une
+adresse**. KPMG écrit son slug `consultant-analyste-m-and-a`, en épelant
+« and ». Les connecteurs qui reconstruisent le titre depuis le slug —
+mode `depuisLien` de `parseListeHtml` — reçoivent donc « m and a ».
+
+Puis la règle **9 ter) « Miettes en QUEUE »** de `cleanTitle` retire le
+dernier mot isolé d'un titre tronqué. Sa liste contient `[àa]` — donc le
+« a » final de M&A. L'offre perd la seule chose qui la rendait
+reconnaissable.
+
+```
+slug        consultant-analyste-m-and-a
+versTexte   « Consultant analyste m and a »
+cleanTitle  « Consultant analyste m and »      <-- le A est parti
+verdict     rejected  gate:big4-sans-marqueur
+```
+
+Et la variante sans « and », quand la source écrit `-m-a-` :
+
+```
+slug        analyste-m-a
+cleanTitle  « Analyste m »
+```
+
+### Le symptôme à reconnaître
+
+**Un intitulé qui finit par « m and », par « m », ou par « et »** — et, plus
+parlant encore, **une offre manifestement M&A qui est rejetée en
+`gate:big4-sans-marqueur` ou `gate:conseil-sans-marqueur`.** C'est le
+signe : le mot qui aurait dû lui ouvrir la porte a été mangé.
+
+Le second symptôme est plus dangereux que le premier : sur les six offres
+touchées le 13/09, **une n'est pas rejetée mais MAL RANGÉE** —
+« Consultant manager finance m and » atterrit en *Conseil &
+Transformation*. Une offre mal rangée paraît, sous une fausse famille.
+
+Le détecteur :
+
+```js
+// sur la recolte, pas sur le catalogue — le catalogue ne les contient pas
+brut.offres.filter((o) => / (and|et|m)$/i.test(String(o.raw.titre || '').trim()))
+```
+
+### Qui est exposé, et pourquoi ça ne coûte rien aujourd’hui
+
+**Trois sources** lisent leur liste en mode `depuisLien` :
+
+| source | exposée ? |
+|---|---|
+| `liste:KPMG` | oui — 6 intitulés touchés le 13/09 |
+| `liste:Citi` | oui, mais elle ne publie aucun M&A aujourd'hui |
+| `liste:Covéa` | oui, mais c'est un assureur : pas de M&A |
+
+Rothschild & Co était la quatrième ; elle a quitté ce mode le 13/09 et lit
+désormais sa carte.
+
+**CE QUI PROTÈGE, et c'est un hasard, pas une garde : KPMG est lue DEUX
+FOIS.** Sa liste HTML rend les titres abîmés, son sitemap JSON-LD rend les
+titres justes (« Consultant Analyste M&A », « Consultant Tech M&A »), et la
+déduplication garde la bonne version. 15 offres KPMG publiées viennent de
+`sitemapld:KPMG`, 2 de `liste:KPMG`.
+
+**Offres abîmées au catalogue publié le 13/09 : 0.**
+
+### Le jour où ça mordra
+
+Quand une maison lue **uniquement** par ses liens publiera du M&A — ou le
+jour où le sitemap de KPMG tombera. La réparation tient en une ligne : la
+règle 9 ter ne doit pas retirer un « a » précédé de « m » ou de « m and ».
+Mais tant que le coût mesuré est zéro, on ne touche pas à une règle de
+nettoyage qui, elle, rend service partout ailleurs.
+
+---
+
 ## Le référencement, au 13 septembre 2026
 
 Mesuré, pas supposé — le détail et les arbitrages sont au **§44** de
