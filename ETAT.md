@@ -63,6 +63,53 @@ sitemap. Le pied de page les nomme désormais toutes, chaque page de famille
 porte les quatorze autres, et les dix familles citées dans « à ne pas
 confondre avec… » sont devenues des liens.
 
+### La preuve, relevée dans la Search Console le 13/09
+
+Ce diagnostic était une déduction à partir du code. Victor est allé le
+vérifier page par page dans la Search Console, et Google le confirme en
+toutes lettres. Sur `/familles/comptabilite-et-consolidation.html` :
+
+> « Cette URL n'a pas été indexée par Google »
+> — et **« Afficher la page explorée » est GRISÉ**.
+
+Grisé veut dire qu'il n'existe aucune version explorée : Google n'est
+**jamais venu chercher cette page**. Pas une fois en neuf jours, alors
+qu'elle est au sitemap depuis le 04/09.
+
+> **Mesuré le 13/09 dans la Search Console : les pages de famille n'ont
+> jamais été explorées par Google depuis leur création le 04/09. Déclarées
+> au sitemap, mais orphelines — aucun lien entrant. Un sitemap ne suffit pas
+> à faire explorer une page : sans lien, Google ne vient pas. C'est ce qui
+> explique les six clics organiques du site jusqu'ici : seule la page
+> d'accueil était connue.**
+
+Ce n'est pas une déduction, c'est ce que Google affiche. La règle qu'on en
+tire est au **§44** de `DECISIONS.md` — ici elle serait perdue à la
+prochaine réécriture de ce fichier.
+
+### Ce qui a été demandé à la Search Console le 13/09
+
+Indexation demandée pour **l'accueil et dix pages de famille** :
+comptabilité, contrôle de gestion, risques, M&A, capital-investissement,
+audit, gestion d'actifs, marchés financiers, banque privée, financements.
+Quota quotidien atteint.
+
+L'accueil était déjà indexé, mais **dans sa version d'avant le maillage** :
+Google travaillait donc sur la page orpheline. La demande porte sur la
+nouvelle.
+
+**À FAIRE DEMAIN — les cinq dernières**, quand le quota se recharge :
+opérations & middle-office, actuariat, conseil & transformation,
+data & quant, autres métiers de la finance.
+
+### Et on n'y retouche plus
+
+**Rien sur le référencement jusqu'au 4 octobre 2026.** Le site a tout ce
+qu'il peut avoir, et y retoucher maintenant rendrait la mesure illisible.
+On regarde les **impressions** des quinze pages, pas les clics.
+
+D'ici là, le temps va aux **maisons**, pas au référencement.
+
 `JobPosting` est **écarté définitivement** : Google exige la description
 complète du poste sur la page qui le porte, et le lien mène chez l'employeur.
 

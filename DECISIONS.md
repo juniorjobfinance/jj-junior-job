@@ -1820,6 +1820,33 @@ Ce qu'on fera, plus tard et autrement : **les dix plus gros croisements
 famille × volet, chacun avec son paragraphe écrit à la main par Victor.** Pas
 généré, pas reformulé depuis la page de famille. Dix pages, pas cent vingt.
 
+### UNE PAGE NAÎT LIÉE, elle ne naît pas seulement DÉCLARÉE
+
+Le diagnostic ci-dessus était une déduction tirée du code. Victor l’a vérifié
+dans la Search Console le 13/09, et Google le confirme en toutes lettres. Sur
+`/familles/comptabilite-et-consolidation.html` :
+
+> « Cette URL n’a pas été indexée par Google », et **« Afficher la page
+> explorée » est GRISÉ**.
+
+Grisé signifie qu’il n’existe **aucune version explorée** : Google n’est
+jamais venu chercher cette page. Pas une fois en neuf jours, alors qu’elle
+était au sitemap depuis le 04/09. Le site comptait **six clics organiques**
+sur toute sa vie — seule la page d’accueil était connue.
+
+> **Un sitemap ne fait pas explorer une page.** Il déclare qu’elle existe ;
+> il ne donne à Google aucune raison d’y aller. Sans lien entrant, une page
+> déclarée reste une page jamais visitée. **Une page se crée LIÉE — depuis
+> l’accueil et depuis ses sœurs — le jour où on la crée, pas le jour où on
+> s’aperçoit qu’elle ne reçoit rien.**
+
+C’est neuf jours perdus sur quinze pages, pour un bloc de liens qui tient en
+quinze lignes. La prochaine fois qu’on créera des pages — les dix croisements
+famille × volet, si la mesure du 4 octobre les justifie — elles naîtront
+liées, et le contrôle de maillage posé le 13/09 le vérifiera tout seul.
+
+---
+
 ### LA MESURE QUI DÉCIDERA — notée le 13/09/2026
 
 Trois semaines après ce passage, soit **autour du 4 octobre 2026**, regarder
