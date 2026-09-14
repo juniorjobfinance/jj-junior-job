@@ -126,7 +126,7 @@ const PREFILTER = [
   // Le garde-fou « retail cede a partir de 9 » ne les sauve pas : elles
   // plafonnent a 8.
   [
-    /^(?!.*\b(?:investor|investisseurs?|middle office|back office|fund|fonds|banque privee|private bank|wealth|patrimoine)\b).*\b(?:relations? clients?|service clients?|customer (?:service|success|relations?))\b/,
+    /^(?!.*\b(?:investor|investisseurs?|institutionnels?|souverains?|middle office|back office|fund|fonds|banque privee|private bank|wealth|patrimoine)\b).*\b(?:relations? clients?|service clients?|customer (?:service|success|relations?))\b/,
     'retail',
   ],
   [/\bconseiller (?:specialise|commercial|financier)\b/, 'retail'],
