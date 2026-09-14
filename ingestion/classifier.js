@@ -357,12 +357,29 @@ const FINANCE_MARKERS = [
 // qu un motif unique ne sait pas faire.
 const RELATIONS_INVESTISSEURS = /\brelations? investisseurs?\b|\binvestor relations\b/;
 
-// Deux lignes, et c est assez. `fonds` et `societe-gestion` ne figurent pas
-// dans la table : ne rien y faire EST la decision, et Gestion d actifs y est
-// juste. Les autres structures non plus : on y laisse le titre decider.
-const REDIRECTION_RELATIONS_INVESTISSEURS = {
-  entreprise: 'controle-gestion-tresorerie',
-};
+// LES STRUCTURES OU LES RELATIONS INVESTISSEURS SONT HORS PERIMETRE.
+//
+// Tranche le 14/09/2026 : chez une societe cotee et chez un assureur cote,
+// les relations investisseurs sont de la COMMUNICATION FINANCIERE — publier
+// les resultats, tenir le consensus, recevoir les analystes. Le §30 les
+// laisserait passer (ca produit de l information financiere), mais ce n est
+// pas un metier que le site vise : il vise la finance junior de marche, de
+// deal et de gestion.
+//
+// ON NOMME CE QU ON ECARTE, PAS CE QU ON GARDE, et la mesure du 14/09 dit
+// pourquoi. Une regle ecrite a l envers — ne garder que `fonds` et
+// `societe-gestion` — emporterait CINQ intitules au lieu de deux, dont :
+//
+//   « Investor Relations Intern - FIVE ARROWS » chez Rothschild & Co, type
+//   `banque-affaires` parce que c est le type de la maison mere — mais Five
+//   Arrows EST son bras de private equity ;
+//   « Stage Investor Relations » chez Oddo BHF, type `bfi` — mais Oddo BHF
+//   AM est une des grosses maisons de gestion francaises.
+//
+// Ce sont exactement les cas qu on veut garder. Une structure de maison mere
+// ne dit pas le metier de sa filiale, et c est pour ca qu on liste les deux
+// structures ou le doute n existe pas.
+const IR_HORS_PERIMETRE = new Set(['entreprise', 'assurance']);
 
 function hasFinanceMarker(title) {
   return FINANCE_MARKERS.some((re) => re.test(title));
@@ -1187,6 +1204,21 @@ function classify(offer) {
 
   // RELATIONS INVESTISSEURS : LE METIER DEPEND DE LA MAISON.
   //
+  // Chez une ENTREPRISE cotee ou un ASSUREUR, c est de la communication
+  // financiere et le site ne la vise pas : on ECARTE. La veille on
+  // redirigeait vers Controle de gestion & Tresorerie — c etait la bonne
+  // reponse a « ou la ranger », mais la vraie question etait « faut-il la
+  // publier ».
+  if (RELATIONS_INVESTISSEURS.test(title) && IR_HORS_PERIMETRE.has(structure)) {
+    return {
+      status: 'rejected',
+      reason: 'prefilter:communication-financiere',
+      structure,
+      tags,
+    };
+  }
+
+  //
   // Chez un FONDS ou une societe de gestion, les relations investisseurs
   // consistent a lever des fonds et a servir des LP : c est bien le metier
   // de la maison, et Gestion d actifs est juste — on ne touche a rien.
@@ -1208,10 +1240,7 @@ function classify(offer) {
   // structure tranche toute seule. Mesure du 13/09/2026 : 11 offres portent
   // ce vocabulaire, UNE SEULE est chez une entreprise. Deux lignes suffisent
   // donc ; s il y en a plus de cinq un jour, on remesurera.
-  if (winner && winner.id === 'gestion-actifs' && RELATIONS_INVESTISSEURS.test(title)) {
-    const vise = REDIRECTION_RELATIONS_INVESTISSEURS[structure];
-    if (vise) winner = byId(vise) || winner;
-  }
+  // (la redirection par structure a ete remplacee par l ecart ci-dessus)
 
   // Le credit management d'un industriel : « Gestionnaire de Recouvrement »
   // chez Rexel n'est pas un intitule generique, c'est le pilotage du poste

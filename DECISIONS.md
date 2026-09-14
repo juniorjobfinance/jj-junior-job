@@ -1960,3 +1960,53 @@ Contre-test **22/22** sur `classify()`. Effet global sur les 7 105 brutes :
 **0 perdue, 0 déplacée** — la redirection ne bouge rien sur la récolte
 actuelle, parce qu'aucune offre de relations investisseurs n'y est encore
 chez une entreprise. Havas était la première, et elle n'était pas branchée.
+
+---
+
+## 45bis. …et le lendemain, on ne la range plus : on l’écarte
+
+**Tranché le 14/09/2026 par Victor**, en voyant les deux offres en ligne :
+
+> « Vire-moi ces 2 offres relations investisseurs. Ça passe que dans des
+> gros groupes de PE ou très très grosses boîtes AM. »
+
+Le §45 répondait à **où la ranger**. La vraie question était **faut-il la
+publier**. Chez une société cotée ou un assureur, les relations
+investisseurs sont de la communication financière — publier les résultats,
+tenir le consensus, recevoir les analystes. Le §30 les laisserait passer
+(ça produit de l'information financière), mais ce n'est pas ce que le site
+vise : la finance junior de marché, de deal et de gestion.
+
+### La mesure a donné sa FORME à la règle
+
+L'écriture naturelle — ne garder que `fonds` et `societe-gestion` —
+emporterait **cinq intitulés au lieu de deux**, dont exactement ceux que la
+raison de Victor veut garder :
+
+| intitulé | structure | ce que c’est vraiment |
+|---|---|---|
+| « Investor Relations Intern - **Five Arrows** » (Rothschild & Co) | `banque-affaires` | Five Arrows EST le bras de private equity |
+| « Stage Investor Relations » (Oddo BHF) | `bfi` | Oddo BHF AM est une des grosses maisons de gestion françaises |
+
+**Une structure de maison mère ne dit pas le métier de sa filiale.** D'où la
+règle écrite à l’endroit : on nomme les deux structures **qu’on écarte**,
+`entreprise` et `assurance`, où le doute n’existe pas. Partout ailleurs le
+titre décide, comme au §45.
+
+```js
+const IR_HORS_PERIMETRE = new Set(['entreprise', 'assurance']);
+```
+
+### Mesure
+
+Contre-test **18/18**. Sur la récolte du 14/09 (7 244 brutes) : **2**
+intitulés écartés — Coface et Havas, les deux nommés — et **14 gardés**,
+dont Five Arrows et Oddo BHF. Rien d’autre ne bouge chez Coface (18 gardées
+sur 22) ni chez Havas (15 sur 112).
+
+> **Ce que ce §45bis apprend, et qui dépasse le cas :** une règle de
+> périmètre s’écrit en nommant ce qu’on ÉCARTE quand les exceptions sont
+> nombreuses et mal typées, et ce qu’on GARDE quand elles sont rares et
+> nettes. Ici la liste des maisons légitimes est longue et leur structure
+> ment (une banque d’affaires qui héberge un fonds) ; la liste des maisons
+> illégitimes est courte et leur structure dit vrai.
