@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23ea580c'/><text x='32' y='44' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='bold' letter-spacing='-2.4' fill='white'>JJ</text></svg>">
+<!-- L ICONE DU SITE. Les DEUX declarations sont necessaires, et l ordre
+     compte.
+
+     Jusqu au 15/09/2026 la page ne declarait que le SVG ci-dessous. Safari
+     sur iOS ne sait pas lire une icone SVG — et une icone DECLAREE mais
+     illisible empeche le repli sur /favicon.ico, qui etait pourtant servi.
+     Resultat : un carre vide dans la barre d adresse sur telephone, et
+     aucun message nulle part.
+
+     C est le meme defaut qu un motif inerte : une declaration qui ne peut
+     pas fonctionner est PIRE que pas de declaration, parce qu elle bloque
+     ce qui aurait marche. -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23ea580c'/><text x='32' y='44' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='bold' letter-spacing='-2.4' fill='white'>JJ</text></svg>">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ea580c">
 <title>Actuariat &amp; Assurance technique : stages, alternances et premiers postes</title>
 <link rel="alternate" type="application/rss+xml" title="Junior Job Finance — dernières offres" href="/offres.xml">
 <meta name="description" content="Actuaires, tarification, provisionnement et réassurance : les offres juniors en compagnie d'assurance, mutuelle, cabinet et banque-assurance.">
