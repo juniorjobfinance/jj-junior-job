@@ -10,20 +10,23 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**1 052 offres** · **217 employeurs** distincts · **15 familles** · **11 types
+**947 offres** · **206 employeurs** distincts · **15 familles** · **11 types
 de structure**, tous représentés. Mesuré sur `offres.js` le 15/09/2026, après
-le passage manuel de 18h30.
+le troisième passage du jour.
 
-> 1 062 avant, 1 052 après. La baisse est voulue et se décompose : les quatre
-> corrections de séniorité (§46), la clé de déduplication de marque (§47) qui
-> retire sept doublons e-i.com, et les trois corrections d'intitulé de la
-> veille. *Moins d'offres, mais toutes justes.*
+> 1 062 le matin, 947 le soir. La baisse est **voulue et vérifiée**, et se
+> décompose : les quatre mécanismes du §46, la clé de déduplication de marque
+> (§47), les quatre mécanismes du §48 — dont la borne basse ouverte, qui pèse
+> le plus — et les deux points de périmètre du §49. S'y ajoutent **10 liens
+> morts** retirés, la vérification tournant pour la première fois.
+>
+> *Moins d'offres, mais toutes justes.*
 
 | Onglet | Offres |
 |---|---:|
 | Stage | 575 |
-| CDI · CDD | 365 |
-| Alternance | 61 |
+| CDI · CDD | 262 |
+| Alternance | 59 |
 | VIE | 51 |
 
 > **L'alternance est saisonnière.** Un catalogue d'alternance maigre relevé en
@@ -31,14 +34,18 @@ le passage manuel de 18h30.
 > se publient de février à juillet. La mesure qui compte est celle du
 > printemps. Ne rien durcir ni assouplir sur la foi de ce compteur.
 
-**Les cinq familles les plus fournies** : Comptabilité & Consolidation 146,
-Risques & Conformité 128, Contrôle de gestion & Trésorerie 128, Audit &
-Contrôle interne 98, Capital-investissement 86. Le résidu « Autres métiers
-de la finance » tient à **11 offres, soit 1,0 %** — il était à 26,7 % le
+**Les cinq familles les plus fournies** : Contrôle de gestion & Trésorerie 121,
+Risques & Conformité 117, Comptabilité & Consolidation 96, Audit & Contrôle
+interne 94, Capital-investissement 86. Le résidu « Autres métiers de la
+finance » tient à **11 offres, soit 1,2 %** — il était à 26,7 % le
 2 septembre.
 
-**Les cinq structures les plus fournies** : BFI 201, Entreprise 169, Big Four
-164, Assurance & courtage 94, Banque d’affaires indépendante 90.
+**Les cinq structures les plus fournies** : BFI 193, Big Four 156, et le reste
+derrière.
+
+> **Comptabilité & Consolidation passe de 146 à 96, et c'est attendu** : c'est
+> la famille où les cabinets exigent le plus souvent « au moins 3 ans ».
+> La borne basse ouverte y a mordu plus qu'ailleurs.
 
 **Les tables** : `ingestion/maisons.txt` 320 lignes. *(Ce fichier est dans
 `ingestion/`, pas à la racine — l'édition précédente de cette ligne le
@@ -46,6 +53,65 @@ cherchait au mauvais endroit.)*
 
 **Le poids servi** : `offres.js` 690 Ko, `index.html` 915 Ko, les quinze pages
 de famille 2 892 Ko au total. Le sitemap déclare **18 URL**.
+
+---
+
+## Le chiffre à suivre chaque jour — et ce qu'on peut en dire
+
+**Ce n'est pas le total du catalogue qu'il faut suivre, c'est celui-ci.** Une
+offre jugée sur un TEXTE a été vraiment lue ; une offre jugée sur son seul
+INTITULÉ est une promesse qu'on ne peut pas tenir.
+
+### Ce qu'on peut affirmer, au 15 septembre 2026
+
+> **Aucune offre CDI/CDD dont le texte a pu être lu n'exige plus de trois ans.
+> Les fiches illisibles restent jugées sur le seul intitulé.**
+
+| | |
+|---|---:|
+| offres CDI/CDD au catalogue | **262** |
+| jugées sur un texte de 300 caractères ou plus | **261** |
+| jugées sur le seul intitulé | **0** |
+| introuvables dans la récolte du passage | 1 |
+| **contre-exemples trouvés** | **0** |
+
+L'affirmation a été éprouvée **à l'envers** : on a relu les 262 offres
+publiées, recalculé le verdict sur le texte dont le juge disposait, et cherché
+un contre-exemple. Il n'y en a pas. Et le zéro a été éprouvé lui-même —
+soumis au même calcul, un témoin « 7 ans » ressort bien en contre-exemple,
+donc l'instrument mord.
+
+### Ce que l'affirmation NE couvre PAS — à dire en même temps
+
+**Un texte LU n'est pas un texte COMPLET.** Banque Populaire du Sud portait
+3 859 caractères de description, et son exigence « confirmé (>3ans) » n'y
+figurait pas : elle n'est que sur la page, qui rend 3 077 octets de coquille
+JavaScript. L'affirmation porte sur **ce que le texte dit**, pas sur ce que
+l'annonce entière exige.
+
+Les autres onglets sont loin derrière, et il faut le savoir avant de
+généraliser :
+
+| onglet | jugées sur un texte | total |
+|---|---:|---:|
+| CDI · CDD | **261** | 262 |
+| Stage | 289 | 575 |
+| Alternance | 25 | 59 |
+| VIE | 0 | 51 |
+
+Le VIE à zéro est normal et assumé : le référencement se fait sans reproduire
+la description (voie B, `PROJET.md` §8). Le stage et l'alternance, eux, sont
+un vrai chantier — mais l'enjeu de séniorité y est moindre, un stage étant
+junior par contrat.
+
+### Correction d'un chiffre donné plus tôt dans la journée
+
+Le paragraphe « 105 fiches muettes » ci-dessous mesurait **les pages**, pas le
+texte dont le juge disposait. Beaucoup d'offres BPCE ont une page vide et
+4 000 caractères venant de leur liste : elles étaient comptées « muettes »
+alors que le juge les lisait. Le chiffre des pages illisibles reste vrai et
+reste un chantier ; **il ne dit rien du nombre d'offres jugées à l'aveugle**,
+qui est de zéro aujourd'hui.
 
 ---
 
