@@ -10,42 +10,64 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**1 062 offres** · **217 employeurs** distincts · **15 familles** · **11 types
-de structure**, tous représentés. Mesuré sur `offres.js` le 15/09/2026.
+**1 052 offres** · **217 employeurs** distincts · **15 familles** · **11 types
+de structure**, tous représentés. Mesuré sur `offres.js` le 15/09/2026, après
+le passage manuel de 18h30.
 
-> **Ce chiffre est celui d'AVANT les corrections du 15/09.** Aucune collecte
-> n'a tourné depuis : les quatre corrections de séniorité (§46) et la clé de
-> déduplication (§47) prendront effet au passage de 06h30. L'audit donne
-> l'ordre de grandeur — **neuf** offres CDI/CDD écartées là où deux
-> l'étaient, plus les doublons de marque.
+> 1 062 avant, 1 052 après. La baisse est voulue et se décompose : les quatre
+> corrections de séniorité (§46), la clé de déduplication de marque (§47) qui
+> retire sept doublons e-i.com, et les trois corrections d'intitulé de la
+> veille. *Moins d'offres, mais toutes justes.*
 
 | Onglet | Offres |
 |---|---:|
-| Stage | 572 |
-| CDI · CDD | 374 |
-| Alternance | 66 |
-| VIE | 50 |
+| Stage | 575 |
+| CDI · CDD | 365 |
+| Alternance | 61 |
+| VIE | 51 |
 
 > **L'alternance est saisonnière.** Un catalogue d'alternance maigre relevé en
 > septembre ne prouve rien : le contrat démarre à la rentrée, donc les annonces
 > se publient de février à juillet. La mesure qui compte est celle du
 > printemps. Ne rien durcir ni assouplir sur la foi de ce compteur.
 
-**Les cinq familles les plus fournies** : Comptabilité & Consolidation 148,
-Contrôle de gestion & Trésorerie 130, Risques & Conformité 127, Audit &
-Contrôle interne 101, Capital-investissement 87. Le résidu « Autres métiers
-de la finance » tient à **10 offres, soit 0,9 %** — il était à 26,7 % le
+**Les cinq familles les plus fournies** : Comptabilité & Consolidation 146,
+Risques & Conformité 128, Contrôle de gestion & Trésorerie 128, Audit &
+Contrôle interne 98, Capital-investissement 86. Le résidu « Autres métiers
+de la finance » tient à **11 offres, soit 1,0 %** — il était à 26,7 % le
 2 septembre.
 
-**Les cinq structures les plus fournies** : BFI 194, Entreprise 173, Big Four
-165, Assurance & courtage 97, Banque d’affaires indépendante 93.
+**Les cinq structures les plus fournies** : BFI 201, Entreprise 169, Big Four
+164, Assurance & courtage 94, Banque d’affaires indépendante 90.
 
-**Les tables** : `ingestion/maisons.txt` 322 lignes. *(Ce fichier est dans
+**Les tables** : `ingestion/maisons.txt` 320 lignes. *(Ce fichier est dans
 `ingestion/`, pas à la racine — l'édition précédente de cette ligne le
 cherchait au mauvais endroit.)*
 
-**Le poids servi** : `offres.js` 716 Ko, `index.html` 922 Ko, les quinze pages
-de famille 2 900 Ko au total. Le sitemap déclare **18 URL**.
+**Le poids servi** : `offres.js` 690 Ko, `index.html` 915 Ko, les quinze pages
+de famille 2 892 Ko au total. Le sitemap déclare **18 URL**.
+
+---
+
+## Le prochain doublon de marque : BNP Paribas / Hello bank!
+
+**Signalé par le contrôle du 15/09**, section « une URL, un employeur »,
+volet récolte :
+
+> 1 URL portée par deux employeurs DANS LA RÉCOLTE, sans doublon publié à ce
+> jour : BNP Paribas / Hello bank! — `group.bnpparibas/…/conseiller-banca`
+
+C'est **exactement** le piège qu'on vient de fermer pour le CIC (§47), sur
+une autre paire. Ici les deux copies ne sont jamais passées le même jour ;
+le jour où elles passeront, le doublon paraîtra et `canonicalKey` ne pourra
+pas le voir — deux noms font deux clés.
+
+La différence avec e-i.com : **l'URL est la même**, pas seulement le numéro.
+Le remède est donc plus simple — faire de l'URL l'identité quand deux
+employeurs la partagent — mais il demande de trancher quel nom publier, et
+de vérifier que ça ne casse pas le cas légitime d'une annonce ouverte sur
+deux sites du **même** employeur (BPCE, quatre cas). À mesurer avant
+d'écrire quoi que ce soit.
 
 ---
 
@@ -100,6 +122,28 @@ depuis trois domaines, `canonicalKey` commence par le nom de l'employeur,
 donc quatre numéros d'annonce paraissaient deux fois. L'identité est
 désormais le numéro. On ne débranche aucun domaine — CIC et Crédit Mutuel
 ont chacun 4 offres en propre sur 15.
+
+**Vérifié SUR LE SITE EN LIGNE**, pas sur le fichier local ni sur le commit —
+un déploiement peut échouer sans rien dire. `juniorjobfinance.com/offres.js`
+sert 1 052 offres, et les sept défauts y sont à zéro :
+
+| | avant | après |
+|---|---:|---:|
+| Thales « Zenith », 5 ans | 1 | 0 |
+| Banque de France « agréments », 10 ans | 1 | 0 |
+| CIC / Crédit Mutuel « RSE-ESG », 3 à 5 ans | 2 | 0 |
+| HSBC « Team Leader » | 1 | 0 |
+| « fin d'études » dans un intitulé | 21 | 0 |
+| « École - » en tête d'intitulé | 6 | 0 |
+| « Animateur Commercial » (AXA) | 3 | 0 |
+| **numéros e-i.com publiés deux fois** | **4** | **0** |
+
+> **Le décalage qui a fait réagir Victor mérite d'être noté, parce qu'il se
+> reproduira.** Le code a été corrigé, testé et poussé — et le site ne
+> changeait pas. C'est normal : un commit de code ne touche pas `offres.js`,
+> que le navigateur lit. Rien n'arrive à l'écran tant qu'une collecte n'a pas
+> republié le catalogue. Une correction de classement n'est donc **livrée**
+> qu'après un passage, pas après un push.
 
 **Ce qui protège ces cinq corrections** : `test-seniorite.js` porte 41 cas
 (contre 25), et `ingestion/test-doublon-marque.js` est une suite nouvelle,
