@@ -624,12 +624,12 @@ donc sur le **voisinage du nombre**, jamais sur le paragraphe.
 | « Bac+5, soit 5 années d'études » | — | le diplôme |
 | « Vous encadrez une dizaine de collaborateurs » | — | « dizaine » sans l'unité « années » |
 
-> **Les phrases négatives données lors d'une séance antérieure — la société, le
-> RGPD, un collègue, un interlocuteur — ne figuraient pas dans le journal de la
-> session du 15/09 et n'ont donc pas pu être reprises textuellement.** La liste
-> ci-dessus a été fabriquée par MESURE, en relisant ce que l'élargissement de
-> l'ancre attrapait à tort. Les formes exactes restent à ajouter ici dès
-> qu'elles seront de nouveau sous la main.
+> La liste ci-dessus a d'abord été fabriquée par MESURE, en relisant ce que
+> l'élargissement de l'ancre attrapait à tort — les phrases négatives d'une
+> séance antérieure n'étaient pas dans le journal de la session. **Victor les
+> a redonnées le même jour : elles sont en II.E, avec leur maison**, et elles
+> couvrent quatre familles dont une que la mesure n'avait pas nommée — les
+> durées qui mesurent autre chose qu'une expérience.
 
 ---
 
@@ -677,3 +677,75 @@ que ».
 Mesuré **avant** de poser la règle, comme demandé : 13 offres touchées sur
 3 407, dont **2 seulement** passaient le filtre junior — les deux RSM
 signalées. Aucun autre effet.
+
+---
+
+## II.E — Les phrases négatives, données par Victor le 15/09/2026
+
+Ce sont de **vraies phrases tirées des fiches du catalogue**, contenant une
+durée qui n'est pas une exigence d'expérience. Aucune ne doit produire de
+rejet.
+
+**Passées au juge le jour où elles ont été données : 0 rejet sur 19, et 0
+nombre lu.** Ce ne sont donc pas des rapports de défaut, ce sont des GARDES —
+elles protègent le prochain élargissement de l'ancre, qui sera tenté un jour
+et devra les laisser muettes.
+
+On rapporte les deux chiffres et pas un seul, parce qu'ils ne disent pas la
+même chose : « ne produit pas de rejet » est le résultat d'aujourd'hui, « ne
+fait lire aucun nombre » est ce qui garantit qu'un changement de plafond ne
+les réveillera pas. Une phrase qui ferait lire « 2 ans » sans rejeter serait
+une bombe à retardement.
+
+### Âge et ancienneté de la société
+
+| la phrase | maison |
+|---|---|
+| « Vous savez que l'on ne peut être leader **depuis plus de 30 ans** sans se réinventer. » | Socfim |
+| « Nous sommes fiers d'être, **depuis plus de 50 ans**, un acteur de confiance » | BPCE CEGC |
+| « prônent **depuis plus de 130 ans** un modèle d'économie sociale et solidaire durable » | Crédit Coopératif |
+| « **en action depuis plus de 200 ans**, nous avons créé le premier réseau bancaire français » | Caisse d'Épargne IDF |
+| « la 1ère banque des entreprises en France **depuis 15 ans**, d'après l'étude Kantar » | BP Rives de Paris |
+| « **En 5 ans d'existence**, nous sommes parvenus à : » | Pennylane |
+| « le Crédit Foncier bénéficie **depuis plusieurs années** du label Egalité professionnelle » | Crédit Foncier |
+
+### Conservation des données (RGPD) — présent dans des centaines de fiches
+
+| la phrase | maison |
+|---|---|
+| « vos données peuvent être **conservées 2 ans** à compter de notre dernier échange » | Pennylane |
+| « Your data is **kept for up to 2 years** in our candidate pool. » | Qonto |
+| « your data may be **retained for 2 years** from our last exchange » | Pennylane EN |
+
+### Parcours d'un tiers — manager, collègue, interlocuteur
+
+| la phrase | maison |
+|---|---|
+| « **Guilhem** built his background in regulatory compliance and internal control **over 8+ years**, including as Head of Compliance at Lyra Collect and **Senior Consultant** at KPMG » | Qonto |
+| « You will **report to Anamaria**, our **Senior Team Lead** Fraud » | Qonto |
+| « en collaboration avec **un actuaire senior** de l'équipe » | BPCE CEGC |
+| « éclairer le **senior management** (analyse de process, études sectorielles) » | BP du Nord |
+| « Un Seynalma Interview avec Arnaud (Operations Lead) et Emmanuel (**Senior Client Executive**) » | Seyna |
+| « Gaia Repossi, sa fille nommée Directrice Artistique **à seulement 21 ans** » | Repossi |
+
+> Les trois dernières de cette famille sont les plus instructives pour la
+> règle II.D : elles contiennent « senior » **et** un rôle, et doivent
+> néanmoins être gardées. C'est pourquoi on ne cherche pas le mot « senior »
+> mais un TITRE DE POSTE annoncé par « votre rôle : », « le poste : », « en
+> tant que », ou suivi de la mention de genre.
+
+### Durées qui ne sont pas de l'expérience — la catégorie à nommer
+
+| la phrase | maison | ce que la durée mesure |
+|---|---|---|
+| « vous intégrez l'équipe pour un **contrat d'une durée de 2 ans** » | AEW | la durée du contrat |
+| « **Plan à 3 ans**/Actuals » | Dior | un horizon budgétaire |
+| « FP&A Systems Analyst - **6-month fixed-term contract** » | Ipsen | la durée du poste |
+
+> **Cette quatrième famille est la seule qui n'ait pas de marqueur de
+> contexte.** Les trois premières se reconnaissent à ce dont elles parlent —
+> la société, les données, une personne nommée. Celle-ci se reconnaît à ce que
+> la durée MESURE : un contrat, un plan, un poste. Le mécanisme la laisse
+> muette aujourd'hui pour une raison plus simple — aucune n'est ancrée sur une
+> exigence adressée au candidat — mais elle mérite son nom, parce que c'est
+> elle qui reviendra si l'ancre s'élargit encore.

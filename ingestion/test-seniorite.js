@@ -181,6 +181,63 @@ for (const [attendu, titre, corps, source] of GRADES) {
 }
 console.log(`${GRADES.length - echecsG}/${GRADES.length} grades lus dans le corps`);
 
+// --- LES PHRASES NÉGATIVES ------------------------------------------------
+// De VRAIES phrases des fiches du catalogue, relevées par Victor le
+// 15/09/2026 : une durée y figure, mais ce n'est pas une exigence
+// d'expérience. Le détail et leurs maisons sont en partie II.E de
+// `corpus-etiquetage.md`.
+//
+// Elles ne mordaient déjà pas le jour où elles ont été données — 0 rejet sur
+// 19. Ce ne sont donc pas des rapports de défaut, ce sont des GARDES : elles
+// protègent le prochain élargissement de l'ancre, qui sera tenté un jour.
+//
+// ON VÉRIFIE DEUX CHOSES, et pas une. Qu'aucune ne rejette, et qu'aucune ne
+// fasse LIRE un nombre. La seconde est la vraie garantie : une phrase qui
+// ferait lire « 2 ans » sans rejeter aujourd'hui rejetterait le jour où le
+// plafond bougerait, et personne ne ferait le lien.
+const NEGATIVES = [
+  // Âge et ancienneté de la société
+  ["Vous savez que l'on ne peut être leader depuis plus de 30 ans sans se réinventer.", 'Socfim'],
+  ["Nous sommes fiers d'être, depuis plus de 50 ans, un acteur de confiance", 'BPCE CEGC'],
+  ["prônent depuis plus de 130 ans un modèle d'économie sociale et solidaire durable", 'Crédit Coopératif'],
+  ['en action depuis plus de 200 ans, nous avons créé le premier réseau bancaire français', "Caisse d'Épargne IDF"],
+  ["la 1ère banque des entreprises en France depuis 15 ans, d'après l'étude Kantar", 'BP Rives de Paris'],
+  ["En 5 ans d'existence, nous sommes parvenus à :", 'Pennylane'],
+  ['le Crédit Foncier bénéficie depuis plusieurs années du label Egalité professionnelle', 'Crédit Foncier'],
+  // Conservation des données
+  ['vos données peuvent être conservées 2 ans à compter de notre dernier échange', 'Pennylane'],
+  ['Your data is kept for up to 2 years in our candidate pool.', 'Qonto'],
+  ['your data may be retained for 2 years from our last exchange', 'Pennylane EN'],
+  // Parcours d'un TIERS — les trois « senior » ci-dessous éprouvent la règle
+  // du grade dans le corps : le mot y est, le poste n'est pas celui-là.
+  ['Guilhem built his background in regulatory compliance and internal control over 8+ years, including as Head of Compliance at Lyra Collect and Senior Consultant at KPMG', 'Qonto'],
+  ['You will report to Anamaria, our Senior Team Lead Fraud', 'Qonto'],
+  ["en collaboration avec un actuaire senior de l'équipe", 'BPCE CEGC'],
+  ['éclairer le senior management (analyse de process, études sectorielles)', 'BP du Nord'],
+  ['Un Seynalma Interview avec Arnaud (Operations Lead) et Emmanuel (Senior Client Executive)', 'Seyna'],
+  ['Gaia Repossi, sa fille nommée Directrice Artistique à seulement 21 ans', 'Repossi'],
+  // Durées qui mesurent autre chose qu'une expérience
+  ["vous intégrez l'équipe pour un contrat d'une durée de 2 ans", 'AEW — durée du contrat'],
+  ['Plan à 3 ans/Actuals', 'Dior — horizon budgétaire'],
+  ['FP&A Systems Analyst - 6-month fixed-term contract', 'Ipsen — durée du poste'],
+];
+let echecsN = 0;
+for (const [phrase, source] of NEGATIVES) {
+  const v = P.verdictSenioriteDescr(phrase);
+  const o = { volet: 'cdi-cdd', title: 'Analyste financier', _descrExtrait: phrase };
+  P.fusionnerVerdictSeniorite(o, phrase);
+  if (!P.passesJuniorFilter(o, true)) {
+    echecsN++;
+    console.log(`  ÉCHEC  cette phrase ne doit PAS faire rejeter   [${source}]`);
+    console.log(`         « ${phrase.slice(0, 100)} »`);
+  } else if (v._expMax != null) {
+    echecsN++;
+    console.log(`  ÉCHEC  cette phrase ne doit faire lire AUCUN nombre, elle rend ${v._expMax}   [${source}]`);
+    console.log(`         « ${phrase.slice(0, 100)} »`);
+  }
+}
+console.log(`${NEGATIVES.length - echecsN}/${NEGATIVES.length} phrases négatives restées muettes`);
+
 let echecs = 0;
 for (const [phrase, attendu, source] of CAS) {
   const rendu = P.dureeExperienceMax(phrase);
@@ -294,4 +351,4 @@ for (const [volet, titre, attendu, source] of INTITULES) {
 }
 console.log(`${INTITULES.length - echecs4}/${INTITULES.length} intitulés jugés conformément`);
 
-if (echecs + echecs2 + echecs3 + echecs4 + echecsB + echecsG) process.exitCode = 1;
+if (echecs + echecs2 + echecs3 + echecs4 + echecsB + echecsG + echecsN) process.exitCode = 1;

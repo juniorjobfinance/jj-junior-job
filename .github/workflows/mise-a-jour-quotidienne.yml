@@ -93,6 +93,14 @@ jobs:
           # offre est désormais son NUMÉRO — et la liste des hôtes est close,
           # une numérotation étrangère fondrait deux annonces sans rapport.
           node ingestion/test-doublon-marque.js
+          # test-limites-mot : `\b` est ASCII et ne voit aucune frontière
+          # contre une lettre accentuée. Le motif n'est alors pas faux, il est
+          # INERTE — il n'attrape rien et ne se plaint jamais. Quatre
+          # occurrences en cinq jours (« finance », « commodities »,
+          # « à partir de », « exigé »), et cinq défauts vivants trouvés le
+          # jour où ce contrôle a été écrit. La classe se ferme ici, une fois,
+          # au lieu d'être rouverte à chaque découverte.
+          node ingestion/test-limites-mot.js
           # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
           # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
           # On le lance pour son journal, pas pour son verdict.

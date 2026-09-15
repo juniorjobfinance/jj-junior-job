@@ -91,7 +91,25 @@ const RECOUVREMENT_PILOTAGE = /\b(?:analyste|pilotage|suivi|controle)\b/;
 
 const PREFILTER_EXCEPTIONS = [
   /\bgestion de patrimoine\b/,
-  /\bpatrimonial(?:e)?\b/,
+  // « patrimonial » exempte du prefiltre retail parce qu il nomme la banque
+  // privee. Mais « Conseiller DE CLIENTELE Patrimoniale » est un poste
+  // d AGENCE : c est le mot « clientele » qui trahit le reseau, la banque
+  // privee ne parle jamais de sa « clientele patrimoniale » mais de gestion
+  // de patrimoine, d ingenierie patrimoniale ou de banquier prive.
+  //
+  // Le lookbehind ne ferme QUE cette forme. Mesure sur la recolte du
+  // 15/09/2026, 3 407 intitules :
+  //
+  //     « conseiller (de) clientele patrimoniale »   3, toutes Caisse
+  //                                                  d Epargne CEPAC, toutes
+  //                                                  typees banque de detail
+  //     « conseiller en gestion de patrimoine »     91, Palatine, Allianz,
+  //                                                  Meilleurtaux — intactes
+  //     « conseiller patrimonial » tout court        exempte comme avant
+  //
+  // Signale par Victor le 15/09 : « Conseiller Clientele Patrimonial |
+  // Caisse d Epargne CEPAC : commercial bancaire, hors perimetre. »
+  /(?<!\bclientele\s)patrimonial(?:e)?\b/,
   /\bingenierie patrimoniale\b/,
   /\bbanquier(?:e)? prive(?:e)?\b/,
   /\bprivate bank/,

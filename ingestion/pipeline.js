@@ -323,7 +323,7 @@ const FAMILLE_RULES = [
   // anglais. Sans « fixed income », « cross asset », « produits structurés » ou
   // « dérivés », les postes les plus recherchés de Lazard, Goldman, BNP ou ODDO
   // tombaient tous dans « Autres métiers de la finance ».
-  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits? d[ée]riv[ée]|d[ée]riv[ée]s?\b|derivativ|march[ée]s financiers|finance de march[ée]|financial market|structuring|\bpricing\b|cross[\s-]?asset|fixed income|high yield|\bobligataire\b|produits? structur|solutions? structur|blended finance|execution and clearing|\bclearing\b|\bsales\b\s*(?:&|et)\s*trading|equity capital|debt capital|\bdcm\b|\becm\b|\bcoverage\b|op[ée]rateur de march[ée]|analyste actions?|\bfo\/fi\b|garanties internationales|financements? syndiqu|syndicated loan|network banking|produits? structur[ée]s? financial|structured product|healthcare sector|march[ée] de l.[ée]nergie|real[\s-]?time analyst|[ée]tudes financi[èe]res|analyse cr[ée]dit|titrisation|\bipv\b|collateral|digital assets|controls on equity|global (?:corporate )?banking|global markets|corporate banking|primary distribution/i, 'Marchés & Front Office'],
+  [/front[\s-]?office|salle des march[ée]s|trading|\btrader\b|structuration|capital market|taux et change|\bfx\b|produits? d[ée]riv[ée]|d[ée]riv[ée]s?(?![A-Za-zÀ-ÿ])|derivativ|march[ée]s financiers|finance de march[ée]|financial market|structuring|\bpricing\b|cross[\s-]?asset|fixed income|high yield|\bobligataire\b|produits? structur|solutions? structur|blended finance|execution and clearing|\bclearing\b|\bsales\b\s*(?:&|et)\s*trading|equity capital|debt capital|\bdcm\b|\becm\b|\bcoverage\b|op[ée]rateur de march[ée]|analyste actions?|\bfo\/fi\b|garanties internationales|financements? syndiqu|syndicated loan|network banking|produits? structur[ée]s? financial|structured product|healthcare sector|march[ée] de l.[ée]nergie|real[\s-]?time analyst|[ée]tudes financi[èe]res|analyse cr[ée]dit|titrisation|\bipv\b|collateral|digital assets|controls on equity|global (?:corporate )?banking|global markets|corporate banking|primary distribution/i, 'Marchés & Front Office'],
   // Gestion d'actifs : la vente institutionnelle (« sales gestion
   // institutionnelle », « coverage institutionnel ») est un métier de la gestion
   // d'actifs, pas du réseau — c'est la distribution de produits financiers à des
@@ -1599,7 +1599,16 @@ function estExclue(url, emp) {
 }
 
 const INDEPENDANT_RE =
-  /profession\s+lib[ée]rale|agent\s+g[ée]n[ée]ral|\bmandataire\b|ind[ée]pendant|franchis[ée]|cr[ée]ateur\s+d.entreprise|auto-?entrepreneur|\bentrepreneur\s+en\b|votre\s+propre\s+(?:cabinet|agence|activit[ée])|\bVDI\b/i;
+  // `\bentrepreneur\b` remplace `\bentrepreneur\s+en\b`, qui laissait passer
+  // « Entrepreneur AXA spécialisé en Prévoyance & Patrimoine » — huit offres
+  // au catalogue du 15/09/2026. C'est un agent commercial en franchise, pas
+  // un salarié : hors périmètre par nature.
+  //
+  // Mesure sur la récolte du 15/09, 3 407 intitulés : le motif large touche
+  // 46 offres, TOUTES chez AXA, toutes des mandats de franchise. Zéro
+  // dommage collatéral. « Entrepreneurship Programme » n'est pas touché — la
+  // limite de mot tombe après « entrepreneur », et « ship » la lui refuse.
+  /profession\s+lib[ée]rale|agent\s+g[ée]n[ée]ral|\bmandataire\b|ind[ée]pendant|franchis[ée]|cr[ée]ateur\s+d.entreprise|auto-?entrepreneur|\bentrepreneurs?\b|votre\s+propre\s+(?:cabinet|agence|activit[ée])|\bVDI\b/i;
 
 // Intitulés de vente / développement commercial. Cette liste ne suffit jamais
 // à écarter une offre à elle seule : elle n'a de sens que croisée avec le type
@@ -1852,7 +1861,12 @@ const GRADE_TITRE_CORPS = [
 
 // L intitule PUBLIE dit-il deja le grade ? Alors il n y a rien a rattraper :
 // SENIOR_RE a deja tranche, et la regle du corps ne sert a rien.
-const TITRE_DIT_LE_GRADE = /\bsenior\b|\bconfirm[ée]e?s?\b|\bmanagers?\b|\bexp[ée]riment[ée]e?s?\b/i;
+// `\b` est ASCII : posé après « confirmé » ou « expérimenté », il ne trouve
+// aucune frontière — le « é » n'est pas un caractère de mot pour lui. Les deux
+// motifs étaient donc inertes sur la forme MASCULINE SINGULIER, celle que les
+// intitulés écrivent le plus souvent.
+const TITRE_DIT_LE_GRADE =
+  /\bsenior\b|\bconfirm[ée]e?s?(?![A-Za-zÀ-ÿ])|\bmanagers?\b|\bexp[ée]riment[ée]e?s?(?![A-Za-zÀ-ÿ])/i;
 
 const FORMULES_SENIORITE = [
   [/exp[ée]rience\s+confirm[ée]e?/i, "expérience confirmée"],
@@ -2392,7 +2406,9 @@ function niveauHorsCible(titre) {
 // annonces sont en outre dupliquées d'une ville à l'autre et jamais rattachées
 // à une maison réelle.
 const EMPLOYEUR_ECOLE_RE =
-  /\b[ée]coles?\b|\bcfa\b|\bcampus\b|centre de formation|\bmbway\b|\besam\b|\baftec\b|\bihecf\b|\be2se\b|aivancity|inted group|studency|\biesa\b|groupe alternance|\bipac\b|formation/i;
+  // `\b` devant « école » ne trouve rien non plus : il est ASCII des DEUX
+  // côtés. Le motif ne reconnaissait donc « École » qu'écrite sans accent.
+  /(?<![A-Za-zÀ-ÿ])[ée]coles?\b|\bcfa\b|\bcampus\b|centre de formation|\bmbway\b|\besam\b|\baftec\b|\bihecf\b|\be2se\b|aivancity|inted group|studency|\biesa\b|groupe alternance|\bipac\b|formation/i;
 
 function estUneOffreFinance(titre) {
   return (
@@ -4014,6 +4030,67 @@ async function checkLink(url) {
   }
 }
 
+// LA VÉRIFICATION DE TOUS LES LIENS, EN PARALLÈLE ET SOUS BUDGET.
+//
+// `linkStatus` valait « unknown » sur la totalité du catalogue, cinq jours
+// durant, pour une raison qui n'était pas le coût : la boucle était
+// SÉQUENTIELLE. Mille cinquante-deux offres à dix secondes de délai maximum,
+// c'est près de trois heures dans le pire cas — alors personne n'a jamais
+// passé `--check-links`, et le garde-fou est resté décoratif.
+//
+// Mesuré le 15/09/2026 sur les 1 052 offres publiées, un hôte à la fois et
+// douze hôtes en parallèle : **1 minute 07**, et **onze liens morts** — dix
+// La Banque Postale et un Butagaz, tous en 404. Le coût n'était pas le
+// problème ; la forme de la boucle l'était.
+//
+// LE BUDGET N'EST PAS UNE PRÉCAUTION DÉCORATIVE. Le chiffre ci-dessus a été
+// pris sur une machine de bureau ; le passage tourne sur GitHub Actions, et
+// « une durée ne se mesure que sur le réseau qui la subira ». Un hôte qui
+// portera cent trente-huit offres et se mettra à ne plus répondre coûterait
+// vingt-trois minutes à lui seul. Au-delà du budget on s'arrête, et ce qui
+// reste garde « unknown » — la seule valeur qui ne retire rien.
+const BUDGET_LIENS_MS = 6 * 60 * 1000;
+const CONCURRENCE_LIENS = 12;
+
+async function verifierLiens(offers) {
+  const parHote = new Map();
+  for (const o of offers) {
+    if (!o.url) continue;
+    let h;
+    try { h = new URL(o.url).host; } catch { continue; }
+    if (!parHote.has(h)) parHote.set(h, []);
+    parHote.get(h).push(o);
+  }
+
+  const etats = new Map();
+  const hotes = [...parHote.entries()];
+  const debut = Date.now();
+  let curseur = 0;
+  let abandonnees = 0;
+
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCE_LIENS, hotes.length) }, async () => {
+      while (curseur < hotes.length) {
+        const [, liste] = hotes[curseur++];
+        for (const o of liste) {
+          if (Date.now() - debut > BUDGET_LIENS_MS) { abandonnees += 1; continue; }
+          etats.set(o.url, await checkLink(o.url));
+          await new Promise((r) => setTimeout(r, 120));
+        }
+      }
+    })
+  );
+
+  const morts = [...etats.values()].filter((v) => v === 'dead').length;
+  const secondes = Math.round((Date.now() - debut) / 1000);
+  console.log(
+    `[pipeline] Liens verifies : ${etats.size} sur ${offers.length} en ${secondes} s ` +
+      `(${morts} mort${morts > 1 ? 's' : ''}` +
+      (abandonnees ? `, ${abandonnees} non verifiees faute de budget` : '') + ').'
+  );
+  return etats;
+}
+
 // ---------------------------------------------------------------------------
 // État persistant entre passages (fraîcheur + détection des offres mortes)
 // ---------------------------------------------------------------------------
@@ -4046,11 +4123,22 @@ async function applyFreshnessAndDeadRemoval(offers) {
   // ne peut nous dire que le poste est pourvu. Elles sont assez peu
   // nombreuses pour que le coût soit sans effet sur la durée du passage.
   mortesManuelles = 0;
+
+  // TOUS LES LIENS, À CHAQUE PASSAGE. `--check-links` ne sert plus qu'à
+  // forcer la vérification quand on l'a explicitement coupée ; elle est
+  // désormais l'ordinaire, parce qu'elle coûte une minute et qu'elle a trouvé
+  // onze annonces mortes dès son premier balayage. Un lien mort est le pire
+  // défaut d'un site d'offres : le candidat clique et tombe sur un 404.
+  const etatsLiens = await verifierLiens(offers);
+
   for (const offer of offers) {
     const prev = prevState[offer._key];
     const manuelle = String(offer.source || '').startsWith('manuel');
-    let linkStatus = 'unknown';
-    if (CHECK_LINKS || manuelle) linkStatus = await checkLink(offer.url);
+    let linkStatus = etatsLiens.get(offer.url) || 'unknown';
+    // Les offres saisies à la main gardent leur vérification propre : elles
+    // ne sont portées par aucune API, et rien d'autre ne peut dire que le
+    // poste est pourvu.
+    if (linkStatus === 'unknown' && (CHECK_LINKS || manuelle)) linkStatus = await checkLink(offer.url);
 
     if (linkStatus === 'dead') {
       // Lien mort constaté directement -> retrait immédiat, pas d'entrée conservée.
@@ -4449,11 +4537,31 @@ async function completerDatesManquantes(offers) {
   // Le critere est le meme dans les deux branches : ce qui aurait ete
   // rattrape en vraie collecte est exactement ce qui doit se trouver dans le
   // cache au rejeu. Le nommer une fois evite que les deux derivent.
+  // UNE DESCRIPTION TROP COURTE COMPTE COMME ABSENTE.
+  //
+  // Trois cents caractères ne portent pas un profil : ils portent une
+  // étiquette. Le connecteur Avature lit le champ `experience` de sa source —
+  // « Minimum 3 ans », quatorze caractères — et c'est TOUTE sa description ;
+  // LVMH faisait de même avec `requiredExperience` avant le 15/09/2026.
+  //
+  // L'effet était pervers : une description PRÉSENTE désarmait ce rattrapage,
+  // et le juge de séniorité se prononçait sur quatorze caractères alors que
+  // la page d'Avature en rend 7 316. Un champ court est plus dangereux qu'un
+  // champ absent — l'absence déclenche le rattrapage, la brièveté l'éteint.
+  //
+  // Le seuil vaut pour TOUS les onglets, à la différence des 1 500 caractères
+  // ci-dessous qui ne concernent que les CDI/CDD : une étiquette de quatorze
+  // caractères ne dit rien de plus sur un stage que sur un CDI.
+  //
+  // Coût mesuré sur la récolte du 15/09 : 30 fiches de plus à visiter — 19
+  // Avature, 11 SmartRecruiters. Négligeable devant les 633 déjà lues.
+  const DESCR_TROP_COURTE = 300;
   const aCompleter = offers.filter(
     (o) =>
       o.url &&
       (!SOURCES_DATE_FIABLE_RE.test(o.source) ||
         o._dateDeLaSource !== true ||
+        (o._descrExtrait && o._descrExtrait.length < DESCR_TROP_COURTE) ||
         (o.volet === 'cdi-cdd' && (!o._descrExtrait || o._descrExtrait.length < 1500)) ||
         (o.volet === 'cdi-cdd' && SOURCE_SANS_CONTRAT_RE.test(o.source)))
   );

@@ -361,7 +361,9 @@ const ADZUNA_BASE = 'https://api.adzuna.com/v1/api/jobs/fr/search';
 // 2 intitulés dans 7 villes — signature classique d'un cabinet.
 const FAUX_EMPLOYEUR_MOTIFS = [
   // Écoles, CFA, organismes de formation
-  "\\b[ée]cole\\b", "\\bcfa\\b", 'campus', 'formation', "alternance\\s*$", "\\bapprentissage\\b",
+  // `\b` est ASCII et ne voit aucune frontière devant le « é » : ce motif ne
+  // reconnaissait « École » qu'écrite sans accent.
+  "(?<![A-Za-zÀ-ÿ])[ée]cole\\b", "\\bcfa\\b", 'campus', 'formation', "alternance\\s*$", "\\bapprentissage\\b",
   'ifcv', "\\bcci\\b", 'chambre de commerce', 'centre de format', 'galileo global', "\\baft\\b",
   'afpa', 'greta', 'aforp', 'promeo', 'irfa', 'iscom', 'iseg', 'ipsa', 'efrei', 'esiee', 'ynov',
   'eductive', 'omnes education', 'ecema', 'cesi\\b', 'ecoris', 'sciences-u', 'maestris', 'cerfal',
