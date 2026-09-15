@@ -67,6 +67,27 @@ INTITULÉ est une promesse qu'on ne peut pas tenir.
 > **Aucune offre CDI/CDD dont le texte a pu être lu n'exige plus de trois ans.
 > Les fiches illisibles restent jugées sur le seul intitulé.**
 
+> ### ⚠ CETTE PHRASE NE COUVRE QUE LES CDI/CDD
+>
+> **Elle ne vaut ni pour les stages, ni pour l'alternance, ni pour les VIE**,
+> et il faut le dire en même temps qu'elle. Au 15/09/2026 :
+>
+> | onglet | jugées sur un texte | total | |
+> |---|---:|---:|---|
+> | **CDI · CDD** | **261** | 262 | l'affirmation porte ici |
+> | Stage | 289 | 575 | **la moitié jugée sur le seul intitulé** |
+> | Alternance | 25 | 59 | |
+> | VIE | 0 | 51 | assumé — voie B, on ne reproduit pas la description |
+>
+> Dire « aucune offre du site n'exige plus de trois ans » serait **faux**. La
+> formulation défendable est celle du haut, avec « CDI/CDD » dedans.
+>
+> Ce qui protège malgré tout les trois autres onglets : un stage, une
+> alternance et un VIE sont **juniors par contrat**. Leur filtre de séniorité
+> ne lit pas le chiffre, il lit l'intitulé — un « Comptable Général Senior »
+> deviné en VIE est écarté sur son grade. L'enjeu y est donc moindre, mais il
+> n'est pas nul et il n'est pas mesuré.
+
 | | |
 |---|---:|
 | offres CDI/CDD au catalogue | **262** |

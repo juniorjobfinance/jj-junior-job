@@ -138,10 +138,27 @@ for (const [phrase, attendu, source] of BORNES) {
   }
 }
 // Et la DÉCISION, qui est ce qui compte : le filtre lui-même.
+//
+// LA DÉCISION A CHANGÉ LE 15/09/2026 AU SOIR, et c'est un choix PRODUIT.
+// « Au moins 3 ans » et « à partir de 3 ans » sont DANS le périmètre : le
+// site promet 0-3 ans, et quelqu'un qui a trois ans pile peut postuler. On
+// écarte à partir de QUATRE. Voir DECISIONS.md §50.
+//
+// La borne ouverte reste CALCULÉE — elle ne décide plus, elle dira « 3 ans ou
+// plus » là où l'affichage dira « 3 ans demandés ».
 const DECISIONS = [
-  ['Une première expérience réussie en environnement bancaire de 3 ans ou plus.', false, "CE Hauts de France — écartée"],
+  // Le cas qui a fait trancher : l'intitulé dit junior, le texte dit « au
+  // moins 3 ans ». Les deux sont vrais, et l'offre est dans la cible.
+  ["Vous disposez d’une première expérience d’au moins 3 ans en cabinet de conseil, d’audit ou sur une fonction corporate liée aux normes comptables.",
+    true, 'PwC « Consultant en Opérations financières junior » — le cas qui a tranché'],
+  ['Une première expérience réussie en environnement bancaire de 3 ans ou plus.', true, "CE Hauts de France — trois ans est dans la cible"],
+  ['À partir de 3 ans d’expérience au sein d’une banque de détail.', true, 'Talan — « à partir de 3 ans » est dans la cible'],
   ['Vous justifiez de 3 ans d’expérience en audit interne.', true, 'trois ans fermes — gardée'],
   ['Vous justifiez d’un minimum de 2 ans en comptabilité.', true, 'deux ans ou plus — gardée'],
+  // Et la nouvelle frontière : quatre.
+  ['Poste ouvert à partir de 4 ans sur une fonction similaire, exigé.', false, 'quatre ans ouverts — écartée'],
+  ["Vous justifiez d'au moins 4 ans d'expérience en consolidation.", false, 'quatre ans — écartée'],
+  ["Vous justifiez de 5 à 7 ans d'expérience en cabinet.", false, 'la borne haute décide toujours'],
 ];
 for (const [descr, attendu, source] of DECISIONS) {
   const o = { volet: 'cdi-cdd', title: 'Analyste financier', _descrExtrait: descr };

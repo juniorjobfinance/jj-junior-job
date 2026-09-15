@@ -2473,3 +2473,140 @@ le regroupement par annonce fond **964 cartes en 41 groupes**.
 Rien n'a donc été changé, et c'est la bonne réponse. **Corriger ce qui marche
 coûte deux fois** : le travail, et la confiance qu'on met ensuite dans les
 mesures.
+
+
+---
+
+## 50. « Au moins 3 ans » est DANS le périmètre — on écarte à partir de quatre
+
+**Arbitré par Victor le 15/09/2026 au soir**, après une mesure demandée
+explicitement : *« C'est un choix produit, je veux le faire explicitement.
+Mesure d'abord, ne change rien. »*
+
+### Ce qui avait été posé, et pourquoi c'était discutable
+
+Le §48 avait fait rejeter les bornes basses ouvertes à trois ans — « au moins
+3 ans », « à partir de 3 ans », « 3 ans ou plus », « minimum 3 ans ». Le
+raisonnement : *trois ans OU PLUS* ne demande pas trois ans, il en demande au
+moins trois, donc le poste vise au-delà de la cible.
+
+Le raisonnement est juste sur le TEXTE. Il est faux sur le PRODUIT.
+
+> **Le site promet 0-3 ans. Quelqu'un qui a trois ans pile est dans la cible,
+> et il peut postuler à ces offres.** Les écarter, c'est priver le candidat le
+> plus avancé de la cible de la moitié de ce qui lui est ouvert.
+
+### La mesure qui a servi à trancher
+
+Sur la récolte du 15/09 au soir, en interrogeant `passesJuniorFilter` deux
+fois sur la même offre — une fois telle quelle, une fois avec `_expOuverte`
+remis à faux :
+
+| | |
+|---|---:|
+| offres CDI/CDD qui **reviennent** | **113** |
+| offres qui **restent écartées de toute façon** | **40** |
+| … dont par leur intitulé senior | 32 |
+| … dont par une formule de séniorité | 8 |
+| revenantes ayant par ailleurs un intitulé senior | **0** |
+
+Ce dernier zéro n'est pas un hasard : un intitulé senior est écarté **avant**
+le chiffre. Une offre ne peut donc pas revenir par la borne si son titre la
+condamne — et c'est ce qui rend l'assouplissement sûr.
+
+### Le cas qui a tranché
+
+**PwC, « Consultant en Opérations financières junior »** :
+
+> « Vous disposez d'une première expérience **d'au moins 3 ans** en cabinet de
+> conseil, d'audit ou sur une fonction corporate liée aux normes comptables. »
+
+L'intitulé dit junior. Le texte dit au moins trois ans. **Les deux sont
+vrais**, et l'offre est dans la cible. Elle est devenue un cas de test
+POSITIF de `test-seniorite.js`.
+
+C'est l'exception à une règle du dépôt, et il faut la nommer : « le CHIFFRE
+passe avant tout, y compris avant le veto — le nombre est la donnée dure, le
+reste est du vocabulaire de marque ». Cette règle reste vraie **au-dessus** du
+plafond. À l'égalité avec le plafond, c'est le périmètre annoncé qui tranche,
+pas la grammaire de l'annonce.
+
+### Ce qui est posé
+
+```
+« au moins 3 ans », « à partir de 3 ans », « 3 ans ou plus »   DANS le périmètre
+« au moins 4 ans », « à partir de 4 ans », « 4 ans et plus »   ÉCARTÉ
+```
+
+`_expOuverte` **continue d'être calculé** alors qu'il ne décide plus rien. Ce
+n'est pas un oubli : il porte la différence entre « 3 ans demandés » et « 3
+ans ou plus demandés », et c'est ce que l'affichage montrera le jour où il
+sera branché (voir §50bis). Un champ qui ne décide plus mais qui informe
+encore n'est pas du code mort — à condition que son emploi soit écrit, ce
+qu'est ce paragraphe.
+
+### Mesure de l'application
+
+Avant / après sur la récolte du 15/09 (16h33), avec le même instrument :
+**110 offres nouvellement gardées, 0 nouvellement écartée.** Les treize suites
+du contrôle 1 passent.
+
+---
+
+## 50bis. Afficher l'expérience demandée : la distribution dit non au filtre
+
+**Demandé par Victor le même soir**, avec la bonne précaution : *« Ne code
+l'affichage qu'après m'avoir donné la distribution. »*
+
+`_expMax` est calculé depuis toujours, sert à écarter, puis est jeté avant
+publication. L'idée : le conserver dans `offres.js` et l'afficher — « 3 ans
+demandés », et rien quand on ne sait pas — plus un filtre « expérience
+demandée » si la couverture le permet.
+
+### La distribution, mesurée
+
+| | CDI · CDD | Stage | Alternance | VIE |
+|---|---:|---:|---:|---:|
+| 1 an | 6 | — | — | — |
+| 2 ans | 32 | 1 | — | — |
+| 3 ans | 18 | 1 | 2 | — |
+| aucun chiffre lisible | 206 | 570 | 56 | 51 |
+| **couverture** | **21 %** | 1 % | 5 % | 0 % |
+
+Dont **19 bornes ouvertes** sur les 56 CDI/CDD connus — elles diraient « 3 ans
+ou plus demandés ».
+
+### Ce que la distribution tranche
+
+**Le filtre : non.** Vingt et un pour cent de couverture signifie qu'un filtre
+« expérience demandée » masquerait **79 % du catalogue** dès qu'on le
+touche. Un filtre qui cache l'essentiel de ce qu'il devrait trier est pire
+qu'un filtre absent — c'est le même défaut qu'une alerte qui crie à tort :
+il apprend à ne pas s'en servir.
+
+**L'affichage : à voir, et seulement sur les CDI/CDD.** Sur les autres onglets
+la couverture est nulle ou dérisoire, et le peu qu'on y lit est FAUX. Les
+quatre offres hors CDI/CDD portant un chiffre supérieur à trois sont toutes
+des faux positifs :
+
+| ce que le lecteur a lu | ce que la phrase dit |
+|---|---|
+| VEGA, stage, « 20 ans » | « forte d'une **expérience de plus 20 ans** en conseil » — la maison |
+| Eurazeo, stage, « 20 ans » | « Avec plus de 20 ans d'expérience, **Eurazeo gère** » — la maison |
+| Natixis, alternance, « 20 ans » | « 22 **négociateurs** bénéficiant de plus de 20 ans » — les collègues |
+| Crédit Agricole CIB, stage, « 11 ans » | « 0 - 2 ans (92) 3 - 5 ans (43) 6 - 10 ans (101) **11 ans et plus (49)** » |
+
+Les trois premiers sont la famille « âge de la société » du corpus, qui ne
+nuisait pas tant qu'elle restait invisible. **Le quatrième est une famille que
+personne n'avait nommée : le MENU DÉROULANT du site carrières, capturé comme
+du texte.** `texteDeLaPage` prend tout, y compris les facettes de recherche.
+
+> **Un champ qui ne sert qu'à décider peut se permettre d'être faux sur les
+> cas que la décision ignore. Un champ qu'on AFFICHE ne le peut pas.** Ces
+> quatre erreurs étaient sans conséquence tant que `_expMax` n'était lu que
+> pour les CDI/CDD ; affichées sur une carte de stage, elles deviennent « 20
+> ans demandés » sur une offre de stage, et le site perd sa crédibilité sur
+> une ligne.
+
+Rien n'a donc été codé ce soir : la distribution était demandée avant
+l'affichage, et elle change la question.

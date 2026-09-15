@@ -2069,15 +2069,25 @@ function passesJuniorFilter(offre, strict) {
   // Le nombre est la donnée dure, le reste est du vocabulaire de marque.
   if (offre._expMax != null && offre._expMax > EXPERIENCE_MAX_ANNEES) return false;
 
-  // ET LA BORNE BASSE OUVERTE AU PLAFOND. « Une premiere experience … de
-  // 3 ans ou plus » (Caisse d Epargne Hauts de France) rend 3, qui n est pas
-  // superieur a trois : l offre passait. Mais « trois ans OU PLUS » ne
-  // demande pas trois ans, il en demande au moins trois — et le poste vise
-  // donc au-dela de la cible.
+  // LA BORNE OUVERTE À TROIS ANS NE REJETTE PAS — arbitré par Victor le
+  // 15/09/2026, et c'est un choix PRODUIT, pas une propriété du texte.
   //
-  // Sous le plafond, une borne ouverte ne dit rien de genant : « au moins
-  // 1 an » reste un poste junior. C'est l'egalite AU plafond qui tranche.
-  if (offre._expMax != null && offre._expMax >= EXPERIENCE_MAX_ANNEES && offre._expOuverte) return false;
+  // Elle a rejeté un soir durant, et coûtait 113 offres CDI/CDD. Le
+  // raisonnement qui l'avait posée était : « 3 ans ou plus » ne demande pas
+  // trois ans, il en demande au moins trois, donc le poste vise au-delà de la
+  // cible. Le raisonnement qui l'emporte est plus simple et plus juste pour
+  // le candidat : **le site promet 0-3 ans, et quelqu'un qui a trois ans
+  // pile peut postuler à ces offres.** « Au moins 3 ans » et « à partir de
+  // 3 ans » sont DANS le périmètre ; on écarte à partir de QUATRE.
+  //
+  // Le verdict continue de porter `_expOuverte` : il ne décide plus, mais il
+  // dira « 3 ans ou plus » là où l'affichage dira « 3 ans demandés ». Voir
+  // DECISIONS.md §50.
+  //
+  // Ce que la règle NE change pas : un intitulé senior écarte toujours avant
+  // le chiffre, et les formules de séniorité aussi. Sur les 153 offres que la
+  // borne touchait, 40 restent écartées pour ces raisons-là — 32 par leur
+  // intitulé, 8 par une formule.
 
   // Le veto n'annule qu'un rejet fondé sur la DESCRIPTION. L'intitulé, lui,
   // a déjà tranché plus haut : un « Senior Manager » reste écarté quoi que
