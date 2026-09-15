@@ -1722,6 +1722,84 @@ const NOMBRES_ECRITS = {
 // Le mot qui ancre. Sans lui dans la phrase, aucun nombre n'est compté.
 const ANCRE_EXPERIENCE = /exp[ée]rien/i;
 
+// LA SECONDE ANCRE : une exigence ADRESSEE AU CANDIDAT.
+//
+// « Le/la candidat(e) retenu(e) devra disposer d une expertise technique
+// … d une duree d au moins 5 ans » (Caisse d Epargne Bourgogne Franche
+// Comte) ne contient pas le mot « experience ». « Vous justifiez d au
+// moins 5 a 7 ans en Cabinet d Expertise-Comptable » (Forvis Mazars) non
+// plus. Les deux etaient publiees.
+//
+// On a mesure la solution evidente — elargir a « expertise | pratique |
+// anciennete » — et elle ne tient pas : sur la recolte du 15/09,
+// « expertise » fait entrer 396 phrases dont presque toutes decrivent le
+// CABINET (« notre expertise couvrant… 3 000 consultants, 48 bureaux »),
+// « pratique » 67 toutes fausses, et « anciennete » comme « seniorite »
+// ZERO — deux motifs inertes de plus.
+//
+// Ce qui distingue une exigence d un boniment n est pas son vocabulaire,
+// c'est qu'elle s'adresse au candidat. Cette ancre est donc grammaticale.
+const ANCRE_EXIGENCE = new RegExp(
+  [
+    'vous\\s+(?:justifiez|disposez|poss[ée]dez|cumulez|comptez|[êe]tes)',
+    'candidat[^.]{0,40}(?:devra|doit|retenu)',
+    'devra\\s+(?:disposer|justifier|avoir)',
+    // `\\b` est ASCII : pose APRÈS « exigé » il ne trouve aucune frontière,
+    // le « é » n'étant pas un caractère de mot pour lui. Le motif était donc
+    // inerte sur la forme accentuée — celle que les annonces écrivent.
+    '(?:exig[ée]e?s?|requise?s?)(?![A-Za-zÀ-ÿ])',
+    '\\bminimum\\b',
+    '\\bau\\s+moins\\b',
+    // Même piège, à l'autre bout : `\\b` posé DEVANT « à » ne matche pas non
+    // plus. « à partir de 4 ans » passait au travers pour cette seule raison.
+    '(?<![A-Za-zÀ-ÿ])[àa]\\s+partir\\s+de(?![A-Za-zÀ-ÿ])',
+    // LE SYMBOLE EST UNE ANCRE À LUI SEUL. Banque Populaire du Sud écrit
+    // « Chargé d'Affaires Entreprises confirmé (>3ans) » : aucune formule,
+    // aucun « expérience », juste un signe. Personne n'écrit « >3ans » pour
+    // parler d'autre chose que d'une exigence.
+    '[>≥]\\s*\\d',
+    // Et le grade, qui dit la séniorité sans la chiffrer.
+    'confirm[ée]e?s?(?![A-Za-zÀ-ÿ])',
+  ].join('|'),
+  'i'
+);
+
+// CE QUI NE PARLE PAS DU CANDIDAT, meme quand une ancre y figure.
+//
+// La mesure du 15/09 a montre d'ou viennent les faux positifs : la taille
+// du cabinet, le deroule du recrutement, les avantages sociaux. Une phrase
+// qui compte des bureaux ou des collaborateurs ne dit rien d'un candidat,
+// et « 50 % transport apres 1 an » decrit une mutuelle, pas un profil.
+//
+// Cette liste se NOURRIT : chaque faux positif observe y ajoute sa forme,
+// et le cas correspondant entre au corpus. Elle ne se devine pas.
+const CONTEXTE_NON_CANDIDAT = new RegExp(
+  [
+    // La maison parle d elle-meme.
+    "\\b(?:nos|notre|nous comptons|le groupe|le cabinet|la soci[ée]t[ée]|l[’']entreprise)\\b[^.]{0,80}\\b(?:collaborateurs?|consultants?|bureaux|agences|pays|salari[ée]s?|clients?)\\b",
+    '\\b(?:depuis|r[ée]partis? dans|implant[ée]e?s? dans)\\b[^.]{0,30}\\b(?:bureaux|pays|agences|villes)\\b',
+    // Le deroule du recrutement.
+    '\\bprocessus\\s+de\\s+recrutement\\b|\\bentretiens?\\b[^.]{0,40}\\b(?:visio|RH|manager)\\b',
+    // Les avantages, ou les durees sont des conditions d anciennete
+    // administratives et non des exigences de profil.
+    '\\b(?:ticket|mutuelle|pr[ée]voyance|int[ée]ressement|participation|cong[ée]s|RTT|t[ée]l[ée]travail|prime)\\b',
+    // La conservation des donnees.
+    '\\bRGPD\\b|\\bconservation\\b[^.]{0,30}\\bdonn[ée]es\\b',
+  ].join('|'),
+  'i'
+);
+
+// CE QUI REND UNE BORNE OUVERTE VERS LE HAUT.
+//
+// « 3 ans ou plus », « au moins 3 ans », « minimum 3 ans », « >3ans »,
+// « 3+ ans », « a partir de 3 ans » : l employeur demande AU MOINS trois
+// ans et en accepte davantage. Lu comme un « 3 » sec, cela passait le
+// plafond de trois ans sans le franchir.
+// Le `(?<![A-Za-zÀ-ÿ])` remplace un `\b` : celui-ci est ASCII et ne voit
+// aucune frontière devant le « à » de « à partir de ».
+const BORNE_OUVERTE_AVANT = /(?<![A-Za-zÀ-ÿ])(?:au\s+moins|minimum(?:\s+de)?|mini|[àa]\s+partir\s+de|plus\s+de|d[èe]s|at\s+least)\s*$|[>≥]\s*$/i;
+const BORNE_OUVERTE_APRES = /^\s*(?:\+|ou\s+plus|et\s+plus|minimum|mini\b|au\s+minimum|and\s+(?:more|above)|or\s+more)/i;
+
 // Ce qui ressemble à une durée d'expérience sans en être une. Vérifié AVANT
 // le comptage, sur le voisinage immédiat du nombre — AMONT seulement, d'où
 // la règle DUREE_ETUDES qui suit, pour ce qui ne se voit qu'en aval.
@@ -1749,6 +1827,33 @@ const DUREE_ETUDES = /^\s*d[’']\s*[ée]tudes?|^\s*of\s+stud/i;
 // peuvent rien vouloir dire d'autre — à la différence de « une première
 // expérience » ou « une expérience réussie », qui abondent dans les annonces
 // juniors et ne qualifient que la qualité, jamais la durée.
+// LE GRADE ECRIT DANS LE CORPS, quand l intitule publie ne le dit pas.
+//
+// RSM publie « Consultant Expertise Conseil » et ecrit dans l'annonce
+// « Votre rôle : Consultant Comptable Senior H/F ». Le titre de liste a ete
+// nettoye ; le poste est reste senior.
+//
+// On cherche un TITRE DE POSTE, pas le mot « senior ». Celui-ci figure dans
+// presque toutes les annonces de cabinet — « notre équipe senior », « nos
+// managers seniors » — et le prendre pour un grade ferait des ravages.
+// Trois formes, toutes observees le 15/09 :
+//
+//   « Consultant Comptable Senior H/F »      un grade suivi de la mention de genre
+//   « Votre rôle : Consultant Senior … »     annonce par un libelle de role
+//   « En tant que Senior … »
+//
+// Mesure sur 3 407 offres : 13 touchees, dont 2 seulement passaient le
+// filtre junior — les deux RSM signalees. Rien d autre ne bouge.
+const GRADE_TITRE_CORPS = [
+  /[A-ZÀ-Ý][^.;:•\n]{2,60}?\bsenior\b[^.;:•\n]{0,40}?\s*[(\-–—]?\s*(?:H\s*\/\s*F|F\s*\/\s*H)/i,
+  /(?:votre\s+r[ôo]le|le\s+poste|intitul[ée]\s+du\s+poste)\s*[:\-–—]\s*[^.;•\n]{0,70}\bsenior\b/i,
+  /en\s+tant\s+que\s+[^.;•\n]{0,40}\bsenior\b/i,
+];
+
+// L intitule PUBLIE dit-il deja le grade ? Alors il n y a rien a rattraper :
+// SENIOR_RE a deja tranche, et la regle du corps ne sert a rien.
+const TITRE_DIT_LE_GRADE = /\bsenior\b|\bconfirm[ée]e?s?\b|\bmanagers?\b|\bexp[ée]riment[ée]e?s?\b/i;
+
 const FORMULES_SENIORITE = [
   [/exp[ée]rience\s+confirm[ée]e?/i, "expérience confirmée"],
   [/exp[ée]rience\s+significative/i, "expérience significative"],
@@ -1766,16 +1871,17 @@ const VETO_JUNIOR_DESCR =
  * Lit la durée d'expérience exigée dans un texte. Rend le nombre le plus
  * élevé trouvé — sur « 3 à 5 ans », la borne haute — ou null.
  */
-function dureeExperienceMax(texte) {
+function lireDuree(texte) {
   const t = String(texte || '').replace(/\s+/g, ' ');
-  if (!t) return null;
+  if (!t) return { max: null, ouverte: false };
 
   let max = null;
+  let ouverte = false;
   // Phrase par phrase : un nombre ne compte que si SA phrase parle
   // d'expérience. « Notre société a 10 ans. Vous avez une expérience en
   // audit. » ne doit pas rendre 10.
   for (const phrase of t.split(/[.;!?\u2022\n]+/)) {
-    if (!ANCRE_EXPERIENCE.test(phrase)) continue;
+    if (!ANCRE_EXPERIENCE.test(phrase) && !ANCRE_EXIGENCE.test(phrase)) continue;
 
     // Le `(?:d['’]\s*)?` couvre « dizaine D ANNEES » : en francais la quantite
     // approximative se relie a son unite par une apostrophe, la quantite
@@ -1789,6 +1895,21 @@ function dureeExperienceMax(texte) {
     while ((m = re.exec(phrase)) !== null) {
       const avant = phrase.slice(Math.max(0, m.index - 45), m.index);
       if (FAUX_AMIS.some((f) => f.test(avant))) continue;
+      // LE CONTEXTE NON-CANDIDAT SE JUGE SUR LE VOISINAGE DU NOMBRE, jamais
+      // sur la phrase entière.
+      //
+      // Posé au niveau de la phrase, il a fait passer 18 offres qui étaient
+      // correctement écartées — dont un actuaire AG2R dont l'annonce dit
+      // « Vous êtes de formation supérieure BAC +5 … et avez au minimum 5 ans
+      // d'expérience, Vos avantages Une politique de rémunération… ». Les
+      // annonces n'ont pas de points : l'exigence et les avantages tiennent
+      // dans la MÊME phrase, et jeter la phrase jetait l'exigence.
+      //
+      // C'est la forme de FAUX_AMIS, et pour la même raison : ce qu'on
+      // disqualifie, c'est un NOMBRE dans son voisinage, pas un paragraphe.
+      const voisinage = avant.slice(-60) + m[0] +
+        phrase.slice(m.index + m[0].length, m.index + m[0].length + 30);
+      if (CONTEXTE_NON_CANDIDAT.test(voisinage)) continue;
       // Puis l'aval : « 5 années d'études » est un diplôme, pas un poste.
       const apres = phrase.slice(m.index + m[0].length, m.index + m[0].length + 24);
       if (DUREE_ETUDES.test(apres)) continue;
@@ -1798,10 +1919,23 @@ function dureeExperienceMax(texte) {
       if (!n) continue;
       // Au-delà de vingt ans c'est l'âge de la maison, pas celui du candidat.
       if (n > 20) continue;
-      if (max === null || n > max) max = n;
+      // La borne est-elle OUVERTE vers le haut ? On regarde les deux cotes
+      // du nombre : « au moins 3 ans » en amont, « 3 ans ou plus » en aval.
+      const ouvertureAmont = BORNE_OUVERTE_AVANT.test(avant.slice(-18));
+      const ouvertureAval = BORNE_OUVERTE_APRES.test(apres);
+      if (max === null || n > max) { max = n; ouverte = ouvertureAmont || ouvertureAval; }
+      else if (n === max && (ouvertureAmont || ouvertureAval)) ouverte = true;
     }
   }
-  return max;
+  return { max, ouverte };
+}
+
+/**
+ * La borne haute seule, pour les appelants qui n'ont pas besoin de savoir
+ * si elle est ouverte. `test-seniorite.js` l'interroge sous cette forme.
+ */
+function dureeExperienceMax(texte) {
+  return lireDuree(texte).max;
 }
 
 /**
@@ -1811,14 +1945,19 @@ function dureeExperienceMax(texte) {
  */
 function verdictSenioriteDescr(texte) {
   const t = String(texte || '');
-  if (!t) return { _expMax: null, _formuleSeniorite: null, _vetoJunior: false, _verdictSur: 0 };
+  if (!t) return { _expMax: null, _expOuverte: false, _formuleSeniorite: null, _gradeCorps: null, _vetoJunior: false, _verdictSur: 0 };
   const formule = (FORMULES_SENIORITE.find(([re]) => re.test(t)) || [])[1] || null;
   // Prefixe `_` : ce sont des champs de travail, jamais publies. Ils doivent
   // AUSSI figurer dans la liste de writeOutput, qui ne retire que ce qu elle
   // nomme — le prefixe seul ne protege de rien.
+  const duree = lireDuree(t);
   return {
-    _expMax: dureeExperienceMax(t),
+    _expMax: duree.max,
+    // La borne basse est-elle OUVERTE ? « 3 ans ou plus » n est pas « 3 ans ».
+    _expOuverte: duree.ouverte,
     _formuleSeniorite: formule,
+    // Le titre que l'annonce se donne a elle-meme, quand il porte un grade.
+    _gradeCorps: (GRADE_TITRE_CORPS.find((re) => re.test(t)) ? true : false) || null,
     _vetoJunior: VETO_JUNIOR_DESCR.test(t),
     // Sur quelle longueur ce verdict a ete rendu. C'est ce chiffre qui permet
     // de verifier, avant publication, quil couvre bien la description finale.
@@ -1847,7 +1986,14 @@ function fusionnerVerdictSeniorite(offre, texte) {
       : v._expMax == null
         ? offre._expMax
         : Math.max(offre._expMax, v._expMax);
+  // L ouverture suit le MAXIMUM : si un texte plus exigeant l emporte, c est
+  // SON ouverture qui compte, pas celle du texte precedent.
+  if (v._expMax != null && (offre._expMax == null || v._expMax >= offre._expMax)) {
+    offre._expOuverte = Boolean(offre._expOuverte && v._expMax === offre._expMax) || Boolean(v._expOuverte);
+  }
+  offre._expOuverte = Boolean(offre._expOuverte);
   offre._formuleSeniorite = offre._formuleSeniorite || v._formuleSeniorite;
+  offre._gradeCorps = offre._gradeCorps || v._gradeCorps;
   offre._vetoJunior = Boolean(offre._vetoJunior || v._vetoJunior);
   // La plus grande longueur analysee : c'est elle que le controle d'invariant
   // compare a la description finale avant publication.
@@ -1895,10 +2041,29 @@ function passesJuniorFilter(offre, strict) {
   }
   if (SENIOR_RE.test(title)) return false;
 
+  // ET LE GRADE QUE L'INTITULE DE LISTE A PERDU. « Consultant Expertise
+  // Conseil » chez RSM se presente, dans le corps de sa propre annonce,
+  // comme « Consultant Comptable Senior H/F ». Entre le titre de liste et
+  // celui que l'annonce se donne, c'est l'annonce qui engage l'employeur.
+  //
+  // Avant le veto, et avant le chiffre : c'est un TITRE, pas une phrase de
+  // description. Un titre ne se rattrape pas par une prose accueillante.
+  if (offre._gradeCorps && !TITRE_DIT_LE_GRADE.test(title || '')) return false;
+
   // Le CHIFFRE passe avant tout, y compris avant le veto : une annonce qui
   // s'intitule « Junior Consultant » et réclame cinq ans n'est pas junior.
   // Le nombre est la donnée dure, le reste est du vocabulaire de marque.
   if (offre._expMax != null && offre._expMax > EXPERIENCE_MAX_ANNEES) return false;
+
+  // ET LA BORNE BASSE OUVERTE AU PLAFOND. « Une premiere experience … de
+  // 3 ans ou plus » (Caisse d Epargne Hauts de France) rend 3, qui n est pas
+  // superieur a trois : l offre passait. Mais « trois ans OU PLUS » ne
+  // demande pas trois ans, il en demande au moins trois — et le poste vise
+  // donc au-dela de la cible.
+  //
+  // Sous le plafond, une borne ouverte ne dit rien de genant : « au moins
+  // 1 an » reste un poste junior. C'est l'egalite AU plafond qui tranche.
+  if (offre._expMax != null && offre._expMax >= EXPERIENCE_MAX_ANNEES && offre._expOuverte) return false;
 
   // Le veto n'annule qu'un rejet fondé sur la DESCRIPTION. L'intitulé, lui,
   // a déjà tranché plus haut : un « Senior Manager » reste écarté quoi que
@@ -2791,7 +2956,30 @@ function normalizeInterne(item) {
     url = raw.link;
     typeContratRaw = raw.contract || raw.name;
     romeLibelle = raw.functionFilter;
-    descr = raw.requiredExperience || '';
+    // LE CHAMP LE PLUS COURT N'EST PAS LA DESCRIPTION.
+    //
+    // `requiredExperience` vaut « Minimum 3 ans » — treize caractères. C'est
+    // un signal de séniorité précieux, et c'était TOUTE la description : les
+    // 73 offres LVMH arrivaient avec moins de 60 caractères de texte.
+    //
+    // Conséquence double, et silencieuse. D'abord le juge de séniorité ne
+    // lisait que ça : « Comptable Fournisseurs » chez Make Up For Ever exige
+    // « au moins 5 ans d'expérience en comptabilité » dans son champ
+    // `profile` (1 250 caractères), et a été publiée. Ensuite une
+    // description PRÉSENTE, si courte soit-elle, vaut « annonce lue » pour
+    // `passesJuniorFilter` comme pour `aCompleter` : elle éteignait le doute
+    // au lieu de l'éveiller.
+    //
+    // On lit donc les trois champs de texte, `profile` en tête puisque c'est
+    // lui qui porte les exigences, et l'on garde `requiredExperience` — sa
+    // formule « Minimum N ans » est justement ce que la borne ouverte sait
+    // maintenant lire.
+    descr = [raw.requiredExperience, raw.profile, raw.jobResponsabilities, raw.description]
+      .filter(Boolean)
+      .join(' ')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
     postedAt = raw.publicationTimestamp
       ? raw.publicationTimestamp * 1000
       : null;
@@ -5045,7 +5233,7 @@ function writeOutput(offers) {
       _key, _postedAt, _firstSeenAt, _lastSeenAt, _linkStatus,
       _dateRecuperee, _dateDeLaSource, _dateEstMiseAJour, _descrExtrait,
       // Analyse de séniorité : champs de travail, jamais publiés.
-      _expMax, _formuleSeniorite, _vetoJunior, _verdictSur,
+      _expMax, _expOuverte, _formuleSeniorite, _gradeCorps, _vetoJunior, _verdictSur,
       // Onglet corrigé d'après la fiche : sert au rapport, pas au visiteur.
       _voletCorrige,
       // Valeurs DÉRIVÉES d'un champ déjà publié : familleId se recalcule

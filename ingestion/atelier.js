@@ -86,6 +86,9 @@ const NOMS = [
   'METIER_HORS_PERIMETRE_RE',
   'SENIOR_RE',
   'dureeExperienceMax',
+  'lireDuree',
+  'ANCRE_EXIGENCE',
+  'CONTEXTE_NON_CANDIDAT',
   'verdictSenioriteDescr',
   // Le SECOND passage, celui qui lit la fiche. `verdictSenioriteDescr` rend
   // un verdict sur un texte ; `fusionnerVerdictSeniorite` est ce qui le POSE
@@ -134,7 +137,21 @@ function chargerPipeline(racine = path.join(__dirname, '..')) {
     'exports',
     '__dirname',
     '__filename',
-    src + '\n;return {' + NOMS.join(', ') + '};'
+    // `typeof X === 'undefined' ? undefined : X` plutôt que `X` tout court.
+    //
+    // Sans cette précaution, un nom absent du pipeline fait échouer le
+    // CHARGEMENT ENTIER par une ReferenceError, et l'atelier ne rend plus
+    // rien du tout. C'est arrivé le 15/09/2026 en comparant le pipeline de
+    // travail à celui de HEAD : `lireDuree` n'existait que dans le premier,
+    // et la mesure du « avant » était impossible — donc aucun avant/après.
+    //
+    // Or comparer deux versions du pipeline est exactement ce à quoi sert
+    // cet atelier. Il doit accepter qu'une version ne connaisse pas encore
+    // un rouage : l'appelant voit alors `undefined` et le dit, au lieu de
+    // recevoir une exception qui masque tout le reste.
+    src + '\n;return {' +
+      NOMS.map((n) => `${n}: (typeof ${n} === 'undefined' ? undefined : ${n})`).join(', ') +
+      '};'
   );
   // Les require() relatifs du pipeline (« ./sources ») doivent se résoudre
   // depuis SON dossier, pas depuis celui de l'appelant.

@@ -574,6 +574,46 @@ déclare **par source**, comme le format de date et le nom de champ.
   Un motif inerte est invisible à l’œil et évident dès qu’on lui soumet le
   mot complet. C’est précisément à ça que sert un cas attendu « garde » à
   côté des cas attendus « écarte ».
+- **UNE CORRECTION SE MESURE SUR LA POPULATION, JAMAIS SUR LES CAS QUI L'ONT
+  MOTIVÉE.** Le 15/09/2026, quatre offres seniors signalées à l'écran ont été
+  corrigées, vérifiées une par une, et déclarées réparées. Victor a alors
+  vérifié les siennes : **deux parties, sept encore là**, par quatre
+  mécanismes de plus.
+
+  Les quatre cas passaient. Le défaut, lui, ne passait pas — il vivait chez
+  des offres qu'on ne savait pas fautives, et qu'on n'avait donc pas
+  regardées. C'est « SUR QUELLE POPULATION ? » retourné contre le correctif :
+  on avait mesuré la SORTIE de la correction (mes cas sont-ils réparés ?) au
+  lieu de son EFFET (que devient le catalogue ?).
+
+  **La forme juste, et elle tient en deux nombres** : rejouer le catalogue
+  entier avec l'ancien code et avec le nouveau, puis rapporter *combien
+  d'offres changent de verdict* et *combien changent dans le MAUVAIS sens*.
+  C'est le second qui autorise à publier — 139 et **0** le 15/09. Un
+  correctif dont on ne connaît que le premier chiffre n'est pas mesuré.
+
+  Le mécanisme, pour n'avoir à s'en souvenir de rien : `atelier.js` accepte
+  désormais qu'un rouage manque à une version du pipeline (il rend `undefined`
+  au lieu de lever), ce qui permet de charger HEAD et le travail côte à côte.
+  Sans cela, la comparaison était impossible — et c'est ce qui l'avait
+  empêchée.
+- **UN CHAMP COURT EST PLUS DANGEREUX QU'UN CHAMP ABSENT.** Le connecteur
+  LVMH lisait `requiredExperience` — « Minimum 3 ans », **treize
+  caractères** — comme description, alors que `profile` en fait 1 250 et
+  porte les exigences. Les 73 offres LVMH arrivaient avec moins de 60
+  caractères de texte.
+
+  L'effet est double, et les deux fois silencieux : le juge de séniorité ne
+  lisait que ces treize caractères, ET une description *présente* vaut
+  « annonce lue » partout — pour `passesJuniorFilter`, qui accepte alors, et
+  pour `aCompleter`, qui ne va chercher la fiche d'un CDI que sous 1 500
+  caractères.
+
+  **L'absence déclenche un rattrapage ; la brièveté le désarme.** Vérifier
+  qu'un champ existe ne suffit donc pas : mesurer la distribution des
+  LONGUEURS par source, et regarder les deux extrémités. 92 descriptions
+  faisaient moins de 60 caractères, 407 faisaient exactement 4 000 — les unes
+  trop courtes pour dire quoi que ce soit, les autres coupées.
 - **CE QU'ON REMPLACE PAR UNE ESPACE, ON LE DÉTRUIT.** Trois endroits de
   `pipeline.js` blanchissaient les entités HTML — `.replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')`
   — au lieu de les décoder. Sur le moteur e-i.com du Crédit Mutuel, qui

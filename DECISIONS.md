@@ -2165,3 +2165,160 @@ client d'e-i.com aurait sa propre numérotation.
 > PERDUE** — deux annonces sans rapport fondues l'une dans l'autre, et
 > aucune trace. C'est l'asymétrie qui commande : un doublon se voit à
 > l'écran, une fusion à tort ne se voit nulle part.
+
+
+---
+
+## 48. Sept infractions de plus : ce qu'on trouve quand on cesse de mesurer sur ses propres cas
+
+**Ouvert le 15/09/2026 par Victor**, après le §46 : *« J'ai vérifié mes 9
+infractions contre le catalogue republié : 2 parties, 7 encore là. Tes 4
+corrections étaient bonnes, mais elles portaient sur les 4 cas repérés à
+l'œil. Voici l'autre population. »*
+
+C'est le reproche le plus juste qu'on puisse faire à une correction, et il
+vise exactement la règle que ce dépôt écrit depuis des semaines — **« sur
+quelle population ? »**. Le §46 avait mesuré l'effet de ses quatre correctifs
+sur les offres qu'il savait fautives, et jamais sur celles qu'il ne savait pas
+fautives. La mesure était juste ; la conclusion — « c'est réparé » — ne l'était
+pas.
+
+### Ce que les sept ont révélé : quatre mécanismes de plus
+
+Le détail phrase par phrase est en **partie II de `corpus-etiquetage.md`**,
+qui est désormais le registre des tournures. Ici, les arbitrages.
+
+#### 48.1 — L'ancre n'est pas un mot, c'est une adresse au candidat
+
+Deux annonces n'écrivent jamais « expérience ». Caisse d'Épargne Bourgogne
+Franche Comté : « le/la candidat(e) retenu(e) **devra disposer** d'une
+expertise technique … d'une durée d'au moins 5 ans ». Forvis Mazars : « **vous
+justifiez** d'au moins 5 à 7 ans en Cabinet d'Expertise-Comptable ».
+
+Victor proposait d'élargir l'ancre à `expérience | expertise | pratique |
+ancienneté`. **Mesuré sur la récolte du 15/09, ce lexique ne tient pas** :
+
+| mot | phrases nouvelles | ce qu'elles disent |
+|---|---:|---|
+| `expertise` | 396 | presque toutes le CABINET — « notre expertise couvrant… 3 000 consultants, 48 bureaux » |
+| `pratique` | 67 | « mettre en pratique », « bonnes pratiques » |
+| `ancienneté` | **0** | motif inerte |
+| `séniorité` | **0** | motif inerte |
+
+Deux motifs inertes de plus auraient donné l'illusion d'une couverture — le
+défaut déjà nommé pour `\bfinanc\b` et `\bcommodit\b`, transposé au
+vocabulaire.
+
+> **Ce qui distingue une exigence d'un boniment n'est pas son vocabulaire,
+> c'est qu'elle s'adresse au candidat.** L'ancre retenue est donc
+> grammaticale : « vous justifiez / disposez / êtes », « le candidat devra »,
+> « exigé », « au moins », « minimum », « à partir de », le symbole `>` collé
+> à un nombre, le grade « confirmé ».
+
+Coût mesuré : 404 phrases nouvelles, dont la quasi-totalité **ne portent aucun
+nombre**. L'ancre ouvre la porte ; le compteur, lui, ne trouve rien.
+
+#### 48.2 — Le contexte négatif se juge sur le VOISINAGE, jamais sur la phrase
+
+Première version : une phrase contenant « avantages », « mutuelle » ou « nos
+3 000 collaborateurs » était sautée en entier. Elle a fait **repasser 18
+offres correctement écartées**, dont un actuaire AG2R dont l'annonce enchaîne
+sans le moindre point :
+
+> « Vous êtes de formation BAC +5 en actuariat et avez **au minimum 5 ans
+> d'expérience**, Vos avantages Une politique de rémunération… »
+
+Les annonces n'ont pas de points. L'exigence et les avantages tiennent dans la
+même « phrase », et jeter la phrase jetait l'exigence.
+
+> **La règle :** un contexte disqualifiant porte sur le VOISINAGE du nombre —
+> soixante caractères avant, trente après — exactement comme `FAUX_AMIS`. Ce
+> qu'on disqualifie est un nombre dans son contexte, jamais un paragraphe.
+
+C'est la sœur de « un contrôle qui compare un rendu neutralise d'abord ce qui
+varie » : la bonne granularité est celle de l'objet jugé.
+
+#### 48.3 — La borne basse ouverte
+
+« 3 ans ou plus » rendait 3, qui n'est pas supérieur à trois : publié. Mais
+« trois ans **ou plus** » ne demande pas trois ans, il en demande au moins
+trois.
+
+Le verdict porte désormais `_expOuverte`, et la décision rejette à
+**l'égalité** avec le plafond quand la borne est ouverte. Sous le plafond, une
+borne ouverte ne dit rien de gênant : « minimum 2 ans » reste junior.
+
+Formes couvertes : `X ans ou plus`, `X ans minimum`, `minimum X ans`, `au
+moins X ans`, `à partir de X ans`, `>Xans`, `X+ ans`, `dès X ans`, `at least X
+years`.
+
+**Deux de ces formes étaient inertes pour la raison déjà fichée** : `\b` est
+ASCII, donc `\bà partir de` ne trouve aucune frontière devant le « à », et
+`exigé\b` aucune après le « é ». Troisième et quatrième occurrence du même
+piège en cinq jours.
+
+#### 48.4 — Le grade que l'intitulé de liste a perdu
+
+RSM publie « Consultant Expertise Conseil » et écrit dans le corps : « Votre
+rôle : **Consultant Comptable Senior H/F** ». Entre le titre de liste et celui
+que l'annonce se donne, c'est l'annonce qui engage l'employeur.
+
+Mesuré **avant** de poser la règle, comme Victor l'a demandé : 13 offres
+touchées sur 3 407, dont **2 seulement** passaient le filtre — les deux RSM
+signalées. Aucun autre effet.
+
+Ce qu'on ne cherche pas : le mot « senior » quelque part, qui figure dans
+presque toutes les annonces de cabinet. On cherche un **titre de poste** :
+grade + mention de genre, ou introduit par « votre rôle : », « le poste : »,
+« en tant que ».
+
+#### 48.5 — Le champ le plus court n'est pas la description
+
+Make Up For Ever arrivait avec **13 caractères** de description : le
+connecteur LVMH lisait `requiredExperience` (« Minimum 3 ans ») et ignorait
+`profile` (1 250 caractères), qui dit « au moins 5 ans d'expérience en
+comptabilité ».
+
+Les 73 offres LVMH étaient dans ce cas. Et l'effet est double, les deux fois
+silencieux :
+
+- le juge de séniorité ne lisait que treize caractères ;
+- une description **présente**, si courte soit-elle, vaut « annonce lue » — pour
+  `passesJuniorFilter` comme pour `aCompleter`, qui ne va chercher la fiche
+  d'un CDI que sous 1 500 caractères. Elle éteignait le doute au lieu de
+  l'éveiller.
+
+> **Un champ court est plus dangereux qu'un champ absent.** L'absence déclenche
+> un rattrapage ; la brièveté le désarme.
+
+### La mesure d'ensemble
+
+Sur les 3 232 offres de la récolte du 15/09 portant une adresse, avant contre
+après, avec le même instrument :
+
+| | avant | après |
+|---|---:|---:|
+| passent le filtre junior | 1 573 | **1 434** |
+| **écartées en plus** | — | **139** |
+| repêchées à tort | — | **0** |
+
+Dont 113 sur la seule borne ouverte à trois ans, vérifiées sur pièce.
+
+### Ce qui reste hors de portée, et il faut le dire
+
+**Banque Populaire du Sud n'est pas réparable par la lecture.** Sa phrase
+« confirmé (>3ans) » n'est ni dans l'API OpenDataSoft — dont le champ
+`description` fait 3 859 caractères et ne la contient pas — ni dans la page,
+`recrutement.bpce.fr` rendant **3 077 octets de coquille JavaScript**. Le motif
+la reconnaîtra le jour où le texte sera atteignable ; aujourd'hui il ne l'est
+pas. C'est la même famille que les 105 fiches muettes d'`ETAT.md`.
+
+### Ce que cet épisode apprend
+
+> **Une correction se mesure sur la population, jamais sur les cas qui l'ont
+> motivée.** Le §46 avait vérifié ses quatre offres et conclu que le défaut
+> était réparé. Les quatre l'étaient ; le défaut ne l'était pas. La bonne
+> vérification n'est pas « mes cas passent-ils ? » mais « que devient le
+> catalogue entier ? » — et elle se lit en deux nombres : combien d'offres
+> changent de verdict, et combien changent dans le MAUVAIS sens. C'est ce
+> second nombre, resté à zéro, qui autorise à publier.

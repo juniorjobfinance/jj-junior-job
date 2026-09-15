@@ -517,3 +517,163 @@ FAMILLE :
 > Description du poste: ‎ Au sein de la Direction des Affaires Internationales de l'ACPR et du Pôle de Stabilité Financière, le Service des Affaires Internationales Banques (SAIB) joue un rôle stratégique dans la définition des positions françaises sur l'évolution de la réglementation bancaire. Centre d'expertise en matière de réglementation, il participe activement aux travaux du Comité de Bâle, de l'Autorité bancaire européenne et de la Commission européenne, prépare les notes de position pour la DG et contribue à la définition de la doctrine prudentielle. En tant que spécialiste climat et nat
 
 <sub>2210 caractères au total, extrait pris au 145ᵉ · https://bdf.wd103.myworkdayjobs.com/en-US/recrutement-banque-de-France/job/PARIS/Expert-ngociation-internationale-banque-climat-et-nature--H-F-_JR100382</sub>
+
+---
+---
+
+# Partie II — Les tournures de SÉNIORITÉ, et leur verdict attendu
+
+**Ouverte le 15/09/2026, à la demande de Victor** : « La fuite reviendra une
+tournure à la fois ; le corpus est le seul endroit où ça s'accumule. »
+
+La partie I ci-dessus porte sur la FAMILLE d'une offre. Celle-ci porte sur un
+autre sujet — la durée d'expérience exigée — et elle est ici parce que les
+deux répondent à la même question de fond : qu'est-ce qu'une machine doit lire
+dans une annonce, et comment sait-on qu'elle l'a bien lu ?
+
+**Ce document est le REGISTRE ; `ingestion/test-seniorite.js` est ce qui
+TOURNE.** Toute tournure nouvelle s'inscrit d'abord ici, avec sa maison et sa
+phrase exacte. Elle devient ensuite un cas exécutable dans la suite. Une
+tournure qui n'est qu'ici n'est pas protégée ; une tournure qui n'est que dans
+la suite perd sa provenance.
+
+**Comment lire la colonne « lu »** : ce que le mécanisme doit tirer de la
+phrase — un nombre d'années, `ouverte` si la borne l'est (« ou plus »,
+« minimum »), `grade` si c'est un titre senior, `—` si rien ne doit en sortir.
+
+---
+
+## II.A — Les sept infractions relevées le 15/09/2026
+
+Victor a vérifié le catalogue republié après une première série de
+corrections : **deux parties, sept encore là**. Ces sept-là n'avaient pas été
+vues parce que la correction du matin avait été mesurée sur les quatre cas
+repérés à l'œil, jamais sur la population.
+
+| # | maison | intitulé publié | la phrase | lu | verdict |
+|---|---|---|---|---|---|
+| 1 | Caisse d'Épargne Bourgogne Franche Comté | Chargé(e) d'Affaires Entreprises | « le/la candidat(e) retenu(e) devra disposer d'une **expertise technique** indéniable … **d'une durée d'au moins 5 ans** » | 5, ouverte | ÉCARTER |
+| 2 | Make Up For Ever | Comptable Fournisseurs | « Vous avez … **au moins 5 ans d'expérience** en comptabilité » — champ `profile`, jamais lu | 5, ouverte | ÉCARTER |
+| 3 | Banque Populaire du Sud | Chargé d'Affaires Entreprises | « Si vous êtes Chargé d'Affaires Entreprises **confirmé (>3ans)** » | 3, ouverte | ÉCARTER |
+| 4 | Caisse d'Épargne Hauts de France | Analyste Risques | « une **première expérience** réussie en environnement bancaire **de 3 ans ou plus** » | 3, ouverte | ÉCARTER |
+| 5 | RSM France | Consultant Expertise Conseil - Assistance Opérationnelle | corps : « **Votre rôle : Consultant Comptable Senior H/F** » | grade | ÉCARTER |
+| 6 | RSM France | Consultant Conformité Réglementaire Banque, PSP et SDG | corps : « **Consultant Senior** Conformité et Contrôle interne … H/F » | grade | ÉCARTER |
+| 7 | RSM France | Consultant comptabilité technique | — | — | **absente de la récolte du 15/09 au soir** — ni renommée ni retirée visiblement. À revoir si elle réapparaît. |
+
+**Ce que ces sept apprennent, et qui dépasse le cas.** Un symptôme unique —
+« une offre senior est publiée » — recouvrait **quatre mécanismes sans
+rapport** :
+
+1. l'**ancre** est le mot « expérience », et deux de ces annonces ne l'écrivent
+   jamais (n° 1 et 3) ;
+2. la **borne basse ouverte** est lue comme fermée : « 3 ans ou plus » rendait
+   3, qui n'est pas supérieur à trois (n° 3 et 4) ;
+3. le **connecteur** lisait le champ le plus court : chez LVMH,
+   `requiredExperience` (« Minimum 3 ans », 13 caractères) tenait lieu de
+   description, quand `profile` en fait 1 250 (n° 2) ;
+4. le **grade vit dans le corps** quand l'employeur l'a retiré du titre de
+   liste (n° 5 et 6).
+
+---
+
+## II.B — L'ancre : ce qui est une exigence, et ce qui n'en est pas une
+
+**La solution évidente a été mesurée et écartée.** Élargir l'ancre à une liste
+de mots — « expérience | expertise | pratique | ancienneté » — ne survit pas à
+la récolte du 15/09 (1 799 offres portant du texte) :
+
+| mot ajouté | phrases nouvelles | ce qu'elles disent |
+|---|---:|---|
+| `expertise` | 396 | presque toutes le **cabinet** : « notre expertise couvrant… 3 000 consultants, 48 bureaux » |
+| `pratique` | 67 | « mettre en pratique », « bonnes pratiques » — toutes fausses |
+| `ancienneté` | **0** | motif inerte |
+| `séniorité` | **0** | motif inerte |
+
+Ce qui distingue une exigence d'un boniment n'est pas son vocabulaire, c'est
+qu'elle **s'adresse au candidat**. L'ancre retenue est donc grammaticale :
+« vous justifiez / disposez / possédez / êtes », « le candidat devra »,
+« exigé », « requis », « minimum », « au moins », « à partir de », le symbole
+`>` collé à un nombre, et le grade « confirmé ».
+
+### Ce qui doit être LU comme une exigence
+
+| la phrase | maison | lu |
+|---|---|---|
+| « le/la candidat(e) retenu(e) devra disposer d'une expertise technique … d'une durée d'au moins 5 ans » | CE Bourgogne FC | 5, ouverte |
+| « vous justifiez d'au moins 5 à 7 ans en Cabinet d'Expertise-Comptable » | Forvis Mazars | 7 |
+| « Si vous êtes Chargé d'Affaires Entreprises confirmé (>3ans) » | BP du Sud | 3, ouverte |
+| « Poste ouvert à partir de 4 ans sur une fonction similaire » | forme observée | 4, ouverte |
+| « Vous êtes de formation BAC +5 en actuariat et avez au minimum 5 ans d'expérience, Vos avantages Une politique de rémunération… » | AG2R La Mondiale | 5, ouverte |
+
+Le dernier cas est le plus instructif : l'exigence et les avantages tiennent
+dans **la même phrase**, les annonces n'ayant pas de points. Une liste négative
+posée au niveau de la phrase jetait l'exigence avec les avantages — elle a fait
+repasser **18 offres** correctement écartées. Le contexte non-candidat se juge
+donc sur le **voisinage du nombre**, jamais sur le paragraphe.
+
+### Ce qui ne doit RIEN faire lire
+
+| la phrase | maison | pourquoi |
+|---|---|---|
+| « Avec une expertise couvrant un large éventail de secteurs, nos 3 000 consultants accompagnent des clients depuis 48 bureaux répartis dans 19 pays » | Sia Partners | le cabinet parle de lui |
+| « Tickets restaurant, mutuelle, prime vacances après 1 an » | Talan | une ancienneté administrative, pas un profil |
+| « Processus de recrutement : premier entretien en visio, 30 min » | Younited | le déroulé du recrutement |
+| « Façonné par plus de 145 ans d'expérience, Indosuez accompagne » | Indosuez | l'âge de la maison |
+| « Notre maison, créée il y a 30 ans » | — | l'âge de la maison |
+| « Contrat en alternance de 2 ans » | — | la durée du contrat, pas l'exigence |
+| « Bac+5, soit 5 années d'études » | — | le diplôme |
+| « Vous encadrez une dizaine de collaborateurs » | — | « dizaine » sans l'unité « années » |
+
+> **Les phrases négatives données lors d'une séance antérieure — la société, le
+> RGPD, un collègue, un interlocuteur — ne figuraient pas dans le journal de la
+> session du 15/09 et n'ont donc pas pu être reprises textuellement.** La liste
+> ci-dessus a été fabriquée par MESURE, en relisant ce que l'élargissement de
+> l'ancre attrapait à tort. Les formes exactes restent à ajouter ici dès
+> qu'elles seront de nouveau sous la main.
+
+---
+
+## II.C — La borne basse ouverte
+
+« 3 ans ou plus » ne demande pas trois ans : il en demande **au moins** trois.
+Lu comme un « 3 » sec, cela franchissait le plafond sans le dépasser.
+
+Formes observées, toutes ouvertes : `X ans ou plus`, `X ans minimum`,
+`minimum X ans`, `au moins X ans`, `à partir de X ans`, `>Xans`, `X+ ans`,
+`dès X ans`, `at least X years`.
+
+**La règle n'est pas « toute borne ouverte écarte ».** Sous le plafond elle ne
+dit rien de gênant : « au moins 1 an » reste un poste junior, et « minimum
+2 ans » aussi. C'est l'**égalité au plafond** qui tranche.
+
+Mesure du 15/09, sur les 3 232 offres de la récolte portant une adresse :
+**139 écartées en plus, 0 repêchée**, dont 113 sur cette seule forme. Vérifiées
+sur pièce — Pennylane « Expérience d'au moins 3 ans en cabinet comptable »,
+Talan « À partir de 3 ans d'expérience », Deloitte « ayant travaillé 3 ans
+minimum », Banque de France « une expérience de minimum 3 ans en LCB-FT ».
+
+---
+
+## II.D — Le grade que l'intitulé de liste a perdu
+
+RSM publie « Consultant Expertise Conseil » et écrit, dans le corps de la même
+annonce, « Votre rôle : **Consultant Comptable Senior H/F** ». L'employeur
+nettoie son titre de liste ; le poste, lui, reste senior.
+
+**Ce qu'on ne cherche PAS : le mot « senior » quelque part.** Il figure dans
+presque toutes les annonces de cabinet — « notre équipe senior », « nos
+managers seniors ». On cherche un **titre de poste** : un grade suivi de la
+mention de genre, ou introduit par « votre rôle : », « le poste : », « en tant
+que ».
+
+| le corps dit | verdict | source |
+|---|---|---|
+| « Votre rôle : Consultant Comptable Senior H/F » | ÉCARTER | RSM |
+| « Consultant Senior Conformité et Contrôle interne … H/F » | ÉCARTER | RSM |
+| « En tant que Senior Analyst, vous piloterez… » | ÉCARTER | forme anglaise |
+| « Vous rejoindrez une équipe de consultants seniors » | GARDER | le cabinet parle de ses équipes |
+| « Vous serez encadré par un Consultant Senior H/F » (stage) | GARDER | le tuteur, pas le poste |
+
+Mesuré **avant** de poser la règle, comme demandé : 13 offres touchées sur
+3 407, dont **2 seulement** passaient le filtre junior — les deux RSM
+signalées. Aucun autre effet.

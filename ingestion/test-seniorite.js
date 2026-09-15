@@ -65,10 +65,121 @@ const CAS = [
   ['Vous encadrez une dizaine de collaborateurs, expérience appréciée.', null, "« dizaine » sans l'unité"],
   ['Vous justifiez d’années d’expérience variées.', null, 'aucun nombre, juste une apostrophe'],
 
+  // --- L'ANCRE N'EST PAS LE MOT « EXPÉRIENCE » ---------------------------
+  // Victor a relevé sept infractions le 15/09 que la correction du matin ne
+  // touchait pas. Deux d'entre elles n'écrivent jamais le mot « expérience » :
+  // l'exigence s'y dit par une formule adressée au candidat.
+  //
+  // On a mesuré la solution évidente — élargir à « expertise | pratique |
+  // ancienneté » — et elle ne tient pas : « expertise » ferait entrer 396
+  // phrases dont presque toutes décrivent le cabinet, « pratique » 67 toutes
+  // fausses, « ancienneté » et « séniorité » ZÉRO. Ce qui distingue une
+  // exigence d'un boniment est grammatical, pas lexical.
+  ["De formation supérieure, le/la candidat(e) retenu(e) devra disposer d’une expertise technique indéniable d’une durée d’au moins 5 ans sur un poste de CA Entreprises.",
+    5, "Caisse d'Épargne Bourgogne Franche Comté"],
+  ["Diplômé(e) d’un Bac +3 à minima, vous justifiez d’au moins 5 à 7 ans en Cabinet d’Expertise-Comptable.",
+    7, 'Forvis Mazars — « vous justifiez », sans le mot expérience'],
+  ['Si vous êtes Chargé d’Affaires Entreprises confirmé (>3ans) et souhaitez nous rejoindre.',
+    3, 'Banque Populaire du Sud — le symbole est une ancre à lui seul'],
+  ['Poste ouvert à partir de 4 ans sur une fonction similaire, exigé.',
+    4, '« à partir de » — le `\\b` ASCII l’avait rendu inerte devant le « à »'],
+
+  // --- CE QUI NE PARLE PAS DU CANDIDAT ----------------------------------
+  // La liste négative n'a pas été devinée : elle vient des faux positifs
+  // mesurés sur la récolte du 15/09. Elle se juge sur le VOISINAGE du
+  // nombre, jamais sur la phrase — posée au niveau de la phrase, elle a fait
+  // repasser 18 offres correctement écartées, dont un actuaire AG2R dont
+  // l'annonce enchaîne « au minimum 5 ans d'expérience, Vos avantages… »
+  // sans le moindre point.
+  ['Avec une expertise couvrant un large éventail de secteurs, nos 3 000 consultants accompagnent des clients depuis 48 bureaux répartis dans 19 pays.',
+    null, 'Sia Partners — le cabinet parle de lui'],
+  ['Tickets restaurant, mutuelle prise en charge, prime vacances après 1 an, exigé pour en bénéficier.',
+    null, 'les avantages : une ancienneté administrative, pas un profil'],
+  ['Processus de recrutement : premier entretien en visio, minimum 2 ans de recul.',
+    null, 'le déroulé du recrutement'],
+  ["Vous êtes de formation BAC +5 en actuariat et avez au minimum 5 ans d’expérience, Vos avantages Une politique de rémunération attractive.",
+    5, 'AG2R — exigence ET avantages dans la même phrase : le nombre survit'],
+
   // --- La cible elle-même : ce qui doit PASSER --------------------------
   ["Vous justifiez de 2 ans d'expérience.", 2, 'dans la cible'],
   ["Une première expérience de 3 ans en audit.", 3, 'à la limite, donc admis'],
 ];
+
+// --- LA BORNE BASSE OUVERTE ------------------------------------------------
+// « 3 ans ou plus » rend 3, qui n'est pas supérieur à trois : l'offre passait.
+// Mais « trois ans OU PLUS » ne demande pas trois ans, il en demande au moins
+// trois. Sous le plafond, une borne ouverte est sans danger — « au moins
+// 1 an » reste junior ; c'est l'égalité AU plafond qui tranche.
+//
+// Mesure du 15/09 : 139 offres écartées en plus, 0 repêchée, dont 113 sur
+// cette seule forme. Vérifiées sur pièce — Pennylane « Expérience d'au moins
+// 3 ans en cabinet comptable », Talan « À partir de 3 ans d'expérience »,
+// Deloitte « ayant travaillé 3 ans minimum ».
+const BORNES = [
+  ['Une première expérience réussie en environnement bancaire de 3 ans ou plus.', true, "Caisse d'Épargne Hauts de France"],
+  ['Vous justifiez d’une expérience de 3 ans minimum en cabinet.', true, 'Meilleurtaux'],
+  ['À partir de 3 ans d’expérience au sein d’une banque de détail.', true, 'Talan'],
+  ['Vous avez minimum 3 ans d’expérience en cabinet d’expertise comptable.', true, 'Forvis Mazars'],
+  ['Vous justifiez de 3 ans d’expérience en audit interne.', false, 'borne FERMÉE : la cible haute reste admise'],
+  ['Vous justifiez d’un minimum de 2 ans en comptabilité.', true, 'ouverte mais SOUS le plafond : sans danger'],
+];
+let echecsB = 0;
+for (const [phrase, attendu, source] of BORNES) {
+  // Repli si le pipeline ne connaît pas encore ce rouage : la suite doit
+  // alors ÉNUMÉRER ses échecs, pas mourir sur une pile d'appels. Une suite
+  // qui plante dit « quelque chose ne va pas » ; une suite qui échoue dit
+  // QUOI — et c'est la seconde qu'on relit dans six mois.
+  const lire = P.lireDuree || ((t) => ({ max: P.dureeExperienceMax(t), ouverte: false }));
+  const rendu = lire(phrase).ouverte;
+  if (rendu !== attendu) {
+    echecsB++;
+    console.log(`  ÉCHEC  borne ouverte attendue ${attendu}, rendue ${rendu}`);
+    console.log(`         « ${phrase} »   [${source}]`);
+  }
+}
+// Et la DÉCISION, qui est ce qui compte : le filtre lui-même.
+const DECISIONS = [
+  ['Une première expérience réussie en environnement bancaire de 3 ans ou plus.', false, "CE Hauts de France — écartée"],
+  ['Vous justifiez de 3 ans d’expérience en audit interne.', true, 'trois ans fermes — gardée'],
+  ['Vous justifiez d’un minimum de 2 ans en comptabilité.', true, 'deux ans ou plus — gardée'],
+];
+for (const [descr, attendu, source] of DECISIONS) {
+  const o = { volet: 'cdi-cdd', title: 'Analyste financier', _descrExtrait: descr };
+  P.fusionnerVerdictSeniorite(o, descr);
+  const rendu = P.passesJuniorFilter(o, true);
+  if (rendu !== attendu) {
+    echecsB++;
+    console.log(`  ÉCHEC  attendu ${attendu ? 'gardée' : 'écartée'}, rendu ${rendu ? 'gardée' : 'écartée'}   [${source}]`);
+  }
+}
+console.log(`${BORNES.length + DECISIONS.length - echecsB}/${BORNES.length + DECISIONS.length} bornes ouvertes conformes`);
+
+// --- LE GRADE QUE L'INTITULÉ DE LISTE A PERDU ------------------------------
+// RSM publie « Consultant Expertise Conseil » et écrit dans le corps de la
+// même annonce « Votre rôle : Consultant Comptable Senior H/F ». Entre le
+// titre de liste et celui que l'annonce se donne, c'est l'annonce qui engage
+// l'employeur.
+//
+// Mesuré AVANT de poser la règle : 13 offres touchées sur 3 407, dont 2
+// seulement passaient le filtre — les deux RSM signalées. Aucun autre effet.
+const GRADES = [
+  [false, 'Consultant Expertise Conseil', 'Votre rôle : Consultant Comptable Senior H/F au sein de notre équipe', 'RSM'],
+  [false, 'Consultant Conformité Réglementaire', 'Votre rôle : Consultant Senior Conformité et Contrôle interne H/F', 'RSM'],
+  [false, 'Analyste financier', 'En tant que Senior Analyst, vous piloterez le reporting du groupe', 'forme anglaise'],
+  [true, 'Analyste financier', 'Vous rejoindrez une équipe de consultants seniors et de managers expérimentés.', 'le cabinet parle de SES équipes'],
+];
+let echecsG = 0;
+for (const [attendu, titre, corps, source] of GRADES) {
+  const o = { volet: 'cdi-cdd', title: titre, _descrExtrait: corps };
+  P.fusionnerVerdictSeniorite(o, corps);
+  const rendu = P.passesJuniorFilter(o, true);
+  if (rendu !== attendu) {
+    echecsG++;
+    console.log(`  ÉCHEC  attendu ${attendu ? 'gardée' : 'écartée'}, rendu ${rendu ? 'gardée' : 'écartée'}`);
+    console.log(`         « ${titre} » / « ${corps.slice(0, 70)} »   [${source}]`);
+  }
+}
+console.log(`${GRADES.length - echecsG}/${GRADES.length} grades lus dans le corps`);
 
 let echecs = 0;
 for (const [phrase, attendu, source] of CAS) {
@@ -183,4 +294,4 @@ for (const [volet, titre, attendu, source] of INTITULES) {
 }
 console.log(`${INTITULES.length - echecs4}/${INTITULES.length} intitulés jugés conformément`);
 
-if (echecs + echecs2 + echecs3 + echecs4) process.exitCode = 1;
+if (echecs + echecs2 + echecs3 + echecs4 + echecsB + echecsG) process.exitCode = 1;
