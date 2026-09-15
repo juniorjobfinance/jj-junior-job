@@ -2630,6 +2630,21 @@ function cleanTitle(title) {
     .replace(/^[\s:\-–—,|\/«»]+/, '')
     .replace(/^(?:en|de|du|des|d['’]|pour|au|aux)\s+/i, '')
     .replace(/^fin\s+d['’]?[ée]tudes?\s+/i, '')
+    // ET LA PRÉPOSITION UNE SECONDE FOIS, parce que « fin d'études » vient
+    // d'en libérer une autre.
+    //
+    // Forvis Mazars écrit « Stagiaire de Fin d'Études EN Analyste Finance
+    // Quantitative - 2027 (H/F) ». Le déroulé était :
+    //
+    //   retrait du mot de contrat     « de Fin d'Études en Analyste… »
+    //   retrait de la préposition     « Fin d'Études en Analyste… »
+    //   retrait de « fin d'études »   « en Analyste… »   ← plus personne après
+    //
+    // La carte affichait donc « En Analyste Finance Quantitative », vu par
+    // Victor le 15/09/2026. Ce n'était pas une règle manquante : c'était un
+    // ORDRE. Un nettoyage qui retire des couches doit repasser sur ce que la
+    // couche suivante découvre.
+    .replace(/^(?:en|de|du|des|d['’]|pour|au|aux)\s+/i, '')
     .trim();
   if (sansContrat.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 4) t = sansContrat;
 
