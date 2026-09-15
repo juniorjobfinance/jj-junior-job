@@ -188,6 +188,36 @@ qui est de zéro aujourd'hui.
 
 ---
 
+## Chantier NOMMÉ, pas urgent : faire tourner les Pépites JJ tous les 5 jours
+
+**Demandé par Victor le 15/09/2026, rangé par lui-même en « pas important ».**
+Noté ici pour ne pas être redécouvert.
+
+La sélection est aujourd'hui **déterministe** : même catalogue, mêmes pépites.
+Elles ne bougent que quand une offre entre ou sort du vivier. Mesuré sur les
+douze derniers catalogues :
+
+| | |
+|---|---|
+| pépites servies | 20, toujours (5 par onglet) |
+| renouvellement d'un jour sur l'autre | **0 à 3 sur 20**, et souvent 0 |
+
+L'instinct de Victor est donc juste : elles paraissent figées, et elles le
+sont à 85 % près.
+
+**Ce qu'il faudra mesurer avant de coder** : la taille du vivier par onglet.
+La contrainte « une seule pépite par maison » est ce qui borne vraiment — c'est
+le nombre de MAISONS distinctes éligibles, pas le nombre d'offres, qui décide
+du nombre de tirages possibles. Une rotation sur sept maisons pour cinq places
+ne changerait presque rien.
+
+**La forme qui marchera** : un index de période — `floor(jours / 5)` — utilisé
+comme décalage déterministe dans la liste triée par score. Déterministe est
+essentiel : une part d'aléatoire changerait les pépites à CHAQUE passage de
+6h30, pas tous les cinq jours.
+
+---
+
 ## Le prochain doublon de marque : BNP Paribas / Hello bank!
 
 **Signalé par le contrôle du 15/09**, section « une URL, un employeur »,

@@ -85,6 +85,16 @@ const NOMS = [
   'FAMILLE_HORS_PERIMETRE',
   'METIER_HORS_PERIMETRE_RE',
   'SENIOR_RE',
+  // Les rouages des « Pépites JJ ». Sans eux, toute mesure sur le vivier
+  // rend ZÉRO en silence depuis que cette liste tolère les noms absents.
+  'MAISONS_PRESTIGE',
+  'POSTE_RARE_RE',
+  'GRANDE_STRUCTURE_RE',
+  'PEPITES_PAR_VOLET',
+  'PEPITE_FRAICHEUR_JOURS',
+  'scorePepite',
+  'estEnormeMaison',
+  'choisirPepites',
   'dureeExperienceMax',
   'lireDuree',
   'ANCRE_EXIGENCE',
@@ -157,7 +167,28 @@ function chargerPipeline(racine = path.join(__dirname, '..')) {
   // depuis SON dossier, pas depuis celui de l'appelant.
   const requireDuPipeline = require('module').createRequire(chemin);
   const faux = { exports: {} };
-  return fabrique(requireDuPipeline, faux, faux.exports, path.join(racine, 'ingestion'), chemin);
+  const rouages = fabrique(requireDuPipeline, faux, faux.exports, path.join(racine, 'ingestion'), chemin);
+
+  // LA TOLÉRANCE NE DOIT PAS ÊTRE SILENCIEUSE.
+  //
+  // Le `typeof … === 'undefined'` ci-dessus a été posé le 15/09/2026 pour
+  // pouvoir charger deux versions du pipeline côte à côte. Il a supprimé une
+  // exception — et créé un ZÉRO MUET : le même jour, une mesure du vivier des
+  // pépites a rendu « 0 maison prestige » sur les quatre onglets, parce que
+  // `MAISONS_PRESTIGE` n'était pas dans cette liste et valait `undefined`.
+  // La mesure n'a rien levé, rien affiché d'anormal, et son zéro était faux.
+  //
+  // On garde la tolérance, qui sert ; on lui retire le silence, qui nuit.
+  // C'est « un zéro est le résultat le plus facile à produire par accident »
+  // appliqué à l'outil qui sert à produire les zéros.
+  const absents = NOMS.filter((n) => rouages[n] === undefined);
+  if (absents.length) {
+    console.warn(
+      '[atelier] ' + absents.length + ' rouage(s) absent(s) de ce pipeline, ' +
+        'ils valent undefined : ' + absents.join(', ')
+    );
+  }
+  return rouages;
 }
 
 // ---------------------------------------------------------------------------
