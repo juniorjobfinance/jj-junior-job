@@ -2010,3 +2010,158 @@ sur 22) ni chez Havas (15 sur 112).
 > nettes. Ici la liste des maisons légitimes est longue et leur structure
 > ment (une banque d’affaires qui héberge un fonds) ; la liste des maisons
 > illégitimes est courte et leur structure dit vrai.
+
+---
+
+## 46. Quatre offres seniors en vitrine, quatre défauts sans rapport
+
+**Ouvert le 15/09/2026 par Victor**, capture d'écran à l'appui : « c'est
+5 ans d'xp là comment t'as pu laisser passer ça » (Thales), « c'est la même
+offre et encore 3-5 ans d'expérience » (CIC), « ya encore une offre à la
+banque de France à 10 ans d'expériences ».
+
+Le réflexe était d'accuser le juge de séniorité. Il n'y était pour rien :
+`dureeExperienceMax` et `passesJuniorFilter` lisaient correctement tout ce
+qu'on leur donnait. **Le défaut était en amont, dans ce qu'on leur donnait**
+— et il s'est révélé être quatre défauts distincts, qui n'ont en commun que
+leur symptôme.
+
+### 46.1 — La fiche était coupée à 4 000 caractères
+
+`ficheJsonLd` tronquait la description avant de la rendre.
+
+```
+description réelle de Thales      6 289 caractères
+ce que le juge en voyait          4 000
+« au moins 5 ans d'expérience »   vers 4 700
+_expMax obtenu                    null
+```
+
+Thales et la Banque de France ouvrent leur annonce par une longue
+présentation du groupe : le profil recherché — la seule partie qui dit le
+niveau — tombait après la coupe.
+
+Le dépôt portait **déjà cette leçon**, appliquée au cache de fiches : « un
+rejeu ne voyait alors que 4 000 caractères là où une vraie collecte en lit
+14 000 — 72 rejets de séniorité au rejeu contre 181 ». Elle n'avait jamais
+été appliquée au chemin de collecte. `LIMITE_DESCR_FICHE = 14000` aligne les
+deux.
+
+### 46.2 — « Une dizaine d'années » n'était pas un nombre
+
+L'offre Banque de France « Analyste dossiers d'agréments » n'était pas
+concernée par la coupe : sa fiche fait **2 853 caractères**. Son texte dit
+« vous disposez d'une dizaine d'années d'expérience », et `_expMax` rendait
+`null`. Deux trous, un seul symptôme : « dizaine » manquait à
+`NOMBRES_ECRITS`, et le motif exigeait le nombre **collé** à son unité alors
+qu'en français la quantité approximative s'y relie par une apostrophe.
+
+Mesure sur les 644 fiches du 14/09 — la population juste, ce sont les textes
+que le second passage a réellement lus : **une seule** mention de quantité
+approximative, et c'est celle-là. Après correction, 270 → 271 fiches datées
+d'un chiffre, le seau « 10 ans » passe de 47 à 48, rien d'autre ne bouge.
+
+### 46.3 — Une entité HTML était BLANCHIE, pas décodée
+
+Le plus grave des quatre, et le seul qui ne se voyait nulle part.
+
+`texteDeLaPage` remplaçait toute entité par une **espace**. Le moteur e-i.com
+du Crédit Mutuel encode tous ses accents en `&#233;` :
+
+```
+la page dit   « Expérience professionnelle antérieure de 3 à 5 ans »
+le juge lit   « Exp rience professionnelle ant rieure de 3   5 ans »
+```
+
+Or l'ancre du juge est `/exp[ée]rien/i`. Le mot n'existait plus, la phrase
+entière était sautée, et le « 3 à 5 ans » n'était jamais compté.
+
+**Ce n'était pas un défaut d'affichage, c'était un défaut de lecture** :
+chaque ancre de ce mécanisme est un mot français accentué — « expérience »,
+« années ». Toute page à entités numériques lui était donc muette. C'est la
+règle « UN CHAMP ABÎMÉ EST UN SYMPTÔME » retournée : ici rien n'était abîmé
+à l'écran, parce que le texte abîmé ne s'affiche jamais.
+
+`decodeEntities` existait depuis toujours dans le même fichier, dix-huit
+cents lignes plus haut. Il n'avait simplement jamais été appelé aux trois
+endroits qui lisent une page.
+
+### 46.4 — « Team Leader » n'était pas un marqueur
+
+On n'encadre pas une équipe à zéro an. Mesure sur les 3 417 intitulés
+normalisés du 14/09 : **8 touchés, dont 5 déjà pris** par « manager » ou
+« responsable ». Le motif en ajoute 3 — HSBC et Deloitte. Il vit dans
+`SENIOR_RE` **seule**, qui ne se consulte que pour les CDI/CDD : un stage
+d'assistant reste un stage.
+
+### Ce que l'ensemble a coûté, et rapporté
+
+Audit complet sur les 374 offres CDI/CDD publiées, le chemin refait sur
+chacune, **avant et après, avec le même instrument** :
+
+| | avant | après |
+|---|---:|---:|
+| jugées junior | 263 | 256 |
+| **écartées** | **2** | **9** |
+
+### Ce que cet épisode apprend
+
+> **Un symptôme unique n'annonce pas une cause unique.** Quatre offres
+> seniors en vitrine, quatre mécanismes sans rapport : une troncature, une
+> table de nombres, un décodage de texte, un marqueur d'intitulé. S'arrêter
+> à la première trouvée — la troncature, la plus spectaculaire — aurait
+> laissé les trois autres en place, et elles couvraient **sept** des neuf
+> offres.
+
+Et le corollaire de méthode, payé trois fois dans la séance : **l'instrument
+se fait dire non-zéro sur un cas connu AVANT de servir.** Le premier audit a
+rendu « 0 offre senior » avec 370 erreurs d'analyse avalées ; le second a
+rendu « 0 touché sur 7 244 » en lisant un champ qui n'existe pas dans la
+récolte brute. Les deux chiffres étaient lisibles, présentables, et faux. Le
+troisième audit commence par Thales et refuse de tourner si Thales passe.
+
+---
+
+## 47. Le doublon de marque : une offre est son NUMÉRO, pas son domaine
+
+**Ouvert le 15/09/2026 par Victor** : « c'est la même offre ».
+
+`canonicalKey` vaut `slugEmp|slugTitre|lieu`. Le nom de l'employeur fait
+partie de la clé, donc **deux offres identiques publiées sous deux noms ne
+peuvent jamais se dédupliquer.** `CLAUDE.md` le portait comme piège depuis
+des semaines. Le moteur e-i.com du Crédit Mutuel Alliance Fédérale l'a
+réalisé : il sert la même annonce depuis trois domaines.
+
+Au catalogue du 15/09 : 13 offres eicards publiées, **quatre numéros
+d'annonce parus deux fois** — sous CIC et sous Crédit Mutuel. Le contrôle
+« une URL, un employeur » ne voyait rien : les adresses diffèrent par leur
+hôte.
+
+### Pourquoi on ne débranche pas un domaine
+
+Mesure directe sur les trois listes :
+
+| | offres | en propre |
+|---|---:|---:|
+| CIC | 15 | 4 |
+| Crédit Mutuel | 15 | 4 |
+| Banque Transatlantique | 8 | 7 |
+
+CIC × Crédit Mutuel : **11 numéros en commun**. Débrancher le CIC coûterait
+les 4 annonces qu'il est seul à servir. Ce n'est pas un hôte de trop, c'est
+une **identité mal choisie**.
+
+### Ce qui est posé
+
+Sur ce moteur, une offre est son numéro d'annonce. `canonicalKey` le rend
+tel quel, et `dedupe` fait le reste — il fond l'offre, note l'autre domaine
+dans `alsoOn`, et inscrit le rejet au registre avec son motif.
+
+La liste des hôtes est **close**, et volontairement : le chemin
+`/fr/offre.html?annonce=N` suffirait à reconnaître le moteur, mais un autre
+client d'e-i.com aurait sa propre numérotation.
+
+> **Une clé trop large ne se paie pas d'un doublon, elle se paie d'une offre
+> PERDUE** — deux annonces sans rapport fondues l'une dans l'autre, et
+> aucune trace. C'est l'asymétrie qui commande : un doublon se voit à
+> l'écran, une fusion à tort ne se voit nulle part.

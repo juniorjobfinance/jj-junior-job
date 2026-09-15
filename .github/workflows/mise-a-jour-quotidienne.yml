@@ -85,6 +85,14 @@ jobs:
           # declinaison de la meme maison ne se substitue pas — sans cette
           # borne, 371 offres « AXA » deviendraient « AXA France ».
           node ingestion/test-entite.js
+          # test-doublon-marque : `canonicalKey` commence par le nom de
+          # l'employeur, si bien qu'une offre publiée sous deux marques ne
+          # pouvait PAS se dédupliquer. Le moteur e-i.com du Crédit Mutuel
+          # sert la même annonce depuis trois domaines : quatre numéros
+          # paraissaient deux fois au catalogue du 15/09. Sur ce moteur, une
+          # offre est désormais son NUMÉRO — et la liste des hôtes est close,
+          # une numérotation étrangère fondrait deux annonces sans rapport.
+          node ingestion/test-doublon-marque.js
           # test-fourre-tout.js est un RAPPORT, pas un test : il range 73 offres
           # observées et n'a aucune valeur attendue, donc il ne peut pas échouer.
           # On le lance pour son journal, pas pour son verdict.

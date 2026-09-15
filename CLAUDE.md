@@ -108,6 +108,19 @@ une ligne de configuration dans `ingestion/sources.js`.
 
 ## Commandes utiles
 
+**Avant de pousser une règle de classement, lancer LES DOUZE SUITES** du
+contrôle 1, pas un sous-ensemble choisi. Elles sont listées dans
+`.github/workflows/mise-a-jour-quotidienne.yml`, et c’est ce fichier qui fait
+foi — pas la mémoire de la séance précédente. Le 14/09/2026 le cron a échoué
+sur un motif validé la veille : quatre suites avaient été lancées, la CI en
+lançait neuf, et le cas qui mordait vivait dans `test-echantillon.js`.
+
+**Corollaire, du même incident : une mesure faite sur la RÉCOLTE DU JOUR ne
+remplace pas les suites.** La récolte ne contient que ce qui a été publié ce
+matin-là ; les suites portent des cas historiques, choisis parce qu’ils ont
+déjà cassé quelque chose. Un motif validé « 0 dégât sur la récolte » n’est
+pas validé.
+
 ```bash
 node ingestion/pipeline.js              # passage complet (~18 min)
 node ingestion/pipeline.js --forcer     # publier malgré le garde-fou (baisse voulue)
@@ -162,6 +175,15 @@ La forme sûre, sans exception :
 ```bash
 git commit -F chemin/vers/message.txt   # fichier écrit avec l’outil Write
 ```
+
+**Et `-m` n’est pas plus sûr que `printf`.** Le 13/09/2026, un
+`git commit -m "…"` a perdu quatre fragments de code du message : le shell a
+pris les accents graves pour une substitution de commande et les a exécutés.
+Le commit est parti, poussé, avec quatre trous là où se trouvaient les noms
+de fonctions — et git n’a rien signalé, le message lui paraissant simplement
+plus court. Or un message de commit de ce dépôt cite presque toujours du
+code entre accents graves. **La règle n’est donc pas « éviter `printf` »,
+c’est `-F` et rien d’autre.**
 
 `%`, `\n`, `\t`, `%s` : tout caractère de format est un piège, et le message
 de commit est précisément l’endroit où l’on écrit des pourcentages et des
@@ -552,6 +574,26 @@ déclare **par source**, comme le format de date et le nom de champ.
   Un motif inerte est invisible à l’œil et évident dès qu’on lui soumet le
   mot complet. C’est précisément à ça que sert un cas attendu « garde » à
   côté des cas attendus « écarte ».
+- **CE QU'ON REMPLACE PAR UNE ESPACE, ON LE DÉTRUIT.** Trois endroits de
+  `pipeline.js` blanchissaient les entités HTML — `.replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')`
+  — au lieu de les décoder. Sur le moteur e-i.com du Crédit Mutuel, qui
+  encode tous ses accents en `&#233;`, le juge de séniorité lisait
+  « Exp rience professionnelle ant rieure de 3   5 ans » là où la page dit
+  « Expérience professionnelle antérieure de 3 à 5 ans ».
+
+  Son ancre est `/exp[ée]rien/i`. Le mot n'existait plus, la phrase entière
+  était sautée, et l'offre est parue malgré ses 3 à 5 ans exigés.
+
+  **Ce qui rend ce défaut invisible : le texte abîmé ne s'affiche jamais.**
+  « UN CHAMP ABÎMÉ EST UN SYMPTÔME » suppose qu'on VOIE le champ abîmé — un
+  intitulé en bouillie crie. Un texte lu pour être jugé, et jeté ensuite, ne
+  crie pas : il rend seulement un verdict trop indulgent. Tout texte destiné
+  à être LU par une règle se vérifie donc sur un échantillon imprimé, jamais
+  sur son seul verdict.
+
+  Et la règle générale : **avant de remplacer quelque chose par une espace,
+  demander si ce quelque chose portait du sens.** Une balise, non. Une
+  entité, oui — c'est une lettre.
 - **Un contrôle qui vérifie ce qui est PASSÉ ne peut pas voir ce qui NE
   PASSE PAS** — voir la règle « SUR QUELLE POPULATION ? » ci-dessus. Le
   contrôle des deux tables lisait le catalogue publié : RSM y a perdu
@@ -726,6 +768,21 @@ déclare **par source**, comme le format de date et le nom de champ.
   rien, et le diagnostic était écrit dans `ETAT.md` comme une piste établie.
   C'est le pendant exact de « un contrôle qu'on n'a jamais vu échouer n'est
   pas vérifié » : avant de croire un zéro, faire dire non-zéro à l'appareil.
+
+  **Et le 15/09/2026, le même défaut a pris DEUX formes de plus dans la même
+  heure, toutes deux rendant un zéro présentable.** Un audit de séniorité sur
+  374 offres a rendu « 0 offre senior » avec **370 erreurs d'analyse
+  avalées** — un `catch` englobait le réseau ET l'analyse, et la fonction
+  appelée n'était pas exposée par `atelier.js`. Une mesure de motif a rendu
+  « 0 touché sur 7 244 » en lisant `o.title` dans la récolte BRUTE, qui ne
+  garde que `{ __src, emp, raw }` — le titre n'existe qu'après `normalize()`.
+
+  Les deux chiffres étaient lisibles, plausibles, et faux. **Un zéro est le
+  résultat le plus facile à produire par accident** : une erreur avalée, un
+  champ absent, un motif inerte le rendent tous. La forme sûre est d'ouvrir
+  la mesure par un TÉMOIN — un cas dont on sait la réponse — et de refuser
+  de tourner s'il ne mord pas. Le troisième audit commençait par Thales et
+  s'arrêtait si Thales passait ; c'est celui-là qui a rendu le bon chiffre.
 - **L'alternance est SAISONNIÈRE.** Le contrat démarre en septembre, donc les
   annonces se publient de février à juillet. Un catalogue d'alternance maigre
   relevé en septembre ou en octobre ne prouve rien — c'est le creux du cycle.

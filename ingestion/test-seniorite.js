@@ -50,6 +50,21 @@ const CAS = [
   ['Notre maison, créée il y a 30 ans, cherche un profil avec de l’expérience.', null, 'âge de la maison'],
   ['Nous comptons 3 000 consultants depuis 48 bureaux.', null, "aucune ancre « expérience »"],
 
+  // --- Les quantités APPROXIMATIVES -------------------------------------
+  // « Une dizaine d'années » est aussi net qu'un « 10 ans » pour qui lit
+  // l'annonce, et parfaitement muet pour qui compte des chiffres. La Banque
+  // de France publiait son « Analyste dossiers d'agréments » sous cette
+  // forme, et il est passé — sa fiche ne faisait que 2 853 caractères, donc
+  // aucune troncature n'était en cause : le mot n'était simplement pas dans
+  // la table des nombres, et l'apostrophe de « dizaine D'ANNÉES » coupait le
+  // motif en deux.
+  ["Vous disposez d’une dizaine d’années d’expérience.", 10, 'Banque de France'],
+  ["Une quinzaine d’années d’expérience exigée.", 15, 'par symétrie'],
+  ["Une vingtaine d'années d'expérience.", 20, 'par symétrie, à la borne'],
+  // Et ce qu'elles ne doivent PAS faire dire au juge.
+  ['Vous encadrez une dizaine de collaborateurs, expérience appréciée.', null, "« dizaine » sans l'unité"],
+  ['Vous justifiez d’années d’expérience variées.', null, 'aucun nombre, juste une apostrophe'],
+
   // --- La cible elle-même : ce qui doit PASSER --------------------------
   ["Vous justifiez de 2 ans d'expérience.", 2, 'dans la cible'],
   ["Une première expérience de 3 ans en audit.", 3, 'à la limite, donc admis'],
@@ -89,4 +104,83 @@ for (const [phrase, attendu, source] of VERDICTS) {
 }
 console.log(`${VERDICTS.length - echecs2}/${VERDICTS.length} verdicts de séniorité conformes`);
 
-if (echecs + echecs2) process.exitCode = 1;
+// --- CE QUE LE JUGE PEUT LIRE --------------------------------------------
+// Les deux cas ci-dessus supposent un texte propre. Encore faut-il que le
+// texte ARRIVE propre : `texteDeLaPage` remplaçait toute entité HTML par une
+// ESPACE, si bien que le moteur e-i.com — CIC, Crédit Mutuel, Banque
+// Transatlantique, qui encodent tous leurs accents en « &#233; » — servait
+// au juge « Exp rience professionnelle ant rieure de 3   5 ans ».
+//
+// Or l'ancre du juge est `/exp[ée]rien/i`. Le mot n'existait plus, la phrase
+// entière était sautée, et « Analyste RSE-ESG » du CIC a été publié malgré
+// ses 3 à 5 ans exigés. Ce n'était pas un défaut d'affichage : chaque ancre
+// de ce mécanisme est un mot français accentué.
+const remplissage = '<p>Rejoignez notre groupe bancaire. </p>'.repeat(20);
+const LECTURES = [
+  [
+    remplissage + '<p>Exp&#233;rience professionnelle ant&#233;rieure de 3 &#224; 5 ans.</p>',
+    5,
+    'CIC — accents en entités numériques',
+  ],
+  [
+    remplissage + '<p>Vous disposez d&#39;une dizaine d&#8217;ann&#233;es d&#8217;exp&#233;rience.</p>',
+    10,
+    'les deux corrections ensemble : entité + quantité approximative',
+  ],
+  [remplissage + '<p>Expérience de 3 à 5 ans.</p>', 5, 'texte déjà propre : inchangé'],
+];
+let echecs3 = 0;
+for (const [html, attendu, source] of LECTURES) {
+  const texte = P.texteDeLaPage(html);
+  const rendu = texte ? P.verdictSenioriteDescr(texte)._expMax : null;
+  if (rendu !== attendu) {
+    echecs3++;
+    console.log(`  ÉCHEC  attendu ${attendu}, rendu ${rendu}   [${source}]`);
+    console.log(`         lu : « ${String(texte).slice(-90)} »`);
+  }
+}
+// Une entité que le décodeur ne connaît pas doit rester une ESPACE : sans
+// quoi elle collerait deux mots l'un à l'autre.
+{
+  const lu = P.texteDeLaPage(remplissage + '<p>Paris&zzz;Lyon</p>') || '';
+  if (!/Paris Lyon/.test(lu)) {
+    echecs3++;
+    console.log('  ÉCHEC  une entité inconnue doit redevenir une espace');
+  }
+}
+console.log(`${LECTURES.length + 1 - echecs3}/${LECTURES.length + 1} lectures de fiche conformes`);
+
+// --- L'INTITULÉ QUI SUFFIT À ÉCARTER -------------------------------------
+// « On n'encadre pas une équipe à zéro an. » HSBC publiait un « Team Leader
+// - Asia & Middle East Corridor » en CDI, et aucun marqueur ne le voyait.
+// Le motif vit dans SENIOR_RE, qui ne se consulte que pour les CDI/CDD : un
+// stage d'assistant reste donc un stage, et c'est le dernier cas ci-dessous
+// qui le vérifie.
+//
+// CHAQUE CAS PORTE UNE DESCRIPTION, et ce n'est pas un détail. Sans elle, un
+// CDI dont l'intitulé ne dit pas « junior » est écarté par une règle de
+// dernier recours, étrangère au marqueur : les quatre cas « écarté »
+// passaient alors AUSSI sur le code d'avant la correction, et ne
+// protégeaient rien. C'est la contre-épreuve — relancer la suite sur le
+// pipeline de HEAD — qui l'a montré, pas la relecture.
+const DESCR = 'Texte de l’annonce, suffisant pour que la description soit réputée lue.';
+const INTITULES = [
+  ['cdi-cdd', 'Team Leader - Asia & Middle East Corridor - Global Network Banking', false, 'HSBC'],
+  ['cdi-cdd', 'Team leader Governance, Compliance & Regulatory', false, 'Deloitte'],
+  ['cdi-cdd', 'Chef d’équipe Back Office', false, 'forme française'],
+  ['cdi-cdd', 'Team Manager OPC - Fund Administration', false, 'Caceis'],
+  ['stage', 'Stage - Assistant du Team Lead Finance', true, 'un stage reste un stage'],
+  ['cdi-cdd', 'Analyste financier junior au sein de l’équipe M&A', true, "« équipe » seul n'encadre rien"],
+];
+let echecs4 = 0;
+for (const [volet, titre, attendu, source] of INTITULES) {
+  const rendu = P.passesJuniorFilter({ volet, title: titre, _descrExtrait: DESCR }, true);
+  if (rendu !== attendu) {
+    echecs4++;
+    console.log(`  ÉCHEC  attendu ${attendu ? 'gardé' : 'écarté'}, rendu ${rendu ? 'gardé' : 'écarté'}`);
+    console.log(`         « ${titre} »   [${source}]`);
+  }
+}
+console.log(`${INTITULES.length - echecs4}/${INTITULES.length} intitulés jugés conformément`);
+
+if (echecs + echecs2 + echecs3 + echecs4) process.exitCode = 1;

@@ -87,6 +87,14 @@ const NOMS = [
   'SENIOR_RE',
   'dureeExperienceMax',
   'verdictSenioriteDescr',
+  // Le SECOND passage, celui qui lit la fiche. `verdictSenioriteDescr` rend
+  // un verdict sur un texte ; `fusionnerVerdictSeniorite` est ce qui le POSE
+  // sur l offre, et `texteDeLaPage` ce qui fabrique la moitie du texte juge.
+  // Sans ces deux-la on ne peut pas refaire le chemin du pipeline — on ne
+  // peut que le recopier, ce que le depot interdit depuis trois diagnostics
+  // faux.
+  'fusionnerVerdictSeniorite',
+  'texteDeLaPage',
   // Les rouages du verdict, pour pouvoir ventiler un rejet par sa FORME.
   'NOMBRES_ECRITS',
   'ANCRE_EXPERIENCE',

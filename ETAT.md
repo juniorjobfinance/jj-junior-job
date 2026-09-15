@@ -1,6 +1,6 @@
 # Où en est JJ
 
-**Dernière mise à jour : 13 septembre 2026.**
+**Dernière mise à jour : 15 septembre 2026.**
 
 Ce fichier dit l'état du projet à date. Il est réécrit à la fin de chaque
 séance de travail — c'est la première chose à lire pour reprendre, et la
@@ -10,20 +10,21 @@ dernière à écrire avant de s'arrêter.
 
 ## Le catalogue en ligne
 
-**1 060 offres** · **215 employeurs** distincts · **15 familles** · **11 types
-de structure**, tous représentés. Mesuré sur `offres.js` le 13/09/2026.
+**1 062 offres** · **217 employeurs** distincts · **15 familles** · **11 types
+de structure**, tous représentés. Mesuré sur `offres.js` le 15/09/2026.
 
-> 1 073 la veille, 1 060 aujourd'hui. La baisse est voulue et se décompose :
-> quinze offres Rothschild qui n'étaient **pas en France** (§43), vingt titres
-> Ardian nettoyés de leur suffixe « I Paris », et une offre écartée comme
-> hors périmètre (§42). *Moins d'offres, mais toutes justes.*
+> **Ce chiffre est celui d'AVANT les corrections du 15/09.** Aucune collecte
+> n'a tourné depuis : les quatre corrections de séniorité (§46) et la clé de
+> déduplication (§47) prendront effet au passage de 06h30. L'audit donne
+> l'ordre de grandeur — **neuf** offres CDI/CDD écartées là où deux
+> l'étaient, plus les doublons de marque.
 
 | Onglet | Offres |
 |---|---:|
-| Stage | 563 |
-| CDI · CDD | 378 |
-| Alternance | 68 |
-| VIE | 51 |
+| Stage | 572 |
+| CDI · CDD | 374 |
+| Alternance | 66 |
+| VIE | 50 |
 
 > **L'alternance est saisonnière.** Un catalogue d'alternance maigre relevé en
 > septembre ne prouve rien : le contrat démarre à la rentrée, donc les annonces
@@ -31,18 +32,81 @@ de structure**, tous représentés. Mesuré sur `offres.js` le 13/09/2026.
 > printemps. Ne rien durcir ni assouplir sur la foi de ce compteur.
 
 **Les cinq familles les plus fournies** : Comptabilité & Consolidation 148,
-Contrôle de gestion & Trésorerie 132, Risques & Conformité 124, Audit &
-Contrôle interne 100, Capital-investissement 86. Le résidu « Autres métiers
-de la finance » tient à **12 offres, soit 1,1 %** — il était à 26,7 % le
+Contrôle de gestion & Trésorerie 130, Risques & Conformité 127, Audit &
+Contrôle interne 101, Capital-investissement 87. Le résidu « Autres métiers
+de la finance » tient à **10 offres, soit 0,9 %** — il était à 26,7 % le
 2 septembre.
 
-**Les cinq structures les plus fournies** : BFI 203, Entreprise 169, Big Four
-167, Banque d’affaires indépendante 94, Fonds d’investissement 86.
+**Les cinq structures les plus fournies** : BFI 194, Entreprise 173, Big Four
+165, Assurance & courtage 97, Banque d’affaires indépendante 93.
 
-**Les tables** : `maisons.txt` 292 lignes.
+**Les tables** : `ingestion/maisons.txt` 322 lignes. *(Ce fichier est dans
+`ingestion/`, pas à la racine — l'édition précédente de cette ligne le
+cherchait au mauvais endroit.)*
 
-**Le poids servi** : `offres.js` 696 Ko, `index.html` 920 Ko, les quinze pages
-de famille 2 878 Ko au total. Le sitemap déclare **18 URL**.
+**Le poids servi** : `offres.js` 716 Ko, `index.html` 922 Ko, les quinze pages
+de famille 2 900 Ko au total. Le sitemap déclare **18 URL**.
+
+---
+
+## Chantier OUVERT, mesuré et non réparé : 105 fiches muettes
+
+**Mesuré le 15/09/2026, sur les 374 offres CDI/CDD publiées**, le chemin du
+second passage refait sur chacune :
+
+| | offres |
+|---|---:|
+| fiches lues | 370 |
+| **sans aucun texte** | **105** |
+| jugées junior sur leur texte | 256 |
+| écartées | 9 |
+| échecs réseau (404) | 4 |
+
+**Vingt-huit pour cent des CDI/CDD sont jugés sans que le juge ait lu une
+seule ligne.** Ni le JSON-LD ni le corps de page ne rendent quoi que ce soit :
+ce sont des applications JavaScript, qui servent une coquille au `fetch` de
+Node. Leur séniorité ne repose alors que sur l'intitulé — exactement la
+situation qui a laissé passer Thales.
+
+C'est un trou **plus large** que les quatre défauts du §46 réunis, et il ne
+se répare pas par une expression régulière : il faut, source par source,
+trouver le point d'entrée qui rend le texte (l'API JSON de Workday en est
+un). À faire avant d'ajouter de nouveaux connecteurs — un gisement mal lu
+vaut moins qu'un gisement absent.
+
+> Ce que le chiffre ne dit PAS encore : sur quelles plateformes ces 105 se
+> concentrent. L'audit les a comptées sans les nommer. C'est la première
+> mesure à refaire, et elle est bon marché.
+
+---
+
+## Ce qui a bougé le 15/09/2026
+
+**Quatre offres seniors signalées par Victor à l'écran, quatre défauts sans
+rapport** — le détail et les mesures sont au **§46** de `DECISIONS.md` :
+
+1. la fiche était **coupée à 4 000 caractères** avant d'être jugée (Thales,
+   « au moins 5 ans » écrit vers le caractère 4 700) ;
+2. « **une dizaine d'années** » n'était pas un nombre (Banque de France,
+   10 ans — sa fiche ne fait que 2 853 caractères, la coupe n'y était pour
+   rien) ;
+3. une **entité HTML était blanchie, pas décodée** : le juge lisait
+   « Exp rience … de 3   5 ans » et son ancre `/exp[ée]rien/i` ne matchait
+   plus (CIC, 3 à 5 ans) ;
+4. « **Team Leader** » n'était pas un marqueur de séniorité (HSBC).
+
+**Et le doublon de marque** (§47) : le moteur e-i.com sert la même annonce
+depuis trois domaines, `canonicalKey` commence par le nom de l'employeur,
+donc quatre numéros d'annonce paraissaient deux fois. L'identité est
+désormais le numéro. On ne débranche aucun domaine — CIC et Crédit Mutuel
+ont chacun 4 offres en propre sur 15.
+
+**Ce qui protège ces cinq corrections** : `test-seniorite.js` porte 41 cas
+(contre 25), et `ingestion/test-doublon-marque.js` est une suite nouvelle,
+branchée au contrôle 1 du workflow. Les deux ont été **relancées sur le
+pipeline de HEAD** pour vérifier qu'elles échouent — 8 et 4 cas
+respectivement. Sans cette contre-épreuve, les quatre cas « team leader »
+seraient restés décoratifs : ils passaient aussi avant la correction.
 
 ---
 

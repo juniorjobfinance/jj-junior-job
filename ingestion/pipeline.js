@@ -1406,6 +1406,27 @@ const SENIOR_RE = new RegExp(
     `${AV}managers?${AP}`,
     `${AV}direct(?:eur|rice|or)s?${AP}`,
     `${AV}head of${AP}`,
+    // LE CHEF D EQUIPE. On n encadre pas une equipe a zero an : « Team
+    // Leader », « Chef d equipe », « Responsable d equipe » sont des
+    // grades d encadrement, pas des premiers postes. HSBC publiait un
+    // « Team Leader - Asia & Middle East Corridor - Global Network
+    // Banking » au catalogue le 15/09/2026.
+    //
+    // Mesure sur la recolte du 14/09, 3 417 intitules normalises : 8
+    // touches, dont 5 DEJA pris ici meme par « manager » ou
+    // « responsable ». Le motif en ajoute 3 — Deloitte et HSBC.
+    //
+    // Ici et PAS dans SENIOR_TITRE_STRICT_RE : cette liste-ci ne se
+    // consulte que pour les CDI/CDD. Un « Stage - Assistant du Team Lead »
+    // reste donc un stage, ce que le contre-test a verifie.
+    //
+    // Les formes sont ENUMEREES et non abregees en radical : `lead` suivi
+    // de `${AP}` ne matcherait jamais « leader » — la lecon des 11 et
+    // 13/09, ou `\bfinanc\b` puis `\bcommodit\b` sont restes inertes.
+    `${AV}team[\\s-]?lead(?:er|ers|s)?${AP}`,
+    `${AV}chef(?:fe)?[\\s]?d[\\s'’]?[ée]quipe${AP}`,
+    `${AV}responsable[\\s]d[\\s'’]?[ée]quipe${AP}`,
+    `${AV}team[\\s-]?manager${AP}`,
     // LE RECRUTEMENT LATERAL. « Experienced Hire » designe un professionnel
     // confirme, par opposition au « graduate ». PJT Partners publiait
     // « Analyst - Strategic Advisory (France Coverage) - Experienced Hire » :
@@ -1688,6 +1709,14 @@ const LIMITE_DESCR = 4000;
 const NOMBRES_ECRITS = {
   quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10, douze: 12, quinze: 15,
   four: 4, five: 5, seven: 7, eight: 8, nine: 9, ten: 10, twelve: 12, fifteen: 15,
+  // LES QUANTITES APPROXIMATIVES. « Une dizaine d annees d experience » est
+  // aussi net qu un « 10 ans » pour qui lit l annonce, et parfaitement muet
+  // pour qui compte des chiffres. La Banque de France publiait un « Analyste
+  // dossiers d agrements » sous cette forme, et il est passe.
+  //
+  // On s arrete a la vingtaine : au-dela, le comptage rejette de toute facon
+  // (« plus de vingt ans, c est l age de la maison, pas celui du candidat »).
+  dizaine: 10, douzaine: 12, quinzaine: 15, vingtaine: 20,
 };
 
 // Le mot qui ancre. Sans lui dans la phrase, aucun nombre n'est compté.
@@ -1748,7 +1777,14 @@ function dureeExperienceMax(texte) {
   for (const phrase of t.split(/[.;!?\u2022\n]+/)) {
     if (!ANCRE_EXPERIENCE.test(phrase)) continue;
 
-    const re = /(\d{1,2}|[a-zà-ÿ]+)\s*\+?\s*(?:ans?|ann[ée]es?|years?)\b/gi;
+    // Le `(?:d['’]\s*)?` couvre « dizaine D ANNEES » : en francais la quantite
+    // approximative se relie a son unite par une apostrophe, la quantite
+    // exacte non (« dix ans »). Sans lui, le motif s arrete sur l apostrophe.
+    //
+    // Il n ouvre rien : le mot capture doit toujours etre un nombre connu de
+    // NOMBRES_ECRITS. « vous justifiez d annees d experience » capture
+    // « justifiez », que la table ignore, et la boucle passe au suivant.
+    const re = /(\d{1,2}|[a-zà-ÿ]+)\s*\+?\s*(?:d['’]\s*)?(?:ans?|ann[ée]es?|years?)\b/gi;
     let m;
     while ((m = re.exec(phrase)) !== null) {
       const avant = phrase.slice(Math.max(0, m.index - 45), m.index);
@@ -1966,6 +2002,24 @@ const HTML_ENTITIES = {
   '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'",
   '&nbsp;': ' ', '&eacute;': 'é', '&egrave;': 'è', '&agrave;': 'à', '&ccedil;': 'ç',
 };
+
+// Ce qu on met a la place d une entite dans un texte qu on va LIRE.
+//
+// Blanchir etait le comportement d origine, et il detruit le mot : le
+// moteur e-i.com (CIC, Credit Mutuel, Banque Transatlantique) encode tous
+// ses accents en « &#233; », si bien que « Experience professionnelle
+// anterieure de 3 a 5 ans » arrivait au juge sous la forme « Exp rience
+// professionnelle ant rieure de 3   5 ans ». L ancre `/exp[ée]rien/i` ne
+// matchait plus, la phrase etait sautee, et l offre « Analyste RSE-ESG »
+// du CIC a ete publiee malgre ses 3 a 5 ans exiges.
+//
+// On decode donc, et l on ne blanchit que ce que le decodeur ne connait
+// pas — ce qui preserve exactement l ancien comportement sur les entites
+// exotiques, sans rien casser de ce qui marchait.
+function entiteOuEspace(entite) {
+  const decode = decodeEntities(entite);
+  return decode === entite ? ' ' : decode;
+}
 
 function decodeEntities(text) {
   return (text || '')
@@ -3616,7 +3670,36 @@ function slugEmp(emp) {
 const TELETRAVAIL_COMPLET_RE =
   /t[ée]l[ée]travail (?:complet|total|int[ée]gral|100\s*%)|100\s*% (?:t[ée]l[ée]travail|remote)|full[\s-]?remote|fully remote|remote only/i;
 
+// Le moteur e-i.com du Credit Mutuel Alliance Federale sert LA MEME annonce
+// depuis trois domaines. Son identite est le numero, pas l hote : c est la
+// seule chose qui ne change pas d un domaine a l autre.
+//
+// Liste CLOSE, tenue a cote de celle de sources.js. Un autre client du meme
+// moteur aurait sa propre numerotation, et confondre deux numerotations ne
+// coute pas un doublon mais une offre perdue.
+const EICARDS_HOTES = new Set([
+  'recrutement.cic.fr',
+  'recrutement.creditmutuel.fr',
+  'www.banquetransatlantique.com',
+]);
+
+// Rend le numero d annonce quand l adresse vient de ce moteur, sinon null.
+function numeroEiCards(url) {
+  if (!url) return null;
+  let u;
+  try { u = new URL(url); } catch { return null; }
+  if (!EICARDS_HOTES.has(u.host)) return null;
+  const n = u.searchParams.get('annonce');
+  return /^\d+$/.test(n || '') ? n : null;
+}
+
 function canonicalKey(offer) {
+  // Meme annonce, deux domaines, deux noms de maison : c est UNE offre.
+  // Le premier hote de la liste de sources.js l emporte — `enFile` ecrit
+  // ses resultats dans l ordre des taches, donc le choix est stable d un
+  // passage a l autre, et `dedupe` inscrit l autre au registre.
+  const eiN = numeroEiCards(offer.url);
+  if (eiN) return 'eicards|' + eiN;
   const aDistance = TELETRAVAIL_COMPLET_RE.test(offer.title || '');
   const lieu = aDistance ? 'a-distance' : slugLieu(offer.loc);
   return `${slugEmp(offer.emp)}|${slugTitleFuzzy(offer.title)}|${lieu}`;
@@ -3989,7 +4072,7 @@ function texteDeLaPage(html) {
     .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<nav[\s\S]*?<\/nav>/gi, ' ')
     .replace(/<[^>]*>/g, ' ')
-    .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+    .replace(/&#x?[0-9a-f]+;|&\w+;/gi, entiteOuEspace)
     .replace(/\s+/g, ' ')
     .trim();
   return texte.length > 300 ? texte.slice(0, 12000) : null;
@@ -4015,6 +4098,21 @@ function contratDeLaFiche(texte) {
   return null; // CDI, CDD, intérim : rien à corriger
 }
 
+// Ce que le JUGE a le droit de lire dans une fiche.
+//
+// 4 000 caracteres jusqu au 15/09/2026, et c est ce qui a publie un poste
+// Thales « au moins 5 ans d experience » et un poste Banque de France a
+// 10 ans : ces annonces ouvrent par une longue presentation du groupe, et
+// le profil recherche — la seule partie qui dit le niveau — tombait apres
+// la coupe. La description de Thales fait 6 289 caracteres ; le juge en
+// voyait 4 000 ; les « 5 ans » sont vers 4 700.
+//
+// 14 000 aligne cette lecture sur le reste du pipeline : `texteDeLaPage`
+// garde 12 000, et le cache de fiches stocke deja 14 000 pour exactement
+// cette raison — le commentaire y dit « un rejeu ne voyait que 4 000
+// caracteres la ou une vraie collecte en lit 14 000 ». La collecte, elle,
+// n en lisait que 4 000.
+const LIMITE_DESCR_FICHE = 14000;
 function ficheJsonLd(html, format) {
   const resultat = { date: null, description: null };
   for (const bloc of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -4029,9 +4127,9 @@ function ficheJsonLd(html, format) {
       if (!resultat.description && typeof n.description === 'string' && n.description.length > 80) {
         resultat.description = n.description
           .replace(/<[^>]*>/g, ' ')
-          .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+          .replace(/&#x?[0-9a-f]+;|&\w+;/gi, entiteOuEspace)
           .replace(/\s+/g, ' ')
-          .slice(0, 4000);
+          .slice(0, LIMITE_DESCR_FICHE);
       }
       const brut = n.datePosted || (n['@graph'] || []).map((g) => g && g.datePosted).find(Boolean);
       if (!brut || resultat.date) continue;
@@ -4085,7 +4183,7 @@ function ficheJsonLd(html, format) {
         .map((m) => m[1])
         .join(' ');
       const texte = (html.replace(/<[^>]*>/g, ' ') + ' ' + metas)
-        .replace(/&#x?[0-9a-f]+;|&\w+;/gi, ' ')
+        .replace(/&#x?[0-9a-f]+;|&\w+;/gi, entiteOuEspace)
         .replace(/\s+/g, ' ');
       // « Date de parution » est la formulation des pages TalentSoft en
       // français, quand leur version anglaise dit « Publication date ».
