@@ -8,6 +8,58 @@ dernière à écrire avant de s'arrêter.
 
 ---
 
+## ⏳ ÉCHÉANCE — la promotion démarre le JEUDI 17 SEPTEMBRE 2026
+
+**Annoncé par Victor le 15/09/2026 au soir.** C'est la première fois que le
+site recevra du trafic volontaire : jusqu'ici, les 100 visiteurs et 76 clics
+mesurés sur Umami sont venus sans aucune promotion.
+
+**Il ne reste que DEUX passages du cron avant** : mercredi 16 et jeudi 17 au
+matin. Toute correction qui doit être en ligne jeudi doit être **poussée
+mercredi soir au plus tard** — un commit de code ne change rien à l'écran
+tant qu'une collecte n'a pas republié le catalogue.
+
+### Ce qui est prêt
+
+- le catalogue est purgé (§46 à §50) et les liens morts sont retirés
+  automatiquement à chaque passage ;
+- l'affirmation publique est écrite, éprouvée et **bornée aux CDI/CDD** — voir
+  plus bas, l'encadré compte autant que la phrase ;
+- treize suites gardent le classement au contrôle 1.
+
+### Ce qu'il faut décider ou surveiller d'ici là
+
+| | |
+|---|---|
+| **visibilité du dépôt GitHub** | **TRANCHÉ le 15/09 : le dépôt passe en PRIVÉ.** Raison : ne pas exposer la méthode. Ce n'est pas une décision de sécurité — mesuré le même jour, il n'y a aucun secret dans l'historique (`.env` jamais commité), aucune donnée personnelle, aucun texte d'annonce publié. C'est un arbitrage stratégique, et il appartient à Victor. |
+| **les deux passages de 06h30** | les regarder. Un cron qui échoue mercredi et qu'on ne voit pas, c'est un site figé le jour du lancement. |
+| **le chiffre à suivre** | pas le total : le nombre de CDI/CDD jugés sur un texte (261/262 au 15/09). |
+
+### Le dépôt est PRIVÉ — ce que ça change, et ce que ça ne change pas
+
+**Ne change rien** : le site ne lit rien depuis GitHub (aucun lien vers
+`raw.githubusercontent`, aucun vers le dépôt), et Vercel déploie via son
+application GitHub, qui garde son accès.
+
+**Change une chose** : un dépôt public a des minutes d'Actions illimitées, un
+dépôt privé en a 2 000 par mois sur le plan Free. **Victor a tranché : il
+paiera le dépassement s'il y en a.**
+
+Le corollaire, qui n'est plus un risque de service mais de facture : avec
+`timeout-minutes: 120`, un passage qui part en vrille coûte désormais deux
+heures de quota au lieu d'être gratuit. Tant que le cron tourne en vingt à
+trente minutes, la question ne se pose pas — mais **la durée réelle sur le
+runner n'a jamais été mesurée**, seulement estimée depuis une machine de
+bureau, ce qui ne vaut rien. Elle se lit dans l'onglet *Actions*.
+
+### Ce qu'il ne faut PAS dire en public
+
+« Aucune offre du site n'exige plus de trois ans » — **c'est faux**.
+L'affirmation ne vaut que pour les CDI/CDD. La moitié des stages est jugée sur
+le seul intitulé. La formulation défendable est dans l'encadré plus bas.
+
+---
+
 ## Le catalogue en ligne
 
 **947 offres** · **206 employeurs** distincts · **15 familles** · **11 types
