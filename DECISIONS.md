@@ -2306,12 +2306,40 @@ Dont 113 sur la seule borne ouverte à trois ans, vérifiées sur pièce.
 
 ### Ce qui reste hors de portée, et il faut le dire
 
-**Banque Populaire du Sud n'est pas réparable par la lecture.** Sa phrase
+~~**Banque Populaire du Sud n'est pas réparable par la lecture.** Sa phrase
 « confirmé (>3ans) » n'est ni dans l'API OpenDataSoft — dont le champ
 `description` fait 3 859 caractères et ne la contient pas — ni dans la page,
-`recrutement.bpce.fr` rendant **3 077 octets de coquille JavaScript**. Le motif
-la reconnaîtra le jour où le texte sera atteignable ; aujourd'hui il ne l'est
-pas. C'est la même famille que les 105 fiches muettes d'`ETAT.md`.
+`recrutement.bpce.fr` rendant **3 077 octets de coquille JavaScript**.~~
+
+> **CE PARAGRAPHE ÉTAIT FAUX, et il est laissé barré plutôt que supprimé.**
+> Corrigé le 15/09/2026 au soir, quand l'offre est revenue au catalogue **avec
+> sa phrase parfaitement lisible**.
+>
+> **Banque Populaire du Sud publie DEUX annonces aux titres presque
+> identiques** :
+>
+> | adresse | texte | porte « confirmé (>3ans) » |
+> |---|---:|---|
+> | `…-entreprises-f-h-3` | 3 859 car. | **non** |
+> | `…-entreprises-f-h-2` | 2 442 car. | **oui** — c'est celle que Victor citait |
+>
+> J'ai cherché l'offre par « employeur + motif de titre », pris la PREMIÈRE
+> qui correspondait, conclu sur elle, et généralisé à toute la maison. Les
+> mesures étaient justes ; elles portaient sur une autre annonce.
+>
+> **La leçon, et elle est neuve** : quand on diagnostique UNE offre nommée par
+> son intitulé, on l'identifie par son ADRESSE avant de conclure. Un employeur
+> publie couramment plusieurs postes au même intitulé — c'est même le cas
+> normal dans un réseau d'agences. Un motif de titre désigne une FAMILLE
+> d'offres, jamais une offre.
+>
+> C'est la sœur de « un champ lu doit être un champ demandé », appliquée non
+> plus au champ mais au SUJET : avant de conclure sur un cas, vérifier qu'on
+> tient bien le cas dont on parle.
+>
+> Ce qui reste vrai du paragraphe barré : `recrutement.bpce.fr` rend bien
+> 3 077 octets de coquille, et les pages illisibles restent un chantier. Mais
+> pour cette offre-là, le texte de la liste suffisait.
 
 ### Ce que cet épisode apprend
 
