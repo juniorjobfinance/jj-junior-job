@@ -2322,3 +2322,154 @@ pas. C'est la même famille que les 105 fiches muettes d'`ETAT.md`.
 > catalogue entier ? » — et elle se lit en deux nombres : combien d'offres
 > changent de verdict, et combien changent dans le MAUVAIS sens. C'est ce
 > second nombre, resté à zéro, qui autorise à publier.
+
+
+---
+
+## 49. Fermer une classe de défauts au lieu de la réparer
+
+**Ouvert le 15/09/2026 par Victor**, après le §48 : *« Le `\b` contre les
+accents — mets-le sous contrôle, ne le répare plus. C'est la 3e et la 4e
+occurrence en cinq jours. La classe se ferme une fois, pas à chaque
+découverte. »*
+
+C'est la même exigence que celle déjà écrite dans `CLAUDE.md` — « quand une
+règle a été enfreinte quatre fois, ce n'est plus une règle qu'il faut, c'est
+un mécanisme » — appliquée cette fois à un piège de code et non à un geste de
+méthode.
+
+### 49.1 — Le contrôle des limites de mot
+
+`ingestion/test-limites-mot.js` relit les motifs de `pipeline.js`,
+`classifier.js` et `sources.js` — **3 187 limites de mot** — et échoue si l'une
+d'elles peut toucher une lettre accentuée.
+
+**Au premier passage il en a trouvé cinq, toutes vivantes :**
+
+| le motif | ce qu'il ne matchait pas |
+|---|---|
+| `d[ée]riv[ée]s?\b` | « produit dérivé » au singulier |
+| `\bconfirm[ée]e?s?\b` | « confirmé » |
+| `\bexp[ée]riment[ée]e?s?\b` | « expérimenté » |
+| `\b[ée]coles?\b` | « École » (pipeline) |
+| `\b[ée]cole\b` | « École » (sources) |
+
+Les deux du milieu avaient été écrites **le jour même**, dans le §48. Le piège
+se reforme à la vitesse où l'on écrit.
+
+**La difficulté qui rendait le contrôle non trivial** : le caractère qui
+précède un `\b` peut être OPTIONNEL. Dans `exig[ée]e?s?\b`, le dernier
+caractère ÉCRIT est `?` ; le dernier caractère POSSIBLE est le `é` de la
+classe. Un contrôle qui ne regarderait que le voisin immédiat ne verrait rien
+— et c'est exactement ce qui avait laissé passer ce cas. Le contrôle remonte
+donc les quantificateurs jusqu'au premier atome non optionnel, des deux côtés.
+
+**Sa portée est bornée, et c'est écrit dedans.** `\bfinanc\b` et
+`\bcommodit\b` sont tout aussi inertes, mais **entièrement ASCII** : ce qui
+cloche n'est pas un accent, c'est qu'un radical réclame une frontière au
+milieu d'un mot. Les détecter demanderait un lexique français, que ce dépôt
+n'a pas et ne veut pas. Deux épreuves de l'instrument l'établissent **en ne
+signalant rien** sur ces deux motifs.
+
+> **Un contrôle doit déclarer ce qu'il ne couvre pas, sinon on le croit plus
+> large qu'il n'est et l'on cesse de chercher ailleurs.** C'est le pendant de
+> « un contrôle qu'on n'a jamais vu échouer n'est pas vérifié » : celui-là
+> porte sur ce qu'il attrape, celui-ci sur ce qu'il laisse.
+
+### 49.2 — Le champ étroit : LVMH avait un jumeau
+
+Victor : *« Mesure la longueur MÉDIANE de description par connecteur. Tout
+connecteur à médiane très basse est un LVMH qui s'ignore. »*
+
+**La première mesure répondait à la mauvaise question** — elle donnait la
+longueur de la description de LISTE, alors que le juge voit la liste PLUS la
+fiche quand elle a été lue. Corrigée, elle donne :
+
+| médiane | offres | champ lu | connecteur |
+|---:|---:|---|---|
+| **14** | 23 | `experience` | **avature** |
+| 450 | 3 | `description` | smartrecruiters:revaia |
+| 868 | 149 | `description` | smartrecruiters:mazars |
+| 1 490 | 37 | `externalDescription` | cornerstone:eurazeo |
+
+**Avature est le jumeau exact de LVMH** : il lit `experience` — « Minimum
+3 ans », quatorze caractères — et c'est toute sa description. Sa source n'a
+aucun autre champ de texte, mais **sa page rend 7 316 caractères** : le texte
+existe, on n'allait pas le chercher.
+
+Les SmartRecruiters, eux, sont **sous le seuil de 1 500** et déclenchent donc
+déjà le rattrapage de fiche. Une médiane basse n'est pas un défaut en soi —
+c'est la médiane basse QUI DÉSARME LE RATTRAPAGE qui en est un. Les médianes
+à zéro (les Workday) sont saines pour la même raison.
+
+**La correction est générale et non propre à Avature** : une description de
+**moins de 300 caractères compte comme absente**, pour tous les onglets. Trois
+cents caractères ne portent pas un profil, ils portent une étiquette. Coût
+mesuré : 30 fiches de plus à visiter, devant 633 déjà lues.
+
+### 49.3 — Les liens morts : le coût n'était pas le sujet
+
+`linkStatus` valait « unknown » sur la totalité du catalogue depuis cinq
+jours. La cause n'était pas le coût, c'était la FORME de la boucle :
+séquentielle, 1 052 offres à dix secondes de délai maximum, soit près de trois
+heures dans le pire cas. Personne n'a donc jamais passé `--check-links`, et le
+garde-fou est resté décoratif.
+
+**Mesuré : 1 052 liens en 1 minute 07**, un hôte à la fois et douze hôtes en
+parallèle. Et **onze liens morts**, tous en 404 — dix La Banque Postale, dont
+le schéma d'adresse a changé, et un Butagaz.
+
+> **Un garde-fou trop cher pour être allumé est un garde-fou absent.** Et le
+> prix n'est pas toujours celui qu'on croit : ici il tenait entièrement à une
+> boucle séquentielle, pas au nombre de requêtes. Avant de renoncer à un
+> contrôle pour son coût, mesurer le coût.
+
+La vérification est désormais l'ordinaire du passage, **sous un budget de six
+minutes** : au-delà on s'arrête, et ce qui reste garde « unknown » — la seule
+valeur qui ne retire rien. Le budget n'est pas décoratif : le chiffre d'une
+minute a été pris sur une machine de bureau, et « une durée ne se mesure que
+sur le réseau qui la subira ». Un hôte portant 138 offres qui cesserait de
+répondre coûterait vingt-trois minutes à lui seul.
+
+### 49.4 — Deux points de périmètre
+
+**« Entrepreneur AXA »** — huit offres publiées. `INDEPENDANT_RE` portait
+`\bentrepreneur\s+en\b`, qui attrapait « Entrepreneur EN Gestion de
+Patrimoine » et laissait passer « Entrepreneur AXA spécialisé en… ». Le motif
+devient `\bentrepreneurs?\b` : **46 intitulés touchés sur 3 407, tous chez
+AXA**, tous des mandats de franchise. « Entrepreneurship Programme » n'est pas
+touché — la limite de mot tombe après « entrepreneur », et « ship » la lui
+refuse.
+
+**« Conseiller Clientèle Patrimonial » (Caisse d'Épargne CEPAC)** — la cause
+n'était pas une règle manquante mais une EXEMPTION trop large.
+`PREFILTER_EXCEPTIONS` porte `\bpatrimonial(e)?\b` pour protéger la banque
+privée du préfiltre retail ; elle protégeait donc aussi le conseiller
+d'agence.
+
+|  | avant | après |
+|---|---:|---:|
+| « conseiller de clientèle patrimoniale » | 3 | **0** |
+| « conseiller en gestion de patrimoine » | 91 | **91** |
+| « conseiller patrimonial » tout court | 6 | **6** |
+
+> **La banque privée ne parle jamais de sa « clientèle patrimoniale ».** Elle
+> dit gestion de patrimoine, ingénierie patrimoniale, banquier privé. C'est le
+> mot « clientèle » qui trahit le réseau — et c'est lui, et lui seul, que
+> l'exemption refuse désormais.
+
+C'est le piège « une exclusion écrite pour une maison en pénalise une autre »
+pris par l'autre bout : **une EXEMPTION écrite pour un métier en protège un
+autre**, et elle se relit avec la même question — « dans un réseau d'agences,
+ce mot veut dire quoi ? ».
+
+### 49.5 — Pennylane : la mesure dit qu'il n'y a rien à faire
+
+Victor signalait « 26 lignes pour 2 postes sur 26 villes, à regrouper à
+l'affichage ». Le regroupement existe et fonctionne : `index.html` porte
+**deux cartes `card-groupe`**, l'une à 14 pastilles de ville, l'autre à 12, et
+le regroupement par annonce fond **964 cartes en 41 groupes**.
+
+Rien n'a donc été changé, et c'est la bonne réponse. **Corriger ce qui marche
+coûte deux fois** : le travail, et la confiance qu'on met ensuite dans les
+mesures.

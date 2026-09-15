@@ -574,6 +574,37 @@ déclare **par source**, comme le format de date et le nom de champ.
   Un motif inerte est invisible à l’œil et évident dès qu’on lui soumet le
   mot complet. C’est précisément à ça que sert un cas attendu « garde » à
   côté des cas attendus « écarte ».
+- **UN GARDE-FOU TROP CHER POUR ÊTRE ALLUMÉ EST UN GARDE-FOU ABSENT — et le
+  prix n'est pas toujours celui qu'on croit.** `linkStatus` valait « unknown »
+  sur les 1 052 offres du catalogue, cinq jours durant, parce que la
+  vérification vivait derrière `--check-links` que personne ne passait jamais.
+  La raison invoquée était le coût : mille cinquante-deux requêtes à dix
+  secondes de délai maximum.
+
+  Le coût réel, mesuré : **1 minute 07**, un hôte à la fois et douze hôtes en
+  parallèle. Le prix ne tenait pas au nombre de requêtes mais à la FORME de la
+  boucle, qui était séquentielle. Le premier balayage a trouvé **onze liens
+  morts**.
+
+  **Avant de renoncer à un contrôle pour son coût, mesurer le coût** — et le
+  mesurer sur la forme qu'on lui donnerait, pas sur celle qu'il a. Le
+  corollaire : tout contrôle branché dans le passage porte un BUDGET de temps,
+  au-delà duquel il s'arrête en laissant la valeur qui ne retire rien. Sans
+  budget, un seul hôte devenu muet suffit à faire tomber le passage entier.
+- **UN CONTRÔLE DOIT DÉCLARER CE QU'IL NE COUVRE PAS.** `test-limites-mot.js`
+  ferme la classe « `\b` contre une lettre accentuée » — quatre occurrences en
+  cinq jours, cinq défauts vivants trouvés le jour de son écriture, dont deux
+  écrits le matin même. Mais `\bfinanc\b` et `\bcommodit\b` sont tout aussi
+  inertes et **entièrement ASCII** : les détecter demanderait un lexique
+  français.
+
+  Deux épreuves de l'instrument l'établissent **en ne signalant rien** sur ces
+  deux motifs, et la portée est écrite en tête du fichier. Sinon on croit le
+  contrôle plus large qu'il n'est, et l'on cesse de chercher ailleurs.
+
+  C'est le pendant de « un contrôle qu'on n'a jamais vu échouer n'est pas
+  vérifié » : celui-là porte sur ce qu'il ATTRAPE, celui-ci sur ce qu'il
+  LAISSE.
 - **UNE CORRECTION SE MESURE SUR LA POPULATION, JAMAIS SUR LES CAS QUI L'ONT
   MOTIVÉE.** Le 15/09/2026, quatre offres seniors signalées à l'écran ont été
   corrigées, vérifiées une par une, et déclarées réparées. Victor a alors
