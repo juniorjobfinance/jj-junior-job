@@ -2388,6 +2388,45 @@ function cleanTitle(title) {
     .trim();
   if (sansContrat.replace(/[^A-Za-zÀ-ÿ]/g, '').length >= 4) t = sansContrat;
 
+  // 8 bis) LA MENTION « FIN D ETUDES », OU QU ELLE SOIT.
+  //
+  //    La regle 1 sait lire « Stage de fin d'etudes - X » EN TETE. Elle ne
+  //    voit ni la forme parenthesee, ni le qualificatif reste au milieu du
+  //    titre apres que la regle 8 a retire son mot de contrat.
+  //
+  //    Mesure du 15/09/2026 sur les 7 244 brutes : 48 intitules portent
+  //    « fin d'etudes », et VINGT-SIX le gardaient apres nettoyage. Quatre
+  //    formes :
+  //
+  //      « Stage de 6 mois (FIN D'ETUDES) - Analyste quantitatif »  Photosol
+  //      « Auditeur STAGIAIRE DE FIN D'ETUDES - Lyon »              Deloitte x14
+  //      « Transaction Services - STAGIAIRE DE FIN D'ETUDES »       Eight Advisory
+  //      « STAGIAIRE DE FIN D'ETUDES/CESURE - Auditeur »            Forvis Mazars
+  //
+  //    « Fin d'etudes » n'est jamais un metier : c'est une mention de
+  //    contrat, que la pastille de la carte porte deja. La « cesure » qui la
+  //    suit parfois part avec elle — seule, « /cesure » ou « (ou cesure) »
+  //    ne veut rien dire.
+  //
+  //    L'apostrophe se lit dans ses DEUX formes, et « Etudes » sans accent
+  //    existe aussi : Deloitte et Forvis Mazars ecrivent les deux.
+  t = t.replace(
+    /[\s\-–—(,:]*\(?\s*(?:de\s+)?fin\s+d['’]?\s*[ée]tudes?\s*(?:\/\s*c[ée]sure)?\s*\)?/gi,
+    ' '
+  );
+  //    « (ou cesure) » reste seul quand il etait entre parentheses a part.
+  t = t.replace(/[\s\-–—(,:]*\(\s*ou\s+c[ée]sure\s*\)/gi, ' ');
+  //    LE MOT « ECOLE » RESTE SEUL de la meme facon. Le brut du CIC dit
+  //    « Stagiaire école (F/H) - ANALYSTE LEVERAGED FINANCE » : la regle
+  //    1 bis retire « Stagiaire », la regle 3 retire « (F/H) », et
+  //    « École » ouvre le titre. Six offres le 15/09/2026, au CIC et au
+  //    Credit Mutuel, toutes publiees.
+  //
+  //    DEUX CONDITIONS, et les deux sont necessaires : le mot doit OUVRIR
+  //    le titre ET etre suivi d un separateur. Sans elles on amputerait
+  //    « Chargé de relations écoles », ou « ecole » est le sujet du poste.
+  t = t.replace(/^[\s\-–—(,:]*[ée]coles?\s*[:\-–—]\s*/i, '');
+
   // 9) Scories laissées par les retraits ci-dessus : une année orpheline
   //    ("Consultant - 2027") et les tournures d'annonce qui introduisaient une
   //    date qu'on vient d'enlever ("À partir de – Sales Analyst").

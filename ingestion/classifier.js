@@ -214,6 +214,17 @@ const PREFILTER = [
   [/\bassistant(?:e)? de clientele\b/, 'retail'],
   [/\battach(?:e|ee) (?:de clientele|relation commerciale)\b/, 'retail'],
   [/\bresponsable commercial\b/, 'retail'],
+  // « Animateur Commercial - Prévoyance & Patrimoine » chez AXA : animer un
+  // reseau de distribution est du developpement commercial, pas de la
+  // finance. Trois intitules dans la recolte du 15/09/2026, tous AXA, tous
+  // publies — et ranges en « Actuariat & Assurance technique », ce qui est
+  // doublement faux.
+  //
+  // La FENETRE de 24 caracteres est ce qui rend le motif sur : elle attrape
+  // « Animateur Commercial » et « Animateur du reseau commercial », jamais
+  // un « Contrôleur de gestion Brand Animation » ou un « Chargé d'études et
+  // animation ADE », ou les deux mots sont loin l un de l autre ou absents.
+  [/\banimat(?:eur|rice)s?\b[^,]{0,24}\bcommercial/, 'retail'],
   [/\bassistant(?:e)? commercial/, 'retail'],
   [/\bcandidatures? spontanee/, 'retail'],
   [/\brejoignez la\b/, 'retail'],

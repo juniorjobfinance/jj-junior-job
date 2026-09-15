@@ -1029,12 +1029,25 @@
   .card-groupe .villes {
     display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.55rem 0 0.2rem;
   }
+  /* CE QUI EST ORANGE SE CLIQUE.
+
+     Ces pastilles portaient `currentColor` et `opacity: 0.8` : gris foncé,
+     donc identiques aux étiquettes de famille et de structure juste
+     au-dessus, qui elles ne sont pas cliquables. Sur une carte groupée le
+     titre ne l’est pas non plus — ces pastilles étaient donc le SEUL point
+     d’entrée de la carte, et rien ne le disait.
+
+     Elles prennent l’orange du nom de l’employeur, le seul autre élément
+     coloré de la carte. La règle devient lisible sans légende. */
   .card-groupe .villes .ville {
     font-size: 0.82rem; padding: 0.15rem 0.55rem; border-radius: 999px;
-    border: 1px solid currentColor; opacity: 0.8; text-decoration: none;
+    border: 1px solid var(--accent); color: var(--accent-fort);
+    font-weight: 600; text-decoration: none;
   }
   .card-groupe .villes .ville:hover,
-  .card-groupe .villes .ville:focus-visible { opacity: 1; text-decoration: underline; }
+  .card-groupe .villes .ville:focus-visible {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
 
   .card {
     background: var(--paper-raised);
